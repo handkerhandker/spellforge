@@ -32,6 +32,9 @@
   .desc{font-size:13.5px;line-height:1.8;color:#cfc8f2;text-align:center;}
   .hint{font-size:12px;color:#7e76ad;line-height:1.9;text-align:center;}
   .credit{font-size:11px;color:#564f80;margin-top:4px;}
+  .cl-v{margin-bottom:16px;align-self:stretch;}
+  .cl-h{font-size:14px;font-weight:700;color:#ffd98a;letter-spacing:.06em;margin-bottom:5px;}
+  .cl-i{font-size:12.5px;color:#b8aed8;line-height:1.7;}
   .btn{margin-top:8px;padding:14px 40px;border:0;border-radius:999px;cursor:pointer;
     font-size:16px;font-weight:800;letter-spacing:.28em;padding-left:calc(40px + .28em);color:#fff;
     background:linear-gradient(135deg,#7a5cff,#37a4ff);
@@ -99,7 +102,8 @@
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="margin-top:8px;opacity:.8;">v32 · 更新于 2026-06-14</div>
+    <div class="credit" style="margin-top:8px;opacity:.8;">v34 · 更新于 2026-06-15</div>
+    <div class="credit" id="clOpen" style="margin-top:4px;cursor:pointer;text-decoration:underline;opacity:.85;">更新说明</div>
   </div>
 </div>
 
@@ -132,6 +136,20 @@
 </div>
 
 <!-- 暂停 -->
+<div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
+<div class="eyebrow" style="color:#8b7df0;">Changelog</div>
+<h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v34 · 2026-06-15</div><div class="cl-i">无尽模式改版：每波都刷 Boss，且都是不同的 Boss<br>16–20 波每波 1 尊，21–25 波每波 2 尊，26–30 波每波 3 尊，以此类推（每 5 波 +1）<br>多 Boss 各自显示血条、分散登场，自动瞄准锁定最近的 Boss</div></div>
+<div class="cl-v"><div class="cl-h">v33 · 2026-06-14</div><div class="cl-i">新增「更新说明」页，可查看各版本更新内容</div></div>
+<div class="cl-v"><div class="cl-h">v32 · 2026-06-14</div><div class="cl-i">无尽模式随机刷不同 Boss（5 选 1，外观招式都变）<br>Boss 出场 2.5 秒无敌护罩，给足走位备战时间</div></div>
+<div class="cl-v"><div class="cl-h">v31 · 2026-06-14</div><div class="cl-i">黑洞削弱：范围缩小、吸力变温和，怪不再被锁死<br>PC 端按 T 切换自动瞄准<br>提交成绩后显示「本次第 N 名 · 共 M 人」<br>新增高速小兵「狰」，逼迫走位</div></div>
+<div class="cl-v"><div class="cl-h">v30 · 2026-06-14</div><div class="cl-i">暂停菜单加「结束并提交成绩」，玩到死不了也能上榜<br>初始页加版本号与更新说明</div></div>
+<div class="cl-v"><div class="cl-h">v29 · 2026-06-14</div><div class="cl-i">修复生命虹吸回血过快的 Bug</div></div>
+<div class="cl-v"><div class="cl-h">v28 · 2026-06-14</div><div class="cl-i">法术槽上限：最多同时持有 4 种法术，槽满后只出升级与符文，可在商店卖出替换</div></div>
+<div class="cl-v"><div class="cl-h">v25–v27 · 2026-06-13</div><div class="cl-i">新增暂停功能与云端排行榜（TOP 10）<br>修复右上角 HUD 被按钮遮挡的问题</div></div>
+<div class="cl-v"><div class="cl-h">v20–v24 · 2026-06-13</div><div class="cl-i">Boss 招式加入预警系统，弹幕不再无预警炸脸<br>敌人威胁前置、危险敌人加红环标记<br>卖法术保底，杜绝卖光后打不出子弹</div></div>
+<button class="btn" id="clClose" style="margin-top:8px;">关闭</button>
+</div></div>
 <div id="paused" class="overlay hidden">
   <div class="panel">
     <div class="eyebrow" style="color:#8b7df0;">Paused</div>
@@ -197,6 +215,7 @@ const irand=(a,b)=>Math.floor(rand(a,b+1));
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const dist2=(ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay;return dx*dx+dy*dy;};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;};
 const $=id=>document.getElementById(id);
 
 /* ============ 画布 ============ */
@@ -958,16 +977,32 @@ function startWave(n){
   /* 自适应难度重算 */
   recomputeDifficulty();
   const sr=difficultyPool.spawnRate;
-  if(n%5===0){
+  const bossWave = (n%5===0) || (endless && n>15);
+  if(bossWave){
     const tier=clamp(Math.ceil(n/5),1,3)+(endless&&n>15?Math.floor((n-15)/5):0);
-    spawnQ.push({t:.8,type:'boss',tier:clamp(tier,1,3),scale:1+(n>15?(n-15)*.12:0)});
+    const tClamp=clamp(tier,1,3);
+    const scale=1+(n>15?(n-15)*.12:0);
+    /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
+    const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
+    const order=shuffle([0,1,2,3,4]); /* 打乱 Boss 序号;数量超过 5 种时循环复用 */
+    for(let i=0;i<bossCount;i++){
+      const idx=order[i%order.length];
+      let px,py;
+      if(bossCount===1){ px=ARENA.w/2; py=ARENA.pad+160; }
+      else {
+        const span=Math.max(0,ARENA.w-2*(ARENA.pad+140));
+        px=clamp(ARENA.pad+140+span*(i/(bossCount-1)),ARENA.pad+60,ARENA.w-ARENA.pad-60);
+        py=clamp(ARENA.pad+130+(i%2)*70,ARENA.pad+60,ARENA.h*.5);
+      }
+      spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py});
+    }
     const guard=Math.min(tier,3);
     /* Boss 波按压力插入妖/煞护卫 */
     const guardTier=Math.max(2,Math.min(3,1+Math.floor(difficultyPool.pressure*3)));
     for(let i=0;i<2+guard;i++) spawnQ.push({t:rand(3,(11+n*.6)/sr),type:pick(['slime','bat','snake']),tier:guardTier});
     if(n>=10) for(let i=0;i<1+Math.floor(guard/2);i++) spawnQ.push({t:rand(5,(13)/sr),type:pick(['brute','summoner']),tier:guardTier});
     spawnQ.sort((a,b)=>a.t-b.t);
-    announce('⚠ 首领来袭','BOSS · WAVE '+n); cam.shake=8;
+    announce(bossCount>1?('⚠ '+bossCount+' 尊首领围攻'):'⚠ 首领来袭','BOSS · WAVE '+n); cam.shake=8;
     /* 水墨飞白:Boss 波 — 竖向朱砂 */
     inkSplash={t:1,kind:'boss',x:rand(0,W),y:rand(0,H)};
     return;
@@ -1092,11 +1127,12 @@ function hex2rgb(h){
   h=h.replace('#','');
   return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
 }
-function makeBoss(tier,scale){
+function makeBoss(tier,scale,forceIdx,px,py){
   const hp=(300+tier*tier*1000)*(scale||1); /* boss耐久×3,作为高潮持久战 */
-  const idx=endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1);
+  const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
+           :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
-  return {boss:true,tier,type:'boss',x:ARENA.w/2,y:ARENA.pad+160,r:34+tier*7,
+  return {boss:true,tier,type:'boss',x:(px!==undefined?px:ARENA.w/2),y:(py!==undefined?py:ARENA.pad+160),r:34+tier*7,
     hp,maxhp:hp,spd:30+tier*5,dmg:16,col:p.col,atkName:p.atkName,name:p.name,
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
@@ -2120,10 +2156,10 @@ function updateSpellStates(dt){
 }
 function aimPoint(){
   if(!usingTouch&&mouse.active&&!autoAim) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
-  let boss=null,best=null,bd=Infinity,closeThreat=null,cd=160*160;
+  let boss=null,bossD=Infinity,best=null,bd=Infinity,closeThreat=null,cd=160*160;
   for(const e of enemies){ if(e.dead)continue;
     const d=dist2(player.x,player.y,e.x,e.y);
-    if(e.boss)boss=e;
+    if(e.boss){ if(d<bossD){bossD=d;boss=e;} }   /* 多 Boss 时锁最近的那个 */
     if(d<bd){bd=d;best=e;}
     if(!e.boss&&d<cd){cd=d;closeThreat=e;} }
   /* boss在场:优先打boss(否则发数少的狙击子弹全被护卫吸走),但贴脸护卫(<160px)先清除以解围 */
@@ -2859,7 +2895,7 @@ function update(dt){
   waveT+=dt;
   while(spawnQ.length&&spawnQ[0].t<=waveT){
     const it=spawnQ.shift();
-    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
+    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale,it.bossIdx,it.px,it.py)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
     else if(it.type==='elite')spawnEnemy('elite',undefined,it.baseType,it.tier);
     else spawnEnemy(it.type,undefined,undefined,it.tier);
   }
@@ -3935,8 +3971,9 @@ function drawHUD(){
       ctx.fillText('战意 +'+Math.round(comboDmg*100)+'%',W-14,top+161);}
   }
   /* 首领血条(加大字号 + 朱砂方框印章) */
-  const boss=enemies.find(e=>e.boss);
-  if(boss){
+  const bosses=enemies.filter(e=>e.boss);
+  if(bosses.length===1){
+    const boss=bosses[0];
     const bw=Math.min(W*.62,440), bx=(W-bw)/2, by=top+42;
     /* 浓墨外底 */
     ctx.fillStyle='rgba(10,8,24,.8)';rrect(bx-4,by-4,bw+8,24,8);ctx.fill();
@@ -3948,7 +3985,7 @@ function drawHUD(){
     bg.addColorStop(0,'#c83a3a');bg.addColorStop(1,'#7a1a1a');
     ctx.fillStyle=bg;rrect(bx,by,bw*bhr,16,5);ctx.fill();
     /* Boss 名字(浓墨 + 加大字号) */
-    const bname=BOSS_NAMES[boss.tier-1]||'';
+    const bname=boss.name||'';
     ctx.font='900 18px "Songti SC","STSong",serif';
     const tw=ctx.measureText(bname).width;
     /* 朱砂方框印章(框 1.5px 朱砂) */
@@ -3967,6 +4004,26 @@ function drawHUD(){
     ctx.fillRect(sealX+sealW-3,sealY,3,3);
     ctx.fillRect(sealX,sealY+sealH-3,3,3);
     ctx.fillRect(sealX+sealW-3,sealY+sealH-3,3,3);
+  } else if(bosses.length>1){
+    /* 多 Boss:紧凑血条竖向堆叠,各自标名 + 体色点;护罩中显示蓝条 */
+    const bw=Math.min(W*.5,300), bx=(W-bw)/2;
+    let by=top+30;
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    for(const boss of bosses){
+      ctx.fillStyle='rgba(10,8,24,.78)';rrect(bx-3,by-3,bw+6,18,6);ctx.fill();
+      ctx.fillStyle='#33152a';rrect(bx,by,bw,12,4);ctx.fill();
+      const bhr=clamp(boss.hp/boss.maxhp,0,1);
+      const shielded=boss._shieldT>0;
+      const bg=ctx.createLinearGradient(bx,0,bx+bw,0);
+      if(shielded){bg.addColorStop(0,'#6fa8ff');bg.addColorStop(1,'#33559e');}
+      else{bg.addColorStop(0,'#c83a3a');bg.addColorStop(1,'#7a1a1a');}
+      ctx.fillStyle=bg;rrect(bx,by,bw*bhr,12,4);ctx.fill();
+      ctx.fillStyle=boss.col;ctx.beginPath();ctx.arc(bx+9,by+6,3.5,0,TAU);ctx.fill();
+      ctx.font='900 12px "Songti SC","STSong",serif';
+      ctx.fillStyle='#fff';
+      ctx.fillText((boss.name||'')+(shielded?' 🛡️':''),bx+18,by+6);
+      by+=20;
+    }
   }
   /* 法术构筑栏 */
   let line1='', line2='';
@@ -4032,6 +4089,8 @@ $('resumeBtn').onclick=()=>togglePause(false);
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+$('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
+$('clClose').onclick=()=>$('changelog').classList.add('hidden');
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
 $('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
