@@ -23,7 +23,15 @@
     background:linear-gradient(170deg,#1a1438,#0e0b20 70%);
     box-shadow:0 0 60px rgba(110,90,240,.18), inset 0 0 40px rgba(110,90,240,.06);}
   /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
-  #menu .panel{max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+  #menu .panel{max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:15px 20px;gap:6px;}
+  /* 开始页紧凑排版:目标一屏放下、无需滚动 */
+  #menu .title{font-size:38px;}
+  #menu .desc{font-size:13px;line-height:1.55;}
+  #menu .hint{line-height:1.5;}
+  #menu .lb-title{margin-top:7px;}
+  #menu .lb-board{max-height:172px;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;margin-top:6px;}
+  #menu .lb-row{padding:5px 11px;margin-bottom:4px;}
+  #menu .credit{margin-top:2px;}
   .eyebrow{font-size:11px;letter-spacing:.5em;color:var(--cyan);text-transform:uppercase;padding-left:.5em;}
   h1.title{font-family:"Songti SC","STSong","SimSun",serif;font-weight:900;font-size:46px;line-height:1.15;
     letter-spacing:.3em;margin-left:.3em;
@@ -51,7 +59,9 @@
   .lb-row{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:rgba(30,22,60,.45);margin-bottom:5px;font-size:13px;}
   .lb-medal{width:22px;text-align:center;flex-shrink:0;}
   .lb-rank{display:inline-block;width:22px;text-align:center;color:#8b7df0;font-weight:bold;flex-shrink:0;}
-  .lb-name{flex:1;color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+  .lb-id{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;}
+  .lb-name{color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;max-width:100%;}
+  .lb-date{font-size:10px;color:#8b7df0;line-height:1.3;letter-spacing:.02em;}
   .lb-score{color:#ffd98a;font-size:12px;flex-shrink:0;}
   .lb-empty,.lb-load{padding:14px;color:#8b7df0;font-size:12px;text-align:center;}
   .lb-myrank{padding:12px;margin-bottom:8px;border-radius:10px;text-align:center;font-size:14px;font-weight:700;color:#ffd98a;background:linear-gradient(135deg,rgba(255,180,80,.18),rgba(255,140,60,.1));border:1px solid rgba(255,200,120,.35);}
@@ -104,8 +114,7 @@
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="margin-top:8px;opacity:.8;">v35 · 更新于 2026-06-15</div>
-    <div class="credit" id="clOpen" style="margin-top:4px;cursor:pointer;text-decoration:underline;opacity:.85;">更新说明</div>
+    <div class="credit" style="opacity:.8;">v35 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
   </div>
 </div>
 
@@ -2453,8 +2462,15 @@ async function submitScore(name,wave,kills){
     body:JSON.stringify({name,wave,kills})}); return true; }catch(e){ console.warn('提交失败',e); return false; }
 }
 async function fetchLeaderboard(){
-  try{ const r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&order=wave.desc,kills.desc&limit=10',
-    {headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}}); return await r.json(); }catch(e){ console.warn('读榜失败',e); return []; }
+  const base=SB_URL+'/rest/v1/scores?order=wave.desc,kills.desc&limit=10';
+  const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
+  try{
+    /* 优先带上记录时间列;若该表无 created_at 列(请求 400),自动回退,保证榜单不受影响 */
+    let r=await fetch(base+'&select=name,wave,kills,created_at',{headers:hdr});
+    if(!r.ok) r=await fetch(base+'&select=name,wave,kills',{headers:hdr});
+    const data=await r.json();
+    return Array.isArray(data)?data:[];
+  }catch(e){ console.warn('读榜失败',e); return []; }
 }
 async function fetchRank(wave,kills){
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,Prefer:'count=exact',Range:'0-0'};
@@ -2466,12 +2482,24 @@ async function fetchRank(wave,kills){
   }catch(e){ return {rank:0,total:0}; }
 }
 function escHtml(s){ return (s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
+/* 记录时间格式化:本地时区 年-月-日 时:分;无效/缺失则返回空串 */
+function fmtTime(ts){
+  if(!ts) return '';
+  const d=new Date(ts);
+  if(isNaN(d.getTime())) return '';
+  const p=n=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+}
 function renderBoard(el,list){
   if(!el)return;
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
-    return '<div class="lb-row"><span class="lb-medal">'+medal+'</span><span class="lb-name">'+escHtml(r.name)+'</span><span class="lb-score">第 '+r.wave+' 波 · '+r.kills+' 杀</span></div>';
+    const t=fmtTime(r.created_at);
+    return '<div class="lb-row"><span class="lb-medal">'+medal+'</span>'
+      +'<span class="lb-id"><span class="lb-name">'+escHtml(r.name)+'</span>'
+      +(t?'<span class="lb-date">'+t+'</span>':'')+'</span>'
+      +'<span class="lb-score">第 '+r.wave+' 波 · '+r.kills+' 杀</span></div>';
   }).join('');
 }
 function setupEndLeaderboard(prefix){
