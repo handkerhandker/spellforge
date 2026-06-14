@@ -894,6 +894,7 @@ function tryDash(){
 }
 /* ============ 金币 & 连击 ============ */
 const PRICE={1:18,2:30,3:50}, REROLL_COST=8, SHOP_REROLL=10, HEAL_COST=30, SELL_GAIN=8;
+const SPELL_SLOT_MAX=4; /* 法术槽位上限:最多同时持有这么多种法术(符文mod不限) */
 function comboCoinMult(){ return 1+Math.min(combo,50)*.008; } /* 平衡:50连击 ×2→×1.4 */
 function addCoins(n){
   n=Math.max(1,Math.round(n*(1+player.curse.coin)*comboCoinMult()));
@@ -2110,7 +2111,7 @@ function updateSpellStates(dt){
   player.blackholes=player.blackholes.filter(b=>b.life>0);
   /* 生命虹吸(毒云存在时回血) */
   if(clouds.length && activeSynergies().find(x=>x.id==='lifesteal')){
-    if(Math.random()<.3) heal(1);
+    heal(2.5*dt); /* FIX: 原为每帧30%概率heal(1),60fps下达约18血/秒;改为按时间约2.5血/秒,与帧率无关 */
   }
 }
 function aimPoint(){
@@ -2458,6 +2459,8 @@ function cardInfo(d){
 function rollCards(n){
   let pool=CARD_DEFS.filter(d=>{
     if(d.kind==='curse'&&waveNum<4)return false;
+    /* 法术槽位上限:已满且这是张没拥有的新法术 -> 不出;已有法术的升级与所有符文照常 */
+    if(d.kind==='spell'&&!player.spells[d.id]&&Object.keys(player.spells).length>=SPELL_SLOT_MAX)return false;
     const c=player.cc[d.id]||0;
     const max=d.kind==='spell'?(d.id==='blade'?4:5):d.max;
     return c<max;
@@ -2514,7 +2517,9 @@ function buildCards(){
       else { startWave(waveNum+1); state='play'; } };
     row.appendChild(el);
   }
-  $('cardSub').textContent='已肃清第 '+waveNum+' 波 · 三选一'+(shopWave(waveNum)?' · 选完逛商店':'');
+  const _sn=Object.keys(player.spells).length;
+  const _st=_sn>=SPELL_SLOT_MAX?' · 法术槽已满 '+_sn+'/'+SPELL_SLOT_MAX+'（商店可卖出替换）':' · 法术 '+_sn+'/'+SPELL_SLOT_MAX;
+  $('cardSub').textContent='已肃清第 '+waveNum+' 波 · 三选一'+_st+(shopWave(waveNum)?' · 选完逛商店':'');
   const rb=$('rerollBtn');
   rb.textContent='🔄 重抽一组 ('+REROLL_COST+'💰) · 现有 '+coins+'💰';
   rb.style.opacity=coins>=REROLL_COST?'1':'.45';
@@ -2522,7 +2527,7 @@ function buildCards(){
 }
 
 /* ============ 商店 ============ */
-function refreshShopHead(){ $('shopCoins').textContent='钱袋 · '+coins+' 💰'; }
+function refreshShopHead(){ const _sn=Object.keys(player.spells).length; $('shopCoins').textContent='钱袋 · '+coins+' 💰 · 法术槽 '+_sn+'/'+SPELL_SLOT_MAX+(_sn>=SPELL_SLOT_MAX?' 已满':''); }
 function buildShopItems(){
   const row=$('shopRow'); row.innerHTML='';
   const opts=rollCards(3);
