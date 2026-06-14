@@ -39,6 +39,16 @@
     transition:transform .12s ease, box-shadow .12s ease;}
   .btn:active{transform:scale(.96);}
   .btn.ghost{background:transparent;border:1px solid #4a4380;box-shadow:none;color:#bdb4ea;font-weight:600;}
+  .lb-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:16px;margin-bottom:2px;}
+  .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
+  .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
+  .lb-board{width:min(360px,90vw);margin-top:10px;max-height:34vh;overflow-y:auto;}
+  .lb-row{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:rgba(30,22,60,.45);margin-bottom:5px;font-size:13px;}
+  .lb-medal{width:22px;text-align:center;flex-shrink:0;}
+  .lb-rank{display:inline-block;width:22px;text-align:center;color:#8b7df0;font-weight:bold;flex-shrink:0;}
+  .lb-name{flex:1;color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+  .lb-score{color:#ffd98a;font-size:12px;flex-shrink:0;}
+  .lb-empty,.lb-load{padding:14px;color:#8b7df0;font-size:12px;text-align:center;}
   .stats{display:flex;gap:30px;margin:6px 0;}
   .stat{display:flex;flex-direction:column;align-items:center;gap:2px;}
   .stat b{font-size:30px;color:var(--gold);font-family:"Songti SC","STSong",serif;}
@@ -66,11 +76,15 @@
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;}
+  #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
+    z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
+    background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
 <button id="muteBtn" title="声音">🔊</button>
+<button id="pauseBtn" title="暂停">⏸</button>
 
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
@@ -81,6 +95,8 @@
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
     <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
     <button class="btn" id="startBtn">拔出法杖</button>
+    <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
+    <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
   </div>
 </div>
@@ -103,7 +119,23 @@
       <div class="stat"><b id="ovWave">0</b><span>抵达波次</span></div>
       <div class="stat"><b id="ovKill">0</b><span>击杀</span></div>
     </div>
-    <button class="btn" id="retryBtn">再次挑战</button>
+    <div class="lb-title">⚔ 英雄榜</div>
+    <div class="lb">
+      <input id="ovName" maxlength="16" placeholder="留名上榜">
+      <button class="btn" id="ovSubmit" style="margin-top:0;padding:11px 22px;font-size:14px;">提交</button>
+    </div>
+    <div id="ovBoard" class="lb-board"></div>
+    <button class="btn ghost" id="retryBtn">再次挑战</button>
+  </div>
+</div>
+
+<!-- 暂停 -->
+<div id="paused" class="overlay hidden">
+  <div class="panel">
+    <div class="eyebrow" style="color:#8b7df0;">Paused</div>
+    <h1 class="title" style="font-size:34px;">已暂停</h1>
+    <button class="btn" id="resumeBtn">继续</button>
+    <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
 </div>
 
@@ -117,6 +149,12 @@
       <div class="stat"><b>15</b><span>通关波次</span></div>
       <div class="stat"><b id="wnKill">0</b><span>击杀</span></div>
     </div>
+    <div class="lb-title">⚔ 英雄榜</div>
+    <div class="lb">
+      <input id="wnName" maxlength="16" placeholder="留名上榜">
+      <button class="btn" id="wnSubmit" style="margin-top:0;padding:11px 22px;font-size:14px;">提交</button>
+    </div>
+    <div id="wnBoard" class="lb-board"></div>
     <button class="btn" id="endlessBtn">无尽模式</button>
     <button class="btn ghost" id="winRetryBtn">重新开始</button>
   </div>
@@ -202,7 +240,7 @@ $('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'
 
 /* ============ 输入 ============ */
 const keys={};
-addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault();});
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault(); if((e.key==='Escape'||e.key.toLowerCase()==='p')&&state==='play')togglePause();});
 addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 const mouse={x:W/2,y:H/2,active:false};
 let usingTouch=false;
@@ -707,7 +745,7 @@ function buildBossArt(){
 buildBossArt();
 
 /* ============ 状态 ============ */
-let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0;
+let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false;
 let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 let novaFX=null;
@@ -2353,15 +2391,56 @@ function hurtPlayer(d){
   }
   if(player.hp<=0){ player.hp=0; gameOver(); }
 }
+/* ============ 排行榜(Supabase) ============ */
+const SB_URL='https://ivhwhewqegshzxigmslt.supabase.co';
+const SB_KEY='sb_publishable_JhIPyJDKFZDr0kcwE13gVQ_HTDcn4bQ';
+function lastName(){ try{return localStorage.getItem('sf_name')||'';}catch(e){return '';} }
+function saveName(n){ try{localStorage.setItem('sf_name',n);}catch(e){} }
+async function submitScore(name,wave,kills){
+  try{ await fetch(SB_URL+'/rest/v1/scores',{method:'POST',
+    headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+    body:JSON.stringify({name,wave,kills})}); return true; }catch(e){ console.warn('提交失败',e); return false; }
+}
+async function fetchLeaderboard(){
+  try{ const r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&order=wave.desc,kills.desc&limit=10',
+    {headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}}); return await r.json(); }catch(e){ console.warn('读榜失败',e); return []; }
+}
+function escHtml(s){ return (s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
+function renderBoard(el,list){
+  if(!el)return;
+  if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
+  el.innerHTML=list.map((r,i)=>{
+    const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
+    return '<div class="lb-row"><span class="lb-medal">'+medal+'</span><span class="lb-name">'+escHtml(r.name)+'</span><span class="lb-score">第 '+r.wave+' 波 · '+r.kills+' 杀</span></div>';
+  }).join('');
+}
+function setupEndLeaderboard(prefix){
+  const nameEl=$(prefix+'Name'), submitBtn=$(prefix+'Submit'), boardEl=$(prefix+'Board');
+  if(!nameEl)return;
+  nameEl.value=lastName();
+  submitBtn.disabled=false; submitBtn.textContent='提交';
+  boardEl.innerHTML='<div class="lb-load">加载榜单中…</div>';
+  fetchLeaderboard().then(b=>renderBoard(boardEl,b));
+  const w=waveNum, k=kills;
+  submitBtn.onclick=async()=>{
+    const n=(nameEl.value.trim()||'无名英雄').slice(0,16);
+    saveName(n); submitBtn.disabled=true; submitBtn.textContent='已提交 ✓';
+    await submitScore(n,w,k);
+    boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
+    renderBoard(boardEl, await fetchLeaderboard());
+  };
+}
 function gameOver(){
   state='over'; S.die();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
   $('over').classList.remove('hidden');
+  setupEndLeaderboard('ov');
 }
 function victory(){
   state='win'; S.win();
   $('wnKill').textContent=kills;
   $('win').classList.remove('hidden');
+  setupEndLeaderboard('wn');
 }
 
 /* ============ 卡牌 ============ */
@@ -3760,9 +3839,9 @@ function drawHUD(){
   /* 顶部 1px 浓墨下边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
   ctx.fillRect(0,top+34,W,1);
-  /* 压力条(右上角,在击杀数上方) */
+  /* 压力条(左上角,金币下方,避开右上角按钮) */
   if(state==='play'){
-    const pw=120, px=W-12-pw, py=top+22;
+    const pw=104, px=18, py=top+82;
     ctx.fillStyle='rgba(10,8,24,.7)';rrect(px-4,py-3,pw+8,12,5);ctx.fill();
     const pr=clamp(playerProfile.pressure,0,1);
     let pcol='#5a3a3a';
@@ -3770,8 +3849,8 @@ function drawHUD(){
     else if(pr>.4) pcol='#d4a050';
     else pcol='#5fa070';
     ctx.fillStyle=pcol;rrect(px,py,pw*pr,6,3);ctx.fill();
-    ctx.fillStyle='#cfc8f2';ctx.font='bold 9px sans-serif';ctx.textAlign='right';
-    ctx.fillText('压 '+(pr*100|0)+'%',W-14,py+6);
+    ctx.fillStyle='#cfc8f2';ctx.font='bold 9px sans-serif';ctx.textAlign='left';
+    ctx.fillText('压 '+(pr*100|0)+'%',px+pw+6,py+6);
   }
   /* 阵型激活 flash(屏幕顶部中央,激活全程显示) */
   if(formations.active){
@@ -3806,11 +3885,11 @@ function drawHUD(){
   ctx.fillText('第 '+waveNum+' 波'+(endless?' ∞':''),W/2,top+10);
   ctx.fillStyle='#8b7df0';ctx.font='10px sans-serif';
   ctx.fillText('剩余 '+(enemies.length+spawnQ.length),W/2,top+26);
-  /* 击杀 */
-  ctx.textAlign='right';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
-  ctx.fillText('☠ '+kills,W-58,top+12);
+  /* 击杀/金币:移到血条下方左侧,避开右上角的暂停/静音按钮(原先在右上角被按钮遮挡) */
+  ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
+  ctx.fillText('☠ '+kills,16,top+40);
   ctx.fillStyle='#ffd24d';
-  ctx.fillText('💰 '+coins,W-58,top+50);
+  ctx.fillText('💰 '+coins,16,top+60);
   /* 无尽修饰符图标(顶部中央常驻) */
   if(endlessMods.length){
     const iw=26; let mx=W/2-(endlessMods.length-1)*iw/2;
@@ -3827,11 +3906,11 @@ function drawHUD(){
     const cs=combo>=25?'#ff5d5d':combo>=10?'#ffd24d':'#cfe9ff';
     ctx.fillStyle=cs;ctx.textAlign='right';
     ctx.font='900 '+Math.round(20+Math.min(combo,30)*.3)+'px "Songti SC","STSong",serif';
-    ctx.fillText('×'+combo+' 连击',W-14,top+84);
-    ctx.fillStyle='rgba(10,8,24,.6)';ctx.fillRect(W-94,top+94,80,4);
-    ctx.fillStyle=cs;ctx.fillRect(W-94,top+94,80*clamp(comboT/3,0,1),4);
+    ctx.fillText('×'+combo+' 连击',W-14,top+135);
+    ctx.fillStyle='rgba(10,8,24,.6)';ctx.fillRect(W-94,top+145,80,4);
+    ctx.fillStyle=cs;ctx.fillRect(W-94,top+145,80*clamp(comboT/3,0,1),4);
     if(comboDmg>0){ctx.font='10px sans-serif';ctx.fillStyle='#ffd98a';
-      ctx.fillText('战意 +'+Math.round(comboDmg*100)+'%',W-14,top+110);}
+      ctx.fillText('战意 +'+Math.round(comboDmg*100)+'%',W-14,top+161);}
   }
   /* 首领血条(加大字号 + 朱砂方框印章) */
   const boss=enemies.find(e=>e.boss);
@@ -3899,16 +3978,19 @@ function drawHUD(){
 
 /* ============ 主循环 ============ */
 let last=performance.now();
-document.addEventListener('visibilitychange',()=>{last=performance.now();});
+document.addEventListener('visibilitychange',()=>{last=performance.now(); if(document.hidden&&state==='play'&&!paused)togglePause(true);});
 function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
-  if(state==='play')update(dt);
+  if(state==='play'&&!paused)update(dt);
+  $('pauseBtn').style.display=(state==='play')?'flex':'none';
   render();
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
 
 /* ============ 按钮 ============ */
+/* 菜单榜单初始加载 */
+fetchLeaderboard().then(b=>renderBoard($('menuBoard'),b));
 function launchRun(w){
   resetGame(); applyWand(w);
   /* #warp 跳波测试钩子 */
@@ -3918,6 +4000,14 @@ function launchRun(w){
   /* #debug 无敌 + #warpn 跳到 n 波 */
   if(location.hash.includes('debug')){player.maxhp=99999;player.hp=99999;player.mods.armor=99;}
 }
+function togglePause(p){
+  if(state!=='play')return;
+  paused=(p!==undefined)?p:!paused;
+  $('paused').classList.toggle('hidden',!paused);
+}
+$('pauseBtn').onclick=()=>togglePause();
+$('resumeBtn').onclick=()=>togglePause(false);
+$('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
 $('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
