@@ -76,6 +76,7 @@
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;}
+  #verTag{position:fixed;right:8px;bottom:6px;z-index:6;font-size:10px;letter-spacing:.04em;color:rgba(196,186,255,.4);pointer-events:none;}
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
@@ -85,6 +86,7 @@
 <canvas id="game"></canvas>
 <button id="muteBtn" title="声音">🔊</button>
 <button id="pauseBtn" title="暂停">⏸</button>
+<div id="verTag">v30 · 2026-06-14</div>
 
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
@@ -135,6 +137,7 @@
     <div class="eyebrow" style="color:#8b7df0;">Paused</div>
     <h1 class="title" style="font-size:34px;">已暂停</h1>
     <button class="btn" id="resumeBtn">继续</button>
+    <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
 </div>
@@ -2431,8 +2434,8 @@ function setupEndLeaderboard(prefix){
     renderBoard(boardEl, await fetchLeaderboard());
   };
 }
-function gameOver(){
-  state='over'; S.die();
+function gameOver(manual){
+  state='over'; if(!manual)S.die();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
   $('over').classList.remove('hidden');
   setupEndLeaderboard('ov');
@@ -3988,6 +3991,7 @@ function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
   if(state==='play'&&!paused)update(dt);
   $('pauseBtn').style.display=(state==='play')?'flex':'none';
+  $('verTag').style.display=(state==='play')?'none':'block';
   render();
   requestAnimationFrame(loop);
 }
@@ -4013,6 +4017,7 @@ function togglePause(p){
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
+$('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
 $('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
