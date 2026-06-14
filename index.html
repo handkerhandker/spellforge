@@ -49,6 +49,7 @@
   .lb-name{flex:1;color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
   .lb-score{color:#ffd98a;font-size:12px;flex-shrink:0;}
   .lb-empty,.lb-load{padding:14px;color:#8b7df0;font-size:12px;text-align:center;}
+  .lb-myrank{padding:12px;margin-bottom:8px;border-radius:10px;text-align:center;font-size:14px;font-weight:700;color:#ffd98a;background:linear-gradient(135deg,rgba(255,180,80,.18),rgba(255,140,60,.1));border:1px solid rgba(255,200,120,.35);}
   .stats{display:flex;gap:30px;margin:6px 0;}
   .stat{display:flex;flex-direction:column;align-items:center;gap:2px;}
   .stat b{font-size:30px;color:var(--gold);font-family:"Songti SC","STSong",serif;}
@@ -76,7 +77,6 @@
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;}
-  #verTag{position:fixed;right:8px;bottom:6px;z-index:6;font-size:10px;letter-spacing:.04em;color:rgba(196,186,255,.4);pointer-events:none;}
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
@@ -86,7 +86,6 @@
 <canvas id="game"></canvas>
 <button id="muteBtn" title="声音">🔊</button>
 <button id="pauseBtn" title="暂停">⏸</button>
-<div id="verTag">v30 · 2026-06-14</div>
 
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
@@ -95,11 +94,12 @@
     <h1 class="title">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
-    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
+    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换自动瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
     <button class="btn" id="startBtn">拔出法杖</button>
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
+    <div class="credit" style="margin-top:8px;opacity:.8;">v31 · 更新于 2026-06-14</div>
   </div>
 </div>
 
@@ -243,7 +243,7 @@ $('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'
 
 /* ============ 输入 ============ */
 const keys={};
-addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault(); if((e.key==='Escape'||e.key.toLowerCase()==='p')&&state==='play')togglePause();});
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault(); if(e.key.toLowerCase()==='t'&&state==='play'){autoAim=!autoAim;announce(autoAim?'🎯 自动瞄准 开':'🖱️ 自动瞄准 关',autoAim?'法术自动锁定最近敌人':'恢复鼠标瞄准');} if((e.key==='Escape'||e.key.toLowerCase()==='p')&&state==='play')togglePause();});
 addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 const mouse={x:W/2,y:H/2,active:false};
 let usingTouch=false;
@@ -362,7 +362,7 @@ const SPELL_DEF={
   heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,desc:'直接回复 6 点生命(随等级提升)'},
   shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,desc:'4 秒内受击只扣 1,最多 5 次'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
-  blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:200,desc:'强力吸入并持续灼烧范围内敌人'},
+  blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
   swarm:{name:'蜂群飞弹',icon:'🐝',col:'#ffd24d',dmg:5,cd:1.4,spd:300,r:5,life:1.5,desc:'射出 3 枚自动追踪的飞弹'},
   chain:{name:'回旋刃',icon:'🪃',col:'#d8c6ff',cd:.9,dmg:14,spd:480,r:6,life:1.15,chain:1,desc:'飞行一段后回旋,可二次命中'}
@@ -483,7 +483,8 @@ const ETYPE={
   /* 新增:战术型敌人 */
   totem:   {hp:120,spd:0,  r:19, dmg:0,  col:'#6ad0a0', name:'旋龟',ai:'totem',    auraR:210, auraCD:2.2, auraShield:0.6, kbm:0},
   frostarcher:{hp:30,spd:44,r:13, dmg:0, col:'#7ad0ff', name:'钦原',ai:'frostbow', shootR:560, shootCD:2.8, windup:1.0, slowDur:1.6},
-  qiongqi: {hp:58, spd:52, r:16, dmg:13, col:'#b85c4a', name:'穷奇',ai:'melee', kbm:0}   /* 霸体:免疫击退,顶弹冲锋 */
+  qiongqi: {hp:58, spd:52, r:16, dmg:13, col:'#b85c4a', name:'穷奇',ai:'melee', kbm:0},   /* 霸体:免疫击退,顶弹冲锋 */
+  dart:    {hp:14, spd:170, r:10, dmg:7, col:'#ff5edb', name:'狰',  ai:'melee'}   /* 高速直冲小兵:血薄速快,逼迫走位 */
 };
 /* ============ 词缀(精英/后期怪随机携带,改变应对方式) ============ */
 const AFFIX_DEFS={
@@ -748,7 +749,7 @@ function buildBossArt(){
 buildBossArt();
 
 /* ============ 状态 ============ */
-let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false;
+let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, autoAim=false;
 let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 let novaFX=null;
@@ -930,10 +931,10 @@ const WAVE_TABLE={
   1:  [['slime',5],['bat',2]],
   2:  [['slime',6],['bat',3]],
   3:  [['slime',5],['bat',3],['elite','brute',1]],
-  4:  [['slime',5],['bat',4],['shooter',2]],
-  6:  [['slime',6],['snake',5],['shooter',3],['charger',1]],
+  4:  [['slime',5],['bat',4],['shooter',2],['dart',2]],
+  6:  [['slime',6],['snake',5],['shooter',3],['charger',1],['dart',3]],
   7:  [['slime',4],['splitter',3],['bat',5],['charger',2],['bomber',1]],
-  8:  [['brute',3],['shooter',4],['bat',5],['charger',2],['bomber',2]],
+  8:  [['brute',3],['shooter',4],['bat',5],['charger',2],['bomber',2],['dart',4]],
   9:  [['summoner',2],['bat',6],['bomber',3],['charger',3],['snake',4]],
   11: [['wraith',4],['ghost',4],['frostarcher',3],['charger',2],['bat',5]],
   12: [['bomber',7],['totem',1],['shooter',4],['charger',3],['snake',4]],
@@ -2103,7 +2104,7 @@ function updateSpellStates(dt){
       const dx=bh.x-e.x,dy=bh.y-e.y,d=Math.hypot(dx,dy)||1;
       if(d<bh.r){
         /* 强吸力(越近越强,Boss减免) — 把敌人真正吸入而非外圈徘徊 */
-        const pull=((1-d/bh.r)*170+150)*(e.boss?.35:1);
+        const pull=((1-d/bh.r)*100+70)*(e.boss?.35:1);
         e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt;
         /* 全范围持续伤害,中心更疼 */
         damageEnemy(e,bh.dmg*(d<bh.r*.5?1.7:1)*dt);
@@ -2118,7 +2119,7 @@ function updateSpellStates(dt){
   }
 }
 function aimPoint(){
-  if(!usingTouch&&mouse.active) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
+  if(!usingTouch&&mouse.active&&!autoAim) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
   let boss=null,best=null,bd=Infinity,closeThreat=null,cd=160*160;
   for(const e of enemies){ if(e.dead)continue;
     const d=dist2(player.x,player.y,e.x,e.y);
@@ -2409,6 +2410,15 @@ async function fetchLeaderboard(){
   try{ const r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&order=wave.desc,kills.desc&limit=10',
     {headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}}); return await r.json(); }catch(e){ console.warn('读榜失败',e); return []; }
 }
+async function fetchRank(wave,kills){
+  const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,Prefer:'count=exact',Range:'0-0'};
+  const ext=s=>parseInt((s||'0-0/0').split('/')[1])||0;
+  try{
+    const r1=await fetch(SB_URL+'/rest/v1/scores?select=name&or=(wave.gt.'+wave+',and(wave.eq.'+wave+',kills.gt.'+kills+'))',{headers:hdr});
+    const r2=await fetch(SB_URL+'/rest/v1/scores?select=name',{headers:hdr});
+    return {rank:ext(r1.headers.get('content-range'))+1, total:ext(r2.headers.get('content-range'))};
+  }catch(e){ return {rank:0,total:0}; }
+}
 function escHtml(s){ return (s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
 function renderBoard(el,list){
   if(!el)return;
@@ -2431,7 +2441,9 @@ function setupEndLeaderboard(prefix){
     saveName(n); submitBtn.disabled=true; submitBtn.textContent='已提交 ✓';
     await submitScore(n,w,k);
     boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
-    renderBoard(boardEl, await fetchLeaderboard());
+    const [bd,ri]=await Promise.all([fetchLeaderboard(),fetchRank(w,k)]);
+    renderBoard(boardEl, bd);
+    if(ri.rank>0)boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🏆 本次第 '+ri.rank+' 名 · 共 '+ri.total+' 人</div>');
   };
 }
 function gameOver(manual){
@@ -3991,7 +4003,6 @@ function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
   if(state==='play'&&!paused)update(dt);
   $('pauseBtn').style.display=(state==='play')?'flex':'none';
-  $('verTag').style.display=(state==='play')?'none':'block';
   render();
   requestAnimationFrame(loop);
 }
