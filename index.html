@@ -99,7 +99,7 @@
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="margin-top:8px;opacity:.8;">v31 · 更新于 2026-06-14</div>
+    <div class="credit" style="margin-top:8px;opacity:.8;">v32 · 更新于 2026-06-14</div>
   </div>
 </div>
 
@@ -1094,7 +1094,7 @@ function hex2rgb(h){
 }
 function makeBoss(tier,scale){
   const hp=(300+tier*tier*1000)*(scale||1); /* boss耐久×3,作为高潮持久战 */
-  const idx=Math.min(tier-1, BOSS_PALETTE.length-1);
+  const idx=endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1);
   const p=BOSS_PALETTE[idx];
   return {boss:true,tier,type:'boss',x:ARENA.w/2,y:ARENA.pad+160,r:34+tier*7,
     hp,maxhp:hp,spd:30+tier*5,dmg:16,col:p.col,atkName:p.atkName,name:p.name,
@@ -1102,7 +1102,7 @@ function makeBoss(tier,scale){
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
     _phase2Used:false,_phase3Used:false,_laserT:0,_laserAngle:0,_laserDmg:14,_laserFlash:0,_laserFlashAng:0,
     _bossId:idx,_charging:false,_chargeA:0,_chargeT:0,_chargeDmg:0,_multiCharge:0,
-    _shieldT:0,dead:false};
+    _shieldT:2.5,dead:false};
 }
 
 /* 陨石召唤（仅 Boss 阶段 3 使用） */
@@ -2331,6 +2331,8 @@ function volatileBlast(x,y,dmg){
 }
 function damageEnemy(e,dmg,kb){
   if(e.dead)return;
+  /* boss出场护罩/蚩尤干盾:完全免伤 */
+  if(e._shieldT>0){ texts.push({x:e.x,y:e.y-e.r-6,str:'护',life:.4,vy:-26,col:'#9ad8ff',size:12}); return; }
   /* 虚影词缀:免疫窗口 */
   if(e._phaseInv){ texts.push({x:e.x,y:e.y-e.r-6,str:'虚',life:.4,vy:-26,col:'#c8a8ff',size:11}); return; }
   /* 护盾词缀/图腾护盾:先扣盾 */
@@ -2857,7 +2859,7 @@ function update(dt){
   waveT+=dt;
   while(spawnQ.length&&spawnQ[0].t<=waveT){
     const it=spawnQ.shift();
-    if(it.type==='boss')enemies.push(makeBoss(it.tier,it.scale));
+    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
     else if(it.type==='elite')spawnEnemy('elite',undefined,it.baseType,it.tier);
     else spawnEnemy(it.type,undefined,undefined,it.tier);
   }
