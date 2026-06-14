@@ -22,6 +22,8 @@
     padding:28px 22px;border:1px solid #3b3370;border-radius:20px;
     background:linear-gradient(170deg,#1a1438,#0e0b20 70%);
     box-shadow:0 0 60px rgba(110,90,240,.18), inset 0 0 40px rgba(110,90,240,.06);}
+  /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
+  #menu .panel{max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
   .eyebrow{font-size:11px;letter-spacing:.5em;color:var(--cyan);text-transform:uppercase;padding-left:.5em;}
   h1.title{font-family:"Songti SC","STSong","SimSun",serif;font-weight:900;font-size:46px;line-height:1.15;
     letter-spacing:.3em;margin-left:.3em;
@@ -102,7 +104,7 @@
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="margin-top:8px;opacity:.8;">v34 · 更新于 2026-06-15</div>
+    <div class="credit" style="margin-top:8px;opacity:.8;">v35 · 更新于 2026-06-15</div>
     <div class="credit" id="clOpen" style="margin-top:4px;cursor:pointer;text-decoration:underline;opacity:.85;">更新说明</div>
   </div>
 </div>
@@ -139,6 +141,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v35 · 2026-06-15</div><div class="cl-i">无尽模式多 Boss 同屏时，每尊自动削减血量与伤害（数量越多每尊越弱，避免秒杀墙）<br>黑洞加高对比「事件视界」亮环，浅色背景下也清晰可辨</div></div>
 <div class="cl-v"><div class="cl-h">v34 · 2026-06-15</div><div class="cl-i">无尽模式改版：每波都刷 Boss，且都是不同的 Boss<br>16–20 波每波 1 尊，21–25 波每波 2 尊，26–30 波每波 3 尊，以此类推（每 5 波 +1）<br>多 Boss 各自显示血条、分散登场，自动瞄准锁定最近的 Boss</div></div>
 <div class="cl-v"><div class="cl-h">v33 · 2026-06-14</div><div class="cl-i">新增「更新说明」页，可查看各版本更新内容</div></div>
 <div class="cl-v"><div class="cl-h">v32 · 2026-06-14</div><div class="cl-i">无尽模式随机刷不同 Boss（5 选 1，外观招式都变）<br>Boss 出场 2.5 秒无敌护罩，给足走位备战时间</div></div>
@@ -984,6 +987,8 @@ function startWave(n){
     const scale=1+(n>15?(n-15)*.12:0);
     /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
     const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
+    /* 多 Boss 同屏时,每尊削血量+伤害:1尊不变,越多每尊越弱(但总量仍随数量上升) */
+    const cScale=bossCount>1?(0.55+0.45/bossCount):1;
     const order=shuffle([0,1,2,3,4]); /* 打乱 Boss 序号;数量超过 5 种时循环复用 */
     for(let i=0;i<bossCount;i++){
       const idx=order[i%order.length];
@@ -994,7 +999,7 @@ function startWave(n){
         px=clamp(ARENA.pad+140+span*(i/(bossCount-1)),ARENA.pad+60,ARENA.w-ARENA.pad-60);
         py=clamp(ARENA.pad+130+(i%2)*70,ARENA.pad+60,ARENA.h*.5);
       }
-      spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py});
+      spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py,cScale});
     }
     const guard=Math.min(tier,3);
     /* Boss 波按压力插入妖/煞护卫 */
@@ -1127,13 +1132,14 @@ function hex2rgb(h){
   h=h.replace('#','');
   return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
 }
-function makeBoss(tier,scale,forceIdx,px,py){
-  const hp=(300+tier*tier*1000)*(scale||1); /* boss耐久×3,作为高潮持久战 */
+function makeBoss(tier,scale,forceIdx,px,py,cScale){
+  const cs=cScale||1; /* 多 Boss 同屏时 <1:同时削血量与伤害 */
+  const hp=(300+tier*tier*1000)*(scale||1)*cs; /* boss耐久×3,作为高潮持久战 */
   const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
            :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
   return {boss:true,tier,type:'boss',x:(px!==undefined?px:ARENA.w/2),y:(py!==undefined?py:ARENA.pad+160),r:34+tier*7,
-    hp,maxhp:hp,spd:30+tier*5,dmg:16,col:p.col,atkName:p.atkName,name:p.name,
+    hp,maxhp:hp,spd:30+tier*5,dmg:16,_dmgMul:cs,col:p.col,atkName:p.atkName,name:p.name,
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
     _phase2Used:false,_phase3Used:false,_laserT:0,_laserAngle:0,_laserDmg:14,_laserFlash:0,_laserFlashAng:0,
@@ -1227,6 +1233,7 @@ function bossPhaseCheck(e){
 /* Boss 选招 — 每位古神 5+ 招,基于 phase + 玩家行为智能选 */
 function bossAttack(e){
   const phase=e.phase, tier=e.tier;
+  _bossAtkMul=e._dmgMul||1; /* 多 Boss 同屏削伤:本尊所有子弹按倍率缩放 */
   const moveSet=[];  /* 本 boss 的招式库 */
   /* 玩家行为侦测,影响选招偏好 */
   const pHP=playerProfile.hpAvg;       /* 玩家近 5s 平均 HP 比例 */
@@ -1509,6 +1516,7 @@ function bossAttack(e){
   /* 移动模式 */
   const modes=['chase','orbit','strafe','chase','charge'];
   e._moveMode=pick(modes);
+  _bossAtkMul=1; /* 复位,避免影响普通敌人子弹 */
 }
 
 /* 玩家档案采样与聚合 */
@@ -1883,7 +1891,7 @@ function enemyAI(e,dt){
       e.burstT-=dt;
       if(e.burstT<=0){
         e.burstT=.3;e.bursts--;
-        for(const o of[-.22,0,.22]) ebul(e.x,e.y,a+o,260,9+e.tier*2);
+        for(const o of[-.22,0,.22]) ebul(e.x,e.y,a+o,260,(9+e.tier*2)*(e._dmgMul||1));
         S.zap();
       }
     }
@@ -1898,7 +1906,7 @@ function enemyAI(e,dt){
         const proj=px*lx+py*ly;
         if(proj>0 && proj<900){
           const perp=Math.abs(px*ly-py*lx);
-          if(perp<40) hurtPlayer(dmg);
+          if(perp<40) hurtPlayer(dmg*(e._dmgMul||1));
         }
         cam.shake=Math.min(cam.shake+10,16);
         e._laserFlash=.16; e._laserFlashAng=e._laserAngle;
@@ -1917,7 +1925,7 @@ function enemyAI(e,dt){
       e.x+=mvx; e.y+=mvy;
       /* 撞到玩家 */
       if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+10){
-        hurtPlayer(e._chargeDmg||20);
+        hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1));
         cam.shake=Math.min(cam.shake+8,14);
         e._charging=false;
       }
@@ -1926,7 +1934,7 @@ function enemyAI(e,dt){
         e._chargeT=0;
         for(let k=-1;k<=1;k++){
           const aa=e._chargeA+Math.PI/2*k*.3;
-          ebullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*40,vy:Math.sin(aa)*40,r:7,life:2,dmg:e._chargeDmg?e._chargeDmg*.4:8,dead:false,col:'#c83a3a'});
+          ebullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*40,vy:Math.sin(aa)*40,r:7,life:2,dmg:(e._chargeDmg?e._chargeDmg*.4:8)*(e._dmgMul||1),dead:false,col:'#c83a3a'});
         }
       }
       /* 撞墙或超时结束 */
@@ -2665,7 +2673,9 @@ function collidePillars(o){
   o.x=clamp(o.x,ARENA.pad+o.r,ARENA.w-ARENA.pad-o.r);
   o.y=clamp(o.y,ARENA.pad+o.r,ARENA.h-ARENA.pad-o.r);
 }
+let _bossAtkMul=1; /* 多 Boss 同屏时对每尊 Boss 的子弹伤害统一缩放,仅在 bossAttack 期间生效 */
 function ebul(x,y,a,sp,dmg){
+  dmg*=_bossAtkMul;
   ebullets.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,r:6,life:5,dmg,dead:false});
 }
 /* 预警弹幕:先在目标位置显示红色危险圈,延迟 0.7s 后才生成弹幕,给玩家时间躲开 */
@@ -2839,7 +2849,7 @@ function update(dt){
     collidePillars(e);
     if(e._cloaked && e._alpha<0.2) continue;
     if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+2)*(e.r+player.r+2)){
-      hurtPlayer(e.dmg);
+      hurtPlayer(e.dmg*(e._dmgMul||1));
       if((e._aff&&e._aff.venomous)||modMult.contactPoison)applyPoison(3,4);
     }
   }
@@ -2895,7 +2905,7 @@ function update(dt){
   waveT+=dt;
   while(spawnQ.length&&spawnQ[0].t<=waveT){
     const it=spawnQ.shift();
-    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale,it.bossIdx,it.px,it.py)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
+    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale,it.bossIdx,it.px,it.py,it.cScale)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
     else if(it.type==='elite')spawnEnemy('elite',undefined,it.baseType,it.tier);
     else spawnEnemy(it.type,undefined,undefined,it.tier);
   }
@@ -3261,9 +3271,13 @@ function render(){
     ctx.globalAlpha=.72;ctx.fillStyle='#140730';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.72,0,TAU);ctx.fill();
     ctx.globalAlpha=.9;ctx.fillStyle='#0a0420';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.52,0,TAU);ctx.fill();
     ctx.globalAlpha=1;ctx.fillStyle='#020106';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.36,0,TAU);ctx.fill();
-    ctx.globalAlpha=.45;ctx.strokeStyle='#4a2578';ctx.lineWidth=2;
+    ctx.globalAlpha=.6;ctx.strokeStyle='#9a5ce0';ctx.lineWidth=2.5;
     for(let k=0;k<3;k++){const za=bh.ang*2+k/3*TAU;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.64,za,za+1.4);ctx.stroke();}
-    ctx.globalAlpha=.5;ctx.strokeStyle='#6a3a9a';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.82,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.6;ctx.strokeStyle='#b07fe8';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.82,0,TAU);ctx.stroke();
+    /* === 高对比事件视界环:浅色/深色背景下都清晰可辨 === */
+    ctx.globalAlpha=.85;ctx.strokeStyle='#120626';ctx.lineWidth=6;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r+2.5,0,TAU);ctx.stroke(); /* 外侧暗描边:浅底勾轮廓 */
+    ctx.globalAlpha=1;ctx.strokeStyle='#c77dff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r,0,TAU);ctx.stroke(); /* 亮紫主环:深底醒目 */
+    ctx.globalAlpha=.9;ctx.strokeStyle='#f1e3ff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r-2.5,0,TAU);ctx.stroke(); /* 白色高光细环 */
     ctx.restore();
   }
   /* 粒子 */
