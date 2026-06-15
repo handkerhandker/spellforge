@@ -31,7 +31,7 @@
     box-shadow:0 0 60px rgba(110,90,240,.18), inset 0 0 40px rgba(110,90,240,.06);}
   /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
   #menu{justify-content:flex-start;padding-top:calc(6px + env(safe-area-inset-top));}
-  #menu .panel{max-height:93vh;max-height:93dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:46px 20px 18px;gap:9px;}
+  #menu .panel{max-height:calc(100vh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:46px 20px 18px;gap:6px;}
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
   #menu .title{font-size:38px;}
   #menu .desc{font-size:12.5px;line-height:1.4;}
