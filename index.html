@@ -62,6 +62,36 @@
   .cx-tag{font-size:10px;padding:1px 7px;border-radius:999px;background:rgba(123,92,255,.22);color:#c8b8ff;border:1px solid rgba(123,92,255,.4);white-space:nowrap;}
   .cx-stat{font-size:11px;color:#ffd98a;margin-left:auto;white-space:nowrap;}
   .cx-desc{font-size:12px;color:#b8aed4;margin-top:3px;line-height:1.4;}
+  /* 异兽图鉴:Boss 大卡 */
+  .bx-boss{display:flex;gap:12px;padding:10px;border-radius:11px;background:rgba(30,22,60,.5);margin-bottom:8px;align-items:center;}
+  .bx-boss img{width:56px;height:56px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));}
+  .bx-bmain{flex:1;min-width:0;}
+  .bx-bname{color:#fff;font-weight:800;font-size:15px;}
+  .bx-batk{font-size:11px;color:#ffd98a;margin-top:1px;}
+  .bx-btip{font-size:11.5px;color:#b8aed4;margin-top:4px;line-height:1.4;}
+  .bx-fiend{font-size:9px;padding:1px 6px;border-radius:999px;background:rgba(200,32,58,.22);color:#ff9aa8;border:1px solid rgba(200,32,58,.5);margin-left:6px;vertical-align:middle;}
+  /* 成就 */
+  .ach-item{display:flex;gap:11px;padding:9px 11px;border-radius:10px;margin-bottom:6px;background:rgba(30,22,60,.42);align-items:center;}
+  .ach-item.locked{opacity:.5;filter:grayscale(.7);}
+  .ach-ic{font-size:24px;flex-shrink:0;width:34px;text-align:center;}
+  .ach-main{flex:1;min-width:0;}
+  .ach-name{color:#fff;font-weight:700;font-size:13.5px;}
+  .ach-name .ach-done{color:#ffd24d;font-size:11px;margin-left:6px;}
+  .ach-desc{font-size:11.5px;color:#b8aed4;margin-top:2px;line-height:1.35;}
+  .ach-prog{margin-top:5px;height:5px;border-radius:3px;background:rgba(10,8,24,.6);overflow:hidden;}
+  .ach-prog>i{display:block;height:100%;background:linear-gradient(90deg,#7b5cff,#a98bff);}
+  .ach-sum{color:#bdb4ea;font-size:12px;letter-spacing:.1em;margin:2px 0 10px;text-align:center;}
+  /* 菜单:图鉴/成就按钮行 */
+  .codex-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:320px;margin-top:8px;}
+  .codex-row button{min-width:0;padding:10px 4px;border-radius:999px;border:1px solid rgba(123,92,255,.4);background:rgba(123,92,255,.14);color:#cbbcff;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-sizing:border-box;}
+  .codex-row button:active{background:rgba(123,92,255,.28);}
+  /* 成就解锁吐司 */
+  #achToast{position:fixed;left:50%;top:50px;transform:translate(-50%,-14px);z-index:60;display:flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;background:rgba(24,16,46,.93);border:1.5px solid var(--gold);box-shadow:0 4px 18px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:84vw;}
+  #achToast.show{opacity:1;transform:translate(-50%,0);}
+  #achToast .at-ic{font-size:22px;flex-shrink:0;}
+  #achToast .at-tx{min-width:0;}
+  #achToast .at-h{font-size:9.5px;letter-spacing:.18em;color:var(--gold);font-weight:700;}
+  #achToast .at-n{font-size:13.5px;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .btn{margin-top:8px;padding:14px 40px;border:0;border-radius:999px;cursor:pointer;
     font-size:16px;font-weight:800;letter-spacing:.28em;padding-left:calc(40px + .28em);color:#fff;
     background:linear-gradient(135deg,#7a5cff,#37a4ff);
@@ -162,7 +192,12 @@
     </div>
     <div class="aim-hint">智能=自动优先奶妈 / 远程 / Boss 等高威胁</div>
     <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
-    <button class="btn ghost" id="dailyBtn" style="margin-top:6px;padding:10px 28px;font-size:14px;letter-spacing:.12em;">🗓 每日挑战</button>
+    <div class="codex-row" style="margin-top:12px;">
+      <button id="dailyBtn">🗓 每日挑战</button>
+      <button id="bCodex">📖 法术图鉴</button>
+      <button id="bBeast">🐉 异兽图鉴</button>
+      <button id="bAchv">🏆 成就一览</button>
+    </div>
     <div class="lb-title" id="lbTitle">⚔ 英雄榜 · TOP 10</div>
     <div id="lbTabs" class="lb-tabs">
       <button class="lb-tab active" data-period="all">总榜</button>
@@ -171,7 +206,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v50 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v51 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
   </div>
 </div>
 
@@ -186,6 +221,32 @@
     <button class="btn" id="codexClose" style="margin-top:10px;">关闭</button>
   </div>
 </div>
+
+<!-- 异兽图鉴 -->
+<div id="bestiary" class="overlay hidden" style="z-index:50;">
+  <div class="panel" style="max-width:560px;max-height:86vh;overflow-y:auto;text-align:left;">
+    <button class="ovx-close" id="bestiaryCloseTop" aria-label="关闭" title="关闭">✕</button>
+    <div class="eyebrow" style="color:#8b7df0;">Bestiary</div>
+    <h1 class="title" style="font-size:28px;margin-bottom:4px;">异兽图鉴</h1>
+    <div class="sub" style="font-size:11px;letter-spacing:.14em;margin-bottom:8px;">山海经妖兽 · 打法 · 弱点</div>
+    <div id="bestiaryBody" style="width:100%;"></div>
+    <button class="btn" id="bestiaryClose" style="margin-top:10px;">关闭</button>
+  </div>
+</div>
+
+<!-- 成就 -->
+<div id="achv" class="overlay hidden" style="z-index:50;">
+  <div class="panel" style="max-width:560px;max-height:86vh;overflow-y:auto;text-align:left;">
+    <button class="ovx-close" id="achvCloseTop" aria-label="关闭" title="关闭">✕</button>
+    <div class="eyebrow" style="color:#ffd24d;">Achievements</div>
+    <h1 class="title" style="font-size:28px;margin-bottom:4px;">成就</h1>
+    <div id="achvBody" style="width:100%;"></div>
+    <button class="btn" id="achvClose" style="margin-top:10px;">关闭</button>
+  </div>
+</div>
+
+<!-- 成就解锁吐司 -->
+<div id="achToast"><div class="at-ic"></div><div class="at-tx"><div class="at-h">成就解锁</div><div class="at-n"></div></div></div>
 
 <!-- 每日挑战 -->
 <div id="daily" class="overlay hidden">
@@ -227,6 +288,7 @@
       <div class="stat"><b id="ovWave">0</b><span>抵达波次</span></div>
       <div class="stat"><b id="ovKill">0</b><span>击杀</span></div>
     </div>
+    <div id="ovAch"></div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="ovName" maxlength="16" placeholder="留名上榜">
@@ -242,6 +304,7 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。纯展示与记录,不改动任何战斗数值</div></div>
 <div class="cl-v"><div class="cl-h">v50 · 2026-06-15</div><div class="cl-i">顶部信息栏不再挤成一团:此前血条、「第 N 波 / 剩余」与无尽变数图标都画在屏幕正中央、互相叠住,深层局尤其糊。现血条收窄不再顶到中间;波次与剩余居中、必要时自动右移避开血条;无尽「潮汐」变数图标(狂暴/钢甲/猎杀/群涌/精英/剧毒)挪到左侧击杀金币下方单独成行。另外底部法术构筑栏过长时会自动压缩,不再溢出去盖住右下角冲刺键</div></div>
 <div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
 <div class="cl-v"><div class="cl-h">v48 · 2026-06-15</div><div class="cl-i">拉平手机 / PC 难度差(此前 PC 鼠标精准手瞄,手机只能自动打最近的杂兵,威胁清不掉、被耗死)。新增「瞄准模式:手动 / 就近 / 智能」三档(菜单和暂停里可调,PC 按 T 也能循环):<b>智能</b>会优先打高威胁目标(奶妈/护盾龟/远程/冲锋/Boss)且兼顾距离;<b>就近</b>是原来的打最近;<b>手动</b>是 PC 鼠标自由瞄。手机默认<b>智能</b>(无鼠标自动隐藏手动)。另外摇杆满速更易达到、冲刺按钮更好按</div></div>
@@ -280,6 +343,7 @@
       <button class="aim-pill" data-aim="near">就近</button>
       <button class="aim-pill" data-aim="smart">智能</button>
     </div>
+    <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
     <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
@@ -295,6 +359,7 @@
       <div class="stat"><b>15</b><span>通关波次</span></div>
       <div class="stat"><b id="wnKill">0</b><span>击杀</span></div>
     </div>
+    <div id="wnAch"></div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="wnName" maxlength="16" placeholder="留名上榜">
@@ -976,6 +1041,7 @@ buildBossArt();
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
+let _runUnlocked=[], runTookHeart=false, runBoughtShop=false; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
 let relicMods={...RELIC_BASE};
@@ -1078,6 +1144,7 @@ function resetGame(){
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
+  _runUnlocked=[]; runTookHeart=false; runBoughtShop=false;
   relicMods={...RELIC_BASE};
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
   /* 学习系统状态重置 */
@@ -1147,7 +1214,7 @@ function recomputeRelics(){
   relicMods.critChance=Math.min(.5,relicMods.critChance);/* 暴击率 ≤ 50% */
   relicMods.dodge=Math.min(.35,relicMods.dodge);         /* 闪避 ≤ 35% */
 }
-function addRelic(r){ player.relics.push(r.id); if(r.instant)r.instant(player); recomputeRelics(); }
+function addRelic(r){ player.relics.push(r.id); if(r.instant)r.instant(player); recomputeRelics(); if(player.relics.length>=6) unlockAch('relic6'); }
 /* 伤害倍率:加法池(基础 + 残血 + 冲刺余韵)× 暴击掷骰 */
 function relicDmgMul(){
   let add=relicMods.dmgAdd;
@@ -1256,6 +1323,7 @@ const WAVE_TABLE={
 
 function startWave(n){
   waveNum=n; spawnQ=[]; waveT=0;
+  if(endless){ if(n>=20) unlockAch('endless20'); if(n>=50) unlockAch('endless50'); }
   /* 随机地形(Boss 波沿用上波地形,避免转场突兀) */
   if(n%5!==0) terrain=pick(TERRAINS);
   /* 无尽难度修饰符:15 波后每 5 波叠加一个 */
@@ -2763,10 +2831,12 @@ function damageEnemy(e,dmg,kb){
 }
 function onKill(e){
   kills++;
+  recordKill();
   playerProfile._killCount=(playerProfile._killCount||0)+1;
   /* 连击:连续曲线伤害加成 + 段位升级喊话(进攻向) */
   combo++; comboT=COMBO_WINDOW;
   comboDmg=Math.min(COMBO_DMG_CAP, combo*COMBO_DMG_PER);
+  if(combo>=50) unlockAch('combo50');
   const _ct=comboTier(combo);
   if(_ct>comboTierLv){ comboTierLv=_ct; const _ti=COMBO_TIERS[_ct-1];
     texts.push({x:player.x,y:player.y-42,str:'【'+_ti.name+'】',life:1.3,vy:-42,col:_ti.col,size:26});
@@ -2777,6 +2847,7 @@ function onKill(e){
   if(e._aff&&e._aff.volatile)volatileBlast(e.x,e.y,Math.max(14,e.maxhp*.12));
   /* 金币 & 噬血法杖 */
   dropCoins(e);
+  if(coins>=3000) unlockAch('rich');
   if(player.wandFx.killHeal)heal(player.wandFx.killHeal);
   if(relicMods.killHeal)heal(relicMods.killHeal);
   for(let i=0;i<10;i++){ const a=rand(0,TAU),s=rand(40,200);
@@ -2784,6 +2855,7 @@ function onKill(e){
   if(player.mods.leech) heal(player.mods.leech);
   if(!e.boss&&Math.random()<.08) pickups.push({x:e.x,y:e.y,t:0,kind:'heart'});
   if(e.boss){
+    recordBoss(e._bossId);
     cam.shake=15; S.die();
     for(let i=0;i<40;i++){ const a=rand(0,TAU),s=rand(60,360);
       spawnPart(e.x,e.y,Math.cos(a)*s,Math.sin(a)*s,rand(.4,.9),rand(3,7),e.col); }
@@ -2931,14 +3003,23 @@ function setupEndLeaderboard(prefix){
 function gameOver(manual){
   state='over'; if(!manual)S.die();
   if(dailyRun) saveDailyBest(waveNum,kills);
+  saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
+  $('ovAch').innerHTML=achSummaryHTML();
   $('over').classList.remove('hidden');
   setupEndLeaderboard('ov');
 }
 function victory(){
   state='win'; S.win();
   if(dailyRun) saveDailyBest(waveNum,kills);
+  /* 通关类成就(全甲=不吃红心 / 独狼=不逛商店 / 屠神=弑神难度) */
+  unlockAch('clear');
+  if(!runTookHeart) unlockAch('nohit');
+  if(!runBoughtShop) unlockAch('noshop');
+  if(difficulty>=5) unlockAch('godslayer');
+  saveProfile();
   $('wnKill').textContent=kills;
+  $('wnAch').innerHTML=achSummaryHTML();
   $('win').classList.remove('hidden');
   setupEndLeaderboard('wn');
 }
@@ -2966,6 +3047,125 @@ function buildCodex(){
   $('codexBody').innerHTML=h;
 }
 function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
+
+/* ===== 成就系统 + 异兽图鉴 ===== */
+/* 本地存档:成就解锁 + 跨局统计(沿用 localStorage,不碰服务器) */
+let profile=(()=>{ try{ const p=JSON.parse(localStorage.getItem('sf_profile')||'{}'); return {unlocked:p.unlocked||[], totalKills:p.totalKills||0, bosses:p.bosses||[]}; }catch(e){ return {unlocked:[],totalKills:0,bosses:[]}; } })();
+function saveProfile(){ try{ localStorage.setItem('sf_profile',JSON.stringify(profile)); }catch(e){} }
+function hasAch(id){ return profile.unlocked.indexOf(id)>=0; }
+const FOUR_FIENDS=[2,5,6,7]; /* BOSS_PALETTE 下标:帝江(浑敦)/穷奇/梼杌/饕餮 */
+const ACH=[
+  {id:'first_kill',icon:'🗡️',name:'初探山海',  desc:'首次击杀任意妖兽'},
+  {id:'kill500',   icon:'💀',name:'百兽伏诛',  desc:'累计击杀 500 只妖兽', prog:()=>[Math.min(profile.totalKills,500),500]},
+  {id:'kill3000',  icon:'☠️',name:'千军辟易',  desc:'累计击杀 3000 只妖兽', prog:()=>[Math.min(profile.totalKills,3000),3000]},
+  {id:'boss1',     icon:'👁️',name:'初遇古神',  desc:'首次击败任意古神 Boss'},
+  {id:'allboss',   icon:'🐲',name:'神话终结',  desc:'击败过全部 8 位古神', prog:()=>[profile.bosses.length,8]},
+  {id:'fourfiend', icon:'😈',name:'四凶克星',  desc:'集齐击败四凶(帝江/穷奇/梼杌/饕餮)', prog:()=>[FOUR_FIENDS.filter(i=>profile.bosses.indexOf(i)>=0).length,4]},
+  {id:'endless20', icon:'🌀',name:'深渊行者',  desc:'无尽模式抵达第 20 波'},
+  {id:'endless50', icon:'♾️',name:'登峰造极',  desc:'无尽模式抵达第 50 波'},
+  {id:'clear',     icon:'🏅',name:'凯旋归来',  desc:'通关(讨伐三位古神 · 第 15 波)'},
+  {id:'nohit',     icon:'🛡️',name:'全甲而归',  desc:'整局不吃一颗红心通关'},
+  {id:'noshop',    icon:'🐺',name:'独狼',      desc:'整局不在商店购物通关'},
+  {id:'godslayer', icon:'⚡',name:'屠神者',    desc:'在「弑神」难度通关'},
+  {id:'combo50',   icon:'🔥',name:'战意滔天',  desc:'单局达成 50 连击'},
+  {id:'rich',      icon:'💰',name:'富甲一方',  desc:'单局持有 3000 金币'},
+  {id:'relic6',    icon:'🏺',name:'遗物收藏家',desc:'单局集齐 6 件遗物'},
+  {id:'spellfull', icon:'📜',name:'法术宗师',  desc:'单局法术槽全满(4 种法术)'}
+];
+function unlockAch(id){
+  if(hasAch(id))return;
+  profile.unlocked.push(id); saveProfile();
+  const a=ACH.find(x=>x.id===id); if(!a)return;
+  _runUnlocked.push(a);
+  if(state==='play') achToast(a);
+}
+function recordBoss(idx){
+  if(idx==null)return;
+  if(profile.bosses.indexOf(idx)<0){ profile.bosses.push(idx); saveProfile(); }
+  unlockAch('boss1');
+  if(profile.bosses.length>=8) unlockAch('allboss');
+  if(FOUR_FIENDS.every(i=>profile.bosses.indexOf(i)>=0)) unlockAch('fourfiend');
+}
+function recordKill(){
+  unlockAch('first_kill');
+  profile.totalKills++;
+  if(profile.totalKills>=500) unlockAch('kill500');
+  if(profile.totalKills>=3000) unlockAch('kill3000');
+  if(profile.totalKills%50===0) saveProfile();
+}
+/* 解锁吐司:顶部中央一闪而过、自动消失,不挡控制 */
+let _toastQ=[], _toastT=0;
+function achToast(a){ _toastQ.push(a); const el=$('achToast'); if(el&&!el.classList.contains('show')) _toastNext(); }
+function _toastNext(){
+  const el=$('achToast'); if(!el)return;
+  if(!_toastQ.length){ el.classList.remove('show'); return; }
+  const a=_toastQ.shift();
+  el.querySelector('.at-ic').textContent=a.icon;
+  el.querySelector('.at-n').textContent=a.name;
+  el.classList.add('show'); if(window.S&&S.card)S.card();
+  clearTimeout(_toastT);
+  _toastT=setTimeout(()=>{ el.classList.remove('show'); setTimeout(_toastNext,320); },2600);
+}
+
+/* 异兽图鉴数据(展示用,独立 curate;杂兵名字游戏内不显示,这里给重名小怪换了山海经名) */
+const BESTIARY_MOBS=[
+  {k:'slime',  ic:'🟢',n:'罔象',t:'近战·直冲',    tip:'最基础的黏体妖,贴脸硬撞;拉开距离边退边打。'},
+  {k:'bat',    ic:'🦇',n:'毕方',t:'游走·穿插',    tip:'飘忽乱窜不好瞄,用范围或追踪法术招呼。'},
+  {k:'shooter',ic:'🏹',n:'凿齿',t:'远程·放风筝',  tip:'远远放冷箭,贴近它就软了。'},
+  {k:'brute',  ic:'🐗',n:'猰貐',t:'肉盾·硬顶',    tip:'血厚抗揍还免大半击退,集火或直接绕开。'},
+  {k:'shaman', ic:'💚',n:'句芒',t:'奶妈·治疗',    tip:'给周围怪回血,优先点掉(智能瞄准会帮你锁它)。'},
+  {k:'charger',ic:'💨',n:'诸怀',t:'冲锋·蓄力突进',tip:'蓄力后高速直冲,看到预警线就侧身闪开。'},
+  {k:'splitter',ic:'🍂',n:'蠃鱼',t:'分裂·一化多', tip:'半血会裂成两只小的,范围法术一次清干净。'},
+  {k:'ghost',  ic:'👻',n:'幽光',t:'幽灵·周期隐身',tip:'周期性虚化免疫,等它实体化再集中输出。'},
+  {k:'summoner',ic:'🪄',n:'英招',t:'召唤·生兵',   tip:'源源不断召小怪,先把它本体解决。'},
+  {k:'bomber', ic:'💣',n:'蛊雕',t:'自爆·贴身炸',  tip:'冲到身边引爆,别让它近身,远程点掉。'},
+  {k:'snake',  ic:'🐍',n:'鸣蛇',t:'蛇行·正弦走位',tip:'蛇形蜿蜒难命中,用范围/追踪覆盖路径。'},
+  {k:'wraith', ic:'🥷',n:'刑天',t:'潜行·隐身接近',tip:'近身才现形,留意身边突然冒出的影子。'},
+  {k:'totem',  ic:'🐢',n:'旋龟',t:'图腾·光环护盾',tip:'原地给周围怪套护盾,先拆这座图腾。'},
+  {k:'frostarcher',ic:'❄️',n:'钦原',t:'冰弓·减速射击',tip:'远程冰箭命中会减速你,绕掩体接近。'},
+  {k:'qiongqi',ic:'🐂',n:'蜚',  t:'霸体·免击退冲锋',tip:'霸体免疫击退、顶着弹幕冲,别站它冲锋路线。'},
+  {k:'dart',   ic:'⚡',n:'狰',  t:'高速·薄血直冲',tip:'又快又脆,贴脸快;靠走位拉扯。'}
+];
+const BESTIARY_AFFIX=[
+  {k:'swift',tip:'移速暴增,更难拉开距离。'},
+  {k:'shielded',tip:'带一层额外护盾,得先磨破才掉血。'},
+  {k:'venomous',tip:'命中会让你中毒,持续掉血。'},
+  {k:'frenzied',tip:'掉到半血后暴走、变得更凶。'},
+  {k:'volatile',tip:'死亡时原地爆炸,小心补刀距离。'},
+  {k:'phasing',tip:'周期性免疫伤害,抓它实体的窗口。'},
+  {k:'unstoppable',tip:'免疫击退、顶弹冲锋,别挡它路线。'}
+];
+const BOSS_TIP=['睁眼即昼、闭眼为夜,跟着昼夜节奏走位。','九尾绽放、弹幕华丽量大;保持移动别被合围。','浑敦无面,混沌之袋搅乱全场;留出闪避缝隙。','翔舞九天、雨落成阵;预判落点别贪刀。','铜头铁额、悍勇直撞;侧身绕背输出。','高速俯冲 + 翼刃横扫;看预警侧身闪。','顽固紧追、震地冲击波;别贴脸硬刚。','张口吸入 + 咬合;吸力起时反向拉开。'];
+function buildBestiary(){
+  let h='<div class="cx-sec">🐾 妖兽 · 杂兵</div>';
+  for(const m of BESTIARY_MOBS){ const e=ETYPE[m.k]||{}; const s=[];
+    if(e.hp)s.push('血 '+e.hp); if(e.dmg)s.push('伤 '+e.dmg);
+    h+=cxItem(m.ic,m.n,m.t,s.join(' · '),m.tip); }
+  h+='<div class="cx-sec">👑 精英 · 词缀变体</div>';
+  for(const a of BESTIARY_AFFIX){ const d=AFFIX_DEFS[a.k]||{}; h+=cxItem(d.icon||'❖',d.name||a.k,'精英词缀','',a.tip); }
+  h+='<div class="cx-sec">🔱 古神 · 首领</div>';
+  for(let i=0;i<BOSS_PALETTE.length;i++){ const b=BOSS_PALETTE[i];
+    const fiend=FOUR_FIENDS.indexOf(i)>=0?'<span class="bx-fiend">四凶</span>':'';
+    const art='data:image/svg+xml;charset=utf8,'+encodeURIComponent(BOSS_SVG[i]||'');
+    h+='<div class="bx-boss"><img src="'+art+'" alt=""><div class="bx-bmain"><div class="bx-bname">'+b.name+fiend+'</div><div class="bx-batk">招式 · '+b.atkName+'</div><div class="bx-btip">'+(BOSS_TIP[i]||'')+'</div></div></div>';
+  }
+  $('bestiaryBody').innerHTML=h;
+}
+function openBestiary(){ buildBestiary(); $('bestiary').classList.remove('hidden'); }
+function buildAchv(){
+  let h='<div class="ach-sum">已解锁 '+profile.unlocked.length+' / '+ACH.length+'</div>';
+  for(const a of ACH){ const done=hasAch(a.id); let prog='';
+    if(!done&&a.prog){ const pr=a.prog(); prog='<div class="ach-prog"><i style="width:'+Math.round(pr[0]/pr[1]*100)+'%"></i></div>'; }
+    h+='<div class="ach-item'+(done?'':' locked')+'"><div class="ach-ic">'+(done?a.icon:'🔒')+'</div><div class="ach-main"><div class="ach-name">'+a.name+(done?'<span class="ach-done">✓ 已解锁</span>':'')+'</div><div class="ach-desc">'+a.desc+'</div>'+prog+'</div></div>'; }
+  $('achvBody').innerHTML=h;
+}
+function openAchv(){ buildAchv(); $('achv').classList.remove('hidden'); }
+function achSummaryHTML(){
+  if(!_runUnlocked.length)return '';
+  let h='<div class="ach-sum" style="color:var(--gold);margin-top:12px;">🎉 本局解锁 '+_runUnlocked.length+' 项成就</div>';
+  for(const a of _runUnlocked) h+='<div class="ach-item"><div class="ach-ic">'+a.icon+'</div><div class="ach-main"><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div></div></div>';
+  return h;
+}
 
 function cardInfo(d){
   if(d.kind==='spell'){
@@ -3002,6 +3202,7 @@ function applyCard(c){
   if(c.kind==='spell'){
     const s=player.spells[c.id];
     if(s)s.lv++; else player.spells[c.id]={lv:1,t:.2};
+    if(Object.keys(player.spells).length>=SPELL_SLOT_MAX) unlockAch('spellfull');
   } else if(c.kind==='mod'){ player.mods[c.id]++; }
   else if(c.kind==='curse'){
     if(c.id==='pact_blood'){player.curse.dmg+=.4;player.curse.enemySpd+=.15;}
@@ -3063,7 +3264,7 @@ function buildShopItems(){
       '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+price+'💰</div>';
     el.onclick=()=>{
       if(coins<price){S.no();return;}
-      coins-=price; applyCard(c); S.buy();
+      coins-=price; applyCard(c); S.buy(); runBoughtShop=true;
       el.className='card r1 dis';
       el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">已购入 · '+c.name+'</div></div>';
       el.onclick=null;
@@ -3214,7 +3415,7 @@ function update(dt){
         const got=addCoins(p.val||1); S.coin();
         texts.push({x:player.x,y:player.y-20,str:'+'+got+'💰',life:.6,vy:-44,col:'#ffd98a',size:12});
       } else {
-        heal(12); S.pickup();
+        heal(12); S.pickup(); runTookHeart=true;
         texts.push({x:player.x,y:player.y-24,str:'+12',life:.8,vy:-40,col:'#8df07a',size:14});
       }
     }
@@ -4660,6 +4861,7 @@ function togglePause(p){
 }
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
+$('pauseBeastBtn').onclick=openBestiary;
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
@@ -4682,14 +4884,20 @@ $('clClose').onclick=()=>$('changelog').classList.add('hidden');
 $('codexClose').onclick=()=>$('codex').classList.add('hidden');
 $('clCloseTop').onclick=()=>$('changelog').classList.add('hidden');
 $('codexCloseTop').onclick=()=>$('codex').classList.add('hidden');
-$('codexOpenMenu').onclick=openCodex;
+$('bCodex').onclick=openCodex;
+$('bBeast').onclick=openBestiary;
+$('bAchv').onclick=openAchv;
+$('bestiaryClose').onclick=()=>$('bestiary').classList.add('hidden');
+$('bestiaryCloseTop').onclick=()=>$('bestiary').classList.add('hidden');
+$('achvClose').onclick=()=>$('achv').classList.add('hidden');
+$('achvCloseTop').onclick=()=>$('achv').classList.add('hidden');
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
 $('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
-$('shopHeal').onclick=()=>{ if(coins>=HEAL_COST&&player.hp<player.maxhp){coins-=HEAL_COST;heal(9999);S.buy();refreshShopHead();refreshShopBtns();} else S.no(); };
-$('shopReroll').onclick=()=>{ if(coins>=SHOP_REROLL){coins-=SHOP_REROLL;S.card();buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
+$('shopHeal').onclick=()=>{ if(coins>=HEAL_COST&&player.hp<player.maxhp){coins-=HEAL_COST;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
+$('shopReroll').onclick=()=>{ if(coins>=SHOP_REROLL){coins-=SHOP_REROLL;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopLeave').onclick=()=>{ $('shop').classList.add('hidden'); startWave(waveNum+1); state='play'; };
 $('endlessBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden');
   endless=true; startWave(waveNum+1); state='play'; };
