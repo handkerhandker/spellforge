@@ -34,7 +34,7 @@
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
   #menu .title{font-size:38px;}
   #menu .desc{font-size:12.5px;line-height:1.4;}
-  #menu .hint{line-height:1.35;font-size:11px;}
+  #menu .hint{line-height:1.35;font-size:11px;text-align:left;}
   #menu .lb-title{margin-top:7px;}
   #menu .lb-board{max-height:none;overflow-y:visible;margin-top:6px;flex-shrink:0;}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
@@ -176,14 +176,14 @@
 <div id="menu" class="overlay">
   <div id="verBadge">
     <div class="vb-top"><b>v51</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
-    <div class="vb-time">更新于 2026-06-15 20:32</div>
+    <div class="vb-time">更新于 2026-06-15 21:05</div>
   </div>
   <div class="panel">
     <div class="eyebrow">Spellforge · Roguelike</div>
     <h1 class="title">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
-    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式<br>📱 拖屏移动 · 默认智能瞄准 · 右下角按钮冲刺<br>法杖会自动施法</p>
+    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式<br>📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</p>
     <div class="diff-title">⚔ 选择难度</div>
     <div id="diffSel" class="diff-sel">
       <button class="diff-pill" data-diff="1">凡尘</button>
@@ -312,7 +312,7 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
-<div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。纯展示与记录,不改动任何战斗数值</div></div>
+<div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。图鉴与成就纯展示记录、不改动战斗数值。另外大幅强化「弑神」难度:精英词缀从前期(第 4 波)就出现且明显增多,会冒出更多霸体(免疫击退)、虚影(周期免疫)、淬毒(贴到掉血)等逼你主动应对的怪;红心掉落减半、容错更低;Boss 伤害 +25%、耐久略增,后期真有威胁;同屏怪量提高。仅影响弑神,其它难度原样不变</div></div>
 <div class="cl-v"><div class="cl-h">v50 · 2026-06-15</div><div class="cl-i">顶部信息栏不再挤成一团:此前血条、「第 N 波 / 剩余」与无尽变数图标都画在屏幕正中央、互相叠住,深层局尤其糊。现血条收窄不再顶到中间;波次与剩余居中、必要时自动右移避开血条;无尽「潮汐」变数图标(狂暴/钢甲/猎杀/群涌/精英/剧毒)挪到左侧击杀金币下方单独成行。另外底部法术构筑栏过长时会自动压缩,不再溢出去盖住右下角冲刺键</div></div>
 <div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
 <div class="cl-v"><div class="cl-h">v48 · 2026-06-15</div><div class="cl-i">拉平手机 / PC 难度差(此前 PC 鼠标精准手瞄,手机只能自动打最近的杂兵,威胁清不掉、被耗死)。新增「瞄准模式:手动 / 就近 / 智能」三档(菜单和暂停里可调,PC 按 T 也能循环):<b>智能</b>会优先打高威胁目标(奶妈/护盾龟/远程/冲锋/Boss)且兼顾距离;<b>就近</b>是原来的打最近;<b>手动</b>是 PC 鼠标自由瞄。手机默认<b>智能</b>(无鼠标自动隐藏手动)。另外摇杆满速更易达到、冲刺按钮更好按</div></div>
@@ -338,6 +338,11 @@
 <div class="cl-v"><div class="cl-h">v28 · 2026-06-14</div><div class="cl-i">法术槽上限：最多同时持有 4 种法术，槽满后只出升级与符文，可在商店卖出替换</div></div>
 <div class="cl-v"><div class="cl-h">v25–v27 · 2026-06-13</div><div class="cl-i">新增暂停功能与云端排行榜（TOP 10）<br>修复右上角 HUD 被按钮遮挡的问题</div></div>
 <div class="cl-v"><div class="cl-h">v20–v24 · 2026-06-13</div><div class="cl-i">Boss 招式加入预警系统，弹幕不再无预警炸脸<br>敌人威胁前置、危险敌人加红环标记<br>卖法术保底，杜绝卖光后打不出子弹</div></div>
+<div class="cl-i" style="opacity:.6;font-size:11px;margin:16px 0 2px;border-top:1px solid rgba(123,92,255,.2);padding-top:13px;">💡 以下为 v1–v19 早期记录:游戏初期按功能阶段快速迭代,当时尚未逐版本标号(版本号 v30 才加入游戏),故按开发阶段如实还原。</div>
+<div class="cl-v"><div class="cl-h">v15–v19 · 密集打磨与修复</div><div class="cl-i">密集体验打磨:逐一修掉环刃、奥术球、黑洞、激光等"能打到怪却看不见特效"的隐形 Bug;新增霸体系统(部分敌人免疫击退、能顶着弹幕冲锋);修正部分法术射程;不同敌人与命中反馈做出视觉区分、画面更易读;修复"难度倒挂"(某些波反而更简单);提升 Boss 血量让 Boss 战更有分量;削弱过强的狙击法杖,并让自动瞄准在 Boss 波优先锁定 Boss;屏幕震动节流等一系列细节优化</div></div>
+<div class="cl-v"><div class="cl-h">v10–v14 · 经济平衡与内容扩展</div><div class="cl-i">从"能玩"走向"平衡且有深度":用数据驱动重做经济(金币产出、商店价格、升级曲线),节奏更合理;新增词缀精英系统(精英怪带护盾、虚影、分裂等随机词缀);15 波后进入无尽模式、叠加修饰符持续加难度;新增 2 种敌人、2 种法杖、2 种法术,丰富 build 与挑战</div></div>
+<div class="cl-v"><div class="cl-h">v4–v9 · 五大趣味系统</div><div class="cl-i">一口气加入五大系统:法杖选择(开局选风格、决定整局走向)、冲刺(空格/摇杆紧急走位躲伤害)、金币商店(击杀掉币,隔几波进店买法术/强化/回血)、连击系统、诅咒契约卡(高风险高回报);同时修复第 7 波卡死、卖法术后法术状态冲突崩溃等严重 Bug</div></div>
+<div class="cl-v"><div class="cl-h">v1–v3 · 原型诞生</div><div class="cl-i">从零搭起核心骨架:致敬 Steam《魔法工艺 Magicraft》,做法术组合 + 肃清怪潮的 Roguelike。Canvas 2D 渲染、玩家移动、法杖自动施法、敌人来袭;法术系统(火球/冰锥/闪电等投射)、符文系统(追踪/分裂/弹射等叠加)、每波结束三选一卡牌升级;深紫奥术美术风、山海经异兽主题</div></div>
 <button class="btn" id="clClose" style="margin-top:8px;">关闭</button>
 </div></div>
 <div id="paused" class="overlay hidden">
@@ -1061,11 +1066,11 @@ const DIFFICULTIES=[
   {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.10,eDmg:1.085},
   {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085},
   {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.10,eDmg:1.085},
-  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.40,eHp:1.13,eDmg:1.11}
+  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.13,eDmg:1.11}
 ];
 let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
-let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085}; /* 当前生效的倍率 */
-function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg}; }
+let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关 */
+function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg,nm:d.id===5}; }
 function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
 function diffData(){ return DIFFICULTIES[difficulty-1]; }
 let novaFX=null;
@@ -1495,9 +1500,11 @@ function spawnEnemy(type,x,y,tier){
     _formation:'', _formationT:0, _stratCD:rand(2,5),
     _kbm:t.kbm!==undefined?t.kbm:1, _kbCool:0
   };
-  /* 后期普通怪概率携带 1 个词缀(图腾除外) */
-  if(type!=='totem' && waveNum>=9 && Math.random()<(.1+modMult.eliteBonus*.5+(endless?(waveNum-15)*.004:0))){
-    rollAffixes(enemy,1);
+  /* 后期普通怪概率携带词缀(图腾除外);弑神大幅提前并增多,且可能带 2 个 */
+  const _affWave=diffMul.nm?4:9;
+  const _affChance=(diffMul.nm?.25:.1)+modMult.eliteBonus*.5+(endless?(waveNum-15)*.004:0);
+  if(type!=='totem' && waveNum>=_affWave && Math.random()<_affChance){
+    rollAffixes(enemy, (diffMul.nm && Math.random()<.25)?2:1);
   }
   enemies.push(enemy);
   puff(x,y,col,tier===3?14:tier===2?10:8);
@@ -1513,8 +1520,8 @@ function hex2rgb(h){
 }
 function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
   const cs=cScale||1; /* 多 Boss 同屏时 <1:同时削血量与伤害 */
-  const ds=(dmgScale||1)*cs*diffMul.dmgM; /* 伤害 = 深度复利 × 多Boss削减 × 难度倍率,作用到接触/激光/冲锋/子弹全部伤害 */
-  const hp=(300+tier*tier*1000)*(scale||1)*cs*diffMul.hpM; /* boss耐久×3,作为高潮持久战 */
+  const ds=(dmgScale||1)*cs*diffMul.dmgM*(diffMul.nm?1.25:1); /* 伤害 = 深度复利 × 多Boss削减 × 难度倍率;弑神 Boss 额外 +25% 伤害,作用到接触/激光/冲锋/子弹全部伤害 */
+  const hp=(300+tier*tier*1000)*(scale||1)*cs*diffMul.hpM*(diffMul.nm?1.15:1); /* boss耐久×3;弑神 +15% 让威胁窗口更长 */
   const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
            :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
@@ -2861,7 +2868,7 @@ function onKill(e){
   for(let i=0;i<10;i++){ const a=rand(0,TAU),s=rand(40,200);
     spawnPart(e.x,e.y,Math.cos(a)*s,Math.sin(a)*s,rand(.3,.6),rand(2,4),e.col); }
   if(player.mods.leech) heal(player.mods.leech);
-  if(!e.boss&&Math.random()<.08) pickups.push({x:e.x,y:e.y,t:0,kind:'heart'});
+  if(!e.boss&&Math.random()<(diffMul.nm?.04:.08)) pickups.push({x:e.x,y:e.y,t:0,kind:'heart'});
   if(e.boss){
     recordBoss(e._bossId);
     cam.shake=15; S.die();
