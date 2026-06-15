@@ -153,7 +153,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v44 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v45 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
   </div>
 </div>
 
@@ -222,6 +222,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v45 · 2026-06-15</div><div class="cl-i">初始「奥术飞弹」不再被永久锁死——现在只要你还持有别的法术,奥术飞弹也能在商店卖出/替换成别的;唯一限制是不能把法术全卖光(至少留 1 个)。万一把攻击法术都卖了,战斗中会自动补一发保底奥术飞弹,不会完全没输出</div></div>
 <div class="cl-v"><div class="cl-h">v44 · 2026-06-15</div><div class="cl-i">两处优化:① 修复 Boss 弹幕偶尔"凭空砸脸"——此前部分全屏招式在全场随机位置生成弹幕,可能正好出现在你身上、零反应时间无从躲避;现加了安全距离守卫,敌弹绝不在你身上凭空出现,总留得出闪避空间。② 移除左上角"压力值"进度条——那是后台动态难度的内部数值,对玩家没有意义,去掉后画面更清爽(难度调节照常在背后运作)</div></div>
 <div class="cl-v"><div class="cl-h">v43 · 2026-06-15</div><div class="cl-i">无尽深层新增三尊「四凶」Boss——穷奇·风啸九霄(高速俯冲+翼刃扇射)、梼杌·裂地不退(顽固紧追+震地冲击波)、饕餮·万物归腹(张口吸入+咬合重创);26 波起登场、越深越多(41 波后为主),渡劫/弑神难度更早现身。同时根治深层多 Boss「外观重复」:精灵图改为按身份绘制,同一波不同 Boss 各显其形</div></div>
 <div class="cl-v"><div class="cl-h">v42 · 2026-06-15</div><div class="cl-i">修复「法盾」无敌漏洞:此前法盾冷却被急速压到比持续短 → 永久挂盾且零伤(站 Boss 脸上不掉血的真凶)。现改为展开 4 秒后强制空窗 2 秒(不受急速影响),挡盾期间真实扣 1 血,层数耗尽正常受伤;保命依旧强力,但不再永久无敌</div></div>
@@ -3013,17 +3014,15 @@ function buildSellRow(){
   const row=$('sellRow'); row.innerHTML='';
   const ids=Object.keys(player.spells);
   let totalLv=0; for(const id of ids)totalLv+=player.spells[id].lv;
-  /* 弹道攻击法术全卖光会导致没有子弹="不能攻击",至少保留 1 级 */
-  const BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm'];
-  let balLv=0; for(const id of ids)if(BAL.indexOf(id)>=0)balLv+=player.spells[id].lv;
+  /* 唯一限制:不能卖到一个法术都不剩(至少保留 1 级)。含初始奥术飞弹在内都可卖、可换。
+     若把攻击法术全卖了,战斗中 castAll 会自动补一发保底奥术飞弹,不会完全没输出。*/
   for(const id of ids){
     const s=player.spells[id], def=SPELL_DEF[id];
-    const lockBal=BAL.indexOf(id)>=0&&balLv<=1;
-    const dis=totalLv<=1||lockBal;
+    const dis=totalLv<=1;  /* 只有"最后剩的那一级"不能卖 */
     const el=document.createElement('button');
     el.className='card r1'+(dis?' dis':'');
     el.style.width='auto'; el.style.padding='8px 12px';
-    el.innerHTML='<div class="cic" style="font-size:20px;">'+def.icon+'</div><div class="ctx"><div class="cn" style="font-size:12.5px;">Lv'+s.lv+' ▸ '+(lockBal?'🔒保留攻击':'+'+SELL_GAIN+'💰')+'</div></div>';
+    el.innerHTML='<div class="cic" style="font-size:20px;">'+def.icon+'</div><div class="ctx"><div class="cn" style="font-size:12.5px;">Lv'+s.lv+' ▸ '+(dis?'🔒保留':'+'+SELL_GAIN+'💰')+'</div></div>';
     if(!dis)el.onclick=()=>{
       s.lv--;
       if(s.lv<=0){
