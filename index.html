@@ -30,7 +30,8 @@
     background:linear-gradient(170deg,#1a1438,#0e0b20 70%);
     box-shadow:0 0 60px rgba(110,90,240,.18), inset 0 0 40px rgba(110,90,240,.06);}
   /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
-  #menu .panel{max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:15px 20px;gap:6px;}
+  #menu{justify-content:flex-start;padding-top:calc(6px + env(safe-area-inset-top));}
+  #menu .panel{max-height:93vh;max-height:93dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:46px 20px 18px;gap:9px;}
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
   #menu .title{font-size:38px;}
   #menu .desc{font-size:12.5px;line-height:1.4;}
@@ -154,13 +155,13 @@
   .card.r2{--bc:#9b6bff;--gl:rgba(155,107,255,.3);--rc:#c9a8ff;box-shadow:0 0 22px rgba(155,107,255,.18);}
   .card.r3{--bc:#ffc24d;--gl:rgba(255,194,77,.32);--rc:#ffd98a;box-shadow:0 0 26px rgba(255,194,77,.22);}
   .card.dis{opacity:.45;pointer-events:none;}
-  #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));
+  #muteBtn{position:fixed;top:calc(13px + env(safe-area-inset-top));right:calc(15px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;}
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
-  #verBadge{position:fixed;top:calc(10px + env(safe-area-inset-top));left:calc(13px + env(safe-area-inset-left));z-index:20;text-align:left;line-height:1.4;pointer-events:none;}
+  #verBadge{position:fixed;top:calc(13px + env(safe-area-inset-top));left:calc(16px + env(safe-area-inset-left));z-index:20;text-align:left;line-height:1.4;pointer-events:none;}
   #verBadge .vb-top{font-size:11px;color:#a99fd6;}
   #verBadge .vb-top b{color:#cbbcff;font-weight:700;}
   #verBadge .vb-link{cursor:pointer;text-decoration:underline;color:#cbbcff;pointer-events:auto;}
