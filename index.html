@@ -183,6 +183,25 @@
   #ljBadge{position:fixed;top:calc(22px + env(safe-area-inset-top));right:calc(3vw + 16px + env(safe-area-inset-right));z-index:20;font-size:12.5px;color:var(--gold);font-weight:700;pointer-events:none;letter-spacing:.02em;}
   .lj-gain{color:var(--gold);font-size:13px;font-weight:700;margin:8px 0 2px;letter-spacing:.03em;}
   .lj-gain b{font-size:15.5px;}
+  /* 祭坛 */
+  .altar-btn{margin-top:8px;background:rgba(48,36,12,.55);border:1px solid var(--gold);color:var(--gold);box-shadow:none;font-weight:700;letter-spacing:.06em;}
+  .altar-bal{color:var(--gold);font-size:15px;font-weight:700;margin:10px 0 4px;letter-spacing:.04em;}
+  .altar-bal b{font-size:18px;}
+  #altarList{width:100%;display:flex;flex-direction:column;gap:10px;margin:6px 0 4px;}
+  .up-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(30,22,60,.5);border:1px solid rgba(123,92,255,.22);text-align:left;}
+  .up-ic{font-size:26px;flex-shrink:0;width:34px;text-align:center;}
+  .up-main{flex:1;min-width:0;}
+  .up-name{color:#fff;font-weight:700;font-size:15px;}
+  .up-lv{color:var(--gold);font-size:12px;margin-left:6px;font-weight:600;}
+  .up-desc{font-size:11.5px;color:#b8aed4;margin:3px 0 6px;line-height:1.3;}
+  .up-dots{display:flex;gap:5px;}
+  .up-dot{width:13px;height:6px;border-radius:3px;background:rgba(123,92,255,.22);}
+  .up-dot.on{background:var(--gold);}
+  .up-buy{flex-shrink:0;min-width:64px;padding:9px 10px;border-radius:12px;border:1px solid var(--gold);background:rgba(48,36,12,.5);color:var(--gold);font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;line-height:1.35;text-align:center;}
+  .up-buy.dis{opacity:.4;border-color:#4a4380;color:#8078ab;cursor:default;}
+  .up-buy.maxed{border-color:#4a4380;color:#9a90c8;background:transparent;cursor:default;}
+  .altar-note{font-size:11px;color:#9a90c8;background:rgba(123,92,255,.08);border-radius:10px;padding:9px 12px;margin:8px 0 4px;line-height:1.4;text-align:left;}
+  .altar-note b{color:#ff9a9a;}
 </style>
 </head>
 <body>
@@ -220,6 +239,7 @@
     </div>
     <div class="aim-hint">智能=自动优先奶妈 / 远程 / Boss 等高威胁</div>
     <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
+    <button class="btn altar-btn" id="altarBtn">🔮 祭 坛 · 灵 晶 强 化</button>
     <div class="codex-row" style="margin-top:12px;">
       <button id="dailyBtn">🗓 每日挑战</button>
       <button id="bCodex">📖 法术图鉴</button>
@@ -285,6 +305,20 @@
     <div id="dailyBest" class="lb-myrank"></div>
     <button class="btn" id="dailyStart">开始挑战</button>
     <button class="btn ghost" id="dailyBack">返回</button>
+  </div>
+</div>
+
+<!-- 祭坛(元进度:灵晶强化) -->
+<div id="altar" class="overlay hidden" style="z-index:50;">
+  <div class="panel" style="max-width:520px;max-height:88vh;overflow-y:auto;">
+    <button class="ovx-close" id="altarCloseTop" aria-label="关闭" title="关闭">✕</button>
+    <div class="eyebrow" style="color:var(--gold);">Altar of Power</div>
+    <h1 class="title" style="font-size:30px;margin-bottom:4px;">祭 坛</h1>
+    <div class="sub" style="font-size:12px;">消耗灵晶 · 获得永久强化</div>
+    <div class="altar-bal">✦ <b id="altarLj">0</b> 灵晶</div>
+    <div id="altarList"></div>
+    <div class="altar-note">⚔ 永久强化在「弑神」难度<b>不生效</b>——弑神是纯净竞技档，大家凭操作公平冲榜</div>
+    <button class="btn ghost" id="altarBack">返回</button>
   </div>
 </div>
 
@@ -1188,9 +1222,35 @@ function refreshLj(){ const e=document.getElementById('ljBal'); if(e)e.textConte
 /* 结算给灵晶:按 波数 + 击杀(保守草稿,数值以后可调);用基线防止"通关→无尽→死亡"把前 15 波重复计 */
 function awardLj(){ const total=Math.max(0, waveNum*3 + Math.floor(kills/8)); const d=Math.max(0, total-runRewardBase); runRewardBase=total; if(d>0){ META.lj+=d; saveMeta(); } refreshLj(); return d; }
 
+/* 永久强化:体魄=生命上限,法力=法术伤害;均多级递增,弑神不生效 */
+const UPGRADES=[
+  {id:'hp',  icon:'❤️', name:'体魄', unit:'生命上限', per:6, max:5, base:40},
+  {id:'dmg', icon:'🔥', name:'法力', unit:'法术伤害', per:5, max:5, base:50},
+];
+function upCost(u){ const lv=META.up[u.id]||0; return Math.round(u.base*Math.pow(1.5,lv)); }
+function metaDmgMul(){ return (diffMul&&diffMul.nm)?1:(1+0.05*(META.up.dmg||0)); }
+function metaHpMul(){ return (diffMul&&diffMul.nm)?1:(1+0.06*(META.up.hp||0)); }
+function renderAltar(){
+  const ljEl=document.getElementById('altarLj'); if(ljEl)ljEl.textContent=META.lj;
+  const list=document.getElementById('altarList'); if(!list)return; list.innerHTML='';
+  for(const u of UPGRADES){
+    const lv=META.up[u.id]||0, maxed=lv>=u.max, cost=upCost(u), can=!maxed&&META.lj>=cost;
+    let dots=''; for(let i=0;i<u.max;i++) dots+='<span class="up-dot'+(i<lv?' on':'')+'"></span>';
+    const cur=lv>0?('当前 +'+(u.per*lv)+'%'):'未强化';
+    const el=document.createElement('div'); el.className='up-card';
+    el.innerHTML='<div class="up-ic">'+u.icon+'</div><div class="up-main"><div class="up-name">'+u.name+'<span class="up-lv">Lv '+lv+'/'+u.max+'</span></div><div class="up-desc">'+u.unit+' · 每级 +'+u.per+'% · '+cur+'</div><div class="up-dots">'+dots+'</div></div>'+
+      (maxed?'<div class="up-buy maxed">已满级</div>':'<button class="up-buy'+(can?'':' dis')+'">下一级<br>'+cost+' ✦</button>');
+    if(!maxed){ const btn=el.querySelector('.up-buy'); btn.onclick=()=>{ const c=upCost(u); if((META.up[u.id]||0)>=u.max)return; if(META.lj<c){S.no();return;} META.lj-=c; META.up[u.id]=(META.up[u.id]||0)+1; saveMeta(); refreshLj(); S.buy(); renderAltar(); }; }
+    list.appendChild(el);
+  }
+}
+function openAltar(){ renderAltar(); document.getElementById('altar').classList.remove('hidden'); }
+
 function resetGame(){
   runRewardBase=0;
-  player=newPlayer(); enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
+  player=newPlayer();
+  { const _hm=metaHpMul(); if(_hm>1){ player.maxhp=Math.round(player.maxhp*_hm); player.hp=player.maxhp; } }
+  enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -2549,7 +2609,7 @@ function enemyAI(e,dt){
 
 /* ============ 施法 ============ */
 function cdOf(def,lv){ return def.cd*Math.pow(.93,lv-1)*Math.pow(.88,player.mods.haste)*player.wandFx.cdM*relicMods.cdMul; }
-function dmgOf(def,lv){ return def.dmg*(1+.4*(lv-1))*(1+.25*Math.min(player.mods.amp,6)+.09*Math.max(0,player.mods.amp-6))*(1+.2*player.mods.giant)*player.wandFx.dmgM*(1+player.curse.dmg+comboDmg)*relicDmgMul(); }
+function dmgOf(def,lv){ return def.dmg*(1+.4*(lv-1))*(1+.25*Math.min(player.mods.amp,6)+.09*Math.max(0,player.mods.amp-6))*(1+.2*player.mods.giant)*player.wandFx.dmgM*(1+player.curse.dmg+comboDmg)*relicDmgMul()*metaDmgMul(); }
 
 /* 时长型法术(法盾/奥术球/灼热射线/黑洞)状态推进 */
 function updateSpellStates(dt){
@@ -4963,6 +5023,9 @@ $('codexCloseTop').onclick=()=>$('codex').classList.add('hidden');
 $('bCodex').onclick=openCodex;
 $('bBeast').onclick=openBestiary;
 $('bAchv').onclick=openAchv;
+$('altarBtn').onclick=openAltar;
+$('altarBack').onclick=()=>$('altar').classList.add('hidden');
+$('altarCloseTop').onclick=()=>$('altar').classList.add('hidden');
 $('bestiaryClose').onclick=()=>$('bestiary').classList.add('hidden');
 $('bestiaryCloseTop').onclick=()=>$('bestiary').classList.add('hidden');
 $('achvClose').onclick=()=>$('achv').classList.add('hidden');
