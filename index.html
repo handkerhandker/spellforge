@@ -53,6 +53,9 @@
   .btn:active{transform:scale(.96);}
   .btn.ghost{background:transparent;border:1px solid #4a4380;box-shadow:none;color:#bdb4ea;font-weight:600;}
   .lb-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:16px;margin-bottom:2px;}
+  .lb-tabs{display:flex;gap:6px;margin-top:6px;}
+  .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;transition:background .12s,color .12s;}
+  .lb-tab.active{background:linear-gradient(135deg,#7a5cff,#37a4ff);color:#fff;border-color:transparent;font-weight:700;}
   .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
   .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
   .lb-board{width:min(360px,90vw);margin-top:10px;max-height:34vh;overflow-y:auto;}
@@ -111,10 +114,29 @@
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
     <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换自动瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
     <button class="btn" id="startBtn">拔出法杖</button>
+    <button class="btn ghost" id="dailyBtn" style="margin-top:6px;padding:10px 28px;font-size:14px;letter-spacing:.12em;">🗓 每日挑战</button>
     <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
+    <div id="lbTabs" class="lb-tabs">
+      <button class="lb-tab active" data-period="all">总榜</button>
+      <button class="lb-tab" data-period="week">本周</button>
+      <button class="lb-tab" data-period="month">本月</button>
+    </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
     <div class="credit" style="opacity:.8;">v35 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
+  </div>
+</div>
+
+<!-- 每日挑战 -->
+<div id="daily" class="overlay hidden">
+  <div class="panel">
+    <div class="eyebrow" style="color:#7fd4ff;">Daily Challenge</div>
+    <h1 class="title" style="font-size:34px;">每日挑战</h1>
+    <div class="sub" id="dailyDate"></div>
+    <div id="dailyInfo" class="desc" style="text-align:left;"></div>
+    <div id="dailyBest" class="lb-myrank"></div>
+    <button class="btn" id="dailyStart">开始挑战</button>
+    <button class="btn ghost" id="dailyBack">返回</button>
   </div>
 </div>
 
@@ -781,6 +803,7 @@ buildBossArt();
 
 /* ============ 状态 ============ */
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, autoAim=false;
+let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 let novaFX=null;
@@ -865,7 +888,7 @@ function newPlayer(){ return {
 function resetGame(){
   player=newPlayer(); enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
-  coins=0; combo=0; comboT=0; comboDmg=0; ghosts=[];
+  coins=0; combo=0; comboT=0; comboDmg=0; ghosts=[]; dailyRun=false;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
   /* 学习系统状态重置 */
@@ -2461,13 +2484,20 @@ async function submitScore(name,wave,kills){
     headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
     body:JSON.stringify({name,wave,kills})}); return true; }catch(e){ console.warn('提交失败',e); return false; }
 }
-async function fetchLeaderboard(){
-  const base=SB_URL+'/rest/v1/scores?order=wave.desc,kills.desc&limit=10';
+function periodStart(period){
+  const n=new Date();
+  if(period==='week'){ const d=new Date(n.getFullYear(),n.getMonth(),n.getDate()); const dow=(d.getDay()+6)%7; d.setDate(d.getDate()-dow); return d.toISOString(); } /* 本周一 00:00 */
+  return new Date(n.getFullYear(),n.getMonth(),1).toISOString(); /* 本月 1 号 00:00 */
+}
+async function fetchLeaderboard(period){
+  const order='order=wave.desc,kills.desc&limit=10';
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
+  let tf=''; /* 本周/本月按 created_at 筛选;总榜不筛 */
+  if(period==='week'||period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(period));
   try{
-    /* 优先带上记录时间列;若该表无 created_at 列(请求 400),自动回退,保证榜单不受影响 */
-    let r=await fetch(base+'&select=name,wave,kills,created_at',{headers:hdr});
-    if(!r.ok) r=await fetch(base+'&select=name,wave,kills',{headers:hdr});
+    /* 优先带 created_at(+时间段);若该表无此列(请求 400)则自动回退,榜单不受影响 */
+    let r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills,created_at&'+order+tf,{headers:hdr});
+    if(!r.ok) r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&'+order,{headers:hdr});
     const data=await r.json();
     return Array.isArray(data)?data:[];
   }catch(e){ console.warn('读榜失败',e); return []; }
@@ -2482,6 +2512,20 @@ async function fetchRank(wave,kills){
   }catch(e){ return {rank:0,total:0}; }
 }
 function escHtml(s){ return (s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
+/* ===== 每日挑战:用当天日期做种子,固定一把法杖 + 2 个变数;全员同一套 ===== */
+function todayStr(){ const d=new Date(); const p=n=>String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function todaysDaily(){
+  const s=todayStr(); let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); }
+  const rng=mulberry32(h>>>0);
+  const wand=WANDS[Math.floor(rng()*WANDS.length)];
+  const pool=ENDLESS_MODS.slice(), mods=[];
+  for(let i=0;i<2 && pool.length;i++) mods.push(pool.splice(Math.floor(rng()*pool.length),1)[0]);
+  return {wand,mods};
+}
+function dailyKey(){ return 'sf_daily_'+todayStr(); }
+function getDailyBest(){ try{ return JSON.parse(localStorage.getItem(dailyKey())||'null'); }catch(e){ return null; } }
+function saveDailyBest(w,k){ try{ const b=getDailyBest(); if(!b||w>b.wave||(w===b.wave&&k>b.kills)) localStorage.setItem(dailyKey(),JSON.stringify({wave:w,kills:k})); }catch(e){} }
 /* 记录时间格式化:本地时区 年-月-日 时:分;无效/缺失则返回空串 */
 function fmtTime(ts){
   if(!ts) return '';
@@ -2505,6 +2549,19 @@ function renderBoard(el,list){
 function setupEndLeaderboard(prefix){
   const nameEl=$(prefix+'Name'), submitBtn=$(prefix+'Submit'), boardEl=$(prefix+'Board');
   if(!nameEl)return;
+  const lbRow=nameEl.parentElement; /* 含输入框+提交按钮的 .lb 行 */
+  if(dailyRun){
+    /* 每日挑战:有变数,不计入总榜;展示今日成绩 + 总榜作参考 */
+    if(lbRow) lbRow.style.display='none';
+    const best=getDailyBest();
+    boardEl.innerHTML='<div class="lb-load">加载榜单中…</div>';
+    fetchLeaderboard('all').then(b=>{
+      renderBoard(boardEl,b);
+      boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🗓 今日挑战 · 本次第 '+waveNum+' 波 · '+kills+' 杀'+(best?(' · 今日最佳 第 '+best.wave+' 波 · '+best.kills+' 杀'):'')+'</div>');
+    });
+    return;
+  }
+  if(lbRow) lbRow.style.display=''; /* 普通局:恢复显示(防上一把每日局把它隐藏了) */
   nameEl.value=lastName();
   submitBtn.disabled=false; submitBtn.textContent='提交';
   boardEl.innerHTML='<div class="lb-load">加载榜单中…</div>';
@@ -2522,12 +2579,14 @@ function setupEndLeaderboard(prefix){
 }
 function gameOver(manual){
   state='over'; if(!manual)S.die();
+  if(dailyRun) saveDailyBest(waveNum,kills);
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
   $('over').classList.remove('hidden');
   setupEndLeaderboard('ov');
 }
 function victory(){
   state='win'; S.win();
+  if(dailyRun) saveDailyBest(waveNum,kills);
   $('wnKill').textContent=kills;
   $('win').classList.remove('hidden');
   setupEndLeaderboard('wn');
@@ -4111,7 +4170,13 @@ requestAnimationFrame(loop);
 
 /* ============ 按钮 ============ */
 /* 菜单榜单初始加载 */
-fetchLeaderboard().then(b=>renderBoard($('menuBoard'),b));
+function loadMenuBoard(period){
+  $('menuBoard').innerHTML='<div class="lb-load">加载榜单中…</div>';
+  document.querySelectorAll('#lbTabs .lb-tab').forEach(t=>t.classList.toggle('active',t.dataset.period===period));
+  fetchLeaderboard(period).then(b=>renderBoard($('menuBoard'),b));
+}
+document.querySelectorAll('#lbTabs .lb-tab').forEach(t=>t.onclick=()=>loadMenuBoard(t.dataset.period));
+loadMenuBoard('all');
 function launchRun(w){
   resetGame(); applyWand(w);
   /* #warp 跳波测试钩子 */
@@ -4120,6 +4185,15 @@ function launchRun(w){
   state='play';
   /* #debug 无敌 + #warpn 跳到 n 波 */
   if(location.hash.includes('debug')){player.maxhp=99999;player.hp=99999;player.mods.armor=99;}
+}
+function launchDaily(){
+  const {wand,mods}=todaysDaily();
+  resetGame(); applyWand(wand);
+  dailyRun=true;                 /* resetGame 之后再置位 */
+  endlessMods=mods.slice();      /* 当日变数从第 1 波就生效 */
+  modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
+  for(const md of endlessMods) md.apply(modMult);
+  startWave(1); state='play';
 }
 function togglePause(p){
   if(state!=='play')return;
@@ -4131,6 +4205,20 @@ $('resumeBtn').onclick=()=>togglePause(false);
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+function openDaily(){
+  const {wand,mods}=todaysDaily();
+  $('dailyDate').textContent=todayStr()+' · 全员同一套挑战';
+  $('dailyInfo').innerHTML='<div style="margin:8px 0;color:#cdbcff;font-weight:700;">今日法杖</div>'
+    +'<div style="margin-bottom:10px;">'+wand.icon+' '+wand.name+'<br><span style="font-size:12px;opacity:.75;">'+wand.desc+'</span></div>'
+    +'<div style="margin:8px 0;color:#ff9c7b;font-weight:700;">今日变数</div>'
+    +mods.map(m=>'<div style="margin-bottom:6px;">'+m.icon+' '+m.name+' <span style="font-size:12px;opacity:.75;">· '+m.desc+'</span></div>').join('');
+  const best=getDailyBest();
+  $('dailyBest').innerHTML = best ? ('🏆 今日最佳:第 '+best.wave+' 波 · '+best.kills+' 杀') : '今日尚无记录 · 来打第一把!';
+  $('menu').classList.add('hidden'); $('daily').classList.remove('hidden');
+}
+$('dailyBtn').onclick=()=>{ initAudio(); openDaily(); };
+$('dailyBack').onclick=()=>{ $('daily').classList.add('hidden'); $('menu').classList.remove('hidden'); };
+$('dailyStart').onclick=()=>{ initAudio(); $('daily').classList.add('hidden'); launchDaily(); };
 $('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
 $('clClose').onclick=()=>$('changelog').classList.add('hidden');
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
