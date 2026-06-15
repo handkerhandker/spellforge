@@ -56,6 +56,16 @@
   .lb-tabs{display:flex;gap:6px;margin-top:6px;}
   .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;transition:background .12s,color .12s;}
   .lb-tab.active{background:linear-gradient(135deg,#7a5cff,#37a4ff);color:#fff;border-color:transparent;font-weight:700;}
+  .diff-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:14px;margin-bottom:7px;}
+  .diff-sel{display:flex;gap:5px;justify-content:center;}
+  .diff-pill{padding:6px 0;flex:1;min-width:50px;max-width:72px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .12s,color .12s,border-color .12s;}
+  .diff-pill.active{color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(0,0,0,.3);}
+  .diff-pill[data-diff="1"].active{background:linear-gradient(135deg,#3fa776,#2d8a5f);}
+  .diff-pill[data-diff="2"].active{background:linear-gradient(135deg,#5a9cff,#3a7fd4);}
+  .diff-pill[data-diff="3"].active{background:linear-gradient(135deg,#7a5cff,#37a4ff);}
+  .diff-pill[data-diff="4"].active{background:linear-gradient(135deg,#ff9a3c,#e0701a);}
+  .diff-pill[data-diff="5"].active{background:linear-gradient(135deg,#ff4d4d,#c81e1e);}
+  .diff-desc{color:#cdbcff;font-size:12px;margin-top:9px;margin-bottom:2px;min-height:16px;letter-spacing:.02em;}
   .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
   .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
   .lb-board{width:min(360px,90vw);margin-top:10px;max-height:34vh;overflow-y:auto;}
@@ -114,9 +124,18 @@
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
     <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换自动瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
+    <div class="diff-title">⚔ 选择难度</div>
+    <div id="diffSel" class="diff-sel">
+      <button class="diff-pill" data-diff="1">凡尘</button>
+      <button class="diff-pill" data-diff="2">通玄</button>
+      <button class="diff-pill" data-diff="3">入圣</button>
+      <button class="diff-pill" data-diff="4">渡劫</button>
+      <button class="diff-pill" data-diff="5">弑神</button>
+    </div>
+    <div id="diffDesc" class="diff-desc"></div>
     <button class="btn" id="startBtn">拔出法杖</button>
     <button class="btn ghost" id="dailyBtn" style="margin-top:6px;padding:10px 28px;font-size:14px;letter-spacing:.12em;">🗓 每日挑战</button>
-    <div class="lb-title">⚔ 英雄榜 · TOP 10</div>
+    <div class="lb-title" id="lbTitle">⚔ 英雄榜 · TOP 10</div>
     <div id="lbTabs" class="lb-tabs">
       <button class="lb-tab active" data-period="all">总榜</button>
       <button class="lb-tab" data-period="week">本周</button>
@@ -124,7 +143,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v38 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
+    <div class="credit" style="opacity:.8;">v39 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
   </div>
 </div>
 
@@ -181,6 +200,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v39 · 2026-06-15</div><div class="cl-i">新增五档难度:凡尘 / 通玄 / 入圣 / 渡劫 / 弑神(由易到难),开始页可选,默认入圣(标准)<br>「通玄」= 原版本难度;「弑神」固定倍率更高且无尽复利更陡,为冲榜而生<br>排行榜按难度分档、各算各的;每日挑战固定「入圣」</div></div>
 <div class="cl-v"><div class="cl-h">v38 · 2026-06-15</div><div class="cl-i">修复无尽后期难度太松:Boss 血量改为复利增长(原线性,后期被秒)；Boss 伤害随波数复利放大(原写死 16 从不缩放,导致后期站脸上也不掉血),激光 / 冲锋等技能一并放大<br>越深越致命,战役 1-15 波难度保持不变</div></div>
 <div class="cl-v"><div class="cl-h">v37 · 2026-06-15</div><div class="cl-i">新增「遗物系统」：每 5 波击败 Boss 后三选一,共 16 件,分攻击 / 防御 / 经济 / 条件触发 / 取舍五类<br>平衡设计：伤害加法叠加(不做乘法)、暴击 / 攻速 / 闪避封顶、遗物不重复,杜绝战力崩盘</div></div>
 <div class="cl-v"><div class="cl-h">v36 · 2026-06-15</div><div class="cl-i">英雄榜新增「本周 / 本月」榜单切换，看近期高手<br>新增「每日挑战」：每天固定法杖 + 2 个变数，全员同一套关卡，记录本地「今日最佳」</div></div>
@@ -820,6 +840,21 @@ let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
 let relicMods={...RELIC_BASE};
+/* ============ 五档难度 ============
+   只调敌人血量/伤害/刷怪量(玩家不变);eHp/eDmg 是无尽逐波复利的底数(弑神更陡)。
+   现版本难度 = 通玄(第2档,全 ×1.0);默认入圣(标准)。 */
+const DIFFICULTIES=[
+  {id:1,name:'凡尘',sub:'轻松',desc:'敌人更弱更少 · 休闲 / 新手向',     hpM:0.70,dmgM:0.65,spawnM:0.88,eHp:1.10,eDmg:1.085},
+  {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.10,eDmg:1.085},
+  {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085},
+  {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.10,eDmg:1.085},
+  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.40,eHp:1.13,eDmg:1.11}
+];
+let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
+let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085}; /* 当前生效的倍率 */
+function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg}; }
+function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
+function diffData(){ return DIFFICULTIES[difficulty-1]; }
 let novaFX=null;
 const cam={x:0,y:0,shake:0};
 let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spawnQ, waveT, telegraphs;
@@ -1093,8 +1128,8 @@ function startWave(n){
     /* 无尽深度缩放:血量与伤害都按波数「复利」上涨,确保后期追得上玩家相乘的战力。
        原本血量是线性(+12%/波)、伤害写死 16 从不缩放 → 后期秒 Boss 且站脸上不掉血。
        只在 16 波后生效,战役 1-15 波完全不变。数值温和起步、越深越狠。 */
-    const scale=(n>15?Math.pow(1.10,n-15):1);       /* Boss 血量复利 +10%/波 */
-    const dmgScale=(n>15?Math.pow(1.085,n-15):1);   /* Boss 伤害复利 +8.5%/波 */
+    const scale=(n>15?Math.pow(diffMul.eHp,n-15):1);       /* Boss 血量复利(弑神更陡) */
+    const dmgScale=(n>15?Math.pow(diffMul.eDmg,n-15):1);   /* Boss 伤害复利(弑神更陡) */
     /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
     const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
     /* 多 Boss 同屏时,每尊削血量+伤害:1尊不变,越多每尊越弱(但总量仍随数量上升) */
@@ -1132,7 +1167,7 @@ function startWave(n){
         const base=row[2]||'brute';
         spawnQ.push({t:rand(2,(5+n*.4)/sr),type:'elite',baseType:base,tier:pickTier()});
       } else {
-        const cc=Math.round(c*modMult.spawnM);
+        const cc=Math.round(c*modMult.spawnM*diffMul.spawnM);
         for(let i=0;i<cc;i++) spawnQ.push({t:rand(.5,(5+n*.8)/sr),type,tier:pickTier()});
       }
     }
@@ -1187,7 +1222,7 @@ function spawnEnemy(type,x,y,tier){
     spd*=tierDef.spdM*(1+difficultyPool.spdBonus);
     r*=tierDef.rM;
     /* 无尽修饰符 */
-    hp*=modMult.hpM; dmg*=modMult.dmgM; spd*=modMult.spdM;
+    hp*=modMult.hpM*diffMul.hpM; dmg*=modMult.dmgM*diffMul.dmgM; spd*=modMult.spdM;
     const col=tier===3?'#c83a3a':tier===2?'#d4a050':'#ffd24d';
     const e={type:baseType, x, y, r, hp, maxhp:hp,
       spd, dmg, col,
@@ -1211,7 +1246,7 @@ function spawnEnemy(type,x,y,tier){
   dmg=dmg*tierDef.dmgM*(1+difficultyPool.dmgBonus);
   r=r*tierDef.rM;
   /* 无尽修饰符 */
-  hp*=modMult.hpM; spd*=modMult.spdM; dmg*=modMult.dmgM;
+  hp*=modMult.hpM*diffMul.hpM; spd*=modMult.spdM; dmg*=modMult.dmgM*diffMul.dmgM;
   const col=tier===3?'#c83a3a':(tier===2?blendCol(t.col,'#d4a050',.35):t.col);
   const enemy={
     type, x, y, r,
@@ -1244,8 +1279,8 @@ function hex2rgb(h){
 }
 function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
   const cs=cScale||1; /* 多 Boss 同屏时 <1:同时削血量与伤害 */
-  const ds=(dmgScale||1)*cs; /* 伤害 = 深度复利 × 多Boss削减,作用到接触/激光/冲锋/子弹全部伤害 */
-  const hp=(300+tier*tier*1000)*(scale||1)*cs; /* boss耐久×3,作为高潮持久战 */
+  const ds=(dmgScale||1)*cs*diffMul.dmgM; /* 伤害 = 深度复利 × 多Boss削减 × 难度倍率,作用到接触/激光/冲锋/子弹全部伤害 */
+  const hp=(300+tier*tier*1000)*(scale||1)*cs*diffMul.hpM; /* boss耐久×3,作为高潮持久战 */
   const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
            :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
@@ -2567,9 +2602,10 @@ const SB_KEY='sb_publishable_JhIPyJDKFZDr0kcwE13gVQ_HTDcn4bQ';
 function lastName(){ try{return localStorage.getItem('sf_name')||'';}catch(e){return '';} }
 function saveName(n){ try{localStorage.setItem('sf_name',n);}catch(e){} }
 async function submitScore(name,wave,kills){
-  try{ await fetch(SB_URL+'/rest/v1/scores',{method:'POST',
-    headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
-    body:JSON.stringify({name,wave,kills})}); return true; }catch(e){ console.warn('提交失败',e); return false; }
+  const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'};
+  const post=body=>fetch(SB_URL+'/rest/v1/scores',{method:'POST',headers:hdr,body:JSON.stringify(body)});
+  try{ let r=await post({name,wave,kills,difficulty}); if(!r.ok) r=await post({name,wave,kills}); return r.ok; }
+  catch(e){ console.warn('提交失败',e); return false; }
 }
 function periodStart(period){
   const n=new Date();
@@ -2581,10 +2617,12 @@ async function fetchLeaderboard(period){
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
   let tf=''; /* 本周/本月按 created_at 筛选;总榜不筛 */
   if(period==='week'||period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(period));
+  const df='&difficulty=eq.'+difficulty; /* 按所选难度档分榜 */
   try{
-    /* 优先带 created_at(+时间段);若该表无此列(请求 400)则自动回退,榜单不受影响 */
-    let r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills,created_at&'+order+tf,{headers:hdr});
-    if(!r.ok) r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&'+order,{headers:hdr});
+    /* 带难度+时间段;列不存在(400)则逐级回退,旧表/未跑 SQL 也不崩 */
+    let r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills,created_at,difficulty&'+order+tf+df,{headers:hdr});
+    if(!r.ok) r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills,created_at&'+order+tf,{headers:hdr}); /* 无 difficulty 列 */
+    if(!r.ok) r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&'+order,{headers:hdr});             /* 无 created_at 列 */
     const data=await r.json();
     return Array.isArray(data)?data:[];
   }catch(e){ console.warn('读榜失败',e); return []; }
@@ -2592,9 +2630,13 @@ async function fetchLeaderboard(period){
 async function fetchRank(wave,kills){
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,Prefer:'count=exact',Range:'0-0'};
   const ext=s=>parseInt((s||'0-0/0').split('/')[1])||0;
+  const df='&difficulty=eq.'+difficulty; /* 同难度档内排名 */
+  const beat='select=name&or=(wave.gt.'+wave+',and(wave.eq.'+wave+',kills.gt.'+kills+'))';
   try{
-    const r1=await fetch(SB_URL+'/rest/v1/scores?select=name&or=(wave.gt.'+wave+',and(wave.eq.'+wave+',kills.gt.'+kills+'))',{headers:hdr});
-    const r2=await fetch(SB_URL+'/rest/v1/scores?select=name',{headers:hdr});
+    let r1=await fetch(SB_URL+'/rest/v1/scores?'+beat+df,{headers:hdr});
+    if(!r1.ok) r1=await fetch(SB_URL+'/rest/v1/scores?'+beat,{headers:hdr});
+    let r2=await fetch(SB_URL+'/rest/v1/scores?select=name'+df,{headers:hdr});
+    if(!r2.ok) r2=await fetch(SB_URL+'/rest/v1/scores?select=name',{headers:hdr});
     return {rank:ext(r1.headers.get('content-range'))+1, total:ext(r2.headers.get('content-range'))};
   }catch(e){ return {rank:0,total:0}; }
 }
@@ -2661,7 +2703,7 @@ function setupEndLeaderboard(prefix){
     boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
     const [bd,ri]=await Promise.all([fetchLeaderboard(),fetchRank(w,k)]);
     renderBoard(boardEl, bd);
-    if(ri.rank>0)boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🏆 本次第 '+ri.rank+' 名 · 共 '+ri.total+' 人</div>');
+    if(ri.rank>0)boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🏆 '+diffData().name+'榜 · 本次第 '+ri.rank+' 名 · 共 '+ri.total+' 人</div>');
   };
 }
 function gameOver(manual){
@@ -4294,14 +4336,27 @@ requestAnimationFrame(loop);
 
 /* ============ 按钮 ============ */
 /* 菜单榜单初始加载 */
+let curPeriod='all';
 function loadMenuBoard(period){
+  curPeriod=period;
+  $('lbTitle').textContent='⚔ 英雄榜 · '+diffData().name+' · TOP 10';
   $('menuBoard').innerHTML='<div class="lb-load">加载榜单中…</div>';
   document.querySelectorAll('#lbTabs .lb-tab').forEach(t=>t.classList.toggle('active',t.dataset.period===period));
   fetchLeaderboard(period).then(b=>renderBoard($('menuBoard'),b));
 }
 document.querySelectorAll('#lbTabs .lb-tab').forEach(t=>t.onclick=()=>loadMenuBoard(t.dataset.period));
+function refreshDiffUI(){
+  document.querySelectorAll('#diffSel .diff-pill').forEach(p=>p.classList.toggle('active',+p.dataset.diff===difficulty));
+  const d=diffData();
+  $('diffDesc').innerHTML='<b>'+d.name+' · '+d.sub+'</b> — '+d.desc;
+}
+document.querySelectorAll('#diffSel .diff-pill').forEach(p=>p.onclick=()=>{ applyDifficulty(+p.dataset.diff); refreshDiffUI(); loadMenuBoard(curPeriod); });
+/* 启动:读取存档难度(默认入圣),刷新选择器 + 榜单 */
+try{ const sv=parseInt(localStorage.getItem('sf_diff')); if(sv>=1&&sv<=5){ difficulty=sv; setDiffMul(sv); } }catch(e){}
+refreshDiffUI();
 loadMenuBoard('all');
 function launchRun(w){
+  setDiffMul(difficulty);   /* 同步所选难度倍率(防上一把每日局改了 diffMul) */
   resetGame(); applyWand(w);
   /* #warp 跳波测试钩子 */
   const wh=location.hash.match(/^#warp(\d+)/);
@@ -4312,6 +4367,7 @@ function launchRun(w){
 }
 function launchDaily(){
   const {wand,mods}=todaysDaily();
+  setDiffMul(3);            /* 每日挑战固定入圣(标准),不受菜单所选档影响 */
   resetGame(); applyWand(wand);
   dailyRun=true;                 /* resetGame 之后再置位 */
   endlessMods=mods.slice();      /* 当日变数从第 1 波就生效 */
