@@ -153,7 +153,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v43 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v44 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
   </div>
 </div>
 
@@ -222,6 +222,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v44 · 2026-06-15</div><div class="cl-i">两处优化:① 修复 Boss 弹幕偶尔"凭空砸脸"——此前部分全屏招式在全场随机位置生成弹幕,可能正好出现在你身上、零反应时间无从躲避;现加了安全距离守卫,敌弹绝不在你身上凭空出现,总留得出闪避空间。② 移除左上角"压力值"进度条——那是后台动态难度的内部数值,对玩家没有意义,去掉后画面更清爽(难度调节照常在背后运作)</div></div>
 <div class="cl-v"><div class="cl-h">v43 · 2026-06-15</div><div class="cl-i">无尽深层新增三尊「四凶」Boss——穷奇·风啸九霄(高速俯冲+翼刃扇射)、梼杌·裂地不退(顽固紧追+震地冲击波)、饕餮·万物归腹(张口吸入+咬合重创);26 波起登场、越深越多(41 波后为主),渡劫/弑神难度更早现身。同时根治深层多 Boss「外观重复」:精灵图改为按身份绘制,同一波不同 Boss 各显其形</div></div>
 <div class="cl-v"><div class="cl-h">v42 · 2026-06-15</div><div class="cl-i">修复「法盾」无敌漏洞:此前法盾冷却被急速压到比持续短 → 永久挂盾且零伤(站 Boss 脸上不掉血的真凶)。现改为展开 4 秒后强制空窗 2 秒(不受急速影响),挡盾期间真实扣 1 血,层数耗尽正常受伤;保命依旧强力,但不再永久无敌</div></div>
 <div class="cl-v"><div class="cl-h">v41 · 2026-06-15</div><div class="cl-i">新增「法术图鉴」:在三选一、商店、菜单都能随时翻看所有法术与符文的类型、伤害、冷却与特性,换技能不再抓瞎</div></div>
@@ -3073,6 +3074,9 @@ function collidePillars(o){
 let _bossAtkMul=1; /* 多 Boss 同屏时对每尊 Boss 的子弹伤害统一缩放,仅在 bossAttack 期间生效 */
 function ebul(x,y,a,sp,dmg){
   dmg*=_bossAtkMul;
+  /* 安全距离守卫:子弹绝不在玩家身上凭空出现(否则零反应时间=无解)。太近就沿径向推到安全圈外,方向不变 */
+  const SAFE=72, dx=x-player.x, dy=y-player.y, d=Math.hypot(dx,dy);
+  if(d<SAFE){ const ang=d>1?Math.atan2(dy,dx):a; x=player.x+Math.cos(ang)*SAFE; y=player.y+Math.sin(ang)*SAFE; }
   ebullets.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,r:6,life:5,dmg,dead:false});
 }
 /* 预警弹幕:先在目标位置显示红色危险圈,延迟 0.7s 后才生成弹幕,给玩家时间躲开 */
@@ -4347,19 +4351,7 @@ function drawHUD(){
   /* 顶部 1px 浓墨下边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
   ctx.fillRect(0,top+34,W,1);
-  /* 压力条(左上角,金币下方,避开右上角按钮) */
-  if(state==='play'){
-    const pw=104, px=18, py=top+82;
-    ctx.fillStyle='rgba(10,8,24,.7)';rrect(px-4,py-3,pw+8,12,5);ctx.fill();
-    const pr=clamp(playerProfile.pressure,0,1);
-    let pcol='#5a3a3a';
-    if(pr>.7) pcol='#c83a3a';
-    else if(pr>.4) pcol='#d4a050';
-    else pcol='#5fa070';
-    ctx.fillStyle=pcol;rrect(px,py,pw*pr,6,3);ctx.fill();
-    ctx.fillStyle='#cfc8f2';ctx.font='bold 9px sans-serif';ctx.textAlign='left';
-    ctx.fillText('压 '+(pr*100|0)+'%',px+pw+6,py+6);
-  }
+  /* 压力条已隐藏:压力值仍在后台驱动动态难度,但不再显示给玩家(对玩家无意义、且占画面) */
   /* 阵型激活 flash(屏幕顶部中央,激活全程显示) */
   if(formations.active){
     const elapsed=formations.active.dur-formations.active.t;
