@@ -190,8 +190,8 @@
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div id="verBadge">
-    <div class="vb-top"><b>v51</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
-    <div class="vb-time">2026-06-15 21:05</div>
+    <div class="vb-top"><b>v52</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
+    <div class="vb-time">2026-06-16 00:30</div>
   </div>
   <div class="panel">
     <div class="eyebrow">Spellforge · Roguelike</div>
@@ -313,7 +313,8 @@
     </div>
     <div id="ovAch"></div>
     <div class="win-actions">
-      <button class="btn ghost" id="retryBtn">再次挑战</button>
+      <button class="btn" id="retryBtn">再次挑战</button>
+      <button class="btn ghost" id="ovHomeBtn">回到初始页面</button>
     </div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
@@ -329,7 +330,8 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
-<div class="cl-ver">当前版本 <b>v51</b> · 2026-06-15 21:05</div>
+<div class="cl-ver">当前版本 <b>v52</b> · 2026-06-16 00:30</div>
+<div class="cl-v"><div class="cl-h">v52 · 2026-06-16</div><div class="cl-i">本次集中修复几处问题并优化结算页。<b>修复法术槽 5/4 漏洞</b>:此前法术槽已满(4/4)时,先卖掉一个法术再刷新商店,刷出的新法术能接连买入、突破上限到 5/4;现在买入时严格校验,满槽时"会占新槽的新法术"直接置灰为「法术槽已满 · 先卖出」,升级已有法术与购买符文不受影响,卖出腾位后又恢复可买。<b>修复结算页按钮够不到</b>:通关 / 失败结算页的「无尽模式 / 再次挑战」按钮会被顶出屏幕且点不到——排行榜自带内部滚动、整页却不滚,加入「本局解锁成就」后按钮被挤出可视区又滑不到;现改为排行榜整体展开、整页统一滚动,任何按钮都能滑到。<b>结算页改版</b>:本局解锁成就改为"一行两个"网格,省一半高度、排布更整齐;并把操作按钮做成并排一行、上移到"成就与排行榜之间",结算页一弹出即可见,不会只顾填名上榜而错过下面的按钮。<b>新增「回到初始页面」</b>:失败页新增此按钮(与再次挑战并排),通关页的「重新开始」也改为「回到初始页面」——此前结算后只能原难度直接重开、无法回主菜单,现在两页都能一键回到主菜单去换难度 / 看完整榜单 / 翻图鉴与成就。<b>浮层防切</b>:选法杖等满屏浮层加了保险,内容超出屏幕时改为可滚动(放得下时仍居中、外观不变),避免小屏上最后一项被切到点不着</div></div>
 <div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。图鉴与成就纯展示记录、不改动战斗数值。另外大幅强化「弑神」难度:精英词缀从前期(第 4 波)就出现且明显增多,会冒出更多霸体(免疫击退)、虚影(周期免疫)、淬毒(贴到掉血)等逼你主动应对的怪;红心掉落减半、容错更低;Boss 伤害 +25%、耐久略增,后期真有威胁;同屏怪量提高。仅影响弑神,其它难度原样不变</div></div>
 <div class="cl-v"><div class="cl-h">v50 · 2026-06-15</div><div class="cl-i">顶部信息栏不再挤成一团:此前血条、「第 N 波 / 剩余」与无尽变数图标都画在屏幕正中央、互相叠住,深层局尤其糊。现血条收窄不再顶到中间;波次与剩余居中、必要时自动右移避开血条;无尽「潮汐」变数图标(狂暴/钢甲/猎杀/群涌/精英/剧毒)挪到左侧击杀金币下方单独成行。另外底部法术构筑栏过长时会自动压缩,不再溢出去盖住右下角冲刺键</div></div>
 <div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
@@ -393,7 +395,7 @@
     <div id="wnAch"></div>
     <div class="win-actions">
       <button class="btn" id="endlessBtn">无尽模式</button>
-      <button class="btn ghost" id="winRetryBtn">重新开始</button>
+      <button class="btn ghost" id="winHomeBtn">回到初始页面</button>
     </div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
@@ -4950,7 +4952,8 @@ $('achvCloseTop').onclick=()=>$('achv').classList.add('hidden');
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
-$('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
+$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; loadMenuBoard(curPeriod); };
+$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; loadMenuBoard(curPeriod); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
 $('shopHeal').onclick=()=>{ if(coins>=HEAL_COST&&player.hp<player.maxhp){coins-=HEAL_COST;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopReroll').onclick=()=>{ if(coins>=SHOP_REROLL){coins-=SHOP_REROLL;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
