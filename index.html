@@ -38,6 +38,11 @@
   #menu .hint{line-height:1.35;font-size:11px;text-align:left;}
   #menu .lb-title{margin-top:7px;}
   #menu .lb-board{max-height:none;overflow-y:visible;margin-top:6px;flex-shrink:0;}
+  /* 结算页(通关/失败):榜展开不自己滚,整页面板滚动,避免把底部按钮顶出屏幕又滑不到 */
+  #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
+  #win .panel,#over .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+  /* 选择/信息类浮层保险:内容超屏时可滚动,放得下时仍居中(safe center 保证正常外观不变),避免选项/按钮被切到点不到 */
+  #wandSel,#cards,#relic,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
   #menu .credit{margin-top:2px;}
   .eyebrow{font-size:11px;letter-spacing:.5em;color:var(--cyan);text-transform:uppercase;padding-left:.5em;}
@@ -84,6 +89,13 @@
   .ach-prog{margin-top:5px;height:5px;border-radius:3px;background:rgba(10,8,24,.6);overflow:hidden;}
   .ach-prog>i{display:block;height:100%;background:linear-gradient(90deg,#7b5cff,#a98bff);}
   .ach-sum{color:#bdb4ea;font-size:12px;letter-spacing:.1em;margin:2px 0 10px;text-align:center;}
+  /* 结算页成就:两列网格省高度;奇数个时最后一个占满整行,避免右侧空缺 */
+  .ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-bottom:2px;}
+  .ach-grid .ach-item{margin-bottom:0;}
+  .ach-grid .ach-item:last-child:nth-child(odd){grid-column:1 / -1;}
+  /* 通关页:无尽模式 + 重新开始 并排一行,等宽协调 */
+  .win-actions{display:flex;gap:10px;width:100%;margin-top:10px;}
+  .win-actions .btn{flex:1;margin-top:0;padding:14px 10px;}
   /* 菜单:图鉴/成就按钮行 */
   .codex-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:320px;margin-top:8px;}
   .codex-row button{min-width:0;padding:10px 4px;border-radius:999px;border:1px solid rgba(123,92,255,.4);background:rgba(123,92,255,.14);color:#cbbcff;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-sizing:border-box;}
@@ -300,13 +312,15 @@
       <div class="stat"><b id="ovKill">0</b><span>击杀</span></div>
     </div>
     <div id="ovAch"></div>
+    <div class="win-actions">
+      <button class="btn ghost" id="retryBtn">再次挑战</button>
+    </div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="ovName" maxlength="16" placeholder="留名上榜">
       <button class="btn" id="ovSubmit" style="margin-top:0;padding:11px 22px;font-size:14px;">提交</button>
     </div>
     <div id="ovBoard" class="lb-board"></div>
-    <button class="btn ghost" id="retryBtn">再次挑战</button>
   </div>
 </div>
 
@@ -377,14 +391,16 @@
       <div class="stat"><b id="wnKill">0</b><span>击杀</span></div>
     </div>
     <div id="wnAch"></div>
+    <div class="win-actions">
+      <button class="btn" id="endlessBtn">无尽模式</button>
+      <button class="btn ghost" id="winRetryBtn">重新开始</button>
+    </div>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="wnName" maxlength="16" placeholder="留名上榜">
       <button class="btn" id="wnSubmit" style="margin-top:0;padding:11px 22px;font-size:14px;">提交</button>
     </div>
     <div id="wnBoard" class="lb-board"></div>
-    <button class="btn" id="endlessBtn">无尽模式</button>
-    <button class="btn ghost" id="winRetryBtn">重新开始</button>
   </div>
 </div>
 
@@ -3182,7 +3198,9 @@ function openAchv(){ buildAchv(); $('achv').classList.remove('hidden'); }
 function achSummaryHTML(){
   if(!_runUnlocked.length)return '';
   let h='<div class="ach-sum" style="color:var(--gold);margin-top:12px;">🎉 本局解锁 '+_runUnlocked.length+' 项成就</div>';
+  h+='<div class="ach-grid">';
   for(const a of _runUnlocked) h+='<div class="ach-item"><div class="ach-ic">'+a.icon+'</div><div class="ach-main"><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div></div></div>';
+  h+='</div>';
   return h;
 }
 
@@ -3278,20 +3296,38 @@ function buildShopItems(){
     const owned=player.cc[c.id]||0;
     const price=Math.round((PRICE[c.rar]||15)*(1+owned*.65));
     const el=document.createElement('button');
-    el.className='card r'+c.rar;
-    el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">'+c.name+
-      '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+price+'💰</div>';
-    el.onclick=()=>{
-      if(coins<price){S.no();return;}
-      coins-=price; applyCard(c); S.buy(); runBoughtShop=true;
-      el.className='card r1 dis';
-      el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">已购入 · '+c.name+'</div></div>';
-      el.onclick=null;
-      refreshShopHead(); buildSellRow(); refreshShopBtns();
+    el._bought=false; el._card=c; el._price=price;
+    el._render=()=>{
+      if(el._bought){
+        el.className='card r1 dis';
+        el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">已购入 · '+c.name+'</div></div>';
+        return;
+      }
+      /* 会占新槽的新法术(升级/符文不算),槽满时显示为不可买 */
+      const full=c.kind==='spell'&&!player.spells[c.id]&&Object.keys(player.spells).length>=SPELL_SLOT_MAX;
+      if(full){
+        el.className='card r1 dis';
+        el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">法术槽已满 · 先卖出</div></div>';
+      }else{
+        el.className='card r'+c.rar;
+        el.innerHTML='<div class="cic">'+c.icon+'</div><div class="ctx"><div class="cn">'+c.name+
+          '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+price+'💰</div>';
+      }
     };
+    el.onclick=()=>{
+      if(el._bought)return;
+      /* FIX: 满槽时不能买"会占新槽的新法术",防止突破 4/4 上限(升级/符文照常) */
+      if(c.kind==='spell'&&!player.spells[c.id]&&Object.keys(player.spells).length>=SPELL_SLOT_MAX){ S.no(); el._render(); return; }
+      if(coins<price){S.no();return;}
+      coins-=price; applyCard(c); S.buy(); runBoughtShop=true; el._bought=true;
+      el._render(); refreshShopHead(); buildSellRow(); refreshShopBtns(); syncSpellOffers();
+    };
+    el._render();
     row.appendChild(el);
   }
 }
+/* 槽位状态变化后,刷新商店里每个法术卡的可买/置灰状态(不重新发牌) */
+function syncSpellOffers(){ const row=$('shopRow'); if(row)[...row.children].forEach(el=>el._render&&el._render()); }
 function buildSellRow(){
   const row=$('sellRow'); row.innerHTML='';
   const ids=Object.keys(player.spells);
@@ -3317,7 +3353,7 @@ function buildSellRow(){
       }
       if(player.cc[id])player.cc[id]--;
       coins+=SELL_GAIN; S.coin();
-      refreshShopHead(); buildSellRow(); refreshShopBtns();
+      refreshShopHead(); buildSellRow(); refreshShopBtns(); syncSpellOffers();
     };
     row.appendChild(el);
   }
