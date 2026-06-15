@@ -45,6 +45,16 @@
   .cl-v{margin-bottom:16px;align-self:stretch;}
   .cl-h{font-size:14px;font-weight:700;color:#ffd98a;letter-spacing:.06em;margin-bottom:5px;}
   .cl-i{font-size:12.5px;color:#b8aed8;line-height:1.7;}
+  .cx-sec{color:#bdb4ea;font-size:12px;letter-spacing:.16em;margin:15px 0 7px;font-weight:700;}
+  .cx-sec:first-child{margin-top:2px;}
+  .cx-item{display:flex;gap:10px;padding:8px 10px;border-radius:9px;background:rgba(30,22,60,.42);margin-bottom:6px;}
+  .cx-ic{font-size:21px;flex-shrink:0;width:28px;text-align:center;line-height:1.3;}
+  .cx-main{flex:1;min-width:0;}
+  .cx-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .cx-name{color:#fff;font-weight:700;font-size:13.5px;}
+  .cx-tag{font-size:10px;padding:1px 7px;border-radius:999px;background:rgba(123,92,255,.22);color:#c8b8ff;border:1px solid rgba(123,92,255,.4);white-space:nowrap;}
+  .cx-stat{font-size:11px;color:#ffd98a;margin-left:auto;white-space:nowrap;}
+  .cx-desc{font-size:12px;color:#b8aed4;margin-top:3px;line-height:1.4;}
   .btn{margin-top:8px;padding:14px 40px;border:0;border-radius:999px;cursor:pointer;
     font-size:16px;font-weight:800;letter-spacing:.28em;padding-left:calc(40px + .28em);color:#fff;
     background:linear-gradient(135deg,#7a5cff,#37a4ff);
@@ -143,7 +153,18 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v40 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
+    <div class="credit" style="opacity:.8;">v41 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+  </div>
+</div>
+
+<!-- 法术图鉴 -->
+<div id="codex" class="overlay hidden" style="z-index:50;">
+  <div class="panel" style="max-width:560px;max-height:86vh;overflow-y:auto;text-align:left;">
+    <div class="eyebrow" style="color:#8b7df0;">Codex</div>
+    <h1 class="title" style="font-size:28px;margin-bottom:4px;">法术图鉴</h1>
+    <div class="sub" style="font-size:11px;letter-spacing:.14em;margin-bottom:8px;">所有法术与强化的定位 · 数值 · 特性</div>
+    <div id="codexBody" style="width:100%;"></div>
+    <button class="btn" id="codexClose" style="margin-top:10px;">关闭</button>
   </div>
 </div>
 
@@ -167,6 +188,7 @@
   <div class="sub" id="cardSub" style="font-size:12px;letter-spacing:.18em;"></div>
   <div id="cardRow"></div>
   <button class="btn ghost" id="rerollBtn" style="margin-top:2px;padding:10px 26px;font-size:13px;">🔄 重抽一组 (8💰)</button>
+  <button class="btn ghost" id="cardCodexBtn" style="margin-top:6px;padding:8px 22px;font-size:12.5px;opacity:.92;">📖 法术图鉴</button>
 </div>
 
 <!-- 遗物三选一 -->
@@ -200,6 +222,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v41 · 2026-06-15</div><div class="cl-i">新增「法术图鉴」:在三选一、商店、菜单都能随时翻看所有法术与符文的类型、伤害、冷却与特性,换技能不再抓瞎</div></div>
 <div class="cl-v"><div class="cl-h">v40 · 2026-06-15</div><div class="cl-i">英雄榜改版更紧凑:每条压成单行(名字 + 日期同行、日期省去年份),一屏可见 6 条以上,不再憋屈</div></div>
 <div class="cl-v"><div class="cl-h">v39 · 2026-06-15</div><div class="cl-i">新增五档难度:凡尘 / 通玄 / 入圣 / 渡劫 / 弑神(由易到难),开始页可选,默认入圣(标准)<br>「通玄」= 原版本难度;「弑神」固定倍率更高且无尽复利更陡,为冲榜而生<br>排行榜按难度分档、各算各的;每日挑战固定「入圣」</div></div>
 <div class="cl-v"><div class="cl-h">v38 · 2026-06-15</div><div class="cl-i">修复无尽后期难度太松:Boss 血量改为复利增长(原线性,后期被秒)；Boss 伤害随波数复利放大(原写死 16 从不缩放,导致后期站脸上也不掉血),激光 / 冲锋等技能一并放大<br>越深越致命,战役 1-15 波难度保持不变</div></div>
@@ -269,6 +292,7 @@
     </div>
     <div class="sub" style="letter-spacing:.2em;font-size:11px;">— 出售法术 · 每级 8💰 —</div>
     <div id="sellRow" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%;"></div>
+    <button class="btn ghost" id="shopCodexBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">📖 法术图鉴</button>
     <button class="btn" id="shopLeave" style="margin-top:4px;">继续征程</button>
   </div>
 </div>
@@ -2723,6 +2747,29 @@ function victory(){
 }
 
 /* ============ 卡牌 ============ */
+/* ===== 法术图鉴 ===== */
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋' };
+const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield'];
+function cxItem(icon,name,tag,stat,desc){
+  return '<div class="cx-item"><div class="cx-ic">'+icon+'</div><div class="cx-main"><div class="cx-head">'
+    +'<span class="cx-name">'+name+'</span>'+(tag?'<span class="cx-tag">'+tag+'</span>':'')
+    +(stat?'<span class="cx-stat">'+stat+'</span>':'')+'</div><div class="cx-desc">'+desc+'</div></div></div>';
+}
+function stackTag(mx){ return mx>=99?'可无限叠':(mx<=1?'一次即满':'可叠 '+mx+' 层'); }
+function buildCodex(){
+  let h='<div class="cx-sec">⚔ 主动法术 · 占用法术槽(上限 '+SPELL_SLOT_MAX+')</div>';
+  for(const id of SPELL_ORDER){ const d=SPELL_DEF[id]; if(!d)continue;
+    const s=[]; if(d.dmg>0)s.push('伤害 '+d.dmg); if(d.cd)s.push('冷却 '+d.cd+'s');
+    h+=cxItem(d.icon,d.name,SPELL_TYPE[id]||'法术',s.join(' · '),d.desc); }
+  h+='<div class="cx-sec">✨ 符文 · 强化(不占槽,叠加增益)</div>';
+  for(const c of CARD_DEFS)if(c.kind==='mod') h+=cxItem(c.icon,c.name,stackTag(c.max),'',c.desc);
+  h+='<div class="cx-sec">❤ 属性 · 被动</div>';
+  for(const c of CARD_DEFS)if(c.kind==='stat') h+=cxItem(c.icon,c.name,stackTag(c.max),'',c.desc);
+  let any=false; for(const c of CARD_DEFS)if(c.kind==='curse'){ if(!any){h+='<div class="cx-sec">⚖ 契约 · 取舍(高风险高回报)</div>';any=true;} h+=cxItem(c.icon,c.name,'取舍','',c.desc); }
+  $('codexBody').innerHTML=h;
+}
+function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
+
 function cardInfo(d){
   if(d.kind==='spell'){
     const def=SPELL_DEF[d.id], own=player.spells[d.id];
@@ -4402,6 +4449,10 @@ $('dailyBack').onclick=()=>{ $('daily').classList.add('hidden'); $('menu').class
 $('dailyStart').onclick=()=>{ initAudio(); $('daily').classList.add('hidden'); launchDaily(); };
 $('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
 $('clClose').onclick=()=>$('changelog').classList.add('hidden');
+$('codexClose').onclick=()=>$('codex').classList.add('hidden');
+$('codexOpenMenu').onclick=openCodex;
+$('cardCodexBtn').onclick=openCodex;
+$('shopCodexBtn').onclick=openCodex;
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
 $('winRetryBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden'); buildWandSel(); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
