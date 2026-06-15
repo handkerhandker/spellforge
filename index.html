@@ -26,11 +26,11 @@
   #menu .panel{max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:15px 20px;gap:6px;}
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
   #menu .title{font-size:38px;}
-  #menu .desc{font-size:13px;line-height:1.55;}
-  #menu .hint{line-height:1.5;}
+  #menu .desc{font-size:12.5px;line-height:1.4;}
+  #menu .hint{line-height:1.35;font-size:11px;}
   #menu .lb-title{margin-top:7px;}
-  #menu .lb-board{max-height:172px;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;margin-top:6px;}
-  #menu .lb-row{padding:5px 11px;margin-bottom:4px;}
+  #menu .lb-board{max-height:248px;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;margin-top:6px;flex-shrink:0;}
+  #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
   #menu .credit{margin-top:2px;}
   .eyebrow{font-size:11px;letter-spacing:.5em;color:var(--cyan);text-transform:uppercase;padding-left:.5em;}
   h1.title{font-family:"Songti SC","STSong","SimSun",serif;font-weight:900;font-size:46px;line-height:1.15;
@@ -56,7 +56,7 @@
   .lb-tabs{display:flex;gap:6px;margin-top:6px;}
   .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;transition:background .12s,color .12s;}
   .lb-tab.active{background:linear-gradient(135deg,#7a5cff,#37a4ff);color:#fff;border-color:transparent;font-weight:700;}
-  .diff-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:14px;margin-bottom:7px;}
+  .diff-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:10px;margin-bottom:6px;}
   .diff-sel{display:flex;gap:5px;justify-content:center;}
   .diff-pill{padding:6px 0;flex:1;min-width:50px;max-width:72px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .12s,color .12s,border-color .12s;}
   .diff-pill.active{color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(0,0,0,.3);}
@@ -65,16 +65,16 @@
   .diff-pill[data-diff="3"].active{background:linear-gradient(135deg,#7a5cff,#37a4ff);}
   .diff-pill[data-diff="4"].active{background:linear-gradient(135deg,#ff9a3c,#e0701a);}
   .diff-pill[data-diff="5"].active{background:linear-gradient(135deg,#ff4d4d,#c81e1e);}
-  .diff-desc{color:#cdbcff;font-size:12px;margin-top:9px;margin-bottom:2px;min-height:16px;letter-spacing:.02em;}
+  .diff-desc{color:#cdbcff;font-size:12px;margin-top:7px;margin-bottom:2px;min-height:15px;letter-spacing:.02em;}
   .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
   .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
   .lb-board{width:min(360px,90vw);margin-top:10px;max-height:34vh;overflow-y:auto;}
   .lb-row{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:rgba(30,22,60,.45);margin-bottom:5px;font-size:13px;}
   .lb-medal{width:22px;text-align:center;flex-shrink:0;}
   .lb-rank{display:inline-block;width:22px;text-align:center;color:#8b7df0;font-weight:bold;flex-shrink:0;}
-  .lb-id{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;}
+  .lb-id{flex:1;min-width:0;display:flex;align-items:baseline;gap:7px;overflow:hidden;}
   .lb-name{color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;max-width:100%;}
-  .lb-date{font-size:10px;color:#8b7df0;line-height:1.3;letter-spacing:.02em;}
+  .lb-date{font-size:10px;color:#8b7df0;line-height:1.3;letter-spacing:.02em;white-space:nowrap;flex-shrink:0;}
   .lb-score{color:#ffd98a;font-size:12px;flex-shrink:0;}
   .lb-empty,.lb-load{padding:14px;color:#8b7df0;font-size:12px;text-align:center;}
   .lb-myrank{padding:12px;margin-bottom:8px;border-radius:10px;text-align:center;font-size:14px;font-weight:700;color:#ffd98a;background:linear-gradient(135deg,rgba(255,180,80,.18),rgba(255,140,60,.1));border:1px solid rgba(255,200,120,.35);}
@@ -143,7 +143,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v39 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
+    <div class="credit" style="opacity:.8;">v40 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
   </div>
 </div>
 
@@ -200,6 +200,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v40 · 2026-06-15</div><div class="cl-i">英雄榜改版更紧凑:每条压成单行(名字 + 日期同行、日期省去年份),一屏可见 6 条以上,不再憋屈</div></div>
 <div class="cl-v"><div class="cl-h">v39 · 2026-06-15</div><div class="cl-i">新增五档难度:凡尘 / 通玄 / 入圣 / 渡劫 / 弑神(由易到难),开始页可选,默认入圣(标准)<br>「通玄」= 原版本难度;「弑神」固定倍率更高且无尽复利更陡,为冲榜而生<br>排行榜按难度分档、各算各的;每日挑战固定「入圣」</div></div>
 <div class="cl-v"><div class="cl-h">v38 · 2026-06-15</div><div class="cl-i">修复无尽后期难度太松:Boss 血量改为复利增长(原线性,后期被秒)；Boss 伤害随波数复利放大(原写死 16 从不缩放,导致后期站脸上也不掉血),激光 / 冲锋等技能一并放大<br>越深越致命,战役 1-15 波难度保持不变</div></div>
 <div class="cl-v"><div class="cl-h">v37 · 2026-06-15</div><div class="cl-i">新增「遗物系统」：每 5 波击败 Boss 后三选一,共 16 件,分攻击 / 防御 / 经济 / 条件触发 / 取舍五类<br>平衡设计：伤害加法叠加(不做乘法)、暴击 / 攻速 / 闪避封顶、遗物不重复,杜绝战力崩盘</div></div>
@@ -2661,7 +2662,7 @@ function fmtTime(ts){
   const d=new Date(ts);
   if(isNaN(d.getTime())) return '';
   const p=n=>String(n).padStart(2,'0');
-  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+  return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
 function renderBoard(el,list){
   if(!el)return;
