@@ -18,6 +18,13 @@
     gap:14px;padding:24px env(safe-area-inset-right) 24px env(safe-area-inset-left);
     background:rgba(8,6,18,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
   .hidden{display:none!important;}
+  /* 浮层顶部吸顶关闭钮:列表长时也能一键关掉,不必滑到底部 */
+  .ovx-close{position:sticky;top:4px;align-self:flex-end;z-index:8;flex:0 0 auto;
+    width:34px;height:34px;margin:0 0 -42px 0;line-height:32px;text-align:center;
+    border:1px solid rgba(150,130,240,.4);border-radius:50%;
+    background:rgba(38,28,68,.94);color:#e2dcff;font-size:16px;cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,.5);transition:transform .08s;}
+  .ovx-close:active{transform:scale(.9);}
   .panel{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:480px;width:min(480px,94vw);
     padding:28px 22px;border:1px solid #3b3370;border-radius:20px;
     background:linear-gradient(170deg,#1a1438,#0e0b20 70%);
@@ -75,6 +82,10 @@
   .diff-pill[data-diff="3"].active{background:linear-gradient(135deg,#7a5cff,#37a4ff);}
   .diff-pill[data-diff="4"].active{background:linear-gradient(135deg,#ff9a3c,#e0701a);}
   .diff-pill[data-diff="5"].active{background:linear-gradient(135deg,#ff4d4d,#c81e1e);}
+  .aim-pill{padding:6px 0;flex:1;min-width:50px;max-width:90px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .12s,color .12s,border-color .12s;}
+  .aim-pill.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,#2ea6b8,#1f8090);box-shadow:0 2px 12px rgba(0,0,0,.3);}
+  .aim-pill.hide{display:none;}
+  .aim-hint{color:#8a7fb8;font-size:10px;margin-top:4px;letter-spacing:.02em;opacity:.85;}
   .diff-desc{color:#cdbcff;font-size:12px;margin-top:7px;margin-bottom:2px;min-height:15px;letter-spacing:.02em;}
   .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
   .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
@@ -133,7 +144,7 @@
     <h1 class="title">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
-    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换自动瞄准<br>📱 拖动屏幕移动 · 自动瞄准<br>法杖会自动施法</p>
+    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式<br>📱 拖屏移动 · 默认智能瞄准 · 右下角按钮冲刺<br>法杖会自动施法</p>
     <div class="diff-title">⚔ 选择难度</div>
     <div id="diffSel" class="diff-sel">
       <button class="diff-pill" data-diff="1">凡尘</button>
@@ -143,7 +154,14 @@
       <button class="diff-pill" data-diff="5">弑神</button>
     </div>
     <div id="diffDesc" class="diff-desc"></div>
-    <button class="btn" id="startBtn">拔出法杖</button>
+    <div class="diff-title" style="margin-top:2px;margin-bottom:4px;">🎯 瞄准模式</div>
+    <div id="aimSel" class="diff-sel">
+      <button class="aim-pill" data-aim="manual">手动</button>
+      <button class="aim-pill" data-aim="near">就近</button>
+      <button class="aim-pill" data-aim="smart">智能</button>
+    </div>
+    <div class="aim-hint">智能=自动优先奶妈 / 远程 / Boss 等高威胁</div>
+    <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
     <button class="btn ghost" id="dailyBtn" style="margin-top:6px;padding:10px 28px;font-size:14px;letter-spacing:.12em;">🗓 每日挑战</button>
     <div class="lb-title" id="lbTitle">⚔ 英雄榜 · TOP 10</div>
     <div id="lbTabs" class="lb-tabs">
@@ -153,13 +171,14 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v45 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v49 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
   </div>
 </div>
 
 <!-- 法术图鉴 -->
 <div id="codex" class="overlay hidden" style="z-index:50;">
   <div class="panel" style="max-width:560px;max-height:86vh;overflow-y:auto;text-align:left;">
+    <button class="ovx-close" id="codexCloseTop" aria-label="关闭" title="关闭">✕</button>
     <div class="eyebrow" style="color:#8b7df0;">Codex</div>
     <h1 class="title" style="font-size:28px;margin-bottom:4px;">法术图鉴</h1>
     <div class="sub" style="font-size:11px;letter-spacing:.14em;margin-bottom:8px;">所有法术与强化的定位 · 数值 · 特性</div>
@@ -220,8 +239,13 @@
 
 <!-- 暂停 -->
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
+<button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
+<div class="cl-v"><div class="cl-h">v48 · 2026-06-15</div><div class="cl-i">拉平手机 / PC 难度差(此前 PC 鼠标精准手瞄,手机只能自动打最近的杂兵,威胁清不掉、被耗死)。新增「瞄准模式:手动 / 就近 / 智能」三档(菜单和暂停里可调,PC 按 T 也能循环):<b>智能</b>会优先打高威胁目标(奶妈/护盾龟/远程/冲锋/Boss)且兼顾距离;<b>就近</b>是原来的打最近;<b>手动</b>是 PC 鼠标自由瞄。手机默认<b>智能</b>(无鼠标自动隐藏手动)。另外摇杆满速更易达到、冲刺按钮更好按</div></div>
+<div class="cl-v"><div class="cl-h">v47 · 2026-06-15</div><div class="cl-i">连杀强化:连击伤害加成做强(连续递增、最高 +40%,原仅 +25%),金币掉落随连击最高 ×1.72;新增连击段位「连斩→疾风→燎原→屠神→天谴」,数字随连击放大、按段位变色、升段有喊话。安全守住:连击只奖励进攻和掉落,绝不给回血/减伤;挨打或 3.2 秒不杀即清零——站桩硬扛根本攒不起连击</div></div>
+<div class="cl-v"><div class="cl-h">v46 · 2026-06-15</div><div class="cl-i">更新说明 / 法术图鉴页面右上角新增常驻「✕」关闭钮——内容再长也能随时一键关掉,不必再滑到底部找「关闭」(底部按钮仍保留)</div></div>
 <div class="cl-v"><div class="cl-h">v45 · 2026-06-15</div><div class="cl-i">初始「奥术飞弹」不再被永久锁死——现在只要你还持有别的法术,奥术飞弹也能在商店卖出/替换成别的;唯一限制是不能把法术全卖光(至少留 1 个)。万一把攻击法术都卖了,战斗中会自动补一发保底奥术飞弹,不会完全没输出</div></div>
 <div class="cl-v"><div class="cl-h">v44 · 2026-06-15</div><div class="cl-i">两处优化:① 修复 Boss 弹幕偶尔"凭空砸脸"——此前部分全屏招式在全场随机位置生成弹幕,可能正好出现在你身上、零反应时间无从躲避;现加了安全距离守卫,敌弹绝不在你身上凭空出现,总留得出闪避空间。② 移除左上角"压力值"进度条——那是后台动态难度的内部数值,对玩家没有意义,去掉后画面更清爽(难度调节照常在背后运作)</div></div>
 <div class="cl-v"><div class="cl-h">v43 · 2026-06-15</div><div class="cl-i">无尽深层新增三尊「四凶」Boss——穷奇·风啸九霄(高速俯冲+翼刃扇射)、梼杌·裂地不退(顽固紧追+震地冲击波)、饕餮·万物归腹(张口吸入+咬合重创);26 波起登场、越深越多(41 波后为主),渡劫/弑神难度更早现身。同时根治深层多 Boss「外观重复」:精灵图改为按身份绘制,同一波不同 Boss 各显其形</div></div>
@@ -249,6 +273,12 @@
     <div class="eyebrow" style="color:#8b7df0;">Paused</div>
     <h1 class="title" style="font-size:34px;">已暂停</h1>
     <button class="btn" id="resumeBtn">继续</button>
+    <div class="diff-title" style="margin-top:2px;font-size:13px;">🎯 瞄准模式</div>
+    <div class="diff-sel">
+      <button class="aim-pill" data-aim="manual">手动</button>
+      <button class="aim-pill" data-aim="near">就近</button>
+      <button class="aim-pill" data-aim="smart">智能</button>
+    </div>
     <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
@@ -357,27 +387,27 @@ $('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'
 
 /* ============ 输入 ============ */
 const keys={};
-addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault(); if(e.key.toLowerCase()==='t'&&state==='play'){autoAim=!autoAim;announce(autoAim?'🎯 自动瞄准 开':'🖱️ 自动瞄准 关',autoAim?'法术自动锁定最近敌人':'恢复鼠标瞄准');} if((e.key==='Escape'||e.key.toLowerCase()==='p')&&state==='play')togglePause();});
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' '||e.key==='Shift')tryDash(); if(e.key===' ')e.preventDefault(); if(e.key.toLowerCase()==='t'&&state==='play'){const _o=['manual','near','smart'];aimMode=_o[(_o.indexOf(aimMode)+1)%3];syncAimUI();announce({manual:'🖱️ 手动瞄准',near:'🎯 就近瞄准',smart:'🧠 智能瞄准'}[aimMode],AIM_DESC[aimMode]);} if((e.key==='Escape'||e.key.toLowerCase()==='p')&&state==='play')togglePause();});
 addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 const mouse={x:W/2,y:H/2,active:false};
 let usingTouch=false;
 cv.addEventListener('mousemove',e=>{ if(usingTouch)return; mouse.x=e.clientX; mouse.y=e.clientY; mouse.active=true; });
 const joy={id:null,ox:0,oy:0,dx:0,dy:0,on:false};
 let lastTapT=-9;
-function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72)<38*38; }
+function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72)<46*46; }
 function tstart(e){ usingTouch=true; initAudio();
   for(const t of e.changedTouches){
     if(inDashBtn(t.clientX,t.clientY)){ tryDash(); continue; }
     if(joy.id===null){ joy.id=t.identifier; joy.ox=t.clientX; joy.oy=t.clientY; joy.dx=0; joy.dy=0; joy.on=true;
       const now=performance.now()/1000;
-      if(now-lastTapT<.28) tryDash();
+      if(now-lastTapT<.32) tryDash();
       lastTapT=now;
     }
   }
   e.preventDefault(); }
 function tmove(e){ for(const t of e.changedTouches){ if(t.identifier===joy.id){
-    const dx=t.clientX-joy.ox, dy=t.clientY-joy.oy; const m=Math.hypot(dx,dy)||1; const cl=Math.min(m,52);
-    joy.dx=dx/m*cl/52; joy.dy=dy/m*cl/52; } } e.preventDefault(); }
+    const dx=t.clientX-joy.ox, dy=t.clientY-joy.oy; const m=Math.hypot(dx,dy)||1; const cl=Math.min(m,42);
+    joy.dx=dx/m*cl/42; joy.dy=dy/m*cl/42; } } e.preventDefault(); }
 function tend(e){ for(const t of e.changedTouches){ if(t.identifier===joy.id){ joy.id=null; joy.on=false; joy.dx=joy.dy=0; } } e.preventDefault(); }
 cv.addEventListener('touchstart',tstart,{passive:false});
 cv.addEventListener('touchmove',tmove,{passive:false});
@@ -942,9 +972,9 @@ function buildBossArt(){
 buildBossArt();
 
 /* ============ 状态 ============ */
-let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, autoAim=false;
+let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let dailyRun=false; /* 当前是否为每日挑战局 */
-let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
+let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
 let relicMods={...RELIC_BASE};
@@ -1045,7 +1075,7 @@ function newPlayer(){ return {
 function resetGame(){
   player=newPlayer(); enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
-  coins=0; combo=0; comboT=0; comboDmg=0; ghosts=[]; dailyRun=false;
+  coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   relicMods={...RELIC_BASE};
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
@@ -1170,7 +1200,17 @@ function tryDash(){
 /* ============ 金币 & 连击 ============ */
 const PRICE={1:18,2:30,3:50}, REROLL_COST=8, SHOP_REROLL=10, HEAL_COST=30, SELL_GAIN=8;
 const SPELL_SLOT_MAX=4; /* 法术槽位上限:最多同时持有这么多种法术(符文mod不限) */
-function comboCoinMult(){ return 1+Math.min(combo,50)*.008; } /* 平衡:50连击 ×2→×1.4 */
+/* 连杀强化(只奖励进攻 + 掉落,绝不加防御;封顶不滚雪球;挨打/3.2秒不杀即清) */
+const COMBO_WINDOW=3.2, COMBO_DMG_PER=.006, COMBO_DMG_CAP=.40; /* 伤害加成:每连击+0.6%,封顶+40%(约67连封顶) */
+const COMBO_TIERS=[
+  {min:10, name:'连斩', col:'#7fe0ff'},
+  {min:22, name:'疾风', col:'#ffd24d'},
+  {min:40, name:'燎原', col:'#ff9a3a'},
+  {min:65, name:'屠神', col:'#ff5d5d'},
+  {min:100,name:'天谴', col:'#d89aff'}
+];
+function comboTier(c){ let t=0; for(let i=0;i<COMBO_TIERS.length;i++) if(c>=COMBO_TIERS[i].min) t=i+1; return t; }
+function comboCoinMult(){ return 1+Math.min(combo,60)*.012; } /* 掉落奖励:60连击 ×1.72 */
 function addCoins(n){
   n=Math.max(1,Math.round(n*(1+player.curse.coin)*comboCoinMult()*relicMods.coinMul));
   coins+=n; return n;
@@ -2465,8 +2505,15 @@ function updateSpellStates(dt){
     heal(2.5*dt); /* FIX: 原为每帧30%概率heal(1),60fps下达约18血/秒;改为按时间约2.5血/秒,与帧率无关 */
   }
 }
+/* 威胁权重:越危险越优先锁定(奶妈让怪不死 / 远程放风筝 / 冲锋怪爆发 / 召唤怪生怪 / 护盾龟) */
+const AIM_THREAT={healer:3.0,totem:2.6,summon:2.4,frostbow:2.3,kiter:2.2,charger:2.0,kamikaze:1.9,stealth:1.6,sine:1.4,weave:1.4,tank:1.2,meteor:.5};
+const AIM_DESC={manual:'鼠标精准手瞄,自由点杀(仅 PC)',near:'自动锁定最近的敌人',smart:'自动优先高威胁(奶妈/护盾/远程/冲锋/Boss),兼顾距离'};
 function aimPoint(){
-  if(!usingTouch&&mouse.active&&!autoAim) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
+  /* 手动仅 PC(有鼠标)生效;手机选了手动会自动落到智能 */
+  if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
+  return aimMode==='near' ? nearAim() : smartAim();
+}
+function nearAim(){
   let boss=null,bossD=Infinity,best=null,bd=Infinity,closeThreat=null,cd=160*160;
   for(const e of enemies){ if(e.dead)continue;
     const d=dist2(player.x,player.y,e.x,e.y);
@@ -2475,6 +2522,17 @@ function aimPoint(){
     if(!e.boss&&d<cd){cd=d;closeThreat=e;} }
   /* boss在场:优先打boss(否则发数少的狙击子弹全被护卫吸走),但贴脸护卫(<160px)先清除以解围 */
   if(boss) return closeThreat||boss;
+  return best;
+}
+function smartAim(){
+  /* 威胁加权 + 距离:高威胁目标优先,但仍兼顾距离(不会为狙远处奶妈而无视啃你的近怪) */
+  let best=null,bestScore=-1;
+  for(const e of enemies){ if(e.dead)continue;
+    const d=Math.sqrt(dist2(player.x,player.y,e.x,e.y));
+    let w=e.boss?2.6:(AIM_THREAT[e._ai]||1.0);
+    if(d<150) w+=1.4;                                /* 贴脸的杂兵也得清,别被白啃 */
+    const score=w*(1+clamp((560-d)/560,0,1));        /* 近的更紧迫,但威胁类型仍主导 */
+    if(score>bestScore){bestScore=score;best=e;} }
   return best;
 }
 function castAll(dt){
@@ -2705,12 +2763,15 @@ function damageEnemy(e,dmg,kb){
 function onKill(e){
   kills++;
   playerProfile._killCount=(playerProfile._killCount||0)+1;
-  /* 连击 */
-  combo++; comboT=3;
-  if(combo%15===0&&comboDmg<.25){comboDmg=Math.min(.25,comboDmg+.05);
-    texts.push({x:player.x,y:player.y-34,str:'战意 +5% 伤害',life:1,vy:-36,col:'#ffd24d',size:14});}
-  if(combo===10||combo===25||combo===50)
-    texts.push({x:e.x,y:e.y-30,str:combo+' 连击!',life:1.1,vy:-44,col:'#ff9a5c',size:Math.min(17+combo*.2,28)});
+  /* 连击:连续曲线伤害加成 + 段位升级喊话(进攻向) */
+  combo++; comboT=COMBO_WINDOW;
+  comboDmg=Math.min(COMBO_DMG_CAP, combo*COMBO_DMG_PER);
+  const _ct=comboTier(combo);
+  if(_ct>comboTierLv){ comboTierLv=_ct; const _ti=COMBO_TIERS[_ct-1];
+    texts.push({x:player.x,y:player.y-42,str:'【'+_ti.name+'】',life:1.3,vy:-42,col:_ti.col,size:26});
+    S.card(); }
+  else if(combo>=10&&combo%25===0)
+    texts.push({x:e.x,y:e.y-30,str:combo+' 连击',life:1,vy:-44,col:'#ff9a5c',size:Math.min(18+combo*.15,28)});
   /* 爆裂词缀:死亡时爆炸 */
   if(e._aff&&e._aff.volatile)volatileBlast(e.x,e.y,Math.max(14,e.maxhp*.12));
   /* 金币 & 噬血法杖 */
@@ -2746,7 +2807,7 @@ function hurtPlayer(d){
   }
   player.hp-=d*Math.pow(.85,player.mods.armor)*(1+player.curse.taken)*relicMods.takenMul;
   if(combo>=5)texts.push({x:player.x,y:player.y-30,str:'连击中断',life:.8,vy:-30,col:'#ff7b9c',size:13});
-  combo=0;comboT=0;comboDmg=0;
+  combo=0;comboT=0;comboDmg=0;comboTierLv=0;
   player.iframe=.9; hurtFx=.4; cam.shake=Math.min(cam.shake+7,16); S.hurt();
   /* 荆棘法杖:受伤向四周弹射荆棘 */
   if(player.wandFx.thorns){
@@ -3325,7 +3386,7 @@ function update(dt){
   zaps=zaps.filter(z=>z.life>0);
   for(const g of ghosts)g.life-=dt;
   ghosts=ghosts.filter(g=>g.life>0);
-  if(comboT>0){comboT-=dt;if(comboT<=0)combo=0;}
+  if(comboT>0){comboT-=dt;if(comboT<=0){combo=0;comboDmg=0;comboTierLv=0;}}
   if(ann.t>0)ann.t-=dt;
   if(hurtFx>0)hurtFx-=dt;
 
@@ -3759,7 +3820,7 @@ function render(){
     ctx.globalAlpha=1;
   }
   /* 准星 */
-  if(!usingTouch&&mouse.active&&state==='play'){
+  if(aimMode==='manual'&&!usingTouch&&mouse.active&&state==='play'){
     ctx.strokeStyle='rgba(111,227,255,.8)';ctx.lineWidth=1.5;
     ctx.beginPath();ctx.arc(mouse.x,mouse.y,9,0,TAU);ctx.stroke();
     ctx.beginPath();ctx.moveTo(mouse.x-14,mouse.y);ctx.lineTo(mouse.x-5,mouse.y);
@@ -4412,16 +4473,20 @@ function drawHUD(){
     }
     ctx.textBaseline='alphabetic';
   }
-  /* 连击 */
+  /* 连击(段位名 + 随连击放大的数字 + 倒计时条) */
   if(combo>=3&&state==='play'){
-    const cs=combo>=25?'#ff5d5d':combo>=10?'#ffd24d':'#cfe9ff';
-    ctx.fillStyle=cs;ctx.textAlign='right';
-    ctx.font='900 '+Math.round(20+Math.min(combo,30)*.3)+'px "Songti SC","STSong",serif';
-    ctx.fillText('×'+combo+' 连击',W-14,top+135);
-    ctx.fillStyle='rgba(10,8,24,.6)';ctx.fillRect(W-94,top+145,80,4);
-    ctx.fillStyle=cs;ctx.fillRect(W-94,top+145,80*clamp(comboT/3,0,1),4);
+    const info=comboTierLv>0?COMBO_TIERS[comboTierLv-1]:null;
+    const cs=info?info.col:'#cfe9ff';
+    ctx.textAlign='right';
+    ctx.font='900 '+Math.round(22+Math.min(combo,45)*.32)+'px "Songti SC","STSong",serif';
+    ctx.fillStyle=cs;ctx.fillText('×'+combo,W-14,top+135);
+    let by=top+145;
+    if(info){ ctx.font='900 13px "Songti SC","STSong",serif';ctx.fillStyle=cs;
+      ctx.fillText(info.name,W-14,top+152); by=top+160; }
+    ctx.fillStyle='rgba(10,8,24,.6)';ctx.fillRect(W-94,by,80,4);
+    ctx.fillStyle=cs;ctx.fillRect(W-94,by,80*clamp(comboT/COMBO_WINDOW,0,1),4);
     if(comboDmg>0){ctx.font='10px sans-serif';ctx.fillStyle='#ffd98a';
-      ctx.fillText('战意 +'+Math.round(comboDmg*100)+'%',W-14,top+161);}
+      ctx.fillText('战意 +'+Math.round(comboDmg*100)+'% 伤害',W-14,by+14);}
   }
   /* 首领血条(加大字号 + 朱砂方框印章) */
   const bosses=enemies.filter(e=>e.boss);
@@ -4537,6 +4602,21 @@ function refreshDiffUI(){
   $('diffDesc').innerHTML='<b>'+d.name+' · '+d.sub+'</b> — '+d.desc;
 }
 document.querySelectorAll('#diffSel .diff-pill').forEach(p=>p.onclick=()=>{ applyDifficulty(+p.dataset.diff); refreshDiffUI(); loadMenuBoard(curPeriod); });
+/* —— 瞄准模式:手动 / 就近 / 智能 —— */
+function syncAimUI(){
+  const fine=!!(window.matchMedia&&window.matchMedia('(pointer:fine)').matches);
+  document.querySelectorAll('[data-aim]').forEach(b=>{
+    b.classList.toggle('hide', b.dataset.aim==='manual' && !fine);   /* 无鼠标设备隐藏「手动」 */
+    b.classList.toggle('active', b.dataset.aim===aimMode);
+  });
+  const ad=$('aimDesc'); if(ad) ad.textContent=AIM_DESC[aimMode]||'';
+}
+function setAimMode(m){ aimMode=m; try{localStorage.setItem('sf_aim',m);}catch(e){} syncAimUI(); }
+document.querySelectorAll('[data-aim]').forEach(b=>b.onclick=()=>{ try{S.card();}catch(e){} setAimMode(b.dataset.aim); });
+/* 启动:读存档瞄准模式;无鼠标设备若是「手动」则回退「智能」 */
+try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa==='smart') aimMode=sa; }catch(e){}
+if(aimMode==='manual'&&!(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)) aimMode='smart';
+syncAimUI();
 /* 启动:读取存档难度(默认入圣),刷新选择器 + 榜单 */
 try{ const sv=parseInt(localStorage.getItem('sf_diff')); if(sv>=1&&sv<=5){ difficulty=sv; setDiffMul(sv); } }catch(e){}
 refreshDiffUI();
@@ -4588,6 +4668,8 @@ $('dailyStart').onclick=()=>{ initAudio(); $('daily').classList.add('hidden'); l
 $('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
 $('clClose').onclick=()=>$('changelog').classList.add('hidden');
 $('codexClose').onclick=()=>$('codex').classList.add('hidden');
+$('clCloseTop').onclick=()=>$('changelog').classList.add('hidden');
+$('codexCloseTop').onclick=()=>$('codex').classList.add('hidden');
 $('codexOpenMenu').onclick=openCodex;
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
