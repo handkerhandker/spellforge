@@ -51,6 +51,8 @@
   .hint{font-size:12px;color:#7e76ad;line-height:1.9;text-align:center;}
   .credit{font-size:11px;color:#564f80;margin-top:4px;}
   .cl-v{margin-bottom:16px;align-self:stretch;}
+  .cl-ver{align-self:stretch;font-size:12px;color:#9a90c8;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(123,92,255,.2);}
+  .cl-ver b{color:#cbbcff;font-weight:700;}
   .cl-h{font-size:14px;font-weight:700;color:#ffd98a;letter-spacing:.06em;margin-bottom:5px;}
   .cl-i{font-size:12.5px;color:#b8aed8;line-height:1.7;}
   .cx-sec{color:#bdb4ea;font-size:12px;letter-spacing:.16em;margin:15px 0 7px;font-weight:700;}
@@ -161,7 +163,7 @@
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
-  #verBadge{position:fixed;top:calc(13px + env(safe-area-inset-top));left:calc(16px + env(safe-area-inset-left));z-index:20;text-align:left;line-height:1.4;pointer-events:none;}
+  #verBadge{position:fixed;top:calc(22px + env(safe-area-inset-top));left:calc(3vw + 16px + env(safe-area-inset-left));z-index:20;text-align:left;line-height:1.4;pointer-events:none;}
   #verBadge .vb-top{font-size:11px;color:#a99fd6;}
   #verBadge .vb-top b{color:#cbbcff;font-weight:700;}
   #verBadge .vb-link{cursor:pointer;text-decoration:underline;color:#cbbcff;pointer-events:auto;}
@@ -177,7 +179,7 @@
 <div id="menu" class="overlay">
   <div id="verBadge">
     <div class="vb-top"><b>v51</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
-    <div class="vb-time">更新于 2026-06-15 21:05</div>
+    <div class="vb-time">2026-06-15 21:05</div>
   </div>
   <div class="panel">
     <div class="eyebrow">Spellforge · Roguelike</div>
@@ -312,7 +314,8 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
-<h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
+<div class="cl-ver">当前版本 <b>v51</b> · 2026-06-15 21:05</div>
 <div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。图鉴与成就纯展示记录、不改动战斗数值。另外大幅强化「弑神」难度:精英词缀从前期(第 4 波)就出现且明显增多,会冒出更多霸体(免疫击退)、虚影(周期免疫)、淬毒(贴到掉血)等逼你主动应对的怪;红心掉落减半、容错更低;Boss 伤害 +25%、耐久略增,后期真有威胁;同屏怪量提高。仅影响弑神,其它难度原样不变</div></div>
 <div class="cl-v"><div class="cl-h">v50 · 2026-06-15</div><div class="cl-i">顶部信息栏不再挤成一团:此前血条、「第 N 波 / 剩余」与无尽变数图标都画在屏幕正中央、互相叠住,深层局尤其糊。现血条收窄不再顶到中间;波次与剩余居中、必要时自动右移避开血条;无尽「潮汐」变数图标(狂暴/钢甲/猎杀/群涌/精英/剧毒)挪到左侧击杀金币下方单独成行。另外底部法术构筑栏过长时会自动压缩,不再溢出去盖住右下角冲刺键</div></div>
 <div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
@@ -4809,6 +4812,7 @@ function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
   if(state==='play'&&!paused)update(dt);
   $('pauseBtn').style.display=(state==='play')?'flex':'none';
+  $('muteBtn').style.display=(state==='play')?'flex':'none';
   render();
   requestAnimationFrame(loop);
 }
