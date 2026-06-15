@@ -153,7 +153,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v41 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v42 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
   </div>
 </div>
 
@@ -222,6 +222,7 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v42 · 2026-06-15</div><div class="cl-i">修复「法盾」无敌漏洞:此前法盾冷却被急速压到比持续短 → 永久挂盾且零伤(站 Boss 脸上不掉血的真凶)。现改为展开 4 秒后强制空窗 2 秒(不受急速影响),挡盾期间真实扣 1 血,层数耗尽正常受伤;保命依旧强力,但不再永久无敌</div></div>
 <div class="cl-v"><div class="cl-h">v41 · 2026-06-15</div><div class="cl-i">新增「法术图鉴」:在三选一、商店、菜单都能随时翻看所有法术与符文的类型、伤害、冷却与特性,换技能不再抓瞎</div></div>
 <div class="cl-v"><div class="cl-h">v40 · 2026-06-15</div><div class="cl-i">英雄榜改版更紧凑:每条压成单行(名字 + 日期同行、日期省去年份),一屏可见 6 条以上,不再憋屈</div></div>
 <div class="cl-v"><div class="cl-h">v39 · 2026-06-15</div><div class="cl-i">新增五档难度:凡尘 / 通玄 / 入圣 / 渡劫 / 弑神(由易到难),开始页可选,默认入圣(标准)<br>「通玄」= 原版本难度;「弑神」固定倍率更高且无尽复利更陡,为冲榜而生<br>排行榜按难度分档、各算各的;每日挑战固定「入圣」</div></div>
@@ -470,7 +471,7 @@ const SPELL_DEF={
   meteor:{name:'陨石',icon:'☄️',col:'#ff7e3a',cd:2.2,dmg:35,spd:240,r:12,life:1.7,aoe:110,desc:'巨型火球，命中后大范围爆炸'},
   beam:{name:'灼热射线',icon:'🔆',col:'#ff7a30',cd:.3,dmg:4,beam:6,desc:'持续射线灼烧 6 段'},
   heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,desc:'直接回复 6 点生命(随等级提升)'},
-  shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,desc:'4 秒内受击只扣 1,最多 5 次'},
+  shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后短暂空窗才能再开'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
   blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
@@ -957,7 +958,7 @@ function newPlayer(){ return {
   poisonT:0,poisonDmg:0,noFireT:0,slowT:0,
   spells:{bolt:{lv:1,t:.4}},
   mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0},
-  shield:null, orb:null, beam:null, blackholes:[], orbShots:[], relics:[], _dashBuff:0
+  shield:null, orb:null, beam:null, blackholes:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
 };}
 function resetGame(){
   player=newPlayer(); enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
@@ -2262,9 +2263,10 @@ function dmgOf(def,lv){ return def.dmg*(1+.4*(lv-1))*(1+.25*Math.min(player.mods
 /* 时长型法术(法盾/奥术球/灼热射线/黑洞)状态推进 */
 function updateSpellStates(dt){
   /* shield 衰减 */
+  if(player.shieldLock>0)player.shieldLock-=dt;
   if(player.shield){
     player.shield.life-=dt;
-    if(player.shield.life<=0||player.shield.hits>=player.shield.max)player.shield=null;
+    if(player.shield.life<=0||player.shield.hits>=player.shield.max){ player.shield=null; player.shieldLock=2; }
   }
   /* orb 旋转 + 自动发射 */
   if(player.orb){
@@ -2363,8 +2365,10 @@ function castAll(dt){
       heal(amt); S.card(); puff(player.x,player.y,'#a8ffb0',8); continue;
     }
     if(id==='shield'){
+      /* 法盾不能永久挂:盾还在场、或处于结束后的强制空窗(2秒,不受急速影响)时,不重放 */
+      if(player.shield||player.shieldLock>0){ s.t=0.05; continue; }
       player.shield={hits:0,max:def.shield+1*s.lv,life:4};
-      S.card(); announce('🛡️ 法盾','受击只扣 1'); continue;
+      S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); continue;
     }
     if(id==='orb'){
       const rad=def.orb+(activeSynergies().find(x=>x.id==='plasma_orb')?40:0);
@@ -2602,9 +2606,10 @@ function hurtPlayer(d){
     player.iframe=.5; hurtFx=Math.max(hurtFx,.12); cam.shake=Math.min(cam.shake+2,6);
     texts.push({x:player.x,y:player.y-30,str:'闪避!',life:.7,vy:-34,col:'#7fe0ff',size:14}); S.hurt(); return;
   }
-  /* 法盾优先 */
+  /* 法盾优先:挡下绝大部分伤害,但仍漏 1 血(对齐说明,杜绝永久零伤) */
   if(player.shield && player.shield.hits<player.shield.max){
     player.shield.hits++;
+    player.hp-=1;
     player.iframe=.4; hurtFx=.2; cam.shake=Math.min(cam.shake+3,8);
     S.hurt(); puff(player.x,player.y,'#9ad8ff',6);
     return;
