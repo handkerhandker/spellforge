@@ -171,7 +171,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v49 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
+    <div class="credit" style="opacity:.8;">v50 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span> · <span id="codexOpenMenu" style="cursor:pointer;text-decoration:underline;">法术图鉴</span></div>
   </div>
 </div>
 
@@ -242,6 +242,7 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v50 · 2026-06-15</div><div class="cl-i">顶部信息栏不再挤成一团:此前血条、「第 N 波 / 剩余」与无尽变数图标都画在屏幕正中央、互相叠住,深层局尤其糊。现血条收窄不再顶到中间;波次与剩余居中、必要时自动右移避开血条;无尽「潮汐」变数图标(狂暴/钢甲/猎杀/群涌/精英/剧毒)挪到左侧击杀金币下方单独成行。另外底部法术构筑栏过长时会自动压缩,不再溢出去盖住右下角冲刺键</div></div>
 <div class="cl-v"><div class="cl-h">v49 · 2026-06-15</div><div class="cl-i">开始菜单的「瞄准模式」选择器排得更紧凑(去掉会随选择变化的说明行,保留一行极简提示让人知道「智能」的好处),小屏手机上排行榜能更早露出来,不再被往下挤</div></div>
 <div class="cl-v"><div class="cl-h">v48 · 2026-06-15</div><div class="cl-i">拉平手机 / PC 难度差(此前 PC 鼠标精准手瞄,手机只能自动打最近的杂兵,威胁清不掉、被耗死)。新增「瞄准模式:手动 / 就近 / 智能」三档(菜单和暂停里可调,PC 按 T 也能循环):<b>智能</b>会优先打高威胁目标(奶妈/护盾龟/远程/冲锋/Boss)且兼顾距离;<b>就近</b>是原来的打最近;<b>手动</b>是 PC 鼠标自由瞄。手机默认<b>智能</b>(无鼠标自动隐藏手动)。另外摇杆满速更易达到、冲刺按钮更好按</div></div>
 <div class="cl-v"><div class="cl-h">v47 · 2026-06-15</div><div class="cl-i">连杀强化:连击伤害加成做强(连续递增、最高 +40%,原仅 +25%),金币掉落随连击最高 ×1.72;新增连击段位「连斩→疾风→燎原→屠神→天谴」,数字随连击放大、按段位变色、升段有喊话。安全守住:连击只奖励进攻和掉落,绝不给回血/减伤;挨打或 3.2 秒不杀即清零——站桩硬扛根本攒不起连击</div></div>
@@ -4426,7 +4427,7 @@ function drawHUD(){
     ctx.globalAlpha=1;
   }
   /* HP */
-  const hw=170;
+  const hw=130;
   ctx.fillStyle='rgba(10,8,24,.7)';rrect(12,top,hw+8,22,8);ctx.fill();
   ctx.fillStyle='#3a1020';rrect(16,top+4,hw,14,6);ctx.fill();
   const hr=clamp(player.hp/player.maxhp,0,1);
@@ -4439,12 +4440,17 @@ function drawHUD(){
   ctx.fillStyle=hg;rrect(16,top+4,hw*hr,14,6);ctx.fill();
   ctx.fillStyle='#fff';ctx.font='bold 11px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
   ctx.fillText('❤ '+Math.ceil(player.hp)+' / '+player.maxhp,22,top+11.5);
-  /* 波次 */
-  ctx.textAlign='center';
-  ctx.fillStyle='#ffd98a';ctx.font='900 17px "Songti SC","STSong",serif';
-  ctx.fillText('第 '+waveNum+' 波'+(endless?' ∞':''),W/2,top+10);
+  /* 波次 + 剩余:居中显示;若左端会与血条相撞,则整体右移到血条右侧,确保不重叠 */
+  const hpRight=12+hw+8;
+  ctx.textAlign='center';ctx.font='900 16px "Songti SC","STSong",serif';
+  const waveStr='第 '+waveNum+' 波'+(endless?' ∞':'');
+  const wWaveW=ctx.measureText(waveStr).width;
+  let waveCx=W/2;
+  if(waveCx-wWaveW/2 < hpRight+10) waveCx=hpRight+10+wWaveW/2;
+  ctx.fillStyle='#ffd98a';
+  ctx.fillText(waveStr,waveCx,top+10);
   ctx.fillStyle='#8b7df0';ctx.font='10px sans-serif';
-  ctx.fillText('剩余 '+(enemies.length+spawnQ.length),W/2,top+26);
+  ctx.fillText('剩余 '+(enemies.length+spawnQ.length),waveCx,top+26);
   /* 击杀/金币:移到血条下方左侧,避开右上角的暂停/静音按钮(原先在右上角被按钮遮挡) */
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
   ctx.fillText('☠ '+kills,16,top+40);
@@ -4452,7 +4458,7 @@ function drawHUD(){
   ctx.fillText('💰 '+coins,16,top+60);
   /* 遗物图标条(常驻,压力条下方) */
   if(player.relics.length){
-    const ry=top+102, rw=19; let rx=18;
+    const ry=top+106, rw=19; let rx=18;
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='13px serif';
     for(const id of player.relics){
       const r=RELICS.find(x=>x.id===id); if(!r)continue;
@@ -4462,16 +4468,16 @@ function drawHUD(){
     }
     ctx.textAlign='left';ctx.textBaseline='alphabetic';
   }
-  /* 无尽修饰符图标(顶部中央常驻) */
+  /* 无尽"潮汐"变数图标:从顶部正中(会压住波次/血条)挪到左侧、击杀金币下方,单独成行 */
   if(endlessMods.length){
-    const iw=26; let mx=W/2-(endlessMods.length-1)*iw/2;
-    ctx.textAlign='center';ctx.font='15px serif';ctx.textBaseline='middle';
+    const iw=20; let mx=18; const my=top+84;
+    ctx.textAlign='center';ctx.font='13px serif';ctx.textBaseline='middle';
     for(const m of endlessMods){
-      ctx.globalAlpha=.55;ctx.fillStyle='rgba(40,12,30,.7)';
-      ctx.beginPath();ctx.arc(mx,top+8,12,0,TAU);ctx.fill();ctx.globalAlpha=1;
-      ctx.fillText(m.icon,mx,top+9); mx+=iw;
+      ctx.globalAlpha=.5;ctx.fillStyle='rgba(40,12,30,.8)';
+      ctx.beginPath();ctx.arc(mx,my,9,0,TAU);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillText(m.icon,mx,my+.5); mx+=iw;
     }
-    ctx.textBaseline='alphabetic';
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
   }
   /* 连击(段位名 + 随连击放大的数字 + 倒计时条) */
   if(combo>=3&&state==='play'){
@@ -4556,20 +4562,26 @@ function drawHUD(){
   let line3=syns.map(s=>s.icon+s.name).join('  ');
   const hasLine2=!!line2, hasLine3=!!line3;
   const bh=(hasLine2?52:32)+(hasLine3?20:0);
-  const bw2=Math.max(ctx.measureText(line1).width,ctx.measureText(line2).width,ctx.measureText(line3).width,150)+30;
+  ctx.font='14px sans-serif';const w1m=ctx.measureText(line1).width;
+  ctx.font='12px sans-serif';const w2m=ctx.measureText(line2).width;
+  ctx.font='900 12px sans-serif';const w3m=ctx.measureText(line3).width;
+  const bw2=Math.max(w1m,w2m,w3m,150)+30;
+  const PW=Math.min(bw2+60,W-108);   /* 面板宽度封顶:右侧给冲刺键留出空当 */
+  const tMaxW=PW-24;                  /* 文字最大宽度:过长则自动横向压缩,绝不溢出怼到冲刺键 */
+  const by0=H-bh-12-(usingTouch?6:0);
   ctx.fillStyle='rgba(10,8,24,.7)';
-  rrect(12,H-bh-12-(usingTouch?6:0),Math.min(bw2+60,W-104),bh,10);ctx.fill();
+  rrect(12,by0,PW,bh,10);ctx.fill();
   /* 构筑栏顶部 1px 浓墨上边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
-  ctx.fillRect(14,H-bh-12-(usingTouch?6:0),Math.min(bw2+60,W-104)-4,1);
+  ctx.fillRect(14,by0,PW-4,1);
   ctx.textAlign='left';ctx.font='14px sans-serif';ctx.fillStyle='#fff';
-  ctx.fillText(line1,24,H-bh+8-(usingTouch?6:0));
+  ctx.fillText(line1,24,H-bh+8-(usingTouch?6:0),tMaxW);
   if(line2){ctx.font='12px sans-serif';ctx.fillStyle='#a79fd6';
-    ctx.fillText(line2,24,H-bh+30-(usingTouch?6:0));}
+    ctx.fillText(line2,24,H-bh+30-(usingTouch?6:0),tMaxW);}
   if(line3){
     const pulse=.7+Math.sin(time*5)*.3;
     ctx.font='900 12px sans-serif';ctx.fillStyle=`rgba(255,210,77,${pulse})`;
-    ctx.fillText(line3,24,H-bh+30+(hasLine2?20:44));
+    ctx.fillText(line3,24,H-bh+30+(hasLine2?20:44),tMaxW);
   }
 }
 
