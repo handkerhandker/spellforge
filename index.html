@@ -74,6 +74,7 @@
   .stat span{font-size:11px;letter-spacing:.25em;color:#7e76ad;padding-left:.25em;}
   /* —— 法术卡牌：本作的签名时刻 —— */
   #cardRow{display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);}
+  #relicRow{display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);}
   .card{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:15px;cursor:pointer;
     text-align:left;background:linear-gradient(160deg,#1b1538,#120e28);
     border:1px solid var(--bc,#4a4380);position:relative;overflow:hidden;
@@ -123,7 +124,7 @@
     </div>
     <div id="menuBoard" class="lb-board"></div>
     <div class="credit">灵感来自《魔法工艺 Magicraft》· 致敬之作</div>
-    <div class="credit" style="opacity:.8;">v35 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
+    <div class="credit" style="opacity:.8;">v38 · 更新于 2026-06-15 · <span id="clOpen" style="cursor:pointer;text-decoration:underline;">更新说明</span></div>
   </div>
 </div>
 
@@ -149,6 +150,14 @@
   <button class="btn ghost" id="rerollBtn" style="margin-top:2px;padding:10px 26px;font-size:13px;">🔄 重抽一组 (8💰)</button>
 </div>
 
+<!-- 遗物三选一 -->
+<div id="relic" class="overlay hidden">
+  <div class="eyebrow" style="color:#ffd24d;">✦ 古神遗物 ✦</div>
+  <h1 class="title" style="font-size:30px;">获得遗物 · 三选一</h1>
+  <div class="sub" id="relicSub" style="font-size:12px;letter-spacing:.18em;">击败 Boss 的奖励 · 选一件永久强化</div>
+  <div id="relicRow"></div>
+</div>
+
 <!-- 失败 -->
 <div id="over" class="overlay hidden">
   <div class="panel">
@@ -172,6 +181,9 @@
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:18px;">更新说明</h1>
+<div class="cl-v"><div class="cl-h">v38 · 2026-06-15</div><div class="cl-i">修复无尽后期难度太松:Boss 血量改为复利增长(原线性,后期被秒)；Boss 伤害随波数复利放大(原写死 16 从不缩放,导致后期站脸上也不掉血),激光 / 冲锋等技能一并放大<br>越深越致命,战役 1-15 波难度保持不变</div></div>
+<div class="cl-v"><div class="cl-h">v37 · 2026-06-15</div><div class="cl-i">新增「遗物系统」：每 5 波击败 Boss 后三选一,共 16 件,分攻击 / 防御 / 经济 / 条件触发 / 取舍五类<br>平衡设计：伤害加法叠加(不做乘法)、暴击 / 攻速 / 闪避封顶、遗物不重复,杜绝战力崩盘</div></div>
+<div class="cl-v"><div class="cl-h">v36 · 2026-06-15</div><div class="cl-i">英雄榜新增「本周 / 本月」榜单切换，看近期高手<br>新增「每日挑战」：每天固定法杖 + 2 个变数，全员同一套关卡，记录本地「今日最佳」</div></div>
 <div class="cl-v"><div class="cl-h">v35 · 2026-06-15</div><div class="cl-i">无尽模式多 Boss 同屏时，每尊自动削减血量与伤害（数量越多每尊越弱，避免秒杀墙）<br>黑洞加高对比「事件视界」亮环，浅色背景下也清晰可辨</div></div>
 <div class="cl-v"><div class="cl-h">v34 · 2026-06-15</div><div class="cl-i">无尽模式改版：每波都刷 Boss，且都是不同的 Boss<br>16–20 波每波 1 尊，21–25 波每波 2 尊，26–30 波每波 3 尊，以此类推（每 5 波 +1）<br>多 Boss 各自显示血条、分散登场，自动瞄准锁定最近的 Boss</div></div>
 <div class="cl-v"><div class="cl-h">v33 · 2026-06-14</div><div class="cl-i">新增「更新说明」页，可查看各版本更新内容</div></div>
@@ -806,6 +818,8 @@ let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, ghosts=[];
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
+const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
+let relicMods={...RELIC_BASE};
 let novaFX=null;
 const cam={x:0,y:0,shake:0};
 let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spawnQ, waveT, telegraphs;
@@ -883,13 +897,14 @@ function newPlayer(){ return {
   poisonT:0,poisonDmg:0,noFireT:0,slowT:0,
   spells:{bolt:{lv:1,t:.4}},
   mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0},
-  shield:null, orb:null, beam:null, blackholes:[], orbShots:[]
+  shield:null, orb:null, beam:null, blackholes:[], orbShots:[], relics:[], _dashBuff:0
 };}
 function resetGame(){
   player=newPlayer(); enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[];
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; ghosts=[]; dailyRun=false;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
+  relicMods={...RELIC_BASE};
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
   /* 学习系统状态重置 */
   for(const k of Object.keys(playerProfile)) playerProfile[k]=Array.isArray(playerProfile[k])?[]:(typeof playerProfile[k]==='number'?0:playerProfile[k]);
@@ -925,6 +940,64 @@ function applyWand(w){
     charge:f.charge||false,thorns:f.thorns||false};
   if(f.maxhpAdj){player.maxhp=Math.max(40,player.maxhp+f.maxhpAdj);player.hp=Math.min(player.hp,player.maxhp);}
 }
+/* ============ 遗物 / 被动系统 ============
+   平衡核心:伤害走「加法池」不做乘法;暴击/攻速/闪避封顶;每 5 波三选一,慢慢拿,不重复。 */
+const RELICS=[
+  /* 🗡 攻击(进加法池 / 封顶) */
+  {id:'sharp',  icon:'🗡',name:'锋锐符',  rar:1,desc:'伤害 +12%',                  apply:m=>m.dmgAdd+=.12},
+  {id:'rapid',  icon:'⏩',name:'连发坠饰',rar:1,desc:'施法间隔 -12%(攻速)',       apply:m=>m.cdMul*=.88},
+  {id:'power',  icon:'💪',name:'巨力护符',rar:2,desc:'伤害 +20%',                  apply:m=>m.dmgAdd+=.20},
+  {id:'crit',   icon:'🎯',name:'致命纹章',rar:2,desc:'暴击率 +18%,暴击伤害 ×1.6', apply:m=>{m.critChance+=.18;}},
+  /* 🛡 防御 */
+  {id:'vit',    icon:'🪨',name:'磐石护符',rar:1,desc:'生命上限 +25',               instant:p=>{p.maxhp+=25;p.hp+=25;}},
+  {id:'regen',  icon:'🌿',name:'再生苔',  rar:2,desc:'每秒回复 0.6 生命',          apply:m=>m.regen+=.6},
+  {id:'dodge',  icon:'👻',name:'虚影斗篷',rar:3,desc:'闪避 +15%(受击概率免伤)',  apply:m=>m.dodge+=.15},
+  /* 💰 经济 / 功能(无直接战力,最安全) */
+  {id:'greed',  icon:'💰',name:'贪婪之握',rar:1,desc:'金币获取 +40%',              apply:m=>m.coinMul*=1.4},
+  {id:'magnet', icon:'🧲',name:'磁石',    rar:1,desc:'拾取范围 +70%',              apply:m=>m.pickupRange*=1.7},
+  {id:'scholar',icon:'📜',name:'博学卷轴',rar:2,desc:'选卡时史诗强化出现率提升',   apply:m=>m.cardLuck+=3},
+  /* 🎯 条件触发(只在特定情况生效,天然自限) */
+  {id:'last',   icon:'🔥',name:'背水一战',rar:2,desc:'生命低于 30% 时,伤害 +35%', apply:m=>m.lowHpDmg+=.35},
+  {id:'vamp',   icon:'🩸',name:'饮血',    rar:2,desc:'每次击杀回复 1.5 生命',      apply:m=>m.killHeal+=1.5},
+  {id:'dashf',  icon:'💨',name:'迅捷余韵',rar:2,desc:'冲刺后 2.5 秒内伤害 +22%',   apply:m=>m.dashDmg+=.22},
+  {id:'first',  icon:'⚡',name:'先手',    rar:2,desc:'对满血敌人首发伤害 +50%',    apply:m=>m.firstHitDmg+=.5},
+  /* ⚖ 取舍(玻璃大炮,只有主动选才会有) */
+  {id:'glass',  icon:'💥',name:'易碎之刃',rar:2,desc:'伤害 +35%,但生命上限 -20%', apply:m=>m.dmgAdd+=.35, instant:p=>{const d=Math.round(p.maxhp*.2);p.maxhp-=d;p.hp=Math.min(p.hp,p.maxhp);}},
+  {id:'berserk',icon:'😤',name:'狂战之怒',rar:3,desc:'攻速 +25%,但受到伤害 +18%', apply:m=>{m.cdMul*=.75;m.takenMul*=1.18;}}
+];
+function recomputeRelics(){
+  relicMods={...RELIC_BASE};
+  for(const id of player.relics){ const r=RELICS.find(x=>x.id===id); if(r&&r.apply)r.apply(relicMods); }
+  /* 封顶:防滚雪球 */
+  relicMods.cdMul=Math.max(.6,relicMods.cdMul);          /* 攻速最多 -40% */
+  relicMods.critChance=Math.min(.5,relicMods.critChance);/* 暴击率 ≤ 50% */
+  relicMods.dodge=Math.min(.35,relicMods.dodge);         /* 闪避 ≤ 35% */
+}
+function addRelic(r){ player.relics.push(r.id); if(r.instant)r.instant(player); recomputeRelics(); }
+/* 伤害倍率:加法池(基础 + 残血 + 冲刺余韵)× 暴击掷骰 */
+function relicDmgMul(){
+  let add=relicMods.dmgAdd;
+  if(relicMods.lowHpDmg>0 && player.hp < player.maxhp*.3) add+=relicMods.lowHpDmg;
+  if(relicMods.dashDmg>0 && player._dashBuff>0) add+=relicMods.dashDmg;
+  let mul=1+add;
+  if(relicMods.critChance>0 && Math.random()<relicMods.critChance) mul*=relicMods.critMul;
+  return mul;
+}
+/* 三选一:不重复;越深越容易出高稀有 */
+function rollRelics(n){
+  const owned=new Set(player.relics);
+  let pool=RELICS.filter(r=>!owned.has(r.id));
+  const depth=waveNum;
+  const wt=r=>{ const base=[0,5,4,2][r.rar]; const boost=r.rar===3?(depth>=20?2:depth>=15?1:0):(r.rar===2&&depth>=10?1:0); return base+boost; };
+  const out=[];
+  while(out.length<n && pool.length){
+    let tw=0; for(const p of pool)tw+=wt(p);
+    let rv=Math.random()*tw, idx=0;
+    for(let i=0;i<pool.length;i++){ rv-=wt(pool[i]); if(rv<=0){idx=i;break;} }
+    out.push(pool[idx]); pool.splice(idx,1);
+  }
+  return out;
+}
 function buildWandSel(){
   const row=$('wandRow'); row.innerHTML='';
   for(const w of WANDS){
@@ -947,6 +1020,7 @@ function tryDash(){
   const m=Math.hypot(dx,dy);
   if(m<.1){dx=player.dirx;dy=player.diry;} else {dx/=m;dy/=m;}
   player.dashT=.16; player.dashCD=2; player.dashDX=dx; player.dashDY=dy;
+  player._dashBuff=2.5; /* 遗物:迅捷余韵 — 冲刺后伤害加成窗口 */
   player.iframe=Math.max(player.iframe,.26);
   S.dash(); puff(player.x,player.y,'#9d8ffc',6);
 }
@@ -955,7 +1029,7 @@ const PRICE={1:18,2:30,3:50}, REROLL_COST=8, SHOP_REROLL=10, HEAL_COST=30, SELL_
 const SPELL_SLOT_MAX=4; /* 法术槽位上限:最多同时持有这么多种法术(符文mod不限) */
 function comboCoinMult(){ return 1+Math.min(combo,50)*.008; } /* 平衡:50连击 ×2→×1.4 */
 function addCoins(n){
-  n=Math.max(1,Math.round(n*(1+player.curse.coin)*comboCoinMult()));
+  n=Math.max(1,Math.round(n*(1+player.curse.coin)*comboCoinMult()*relicMods.coinMul));
   coins+=n; return n;
 }
 function dropCoins(e){
@@ -1016,7 +1090,11 @@ function startWave(n){
   if(bossWave){
     const tier=clamp(Math.ceil(n/5),1,3)+(endless&&n>15?Math.floor((n-15)/5):0);
     const tClamp=clamp(tier,1,3);
-    const scale=1+(n>15?(n-15)*.12:0);
+    /* 无尽深度缩放:血量与伤害都按波数「复利」上涨,确保后期追得上玩家相乘的战力。
+       原本血量是线性(+12%/波)、伤害写死 16 从不缩放 → 后期秒 Boss 且站脸上不掉血。
+       只在 16 波后生效,战役 1-15 波完全不变。数值温和起步、越深越狠。 */
+    const scale=(n>15?Math.pow(1.10,n-15):1);       /* Boss 血量复利 +10%/波 */
+    const dmgScale=(n>15?Math.pow(1.085,n-15):1);   /* Boss 伤害复利 +8.5%/波 */
     /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
     const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
     /* 多 Boss 同屏时,每尊削血量+伤害:1尊不变,越多每尊越弱(但总量仍随数量上升) */
@@ -1031,7 +1109,7 @@ function startWave(n){
         px=clamp(ARENA.pad+140+span*(i/(bossCount-1)),ARENA.pad+60,ARENA.w-ARENA.pad-60);
         py=clamp(ARENA.pad+130+(i%2)*70,ARENA.pad+60,ARENA.h*.5);
       }
-      spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py,cScale});
+      spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py,cScale,dmgScale});
     }
     const guard=Math.min(tier,3);
     /* Boss 波按压力插入妖/煞护卫 */
@@ -1164,14 +1242,15 @@ function hex2rgb(h){
   h=h.replace('#','');
   return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
 }
-function makeBoss(tier,scale,forceIdx,px,py,cScale){
+function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
   const cs=cScale||1; /* 多 Boss 同屏时 <1:同时削血量与伤害 */
+  const ds=(dmgScale||1)*cs; /* 伤害 = 深度复利 × 多Boss削减,作用到接触/激光/冲锋/子弹全部伤害 */
   const hp=(300+tier*tier*1000)*(scale||1)*cs; /* boss耐久×3,作为高潮持久战 */
   const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
            :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
   return {boss:true,tier,type:'boss',x:(px!==undefined?px:ARENA.w/2),y:(py!==undefined?py:ARENA.pad+160),r:34+tier*7,
-    hp,maxhp:hp,spd:30+tier*5,dmg:16,_dmgMul:cs,col:p.col,atkName:p.atkName,name:p.name,
+    hp,maxhp:hp,spd:30+tier*5,dmg:16,_dmgMul:ds,col:p.col,atkName:p.atkName,name:p.name,
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
     _phase2Used:false,_phase3Used:false,_laserT:0,_laserAngle:0,_laserDmg:14,_laserFlash:0,_laserFlashAng:0,
@@ -2117,8 +2196,8 @@ function enemyAI(e,dt){
 }
 
 /* ============ 施法 ============ */
-function cdOf(def,lv){ return def.cd*Math.pow(.93,lv-1)*Math.pow(.88,player.mods.haste)*player.wandFx.cdM; }
-function dmgOf(def,lv){ return def.dmg*(1+.4*(lv-1))*(1+.25*Math.min(player.mods.amp,6)+.09*Math.max(0,player.mods.amp-6))*(1+.2*player.mods.giant)*player.wandFx.dmgM*(1+player.curse.dmg+comboDmg); }
+function cdOf(def,lv){ return def.cd*Math.pow(.93,lv-1)*Math.pow(.88,player.mods.haste)*player.wandFx.cdM*relicMods.cdMul; }
+function dmgOf(def,lv){ return def.dmg*(1+.4*(lv-1))*(1+.25*Math.min(player.mods.amp,6)+.09*Math.max(0,player.mods.amp-6))*(1+.2*player.mods.giant)*player.wandFx.dmgM*(1+player.curse.dmg+comboDmg)*relicDmgMul(); }
 
 /* 时长型法术(法盾/奥术球/灼热射线/黑洞)状态推进 */
 function updateSpellStates(dt){
@@ -2407,6 +2486,8 @@ function volatileBlast(x,y,dmg){
 }
 function damageEnemy(e,dmg,kb){
   if(e.dead)return;
+  /* 遗物:先手 — 对满血(未受伤)敌人首发额外伤害 */
+  if(relicMods.firstHitDmg>0 && e.hp>=e.maxhp) dmg*=(1+relicMods.firstHitDmg);
   /* boss出场护罩/蚩尤干盾:完全免伤 */
   if(e._shieldT>0){ texts.push({x:e.x,y:e.y-e.r-6,str:'护',life:.4,vy:-26,col:'#9ad8ff',size:12}); return; }
   /* 虚影词缀:免疫窗口 */
@@ -2441,6 +2522,7 @@ function onKill(e){
   /* 金币 & 噬血法杖 */
   dropCoins(e);
   if(player.wandFx.killHeal)heal(player.wandFx.killHeal);
+  if(relicMods.killHeal)heal(relicMods.killHeal);
   for(let i=0;i<10;i++){ const a=rand(0,TAU),s=rand(40,200);
     spawnPart(e.x,e.y,Math.cos(a)*s,Math.sin(a)*s,rand(.3,.6),rand(2,4),e.col); }
   if(player.mods.leech) heal(player.mods.leech);
@@ -2455,6 +2537,11 @@ function heal(n){ player.hp=Math.min(player.hp+n,player.maxhp); }
 function hurtPlayer(d){
   if(location.hash==='#debug')return; // 测试模式:URL 加 #debug 玩家无敌
   if(player.iframe>0||state!=='play')return;
+  /* 遗物:闪避(虚影斗篷) */
+  if(relicMods.dodge>0 && Math.random()<relicMods.dodge){
+    player.iframe=.5; hurtFx=Math.max(hurtFx,.12); cam.shake=Math.min(cam.shake+2,6);
+    texts.push({x:player.x,y:player.y-30,str:'闪避!',life:.7,vy:-34,col:'#7fe0ff',size:14}); S.hurt(); return;
+  }
   /* 法盾优先 */
   if(player.shield && player.shield.hits<player.shield.max){
     player.shield.hits++;
@@ -2462,7 +2549,7 @@ function hurtPlayer(d){
     S.hurt(); puff(player.x,player.y,'#9ad8ff',6);
     return;
   }
-  player.hp-=d*Math.pow(.85,player.mods.armor)*(1+player.curse.taken);
+  player.hp-=d*Math.pow(.85,player.mods.armor)*(1+player.curse.taken)*relicMods.takenMul;
   if(combo>=5)texts.push({x:player.x,y:player.y-30,str:'连击中断',life:.8,vy:-30,col:'#ff7b9c',size:13});
   combo=0;comboT=0;comboDmg=0;
   player.iframe=.9; hurtFx=.4; cam.shake=Math.min(cam.shake+7,16); S.hurt();
@@ -2613,7 +2700,7 @@ function rollCards(n){
     const max=d.kind==='spell'?(d.id==='blade'?4:5):d.max;
     return c<max;
   }).map(cardInfo);
-  const W3=[0,4,4,2], out=[];
+  const W3=[0,4,4,2+(relicMods.cardLuck||0)], out=[];
   while(out.length<n&&pool.length){
     let tw=0; for(const p of pool) tw+=W3[p.rar];
     let r=Math.random()*tw, idx=0;
@@ -2779,6 +2866,8 @@ function update(dt){
   if(joy.on){ix=joy.dx;iy=joy.dy;}
   const im=Math.hypot(ix,iy); if(im>1){ix/=im;iy/=im;}
   player.dashCD-=dt;
+  if(player._dashBuff>0)player._dashBuff-=dt; /* 遗物:迅捷余韵窗口 */
+  if(relicMods.regen>0&&player.hp<player.maxhp)heal(relicMods.regen*dt); /* 遗物:再生苔 */
   player.noFireT+=dt;
   if(player.slowT>0)player.slowT-=dt;
   if(player.poisonT>0){ player.poisonT-=dt; player._poiTick=(player._poiTick||0)-dt;
@@ -2826,8 +2915,9 @@ function update(dt){
     p.t+=dt;
     if(p.kind==='coin'){
       const d2p=dist2(p.x,p.y,player.x,player.y);
-      if(d2p<150*150){const dd=Math.sqrt(d2p)||1;
-        const pull=(1-dd/150)*620+140;
+      const mr=150*relicMods.pickupRange; /* 遗物:磁石扩大吸取范围 */
+      if(d2p<mr*mr){const dd=Math.sqrt(d2p)||1;
+        const pull=(1-dd/mr)*620+140;
         p.x+=(player.x-p.x)/dd*pull*dt; p.y+=(player.y-p.y)/dd*pull*dt;}
     }
     if(dist2(p.x,p.y,player.x,player.y)<(player.r+13)*(player.r+13)){
@@ -2992,7 +3082,7 @@ function update(dt){
   waveT+=dt;
   while(spawnQ.length&&spawnQ[0].t<=waveT){
     const it=spawnQ.shift();
-    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale,it.bossIdx,it.px,it.py,it.cScale)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
+    if(it.type==='boss'){enemies.push(makeBoss(it.tier,it.scale,it.bossIdx,it.px,it.py,it.cScale,it.dmgScale)); announce('🛡️ 护罩展开','BOSS 出场无敌 · 速速备战');}
     else if(it.type==='elite')spawnEnemy('elite',undefined,it.baseType,it.tier);
     else spawnEnemy(it.type,undefined,undefined,it.tier);
   }
@@ -3024,9 +3114,31 @@ function update(dt){
   /* —— 过波 —— */
   if(state==='play'&&!spawnQ.length&&!enemies.length){
     heal(8);
-    if(waveNum>=15&&!endless)victory();
-    else {state='cards';buildCards();}
+    /* 每 5 波(Boss 节奏)打完 → 遗物三选一,选完再继续 */
+    if(waveNum>0 && waveNum%5===0 && player.relics.length<RELICS.length){
+      state='relic'; buildRelicChoice();
+    } else proceedAfterWave();
   }
+}
+/* 遗物选完 / 非 Boss 波 → 进入胜利或选卡 */
+function proceedAfterWave(){
+  if(waveNum>=15&&!endless)victory();
+  else {state='cards';buildCards();}
+}
+function buildRelicChoice(){
+  const row=$('relicRow'); row.innerHTML='';
+  const opts=rollRelics(3);
+  if(!opts.length){ $('relic').classList.add('hidden'); proceedAfterWave(); return; }
+  $('relicSub').textContent='击败 Boss 的奖励 · 选一件永久强化（已有 '+player.relics.length+' 件）';
+  for(const r of opts){
+    const el=document.createElement('button');
+    el.className='card r'+r.rar;
+    el.innerHTML='<div class="cic">'+r.icon+'</div><div class="ctx"><div class="cn">'+r.name+
+      '</div><div class="cd">'+r.desc+'</div></div><div class="cr">'+['','普通','稀有','史诗'][r.rar]+'</div>';
+    el.onclick=()=>{ S.card(); addRelic(r); $('relic').classList.add('hidden'); proceedAfterWave(); };
+    row.appendChild(el);
+  }
+  $('relic').classList.remove('hidden');
 }
 
 /* ============ 渲染 ============ */
@@ -4049,6 +4161,18 @@ function drawHUD(){
   ctx.fillText('☠ '+kills,16,top+40);
   ctx.fillStyle='#ffd24d';
   ctx.fillText('💰 '+coins,16,top+60);
+  /* 遗物图标条(常驻,压力条下方) */
+  if(player.relics.length){
+    const ry=top+102, rw=19; let rx=18;
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='13px serif';
+    for(const id of player.relics){
+      const r=RELICS.find(x=>x.id===id); if(!r)continue;
+      ctx.globalAlpha=.5;ctx.fillStyle='rgba(20,14,40,.8)';
+      ctx.beginPath();ctx.arc(rx,ry,9,0,TAU);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillText(r.icon,rx,ry+.5); rx+=rw;
+    }
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  }
   /* 无尽修饰符图标(顶部中央常驻) */
   if(endlessMods.length){
     const iw=26; let mx=W/2-(endlessMods.length-1)*iw/2;
