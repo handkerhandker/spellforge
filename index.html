@@ -219,6 +219,12 @@
   .up-buy.maxed{border-color:#4a4380;color:#9a90c8;background:transparent;cursor:default;}
   .altar-note{font-size:11px;color:#9a90c8;background:rgba(123,92,255,.08);border-radius:10px;padding:9px 12px;margin:8px 0 4px;line-height:1.4;text-align:left;}
   .altar-note b{color:#ff9a9a;}
+  .share-btn{width:100%;margin-top:10px;background:linear-gradient(135deg,#7a5cff,#37a4ff);border:none;color:#fff;font-weight:700;}
+  .share-btn:active{filter:brightness(1.12);}
+  .sc-box{background:linear-gradient(160deg,#1b1538,#120e28);border:1px solid #4a3f7a;border-radius:20px;padding:20px 18px 18px;width:min(400px,92vw);text-align:center;box-shadow:0 14px 54px rgba(0,0,0,.55);max-height:94vh;overflow:auto;}
+  .sc-title{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:12px;}
+  .sc-img{width:min(330px,78vw);height:auto;border-radius:14px;display:block;margin:0 auto 12px;box-shadow:0 8px 30px rgba(0,0,0,.5);}
+  .sc-tip{font-size:12px;color:#a79fd6;margin:0 0 14px;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -229,7 +235,7 @@
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div id="verBadge">
-    <div class="vb-top"><b>v56</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
+    <div class="vb-top"><b>v57</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
     <div class="vb-time">2026-06-16 09:40</div>
   </div>
   <div id="ljBadge">✦ <span id="ljBal">0</span> 灵晶</div>
@@ -389,6 +395,7 @@
       <button class="btn" id="retryBtn">再次挑战</button>
       <button class="btn ghost" id="ovHomeBtn">回到初始页面</button>
     </div>
+    <button class="btn share-btn" id="ovShareBtn">📸 生成战绩图 · 分享</button>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="ovName" maxlength="16" placeholder="留名上榜">
@@ -403,7 +410,8 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
-<div class="cl-ver">当前版本 <b>v56</b> · 2026-06-16 09:40</div>
+<div class="cl-ver">当前版本 <b>v57</b> · 2026-06-16 10:45</div>
+<div class="cl-v"><div class="cl-h">v57 · 2026-06-16</div><div class="cl-i">新增 <b>📸 一键分享战绩</b>。通关 / 战死的结算页底部多了一个<b>「生成战绩图 · 分享」</b>按钮:点一下生成一张<b>暗紫魔法风的战绩图</b>——本局<b>波数、难度、连杀段位、击杀、灵晶</b>,加上<b>你这局打到的 Boss 立绘</b>和你的<b>昵称</b>,<b>左下角带一枚二维码,朋友扫码即可直接进游戏</b>。出图后可直接调系统分享发到微信 / 群,或<b>长按图片保存到相册</b>再自己发,方便拉朋友一起玩。顺手修复一处:<b>🗿 守护图腾此前漏收进「法术图鉴」</b>(v55 加图腾时只接了能用的逻辑、忘了补图鉴展示清单),现已补上 + 配「布防·电击」类型,图鉴里能正常翻到它了。</div></div>
 <div class="cl-v"><div class="cl-h">v56 · 2026-06-16</div><div class="cl-i">补上养成系统的最后一块:<b>📋 存档备份码</b>(换手机 / 清缓存不丢档)。入口在<b>主菜单 → 🔮 祭坛 → 存档备份码</b>。<b>导出</b>:一键把你的灵晶 / 强化 / 解锁 / 成就 / 昵称 / 偏好打包成一串 <b>SF1- 开头的备份码</b>,点「复制」存到备忘录或发给自己即可。<b>导入</b>:在新设备粘贴备份码 →「导入恢复」→ <b>二次确认覆盖</b>(防手滑误覆盖)→ 自动刷新还原,重装 / 换机 / 清缓存都救得回来。备份码已做<b>校验</b>,残缺或乱填会提示「无效」并拒绝导入;中文昵称等也能无损还原。说明:<b>排行榜成绩存在云端、与昵称绑定,不受本地存档影响</b>;至此「打 → 攒灵晶 → 变强 → 不丢档」整条养成链闭环。</div></div>
 <div class="cl-v"><div class="cl-h">v55 · 2026-06-16</div><div class="cl-i">新增一个全新法术与一套隐藏连携。<b>🗿 守护图腾(新法术)</b>:局内商店可抽到、<b>所有法杖通用</b>——放下一座图腾,自动电击射程内最近的敌人,持续数秒后消失,作为"布防型"火力补充,走位时丢在身后或敌群必经之路都好用。<b>御灵共鸣(隐藏连携)</b>:当你<b>同时持有御兽法杖与守护图腾</b>时,图腾化为「御灵图腾」——范围内的灵兽 ①<b>攻击提速</b>(打得更勤)②<b>持续回血</b> ③图腾在场时<b>额外多召一只灵兽</b>(第 5 只,撤掉图腾即退场);此连携已写进图腾说明,御兽流玩家凑齐这套会明显变强。<b>数值为初版手感</b>(偏爽):图腾伤害 / 射程 / 攻速、连携提速与回血量,后续按试玩反馈微调。</div></div>
 <div class="cl-v"><div class="cl-h">v54 · 2026-06-16</div><div class="cl-i">新增<b>法杖解锁系统</b>,让灵晶养成多一个长期目标。<b>原 6 把法杖(学徒 / 散射 / 狙击 / 噬血 / 蓄能 / 荆棘)依旧免费</b>,随时可选;<b>🐾 御兽法杖改为灵晶解锁</b>(需 <b>250</b> 灵晶)——在选杖界面,锁住的法杖会显示 🔒 与价格,点一下弹出确认框,灵晶足够即可永久解锁(不够则置灰提示「灵晶不足」),解锁后写入存档、所有难度通用(含弑神;解锁≠数值强化,不破坏冲榜公平)。说明:上版御兽为免费试玩,本版起需用灵晶解锁,攒约 3-4 局即可拿下;这套框架也为后续新法杖 / 新法术的解锁打好了底子。</div></div>
@@ -476,12 +484,24 @@
       <button class="btn" id="endlessBtn">无尽模式</button>
       <button class="btn ghost" id="winHomeBtn">回到初始页面</button>
     </div>
+    <button class="btn share-btn" id="wnShareBtn">📸 生成战绩图 · 分享</button>
     <div class="lb-title">⚔ 英雄榜</div>
     <div class="lb">
       <input id="wnName" maxlength="16" placeholder="留名上榜">
       <button class="btn" id="wnSubmit" style="margin-top:0;padding:11px 22px;font-size:14px;">提交</button>
     </div>
     <div id="wnBoard" class="lb-board"></div>
+  </div>
+</div>
+
+<!-- 战绩图分享 -->
+<div id="shareCard" class="overlay hidden" style="z-index:80;">
+  <div class="sc-box">
+    <div class="sc-title">🎴 本局战绩</div>
+    <img id="scImg" class="sc-img" alt="战绩图">
+    <div class="sc-tip">长按图片可保存到相册 · 或点下方一键分享给好友 / 群</div>
+    <button class="btn share-btn" id="scShareBtn">📤 分享 / 保存</button>
+    <button class="btn ghost" id="scClose" style="margin-top:9px;">关闭</button>
   </div>
 </div>
 
@@ -1169,6 +1189,7 @@ buildBossArt();
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
+let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
@@ -1330,6 +1351,7 @@ function resetGame(){
   enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; beasts=[]; summonT=0; totems=[]; _synAnnounced=false;
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
+  runMaxComboTier=0; runLastBoss=-1;
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   _runUnlocked=[]; runTookHeart=false; runBoughtShop=false;
   relicMods={...RELIC_BASE};
@@ -1718,6 +1740,7 @@ function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
   const idx=(forceIdx!==undefined&&forceIdx!==null)?forceIdx
            :(endless?Math.floor(Math.random()*BOSS_PALETTE.length):Math.min(tier-1, BOSS_PALETTE.length-1));
   const p=BOSS_PALETTE[idx];
+  runLastBoss=idx; /* 战绩卡:本局打到的 Boss */
   return {boss:true,tier,type:'boss',x:(px!==undefined?px:ARENA.w/2),y:(py!==undefined?py:ARENA.pad+160),r:34+tier*7,
     hp,maxhp:hp,spd:30+tier*5,dmg:16,_dmgMul:ds,col:p.col,atkName:p.atkName,name:p.name,
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
@@ -3047,6 +3070,7 @@ function onKill(e){
   comboDmg=Math.min(COMBO_DMG_CAP, combo*COMBO_DMG_PER);
   if(combo>=50) unlockAch('combo50');
   const _ct=comboTier(combo);
+  if(_ct>runMaxComboTier)runMaxComboTier=_ct;
   if(_ct>comboTierLv){ comboTierLv=_ct; const _ti=COMBO_TIERS[_ct-1];
     texts.push({x:player.x,y:player.y-42,str:'【'+_ti.name+'】',life:1.3,vy:-42,col:_ti.col,size:26});
     S.card(); }
@@ -3235,10 +3259,107 @@ function victory(){
   setupEndLeaderboard('wn');
 }
 
+/* ═══════════ 战绩卡 · 一键分享(v57) ═══════════ */
+const SHARE_QR=["11111110111001001111101111111","10000010000111110010001000001","10111010010101001111001011101","10111010110011110011101011101","10111010010101101010001011101","10000010101101100111001000001","11111110101010101010101111111","00000000011010100110100000000","00000110101000010000000101001","10100100010100110000111001001","00000111100100001011001011110","01101000011000110010101100110","10111111000100001101111001011","00001100000000010111110000000","11010011001000011100011101111","10101101100011101101100011010","11101111110111110101110000010","01000000001110010100001101001","10111110111001000010101110011","00010001001111000101110100011","10100111001000111001111110100","00000000101111001111100010111","11111110000111101000101010010","10000010111101010010100011110","10111010011100111100111110001","10111010001110100101001111110","10111010000100001010000011101","10000010010001101101111100010","11111110011100010110100001010"];   /* 固定网址二维码矩阵(构建期标准算法生成 + 自解码验证) */
+let _scCanvas=null;
+
+function _scDrawQR(ctx,x,y,s){
+  const n=SHARE_QR.length, pad=Math.round(s*0.10), area=s-pad*2, m=area/n;
+  ctx.fillStyle='#0d0a1a';
+  for(let r=0;r<n;r++){ const row=SHARE_QR[r];
+    for(let c=0;c<n;c++){ if(row[c]==='1') ctx.fillRect(x+pad+c*m, y+pad+r*m, m+0.6, m+0.6); } }
+}
+
+function _scPaint(ctx,d){
+  const W=1080,H=1540;
+  const SERIF=(w,s)=>w+' '+s+'px "Songti SC","STSong","Noto Serif CJK SC",serif';
+  const SANS =(w,s)=>w+' '+s+'px "PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif';
+  const DIFF_GRAD={1:['#3fa776','#2d8a5f'],2:['#5a9cff','#3a7fd4'],3:['#7a5cff','#37a4ff'],4:['#ff9a3c','#e0701a'],5:['#ff4d4d','#c81e1e']};
+  let _s=20260616; const rnd=()=>{ _s=(_s*1664525+1013904223)&0x7fffffff; return _s/0x7fffffff; };
+  const rr=(x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); };
+  const cT=(str,y,font,fill)=>{ ctx.font=font; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=fill; ctx.fillText(str,W/2,y); };
+  const cS=(str,y,font,fill,ls)=>{ ctx.font=font; ctx.textBaseline='alphabetic'; const a=[...str]; let tot=0; const ws=[]; for(const ch of a){const w=ctx.measureText(ch).width; ws.push(w); tot+=w+ls;} tot-=ls; let x=W/2-tot/2; ctx.fillStyle=fill; ctx.textAlign='left'; a.forEach((ch,i)=>{ctx.fillText(ch,x,y); x+=ws[i]+ls;}); };
+
+  let bg=ctx.createLinearGradient(0,0,W,H); bg.addColorStop(0,'#1a1438'); bg.addColorStop(.55,'#120e28'); bg.addColorStop(1,'#0b0820'); ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  let vg=ctx.createRadialGradient(W/2,H*0.40,120,W/2,H*0.5,860); vg.addColorStop(0,'rgba(123,92,255,0.12)'); vg.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+  const pc=['#8b7df0','#6fe3ff','#ffd98a']; for(let i=0;i<80;i++){const x=rnd()*W,y=rnd()*H,r=rnd()*2.2+0.4; ctx.globalAlpha=rnd()*0.5+0.08; ctx.fillStyle=pc[i%3]; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();} ctx.globalAlpha=1;
+
+  ctx.save(); ctx.shadowColor='rgba(123,92,255,0.55)'; ctx.shadowBlur=42; rr(30,30,W-60,H-60,46); ctx.lineWidth=3; ctx.strokeStyle='rgba(150,120,255,0.6)'; ctx.stroke(); ctx.restore();
+  rr(44,44,W-88,H-88,38); ctx.lineWidth=1.5; ctx.strokeStyle='rgba(123,92,255,0.22)'; ctx.stroke();
+
+  cS('山海经 · 塔防 ROGUELIKE',118,SANS('500',26),'rgba(111,227,255,0.78)',8);
+  ctx.save(); const tf=SERIF('900',116); ctx.font=tf; const tw=ctx.measureText('法术工坊').width; const tg=ctx.createLinearGradient(W/2-tw/2,0,W/2+tw/2,0); tg.addColorStop(0,'#c9bcff'); tg.addColorStop(.5,'#6fe3ff'); tg.addColorStop(.95,'#ffd98a'); ctx.shadowColor='rgba(123,92,255,0.5)'; ctx.shadowBlur=26; cT('法术工坊',230,tf,tg); ctx.restore();
+  cS('SPELLFORGE',272,SANS('600',27),'rgba(167,159,214,0.68)',14);
+
+  const bx=W/2, by=472, bc=d.bossCol;
+  let grd=ctx.createRadialGradient(bx,by,30,bx,by,250); grd.addColorStop(0,bc+'55'); grd.addColorStop(.6,bc+'22'); grd.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle=grd; ctx.beginPath(); ctx.arc(bx,by,250,0,7); ctx.fill();
+  ctx.save(); ctx.strokeStyle=bc+'66'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(bx,by,196,0,7); ctx.stroke(); ctx.setLineDash([4,12]); ctx.strokeStyle=bc+'44'; ctx.beginPath(); ctx.arc(bx,by,214,0,7); ctx.stroke(); ctx.restore();
+  if(d.bossImg){ const bs=358; ctx.save(); ctx.shadowColor=bc+'88'; ctx.shadowBlur=32; ctx.drawImage(d.bossImg,bx-bs/2,by-bs/2,bs,bs); ctx.restore(); }
+  cS(d.hasBoss?('鏖战 · '+d.bossName):'山海征途 · 启程', by+212, SANS('700',30), bc, 4);
+
+  cS('突 破',762,SANS('600',29),'rgba(167,159,214,0.85)',10);
+  (function(){ const baseY=872, sF=SERIF('800',58), bF=SERIF('900',132); ctx.textBaseline='alphabetic'; ctx.textAlign='left'; ctx.font=sF; const w1=ctx.measureText('第').width; ctx.font=bF; const w2=ctx.measureText(' '+d.wave+' ').width; ctx.font=sF; const w3=ctx.measureText('波').width; let x=W/2-(w1+w2+w3)/2; ctx.fillStyle='#ffd98a'; ctx.font=sF; ctx.fillText('第',x,baseY); x+=w1; ctx.save(); ctx.shadowColor='rgba(255,217,138,0.5)'; ctx.shadowBlur=28; ctx.font=bF; ctx.fillText(' '+d.wave+' ',x,baseY); x+=w2; ctx.restore(); ctx.font=sF; ctx.fillText('波',x,baseY); })();
+
+  (function(){ const y=938,h=70,label=d.diffName+'   ·   '+d.diffSub; ctx.font=SANS('800',38); const tw=ctx.measureText(label).width; const w=tw+92,x=W/2-w/2,dg=DIFF_GRAD[d.diffId]||DIFF_GRAD[3]; const g=ctx.createLinearGradient(x,0,x+w,0); g.addColorStop(0,dg[0]); g.addColorStop(1,dg[1]); ctx.save(); ctx.shadowColor=dg[1]+'aa'; ctx.shadowBlur=30; rr(x,y,w,h,h/2); ctx.fillStyle=g; ctx.fill(); ctx.restore(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(label,W/2,y+h/2+2); })();
+
+  (function(){ const tiles=[{label:'连杀段位',val:d.tierName,col:d.tierCol},{label:'击杀',val:''+d.kills,col:'#ffd98a'},{label:'灵晶',val:'+'+d.crystal,col:'#6fe3ff'}]; const sideM=70,gap=24,tw=(W-sideM*2-gap*2)/3,th=160,y=1014; tiles.forEach((t,i)=>{ const x=sideM+i*(tw+gap); rr(x,y,tw,th,22); ctx.fillStyle='rgba(123,92,255,0.09)'; ctx.fill(); ctx.lineWidth=1.5; ctx.strokeStyle='rgba(123,92,255,0.28)'; ctx.stroke(); ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.font=SANS('500',26); ctx.fillStyle='rgba(167,159,214,0.85)'; ctx.fillText(t.label,x+tw/2,y+54); ctx.font=SERIF('900',60); ctx.fillStyle=t.col; ctx.save(); ctx.shadowColor=t.col+'55'; ctx.shadowBlur=18; ctx.fillText(t.val,x+tw/2,y+122); ctx.restore(); }); })();
+
+  cS('—  '+d.name+'  —',1256,SERIF('600',36),'rgba(201,188,255,0.92)',4);
+
+  ctx.strokeStyle='rgba(123,92,255,0.2)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(70,1290); ctx.lineTo(W-70,1290); ctx.stroke();
+  const qx=92,qy=1316,qs=160; ctx.save(); ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=16; rr(qx,qy,qs,qs,18); ctx.fillStyle='#f4f1ff'; ctx.fill(); ctx.restore(); _scDrawQR(ctx,qx,qy,qs);
+  const tx=qx+qs+40; ctx.textAlign='left'; ctx.textBaseline='alphabetic'; ctx.font=SANS('800',40); ctx.fillStyle='#ffd98a'; ctx.fillText('扫码 · 一起战',tx,qy+56); ctx.font=SANS('500',27); ctx.fillStyle='rgba(167,159,214,0.85)'; ctx.fillText('handkerhandker.github.io',tx,qy+102); ctx.font=SANS('500',24); ctx.fillStyle='rgba(111,227,255,0.7)'; ctx.fillText('暗紫魔法 · 山海异兽',tx,qy+140);
+}
+
+function _scBuild(){
+  return new Promise(resolve=>{
+    const cv=document.createElement('canvas'); cv.width=1080; cv.height=1540;
+    const ctx=cv.getContext('2d');
+    const dID=Math.max(1,Math.min(5,difficulty));
+    const dd=DIFFICULTIES[dID-1]||DIFFICULTIES[2];
+    const t=runMaxComboTier>0?COMBO_TIERS[runMaxComboTier-1]:null;
+    const bi=runLastBoss>=0?runLastBoss:0;
+    const bp=BOSS_PALETTE[bi]||BOSS_PALETTE[0];
+    const data={ wave:waveNum, diffId:dID, diffName:dd.name, diffSub:dd.sub,
+      tierName:(t?t.name:'—'), tierCol:(t?t.col:'#9a90c8'),
+      kills:kills, crystal:(typeof runRewardBase==='number'?runRewardBase:0),
+      name:(lastName()||'无名侠客'), bossCol:bp.col, bossName:bp.name, hasBoss:(runLastBoss>=0) };
+    const im=new Image();
+    im.onload=()=>{ data.bossImg=im; _scPaint(ctx,data); resolve(cv); };
+    im.onerror=()=>{ data.bossImg=null; _scPaint(ctx,data); resolve(cv); };
+    im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(BOSS_SVG[bi]||BOSS_SVG[0]);
+  });
+}
+
+async function shareGenerate(){
+  try{
+    const cv=await _scBuild();
+    _scCanvas=cv;
+    $('scImg').src=cv.toDataURL('image/png');
+    $('shareCard').classList.remove('hidden');
+  }catch(e){ try{announce('战绩图生成失败','请再试一次');}catch(_){} }
+}
+
+async function shareImage(){
+  const cv=_scCanvas; if(!cv){ return; }
+  try{
+    const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+    if(blob && navigator.canShare){
+      const file=new File([blob],'spellforge.png',{type:'image/png'});
+      if(navigator.canShare({files:[file]})){
+        const dn=(DIFFICULTIES[Math.max(1,Math.min(5,difficulty))-1]||{}).name||'';
+        await navigator.share({files:[file], text:'《法术工坊》战绩 · '+dn+' · 第'+waveNum+'波'});
+        return;
+      }
+    }
+  }catch(e){ if(e&&e.name==='AbortError') return; }
+  try{announce('长按上方图片','即可保存到相册');}catch(_){}
+}
+
 /* ============ 卡牌 ============ */
 /* ===== 法术图鉴 ===== */
-const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋' };
-const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield'];
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击' };
+const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield','totem'];
 function cxItem(icon,name,tag,stat,desc){
   return '<div class="cx-item"><div class="cx-ic">'+icon+'</div><div class="cx-main"><div class="cx-head">'
     +'<span class="cx-name">'+name+'</span>'+(tag?'<span class="cx-tag">'+tag+'</span>':'')
@@ -5269,6 +5390,10 @@ $('codexClose').onclick=()=>$('codex').classList.add('hidden');
 $('clCloseTop').onclick=()=>$('changelog').classList.add('hidden');
 $('codexCloseTop').onclick=()=>$('codex').classList.add('hidden');
 $('bCodex').onclick=openCodex;
+$('ovShareBtn').onclick=shareGenerate;
+$('wnShareBtn').onclick=shareGenerate;
+$('scShareBtn').onclick=shareImage;
+$('scClose').onclick=()=>$('shareCard').classList.add('hidden');
 $('bBeast').onclick=openBestiary;
 $('bAchv').onclick=openAchv;
 $('altarBtn').onclick=openAltar;
