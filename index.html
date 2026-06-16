@@ -413,6 +413,9 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.15 · 2026-06-16</div><div class="cl-i">🏆 修复:屏蔽不文明昵称后,排行榜只剩 9 名的问题——现在过滤掉不当昵称后会<b>自动补满</b>,前 10 名榜单始终完整。</div></div>
+<div class="cl-v"><div class="cl-h">v59.14 · 2026-06-16</div><div class="cl-i">🎯 <b>改善高难度看不清弹幕的问题(两项)</b>:① <b>敌方弹幕永远高亮置顶</b>——给每颗敌弹描上醒目的红心 + 白环,再乱的场面也一眼能看清,不会被你自己的特效盖住;② 暂停菜单新增「<b>💫 特效强度</b>」滑块,可把自己的粒子 / 辉光调淡(30%~100%),画面更清爽、更专心躲弹幕——<b>敌方弹幕始终醒目,不受滑块影响</b>。</div></div>
+<div class="cl-v"><div class="cl-h">v59.13 · 2026-06-16</div><div class="cl-i">🪙 新增「<b>聚宝</b>」三选一卡牌:<b>金币 / 道具的吸取范围 +30%</b>,最多叠 3 层,自动捡拾更轻松,不必再贴着金币跑。</div></div>
 <div class="cl-v"><div class="cl-h">v59.12 · 2026-06-16</div><div class="cl-i">🛡 进一步完善排行榜昵称过滤,拦下更多不适宜的昵称,榜单保持干净清爽。</div></div>
 <div class="cl-v"><div class="cl-h">v59.11 · 2026-06-16</div><div class="cl-i">🛡 <b>排行榜昵称自动文明过滤</b>:上榜时如果昵称含不文明用语,会被拦下并提示「请换个文明昵称」,脏名进不了榜;已经在榜上的此类昵称也会自动隐藏。空格、符号间隔等小花招也能识别。榜单更清爽干净。</div></div>
 <div class="cl-v"><div class="cl-h">v59.10 · 2026-06-16</div><div class="cl-i">✍️ 更新说明<b>全面润色</b>:把所有历史版本(含早期)的文字都统一成玩家视角,去掉了开发术语,读起来更顺、更好懂。</div></div>
@@ -479,6 +482,9 @@
       <button class="aim-pill" data-aim="smart">智能</button>
     </div>
     <div class="aim-hint" id="aimDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:280px;line-height:1.45;"></div>
+    <div class="diff-title" style="margin-top:12px;font-size:13px;">💫 特效强度</div>
+    <input id="fxRange" type="range" min="30" max="100" value="100" style="width:78%;max-width:280px;accent-color:#7a5cff;vertical-align:middle;">
+    <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
     <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
     <div id="pauseSaveSub" style="font-size:11.5px;margin:-2px auto 6px;max-width:280px;color:#ffcaa0;opacity:.96;line-height:1.5;display:none;">🔒 弑神不可续战 · 一命冲榜</div>
@@ -589,7 +595,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.12', APP_TIME='2026-06-16 14:23';
+const APP_VER='v59.15', APP_TIME='2026-06-16 17:21';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -777,6 +783,7 @@ const CARD_DEFS=[
   {id:'boots', kind:'stat',name:'疾风之靴',icon:'👟',desc:'移动速度 +10%',max:3,rar:2},
   {id:'leech', kind:'stat',name:'血之契约',icon:'🩸',desc:'每次击杀回复 1 点生命',max:3,rar:3},
   {id:'armor', kind:'stat',name:'石肤术',icon:'🛡️',desc:'受到的伤害 -15%',max:3,rar:3},
+  {id:'pickup',kind:'stat',name:'聚宝',icon:'🪙',desc:'金币 / 道具吸取范围 +30%',max:3,rar:1},
   /* —— 诅咒契约:高风险高回报,第4波起出现,各限1张 —— */
   {id:'pact_blood',kind:'curse',name:'嗜血契约',icon:'⚔️',desc:'诅咒：敌人移速 +15% ▸ 你的伤害 +40%',max:1,rar:3},
   {id:'pact_glass',kind:'curse',name:'玻璃契约',icon:'💔',desc:'诅咒：受到的伤害 +50% ▸ 你的伤害 +50%',max:1,rar:3},
@@ -1210,6 +1217,7 @@ buildBossArt();
 
 /* ============ 状态 ============ */
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
+let fxAlpha=1;   /* 特效强度:玩家粒子/辉光透明度(0.3~1);暂停菜单滑块控制。敌弹高亮、预警圈不受影响 */
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
@@ -1309,7 +1317,7 @@ function newPlayer(){ return {
   curse:{dmg:0,taken:0,enemySpd:0,coin:0,chaos:0},
   poisonT:0,poisonDmg:0,noFireT:0,slowT:0,
   spells:{bolt:{lv:1,t:.4}},
-  mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0},
+  mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0,pickup:0},
   shield:null, orb:null, beam:null, blackholes:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
 };}
 /* ============ 元进度存档:灵晶(货币) + 强化等级 + 解锁内容 ============ */
@@ -3167,7 +3175,7 @@ function periodStart(period){
   return new Date(n.getFullYear(),n.getMonth(),1).toISOString(); /* 本月 1 号 00:00 */
 }
 async function fetchLeaderboard(period){
-  const order='order=wave.desc,kills.desc&limit=10';
+  const order='order=wave.desc,kills.desc&limit=30';   /* 多取做缓冲:滤掉脏名字后仍凑得满前 10 */
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
   let tf=''; /* 本周/本月按 created_at 筛选;总榜不筛 */
   if(period==='week'||period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(period));
@@ -3241,7 +3249,7 @@ function isBadName(name){
 }
 function renderBoard(el,list){
   if(!el)return;
-  if(Array.isArray(list)) list=list.filter(r=>!isBadName(r&&r.name));   /* 滤掉不文明昵称 */
+  if(Array.isArray(list)) list=list.filter(r=>!isBadName(r&&r.name)).slice(0,10);   /* 滤掉不文明昵称后,再取前 10(避免被滤后不足 10 条) */
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
@@ -3606,6 +3614,7 @@ function applyCard(c){
     else if(c.id==='boots'){player.mods.boots++;}
     else if(c.id==='leech'){player.mods.leech++;}
     else if(c.id==='armor'){player.mods.armor++;}
+    else if(c.id==='pickup'){player.mods.pickup++;}
   }
   /* 协同觉醒检测 */
   const now=activeSynergies().map(s=>s.id);
@@ -3954,7 +3963,7 @@ function update(dt){
     p.t+=dt;
     if(p.kind==='coin'){
       const d2p=dist2(p.x,p.y,player.x,player.y);
-      const mr=150*relicMods.pickupRange; /* 遗物:磁石扩大吸取范围 */
+      const mr=150*relicMods.pickupRange*(1+0.3*(player.mods.pickup||0)); /* 磁石遗物 + 聚宝符文 扩大吸取范围 */
       if(d2p<mr*mr){const dd=Math.sqrt(d2p)||1;
         const pull=(1-dd/mr)*620+140;
         p.x+=(player.x-p.x)/dd*pull*dt; p.y+=(player.y-p.y)/dd*pull*dt;}
@@ -4477,9 +4486,9 @@ function render(){
       continue;
     }
     /* 默认发光球 */
-    ctx.globalAlpha=.22;ctx.fillStyle=b.col;
+    ctx.globalAlpha=.22*fxAlpha;ctx.fillStyle=b.col;
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.4,0,TAU);ctx.fill();
-    ctx.globalAlpha=.6;ctx.beginPath();ctx.arc(b.x,b.y,b.r*1.2,0,TAU);ctx.fill();
+    ctx.globalAlpha=.6*fxAlpha;ctx.beginPath();ctx.arc(b.x,b.y,b.r*1.2,0,TAU);ctx.fill();
     ctx.globalAlpha=.95;ctx.fillStyle='#fff';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*.6,0,TAU);ctx.fill();
   }
@@ -4531,12 +4540,24 @@ function render(){
   /* 粒子 */
   for(const p of parts){
     const a=p.life/p.ml;
-    ctx.globalAlpha=a*(p.ring?.5:.85);
+    ctx.globalAlpha=a*(p.ring?.5:.85)*fxAlpha;
     if(p.ring){ctx.strokeStyle=p.col;ctx.lineWidth=3;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1.4-a*.8),0,TAU);ctx.stroke();}
     else{ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r*a,0,TAU);ctx.fill();}
   }
   ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+
+  /* 弹幕置顶高亮:敌弹的高对比轮廓画在所有特效之上,密集时也绝不被自己的粒子/辉光盖住(始终满亮,不受「特效强度」影响) */
+  for(const b of ebullets){
+    const r=b.r;
+    ctx.globalAlpha=.92;ctx.strokeStyle='#1a0008';ctx.lineWidth=3.5;
+    ctx.beginPath();ctx.arc(b.x,b.y,r+1.5,0,TAU);ctx.stroke();
+    ctx.globalAlpha=1;ctx.strokeStyle='#ffffff';ctx.lineWidth=1.6;
+    ctx.beginPath();ctx.arc(b.x,b.y,r+.3,0,TAU);ctx.stroke();
+    ctx.fillStyle='#ff2f55';
+    ctx.beginPath();ctx.arc(b.x,b.y,Math.max(2,r*.45),0,TAU);ctx.fill();
+  }
+  ctx.globalAlpha=1;
 
   /* 伤害数字 */
   for(const t of texts){
@@ -5405,6 +5426,12 @@ function setAimMode(m){ aimMode=m; try{localStorage.setItem('sf_aim',m);}catch(e
 document.querySelectorAll('[data-aim]').forEach(b=>b.onclick=()=>{ try{S.card();}catch(e){} setAimMode(b.dataset.aim); });
 /* 启动:读存档瞄准模式;无鼠标设备若是「手动」则回退「智能」 */
 try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa==='smart') aimMode=sa; }catch(e){}
+/* 特效强度滑块:读存档 + 绑定(0.3~1) */
+(function(){ const fr=document.getElementById('fxRange');
+  const apply=v=>{ fxAlpha=Math.max(.3,Math.min(1,v)); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlpha*100)+'%'; if(fr)fr.value=Math.round(fxAlpha*100); };
+  try{ const sf=parseFloat(localStorage.getItem('sf_fx')); apply(sf>=.3&&sf<=1?sf:1); }catch(e){ apply(1); }
+  if(fr) fr.oninput=()=>{ fxAlpha=Math.max(.3,Math.min(1,(+fr.value||100)/100)); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlpha*100)+'%'; try{localStorage.setItem('sf_fx',String(fxAlpha));}catch(e){} };
+})();
 if(aimMode==='manual'&&!(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)) aimMode='smart';
 syncAimUI();
 /* 启动:读取存档难度(默认入圣),刷新选择器 + 榜单 */
