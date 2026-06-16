@@ -413,6 +413,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.6 · 2026-06-16</div><div class="cl-i">修复暂停界面里「弑神 / 每日不可续战」那行说明<b>颜色太暗、几乎看不清</b>的问题——现改为清晰的暖橙色并加上 🔒 图标,一眼能看明白这两个模式的「保存并退出」为什么是灰的。</div></div>
 <div class="cl-v"><div class="cl-h">v59.5 · 2026-06-16</div><div class="cl-i">「📖 法术图鉴」新增 <b>✦ 古神遗物</b> 一栏——此前图鉴只收法术 / 符文 / 属性 / 契约,<b>遗物从没收录进去</b>;现在全部遗物(含你找的「🌀 疾风步 · 冲刺冷却 -25%」)都能在图鉴里翻到了,而且是<b>自动同步</b>的,以后新增遗物会自动入鉴,不会再漏。</div></div>
 <div class="cl-v"><div class="cl-h">v59.4 · 2026-06-16</div><div class="cl-i">续战稳健性加固(经多角度压测):防止连点「继续上次战斗」重复进入;对损坏 / 残缺存档做兜底——坏存档自动忽略、缺字段用默认值、异常波数钳制,不会崩溃或卡死。功能行为不变,纯保险。</div></div>
 <div class="cl-v"><div class="cl-h">v59.3 · 2026-06-16</div><div class="cl-i"><b>一~四档的无尽模式现在也能续战、且照常上榜</b>(长局中途有事更友好)。续战会完整还原无尽进度,包括<b>已叠加的无尽强化(怪的增强词缀)</b>,不会因续战而变简单。<b>弑神 / 每日仍不可续战</b>(严格一命冲榜,保证公平)。</div></div>
@@ -474,7 +475,7 @@
     <div class="aim-hint" id="aimDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:280px;line-height:1.45;"></div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
     <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
-    <div id="pauseSaveSub" style="font-size:11px;margin:-4px auto 4px;max-width:280px;opacity:.6;display:none;">弑神不可续战 · 一命冲榜</div>
+    <div id="pauseSaveSub" style="font-size:11.5px;margin:-2px auto 6px;max-width:280px;color:#ffcaa0;opacity:.96;line-height:1.5;display:none;">🔒 弑神不可续战 · 一命冲榜</div>
     <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
@@ -582,7 +583,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.5', APP_TIME='2026-06-16 14:15';
+const APP_VER='v59.6', APP_TIME='2026-06-16 14:16';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -5458,7 +5459,7 @@ function togglePause(p){
   $('paused').classList.toggle('hidden',!paused);
   if(paused){ const _no=(difficulty>=5||dailyRun), _b=$('pauseSaveBtn');
     if(_b){ _b.disabled=_no; _b.style.opacity=_no?'.4':''; _b.style.cursor=_no?'not-allowed':''; }
-    const _s=$('pauseSaveSub'); if(_s){ _s.style.display=_no?'block':'none'; _s.textContent= dailyRun?'每日挑战不可续战':'弑神不可续战 · 一命冲榜'; } }
+    const _s=$('pauseSaveSub'); if(_s){ _s.style.display=_no?'block':'none'; _s.textContent= dailyRun?'🔒 每日挑战不可续战':'🔒 弑神不可续战 · 一命冲榜'; } }
 }
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
