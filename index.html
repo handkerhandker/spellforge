@@ -3260,14 +3260,18 @@ function victory(){
 }
 
 /* ═══════════ 战绩卡 · 一键分享(v57) ═══════════ */
-const SHARE_QR=["11111110111001001111101111111","10000010000111110010001000001","10111010010101001111001011101","10111010110011110011101011101","10111010010101101010001011101","10000010101101100111001000001","11111110101010101010101111111","00000000011010100110100000000","00000110101000010000000101001","10100100010100110000111001001","00000111100100001011001011110","01101000011000110010101100110","10111111000100001101111001011","00001100000000010111110000000","11010011001000011100011101111","10101101100011101101100011010","11101111110111110101110000010","01000000001110010100001101001","10111110111001000010101110011","00010001001111000101110100011","10100111001000111001111110100","00000000101111001111100010111","11111110000111101000101010010","10000010111101010010100011110","10111010011100111100111110001","10111010001110100101001111110","10111010000100001010000011101","10000010010001101101111100010","11111110011100010110100001010"];   /* 固定网址二维码矩阵(构建期标准算法生成 + 自解码验证) */
+const SHARE_QR=["1111111010011100101111111","1000001011110100101000001","1011101010110100101011101","1011101010101111001011101","1011101001001011101011101","1000001000101110101000001","1111111010101010101111111","0000000000111010000000000","1011101011001011110011101","1101000000010100100100010","0011011011110110010010000","0001100010000111110111100","0011111101011111111010111","0100100111001011111110001","0100111001000110011010110","1011010100100011100110001","0001011110011100111111111","0000000011011110100010101","1111111000000100101010111","1000001000010011100010010","1011101001010000111111000","1011101010010100111011100","1011101010111100111010110","1000001010111100010010100","1111111011101110001111111"];   /* 固定网址二维码矩阵 V2-L(标准算法生成,cv2 实测可解码) */
 let _scCanvas=null;
 
-function _scDrawQR(ctx,x,y,s){
-  const n=SHARE_QR.length, pad=Math.round(s*0.10), area=s-pad*2, m=area/n;
-  ctx.fillStyle='#0d0a1a';
+function _scDrawQR(ctx,x,y,box){
+  const n=SHARE_QR.length, pad=box*0.12, qs=box-pad*2, m=qs/n;   /* 12% 白边≈4格静区,白底面板再加一圈 */
+  ctx.fillStyle='#000000';                                       /* 纯黑,最大对比 */
   for(let r=0;r<n;r++){ const row=SHARE_QR[r];
-    for(let c=0;c<n;c++){ if(row[c]==='1') ctx.fillRect(x+pad+c*m, y+pad+r*m, m+0.6, m+0.6); } }
+    for(let c=0;c<n;c++){ if(row[c]==='1'){
+      const x0=Math.round(x+pad+c*m), x1=Math.round(x+pad+(c+1)*m);
+      const y0=Math.round(y+pad+r*m), y1=Math.round(y+pad+(r+1)*m);
+      ctx.fillRect(x0,y0,x1-x0,y1-y0);                            /* 整数边界,无缝无糊 */
+    }}}
 }
 
 function _scPaint(ctx,d){
@@ -3306,9 +3310,9 @@ function _scPaint(ctx,d){
 
   cS('—  '+d.name+'  —',1256,SERIF('600',36),'rgba(201,188,255,0.92)',4);
 
-  ctx.strokeStyle='rgba(123,92,255,0.2)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(70,1290); ctx.lineTo(W-70,1290); ctx.stroke();
-  const qx=92,qy=1316,qs=160; ctx.save(); ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=16; rr(qx,qy,qs,qs,18); ctx.fillStyle='#f4f1ff'; ctx.fill(); ctx.restore(); _scDrawQR(ctx,qx,qy,qs);
-  const tx=qx+qs+40; ctx.textAlign='left'; ctx.textBaseline='alphabetic'; ctx.font=SANS('800',40); ctx.fillStyle='#ffd98a'; ctx.fillText('扫码 · 一起战',tx,qy+56); ctx.font=SANS('500',27); ctx.fillStyle='rgba(167,159,214,0.85)'; ctx.fillText('handkerhandker.github.io',tx,qy+102); ctx.font=SANS('500',24); ctx.fillStyle='rgba(111,227,255,0.7)'; ctx.fillText('暗紫魔法 · 山海异兽',tx,qy+140);
+  ctx.strokeStyle='rgba(123,92,255,0.2)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(70,1278); ctx.lineTo(W-70,1278); ctx.stroke();
+  const qx=84,qy=1296,qs=190; ctx.save(); ctx.shadowColor='rgba(0,0,0,0.35)'; ctx.shadowBlur=14; rr(qx,qy,qs,qs,16); ctx.fillStyle='#ffffff'; ctx.fill(); ctx.restore(); _scDrawQR(ctx,qx,qy,qs);
+  const tx=qx+qs+38; ctx.textAlign='left'; ctx.textBaseline='alphabetic'; ctx.font=SANS('800',42); ctx.fillStyle='#ffd98a'; ctx.fillText('扫码 · 一起战',tx,qy+66); ctx.font=SANS('500',28); ctx.fillStyle='rgba(167,159,214,0.88)'; ctx.fillText('handkerhandker.github.io',tx,qy+116); ctx.font=SANS('500',25); ctx.fillStyle='rgba(111,227,255,0.72)'; ctx.fillText('暗紫魔法 · 山海异兽',tx,qy+156);
 }
 
 function _scBuild(){
