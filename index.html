@@ -413,6 +413,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.11 · 2026-06-16</div><div class="cl-i">🛡 <b>排行榜昵称自动文明过滤</b>:上榜时如果昵称含不文明用语,会被拦下并提示「请换个文明昵称」,脏名进不了榜;已经在榜上的此类昵称也会自动隐藏。空格、符号间隔等小花招也能识别。榜单更清爽干净。</div></div>
 <div class="cl-v"><div class="cl-h">v59.10 · 2026-06-16</div><div class="cl-i">✍️ 更新说明<b>全面润色</b>:把所有历史版本(含早期)的文字都统一成玩家视角,去掉了开发术语,读起来更顺、更好懂。</div></div>
 <div class="cl-v"><div class="cl-h">v59.9 · 2026-06-16</div><div class="cl-i">🧹 排行榜会自动过滤不文明的昵称,榜单更清爽干净。</div></div>
 <div class="cl-v"><div class="cl-h">v59.8 · 2026-06-16</div><div class="cl-i">✍️ 更新说明排版与文案优化,读起来更清晰顺口。</div></div>
@@ -587,7 +588,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.10', APP_TIME='2026-06-16 14:21';
+const APP_VER='v59.11', APP_TIME='2026-06-16 14:22';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3215,12 +3216,27 @@ function fmtTime(ts){
   const p=n=>String(n).padStart(2,'0');
   return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
-/* 排行榜不文明昵称屏蔽:名字含以下任一片段则不在榜单显示(数据仍在云端,仅前端隐藏;可随时增减) */
-const BLOCKED_NAMES=['大碌柒'];
-function isBlockedName(nm){ nm=String(nm||''); return BLOCKED_NAMES.some(b=>b&&nm.indexOf(b)>=0); }
+/* ===== 排行榜不文明昵称过滤 =====
+   两道防线:① 上榜提交时拦截(脏名进不了榜);② 显示时兜底(已在云端的命中名也隐藏)。
+   纯前端。BAD_WORDS=自动识别的脏话词库(中 / 粤 / 英),BLOCKED_NAMES=手动精确屏蔽,两者都可随时增减。
+   已尽量保守、避免误伤正常昵称:不匹配单字「逼/妈/死/操/鸡」或拼音「cao」(曹) 等,只匹配明确的脏话组合。
+   防绕过:大小写、空格与符号间隔(如 f u c k / 傻 逼)也能识别。 */
+const BAD_WORDS=['碌柒','撚柒','屌','仆街','冚家','戇鳩','賓周','宾周','屄','閪','契弟',
+  '操你','草你','艹你','我操','卧槽','操你妈','草你妈','傻逼','傻屄','煞笔','沙比','沙逼',
+  '你妈逼','妈了个逼','贱逼','鸡巴','鸡奸','婊子','贱货','妓女','卖逼','日你妈',
+  '死全家','死你妈','滚你妈','nmsl','cnm',
+  'fuck','shit','bitch','asshole','cunt','pussy','motherf','nigger','nigga','faggot',
+  'whore','slut','dickhead','bullshit','dumbass','jackass','retard','penis','vagina','cocksucker'];
+const BLOCKED_NAMES=[];   /* 需精确屏蔽的具体昵称(常见脏话已由 BAD_WORDS 覆盖) */
+function _normName(s){ return String(s||'').toLowerCase().replace(/[\s._\-·•*~|/\\,，。、!！?？]+/g,''); }
+function isBadName(name){
+  const raw=String(name||'').toLowerCase(), norm=_normName(name);
+  return BAD_WORDS.some(w=> raw.indexOf(w)>=0 || norm.indexOf(w)>=0 )
+      || BLOCKED_NAMES.some(b=> b && raw.indexOf(b.toLowerCase())>=0 );
+}
 function renderBoard(el,list){
   if(!el)return;
-  if(Array.isArray(list)) list=list.filter(r=>!isBlockedName(r&&r.name));   /* 滤掉被屏蔽的昵称 */
+  if(Array.isArray(list)) list=list.filter(r=>!isBadName(r&&r.name));   /* 滤掉不文明昵称 */
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
@@ -3254,6 +3270,7 @@ function setupEndLeaderboard(prefix){
   const w=waveNum, k=kills;
   submitBtn.onclick=async()=>{
     const n=(nameEl.value.trim()||'无名英雄').slice(0,16);
+    if(isBadName(n)){ submitBtn.textContent='请换个文明昵称'; if(nameEl)nameEl.style.borderColor='#ff6b6b'; setTimeout(()=>{ submitBtn.textContent='提交'; if(nameEl)nameEl.style.borderColor=''; },2200); return; }   /* 不文明昵称拒绝上榜 */
     saveName(n); submitBtn.disabled=true; submitBtn.textContent='已提交 ✓';
     await submitScore(n,w,k);
     boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
