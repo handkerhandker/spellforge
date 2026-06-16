@@ -447,6 +447,9 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v62.2 · 2026-06-16</div><div class="cl-i">🎯 <b>「角色定位」改进</b>:把上一版那圈青色圆环,换成了<b>贴合人物外形(身体 + 尖帽)的发光轮廓</b>——描边完美套在小巫师身上,既好看,又能在成片法术里一眼找到自己(人物本体也会始终绘制在最上层、不被特效埋住)。</div></div>
+<div class="cl-v"><div class="cl-h">v62.1 · 2026-06-16</div><div class="cl-i">🛠️ <b>两项体验优化(来自试玩反馈)</b>:① <b>修掉进化技能的「连续震屏」</b>——焚天 / 雷罚在成片敌人里连发时,屏幕会一直抖、看着难受;现已大幅收敛震感(从无上限改为有节流、有上限),爆炸该有的那点力度还在、但绝不会再没完没了地震。另外暂停菜单的「💫 特效强度」滑块现在<b>也会同步柔化震屏</b>,调低特效=画面更稳。② <b>新增「角色定位光环」</b>——人物身上多了一圈<b>始终显示在最上层</b>的青色脉冲光环,就算被一大片法术特效盖住,也能一眼找到自己在哪里(满亮显示,不受特效强度影响)。</div></div>
+<div class="cl-v"><div class="cl-h">v62 · 2026-06-16</div><div class="cl-i">🔮 <b>新增 4 个山海经主动法术!</b>🌪️<b>飓风</b>——放出一团缓慢移动的风暴,把成群敌人<b>吸进来并持续切割</b>(出处:风兽飞廉);🦠<b>蛊毒</b>——命中让敌人<b>染疫</b>,染疫者死亡或靠近他人时会<b>传染</b>给周围,在敌群里一片片连锁烂掉(出处:疫鬼);🌊<b>水龙吟</b>——射出一道<b>宽幅水龙波</b>,贯穿一整条线上的所有敌人并<b>狠狠击退</b>(出处:应龙);🩸<b>噬魂印</b>——给命中的敌人盖上<b>饕餮印</b>,带印之敌死亡时<b>爆裂溅射并回你 1 滴血</b>,越杀越滚雪球(出处:饕餮)。四个法术都已收进「📖 法术图鉴」与三选一卡牌,弑神难度同样可用。</div></div>
 <div class="cl-v"><div class="cl-h">v61.1 · 2026-06-16</div><div class="cl-i">⚡ 性能打磨:在「全部法术都进化 + 符文叠满」的极限流派下,地面火海 / 冰径会瞬间铺满整屏,旧版可能拖慢手机;现已为地面效果加上数量上限并适度优化,极限场面也能保持流畅,观感几乎无差别。</div></div>
 <div class="cl-v"><div class="cl-h">v61 · 2026-06-16</div><div class="cl-i">⚔️ <b>全新「武器进化」系统!</b>把某个法术练到 <b>Lv5</b> 并持有<b>对应符文</b>,选牌时会多出一张<b>金色进化卡</b>,将法术觉醒成更强形态:🔥火球术+分裂→<b>💥焚天</b>(命中炸成连环爆炸、地面燃起火海持续灼烧);⚡连锁闪电+多重→<b>🌩雷罚</b>(同时劈中周围全部敌人 + 随机天降雷霆);🗡️环刃术+急速→<b>⚔万刃</b>(环刃翻倍、高速旋转贴身绞杀);❄️寒冰锥+穿透→<b>🧊永冬之矛</b>(贯穿全场的寒冰长矛 + 减速冰径)。进化卡是<b>额外选项、不挤占</b>原本的三选一;首批 4 种已全部收进「📖 法术图鉴」。弑神难度同样可进化。</div></div>
 <div class="cl-v"><div class="cl-h">v60.1 · 2026-06-16</div><div class="cl-i">🆕 <b>新手引导</b>:第一次玩的玩家进来会有一段简短上手引导(移动 / 躲弹幕 / 冲刺 / 三选一 / 商店,共 5 页,可随时跳过)。<b>老玩家不受影响、不会被弹</b>;想回看的话,主菜单左上角点「怎么玩」随时打开。另外顶部的版本 / 灵晶信息栏改为<b>跟随页面滚动</b>,下滑时不再挡住下面的字。</div></div>
@@ -523,7 +526,7 @@
     <div class="aim-hint" id="aimDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:280px;line-height:1.45;"></div>
     <div class="diff-title" style="margin-top:12px;font-size:13px;">💫 特效强度</div>
     <input id="fxRange" type="range" min="30" max="100" value="100" style="width:78%;max-width:280px;accent-color:#7a5cff;vertical-align:middle;">
-    <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
+    <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡、震屏更柔和,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
     <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
     <div id="pauseSaveSub" style="font-size:11.5px;margin:-2px auto 6px;max-width:280px;color:#ffcaa0;opacity:.96;line-height:1.5;display:none;">🔒 弑神不可续战 · 一命冲榜</div>
@@ -635,7 +638,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v61.1', APP_TIME='2026-06-16 19:52';
+const APP_VER='v62.2', APP_TIME='2026-06-16 23:50';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -792,6 +795,10 @@ const SPELL_DEF={
   swarm:{name:'蜂群飞弹',icon:'🐝',col:'#ffd24d',dmg:5,cd:1.4,spd:300,r:5,life:1.5,desc:'射出 3 枚自动追踪的飞弹'},
   chain:{name:'回旋刃',icon:'🪃',col:'#d8c6ff',cd:.9,dmg:14,spd:480,r:6,life:1.15,chain:1,desc:'飞行一段后回旋,可二次命中'},
   totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽提速+回血+多召一只'},
+  cyclone:{name:'飓风',icon:'🌪️',col:'#bfe3ff',cd:6.5,dmg:9,vortex:140,desc:'放出缓慢移动的风暴,吸入并持续切割周围敌人(出处:风兽飞廉)'},
+  plague:{name:'蛊毒',icon:'🦠',col:'#9be86a',cd:2.0,dmg:8,spd:300,r:9,life:1.2,desc:'命中使敌人染疫,染疫者死亡或靠近他人时传染,连锁烂场(出处:疫鬼)'},
+  tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
+  devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射并回你1血(出处:饕餮)'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
   thousandblade:{name:'万刃',icon:'⚔️',col:'#e6d4ff',evo:'blade',desc:'【进化·环刃术】环刃数量翻倍、高速旋转,化作贴身绞肉风暴'},
@@ -805,6 +812,10 @@ const CARD_DEFS=[
   {id:'venom',kind:'spell',rar:2},
   {id:'blade',kind:'spell',rar:2},
   {id:'totem',kind:'spell',rar:2},
+  {id:'cyclone',kind:'spell',rar:3},
+  {id:'plague',kind:'spell',rar:2},
+  {id:'tidal',kind:'spell',rar:2},
+  {id:'devour',kind:'spell',rar:2},
   {id:'arc',kind:'spell',rar:2},
   {id:'meteor',kind:'spell',rar:3},
   {id:'beam',kind:'spell',rar:2},
@@ -1362,7 +1373,7 @@ function newPlayer(){ return {
   poisonT:0,poisonDmg:0,noFireT:0,slowT:0,
   spells:{bolt:{lv:1,t:.4}},
   mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0,pickup:0},
-  shield:null, orb:null, beam:null, blackholes:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
+  shield:null, orb:null, beam:null, blackholes:[], cyclones:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
 };}
 /* ============ 元进度存档:灵晶(货币) + 强化等级 + 解锁内容 ============ */
 let META={lj:0,up:{},unlocked:{}}, runRewardBase=0;
@@ -2556,6 +2567,12 @@ function applyFormationMovement(f){
 /* 统一敌人 AI */
 function enemyAI(e,dt){
   if(e._kbCool>0)e._kbCool-=dt;
+  if(e._devourT>0)e._devourT-=dt;
+  if(e._plagueT>0){ e._plagueT-=dt; e._ptick=(e._ptick||0)-dt;
+    if(e._ptick<=0){ e._ptick=.5; damageEnemy(e,e._plagueDps*.5);
+      for(const o of enemies){ if(o===e||o.dead||o._plagueT>0||o.boss)continue;
+        if(dist2(e.x,e.y,o.x,o.y)<(72+o.r)*(72+o.r)){ o._plagueT=4.5; o._plagueDps=e._plagueDps; puff(o.x,o.y,'#9be86a',2); break; } } }
+  }
   const dx=player.x-e.x, dy=player.y-e.y, d=Math.hypot(dx,dy)||1;
   let spd=e.spd*(e.slowT>0?.45:1)*(1+player.curse.enemySpd);
   let a=Math.atan2(dy,dx);
@@ -2879,6 +2896,20 @@ function updateSpellStates(dt){
     spawnPart(bh.x+Math.cos(bh.ang)*bh.r*.3,bh.y+Math.sin(bh.ang)*bh.r*.3,rand(-30,30),rand(-30,30),.2,3,'#a06fff');
   }
   player.blackholes=player.blackholes.filter(b=>b.life>0);
+  /* 飓风:移动风暴,吸入+持续切割 */
+  for(const cy of player.cyclones){
+    cy.life-=dt; cy.ang+=dt*7; cy.x+=cy.vx*dt; cy.y+=cy.vy*dt; cy.vx*=.992; cy.vy*=.992;
+    if(cy.life<=0)continue;
+    for(const e of enemies){ if(e.dead)continue;
+      const dx=cy.x-e.x,dy=cy.y-e.y,d=Math.hypot(dx,dy)||1;
+      if(d<cy.r){
+        if(!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); const pull=(1-d/cy.r)*120*km; e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt; }
+        damageEnemy(e,cy.dmg*(d<cy.r*.5?1.5:1)*dt);
+      }
+    }
+    for(let i=0;i<2;i++){ const aa=cy.ang*2+i*3.14; spawnPart(cy.x+Math.cos(aa)*cy.r*.45,cy.y+Math.sin(aa)*cy.r*.45,rand(-50,50),rand(-50,50),.25,3,'#dff2ff'); }
+  }
+  player.cyclones=player.cyclones.filter(c=>c.life>0);
   /* 生命虹吸(毒云存在时回血) */
   if(clouds.length && activeSynergies().find(x=>x.id==='lifesteal')){
     heal(2.5*dt); /* FIX: 原为每帧30%概率heal(1),60fps下达约18血/秒;改为按时间约2.5血/秒,与帧率无关 */
@@ -2917,7 +2948,7 @@ function smartAim(){
 function castAll(dt){
   if(!enemies.length) return;
   /* 兜底:玩家把所有能射出子弹的法术卖光后会"完全不能攻击",此时注入保底奥术飞弹 */
-  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','firestorm','winterspear','thunderjudge','thousandblade'];
+  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','firestorm','winterspear','thunderjudge','thousandblade','cyclone','plague','tidal','devour'];
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
   if(!_hasBal)player.spells.bolt={lv:1,t:.2};
   for(const id in player.spells){
@@ -2943,6 +2974,12 @@ function castAll(dt){
       if(player.orb){ player.orb.life=8+2*s.lv; player.orb.rad=rad; }
       else player.orb={ang:0,rad,life:8+2*s.lv,tick:0};
       S.card(); continue;
+    }
+    if(id==='cyclone'){
+      const tgt=aimPoint()||{x:player.x+200,y:player.y};
+      const ca=Math.atan2(tgt.y-player.y,tgt.x-player.x);
+      player.cyclones.push({x:player.x+Math.cos(ca)*30,y:player.y+Math.sin(ca)*30,vx:Math.cos(ca)*72,vy:Math.sin(ca)*72,r:def.vortex*(1+.08*(s.lv-1))*(1+.15*player.mods.giant),life:3.4+.4*s.lv,ang:0,dmg:dmgOf(def,s.lv)});
+      S.zap(); continue;
     }
     if(id==='blackhole'){
       const tgt=aimPoint()||{x:player.x+200,y:player.y};
@@ -3004,7 +3041,7 @@ function castAll(dt){
       playerProfile._shotCount=(playerProfile._shotCount||0)+1;
     }
     if(chargedShot){ S.fire(); puff(player.x,player.y,'#fff3b0',8); }
-    if(id==='fire'||id==='meteor'||id==='firestorm')S.fire();
+    if(id==='fire'||id==='meteor'||id==='firestorm'||id==='tidal')S.fire();
     else if(id==='arc'||id==='chain')S.zap();
     else S.shoot();
   }
@@ -3054,6 +3091,7 @@ function makeBullet(id,lv,a){
     arcChain:def.arc||0,chain:def.chain||0,returning:false};
   /* 协同修饰 */
   if(id==='winterspear')b.pierce+=6;
+  if(id==='tidal')b.pierce+=8;
   synergyApplyToBullet(b);
   return b;
 }
@@ -3105,7 +3143,6 @@ function firestormBurst(x,y,dmg,lv){
     for(let i=0;i<8;i++){ const aa=Math.random()*TAU, sp=rand(60,200); spawnPart(ex,ey,Math.cos(aa)*sp,Math.sin(aa)*sp,rand(.2,.45),rand(2,4),pick(['#ff9a3a','#ffd24d','#ff5a2a'])); }
   }
   clouds.push({x,y,r:66+8*lv,life:2.4,dps:7+3*lv*(1+.25*player.mods.amp),tick:0,kind:'fire'});
-  cam.shake=Math.min(cam.shake+4,10);
 }
 function thunderJudge(dmg,lv){
   const R=300+18*lv, r2=R*R;
@@ -3116,7 +3153,7 @@ function thunderJudge(dmg,lv){
     for(const e of enemies){ if(!e.dead&&dist2(tg.x,tg.y,e.x,e.y)<48*48)damageEnemy(e,dmg*.9,{kx:e.x-tg.x,ky:e.y-tg.y}); }
     for(let i=0;i<6;i++){ const a=Math.random()*TAU; spawnPart(tg.x,tg.y,Math.cos(a)*130,Math.sin(a)*130,.3,3,'#ffe96b'); }
   }
-  cam.shake=Math.min(cam.shake+3,9);
+  addHitShake(2);
 }
 function applyPoison(dur,dps){ player.poisonT=Math.max(player.poisonT,dur); player.poisonDmg=Math.max(player.poisonDmg,dps); }
 function applySlow(dur){ player.slowT=Math.max(player.slowT,dur); }
@@ -3179,6 +3216,10 @@ function onKill(e){
     texts.push({x:e.x,y:e.y-30,str:combo+' 连击',life:1,vy:-44,col:'#ff9a5c',size:Math.min(18+combo*.15,28)});
   /* 爆裂词缀:死亡时爆炸 */
   if(e._aff&&e._aff.volatile)volatileBlast(e.x,e.y,Math.max(14,e.maxhp*.12));
+  if(e._devourT>0){ explode(e.x,e.y,62,Math.max(15,e.maxhp*.16),'#ff5d7a'); heal(1); }
+  if(e._plagueT>0){ for(const o of enemies){ if(o===e||o.dead||o._plagueT>0||o.boss)continue;
+      if(dist2(e.x,e.y,o.x,o.y)<(90+o.r)*(90+o.r)){ o._plagueT=4.5; o._plagueDps=e._plagueDps; puff(o.x,o.y,'#9be86a',3); } }
+    puff(e.x,e.y,'#9be86a',8); }
   /* 金币 & 噬血法杖 */
   dropCoins(e);
   if(coins>=3000) unlockAch('rich');
@@ -3531,8 +3572,8 @@ async function shareImage(){
 
 /* ============ 卡牌 ============ */
 /* ===== 法术图鉴 ===== */
-const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击' };
-const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield','totem'];
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬' };
+const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield','totem','cyclone','plague','tidal','devour'];
 function cxItem(icon,name,tag,stat,desc){
   return '<div class="cx-item"><div class="cx-ic">'+icon+'</div><div class="cx-main"><div class="cx-head">'
     +'<span class="cx-name">'+name+'</span>'+(tag?'<span class="cx-tag">'+tag+'</span>':'')
@@ -4179,6 +4220,9 @@ function update(dt){
         damageEnemy(e,b.dmg,{kx:b.vx,ky:b.vy});
         hitFX(b);
         if(b.slow)e.slowT=Math.max(e.slowT,b.slowT||0)||b.slow;
+        if(b.id==='plague'){ e._plagueT=Math.max(e._plagueT||0,4.5); e._plagueDps=Math.max(e._plagueDps||0,5+1.6*b.lv); }
+        if(b.id==='devour')e._devourT=Math.max(e._devourT||0,6);
+        if(b.id==='tidal'&&!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); if(km>0){ const mm=Math.hypot(b.vx,b.vy)||1; e.x+=b.vx/mm*14*km; e.y+=b.vy/mm*14*km; } }
         if(b.aoe)explode(b.x,b.y,b.aoe,b.dmg*.75,b.col);
         /* arc 链式 */
         if(b.id==='arc' && b.arcChain>0){
@@ -4507,7 +4551,7 @@ function render(){
   ctx.fillStyle='#06050d';ctx.fillRect(0,0,W,H);
   /* —— 视差背景层(在玩家/世界层之前) —— */
   drawParallaxBG();
-  const sx=cam.shake?rand(-cam.shake,cam.shake):0, sy=cam.shake?rand(-cam.shake,cam.shake):0;
+  const _shk=cam.shake*fxAlpha; const sx=_shk?rand(-_shk,_shk):0, sy=_shk?rand(-_shk,_shk):0;
   ctx.save();ctx.translate(-cam.x+sx,-cam.y+sy);
 
   /* 地面 */
@@ -4684,6 +4728,19 @@ function render(){
     ctx.globalAlpha=.9;ctx.strokeStyle='#f1e3ff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r-2.5,0,TAU);ctx.stroke(); /* 白色高光细环 */
     ctx.restore();
   }
+  /* 飓风:旋转风暴 */
+  for(const cy of player.cyclones){
+    ctx.save();
+    ctx.globalAlpha=.5;ctx.strokeStyle='#dff2ff';ctx.lineWidth=2.4;
+    for(let k=0;k<3;k++){ const ra=cy.r*(.42+k*.27), za=cy.ang*(k%2?-1:1);
+      ctx.beginPath();
+      for(let sgi=0;sgi<=14;sgi++){ const tt=sgi/14, ang=za+tt*5.6, rr=ra*(1-tt*.18); const px=cy.x+Math.cos(ang)*rr, py=cy.y+Math.sin(ang)*rr; if(sgi===0)ctx.moveTo(px,py);else ctx.lineTo(px,py); }
+      ctx.stroke();
+    }
+    ctx.globalAlpha=.85;ctx.strokeStyle='#aadcff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.28;ctx.fillStyle='#cfeeff';ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r*.3,0,TAU);ctx.fill();
+    ctx.restore();
+  }
   /* 粒子 */
   for(const p of parts){
     const a=p.life/p.ml;
@@ -4714,6 +4771,24 @@ function render(){
     ctx.strokeText(t.str,t.x,t.y);ctx.fillText(t.str,t.x,t.y);
   }
   ctx.globalAlpha=1;
+  /* —— 角色定位轮廓:贴合人物外形(身体+帽子)的发光剪影描边 + 真身重绘在最上层;成片法术之下也能一眼找到自己(满亮,不受特效强度影响) —— */
+  if(state==='play'&&player){
+    const _p=player, _pu=.5+.5*Math.sin(time*4.6);
+    const _t=aimPoint(); const _aA=_t?Math.atan2(_t.y-_p.y,_t.x-_p.x):Math.atan2(_p.diry,_p.dirx);
+    ctx.save(); ctx.globalCompositeOperation='source-over';
+    /* 柔和外发光:整体透出一圈光晕 */
+    ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.5,1.5); ctx.translate(-_p.x,-_p.y);
+    ctx.globalAlpha=.1+.06*_pu; wizardSilhouette(_p,'#7df0ff'); ctx.restore();
+    /* 细暗描边:浅色背景下勾出边界 */
+    ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.26,1.26); ctx.translate(-_p.x,-_p.y);
+    ctx.globalAlpha=.4; wizardSilhouette(_p,'#08040f'); ctx.restore();
+    /* 青色脉冲亮边(主轮廓·贴合外形) */
+    ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.18,1.18); ctx.translate(-_p.x,-_p.y);
+    ctx.globalAlpha=.62+.34*_pu; wizardSilhouette(_p,'#86f2ff'); ctx.restore();
+    /* 真身重绘:盖住剪影中心,只留一圈贴合外形的发光描边 */
+    ctx.globalAlpha=1; drawWizardBody(_p, _aA);
+    ctx.restore();
+  }
   ctx.restore();
 
   /* 暗角 + 受伤红光 */
@@ -5246,6 +5321,36 @@ function eye(e,lookA,off){
   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(e.x+ox,e.y+oy,3.4,0,TAU);ctx.fill();
   ctx.fillStyle='#1c1c2e';ctx.beginPath();ctx.arc(e.x+ox+Math.cos(a)*1.3,e.y+oy+Math.sin(a)*1.3,1.7,0,TAU);ctx.fill();
 }
+function drawWizardBody(p, aimA){
+  /* 斗篷 */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,p.r+2);
+  g.addColorStop(0,'#6e5cf0');g.addColorStop(1,'#2a2270');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#9d8ffc';ctx.lineWidth=1.5;ctx.stroke();
+  /* 脸 */
+  ctx.fillStyle='#ffe4c8';ctx.beginPath();ctx.arc(p.x,p.y-3,p.r*.55,0,TAU);ctx.fill();
+  ctx.fillStyle='#2b2440';
+  const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
+  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
+  /* 法师帽 */
+  const tilt=Math.sin(p.anim*3)*.06;
+  ctx.save();ctx.translate(p.x,p.y-p.r*.55);ctx.rotate(tilt);
+  ctx.fillStyle='#241d52';
+  ctx.beginPath();ctx.moveTo(-p.r*.95,0);ctx.lineTo(p.r*.95,0);ctx.lineTo(p.r*.12,-p.r*1.55);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#3a3186';ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
+  ctx.fillStyle='#ffd98a';ctx.font='9px serif';ctx.fillText('✦',p.r*.05,-p.r*.75);
+  ctx.restore();
+}
+/* 角色剪影(实心填充,用于贴合外形的定位描边):身体圆 + 法师帽 */
+function wizardSilhouette(p, color){
+  ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
+  const tilt=Math.sin(p.anim*3)*.06;
+  ctx.save();ctx.translate(p.x,p.y-p.r*.55);ctx.rotate(tilt);
+  ctx.beginPath();ctx.moveTo(-p.r*.95,0);ctx.lineTo(p.r*.95,0);ctx.lineTo(p.r*.12,-p.r*1.55);ctx.closePath();ctx.fill();
+  ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
+  ctx.restore();
+}
 function drawPlayer(){
   const p=player;
   /* 冲刺残影 */
@@ -5332,24 +5437,7 @@ function drawPlayer(){
   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx1,sy1,pulse,0,TAU);ctx.fill();
   ctx.globalCompositeOperation='source-over';
   ctx.globalAlpha=p.iframe>0&&Math.floor(p.anim*16)%2===0?.45:1;
-  /* 斗篷 */
-  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,p.r+2);
-  g.addColorStop(0,'#6e5cf0');g.addColorStop(1,'#2a2270');
-  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
-  ctx.strokeStyle='#9d8ffc';ctx.lineWidth=1.5;ctx.stroke();
-  /* 脸 */
-  ctx.fillStyle='#ffe4c8';ctx.beginPath();ctx.arc(p.x,p.y-3,p.r*.55,0,TAU);ctx.fill();
-  ctx.fillStyle='#2b2440';
-  const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
-  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
-  /* 法师帽 */
-  const tilt=Math.sin(p.anim*3)*.06;
-  ctx.save();ctx.translate(p.x,p.y-p.r*.55);ctx.rotate(tilt);
-  ctx.fillStyle='#241d52';
-  ctx.beginPath();ctx.moveTo(-p.r*.95,0);ctx.lineTo(p.r*.95,0);ctx.lineTo(p.r*.12,-p.r*1.55);ctx.closePath();ctx.fill();
-  ctx.fillStyle='#3a3186';ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
-  ctx.fillStyle='#ffd98a';ctx.font='9px serif';ctx.fillText('✦',p.r*.05,-p.r*.75);
-  ctx.restore();
+  drawWizardBody(p, aimA);
   ctx.globalAlpha=1;
 }
 function drawHUD(){
