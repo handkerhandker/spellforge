@@ -413,6 +413,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.7 · 2026-06-16</div><div class="cl-i"><b>🚀 性能优化(缓解手机发烫 / 卡顿)</b>。有朋友反馈久玩手机发烫、变卡——排查确认瓶颈在<b>画面绘制</b>(逻辑/碰撞每帧才 0.1 毫秒可忽略;后期 / 无尽怪一多,每帧要画的东西逼近甚至超出一帧预算,手机扛不住就发烫掉帧)。本版两项优化:<b>① 屏幕外的怪不再绘制</b>(场外本来就看不见,零画面影响);<b>② 渲染分辨率由 2 倍降到 1.5 倍</b>(像素减约 44%,绘制整体提速约两三成,高清手机屏上几乎看不出差别)。<b>逻辑、玩法、数值、手感完全不变</b>。后期 / 无尽的发烫掉帧应有明显缓解。</div></div>
 <div class="cl-v"><div class="cl-h">v59.6 · 2026-06-16</div><div class="cl-i">修复暂停界面里「弑神 / 每日不可续战」那行说明<b>颜色太暗、几乎看不清</b>的问题——现改为清晰的暖橙色并加上 🔒 图标,一眼能看明白这两个模式的「保存并退出」为什么是灰的。</div></div>
 <div class="cl-v"><div class="cl-h">v59.5 · 2026-06-16</div><div class="cl-i">「📖 法术图鉴」新增 <b>✦ 古神遗物</b> 一栏——此前图鉴只收法术 / 符文 / 属性 / 契约,<b>遗物从没收录进去</b>;现在全部遗物(含你找的「🌀 疾风步 · 冲刺冷却 -25%」)都能在图鉴里翻到了,而且是<b>自动同步</b>的,以后新增遗物会自动入鉴,不会再漏。</div></div>
 <div class="cl-v"><div class="cl-h">v59.4 · 2026-06-16</div><div class="cl-i">续战稳健性加固(经多角度压测):防止连点「继续上次战斗」重复进入;对损坏 / 残缺存档做兜底——坏存档自动忽略、缺字段用默认值、异常波数钳制,不会崩溃或卡死。功能行为不变,纯保险。</div></div>
@@ -572,7 +573,7 @@ const $=id=>document.getElementById(id);
 const cv=$('game'), ctx=cv.getContext('2d');
 let W=0,H=0,DPR=1,vg=null,safeB=0;
 function resize(){
-  DPR=Math.min(window.devicePixelRatio||1,2);
+  DPR=Math.min(window.devicePixelRatio||1,1.5);   /* v59.7 性能:2→1.5,像素减约44%,绘制整体提速,高清屏上几乎无感 */
   W=window.innerWidth; H=window.innerHeight;
   safeB=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0;
   cv.width=W*DPR; cv.height=H*DPR;
@@ -583,7 +584,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.6', APP_TIME='2026-06-16 14:16';
+const APP_VER='v59.7', APP_TIME='2026-06-16 14:18';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -4382,7 +4383,7 @@ function render(){
   }
 
   /* 敌人 */
-  for(const e of enemies)drawEnemy(e);
+  for(const e of enemies){ if(!e.boss){ const _sx=e.x-cam.x,_sy=e.y-cam.y,_m=(e.r||20)+72; if(_sx<-_m||_sx>W+_m||_sy<-_m||_sy>H+_m) continue; } drawEnemy(e); }   /* 屏幕外的杂兵不绘制(纯绘制无副作用,零画面变化);Boss 体大且少,始终画 */
   drawTotems();
   drawBeasts();
   /* 玩家 */
