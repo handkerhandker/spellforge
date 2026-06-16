@@ -3339,7 +3339,7 @@ async function shareGenerate(){
   try{
     const cv=await _scBuild();
     _scCanvas=cv;
-    $('scImg').src=cv.toDataURL('image/png');
+    $('scImg').src=cv.toDataURL('image/jpeg',0.92);   /* JPEG 体积小很多,长按保存/分享更快;二维码已验仍可扫 */
     $('shareCard').classList.remove('hidden');
   }catch(e){ try{announce('战绩图生成失败','请再试一次');}catch(_){} }
 }
@@ -3347,9 +3347,9 @@ async function shareGenerate(){
 async function shareImage(){
   const cv=_scCanvas; if(!cv){ return; }
   try{
-    const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.92));
     if(blob && navigator.canShare){
-      const file=new File([blob],'spellforge.png',{type:'image/png'});
+      const file=new File([blob],'spellforge.jpg',{type:'image/jpeg'});
       if(navigator.canShare({files:[file]})){
         await navigator.share({files:[file]});   /* 只发图片,不带文字:微信「转发给朋友」更稳 */
         return;
