@@ -58,6 +58,12 @@
   .cl-v{margin-bottom:16px;align-self:stretch;}
   .cl-ver{align-self:stretch;font-size:12px;color:#9a90c8;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(123,92,255,.2);}
   .cl-ver b{color:#cbbcff;font-weight:700;}
+  .bk-sec{background:rgba(123,92,255,.06);border:1px solid rgba(123,92,255,.18);border-radius:12px;padding:12px 12px 10px;margin:12px 0;text-align:left;}
+  .bk-h{font-size:13px;font-weight:700;color:#cbbcff;margin-bottom:8px;}
+  .bk-area{width:100%;box-sizing:border-box;min-height:60px;background:rgba(0,0,0,.35);border:1px solid rgba(123,92,255,.3);border-radius:8px;color:#e8e0ff;font-size:11px;font-family:ui-monospace,monospace;padding:8px;margin:6px 0;resize:none;word-break:break-all;line-height:1.4;}
+  .bk-warn{font-size:11.5px;color:#ffcaa0;line-height:1.55;margin-bottom:8px;}
+  .bk-warn b{color:#ff9a5c;}
+  .bk-msg{font-size:12px;text-align:center;margin-top:8px;min-height:16px;line-height:1.4;}
   .cl-h{font-size:14px;font-weight:700;color:#ffd98a;letter-spacing:.06em;margin-bottom:5px;}
   .cl-i{font-size:12.5px;color:#b8aed8;line-height:1.7;}
   .cx-sec{color:#bdb4ea;font-size:12px;letter-spacing:.16em;margin:15px 0 7px;font-weight:700;}
@@ -223,8 +229,8 @@
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div id="verBadge">
-    <div class="vb-top"><b>v55</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
-    <div class="vb-time">2026-06-16 09:30</div>
+    <div class="vb-top"><b>v56</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
+    <div class="vb-time">2026-06-16 09:40</div>
   </div>
   <div id="ljBadge">✦ <span id="ljBal">0</span> 灵晶</div>
   <div class="panel">
@@ -322,7 +328,31 @@
     <div class="altar-bal">✦ <b id="altarLj">0</b> 灵晶</div>
     <div id="altarList"></div>
     <div class="altar-note">⚔ 永久强化在「弑神」难度<b>不生效</b>——弑神是纯净竞技档，大家凭操作公平冲榜</div>
+    <button class="btn ghost" id="altarBackupBtn" style="margin-bottom:8px;">📋 存档备份码 · 换机不丢档</button>
     <button class="btn ghost" id="altarBack">返回</button>
+  </div>
+</div>
+
+<div id="backup" class="overlay hidden" style="z-index:55;">
+  <div class="panel" style="max-width:520px;max-height:88vh;overflow-y:auto;">
+    <button class="ovx-close" id="backupCloseTop" aria-label="关闭" title="关闭">✕</button>
+    <div class="eyebrow" style="color:var(--gold);">Save Backup</div>
+    <h1 class="title" style="font-size:28px;margin-bottom:4px;">存档备份码</h1>
+    <div class="sub" style="font-size:12px;line-height:1.7;">把灵晶 / 强化 / 解锁 / 成就导成一串码。换手机或清缓存后,粘贴导入即可恢复。<br>(排行榜成绩在云端、与昵称绑定,不受影响)</div>
+    <div class="bk-sec">
+      <div class="bk-h">📤 导出 · 生成备份码</div>
+      <button class="btn" id="bkGenBtn" style="width:100%;font-size:14px;">生成当前存档的备份码</button>
+      <textarea id="bkOut" class="bk-area" readonly placeholder="点上方按钮生成,然后复制保存…"></textarea>
+      <button class="btn ghost" id="bkCopyBtn" style="width:100%;font-size:13px;">📋 复制</button>
+    </div>
+    <div class="bk-sec">
+      <div class="bk-h">📥 导入 · 恢复存档</div>
+      <div class="bk-warn">⚠ 导入会<b>覆盖</b>当前设备上的存档(灵晶 / 解锁 / 成就),确认后再操作。</div>
+      <textarea id="bkIn" class="bk-area" placeholder="把备份码粘贴到这里…"></textarea>
+      <button class="btn" id="bkImpBtn" style="width:100%;font-size:14px;">导入恢复</button>
+      <div id="bkMsg" class="bk-msg"></div>
+    </div>
+    <button class="btn ghost" id="backupBack" style="margin-top:4px;">返回</button>
   </div>
 </div>
 
@@ -373,7 +403,8 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
-<div class="cl-ver">当前版本 <b>v55</b> · 2026-06-16 09:30</div>
+<div class="cl-ver">当前版本 <b>v56</b> · 2026-06-16 09:40</div>
+<div class="cl-v"><div class="cl-h">v56 · 2026-06-16</div><div class="cl-i">补上养成系统的最后一块:<b>📋 存档备份码</b>(换手机 / 清缓存不丢档)。入口在<b>主菜单 → 🔮 祭坛 → 存档备份码</b>。<b>导出</b>:一键把你的灵晶 / 强化 / 解锁 / 成就 / 昵称 / 偏好打包成一串 <b>SF1- 开头的备份码</b>,点「复制」存到备忘录或发给自己即可。<b>导入</b>:在新设备粘贴备份码 →「导入恢复」→ <b>二次确认覆盖</b>(防手滑误覆盖)→ 自动刷新还原,重装 / 换机 / 清缓存都救得回来。备份码已做<b>校验</b>,残缺或乱填会提示「无效」并拒绝导入;中文昵称等也能无损还原。说明:<b>排行榜成绩存在云端、与昵称绑定,不受本地存档影响</b>;至此「打 → 攒灵晶 → 变强 → 不丢档」整条养成链闭环。</div></div>
 <div class="cl-v"><div class="cl-h">v55 · 2026-06-16</div><div class="cl-i">新增一个全新法术与一套隐藏连携。<b>🗿 守护图腾(新法术)</b>:局内商店可抽到、<b>所有法杖通用</b>——放下一座图腾,自动电击射程内最近的敌人,持续数秒后消失,作为"布防型"火力补充,走位时丢在身后或敌群必经之路都好用。<b>御灵共鸣(隐藏连携)</b>:当你<b>同时持有御兽法杖与守护图腾</b>时,图腾化为「御灵图腾」——范围内的灵兽 ①<b>攻击提速</b>(打得更勤)②<b>持续回血</b> ③图腾在场时<b>额外多召一只灵兽</b>(第 5 只,撤掉图腾即退场);此连携已写进图腾说明,御兽流玩家凑齐这套会明显变强。<b>数值为初版手感</b>(偏爽):图腾伤害 / 射程 / 攻速、连携提速与回血量,后续按试玩反馈微调。</div></div>
 <div class="cl-v"><div class="cl-h">v54 · 2026-06-16</div><div class="cl-i">新增<b>法杖解锁系统</b>,让灵晶养成多一个长期目标。<b>原 6 把法杖(学徒 / 散射 / 狙击 / 噬血 / 蓄能 / 荆棘)依旧免费</b>,随时可选;<b>🐾 御兽法杖改为灵晶解锁</b>(需 <b>250</b> 灵晶)——在选杖界面,锁住的法杖会显示 🔒 与价格,点一下弹出确认框,灵晶足够即可永久解锁(不够则置灰提示「灵晶不足」),解锁后写入存档、所有难度通用(含弑神;解锁≠数值强化,不破坏冲榜公平)。说明:上版御兽为免费试玩,本版起需用灵晶解锁,攒约 3-4 局即可拿下;这套框架也为后续新法杖 / 新法术的解锁打好了底子。</div></div>
 <div class="cl-v"><div class="cl-h">v53 · 2026-06-16</div><div class="cl-i">本次上线<b>养成系统</b>与一把全新法杖。<b>✦ 灵晶 · 🔮 祭坛</b>:每局结束都会按波数与击杀结算「灵晶」(永久积累、自动存档),回主菜单点「🔮 祭坛 · 灵晶强化」即可消费——当前可强化<b>体魄</b>(生命上限,满级 +30%)与<b>法力</b>(法术伤害,满级 +25%),越升越贵;养成核心闭环已通:打 → 攒灵晶 → 变强 → 再战。<b>弑神为净土</b>:为保证冲榜公平,弑神难度<b>不吃</b>体魄 / 法力等永久强化(纯凭操作),但新法杖 / 新法术照常生效;其余四档(凡尘 / 通玄 / 入圣 / 渡劫)强化全部生效。<b>🐾 御兽法杖(全新)</b>:御兽流——不再主要自己发弹,而是召唤<b>山海灵兽</b>并肩作战,随波次增援(2 → 3 → 4 只),四兽各有打法:<b>狻猊🦁</b>近战猛扑 + 击退、<b>毕方🔥</b>中场盘旋喷火、<b>应龙🐲</b>远程蓄力降雷高爆发、<b>白泽🦄</b>守在身边给全队加伤 + 回血;灵兽有血量、被击倒后延迟自动重召,作为取舍自身法术伤害 -30%,所有难度可用。<b>瞄准模式挪位</b>:开始菜单移除瞄准选择(让排行榜更早露出),瞄准只保留在暂停菜单,且点选「就近 / 智能」会在按钮下方显示该模式说明。</div></div>
@@ -1241,6 +1272,30 @@ let META={lj:0,up:{},unlocked:{}}, runRewardBase=0;
 function loadMeta(){ try{ const m=JSON.parse(localStorage.getItem('sf_meta')||'{}'); META.lj=m.lj||0; META.up=m.up||{}; META.unlocked=m.unlocked||{}; }catch(e){} }
 function saveMeta(){ try{ localStorage.setItem('sf_meta', JSON.stringify(META)); }catch(e){} }
 function refreshLj(){ const e=document.getElementById('ljBal'); if(e)e.textContent=META.lj; }
+/* ═══ 存档备份码:导出/导入(换机不丢档) ═══ */
+const BK_KEYS=['sf_meta','sf_profile','sf_name','sf_aim','sf_diff'];
+let _bkConfirm=false;
+function genBackup(){
+  const obj={v:1}; for(const k of BK_KEYS) obj[k]=localStorage.getItem(k);
+  try{ return 'SF1-'+btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }catch(e){ return ''; }
+}
+function parseBackup(code){
+  code=(code||'').trim().replace(/\s+/g,'');
+  if(code.slice(0,4)!=='SF1-') return null;
+  try{ const obj=JSON.parse(decodeURIComponent(escape(atob(code.slice(4))))); if(!obj||typeof obj!=='object'||obj.v!==1) return null; return obj; }catch(e){ return null; }
+}
+function applyBackup(obj){
+  for(const k of BK_KEYS){ const v=obj[k]; if(typeof v==='string') localStorage.setItem(k,v); else if(v===null) localStorage.removeItem(k); }
+}
+function openBackup(){
+  _bkConfirm=false;
+  const o=document.getElementById('bkOut'); if(o)o.value='';
+  const i=document.getElementById('bkIn'); if(i)i.value='';
+  const m=document.getElementById('bkMsg'); if(m)m.textContent='';
+  const ib=document.getElementById('bkImpBtn'); if(ib)ib.textContent='导入恢复';
+  const cb=document.getElementById('bkCopyBtn'); if(cb)cb.textContent='📋 复制';
+  document.getElementById('backup').classList.remove('hidden');
+}
 /* 结算给灵晶:按 波数 + 击杀(保守草稿,数值以后可调);用基线防止"通关→无尽→死亡"把前 15 波重复计 */
 function awardLj(){ const total=Math.max(0, waveNum*3 + Math.floor(kills/8)); const d=Math.max(0, total-runRewardBase); runRewardBase=total; if(d>0){ META.lj+=d; saveMeta(); } refreshLj(); return d; }
 
@@ -5219,6 +5274,17 @@ $('bAchv').onclick=openAchv;
 $('altarBtn').onclick=openAltar;
 $('altarBack').onclick=()=>$('altar').classList.add('hidden');
 $('altarCloseTop').onclick=()=>$('altar').classList.add('hidden');
+$('altarBackupBtn').onclick=()=>{ $('altar').classList.add('hidden'); openBackup(); };
+$('backupBack').onclick=()=>$('backup').classList.add('hidden');
+$('backupCloseTop').onclick=()=>$('backup').classList.add('hidden');
+$('bkGenBtn').onclick=()=>{ const c=genBackup(); $('bkOut').value=c||'生成失败,请重试'; const m=$('bkMsg'); if(m)m.textContent=''; try{S.card();}catch(e){} };
+$('bkCopyBtn').onclick=async()=>{ const ta=$('bkOut'); if(!ta.value)return; try{ await navigator.clipboard.writeText(ta.value); $('bkCopyBtn').textContent='已复制 ✓'; }catch(e){ ta.focus(); ta.select(); $('bkCopyBtn').textContent='已选中 · 长按复制'; } setTimeout(()=>{$('bkCopyBtn').textContent='📋 复制';},1600); };
+$('bkIn').oninput=()=>{ _bkConfirm=false; $('bkImpBtn').textContent='导入恢复'; const m=$('bkMsg'); if(m){m.textContent='';} };
+$('bkImpBtn').onclick=()=>{ const obj=parseBackup($('bkIn').value); const m=$('bkMsg');
+  if(!obj){ m.textContent='✗ 备份码无效或已损坏,请检查是否完整粘贴'; m.style.color='#ff8a8a'; _bkConfirm=false; $('bkImpBtn').textContent='导入恢复'; try{S.no();}catch(e){} return; }
+  if(!_bkConfirm){ _bkConfirm=true; $('bkImpBtn').textContent='⚠ 确认覆盖?再点一次'; m.textContent='校验通过 · 再点一次按钮确认覆盖当前存档'; m.style.color='#ffd24d'; return; }
+  applyBackup(obj); m.textContent='✓ 导入成功,正在刷新…'; m.style.color='#8df07a'; try{S.buy();}catch(e){} setTimeout(()=>location.reload(),750);
+};
 $('bestiaryClose').onclick=()=>$('bestiary').classList.add('hidden');
 $('bestiaryCloseTop').onclick=()=>$('bestiary').classList.add('hidden');
 $('achvClose').onclick=()=>$('achv').classList.add('hidden');
