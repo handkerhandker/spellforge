@@ -413,6 +413,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.16 · 2026-06-16</div><div class="cl-i">🎮 再次改善<b>微信里右下角冲刺键被遮挡</b>的问题:微信内置浏览器底部那条 ‹ › 工具栏会时隐时现地盖住画面底部(所以之前"有时挡、有时不挡")。现在在微信内打开时,冲刺键会<b>自动再抬高一点</b>避开它。(想彻底清爽,可用微信右上「···」→「在浏览器打开」。)</div></div>
 <div class="cl-v"><div class="cl-h">v59.15 · 2026-06-16</div><div class="cl-i">🏆 修复:屏蔽不文明昵称后,排行榜只剩 9 名的问题——现在过滤掉不当昵称后会<b>自动补满</b>,前 10 名榜单始终完整。</div></div>
 <div class="cl-v"><div class="cl-h">v59.14 · 2026-06-16</div><div class="cl-i">🎯 <b>改善高难度看不清弹幕的问题(两项)</b>:① <b>敌方弹幕永远高亮置顶</b>——给每颗敌弹描上醒目的红心 + 白环,再乱的场面也一眼能看清,不会被你自己的特效盖住;② 暂停菜单新增「<b>💫 特效强度</b>」滑块,可把自己的粒子 / 辉光调淡(30%~100%),画面更清爽、更专心躲弹幕——<b>敌方弹幕始终醒目,不受滑块影响</b>。</div></div>
 <div class="cl-v"><div class="cl-h">v59.13 · 2026-06-16</div><div class="cl-i">🪙 新增「<b>聚宝</b>」三选一卡牌:<b>金币 / 道具的吸取范围 +30%</b>,最多叠 3 层,自动捡拾更轻松,不必再贴着金币跑。</div></div>
@@ -587,6 +588,7 @@ function resize(){
   DPR=Math.min(window.devicePixelRatio||1,1.5);   /* v59.7 性能:2→1.5,像素减约44%,绘制整体提速,高清屏上几乎无感 */
   W=window.innerWidth; H=window.innerHeight;
   safeB=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0;
+  if(/micromessenger/i.test(navigator.userAgent||'')) safeB+=52;   /* 微信内置浏览器底部 ‹ › 工具栏会盖住画面底部、且不计入系统安全区(还时隐时现→时遮时不遮);在微信里把冲刺键额外抬高,彻底避开 */
   cv.width=W*DPR; cv.height=H*DPR;
   cv.style.width=W+'px'; cv.style.height=H+'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
@@ -595,7 +597,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.15', APP_TIME='2026-06-16 17:21';
+const APP_VER='v59.16', APP_TIME='2026-06-16 17:22';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
