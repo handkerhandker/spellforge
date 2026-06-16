@@ -169,6 +169,17 @@
   .card.r2{--bc:#9b6bff;--gl:rgba(155,107,255,.3);--rc:#c9a8ff;box-shadow:0 0 22px rgba(155,107,255,.18);}
   .card.r3{--bc:#ffc24d;--gl:rgba(255,194,77,.32);--rc:#ffd98a;box-shadow:0 0 26px rgba(255,194,77,.22);}
   .card.dis{opacity:.45;pointer-events:none;}
+  .card.wlocked{opacity:.74;}
+  .card.wlocked .cic{filter:grayscale(.45) drop-shadow(0 0 8px rgba(255,194,77,.25));}
+  .card.wlocked .cn{color:#cdbfff;}
+  .wcost{font-size:13.5px;font-weight:800;color:var(--gold);white-space:nowrap;align-self:center;padding-left:6px;}
+  .wu-box{background:linear-gradient(160deg,#1b1638,#120e28);border:1px solid #4a3f7a;border-radius:20px;padding:26px 24px 22px;width:min(320px,86vw);text-align:center;box-shadow:0 14px 54px rgba(0,0,0,.55);}
+  .wu-ic{font-size:52px;filter:drop-shadow(0 0 16px rgba(255,194,77,.4));}
+  .wu-name{font-size:20px;font-weight:800;color:#fff;letter-spacing:.06em;margin:8px 0 5px;}
+  .wu-desc{font-size:12px;color:#a79fd6;line-height:1.55;margin-bottom:15px;}
+  .wu-cost{font-size:15px;color:var(--gold);font-weight:800;margin-bottom:18px;}
+  .wu-cost .wu-have{font-size:12px;color:#9a90c8;font-weight:400;margin-top:4px;}
+  #wuBuy.dis{opacity:.4;pointer-events:none;}
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(15px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;align-items:center;justify-content:center;line-height:1;}
@@ -212,8 +223,8 @@
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div id="verBadge">
-    <div class="vb-top"><b>v53</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
-    <div class="vb-time">2026-06-16 07:30</div>
+    <div class="vb-top"><b>v54</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
+    <div class="vb-time">2026-06-16 08:25</div>
   </div>
   <div id="ljBadge">✦ <span id="ljBal">0</span> 灵晶</div>
   <div class="panel">
@@ -362,7 +373,8 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
-<div class="cl-ver">当前版本 <b>v53</b> · 2026-06-16 07:30</div>
+<div class="cl-ver">当前版本 <b>v54</b> · 2026-06-16 08:25</div>
+<div class="cl-v"><div class="cl-h">v54 · 2026-06-16</div><div class="cl-i">新增<b>法杖解锁系统</b>,让灵晶养成多一个长期目标。<b>原 6 把法杖(学徒 / 散射 / 狙击 / 噬血 / 蓄能 / 荆棘)依旧免费</b>,随时可选;<b>🐾 御兽法杖改为灵晶解锁</b>(需 <b>250</b> 灵晶)——在选杖界面,锁住的法杖会显示 🔒 与价格,点一下弹出确认框,灵晶足够即可永久解锁(不够则置灰提示「灵晶不足」),解锁后写入存档、所有难度通用(含弑神;解锁≠数值强化,不破坏冲榜公平)。说明:上版御兽为免费试玩,本版起需用灵晶解锁,攒约 3-4 局即可拿下;这套框架也为后续新法杖 / 新法术的解锁打好了底子。</div></div>
 <div class="cl-v"><div class="cl-h">v53 · 2026-06-16</div><div class="cl-i">本次上线<b>养成系统</b>与一把全新法杖。<b>✦ 灵晶 · 🔮 祭坛</b>:每局结束都会按波数与击杀结算「灵晶」(永久积累、自动存档),回主菜单点「🔮 祭坛 · 灵晶强化」即可消费——当前可强化<b>体魄</b>(生命上限,满级 +30%)与<b>法力</b>(法术伤害,满级 +25%),越升越贵;养成核心闭环已通:打 → 攒灵晶 → 变强 → 再战。<b>弑神为净土</b>:为保证冲榜公平,弑神难度<b>不吃</b>体魄 / 法力等永久强化(纯凭操作),但新法杖 / 新法术照常生效;其余四档(凡尘 / 通玄 / 入圣 / 渡劫)强化全部生效。<b>🐾 御兽法杖(全新)</b>:御兽流——不再主要自己发弹,而是召唤<b>山海灵兽</b>并肩作战,随波次增援(2 → 3 → 4 只),四兽各有打法:<b>狻猊🦁</b>近战猛扑 + 击退、<b>毕方🔥</b>中场盘旋喷火、<b>应龙🐲</b>远程蓄力降雷高爆发、<b>白泽🦄</b>守在身边给全队加伤 + 回血;灵兽有血量、被击倒后延迟自动重召,作为取舍自身法术伤害 -30%,所有难度可用。<b>瞄准模式挪位</b>:开始菜单移除瞄准选择(让排行榜更早露出),瞄准只保留在暂停菜单,且点选「就近 / 智能」会在按钮下方显示该模式说明。</div></div>
 <div class="cl-v"><div class="cl-h">v52 · 2026-06-16</div><div class="cl-i">本次集中修复几处问题并优化结算页。<b>修复法术槽 5/4 漏洞</b>:此前法术槽已满(4/4)时,先卖掉一个法术再刷新商店,刷出的新法术能接连买入、突破上限到 5/4;现在买入时严格校验,满槽时"会占新槽的新法术"直接置灰为「法术槽已满 · 先卖出」,升级已有法术与购买符文不受影响,卖出腾位后又恢复可买。<b>修复结算页按钮够不到</b>:通关 / 失败结算页的「无尽模式 / 再次挑战」按钮会被顶出屏幕且点不到——排行榜自带内部滚动、整页却不滚,加入「本局解锁成就」后按钮被挤出可视区又滑不到;现改为排行榜整体展开、整页统一滚动,任何按钮都能滑到。<b>结算页改版</b>:本局解锁成就改为"一行两个"网格,省一半高度、排布更整齐;并把操作按钮做成并排一行、上移到"成就与排行榜之间",结算页一弹出即可见,不会只顾填名上榜而错过下面的按钮。<b>新增「回到初始页面」</b>:失败页新增此按钮(与再次挑战并排),通关页的「重新开始」也改为「回到初始页面」——此前结算后只能原难度直接重开、无法回主菜单,现在两页都能一键回到主菜单去换难度 / 看完整榜单 / 翻图鉴与成就。<b>浮层防切</b>:选法杖等满屏浮层加了保险,内容超出屏幕时改为可滚动(放得下时仍居中、外观不变),避免小屏上最后一项被切到点不着</div></div>
 <div class="cl-v"><div class="cl-h">v51 · 2026-06-15</div><div class="cl-i">新增两套系统。<b>🐉 异兽图鉴</b>:收录全部杂兵、精英词缀与 8 位古神 Boss(含四凶),每条都有打法定位、关键数值和一句应对贴士,Boss 还配真立绘;菜单和暂停界面都能查(打 Boss 时翻招式很方便)。<b>🏆 成就</b>:16 项收集向成就(初探山海 / 百兽伏诛 / 四凶克星 / 无尽 50 波 / 不吃红心通关 / 弑神通关 等),自动追踪进度,局内解锁会在顶部一闪而过提示、结算页还会汇总本局所斩获;成就页能看全部解锁进度。菜单底部新增「📖法术图鉴 · 🐉异兽图鉴 · 🏆成就」一排入口。图鉴与成就纯展示记录、不改动战斗数值。另外大幅强化「弑神」难度:精英词缀从前期(第 4 波)就出现且明显增多,会冒出更多霸体(免疫击退)、虚影(周期免疫)、淬毒(贴到掉血)等逼你主动应对的怪;红心掉落减半、容错更低;Boss 伤害 +25%、耐久略增,后期真有威胁;同屏怪量提高。仅影响弑神,其它难度原样不变</div></div>
@@ -447,6 +459,18 @@
   <h1 class="title" style="font-size:30px;">选择你的法杖</h1>
   <div class="sub" style="font-size:12px;letter-spacing:.18em;">法杖决定整局的玩法走向</div>
   <div id="wandRow" style="display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);"></div>
+</div>
+
+<!-- 法杖解锁确认 -->
+<div id="wandUnlock" class="overlay hidden" style="z-index:60;">
+  <div class="wu-box">
+    <div class="wu-ic" id="wuIc">🐾</div>
+    <div class="wu-name" id="wuName">御兽法杖</div>
+    <div class="wu-desc" id="wuDesc"></div>
+    <div class="wu-cost">解锁需 ✦ <b id="wuCost">250</b> 灵晶<div class="wu-have">你有 ✦ <b id="wuHave">0</b></div></div>
+    <button class="btn" id="wuBuy">解锁</button>
+    <button class="btn ghost" id="wuCancel" style="margin-top:9px;">取消</button>
+  </div>
 </div>
 
 <!-- 商店 -->
@@ -1280,6 +1304,9 @@ const WANDS=[
   {id:'thorns',icon:'🌹',name:'荆棘法杖',desc:'反伤流 · 受伤时向四周弹射荆棘,生命上限 +30,伤害 -15%',fx:{dmgM:.85,maxhpAdj:30,thorns:true}},
   {id:'summon',icon:'🐾',name:'御兽法杖',desc:'御兽流 · 召唤山海灵兽并肩作战(随波次增援至 4 只),以兽破敌;自身法术伤害 -30%',fx:{dmgM:.7,summon:true}}
 ];
+/* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked) */
+const WAND_COST={summon:250};
+function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
 function applyWand(w){
   player.wand=w; const f=w.fx;
   player.wandFx={dmgM:f.dmgM||1,cdM:f.cdM||1,spdM:f.spdM||1,extra:f.extra||0,
@@ -1349,13 +1376,28 @@ function buildWandSel(){
   const row=$('wandRow'); row.innerHTML='';
   for(const w of WANDS){
     const el=document.createElement('button');
-    el.className='card r2';
-    el.innerHTML='<div class="cic">'+w.icon+'</div><div class="ctx"><div class="cn">'+w.name+
-      '</div><div class="cd">'+w.desc+'</div></div>';
-    el.onclick=()=>{ S.card(); $('wandSel').classList.add('hidden'); launchRun(w); };
+    const ok=wandUnlocked(w.id);
+    el.className='card r2'+(ok?'':' wlocked');
+    if(ok){
+      el.innerHTML='<div class="cic">'+w.icon+'</div><div class="ctx"><div class="cn">'+w.name+
+        '</div><div class="cd">'+w.desc+'</div></div>';
+      el.onclick=()=>{ S.card(); $('wandSel').classList.add('hidden'); launchRun(w); };
+    } else {
+      el.innerHTML='<div class="cic">'+w.icon+'</div><div class="ctx"><div class="cn">'+w.name+
+        ' 🔒</div><div class="cd">'+w.desc+'</div></div><div class="wcost">✦ '+(WAND_COST[w.id]||0)+'</div>';
+      el.onclick=()=>{ openWandUnlock(w); };
+    }
     row.appendChild(el);
   }
   $('wandSel').classList.remove('hidden');
+}
+let _wuWand=null;
+function openWandUnlock(w){
+  _wuWand=w; const cost=WAND_COST[w.id]||0, enough=META.lj>=cost;
+  $('wuIc').textContent=w.icon; $('wuName').textContent=w.name; $('wuDesc').textContent=w.desc;
+  $('wuCost').textContent=cost; $('wuHave').textContent=META.lj;
+  const buy=$('wuBuy'); buy.classList.toggle('dis',!enough); buy.textContent=enough?'解锁':'灵晶不足';
+  $('wandUnlock').classList.remove('hidden');
 }
 /* ============ 冲刺 ============ */
 function tryDash(){
@@ -5098,6 +5140,11 @@ $('pauseBeastBtn').onclick=openBestiary;
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+$('wuCancel').onclick=()=>$('wandUnlock').classList.add('hidden');
+$('wuBuy').onclick=()=>{ if(!_wuWand)return; const cost=WAND_COST[_wuWand.id]||0;
+  if(META.lj<cost){ try{S.no();}catch(e){} return; }
+  META.lj-=cost; META.unlocked[_wuWand.id]=true; saveMeta(); refreshLj();
+  try{S.buy();}catch(e){} $('wandUnlock').classList.add('hidden'); buildWandSel(); };
 function openDaily(){
   const {wand,mods}=todaysDaily();
   $('dailyDate').textContent=todayStr()+' · 全员同一套挑战';
