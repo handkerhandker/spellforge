@@ -157,6 +157,17 @@
   .stat span{font-size:11px;letter-spacing:.25em;color:#7e76ad;padding-left:.25em;}
   /* —— 法术卡牌：本作的签名时刻 —— */
   #cardRow{display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);}
+  #evoRow{display:flex;flex-direction:column;gap:11px;width:min(460px,94vw);align-items:stretch;}
+  .evo-label{font-size:11px;letter-spacing:.14em;color:#ffd98a;text-align:center;margin:14px 0 2px;text-shadow:0 0 10px rgba(255,194,77,.4);}
+  .card.evocard{--bc:#ffce4d;--gl:rgba(255,206,77,.42);--rc:#ffe6a0;background:linear-gradient(160deg,#2c2113,#191207);border-color:#ffce4d;box-shadow:0 0 28px rgba(255,194,77,.4);}
+  .card.evocard .cn{color:#ffe6a0;}
+  .card.evocard .cic{filter:drop-shadow(0 0 12px rgba(255,210,90,.7));}
+  .evo-tag{color:#1a1408 !important;background:linear-gradient(90deg,#ffe08a,#ffb02e);border-color:transparent !important;font-weight:800;}
+  .has-evo .card{padding:10px 14px;gap:11px;}
+  .has-evo .cic{font-size:26px;}
+  .has-evo .cn{font-size:14px;}
+  .has-evo .cd{font-size:11px;margin-top:2px;}
+  .has-evo .cr{font-size:9px;letter-spacing:.2em;}
   #relicRow{display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);}
   .card{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:15px;cursor:pointer;
     text-align:left;background:linear-gradient(160deg,#1b1538,#120e28);
@@ -392,6 +403,7 @@
   <h1 class="title" style="font-size:30px;">选择强化</h1>
   <div class="sub" id="cardSub" style="font-size:12px;letter-spacing:.18em;"></div>
   <div id="cardRow"></div>
+  <div id="evoRow"></div>
   <button class="btn ghost" id="rerollBtn" style="margin-top:2px;padding:10px 26px;font-size:13px;">🔄 重抽一组 (8💰)</button>
   <button class="btn ghost" id="cardCodexBtn" style="margin-top:6px;padding:8px 22px;font-size:12.5px;opacity:.92;">📖 法术图鉴</button>
 </div>
@@ -435,6 +447,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v61.1 · 2026-06-16</div><div class="cl-i">⚡ 性能打磨:在「全部法术都进化 + 符文叠满」的极限流派下,地面火海 / 冰径会瞬间铺满整屏,旧版可能拖慢手机;现已为地面效果加上数量上限并适度优化,极限场面也能保持流畅,观感几乎无差别。</div></div>
+<div class="cl-v"><div class="cl-h">v61 · 2026-06-16</div><div class="cl-i">⚔️ <b>全新「武器进化」系统!</b>把某个法术练到 <b>Lv5</b> 并持有<b>对应符文</b>,选牌时会多出一张<b>金色进化卡</b>,将法术觉醒成更强形态:🔥火球术+分裂→<b>💥焚天</b>(命中炸成连环爆炸、地面燃起火海持续灼烧);⚡连锁闪电+多重→<b>🌩雷罚</b>(同时劈中周围全部敌人 + 随机天降雷霆);🗡️环刃术+急速→<b>⚔万刃</b>(环刃翻倍、高速旋转贴身绞杀);❄️寒冰锥+穿透→<b>🧊永冬之矛</b>(贯穿全场的寒冰长矛 + 减速冰径)。进化卡是<b>额外选项、不挤占</b>原本的三选一;首批 4 种已全部收进「📖 法术图鉴」。弑神难度同样可进化。</div></div>
 <div class="cl-v"><div class="cl-h">v60.1 · 2026-06-16</div><div class="cl-i">🆕 <b>新手引导</b>:第一次玩的玩家进来会有一段简短上手引导(移动 / 躲弹幕 / 冲刺 / 三选一 / 商店,共 5 页,可随时跳过)。<b>老玩家不受影响、不会被弹</b>;想回看的话,主菜单左上角点「怎么玩」随时打开。另外顶部的版本 / 灵晶信息栏改为<b>跟随页面滚动</b>,下滑时不再挡住下面的字。</div></div>
 <div class="cl-v"><div class="cl-h">v60 · 2026-06-16</div><div class="cl-i">🌍 <b>每日挑战上全球榜了!</b>以前每日挑战只记你本地最好成绩,现在全球同台竞技:① 打完直接<b>提交到「今日挑战榜」</b>,看自己在全球第几;② <b>👑 昨日冠军</b>——每天进来就看到昨天谁是第一,给你一个超越的目标;③ <b>🔥 连续挑战天数</b>——记录你连打了几天,别断啦!(每日挑战每天固定法杖 + 变数、全员同一套,公平比拼。)</div></div>
 <div class="cl-v"><div class="cl-h">v59.16 · 2026-06-16</div><div class="cl-i">🎮 再次改善<b>微信里右下角冲刺键被遮挡</b>的问题:微信内置浏览器底部那条 ‹ › 工具栏会时隐时现地盖住画面底部(所以之前"有时挡、有时不挡")。现在在微信内打开时,冲刺键会<b>自动再抬高一点</b>避开它。(想彻底清爽,可用微信右上「···」→「在浏览器打开」。)</div></div>
@@ -621,8 +635,8 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v60.1', APP_TIME='2026-06-16 19:50';
-{ const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
+const APP_VER='v61.1', APP_TIME='2026-06-16 19:52';
+{ const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
 let AC=null, muted=false;
@@ -777,7 +791,11 @@ const SPELL_DEF={
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
   swarm:{name:'蜂群飞弹',icon:'🐝',col:'#ffd24d',dmg:5,cd:1.4,spd:300,r:5,life:1.5,desc:'射出 3 枚自动追踪的飞弹'},
   chain:{name:'回旋刃',icon:'🪃',col:'#d8c6ff',cd:.9,dmg:14,spd:480,r:6,life:1.15,chain:1,desc:'飞行一段后回旋,可二次命中'},
-  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽提速+回血+多召一只'}
+  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽提速+回血+多召一只'},
+  firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
+  thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
+  thousandblade:{name:'万刃',icon:'⚔️',col:'#e6d4ff',evo:'blade',desc:'【进化·环刃术】环刃数量翻倍、高速旋转,化作贴身绞肉风暴'},
+  winterspear:{name:'永冬之矛',icon:'🧊',col:'#a8ecff',cd:.9,dmg:12,spd:520,r:8,life:1.1,slow:2.6,evo:'ice',desc:'【进化·寒冰锥】贯穿全场的寒冰长矛,冻结沿途之敌并留下减速冰径'}
 };
 const CARD_DEFS=[
   {id:'bolt',kind:'spell',rar:1},
@@ -2899,11 +2917,11 @@ function smartAim(){
 function castAll(dt){
   if(!enemies.length) return;
   /* 兜底:玩家把所有能射出子弹的法术卖光后会"完全不能攻击",此时注入保底奥术飞弹 */
-  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm'];
+  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','firestorm','winterspear','thunderjudge','thousandblade'];
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
   if(!_hasBal)player.spells.bolt={lv:1,t:.2};
   for(const id in player.spells){
-    if(id==='blade') continue;
+    if(id==='blade'||id==='thousandblade') continue;
     const s=player.spells[id], def=SPELL_DEF[id];
     s.t-=dt;
     if(s.t>0) continue;
@@ -2934,6 +2952,7 @@ function castAll(dt){
       S.zap(); continue;
     }
     if(id==='totem'){ spawnTotem(s.lv); continue; }
+    if(id==='thunderjudge'){ thunderJudge(dmgOf(def,s.lv),s.lv); S.zap(); continue; }
     if(id==='zap'){
       const jumps=2+s.lv+player.mods.multi+(activeSynergies().find(x=>x.id==='thunder_web')?1:0);
       chainZap(jumps, dmgOf(def,s.lv), 270+22*s.lv);
@@ -2985,7 +3004,7 @@ function castAll(dt){
       playerProfile._shotCount=(playerProfile._shotCount||0)+1;
     }
     if(chargedShot){ S.fire(); puff(player.x,player.y,'#fff3b0',8); }
-    if(id==='fire'||id==='meteor')S.fire();
+    if(id==='fire'||id==='meteor'||id==='firestorm')S.fire();
     else if(id==='arc'||id==='chain')S.zap();
     else S.shoot();
   }
@@ -3034,6 +3053,7 @@ function makeBullet(id,lv,a){
     cloud:id==='venom',small:false,hits:new Set(),tt:0,dead:false,
     arcChain:def.arc||0,chain:def.chain||0,returning:false};
   /* 协同修饰 */
+  if(id==='winterspear')b.pierce+=6;
   synergyApplyToBullet(b);
   return b;
 }
@@ -3058,6 +3078,7 @@ function expire(b,skipAoe){
   if(b.dead)return; b.dead=true;
   if(b.aoe&&!skipAoe) explode(b.x,b.y,b.aoe,b.dmg*.75,b.col);
   if(b.cloud) clouds.push({x:b.x,y:b.y,r:58+12*b.lv,life:3.2,dps:6+3*b.lv*(1+.25*player.mods.amp),tick:0});
+  if(b.id==='firestorm')firestormBurst(b.x,b.y,b.dmg,b.lv);
   if(b.split>0&&!b.small){
     const n=1+b.split*2;
     for(let i=0;i<n;i++){
@@ -3078,6 +3099,25 @@ function explode(x,y,r,dmg,col){
   spawnPart(x,y,0,0,.22,r*.8,col,true);
 }
 /* —— 词缀/状态辅助 —— */
+function firestormBurst(x,y,dmg,lv){
+  for(let k=0;k<4;k++){ const a=k/4*TAU+Math.random()*.8, ex=x+Math.cos(a)*46, ey=y+Math.sin(a)*46;
+    for(const e of enemies){ if(!e.dead&&dist2(ex,ey,e.x,e.y)<50*50)damageEnemy(e,dmg*.5,{kx:e.x-ex,ky:e.y-ey}); }
+    for(let i=0;i<8;i++){ const aa=Math.random()*TAU, sp=rand(60,200); spawnPart(ex,ey,Math.cos(aa)*sp,Math.sin(aa)*sp,rand(.2,.45),rand(2,4),pick(['#ff9a3a','#ffd24d','#ff5a2a'])); }
+  }
+  clouds.push({x,y,r:66+8*lv,life:2.4,dps:7+3*lv*(1+.25*player.mods.amp),tick:0,kind:'fire'});
+  cam.shake=Math.min(cam.shake+4,10);
+}
+function thunderJudge(dmg,lv){
+  const R=300+18*lv, r2=R*R;
+  for(const e of enemies){ if(e.dead)continue; if(dist2(player.x,player.y,e.x,e.y)<r2){ zapFX(player.x,player.y,e.x,e.y); damageEnemy(e,dmg,{kx:e.x-player.x,ky:e.y-player.y}); } }
+  const alive=enemies.filter(e=>!e.dead), strikes=2+Math.floor(lv/2);
+  for(let k=0;k<strikes&&alive.length;k++){ const tg=alive[Math.floor(Math.random()*alive.length)];
+    zapFX(tg.x,tg.y-260,tg.x,tg.y);
+    for(const e of enemies){ if(!e.dead&&dist2(tg.x,tg.y,e.x,e.y)<48*48)damageEnemy(e,dmg*.9,{kx:e.x-tg.x,ky:e.y-tg.y}); }
+    for(let i=0;i<6;i++){ const a=Math.random()*TAU; spawnPart(tg.x,tg.y,Math.cos(a)*130,Math.sin(a)*130,.3,3,'#ffe96b'); }
+  }
+  cam.shake=Math.min(cam.shake+3,9);
+}
 function applyPoison(dur,dps){ player.poisonT=Math.max(player.poisonT,dur); player.poisonDmg=Math.max(player.poisonDmg,dps); }
 function applySlow(dur){ player.slowT=Math.max(player.slowT,dur); }
 function shieldNearby(t){
@@ -3511,6 +3551,10 @@ function buildCodex(){
   let any=false; for(const c of CARD_DEFS)if(c.kind==='curse'){ if(!any){h+='<div class="cx-sec">⚖ 契约 · 取舍(高风险高回报)</div>';any=true;} h+=cxItem(c.icon,c.name,'取舍','',c.desc); }
   h+='<div class="cx-sec">✦ 古神遗物 · 每 5 波击败 Boss 后三选一(不重复 · 所有难度通用)</div>';
   for(const r of RELICS) h+=cxItem(r.icon, r.name, ({1:'普通',2:'稀有',3:'史诗'})[r.rar]||'', '', r.desc);
+  h+='<div class="cx-sec">✨ 武器进化 · 法术练到 Lv'+EVO_LV+' + 持有对应符文 → 选牌时出现进化卡</div>';
+  const _RCN={split:'分裂符文',multi:'多重符文',haste:'急速符文',pierce:'穿透符文'};
+  for(const e of EVOS){ const bd=SPELL_DEF[e.base], ed=SPELL_DEF[e.id];
+    h+=cxItem(ed.icon, ed.name, bd.icon+bd.name+' + '+(_RCN[e.rune]||e.rune), '', ed.desc.replace(/^【[^】]*】/,'')); }
   $('codexBody').innerHTML=h;
 }
 function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
@@ -3696,6 +3740,23 @@ function applyCard(c){
     }
   }
 }
+const EVO_LV=5;
+const EVOS=[
+  {base:'fire',rune:'split',id:'firestorm'},
+  {base:'zap',rune:'multi',id:'thunderjudge'},
+  {base:'blade',rune:'haste',id:'thousandblade'},
+  {base:'ice',rune:'pierce',id:'winterspear'}
+];
+function eligibleEvos(){ if(!player||!player.spells)return []; return EVOS.filter(e=> player.spells[e.base] && (player.spells[e.base].lv||0)>=EVO_LV && (player.mods[e.rune]||0)>=1 && !player.spells[e.id] ); }
+function doEvolve(e){
+  const cur=player.spells[e.base], lv=Math.max(EVO_LV,(cur&&cur.lv)||EVO_LV);
+  delete player.spells[e.base];
+  player.spells[e.id]={lv:lv,t:.2,evo:true};
+  const bd=SPELL_DEF[e.base], ed=SPELL_DEF[e.id];
+  try{announce('✨ 进化！'+ed.icon+' '+ed.name, bd.name+' → '+ed.name);}catch(err){}
+  try{S.fire();}catch(err){}
+  try{cam.shake=Math.min(cam.shake+6,12);}catch(err){}
+}
 function buildCards(){
   const row=$('cardRow'); row.innerHTML='';
   const opts=rollCards(3);
@@ -3716,6 +3777,18 @@ function buildCards(){
   const rb=$('rerollBtn');
   rb.textContent='🔄 重抽一组 ('+REROLL_COST+'💰) · 现有 '+coins+'💰';
   rb.style.opacity=coins>=REROLL_COST?'1':'.45';
+  const _evos=eligibleEvos(), _er=$('evoRow');
+  if(_er){ _er.innerHTML='';
+    if(_evos.length){ $('cards').classList.add('has-evo');
+      const lab=document.createElement('div'); lab.className='evo-label'; lab.textContent='✨ 可进化 · 额外选项,不占上方名额'; _er.appendChild(lab);
+      for(const e of _evos){ const bd=SPELL_DEF[e.base], ed=SPELL_DEF[e.id];
+        const el=document.createElement('button'); el.className='card evocard';
+        el.innerHTML='<div class="cic">'+ed.icon+'</div><div class="ctx"><div class="cn">'+bd.icon+' → '+ed.name+'</div><div class="cd">'+ed.desc.replace(/^【[^】]*】/,'')+'</div></div><div class="cr evo-tag">✨ 进化</div>';
+        el.onclick=()=>{ S.card(); doEvolve(e); $('cards').classList.add('hidden'); $('cards').classList.remove('has-evo'); if(shopWave(waveNum)){ openShop(); } else { startWave(waveNum+1); state='play'; } };
+        _er.appendChild(el);
+      }
+    } else { $('cards').classList.remove('has-evo'); }
+  }
   $('cards').classList.remove('hidden');
 }
 
@@ -4011,10 +4084,11 @@ function update(dt){
   updatePlayerProfile(dt);
 
   /* 环刃 */
-  const bl=player.spells.blade;
+  const bl=player.spells.blade||player.spells.thousandblade;
   if(bl){
-    player.bladeAng+=dt*3;
-    const n=bl.lv+1, R=60;
+    const evo=!!player.spells.thousandblade;
+    player.bladeAng+=dt*(evo?5.2:3);
+    const n=(bl.lv+1)*(evo?2:1), R=evo?72:60;
     for(let i=0;i<n;i++){
       const a=player.bladeAng+i/n*TAU;
       const bx=player.x+Math.cos(a)*R, by=player.y+Math.sin(a)*R;
@@ -4022,8 +4096,8 @@ function update(dt){
         if(e.dead||e.bladeCD>0)continue;
         const rr=10+e.r;
         if(dist2(bx,by,e.x,e.y)<rr*rr){
-          e.bladeCD=.4;
-          damageEnemy(e,10*(1+.45*(bl.lv-1))*(1+.25*player.mods.amp),{kx:e.x-player.x,ky:e.y-player.y});
+          e.bladeCD=evo?.28:.4;
+          damageEnemy(e,10*(1+.45*(bl.lv-1))*(1+.25*player.mods.amp)*(evo?1.5:1),{kx:e.x-player.x,ky:e.y-player.y});
         }
       }
     }
@@ -4071,6 +4145,7 @@ function update(dt){
       }
     }
     b.x+=b.vx*dt; b.y+=b.vy*dt; b.life-=dt;
+    if(b.id==='winterspear'){ b._ft=(b._ft||0)+dt; if(b._ft>=.13){ b._ft=0; clouds.push({x:b.x,y:b.y,r:30,life:1.5,dps:5,tick:0,kind:'frost',slow:1.2}); } }
     b.tt+=dt;
     if(b.tt>.05&&parts.length<400){b.tt=0;spawnPart(b.x,b.y,rand(-15,15),rand(-15,15),.25,b.r*.5,b.col);}
     /* 墙 */
@@ -4198,10 +4273,11 @@ function update(dt){
   for(const c of clouds){
     c.life-=dt;c.tick-=dt;
     if(c.tick<=0){c.tick=.4;
-      for(const e of enemies){if(!e.dead&&dist2(c.x,c.y,e.x,e.y)<(c.r+e.r)*(c.r+e.r))damageEnemy(e,c.dps*.4);}
+      for(const e of enemies){if(!e.dead&&dist2(c.x,c.y,e.x,e.y)<(c.r+e.r)*(c.r+e.r)){if(c.dps)damageEnemy(e,c.dps*.4);if(c.slow)e.slowT=Math.max(e.slowT||0,c.slow);}}
     }
   }
   clouds=clouds.filter(c=>c.life>0);
+  if(clouds.length>130)clouds.splice(0,clouds.length-130);
 
   /* —— 刷怪 —— */
   waveT+=dt;
@@ -4461,7 +4537,7 @@ function render(){
   /* 毒云 */
   for(const c of clouds){
     const a=Math.min(1,c.life/1.2);
-    ctx.globalAlpha=.16*a;ctx.fillStyle='#6fce58';
+    ctx.globalAlpha=.16*a;ctx.fillStyle=c.kind==='fire'?'#ff7a3a':(c.kind==='frost'?'#9fe8ff':'#6fce58');
     for(let i=0;i<6;i++){const aa=i/6*TAU+c.life;
       ctx.beginPath();ctx.arc(c.x+Math.cos(aa)*c.r*.45,c.y+Math.sin(aa)*c.r*.45,c.r*.55,0,TAU);ctx.fill();}
     ctx.globalAlpha=1;
@@ -5202,16 +5278,16 @@ function drawPlayer(){
     ctx.restore();
   }
   /* 环刃:旋转魔刃(此前缺失渲染,导致看不见) */
-  if(p.spells&&p.spells.blade){
-    const bl=p.spells.blade, bn=bl.lv+1, BR=60;
+  if(p.spells&&(p.spells.blade||p.spells.thousandblade)){
+    const _evo=!!p.spells.thousandblade, bl=p.spells.blade||p.spells.thousandblade, bn=(bl.lv+1)*(_evo?2:1), BR=_evo?72:60;
     for(let i=0;i<bn;i++){
       const ba=p.bladeAng+i/bn*TAU;
       const bx=p.x+Math.cos(ba)*BR, by=p.y+Math.sin(ba)*BR;
       ctx.save();ctx.translate(bx,by);ctx.rotate(ba+Math.PI/2);
-      ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.4;ctx.fillStyle='#d8c6ff';
+      ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.4;ctx.fillStyle=_evo?'#ffd24d':'#d8c6ff';
       ctx.beginPath();ctx.arc(0,0,8,0,TAU);ctx.fill();
       ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
-      ctx.fillStyle='#cdb8ff';ctx.strokeStyle='#1a0a2e';ctx.lineWidth=2.2;
+      ctx.fillStyle=_evo?'#ffe6a0':'#cdb8ff';ctx.strokeStyle='#1a0a2e';ctx.lineWidth=2.2;
       ctx.beginPath();ctx.moveTo(0,-11);ctx.lineTo(4,4);ctx.lineTo(0,9);ctx.lineTo(-4,4);ctx.closePath();
       ctx.fill();ctx.stroke();
       ctx.strokeStyle='#fff';ctx.lineWidth=.8;ctx.stroke();
