@@ -413,6 +413,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.9 · 2026-06-16</div><div class="cl-i">🧹 排行榜会自动过滤不文明的昵称,榜单更清爽干净。</div></div>
 <div class="cl-v"><div class="cl-h">v59.8 · 2026-06-16</div><div class="cl-i">✍️ 更新说明排版与文案优化,读起来更清晰顺口。</div></div>
 <div class="cl-v"><div class="cl-h">v59.7 · 2026-06-16</div><div class="cl-i"><b>🚀 性能优化</b>:改善了长时间游玩、以及后期 / 无尽波怪物较多时<b>手机发烫、变卡</b>的情况,游玩更顺滑。画面表现、玩法与数值均保持不变。</div></div>
 <div class="cl-v"><div class="cl-h">v59.6 · 2026-06-16</div><div class="cl-i">修复暂停界面里「弑神 / 每日不可续战」那行说明<b>颜色太暗、几乎看不清</b>的问题——现改为清晰的暖橙色并加上 🔒 图标,一眼能看明白这两个模式的「保存并退出」为什么是灰的。</div></div>
@@ -585,7 +586,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v59.8', APP_TIME='2026-06-16 14:19';
+const APP_VER='v59.9', APP_TIME='2026-06-16 14:20';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3213,8 +3214,12 @@ function fmtTime(ts){
   const p=n=>String(n).padStart(2,'0');
   return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
+/* 排行榜不文明昵称屏蔽:名字含以下任一片段则不在榜单显示(数据仍在云端,仅前端隐藏;可随时增减) */
+const BLOCKED_NAMES=['大碌柒'];
+function isBlockedName(nm){ nm=String(nm||''); return BLOCKED_NAMES.some(b=>b&&nm.indexOf(b)>=0); }
 function renderBoard(el,list){
   if(!el)return;
+  if(Array.isArray(list)) list=list.filter(r=>!isBlockedName(r&&r.name));   /* 滤掉被屏蔽的昵称 */
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
