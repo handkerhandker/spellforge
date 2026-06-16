@@ -6,7 +6,6 @@
 <title>法术工坊 Spellforge</title>
 <style>
   :root{
-    --sab:env(safe-area-inset-bottom,0px);
     --ink:#0d0a1a; --stone:#171231; --rune:#8b7df0; --cyan:#6fe3ff;
     --fire:#ff9a5c; --gold:#ffd98a; --dim:#a79fd6;
   }
@@ -236,7 +235,7 @@
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div id="verBadge">
-    <div class="vb-top"><b>v58</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
+    <div class="vb-top"><b>v57</b> · <span id="clOpen" class="vb-link">更新说明</span></div>
     <div class="vb-time">2026-06-16 09:40</div>
   </div>
   <div id="ljBadge">✦ <span id="ljBal">0</span> 灵晶</div>
@@ -411,8 +410,7 @@
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
-<div class="cl-ver">当前版本 <b>v58</b> · 2026-06-16 12:50</div>
-<div class="cl-v"><div class="cl-h">v58 · 2026-06-16</div><div class="cl-i">三处体验优化。<b>① 残怪自动围拢</b>:打完 Boss 后,当场上只剩最后几只杂兵时,它们会<b>自动加速朝你聚拢</b>,并在屏幕边缘用箭头指明方向——不必再满地图追着清场,收尾更利索(只在"无 Boss、只剩 ≤3 只"时触发,不影响正常战斗)。<b>② 冲刺更跟手</b>:冲刺冷却由 2 秒<b>缩短到 1.6 秒</b>;并新增遗物<b>「🌀 疾风步」</b>(每 5 波击败 Boss 后三选一可遇),再<b>额外 -25% 冲刺冷却</b>,想强化走位的可专门凑——所有难度通用(含弑神,不破坏冲榜公平)。<b>③ 修复冲刺键被遮挡</b>:部分手机(尤其在微信内打开、底部带 ‹ › 工具栏时)右下角冲刺键会被挡住一部分;现在冲刺键会<b>自动避开屏幕底部安全区</b>,不再被压住。</div></div>
+<div class="cl-ver">当前版本 <b>v57</b> · 2026-06-16 10:45</div>
 <div class="cl-v"><div class="cl-h">v57 · 2026-06-16</div><div class="cl-i">新增 <b>📸 一键分享战绩</b>。通关 / 战死的结算页底部多了一个<b>「生成战绩图 · 分享」</b>按钮:点一下生成一张<b>暗紫魔法风的战绩图</b>——本局<b>波数、难度、连杀段位、击杀、灵晶</b>,加上<b>你这局打到的 Boss 立绘</b>和你的<b>昵称</b>,<b>左下角带一枚二维码,朋友扫码即可直接进游戏</b>。出图后可直接调系统分享发到微信 / 群,或<b>长按图片保存到相册</b>再自己发,方便拉朋友一起玩。顺手修复一处:<b>🗿 守护图腾此前漏收进「法术图鉴」</b>(v55 加图腾时只接了能用的逻辑、忘了补图鉴展示清单),现已补上 + 配「布防·电击」类型,图鉴里能正常翻到它了。</div></div>
 <div class="cl-v"><div class="cl-h">v56 · 2026-06-16</div><div class="cl-i">补上养成系统的最后一块:<b>📋 存档备份码</b>(换手机 / 清缓存不丢档)。入口在<b>主菜单 → 🔮 祭坛 → 存档备份码</b>。<b>导出</b>:一键把你的灵晶 / 强化 / 解锁 / 成就 / 昵称 / 偏好打包成一串 <b>SF1- 开头的备份码</b>,点「复制」存到备忘录或发给自己即可。<b>导入</b>:在新设备粘贴备份码 →「导入恢复」→ <b>二次确认覆盖</b>(防手滑误覆盖)→ 自动刷新还原,重装 / 换机 / 清缓存都救得回来。备份码已做<b>校验</b>,残缺或乱填会提示「无效」并拒绝导入;中文昵称等也能无损还原。说明:<b>排行榜成绩存在云端、与昵称绑定,不受本地存档影响</b>;至此「打 → 攒灵晶 → 变强 → 不丢档」整条养成链闭环。</div></div>
 <div class="cl-v"><div class="cl-h">v55 · 2026-06-16</div><div class="cl-i">新增一个全新法术与一套隐藏连携。<b>🗿 守护图腾(新法术)</b>:局内商店可抽到、<b>所有法杖通用</b>——放下一座图腾,自动电击射程内最近的敌人,持续数秒后消失,作为"布防型"火力补充,走位时丢在身后或敌群必经之路都好用。<b>御灵共鸣(隐藏连携)</b>:当你<b>同时持有御兽法杖与守护图腾</b>时,图腾化为「御灵图腾」——范围内的灵兽 ①<b>攻击提速</b>(打得更勤)②<b>持续回血</b> ③图腾在场时<b>额外多召一只灵兽</b>(第 5 只,撤掉图腾即退场);此连携已写进图腾说明,御兽流玩家凑齐这套会明显变强。<b>数值为初版手感</b>(偏爽):图腾伤害 / 射程 / 攻速、连携提速与回血量,后续按试玩反馈微调。</div></div>
@@ -559,11 +557,10 @@ const $=id=>document.getElementById(id);
 
 /* ============ 画布 ============ */
 const cv=$('game'), ctx=cv.getContext('2d');
-let W=0,H=0,DPR=1,vg=null,safeB=0;
+let W=0,H=0,DPR=1,vg=null;
 function resize(){
   DPR=Math.min(window.devicePixelRatio||1,2);
   W=window.innerWidth; H=window.innerHeight;
-  safeB=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0;
   cv.width=W*DPR; cv.height=H*DPR;
   cv.style.width=W+'px'; cv.style.height=H+'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
@@ -609,7 +606,7 @@ let usingTouch=false;
 cv.addEventListener('mousemove',e=>{ if(usingTouch)return; mouse.x=e.clientX; mouse.y=e.clientY; mouse.active=true; });
 const joy={id:null,ox:0,oy:0,dx:0,dy:0,on:false};
 let lastTapT=-9;
-function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72-safeB)<46*46; }
+function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72)<46*46; }
 function tstart(e){ usingTouch=true; initAudio();
   for(const t of e.changedTouches){
     if(inDashBtn(t.clientX,t.clientY)){ tryDash(); continue; }
@@ -1193,10 +1190,9 @@ let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
-let roundupT=0; /* 残怪围拢计时 */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
-const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0,dashCd:1};
+const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0};
 let relicMods={...RELIC_BASE};
 /* ============ 五档难度 ============
    只调敌人血量/伤害/刷怪量(玩家不变);eHp/eDmg 是无尽逐波复利的底数(弑神更陡)。
@@ -1418,7 +1414,6 @@ const RELICS=[
   {id:'last',   icon:'🔥',name:'背水一战',rar:2,desc:'生命低于 30% 时,伤害 +35%', apply:m=>m.lowHpDmg+=.35},
   {id:'vamp',   icon:'🩸',name:'饮血',    rar:2,desc:'每次击杀回复 1.5 生命',      apply:m=>m.killHeal+=1.5},
   {id:'dashf',  icon:'💨',name:'迅捷余韵',rar:2,desc:'冲刺后 2.5 秒内伤害 +22%',   apply:m=>m.dashDmg+=.22},
-  {id:'dashcd', icon:'🌀',name:'疾风步',  rar:2,desc:'冲刺冷却 -25%',              apply:m=>m.dashCd*=.75},
   {id:'first',  icon:'⚡',name:'先手',    rar:2,desc:'对满血敌人首发伤害 +50%',    apply:m=>m.firstHitDmg+=.5},
   /* ⚖ 取舍(玻璃大炮,只有主动选才会有) */
   {id:'glass',  icon:'💥',name:'易碎之刃',rar:2,desc:'伤害 +35%,但生命上限 -20%', apply:m=>m.dmgAdd+=.35, instant:p=>{const d=Math.round(p.maxhp*.2);p.maxhp-=d;p.hp=Math.min(p.hp,p.maxhp);}},
@@ -1485,7 +1480,6 @@ function openWandUnlock(w){
   $('wandUnlock').classList.remove('hidden');
 }
 /* ============ 冲刺 ============ */
-const DASH_CD=1.6;   /* 冲刺基础冷却(v58:2→1.6);遗物「疾风步」按比例再减 */
 function tryDash(){
   if(state!=='play'||!player||player.dashCD>0||player.dashT>0)return;
   let dx=0,dy=0;
@@ -1494,7 +1488,7 @@ function tryDash(){
   if(joy.on&&(Math.abs(joy.dx)>.15||Math.abs(joy.dy)>.15)){dx=joy.dx;dy=joy.dy;}
   const m=Math.hypot(dx,dy);
   if(m<.1){dx=player.dirx;dy=player.diry;} else {dx/=m;dy/=m;}
-  player.dashT=.16; const _cd=DASH_CD*(relicMods.dashCd||1); player.dashCD=_cd; player.dashCDmax=_cd; player.dashDX=dx; player.dashDY=dy;
+  player.dashT=.16; player.dashCD=2; player.dashDX=dx; player.dashDY=dy;
   player._dashBuff=2.5; /* 遗物:迅捷余韵 — 冲刺后伤害加成窗口 */
   player.iframe=Math.max(player.iframe,.26);
   S.dash(); puff(player.x,player.y,'#9d8ffc',6);
@@ -4010,17 +4004,11 @@ function update(dt){
 
   /* —— 敌人（统一 AI 调度） —— */
   updateFormations(dt);
-  /* 残怪围拢:无 Boss、无待生成、只剩≤3 只杂兵时,把它们逐渐拉向玩家(免去满地图追;越久拉得越快) */
-  let _nb=0,_bs=0; for(const _e of enemies){ if(_e.dead)continue; _e.boss?_bs++:_nb++; }
-  const _roundup=(spawnQ.length===0 && _bs===0 && _nb>0 && _nb<=3);
-  roundupT=_roundup?roundupT+dt:0;
-  const _pull=_roundup?Math.min(70+roundupT*130,340):0;
   for(const e of enemies){
     if(e.dead)continue;
     updateEnemyLearning(e,dt);
     enemyAI(e,dt);
     e.x+=e._mv.x*dt;e.y+=e._mv.y*dt;
-    if(_pull>0 && !e.boss){ const _px=player.x-e.x,_py=player.y-e.y,_pd=Math.hypot(_px,_py)||1; e.x+=_px/_pd*_pull*dt; e.y+=_py/_pd*_pull*dt; }
     collidePillars(e);
     if(e._cloaked && e._alpha<0.2) continue;
     if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+2)*(e.r+player.r+2)){
@@ -4505,26 +4493,10 @@ function render(){
   ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
   if(hurtFx>0){ctx.fillStyle='rgba(255,40,60,'+(hurtFx*.45)+')';ctx.fillRect(0,0,W,H);}
 
-  /* 残怪围拢:屏幕边缘箭头指向画面外的杂兵,方便找到最后几只 */
-  if(state==='play'&&roundupT>0){
-    const cx=W/2,cy=H/2,mh=W/2-22,mv=H/2-22;
-    for(const e of enemies){ if(e.dead||e.boss)continue;
-      const ex=e.x-cam.x, ey=e.y-cam.y;
-      if(ex>=0&&ex<=W&&ey>=0&&ey<=H)continue;
-      let ax=ex-cx,ay=ey-cy; const ad=Math.hypot(ax,ay)||1; ax/=ad; ay/=ad;
-      const sc=Math.min(mh/(Math.abs(ax)||1e-4), mv/(Math.abs(ay)||1e-4));
-      ctx.save(); ctx.translate(cx+ax*sc, cy+ay*sc); ctx.rotate(Math.atan2(ay,ax));
-      ctx.globalAlpha=.85; ctx.fillStyle='#ff5b6e';
-      ctx.beginPath(); ctx.moveTo(13,0); ctx.lineTo(-9,-7); ctx.lineTo(-9,7); ctx.closePath(); ctx.fill();
-      ctx.restore();
-    }
-    ctx.globalAlpha=1;
-  }
-
   if(state!=='menu')drawHUD();
   /* 冲刺按钮/冷却 */
   if(state==='play'){
-    const bx=W-58, by=H-72-safeB, br=30;
+    const bx=W-58, by=H-72, br=30;
     const ready=player.dashCD<=0;
     ctx.globalAlpha=usingTouch?.85:.6;
     ctx.fillStyle='rgba(20,15,42,.78)';ctx.beginPath();ctx.arc(bx,by,br,0,TAU);ctx.fill();
@@ -4532,7 +4504,7 @@ function render(){
     if(!ready){
       ctx.fillStyle='rgba(111,227,255,.25)';
       ctx.beginPath();ctx.moveTo(bx,by);
-      ctx.arc(bx,by,br-2,-Math.PI/2,-Math.PI/2+TAU*(1-clamp(player.dashCD/(player.dashCDmax||DASH_CD),0,1)));
+      ctx.arc(bx,by,br-2,-Math.PI/2,-Math.PI/2+TAU*(1-clamp(player.dashCD/2,0,1)));
       ctx.closePath();ctx.fill();
     }
     ctx.fillStyle=ready?'#cfe9ff':'#7e76ad';ctx.font='19px serif';
