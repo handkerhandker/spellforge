@@ -255,6 +255,7 @@
       <button class="diff-pill" data-diff="5">弑神</button>
     </div>
     <div id="diffDesc" class="diff-desc"></div>
+    <button class="btn" id="resumeRunBtn" style="margin-top:10px;display:none;background:linear-gradient(135deg,#2ea36b,#46d196);box-shadow:0 6px 22px rgba(60,201,138,.42);">▶ 继续上次战斗<span id="resumeRunSub" style="font-size:12px;font-weight:400;opacity:.9;margin-left:4px;"></span></button>
     <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
     <button class="btn altar-btn" id="altarBtn">🔮 祭 坛 · 灵 晶 强 化</button>
     <div class="codex-row" style="margin-top:12px;">
@@ -412,6 +413,12 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v59.5 · 2026-06-16</div><div class="cl-i">「📖 法术图鉴」新增 <b>✦ 古神遗物</b> 一栏——此前图鉴只收法术 / 符文 / 属性 / 契约,<b>遗物从没收录进去</b>;现在全部遗物(含你找的「🌀 疾风步 · 冲刺冷却 -25%」)都能在图鉴里翻到了,而且是<b>自动同步</b>的,以后新增遗物会自动入鉴,不会再漏。</div></div>
+<div class="cl-v"><div class="cl-h">v59.4 · 2026-06-16</div><div class="cl-i">续战稳健性加固(经多角度压测):防止连点「继续上次战斗」重复进入;对损坏 / 残缺存档做兜底——坏存档自动忽略、缺字段用默认值、异常波数钳制,不会崩溃或卡死。功能行为不变,纯保险。</div></div>
+<div class="cl-v"><div class="cl-h">v59.3 · 2026-06-16</div><div class="cl-i"><b>一~四档的无尽模式现在也能续战、且照常上榜</b>(长局中途有事更友好)。续战会完整还原无尽进度,包括<b>已叠加的无尽强化(怪的增强词缀)</b>,不会因续战而变简单。<b>弑神 / 每日仍不可续战</b>(严格一命冲榜,保证公平)。</div></div>
+<div class="cl-v"><div class="cl-h">v59.2 · 2026-06-16</div><div class="cl-i">续战小收口:<b>每日挑战也不可续战</b>(与弑神 / 无尽一致——每日是固定种子的上榜模式,可续战会变味、也不公平),暂停里该按钮在每日局会置灰说明。另:续战的各项数据(击杀、灵晶奖励、连杀段位、Boss、成就判定等)已全面核对,均正确,无清零或重复计算。</div></div>
+<div class="cl-v"><div class="cl-h">v59.1 · 2026-06-16</div><div class="cl-i">🛠 修复续战统计。上一版用「继续上次战斗」回到存档波次时,<b>之前波次的击杀数被清零了</b>,导致结算的击杀数、以及按击杀计算的灵晶奖励都会偏少。现已修正——续战会<b>原样还原击杀数</b>(以及本局连杀、Boss、成就等统计),结算与上榜数据都准确。注:此修复对<b>新存档</b>生效,你在旧版存的那一档仍会缺击杀数,重新存一次即可。</div></div>
+<div class="cl-v"><div class="cl-h">v59 · 2026-06-16</div><div class="cl-i">新增 <b>💾 简易续战</b>,中途有事可存档下次接着打。<b>怎么用</b>:战斗中按暂停 → <b>「保存并退出」</b>,即可保存当前进度回到主菜单;下次进游戏,主菜单顶部会出现绿色的 <b>「▶ 继续上次战斗」</b>(标注停在第几波 · 哪个难度),点它即可<b>从那一波开头接着打</b>,你的<b>法杖、法术、符文、遗物、血量、金币</b>原样还原。<b>说明</b>:① 只保留<b>一个存档槽</b>,开新局或这局打完会自动清掉;② 还原的是你存档时的<b>真实血量</b>(不会回血、也无法靠存档洗掉一次必死);③ <b>弑神 / 无尽不可续战</b>(这两个的波数要上榜,存档续战等于卡进度刷分,对一命冲榜的人不公平)——暂停里这两档的按钮会置灰并说明。</div></div>
 <div class="cl-v"><div class="cl-h">v58.1 · 2026-06-16</div><div class="cl-i">🛠 紧急修复。上一版的「残怪围拢」会把残怪<b>高速拽向玩家、几乎躲不开</b>(五个难度都有,弑神尤其致命)。已修正——围拢改为<b>只把屏幕外躲藏的残怪温和地引回视野</b>(配合边缘箭头帮你找到);<b>屏幕内看得见的敌人完全照常行动</b>,不会被拽、更不会静止;<b>弑神难度不启用围拢</b>,怪保持正常速度。</div></div>
 <div class="cl-v"><div class="cl-h">v58 · 2026-06-16</div><div class="cl-i">三处体验优化。<b>① 残怪自动围拢</b>:打完 Boss 后,当场上只剩最后几只杂兵时,<b>远处躲藏的会缓缓朝你靠拢</b>,并在屏幕边缘用箭头指明方向——不必再满地图追着清场,收尾更利索。(温和回拢、只拢远处躲藏的,近处交战的不受影响;<b>弑神难度不启用</b>,保持一命纯净。)<b>② 冲刺更跟手</b>:冲刺冷却由 2 秒<b>缩短到 1.6 秒</b>;并新增遗物<b>「🌀 疾风步」</b>(每 5 波击败 Boss 后三选一可遇),再<b>额外 -25% 冲刺冷却</b>,想强化走位的可专门凑——所有难度通用(含弑神,不破坏冲榜公平)。<b>③ 修复冲刺键被遮挡</b>:部分手机(尤其在微信内打开、底部带 ‹ › 工具栏时)右下角冲刺键会被挡住一部分;现在冲刺键会<b>自动避开屏幕底部安全区</b>,不再被压住。</div></div>
 <div class="cl-v"><div class="cl-h">v57 · 2026-06-16</div><div class="cl-i">新增 <b>📸 一键分享战绩</b>。通关 / 战死的结算页底部多了一个<b>「生成战绩图 · 分享」</b>按钮:点一下生成一张<b>暗紫魔法风的战绩图</b>——本局<b>波数、难度、连杀段位、击杀、灵晶</b>,加上<b>你这局打到的 Boss 立绘</b>和你的<b>昵称</b>,<b>左下角带一枚二维码,朋友扫码即可直接进游戏</b>。出图后可直接调系统分享发到微信 / 群,或<b>长按图片保存到相册</b>再自己发,方便拉朋友一起玩。顺手修复一处:<b>🗿 守护图腾此前漏收进「法术图鉴」</b>(v55 加图腾时只接了能用的逻辑、忘了补图鉴展示清单),现已补上 + 配「布防·电击」类型,图鉴里能正常翻到它了。</div></div>
@@ -466,6 +473,8 @@
     </div>
     <div class="aim-hint" id="aimDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:280px;line-height:1.45;"></div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
+    <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
+    <div id="pauseSaveSub" style="font-size:11px;margin:-4px auto 4px;max-width:280px;opacity:.6;display:none;">弑神不可续战 · 一命冲榜</div>
     <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
@@ -573,7 +582,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v58.1', APP_TIME='2026-06-16 12:51';
+const APP_VER='v59.5', APP_TIME='2026-06-16 14:15';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime',APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1197,7 +1206,7 @@ let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
-let roundupT=0; /* 残怪围拢计时 */
+let roundupT=0, waveStartKills=0, _skipEmod=false; /* 残怪围拢计时 / 开波击杀快照 / 续战恢复那波跳过加无尽修饰符 */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
 const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0,dashCd:1};
@@ -1560,12 +1569,12 @@ const WAVE_TABLE={
 };
 
 function startWave(n){
-  waveNum=n; spawnQ=[]; waveT=0;
+  waveNum=n; spawnQ=[]; waveT=0; waveStartKills=kills;   /* 快照开波击杀数,续战据此防重复计数 */
   if(endless){ if(n>=20) unlockAch('endless20'); if(n>=50) unlockAch('endless50'); }
   /* 随机地形(Boss 波沿用上波地形,避免转场突兀) */
   if(n%5!==0) terrain=pick(TERRAINS);
   /* 无尽难度修饰符:15 波后每 5 波叠加一个 */
-  if(endless && n>15 && n%5===0){
+  if(endless && n>15 && n%5===0 && !_skipEmod){
     const avail=ENDLESS_MODS.filter(m=>!endlessMods.find(x=>x.id===m.id));
     if(avail.length){ const mod=pick(avail); endlessMods.push(mod);
       modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -1573,6 +1582,7 @@ function startWave(n){
       announce(mod.icon+' '+mod.name, mod.desc); cam.shake=10;
     }
   }
+  _skipEmod=false;   /* 一次性:仅续战恢复的那一波跳过加新修饰符,后续波正常叠加 */
   /* 自适应难度重算 */
   recomputeDifficulty();
   const sr=difficultyPool.spawnRate;
@@ -3244,7 +3254,7 @@ function setupEndLeaderboard(prefix){
   };
 }
 function gameOver(manual){
-  state='over'; if(!manual)S.die();
+  state='over'; clearResume(); if(!manual)S.die();
   if(dailyRun) saveDailyBest(waveNum,kills);
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
@@ -3254,7 +3264,7 @@ function gameOver(manual){
   setupEndLeaderboard('ov');
 }
 function victory(){
-  state='win'; S.win();
+  state='win'; clearResume(); S.win();
   if(dailyRun) saveDailyBest(waveNum,kills);
   /* 通关类成就(全甲=不吃红心 / 独狼=不逛商店 / 屠神=弑神难度) */
   unlockAch('clear');
@@ -3389,6 +3399,8 @@ function buildCodex(){
   h+='<div class="cx-sec">❤ 属性 · 被动</div>';
   for(const c of CARD_DEFS)if(c.kind==='stat') h+=cxItem(c.icon,c.name,stackTag(c.max),'',c.desc);
   let any=false; for(const c of CARD_DEFS)if(c.kind==='curse'){ if(!any){h+='<div class="cx-sec">⚖ 契约 · 取舍(高风险高回报)</div>';any=true;} h+=cxItem(c.icon,c.name,'取舍','',c.desc); }
+  h+='<div class="cx-sec">✦ 古神遗物 · 每 5 波击败 Boss 后三选一(不重复 · 所有难度通用)</div>';
+  for(const r of RELICS) h+=cxItem(r.icon, r.name, ({1:'普通',2:'稀有',3:'史诗'})[r.rar]||'', '', r.desc);
   $('codexBody').innerHTML=h;
 }
 function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
@@ -5370,6 +5382,7 @@ refreshDiffUI();
 loadMeta(); refreshLj();
 loadMenuBoard('all');
 function launchRun(w){
+  clearResume();   /* 开新局:清掉续战存档,只保留一个槽 */
   setDiffMul(difficulty);   /* 同步所选难度倍率(防上一把每日局改了 diffMul) */
   resetGame(); applyWand(w);
   /* #warp 跳波测试钩子 */
@@ -5378,6 +5391,56 @@ function launchRun(w){
   state='play';
   /* #debug 无敌 + #warpn 跳到 n 波 */
   if(location.hash.includes('debug')){player.maxhp=99999;player.hp=99999;player.mods.armor=99;}
+}
+
+/* ============ 简易续战(休闲档存档;弑神 / 无尽除外,防刷榜) ============ */
+function saveResume(){
+  if(difficulty>=5 || dailyRun) return false;   /* 仅弑神/每日(严格上榜档)不存档;一~四档含无尽可续战 */
+  try{ localStorage.setItem('sf_resume', JSON.stringify({
+    v:1, wave:waveNum, diff:difficulty,
+    wand:(player.wand?player.wand.id:'apprentice'),
+    spells:player.spells, mods:player.mods, curse:player.curse,
+    relics:player.relics, maxhp:player.maxhp, hp:player.hp, coins:coins,
+    kills:waveStartKills, took:runTookHeart, shop:runBoughtShop, mct:runMaxComboTier, lastb:runLastBoss, unl:_runUnlocked,
+    endless:endless, emods:endlessMods.map(m=>m.id)
+  })); return true; }catch(e){ return false; }
+}
+function loadResume(){
+  try{ const r=localStorage.getItem('sf_resume'); if(!r) return null;
+    const s=JSON.parse(r);
+    if(!s || typeof s.wave!=='number' || !s.spells || s.diff>=5) return null;   /* 校验:残缺 / 弑神存档一律忽略 */
+    return s;
+  }catch(e){ return null; }
+}
+function clearResume(){ try{ localStorage.removeItem('sf_resume'); }catch(e){} }
+function refreshResumeBtn(){
+  const b=$('resumeRunBtn'); if(!b) return;
+  const s=loadResume();
+  if(s){ b.style.display=''; const sub=$('resumeRunSub');
+    if(sub) sub.textContent='（'+(s.endless?'无尽 · ':'')+'第 '+s.wave+' 波 · '+((DIFFICULTIES[s.diff-1]||{}).name||'')+'）'; }
+  else b.style.display='none';
+}
+function resumeRun(){
+  if(state==='play') return;               /* 防连点/重复进入 */
+  const s=loadResume(); if(!s) return;
+  applyDifficulty(s.diff);          /* 切到存档时的难度 */
+  resetGame();                      /* 全新底子(顺带清空无尽/敌人/计时) */
+  applyWand(WANDS.find(x=>x.id===s.wand)||WANDS[0]);
+  if(s.spells) player.spells=s.spells;   /* 还原法术(含等级) */
+  if(s.mods)   player.mods=s.mods;        /* 还原符文 */
+  if(s.curse)  player.curse=s.curse;      /* 还原契约 */
+  if(s.relics) player.relics=s.relics;    /* 还原遗物 */
+  recomputeRelics();                       /* 据遗物重算被动 */
+  player.maxhp=s.maxhp||player.maxhp;      /* 还原血量(存档即真实血,无回血漏洞) */
+  player.hp=Math.max(1, Math.min(s.hp||player.maxhp, player.maxhp));
+  coins=s.coins||0;                        /* 还原金币 */
+  kills=s.kills||0; runTookHeart=!!s.took; runBoughtShop=!!s.shop; runMaxComboTier=s.mct||0; runLastBoss=(typeof s.lastb==='number'?s.lastb:-1); if(Array.isArray(s.unl))_runUnlocked=s.unl;   /* 还原击杀数(波首快照)+本局成就/连杀/Boss 统计,保证结算与上榜数据正确 */
+  endless=!!s.endless;                     /* 还原无尽模式 */
+  if(s.emods && s.emods.length){ endlessMods=s.emods.map(function(id){return ENDLESS_MODS.find(function(m){return m.id===id;});}).filter(Boolean); modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false}; for(const _md of endlessMods)_md.apply(modMult); }   /* 还原无尽修饰符,避免续战后怪变弱=刷榜 */
+  _skipEmod=true;                          /* 续战恢复的这一波不再重复加修饰符 */
+  $('menu').classList.add('hidden');
+  startWave(Math.max(1, Math.min(s.wave||1, 999)));       /* 从那一波开头续打(钳制上限防损坏存档) */
+  state='play';
 }
 function launchDaily(){
   const {wand,mods}=todaysDaily();
@@ -5393,13 +5456,18 @@ function togglePause(p){
   if(state!=='play')return;
   paused=(p!==undefined)?p:!paused;
   $('paused').classList.toggle('hidden',!paused);
+  if(paused){ const _no=(difficulty>=5||dailyRun), _b=$('pauseSaveBtn');
+    if(_b){ _b.disabled=_no; _b.style.opacity=_no?'.4':''; _b.style.cursor=_no?'not-allowed':''; }
+    const _s=$('pauseSaveSub'); if(_s){ _s.style.display=_no?'block':'none'; _s.textContent= dailyRun?'每日挑战不可续战':'弑神不可续战 · 一命冲榜'; } }
 }
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
 $('pauseBeastBtn').onclick=openBestiary;
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
+$('pauseSaveBtn').onclick=()=>{ if(difficulty>=5||dailyRun)return; saveResume(); paused=false; $('paused').classList.add('hidden'); state='menu'; $('menu').classList.remove('hidden'); refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+$('resumeRunBtn').onclick=()=>{ initAudio(); resumeRun(); };
 $('wuCancel').onclick=()=>$('wandUnlock').classList.add('hidden');
 $('wuBuy').onclick=()=>{ if(!_wuWand)return; const cost=WAND_COST[_wuWand.id]||0;
   if(META.lj<cost){ try{S.no();}catch(e){} return; }
@@ -5417,7 +5485,7 @@ function openDaily(){
   $('menu').classList.add('hidden'); $('daily').classList.remove('hidden');
 }
 $('dailyBtn').onclick=()=>{ initAudio(); openDaily(); };
-$('dailyBack').onclick=()=>{ $('daily').classList.add('hidden'); $('menu').classList.remove('hidden'); };
+$('dailyBack').onclick=()=>{ $('daily').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
 $('dailyStart').onclick=()=>{ initAudio(); $('daily').classList.add('hidden'); launchDaily(); };
 $('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
 $('clClose').onclick=()=>$('changelog').classList.add('hidden');
@@ -5452,14 +5520,15 @@ $('achvCloseTop').onclick=()=>$('achv').classList.add('hidden');
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
 $('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
-$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; loadMenuBoard(curPeriod); };
-$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; loadMenuBoard(curPeriod); };
+$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
+$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
 $('shopHeal').onclick=()=>{ if(coins>=HEAL_COST&&player.hp<player.maxhp){coins-=HEAL_COST;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopReroll').onclick=()=>{ if(coins>=SHOP_REROLL){coins-=SHOP_REROLL;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopLeave').onclick=()=>{ $('shop').classList.add('hidden'); startWave(waveNum+1); state='play'; };
 $('endlessBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden');
   endless=true; startWave(waveNum+1); state='play'; };
+refreshResumeBtn();   /* 启动时:有续战存档则显示「继续上次战斗」 */
 })();
 </script>
 </body>
