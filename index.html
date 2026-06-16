@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v62.3 · 2026-06-16</div><div class="cl-i">⚔️ <b>Boss 冲撞加「前摇」预警,不再被视距外秒杀</b>:此前 Boss 会从屏幕外几乎瞬间直线冲过来、一两下就把人撞没,根本来不及反应。现在 Boss 冲撞前会先<b>蓄力约半秒</b>(<b>弑神蓄得更久、给足反应时间</b>),并在地面亮出一条<b>红色危险车道</b>标明冲刺路线——只要侧身走出车道就能躲开;若 Boss 在画面外蓄力,<b>屏幕边缘还会弹出红色箭头</b>指明它将从哪个方向冲来。全难度通用,弑神尤其救命。</div></div>
 <div class="cl-v"><div class="cl-h">v62.2 · 2026-06-16</div><div class="cl-i">🎯 <b>「角色定位」改进</b>:把上一版那圈青色圆环,换成了<b>贴合人物外形(身体 + 尖帽)的发光轮廓</b>——描边完美套在小巫师身上,既好看,又能在成片法术里一眼找到自己(人物本体也会始终绘制在最上层、不被特效埋住)。</div></div>
 <div class="cl-v"><div class="cl-h">v62.1 · 2026-06-16</div><div class="cl-i">🛠️ <b>两项体验优化(来自试玩反馈)</b>:① <b>修掉进化技能的「连续震屏」</b>——焚天 / 雷罚在成片敌人里连发时,屏幕会一直抖、看着难受;现已大幅收敛震感(从无上限改为有节流、有上限),爆炸该有的那点力度还在、但绝不会再没完没了地震。另外暂停菜单的「💫 特效强度」滑块现在<b>也会同步柔化震屏</b>,调低特效=画面更稳。② <b>新增「角色定位光环」</b>——人物身上多了一圈<b>始终显示在最上层</b>的青色脉冲光环,就算被一大片法术特效盖住,也能一眼找到自己在哪里(满亮显示,不受特效强度影响)。</div></div>
 <div class="cl-v"><div class="cl-h">v62 · 2026-06-16</div><div class="cl-i">🔮 <b>新增 4 个山海经主动法术!</b>🌪️<b>飓风</b>——放出一团缓慢移动的风暴,把成群敌人<b>吸进来并持续切割</b>(出处:风兽飞廉);🦠<b>蛊毒</b>——命中让敌人<b>染疫</b>,染疫者死亡或靠近他人时会<b>传染</b>给周围,在敌群里一片片连锁烂掉(出处:疫鬼);🌊<b>水龙吟</b>——射出一道<b>宽幅水龙波</b>,贯穿一整条线上的所有敌人并<b>狠狠击退</b>(出处:应龙);🩸<b>噬魂印</b>——给命中的敌人盖上<b>饕餮印</b>,带印之敌死亡时<b>爆裂溅射并回你 1 滴血</b>,越杀越滚雪球(出处:饕餮)。四个法术都已收进「📖 法术图鉴」与三选一卡牌,弑神难度同样可用。</div></div>
@@ -638,7 +639,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v62.2', APP_TIME='2026-06-16 23:50';
+const APP_VER='v62.3', APP_TIME='2026-06-16 23:51';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1836,7 +1837,7 @@ function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
     _phase2Used:false,_phase3Used:false,_laserT:0,_laserAngle:0,_laserDmg:14,_laserFlash:0,_laserFlashAng:0,
-    _bossId:idx,_charging:false,_chargeA:0,_chargeT:0,_chargeDmg:0,_multiCharge:0,
+    _bossId:idx,_charging:false,_chargeA:0,_chargeT:0,_chargeDmg:0,_multiCharge:0,_chargeWind:0,_cwDone:false,
     _shieldT:2.5,_pullT:0,dead:false};
 }
 
@@ -2608,7 +2609,7 @@ function enemyAI(e,dt){
       e._mv.x=px*e.spd*0.7; e._mv.y=py*e.spd*0.7;
     }
     /* 攻击 CD（阶段越深越快） */
-    e.atkT-=dt;
+    if(!e._charging)e.atkT-=dt;   /* 冲刺(含前摇)期间冻结攻击计时,节奏干净 */
     const cdMul=[1,1,0.7,0.55][e.phase]||1;
     if(e.atkT<=0){
       e.atkT=(2.6-.25*e.tier)*cdMul;
@@ -2644,38 +2645,46 @@ function enemyAI(e,dt){
       }
     }
     if(e._laserFlash>0)e._laserFlash-=dt;
-    /* 冲撞:0.6s 直线冲刺,撞到玩家扣血 + 留弹幕尾迹 */
+    /* 冲撞:先「前摇蓄力」(锁向 + 红色危险车道/边缘箭头预警,看得见躲得开),再 0.6s 直线冲刺 */
     if(e._charging){
-      e._chargeT+=dt;
-      const spd=480*(1+e.phase*.15);
-      const mvx=Math.cos(e._chargeA)*spd*dt;
-      const mvy=Math.sin(e._chargeA)*spd*dt;
-      e.x+=mvx; e.y+=mvy;
-      /* 撞到玩家 */
-      if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+10){
-        hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1));
-        cam.shake=Math.min(cam.shake+8,14);
-        e._charging=false;
-      }
-      /* 留弹幕尾迹 */
-      if(e._chargeT>.05){
-        e._chargeT=0;
-        for(let k=-1;k<=1;k++){
-          const aa=e._chargeA+Math.PI/2*k*.3;
-          ebullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*40,vy:Math.sin(aa)*40,r:7,life:2,dmg:(e._chargeDmg?e._chargeDmg*.4:8)*(e._dmgMul||1),dead:false,col:'#c83a3a'});
+      if(!e._cwDone){
+        /* —— 前摇:首帧初始化蓄力时长(弑神更长给足反应),期间不冲、微微后仰蓄势;预警由渲染层绘制 —— */
+        if(e._chargeWind<=0) e._chargeWind=(difficulty>=5?0.72:0.55);
+        e._chargeWind-=dt;
+        e.x-=Math.cos(e._chargeA)*42*dt; e.y-=Math.sin(e._chargeA)*42*dt;
+        if(e._chargeWind<=0){ e._cwDone=true; e._chargeT=0; cam.shake=Math.min(cam.shake+3,10); }
+      } else {
+        e._chargeT+=dt;
+        const spd=480*(1+e.phase*.15);
+        const mvx=Math.cos(e._chargeA)*spd*dt;
+        const mvy=Math.sin(e._chargeA)*spd*dt;
+        e.x+=mvx; e.y+=mvy;
+        /* 撞到玩家 */
+        if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+10){
+          hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1));
+          cam.shake=Math.min(cam.shake+8,14);
+          e._charging=false; e._cwDone=false; e._chargeWind=0;
         }
-      }
-      /* 撞墙或超时结束 */
-      let blocked=false;
-      for(const p of pillars){if(Math.hypot(p.x-e.x,p.y-e.y)<p.r+e.r){blocked=true;break;}}
-      if(blocked || e._chargeT>0.6){
-        e._charging=false;
-        if(e._multiCharge>0){
-          e._multiCharge--;
-          e._chargeA=Math.atan2(player.y-e.y,player.x-e.x);
-          e._chargeT=0; e._charging=true;
+        /* 留弹幕尾迹 */
+        if(e._chargeT>.05){
+          e._chargeT=0;
+          for(let k=-1;k<=1;k++){
+            const aa=e._chargeA+Math.PI/2*k*.3;
+            ebullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*40,vy:Math.sin(aa)*40,r:7,life:2,dmg:(e._chargeDmg?e._chargeDmg*.4:8)*(e._dmgMul||1),dead:false,col:'#c83a3a'});
+          }
         }
-        cam.shake=Math.min(cam.shake+6,12);
+        /* 撞墙或超时结束 */
+        let blocked=false;
+        for(const p of pillars){if(Math.hypot(p.x-e.x,p.y-e.y)<p.r+e.r){blocked=true;break;}}
+        if(blocked || e._chargeT>0.6){
+          e._charging=false; e._cwDone=false; e._chargeWind=0;
+          if(e._multiCharge>0){
+            e._multiCharge--;
+            e._chargeA=Math.atan2(player.y-e.y,player.x-e.x);
+            e._chargeT=0; e._charging=true;   /* _cwDone/_chargeWind 已归0 → 下一冲会重新前摇预警 */
+          }
+          cam.shake=Math.min(cam.shake+6,12);
+        }
       }
     }
     /* 饕餮·吞噬:把玩家往本尊吸(玩家可逆向移动抵抗,站着不动会被拉进口里) */
@@ -4611,6 +4620,25 @@ function render(){
     ctx.fillText('✦',p.x,p.y);ctx.globalAlpha=1;
   }
 
+  /* Boss 冲撞前摇预警:红色危险车道 + 蓄力辉光(画在地面层、敌人之下,看得见躲得开) */
+  for(const e of enemies){
+    if(e.dead||!e._charging||e._cwDone)continue;
+    const _pp=.5+.5*Math.sin(time*16);
+    ctx.save(); ctx.translate(e.x,e.y);
+    ctx.globalAlpha=.26+.18*_pp; ctx.fillStyle='#ff2f2f';
+    ctx.beginPath(); ctx.arc(0,0,e.r*1.5,0,TAU); ctx.fill();
+    ctx.rotate(e._chargeA);
+    const _len=330, _w=e.r+player.r+12;
+    ctx.globalAlpha=.15+.13*_pp; ctx.fillStyle='#ff3030';
+    ctx.fillRect(0,-_w,_len,_w*2);
+    ctx.globalAlpha=.4+.28*_pp; ctx.strokeStyle='#ff6b6b'; ctx.lineWidth=2.5;
+    ctx.strokeRect(0,-_w,_len,_w*2);
+    ctx.globalAlpha=.55+.3*_pp; ctx.fillStyle='#ff8080';
+    ctx.beginPath(); ctx.moveTo(_len,0); ctx.lineTo(_len-26,-18); ctx.lineTo(_len-26,18); ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  ctx.globalAlpha=1;
+
   /* 敌人 */
   for(const e of enemies){ if(!e.boss){ const _sx=e.x-cam.x,_sy=e.y-cam.y,_m=(e.r||20)+72; if(_sx<-_m||_sx>W+_m||_sy<-_m||_sy>H+_m) continue; } drawEnemy(e); }   /* 屏幕外的杂兵不绘制(纯绘制无副作用,零画面变化);Boss 体大且少,始终画 */
   drawTotems();
@@ -4796,6 +4824,25 @@ function render(){
   if(hurtFx>0){ctx.fillStyle='rgba(255,40,60,'+(hurtFx*.45)+')';ctx.fillRect(0,0,W,H);}
 
   /* 残怪围拢:屏幕边缘箭头指向画面外的杂兵,方便找到最后几只 */
+  /* Boss 视距外冲撞预警:屏幕边缘大号红色脉冲箭头,指明 Boss 蓄力冲来的方向(救命提示) */
+  if(state==='play'){
+    const cx=W/2,cy=H/2,mh=W/2-24,mv=H/2-24;
+    for(const e of enemies){
+      if(e.dead||!e._charging||e._cwDone)continue;
+      const ex=e.x-cam.x, ey=e.y-cam.y;
+      if(ex>=0&&ex<=W&&ey>=0&&ey<=H)continue;   /* 已在屏内:地面车道足够,不再加边缘箭头 */
+      let ax=ex-cx,ay=ey-cy; const ad=Math.hypot(ax,ay)||1; ax/=ad; ay/=ad;
+      const sc=Math.min(mh/(Math.abs(ax)||1e-4), mv/(Math.abs(ay)||1e-4));
+      const _pp=.5+.5*Math.sin(time*18);
+      ctx.save(); ctx.translate(cx+ax*sc, cy+ay*sc); ctx.rotate(Math.atan2(ay,ax));
+      ctx.globalAlpha=.55+.45*_pp; ctx.fillStyle='#ff2f2f';
+      ctx.beginPath(); ctx.moveTo(22,0); ctx.lineTo(-14,-14); ctx.lineTo(-14,14); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha=.3+.7*_pp; ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+      ctx.restore();
+    }
+    ctx.globalAlpha=1;
+  }
+
   if(state==='play'&&roundupT>0){
     const cx=W/2,cy=H/2,mh=W/2-22,mv=H/2-22;
     for(const e of enemies){ if(e.dead||e.boss)continue;
