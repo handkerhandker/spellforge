@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v66.7 · 2026-06-17</div><div class="cl-i">🐛 <b>修复极端弹幕下画面糊成一片白的问题</b>:当屏上子弹/敌弹特别多时(比如多重施法叠满 + 深层波),子弹的发光叠在一起会糊成白屏、啥都看不清。现已修正——弹幕再密也能看清场面,子弹照样清晰。正常游戏画面与之前完全一致。</div></div>
 <div class="cl-v"><div class="cl-h">v66.6 · 2026-06-17</div><div class="cl-i">⚡ <b>深层波性能优化</b>:重写了子弹与敌人的碰撞计算方式,后期数百敌人同屏时大幅降低卡顿,让微信等内存紧张的环境更不容易卡死/闪退。手感、画面、打击特效与之前完全一致,只是跑得更顺。</div></div>
 <div class="cl-v"><div class="cl-h">v66.5 · 2026-06-17</div><div class="cl-i">🧹 <b>排行榜清理</b>:加强了不文明昵称过滤,屏蔽了一批粗俗用户名及其变体,这些名字不会再出现在榜单上,提交时也会被拦下。让排行榜更干净。</div></div>
 <div class="cl-v"><div class="cl-h">v66.4 · 2026-06-17</div><div class="cl-i">🎨 <b>全面整理了游戏图标</b>:把全游戏 136 个图标做到了<b>每个都不一样</b>——法术、符文、属性、契约、遗物、法杖、协同、词缀、御兽、成就,各有专属图标,一眼就能区分,不会再出现"两个东西长一样"的情况。(比如巨型法术、疾风步、血之契约、贪婪契约、混沌契约、先手等都换了新图标)</div></div>
@@ -655,7 +656,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v66.6', APP_TIME='2026-06-17 17:10';
+const APP_VER='v66.7', APP_TIME='2026-06-17 17:35';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -4797,6 +4798,7 @@ function render(){
   ctx.globalAlpha=1;
   /* 弹幕（叠光） */
   ctx.globalCompositeOperation='lighter';
+  const _bdim = bullets.length>140 ? 140/bullets.length : 1;   /* 弹幕极多时按数量调暗叠加发光,防几百颗白核叠加成满屏白(弹下方有深色垫底,仍清晰可辨);≤140 颗时系数=1、与原渲染逐字节一致 */
   for(const b of bullets){
     if(b.id==='chain'){
       /* 回旋刃:高速旋转的双刃回旋镖 */
@@ -4838,10 +4840,10 @@ function render(){
       continue;
     }
     /* 默认发光球 */
-    ctx.globalAlpha=.22*fxAlpha;ctx.fillStyle=b.col;
+    ctx.globalAlpha=.22*fxAlpha*_bdim;ctx.fillStyle=b.col;
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.4,0,TAU);ctx.fill();
-    ctx.globalAlpha=.6*fxAlpha;ctx.beginPath();ctx.arc(b.x,b.y,b.r*1.2,0,TAU);ctx.fill();
-    ctx.globalAlpha=.95;ctx.fillStyle='#fff';
+    ctx.globalAlpha=.6*fxAlpha*_bdim;ctx.beginPath();ctx.arc(b.x,b.y,b.r*1.2,0,TAU);ctx.fill();
+    ctx.globalAlpha=.95*_bdim;ctx.fillStyle='#fff';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*.6,0,TAU);ctx.fill();
   }
   /* 预警危险圈:红色虚线圈 + 随时间填充,提示弹幕即将在此爆发 */
@@ -4854,11 +4856,12 @@ function render(){
     ctx.beginPath();ctx.arc(tg.x,tg.y,tg.r*p,0,TAU);ctx.fill();
     ctx.restore();
   }
+  const _edim = ebullets.length>140 ? 140/ebullets.length : 1;   /* 敌弹同理:数量极多时调暗外圈光晕与亮核;实心弹体(中层)不变,保证躲弹可见 */
   for(const b of ebullets){
-    ctx.globalAlpha=.25;ctx.fillStyle='#ff5d7a';
+    ctx.globalAlpha=.25*_edim;ctx.fillStyle='#ff5d7a';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.2,0,TAU);ctx.fill();
     ctx.globalAlpha=.9;ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,TAU);ctx.fill();
-    ctx.globalAlpha=.95;ctx.fillStyle='#ffd0da';
+    ctx.globalAlpha=.95*_edim;ctx.fillStyle='#ffd0da';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*.45,0,TAU);ctx.fill();
   }
   /* 闪电(辉光增强,更醒目) */
