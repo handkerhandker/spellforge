@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v69 · 2026-06-17</div><div class="cl-i">🕹️ <b>操作方式可选了!</b>暂停菜单新增「🎮 操作方式」,两个开关随意组合:<b>双摇杆瞄准</b>——开启后左半屏拖动移动、右半屏拖动瞄准开火,想精准点杀的玩家可以自己控制射击方向(不推右摇杆时仍自动瞄准,不会没输出);<b>固定摇杆</b>——把摇杆底盘固定在屏幕左下/右下角,喜欢定点搓杆的可以打开。两个开关自由搭配:浮动/固定 × 单/双摇杆共四种。双摇杆模式下冲刺改为<b>双击左摇杆</b>(往移动方向冲)。菜单里会实时显示当前操作方式的说明,首次开启双摇杆进局还会有一句布局提示。默认仍是原来的浮动单摇杆+自动瞄准,不想换的不受影响。</div></div>
 <div class="cl-v"><div class="cl-h">v68 · 2026-06-17</div><div class="cl-i">📷 <b>暂停截图</b>:暂停菜单新增「📷 截图（隐藏菜单）」——画面保持冻结、菜单暂时隐藏，方便截下游戏画面，截完点一下屏幕菜单就回来。🔊 <b>声音修复</b>:① 静音后不再影响其他 App 播放音乐（彻底释放音频）;② 游戏中声音被来电/通知等打断后会自动恢复，不用再退出重进。🛡️ <b>说明修正</b>:法盾、治愈的升级说明此前错写成「伤害提升」,现已改为准确的「可挡次数 +1」「回复量提升」。</div></div>
 <div class="cl-v"><div class="cl-h">v67 · 2026-06-17</div><div class="cl-i">🎭 <b>法杖随手 · 整套换装</b>:11 把法杖现在各有专属外形——噬血杖配蝙蝠翼血珠、命运杖顶着金色星辰、御兽杖是兽角图腾、玻璃炮是水晶碎片、磐岩是顽石巨杖……连法袍和帽子的配色也随手中法杖一起变,每把杖都是一身不同的装扮。而且乱战中法杖也和人物一样始终透到最上层、清晰可见,不会被满屏法术埋住。</div></div>
 <div class="cl-v"><div class="cl-h">v66.7 · 2026-06-17</div><div class="cl-i">🐛 <b>修复极端弹幕下画面糊成一片白的问题</b>:当屏上子弹/敌弹特别多时(比如多重施法叠满 + 深层波),子弹的发光叠在一起会糊成白屏、啥都看不清。现已修正——弹幕再密也能看清场面,子弹照样清晰。正常游戏画面与之前完全一致。</div></div>
@@ -535,6 +536,13 @@
     <button class="btn" id="resumeBtn">继续</button>
     <button class="btn ghost" id="pauseShotBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">📷 截图（隐藏菜单）</button>
     <div class="aim-hint" style="font-size:11px;margin:-2px auto 4px;max-width:280px;opacity:.72;line-height:1.45;">画面保持冻结、菜单暂时隐藏，方便截图；截完点一下屏幕菜单就回来</div>
+    <div id="ctrlSection">
+    <div class="diff-title" style="margin-top:2px;font-size:13px;">🎮 操作方式</div>
+    <button class="btn ghost" id="dualBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">双摇杆瞄准：关</button>
+    <button class="btn ghost" id="fixedBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;margin-top:6px;">固定摇杆：关</button>
+    <div class="diff-desc" id="ctrlDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:292px;line-height:1.5;"></div>
+    </div>
+    <div id="aimSection">
     <div class="diff-title" style="margin-top:2px;font-size:13px;">🎯 瞄准模式</div>
     <div class="diff-sel">
       <button class="aim-pill" data-aim="manual">手动</button>
@@ -542,6 +550,7 @@
       <button class="aim-pill" data-aim="smart">智能</button>
     </div>
     <div class="aim-hint" id="aimDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:280px;line-height:1.45;"></div>
+    </div>
     <div class="diff-title" style="margin-top:12px;font-size:13px;">💫 特效强度</div>
     <input id="fxRange" type="range" min="30" max="100" value="100" style="width:78%;max-width:280px;accent-color:#7a5cff;vertical-align:middle;">
     <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡、震屏更柔和,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
@@ -556,6 +565,7 @@
   </div>
 </div>
 <div id="shotHint" style="position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;padding:7px 16px;border-radius:999px;background:rgba(20,14,40,.82);border:1px solid rgba(123,92,255,.45);color:#cbbcff;font-size:12px;pointer-events:none;opacity:0;transition:opacity .4s;white-space:nowrap;">📷 截图模式 · 点屏幕恢复菜单</div>
+<div id="dualHint" style="position:fixed;left:50%;top:38%;transform:translateX(-50%);z-index:80;padding:9px 20px;border-radius:999px;background:rgba(20,14,40,.86);border:1px solid rgba(111,227,255,.5);color:#d6f3ff;font-size:13px;pointer-events:none;opacity:0;transition:opacity .5s;white-space:nowrap;">🕹️ 左半屏移动 · 右半屏瞄准开火</div>
 
 <!-- 胜利 -->
 <div id="win" class="overlay hidden">
@@ -661,7 +671,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v68', APP_TIME='2026-06-17 19:35';
+const APP_VER='v69', APP_TIME='2026-06-17 20:40';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -705,26 +715,42 @@ addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 const mouse={x:W/2,y:H/2,active:false};
 let usingTouch=false;
 cv.addEventListener('mousemove',e=>{ if(usingTouch)return; mouse.x=e.clientX; mouse.y=e.clientY; mouse.active=true; });
-const joy={id:null,ox:0,oy:0,dx:0,dy:0,on:false};
-let lastTapT=-9;
-function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72-safeB)<46*46; }
+const joy={id:null,ox:0,oy:0,dx:0,dy:0,on:false};   /* 左/移动摇杆 */
+const joyR={id:null,ox:0,oy:0,dx:0,dy:0,on:false};  /* 右/瞄准摇杆(双摇杆模式) */
+let lastTapT=-9, dualStick=false, fixedStick=false, _dualHintSeen=false;  /* 操作设置(v69) */
+try{ dualStick=localStorage.getItem('sf_dual')==='1'; fixedStick=localStorage.getItem('sf_fixed')==='1'; _dualHintSeen=localStorage.getItem('sf_dualhint')==='1'; }catch(e){}
+/* 固定摇杆底盘中心(随屏幕尺寸/安全区) */
+function ljBaseX(){return 92;} function rjBaseX(){return W-92;} function jBaseY(){return H-100-safeB;}
+/* 冲刺键只在单摇杆模式存在(双摇杆右下让给瞄准杆,冲刺改双击左摇杆) */
+function inDashBtn(x,y){ return !dualStick && state==='play' && dist2(x,y,W-58,H-72-safeB)<46*46; }
+function startStick(st,t){
+  let ox,oy;
+  if(fixedStick){ ox=(st===joy)?ljBaseX():rjBaseX(); oy=jBaseY(); }
+  else { ox=t.clientX; oy=t.clientY; }
+  st.id=t.identifier; st.ox=ox; st.oy=oy; st.on=true;
+  const ddx=t.clientX-ox, ddy=t.clientY-oy, m=Math.hypot(ddx,ddy)||1, cl=Math.min(m,42);
+  st.dx=(m>.001)?ddx/m*cl/42:0; st.dy=(m>.001)?ddy/m*cl/42:0;
+}
 function tstart(e){ if(shotMode){ exitShotMode(); e.preventDefault(); return; } usingTouch=true; initAudio();
   for(const t of e.changedTouches){
     if(inDashBtn(t.clientX,t.clientY)){ tryDash(); continue; }
-    if(joy.id===null){ joy.id=t.identifier; joy.ox=t.clientX; joy.oy=t.clientY; joy.dx=0; joy.dy=0; joy.on=true;
-      const now=performance.now()/1000;
-      if(now-lastTapT<.32) tryDash();
-      lastTapT=now;
-    }
+    const aim = dualStick && t.clientX>=W/2;   /* 双摇杆:右半屏=瞄准杆、左半屏=移动杆;单摇杆:全是移动杆 */
+    if(aim){ if(joyR.id===null) startStick(joyR,t); }
+    else { if(joy.id===null){ startStick(joy,t);
+      const now=performance.now()/1000; if(now-lastTapT<.32) tryDash(); lastTapT=now; } }
   }
   e.preventDefault(); }
-function tmove(e){ for(const t of e.changedTouches){ if(t.identifier===joy.id){
-    const dx=t.clientX-joy.ox, dy=t.clientY-joy.oy; const m=Math.hypot(dx,dy)||1; const cl=Math.min(m,42);
-    joy.dx=dx/m*cl/42; joy.dy=dy/m*cl/42; } } e.preventDefault(); }
-function tend(e){ for(const t of e.changedTouches){ if(t.identifier===joy.id){ joy.id=null; joy.on=false; joy.dx=joy.dy=0; } } e.preventDefault(); }
+function tmove(e){ for(const t of e.changedTouches){
+    const st = (t.identifier===joy.id)?joy : (t.identifier===joyR.id)?joyR : null;
+    if(st){ const dx=t.clientX-st.ox, dy=t.clientY-st.oy, m=Math.hypot(dx,dy)||1, cl=Math.min(m,42);
+      st.dx=dx/m*cl/42; st.dy=dy/m*cl/42; } } e.preventDefault(); }
+function tend(e){ for(const t of e.changedTouches){
+    if(t.identifier===joy.id){ joy.id=null; joy.on=false; joy.dx=joy.dy=0; }
+    else if(t.identifier===joyR.id){ joyR.id=null; joyR.on=false; joyR.dx=joyR.dy=0; } } e.preventDefault(); }
 cv.addEventListener('touchstart',tstart,{passive:false});
 cv.addEventListener('touchmove',tmove,{passive:false});
 cv.addEventListener('touchend',tend,{passive:false});
+cv.addEventListener('touchcancel',tend,{passive:false});   /* 触摸被系统打断也复位摇杆,防卡住 */
 cv.addEventListener('mousedown',e=>{ if(shotMode){ exitShotMode(); e.preventDefault(); } });   /* 截图模式下点画面(PC)恢复菜单 */
 cv.addEventListener('touchcancel',tend,{passive:false});
 
@@ -2994,6 +3020,9 @@ function updateSpellStates(dt){
 const AIM_THREAT={healer:3.0,totem:2.6,summon:2.4,frostbow:2.3,kiter:2.2,charger:2.0,kamikaze:1.9,stealth:1.6,sine:1.4,weave:1.4,tank:1.2,meteor:.5};
 const AIM_DESC={manual:'鼠标精准手瞄,自由点杀(仅 PC)',near:'自动锁定最近的敌人',smart:'自动优先高威胁(奶妈/护盾/远程/冲锋/Boss),兼顾距离'};
 function aimPoint(){
+  /* 双摇杆:推右摇杆时朝那个方向开火;不推时回落到智能自动瞄准(保证不推也有输出) */
+  if(dualStick && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.2) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
+  if(dualStick) return smartAim();
   /* 手动仅 PC(有鼠标)生效;手机选了手动会自动落到智能 */
   if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
   return aimMode==='near' ? nearAim() : smartAim();
@@ -5035,8 +5064,8 @@ function render(){
   }
 
   if(state!=='menu')drawHUD();
-  /* 冲刺按钮/冷却 */
-  if(state==='play'){
+  /* 冲刺按钮/冷却(双摇杆模式下不画:右下让给瞄准杆,冲刺改双击左摇杆) */
+  if(state==='play' && !dualStick){
     const bx=W-58, by=H-72-safeB, br=30;
     const ready=player.dashCD<=0;
     ctx.globalAlpha=usingTouch?.85:.6;
@@ -5055,13 +5084,32 @@ function render(){
     ctx.fillText(usingTouch?'双击/点我':'空格冲刺',bx,by+14);
     ctx.globalAlpha=1;
   }
-  /* 摇杆 */
-  if(joy.on){
-    ctx.globalAlpha=.25;ctx.strokeStyle='#cfc8f2';ctx.lineWidth=3;
-    ctx.beginPath();ctx.arc(joy.ox,joy.oy,52,0,TAU);ctx.stroke();
-    ctx.globalAlpha=.5;ctx.fillStyle='#cfc8f2';
-    ctx.beginPath();ctx.arc(joy.ox+joy.dx*52,joy.oy+joy.dy*52,20,0,TAU);ctx.fill();
-    ctx.globalAlpha=1;
+  /* 摇杆(v69:固定底盘常驻 + 双摇杆右瞄准杆) */
+  if(state==='play'){
+    /* 左/移动摇杆 */
+    let lbx=null,lby=0; const lon=joy.on;
+    if(fixedStick&&usingTouch){ lbx=ljBaseX(); lby=jBaseY(); }
+    else if(joy.on){ lbx=joy.ox; lby=joy.oy; }
+    if(lbx!==null){
+      ctx.globalAlpha=lon?.28:.16;ctx.strokeStyle='#cfc8f2';ctx.lineWidth=3;
+      ctx.beginPath();ctx.arc(lbx,lby,52,0,TAU);ctx.stroke();
+      ctx.globalAlpha=lon?.5:.28;ctx.fillStyle='#cfc8f2';
+      ctx.beginPath();ctx.arc(lbx+joy.dx*52,lby+joy.dy*52,20,0,TAU);ctx.fill();
+      ctx.globalAlpha=1;
+    }
+    /* 右/瞄准摇杆(仅双摇杆) */
+    if(dualStick){
+      let rbx=null,rby=0; const ron=joyR.on;
+      if(fixedStick&&usingTouch){ rbx=rjBaseX(); rby=jBaseY(); }
+      else if(joyR.on){ rbx=joyR.ox; rby=joyR.oy; }
+      if(rbx!==null){
+        ctx.globalAlpha=ron?.30:.16;ctx.strokeStyle='#6fe3ff';ctx.lineWidth=3;
+        ctx.beginPath();ctx.arc(rbx,rby,52,0,TAU);ctx.stroke();
+        ctx.globalAlpha=ron?.55:.28;ctx.fillStyle='#6fe3ff';
+        ctx.beginPath();ctx.arc(rbx+joyR.dx*52,rby+joyR.dy*52,20,0,TAU);ctx.fill();
+        ctx.globalAlpha=1;
+      }
+    }
   }
   /* 准星 */
   if(aimMode==='manual'&&!usingTouch&&mouse.active&&state==='play'){
@@ -5900,20 +5948,23 @@ function drawHUD(){
   const bw2=Math.max(w1m,w2m,w3m,150)+30;
   const PW=Math.min(bw2+60,W-108);   /* 面板宽度封顶:右侧给冲刺键留出空当 */
   const tMaxW=PW-24;                  /* 文字最大宽度:过长则自动横向压缩,绝不溢出怼到冲刺键 */
-  const by0=H-bh-12-(usingTouch?6:0);
+  const by0b=H-bh-12-(usingTouch?6:0);
+  let by0=by0b;
+  if(fixedStick&&usingTouch) by0=Math.min(by0, jBaseY()-56-bh);   /* 固定摇杆时上移,避开左下底盘 */
+  const lift=by0-by0b;   /* 文字随面板一起上移;非固定时 lift=0,位置与原来完全一致 */
   ctx.fillStyle='rgba(10,8,24,.7)';
   rrect(12,by0,PW,bh,10);ctx.fill();
   /* 构筑栏顶部 1px 浓墨上边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
   ctx.fillRect(14,by0,PW-4,1);
   ctx.textAlign='left';ctx.font='14px sans-serif';ctx.fillStyle='#fff';
-  ctx.fillText(line1,24,H-bh+8-(usingTouch?6:0),tMaxW);
+  ctx.fillText(line1,24,H-bh+8-(usingTouch?6:0)+lift,tMaxW);
   if(line2){ctx.font='12px sans-serif';ctx.fillStyle='#a79fd6';
-    ctx.fillText(line2,24,H-bh+30-(usingTouch?6:0),tMaxW);}
+    ctx.fillText(line2,24,H-bh+30-(usingTouch?6:0)+lift,tMaxW);}
   if(line3){
     const pulse=.7+Math.sin(time*5)*.3;
     ctx.font='900 12px sans-serif';ctx.fillStyle=`rgba(255,210,77,${pulse})`;
-    ctx.fillText(line3,24,H-bh+30+(hasLine2?20:44),tMaxW);
+    ctx.fillText(line3,24,H-bh+30+(hasLine2?20:44)+lift,tMaxW);
   }
 }
 
@@ -5927,6 +5978,7 @@ function loop(now){
   /* 音频被中断后自动恢复:每约 1 秒,非静音且引擎非 running 就尝试唤醒(无需手动开关静音) */
   _audChkT+=dt; if(_audChkT>1){ _audChkT=0; if(AC&&AC.state!=='running'&&!muted){ try{AC.resume();}catch(e){} } }
   const _hud=(state==='play'&&!shotMode);   /* 截图模式下藏起角标按钮,画面更干净 */
+  if(state==='play'&&!paused&&!shotMode&&dualStick&&!_dualHintSeen){ _dualHintSeen=true; try{localStorage.setItem('sf_dualhint','1');}catch(e){} showDualHint(); }   /* 首次双摇杆游玩:飘一句布局提示,只一次 */
   $('pauseBtn').style.display=_hud?'flex':'none';
   $('muteBtn').style.display=_hud?'flex':'none';
   render();
@@ -5958,10 +6010,28 @@ function syncAimUI(){
     b.classList.toggle('hide', b.dataset.aim==='manual' && !fine);   /* 无鼠标设备隐藏「手动」 */
     b.classList.toggle('active', b.dataset.aim===aimMode);
   });
-  const ad=$('aimDesc'); if(ad) ad.textContent=AIM_DESC[aimMode]||'';
+  const ad=$('aimDesc'); if(ad) ad.textContent = dualStick ? '双摇杆已接管瞄准（不推右摇杆时自动瞄准）' : (AIM_DESC[aimMode]||'');
 }
 function setAimMode(m){ aimMode=m; try{localStorage.setItem('sf_aim',m);}catch(e){} syncAimUI(); }
 document.querySelectorAll('[data-aim]').forEach(b=>b.onclick=()=>{ try{S.card();}catch(e){} setAimMode(b.dataset.aim); });
+/* 操作方式(v69):双摇杆 / 固定摇杆 两个开关 + 实时模式说明 */
+function syncCtrlUI(){
+  const db=$('dualBtn'), fb=$('fixedBtn'), cd=$('ctrlDesc'), as=$('aimSection');
+  if(db) db.textContent='双摇杆瞄准：'+(dualStick?'开':'关');
+  if(fb) fb.textContent='固定摇杆：'+(fixedStick?'开':'关');
+  if(cd){ cd.textContent = dualStick
+      ? (fixedStick?'固定双摇杆：左下摇杆移动 · 右下摇杆瞄准开火 · 双击左摇杆冲刺':'浮动双摇杆：左半屏移动 · 右半屏瞄准开火 · 双击左摇杆冲刺')
+      : (fixedStick?'固定单摇杆：左下摇杆移动 · 自动瞄准 · 双击/按钮冲刺':'浮动单摇杆：拖屏移动 · 自动瞄准 · 双击/按钮冲刺'); }
+  if(as){ as.style.opacity=dualStick?'.4':''; as.style.pointerEvents=dualStick?'none':''; }   /* 双摇杆开:瞄准归右摇杆,瞄准模式选择器置灰 */
+  syncAimUI();
+}
+let _dualHintT=0;
+function showDualHint(){ const h=$('dualHint'); if(!h)return; h.style.opacity='1'; clearTimeout(_dualHintT); _dualHintT=setTimeout(()=>{h.style.opacity='0';},3600); }
+$('dualBtn').onclick=()=>{ dualStick=!dualStick; try{localStorage.setItem('sf_dual',dualStick?'1':'0');}catch(e){} if(!dualStick){ joyR.id=null;joyR.on=false;joyR.dx=joyR.dy=0; } syncCtrlUI(); try{S.card();}catch(e){} };
+$('fixedBtn').onclick=()=>{ fixedStick=!fixedStick; try{localStorage.setItem('sf_fixed',fixedStick?'1':'0');}catch(e){} joy.id=null;joy.on=false;joy.dx=joy.dy=0; joyR.id=null;joyR.on=false;joyR.dx=joyR.dy=0; syncCtrlUI(); try{S.card();}catch(e){} };   /* 切换底盘方式复位摇杆,防 origin 错乱 */
+/* 非触屏设备(PC)隐藏操作方式区块(纯触摸功能) */
+(function(){ const touch=('ontouchstart' in window)||navigator.maxTouchPoints>0||(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches); if(!touch){ const cs=$('ctrlSection'); if(cs)cs.style.display='none'; } })();
+syncCtrlUI();
 /* 启动:读存档瞄准模式;无鼠标设备若是「手动」则回退「智能」 */
 try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa==='smart') aimMode=sa; }catch(e){}
 /* 特效强度滑块:读存档 + 绑定(0.3~1) */
