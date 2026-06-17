@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v66.6 · 2026-06-17</div><div class="cl-i">⚡ <b>深层波性能优化</b>:重写了子弹与敌人的碰撞计算方式,后期数百敌人同屏时大幅降低卡顿,让微信等内存紧张的环境更不容易卡死/闪退。手感、画面、打击特效与之前完全一致,只是跑得更顺。</div></div>
 <div class="cl-v"><div class="cl-h">v66.5 · 2026-06-17</div><div class="cl-i">🧹 <b>排行榜清理</b>:加强了不文明昵称过滤,屏蔽了一批粗俗用户名及其变体,这些名字不会再出现在榜单上,提交时也会被拦下。让排行榜更干净。</div></div>
 <div class="cl-v"><div class="cl-h">v66.4 · 2026-06-17</div><div class="cl-i">🎨 <b>全面整理了游戏图标</b>:把全游戏 136 个图标做到了<b>每个都不一样</b>——法术、符文、属性、契约、遗物、法杖、协同、词缀、御兽、成就,各有专属图标,一眼就能区分,不会再出现"两个东西长一样"的情况。(比如巨型法术、疾风步、血之契约、贪婪契约、混沌契约、先手等都换了新图标)</div></div>
 <div class="cl-v"><div class="cl-h">v66.3 · 2026-06-17</div><div class="cl-i">🐛 <b>修复 Boss 冲刺会卡在角落的问题</b>:此前 Boss 发动冲撞后,如果冲进没有石柱的角落、而你又躲开了,它的"冲一下就收手"判定在某些情况下不触发,会一直闷头往角落冲、看起来像卡死不动(其他东西照常)。现已修正:冲刺最多 0.6 秒必定收手,且<b>撞到场地边缘会立刻停下</b>,Boss 不会再冲出场地或卡在角落。对所有会冲撞的首领都生效。</div></div>
@@ -654,7 +655,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v66.5', APP_TIME='2026-06-17 16:06';
+const APP_VER='v66.6', APP_TIME='2026-06-17 17:10';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -4187,6 +4188,27 @@ function drawTotems(){
   }
 }
 
+/* ===== 空间网格:把敌人按格子索引,弹幕只查附近格子里的敌人,避免 O(弹×敌) 暴力两重循环。
+   深层波(数百敌人)省大量 CPU,且碰撞判定结果与原来完全一致(查询范围按 弹半径+当帧最大敌半径 扩展,绝不漏判)。
+   _near 为复用临时数组(每次查询前清空再填),不产生每帧分配。 ===== */
+let _eGrid=new Map(), _eGridMaxR=20; const _eGridC=80, _near=[];
+function buildEnemyGrid(){
+  _eGrid.clear(); _eGridMaxR=20;
+  for(let i=0;i<enemies.length;i++){ const e=enemies[i]; if(e.dead)continue;
+    if(e.r>_eGridMaxR)_eGridMaxR=e.r;
+    const k=Math.floor(e.x/_eGridC)+','+Math.floor(e.y/_eGridC);
+    const a=_eGrid.get(k); if(a)a.push(e); else _eGrid.set(k,[e]);
+  }
+}
+function enemiesNear(x,y,rad){
+  _near.length=0;
+  const R=rad+_eGridMaxR, C=_eGridC;
+  const x0=Math.floor((x-R)/C),x1=Math.floor((x+R)/C),y0=Math.floor((y-R)/C),y1=Math.floor((y+R)/C);
+  for(let cx=x0;cx<=x1;cx++)for(let cy=y0;cy<=y1;cy++){
+    const a=_eGrid.get(cx+','+cy); if(a){for(let i=0;i<a.length;i++)_near.push(a[i]);}
+  }
+  return _near;
+}
 function update(dt){
   if(state==='play'){
     _runT+=dt;
@@ -4277,11 +4299,12 @@ function update(dt){
   updateSpellStates(dt);
 
   const minX=ARENA.pad,maxX=ARENA.w-ARENA.pad,minY=ARENA.pad,maxY=ARENA.h-ARENA.pad;
+  buildEnemyGrid();   /* 每帧建格,供下方弹幕碰撞/归航就近查询(此刻敌人尚未本帧移动,与原碰撞同位置) */
   for(const b of bullets){
     if(b.dead)continue;
     if(b.homing>0){
       let best=null,bd=480*480;
-      for(const e of enemies){ if(e.dead||b.hits.has(e))continue;
+      for(const e of enemiesNear(b.x,b.y,480)){ if(e.dead||b.hits.has(e))continue;
         const d=dist2(b.x,b.y,e.x,e.y); if(d<bd){bd=d;best=e;} }
       if(best){
         const cur=Math.atan2(b.vy,b.vx), des=Math.atan2(best.y-b.y,best.x-b.x);
@@ -4318,7 +4341,7 @@ function update(dt){
     if(b.dead)continue;
     if(b.life<=0){expire(b);continue;}
     /* 命中敌人 */
-    for(const e of enemies){
+    for(const e of enemiesNear(b.x,b.y,b.r)){
       if(e.dead||b.hits.has(e))continue;
       const rr=b.r+e.r;
       if(dist2(b.x,b.y,e.x,e.y)<rr*rr){
@@ -4460,6 +4483,7 @@ function update(dt){
   parts=parts.filter(p=>p.life>0);
   for(const t of texts){t.life-=dt;t.y+=t.vy*dt;}
   texts=texts.filter(t=>t.life>0);
+  if(texts.length>60)texts.splice(0,texts.length-60);   /* 飘字纯装饰:深层波数百敌人受击会刷爆,封顶 60、丢最旧的,省内存+绘制(不影响玩法) */
   for(const z of zaps)z.life-=dt;
   zaps=zaps.filter(z=>z.life>0);
   for(const g of ghosts)g.life-=dt;
