@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v67 · 2026-06-17</div><div class="cl-i">🎭 <b>法杖随手 · 整套换装</b>:11 把法杖现在各有专属外形——噬血杖配蝙蝠翼血珠、命运杖顶着金色星辰、御兽杖是兽角图腾、玻璃炮是水晶碎片、磐岩是顽石巨杖……连法袍和帽子的配色也随手中法杖一起变,每把杖都是一身不同的装扮。而且乱战中法杖也和人物一样始终透到最上层、清晰可见,不会被满屏法术埋住。</div></div>
 <div class="cl-v"><div class="cl-h">v66.7 · 2026-06-17</div><div class="cl-i">🐛 <b>修复极端弹幕下画面糊成一片白的问题</b>:当屏上子弹/敌弹特别多时(比如多重施法叠满 + 深层波),子弹的发光叠在一起会糊成白屏、啥都看不清。现已修正——弹幕再密也能看清场面,子弹照样清晰。正常游戏画面与之前完全一致。</div></div>
 <div class="cl-v"><div class="cl-h">v66.6 · 2026-06-17</div><div class="cl-i">⚡ <b>深层波性能优化</b>:重写了子弹与敌人的碰撞计算方式,后期数百敌人同屏时大幅降低卡顿,让微信等内存紧张的环境更不容易卡死/闪退。手感、画面、打击特效与之前完全一致,只是跑得更顺。</div></div>
 <div class="cl-v"><div class="cl-h">v66.5 · 2026-06-17</div><div class="cl-i">🧹 <b>排行榜清理</b>:加强了不文明昵称过滤,屏蔽了一批粗俗用户名及其变体,这些名字不会再出现在榜单上,提交时也会被拦下。让排行榜更干净。</div></div>
@@ -656,7 +657,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v66.7', APP_TIME='2026-06-17 17:35';
+const APP_VER='v67', APP_TIME='2026-06-17 19:01';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1496,6 +1497,22 @@ const WANDS=[
 ];
 /* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked) */
 const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240};
+/* 法杖皮肤配色(v67):每把杖给巫师法袍/帽子/点缀一套主题色 → 整个人物随杖换装。
+   c0/c1=斗篷渐变内→外,st=斗篷描边,hat=帽身,band=帽檐,star=帽尖✦。纯渲染、不碰玩法。 */
+const WAND_SKIN={
+  apprentice:{c0:'#6e5cf0',c1:'#2a2270',st:'#9d8ffc',hat:'#241d52',band:'#3a3186',star:'#ffd98a'},
+  scatter:   {c0:'#e0913a',c1:'#5a2e12',st:'#ffc97a',hat:'#4a2c12',band:'#7a4a1e',star:'#ffe0a0'},
+  sniper:    {c0:'#5f7fa8',c1:'#243a52',st:'#a8c8e8',hat:'#20303f',band:'#34506a',star:'#cfe8ff'},
+  blood:     {c0:'#c0303f',c1:'#54101a',st:'#ff8a96',hat:'#3a0c12',band:'#6a1a22',star:'#ff9aa8'},
+  charge:    {c0:'#e0b23a',c1:'#6e4e12',st:'#ffe27a',hat:'#4a3812',band:'#6a521e',star:'#fff0a0'},
+  thorns:    {c0:'#5a9a4a',c1:'#234e22',st:'#a8e08a',hat:'#1e3a16',band:'#34521e',star:'#d8f0a0'},
+  summon:    {c0:'#2a9fb0',c1:'#0e4a54',st:'#7fe2f0',hat:'#123a42',band:'#1a525e',star:'#c8f0f6'},
+  gcannon:   {c0:'#7fb8e8',c1:'#2e5a86',st:'#cfeaff',hat:'#2a4a66',band:'#3a6088',star:'#eaf7ff'},
+  bastion:   {c0:'#8a8478',c1:'#3a362e',st:'#c0bab0',hat:'#2e2a24',band:'#4a463e',star:'#e8e0d0'},
+  fate:      {c0:'#7a4ad0',c1:'#34146e',st:'#d8b8ff',hat:'#2a1452',band:'#b8902a',star:'#ffe680'},
+  rebound:   {c0:'#e8683a',c1:'#6e2410',st:'#ffb27a',hat:'#4a2614',band:'#6a3a1e',star:'#ffd0a8'}
+};
+function wandSkin(id){ return WAND_SKIN[id]||WAND_SKIN.apprentice; }
 function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
 function applyWand(w){
   player.wand=w; const f=w.fx;
@@ -4950,7 +4967,8 @@ function render(){
     ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.18,1.18); ctx.translate(-_p.x,-_p.y);
     ctx.globalAlpha=.62+.34*_pu; wizardSilhouette(_p,'#86f2ff'); ctx.restore();
     /* 真身重绘:盖住剪影中心,只留一圈贴合外形的发光描边 */
-    ctx.globalAlpha=1; drawWizardBody(_p, _aA);
+    /* v67:法杖也一并重绘到最上层(与本体同),否则只有人物透出、法杖仍被弹幕盖住 */
+    ctx.globalAlpha=1; drawWandShape(_p.x,_p.y,_p.r,_aA,_p.wand&&_p.wand.id,_p.anim); drawWizardBody(_p, _aA);
     /* 法盾(法术):明显的青色护罩 + 剩余可挡次数(小亮点),解决"只有文字提示/看不出叠几层"(朋友十六) */
     if(_p.shield){ const _rem=Math.max(0,(_p.shield.max||1)-(_p.shield.hits||0)), _rr=_p.r+13+_pu*2;
       ctx.save();
@@ -5516,24 +5534,106 @@ function eye(e,lookA,off){
   ctx.fillStyle='#1c1c2e';ctx.beginPath();ctx.arc(e.x+ox+Math.cos(a)*1.3,e.y+oy+Math.sin(a)*1.3,1.7,0,TAU);ctx.fill();
 }
 function drawWizardBody(p, aimA){
-  /* 斗篷 */
+  const sk=wandSkin(p.wand&&p.wand.id);
+  /* 斗篷(配色随所持法杖) */
   const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,p.r+2);
-  g.addColorStop(0,'#6e5cf0');g.addColorStop(1,'#2a2270');
+  g.addColorStop(0,sk.c0);g.addColorStop(1,sk.c1);
   ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
-  ctx.strokeStyle='#9d8ffc';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.strokeStyle=sk.st;ctx.lineWidth=1.5;ctx.stroke();
   /* 脸 */
   ctx.fillStyle='#ffe4c8';ctx.beginPath();ctx.arc(p.x,p.y-3,p.r*.55,0,TAU);ctx.fill();
   ctx.fillStyle='#2b2440';
   const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
   ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
-  /* 法师帽 */
+  /* 法师帽(配色随所持法杖) */
   const tilt=Math.sin(p.anim*3)*.06;
   ctx.save();ctx.translate(p.x,p.y-p.r*.55);ctx.rotate(tilt);
-  ctx.fillStyle='#241d52';
+  ctx.fillStyle=sk.hat;
   ctx.beginPath();ctx.moveTo(-p.r*.95,0);ctx.lineTo(p.r*.95,0);ctx.lineTo(p.r*.12,-p.r*1.55);ctx.closePath();ctx.fill();
-  ctx.fillStyle='#3a3186';ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
-  ctx.fillStyle='#ffd98a';ctx.font='9px serif';ctx.fillText('✦',p.r*.05,-p.r*.75);
+  ctx.fillStyle=sk.band;ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
+  ctx.fillStyle=sk.star;ctx.font='9px serif';ctx.fillText('✦',p.r*.05,-p.r*.75);
   ctx.restore();
+}
+/* 法杖造型(v67):每把杖手上呈现不同外形,沿瞄准方向 ang 朝向敌人。
+   纯渲染;ornament 尺寸按 r 比例,游戏内 r≈14、放大预览同一套代码。 */
+function drawWandShape(x,y,r,ang,id,anim){
+  const a0=ctx.globalAlpha;
+  const ux=Math.cos(ang),uy=Math.sin(ang),nx=-Math.sin(ang),ny=Math.cos(ang);
+  const P=(d,o)=>[x+ux*d+nx*o, y+uy*d+ny*o];
+  const LW=Math.max(2.6,r*0.25);
+  const HAND=r*0.42, TIP=r*2.0;
+  const pls=1+Math.sin((anim||0)*7)*0.14;   // 杖头脉冲
+  function shaft(col,w,d0,d1){const A=P(d0,0),B=P(d1,0);ctx.strokeStyle=col;ctx.lineWidth=w;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();ctx.lineCap='butt';}
+  function glowDot(d,rad,core,glow){const c=P(d,0);ctx.globalCompositeOperation='lighter';ctx.fillStyle=glow;ctx.globalAlpha=a0*0.85;ctx.beginPath();ctx.arc(c[0],c[1],(rad+r*0.18)*pls,0,TAU);ctx.fill();ctx.globalAlpha=a0;ctx.fillStyle=core;ctx.beginPath();ctx.arc(c[0],c[1],rad*pls,0,TAU);ctx.fill();ctx.globalCompositeOperation='source-over';}
+  function dot(d,o,rad,col){const c=P(d,o);ctx.fillStyle=col;ctx.beginPath();ctx.arc(c[0],c[1],rad,0,TAU);ctx.fill();}
+  ctx.save();
+  if(id==='scatter'){
+    shaft('#8a6a3a',LW,HAND,TIP*0.78);
+    [-0.32,0,0.32].forEach(an=>{const A=P(TIP*0.78,0),B=[x+Math.cos(ang+an)*TIP,y+Math.sin(ang+an)*TIP];
+      ctx.strokeStyle='#caa050';ctx.lineWidth=LW*0.8;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();ctx.lineCap='butt';
+      ctx.fillStyle='#ffb84d';ctx.beginPath();ctx.arc(B[0],B[1],r*0.13,0,TAU);ctx.fill();});
+  } else if(id==='sniper'){
+    const T=r*2.3;
+    shaft('#7d8aa0',LW*1.15,HAND,T);shaft('#cfe0f2',LW*0.4,HAND,T);
+    const rc=P(T*0.74,-r*0.24);ctx.strokeStyle='#aebfd4';ctx.lineWidth=LW*0.5;ctx.beginPath();ctx.arc(rc[0],rc[1],r*0.2,0,TAU);ctx.stroke();
+    glowDot(T,r*0.13,'#ffffff','#bfe2ff');
+  } else if(id==='blood'){
+    shaft('#3a2230',LW,HAND,TIP);
+    [-1,1].forEach(s=>{const w0=P(HAND*1.5,0),w1=P(HAND*1.5+r*0.55,s*r*0.5),w2=P(HAND*1.5+r*0.2,s*r*0.6);
+      ctx.fillStyle='#6a1020';ctx.beginPath();ctx.moveTo(w0[0],w0[1]);ctx.lineTo(w1[0],w1[1]);ctx.lineTo(w2[0],w2[1]);ctx.closePath();ctx.fill();});
+    glowDot(TIP,r*0.2,'#ff5a72','#e0233a');dot(TIP+r*0.28,r*0.06,r*0.09,'#c01028');
+  } else if(id==='charge'){
+    shaft('#7a5230',LW,HAND,TIP);
+    ctx.globalCompositeOperation='lighter';ctx.strokeStyle='#ffd24d';ctx.lineWidth=LW*0.5;ctx.globalAlpha=a0;
+    for(let k=0;k<3;k++){const c=P(HAND+(TIP-HAND)*(0.25+k*0.22),0);ctx.beginPath();ctx.arc(c[0],c[1],r*0.22,0,TAU);ctx.stroke();}
+    ctx.globalCompositeOperation='source-over';
+    glowDot(TIP,r*0.2,'#fff6c0','#ffcf3a');
+    ctx.globalCompositeOperation='lighter';ctx.strokeStyle='#ffe27a';ctx.lineWidth=LW*0.45;
+    [-0.5,0.5,-1.0,1.0].forEach(an=>{const A=P(TIP,0),B=[x+Math.cos(ang+an)*(TIP+r*0.4),y+Math.sin(ang+an)*(TIP+r*0.4)];ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();});
+    ctx.globalCompositeOperation='source-over';
+  } else if(id==='thorns'){
+    shaft('#5a7a3a',LW,HAND,TIP);
+    for(let k=0;k<4;k++){const s=(k%2?1:-1),A=P(HAND+(TIP-HAND)*(0.2+k*0.2),0),B=P(HAND+(TIP-HAND)*(0.2+k*0.2)+r*0.16,s*r*0.3);
+      ctx.strokeStyle='#3f5a28';ctx.lineWidth=LW*0.5;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();}
+    ctx.fillStyle='#d83a5a';for(let k=0;k<5;k++){const an=k/5*TAU,c=P(TIP,0);ctx.beginPath();ctx.arc(c[0]+Math.cos(an)*r*0.11,c[1]+Math.sin(an)*r*0.11,r*0.12,0,TAU);ctx.fill();}
+    ctx.fillStyle='#ff7a92';const cc=P(TIP,0);ctx.beginPath();ctx.arc(cc[0],cc[1],r*0.1,0,TAU);ctx.fill();
+  } else if(id==='summon'){
+    shaft('#d8cdb0',LW,HAND,TIP);
+    [-1,1].forEach(s=>{const A=P(TIP*0.6,0),B=P(TIP*0.6,s*r*0.16);ctx.strokeStyle='#a99a72';ctx.lineWidth=LW*0.4;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();});
+    [-1,1].forEach(s=>{const b=P(TIP,0);ctx.strokeStyle='#efe6c8';ctx.lineWidth=LW*0.7;ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(b[0],b[1]);ctx.quadraticCurveTo(b[0]+nx*s*r*0.42-ux*r*0.06,b[1]+ny*s*r*0.42-uy*r*0.06,b[0]+nx*s*r*0.34+ux*r*0.4,b[1]+ny*s*r*0.34+uy*r*0.4);ctx.stroke();ctx.lineCap='butt';});
+    glowDot(TIP,r*0.16,'#dffbd0','#7fe26a');
+  } else if(id==='gcannon'){
+    shaft('#9fc6ea',LW*0.85,HAND,TIP);
+    const t=TIP+r*0.2,A=P(t,0),B=P(TIP*0.86,r*0.26),C=P(TIP*0.6,0),D=P(TIP*0.86,-r*0.26);
+    ctx.globalAlpha=a0*0.92;ctx.fillStyle='#bfe8ff';ctx.strokeStyle='#eaf7ff';ctx.lineWidth=1.6;
+    ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.lineTo(C[0],C[1]);ctx.lineTo(D[0],D[1]);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.globalAlpha=a0*0.7;ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(C[0],C[1]);ctx.stroke();ctx.globalAlpha=a0;
+  } else if(id==='bastion'){
+    shaft('#8a8478',LW*1.7,HAND,TIP*0.92);shaft('#aaa498',LW*0.5,HAND,TIP*0.92);
+    const t=TIP*0.92,pts=[[t,0],[t+r*0.4,r*0.22],[t+r*0.46,-r*0.08],[t+r*0.26,-r*0.36],[t-r*0.04,-r*0.26],[t-r*0.06,r*0.2]];
+    ctx.fillStyle='#9a948a';ctx.strokeStyle='#6a6458';ctx.lineWidth=1.6;ctx.beginPath();
+    pts.forEach((q,i)=>{const c=P(q[0],q[1]);i?ctx.lineTo(c[0],c[1]):ctx.moveTo(c[0],c[1]);});ctx.closePath();ctx.fill();ctx.stroke();
+    const f1=P(t+r*0.26,-r*0.36),f2=P(t+r*0.46,-r*0.08),f3=P(t,0);ctx.fillStyle='#6f6a60';ctx.beginPath();ctx.moveTo(f1[0],f1[1]);ctx.lineTo(f2[0],f2[1]);ctx.lineTo(f3[0],f3[1]);ctx.closePath();ctx.fill();
+  } else if(id==='fate'){
+    shaft('#c89030',LW,HAND,TIP);shaft('#ffe9a0',LW*0.35,HAND,TIP);
+    const c=P(TIP+r*0.14,0),R=r*0.34,r2=R*0.42;
+    ctx.globalCompositeOperation='lighter';ctx.fillStyle='#ffe680';ctx.globalAlpha=a0*0.5;ctx.beginPath();ctx.arc(c[0],c[1],R*1.2,0,TAU);ctx.fill();ctx.globalAlpha=a0;ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#ffd700';ctx.strokeStyle='#a87a10';ctx.lineWidth=1.4;ctx.beginPath();
+    for(let i=0;i<10;i++){const ra=(i%2?r2:R),aa=-Math.PI/2+i*Math.PI/5,px=c[0]+Math.cos(aa)*ra,py=c[1]+Math.sin(aa)*ra;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}
+    ctx.closePath();ctx.fill();ctx.stroke();
+  } else if(id==='rebound'){
+    shaft('#8a6a3a',LW,HAND,TIP);
+    ctx.globalAlpha=a0*0.5;ctx.strokeStyle='#ffb27a';ctx.lineWidth=1.4;ctx.setLineDash([3,3]);
+    const o=P(TIP,0);ctx.beginPath();ctx.arc(o[0]+ux*r*0.3,o[1]+uy*r*0.3-r*0.1,r*0.32,Math.PI,TAU);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=a0;
+    ctx.globalAlpha=a0*0.35;dot(TIP+r*0.5,-r*0.2,r*0.14,'#ff8a3a');ctx.globalAlpha=a0;
+    glowDot(TIP,r*0.18,'#ffd0a8','#ff8a3a');
+  } else {  /* apprentice / 默认 */
+    shaft('#7a5230',LW,HAND,TIP);
+    glowDot(TIP,r*0.16,'#ffffff','#6fe3ff');
+  }
+  ctx.restore();
+  ctx.globalAlpha=a0;
 }
 /* 角色剪影(实心填充,用于贴合外形的定位描边):身体圆 + 法师帽 */
 function wizardSilhouette(p, color){
@@ -5619,16 +5719,8 @@ function drawPlayer(){
   ctx.beginPath();ctx.ellipse(p.x,p.y+p.r*.9,p.r*.9,p.r*.34,0,0,TAU);ctx.fill();ctx.restore();
   const tgt=aimPoint();
   const aimA=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.diry,p.dirx);
-  /* 法杖 */
-  const sx0=p.x+Math.cos(aimA)*6, sy0=p.y+Math.sin(aimA)*6;
-  const sx1=p.x+Math.cos(aimA)*30, sy1=p.y+Math.sin(aimA)*30;
-  ctx.strokeStyle='#7a5230';ctx.lineWidth=3.5;
-  ctx.beginPath();ctx.moveTo(sx0,sy0);ctx.lineTo(sx1,sy1);ctx.stroke();
-  const pulse=2.5+Math.sin(p.anim*7)*1.2;
-  ctx.globalCompositeOperation='lighter';
-  ctx.fillStyle='#6fe3ff';ctx.globalAlpha*=.9;
-  ctx.beginPath();ctx.arc(sx1,sy1,pulse+2.5,0,TAU);ctx.fill();
-  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx1,sy1,pulse,0,TAU);ctx.fill();
+  /* 法杖(造型随所持法杖,v67) */
+  drawWandShape(p.x,p.y,p.r,aimA,p.wand&&p.wand.id,p.anim);
   ctx.globalCompositeOperation='source-over';
   ctx.globalAlpha=p.iframe>0&&Math.floor(p.anim*16)%2===0?.45:1;
   drawWizardBody(p, aimA);
