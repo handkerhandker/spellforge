@@ -259,7 +259,7 @@
     <h1 class="title">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
-    <p class="hint">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式<br>📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</p>
+    <p class="hint"><span id="hintTouch">📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</span><span id="hintPC" style="display:none;">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式</span></p>
     <div class="diff-title">⚔ 选择难度</div>
     <div id="diffSel" class="diff-sel">
       <button class="diff-pill" data-diff="1">凡尘</button>
@@ -447,6 +447,11 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v66.1 · 2026-06-17</div><div class="cl-i">☄️ <b>「燎原余烬」威力提升</b>:击杀敌人时的爆裂溅射伤害上限调高,清理成群杂兵更有力、滚雪球更爽(视觉仍是 v66 的清爽小火花,不挡视线)。</div></div>
+<div class="cl-v"><div class="cl-h">v66 · 2026-06-17</div><div class="cl-i">🛠️ <b>修复后期被 Boss 拉到没法操控</b>:之前打到深层、同屏多只「饕餮」时,它们的「吸入」会互相叠加,把你硬生生拽去撞子弹、想走也走不动;现在所有吸力合并后统一限速,<b>正常移速永远挣脱得出</b>,多只饕餮也不再叠成无解(被冰冻减速时仍会更吃力,那是减速本身的代价)。🛡️ <b>护盾看得见了</b>:法盾 / 玄龟甲护盾现在身上有明显护罩,并用小亮点标出<b>还能挡几下</b>,不再只有文字。📊 <b>法术栏显示叠加层数</b>:聚宝 / 疾风之靴 / 血之契约 / 石肤术等属性卡现在会显示各叠了几层。📖 <b>法术图鉴标记</b>:每个法术后面会标「✓ 已用过 / · 未遇见」,一眼看出哪些玩过、哪些还没解锁。🛒 <b>新增「出售技能二次确认」开关</b>(暂停菜单里):开启后卖技能要再点一次确认,防手滑误卖,不想要可关。↩️ <b>选法杖界面加了「返回」</b>,不用再绕一圈回主页。☄️ <b>燎原余烬不再满屏冒烟挡视线</b>:击杀爆裂改成清爽小火花、不再震屏(伤害不变)。</div></div>
+<div class="cl-v"><div class="cl-h">v65.1 · 2026-06-17</div><div class="cl-i">🔧 <b>修正「山鬼宝囊」遗物的一个小问题</b>:之前在「保存并退出后继续」(续战)恢复到那一波时,会把这件遗物的每波金币又多发一次;现已修正,续战恢复的那波不再重复发币,正常推进每波照常 +15。</div></div>
+<div class="cl-v"><div class="cl-h">v65 · 2026-06-17</div><div class="cl-i">💎 <b>新增 6 件遗物(打 Boss 后三选一里出)</b>,补上了以前没有的玩法方向:🪶<b>风后之羽</b>——移动速度 +12%(拉开距离更轻松,躲快怪也好用);💎<b>山鬼宝囊</b>——每波开始白拿 15 金币(稳定攒钱买符文);👑<b>屠神印</b>——对 Boss 伤害 +25%(打杂兵没用、专克 Boss,三 Boss 车轮战很爽);❄️<b>玄冰碎</b>——法术命中让敌人短暂减速(黏人 / 冲撞的怪都能放风筝,手感好);☄️<b>燎原余烬</b>——击杀的敌人会爆裂、溅射伤害周围(清群滚雪球,怪越密越爽);🛡<b>玄龟甲</b>——每 12 秒获得一层护盾、免疫下一次受击(保命神器,弑神尤其救命)。机制覆盖机动 / 经济 / 爆发 / 控场 / 清群 / 保命六个面,跟现有遗物都不撞。</div></div>
+<div class="cl-v"><div class="cl-h">v64.1 · 2026-06-17</div><div class="cl-i">📱 <b>开始菜单的操作提示按设备区分</b>:手机上不再显示「WASD / 鼠标瞄准 / 按 T」这些电脑专属操作,只看到和你设备相关的拖屏走位、右下角冲刺、法杖自动施法说明,菜单更清爽不啰嗦。(电脑端则照常显示键鼠操作)</div></div>
 <div class="cl-v"><div class="cl-h">v64 · 2026-06-17</div><div class="cl-i">🏆 <b>新增 13 个成就,有硬核挑战也有无厘头整活</b>。挑战向:🌋深渊领主(无尽第 30 波)、💯百连斩(单局 100 连击)、🔱神乎其技(弑神难度全程不吃红心通关)、💠刀尖独舞(玻璃炮法杖通关)、☝️一招鲜(全程只用一种法术通关)、🐢脚踏实地(整局不冲刺通关)。整活向:🐷貔貅附体(攒到 5000 金币却一次商店没逛)、🛞风火轮(累计冲刺 1000 次)、⏳时间管理大师(累计游玩满 1 小时)、🐌龟仙人(单局存活超 20 分钟)、🎆一锅端(一次爆炸同时秒 8 只)、🤕出师不利(开局 5 秒内就挨打)、🪦出门没看黄历(第 1 波就阵亡)。带进度追踪,局内解锁顶部弹提示、结算页汇总本局所得,成就页可看全部进度。纯记录、不改动战斗数值。</div></div>
 <div class="cl-v"><div class="cl-h">v63 · 2026-06-16</div><div class="cl-i">🪄 <b>新增 4 把可用灵晶解锁的法杖,玩法各不相同</b>:💎<b>玻璃炮法杖</b>——伤害爆表但血薄,纯靠走位的极限输出;🛡️<b>磐岩法杖</b>——血厚 + 减伤的重甲苟命流,适合稳健冲弑神;🌟<b>命运法杖</b>——超高暴击率 + 暴伤,打出满屏暴击数字的看脸爆发流;🔁<b>弹跳法杖</b>——子弹命中后会弹向最近的另一个敌人(最多 2 跳),怪越多越爽的清群利器。每把都有取舍、定位鲜明,在开始<b>选杖界面</b>用<b>灵晶</b>解锁(200~320 不等),解锁后所有难度通用(含弑神)。</div></div>
 <div class="cl-v"><div class="cl-h">v62.3 · 2026-06-16</div><div class="cl-i">⚔️ <b>Boss 冲撞加「前摇」预警,不再被视距外秒杀</b>:此前 Boss 会从屏幕外几乎瞬间直线冲过来、一两下就把人撞没,根本来不及反应。现在 Boss 冲撞前会先<b>蓄力约半秒</b>(<b>弑神蓄得更久、给足反应时间</b>),并在地面亮出一条<b>红色危险车道</b>标明冲刺路线——只要侧身走出车道就能躲开;若 Boss 在画面外蓄力,<b>屏幕边缘还会弹出红色箭头</b>指明它将从哪个方向冲来。全难度通用,弑神尤其救命。</div></div>
@@ -530,6 +535,9 @@
     <div class="diff-title" style="margin-top:12px;font-size:13px;">💫 特效强度</div>
     <input id="fxRange" type="range" min="30" max="100" value="100" style="width:78%;max-width:280px;accent-color:#7a5cff;vertical-align:middle;">
     <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡、震屏更柔和,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
+    <div class="diff-title" style="margin-top:12px;font-size:13px;">🛒 出售确认</div>
+    <button class="btn ghost" id="sellConfirmBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">出售技能二次确认：开</button>
+    <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">开启后，在商店卖出技能要再点一次确认，防手滑误卖</div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
     <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
     <div id="pauseSaveSub" style="font-size:11.5px;margin:-2px auto 6px;max-width:280px;color:#ffcaa0;opacity:.96;line-height:1.5;display:none;">🔒 弑神不可续战 · 一命冲榜</div>
@@ -581,6 +589,7 @@
   <h1 class="title" style="font-size:30px;">选择你的法杖</h1>
   <div class="sub" style="font-size:12px;letter-spacing:.18em;">法杖决定整局的玩法走向</div>
   <div id="wandRow" style="display:flex;flex-direction:column;gap:12px;width:min(460px,94vw);"></div>
+  <button class="btn ghost" id="wandBack" style="margin-top:16px;">返回</button>
 </div>
 
 <!-- 法杖解锁确认 -->
@@ -641,7 +650,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v64', APP_TIME='2026-06-17 09:15';
+const APP_VER='v66.1', APP_TIME='2026-06-17 14:20';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1276,13 +1285,14 @@ buildBossArt();
 /* ============ 状态 ============ */
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let fxAlpha=1;   /* 特效强度:玩家粒子/辉光透明度(0.3~1);暂停菜单滑块控制。敌弹高亮、预警圈不受影响 */
+let sellConfirm=true;   /* 出售技能二次确认(防手滑误卖);暂停菜单开关,存 sf_sellconfirm,默认开 */
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
 let roundupT=0, waveStartKills=0, _skipEmod=false; /* 残怪围拢计时 / 开波击杀快照 / 续战恢复那波跳过加无尽修饰符 */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false, _runDashed=false, _runMaxSpells=0, _runT=0, _playAcc=0; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
-const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0,dashCd:1};
+const RELIC_BASE={dmgAdd:0,cdMul:1,critChance:0,critMul:1.6,regen:0,dodge:0,killHeal:0,coinMul:1,pickupRange:1,cardLuck:0,takenMul:1,lowHpDmg:0,dashDmg:0,firstHitDmg:0,dashCd:1,moveMul:1,bossDmg:0,hitSlow:0,killExplode:0,waveCoins:0,wardEvery:0};
 let relicMods={...RELIC_BASE};
 /* ============ 五档难度 ============
    只调敌人血量/伤害/刷怪量(玩家不变);eHp/eDmg 是无尽逐波复利的底数(弑神更陡)。
@@ -1514,7 +1524,14 @@ const RELICS=[
   {id:'first',  icon:'⚡',name:'先手',    rar:2,desc:'对满血敌人首发伤害 +50%',    apply:m=>m.firstHitDmg+=.5},
   /* ⚖ 取舍(玻璃大炮,只有主动选才会有) */
   {id:'glass',  icon:'💥',name:'易碎之刃',rar:2,desc:'伤害 +35%,但生命上限 -20%', apply:m=>m.dmgAdd+=.35, instant:p=>{const d=Math.round(p.maxhp*.2);p.maxhp-=d;p.hp=Math.min(p.hp,p.maxhp);}},
-  {id:'berserk',icon:'😤',name:'狂战之怒',rar:3,desc:'攻速 +25%,但受到伤害 +18%', apply:m=>{m.cdMul*=.75;m.takenMul*=1.18;}}
+  {id:'berserk',icon:'😤',name:'狂战之怒',rar:3,desc:'攻速 +25%,但受到伤害 +18%', apply:m=>{m.cdMul*=.75;m.takenMul*=1.18;}},
+  /* 🆕 新一批遗物 */
+  {id:'windfeather',icon:'🪶',name:'风后之羽',rar:1,desc:'移动速度 +12%',                apply:m=>m.moveMul*=1.12},
+  {id:'pouch',      icon:'💎',name:'山鬼宝囊',rar:1,desc:'每波开始获得 15 金币',         apply:m=>m.waveCoins+=15},
+  {id:'bossbane',   icon:'👑',name:'屠神印',  rar:2,desc:'对 Boss 伤害 +25%',           apply:m=>m.bossDmg+=.25},
+  {id:'frostbite',  icon:'❄️',name:'玄冰碎',  rar:2,desc:'法术命中使敌人减速 0.8 秒',    apply:m=>{m.hitSlow=Math.max(m.hitSlow,.8);}},
+  {id:'ember',      icon:'☄️',name:'燎原余烬',rar:2,desc:'击杀的敌人爆裂,溅射伤害周围',  apply:m=>m.killExplode+=1},
+  {id:'aegis',      icon:'🛡',name:'玄龟甲',  rar:3,desc:'每 12 秒获得护盾,免疫下次受击',apply:m=>{m.wardEvery=12;}}
 ];
 function recomputeRelics(){
   relicMods={...RELIC_BASE};
@@ -1653,6 +1670,8 @@ const WAVE_TABLE={
 function startWave(n){
   waveNum=n; spawnQ=[]; waveT=0; waveStartKills=kills;   /* 快照开波击杀数,续战据此防重复计数 */
   if(endless){ if(n>=20) unlockAch('endless20'); if(n>=30) unlockAch('endless30'); if(n>=50) unlockAch('endless50'); }
+  /* 遗物:山鬼宝囊 — 每波开始获得金币(续战恢复的那一波跳过,避免重复给币) */
+  if(relicMods.waveCoins>0 && !_skipEmod){ coins+=relicMods.waveCoins; }
   /* 随机地形(Boss 波沿用上波地形,避免转场突兀) */
   if(n%5!==0) terrain=pick(TERRAINS);
   /* 无尽难度修饰符:15 波后每 5 波叠加一个 */
@@ -2698,13 +2717,11 @@ function enemyAI(e,dt){
         }
       }
     }
-    /* 饕餮·吞噬:把玩家往本尊吸(玩家可逆向移动抵抗,站着不动会被拉进口里) */
+    /* 饕餮·吞噬:把玩家往本尊吸。多只饕餮的拉力先累加到 _suckX/Y,敌人循环外统一封顶(< 玩家移速 215)→ 任何情况都挣脱得出,杜绝多 Boss 叠加或被减速时彻底失控(朋友二十) */
     if(e._pullT>0){
       e._pullT-=dt;
       const dx=e.x-player.x, dy=e.y-player.y, d=Math.hypot(dx,dy)||1;
-      if(d>e.r*0.7){ const pull=200*dt; player.x+=dx/d*pull; player.y+=dy/d*pull;
-        player.x=clamp(player.x,ARENA.pad+player.r,ARENA.w-ARENA.pad-player.r);
-        player.y=clamp(player.y,ARENA.pad+player.r,ARENA.h-ARENA.pad-player.r); }
+      if(d>e.r*0.7){ player._suckX=(player._suckX||0)+dx/d*200; player._suckY=(player._suckY||0)+dy/d*200; }
       e.flash=Math.max(e.flash,0.04);
       if(Math.random()<0.5) spawnPart(player.x+rand(-22,22),player.y+rand(-22,22),dx/d*140,dy/d*140,.3,3,e.col);
     }
@@ -3158,6 +3175,13 @@ function explode(x,y,r,dmg,col){
     spawnPart(x,y,Math.cos(a)*s,Math.sin(a)*s,rand(.25,.5),rand(2,5),col); }
   spawnPart(x,y,0,0,.22,r*.8,col,true);
 }
+/* 燎原余烬专用:伤害同 explode,但去掉震屏/音效/大烟团,只留几粒小火花 — 解决"到处冒烟挡视线"(朋友十九) */
+function emberSplash(x,y,r,dmg){ let _ek=0;
+  for(const e of enemies){ if(e.dead)continue;
+    if(dist2(x,y,e.x,e.y)<(r+e.r)*(r+e.r)){ damageEnemy(e,dmg,{kx:e.x-x,ky:e.y-y}); if(e.dead)_ek++; } }
+  if(_ek>=8)unlockAch('megakill');
+  for(let i=0;i<4;i++){ const a=rand(0,TAU),s=rand(50,130); spawnPart(x,y,Math.cos(a)*s,Math.sin(a)*s,rand(.18,.3),rand(1.5,2.6),'#ff8a3a'); }
+}
 /* —— 词缀/状态辅助 —— */
 function firestormBurst(x,y,dmg,lv){
   for(let k=0;k<4;k++){ const a=k/4*TAU+Math.random()*.8, ex=x+Math.cos(a)*46, ey=y+Math.sin(a)*46;
@@ -3201,6 +3225,8 @@ function damageEnemy(e,dmg,kb){
   if(e.dead)return;
   /* 遗物:先手 — 对满血(未受伤)敌人首发额外伤害 */
   if(relicMods.firstHitDmg>0 && e.hp>=e.maxhp) dmg*=(1+relicMods.firstHitDmg);
+  /* 遗物:屠神印 — 对 Boss 额外伤害 */
+  if(e.boss && relicMods.bossDmg>0) dmg*=(1+relicMods.bossDmg);
   /* boss出场护罩/蚩尤干盾:完全免伤 */
   if(e._shieldT>0){ texts.push({x:e.x,y:e.y-e.r-6,str:'护',life:.4,vy:-26,col:'#9ad8ff',size:12}); return; }
   /* 虚影词缀:免疫窗口 */
@@ -3212,6 +3238,8 @@ function damageEnemy(e,dmg,kb){
     if(dmg<=0){ texts.push({x:e.x,y:e.y-e.r-6,str:Math.round(s),life:.55,vy:-38,col:'#9ad0ff',size:11}); return; }
   }
   e.hp-=dmg; e.flash=.12;
+  /* 遗物:玄冰碎 — 命中使敌人短暂减速(Boss 除外,保留威胁) */
+  if(relicMods.hitSlow>0 && !e.boss) e.slowT=Math.max(e.slowT||0,relicMods.hitSlow);
   playerProfile._dmgDealt=(playerProfile._dmgDealt||0)+dmg;
   texts.push({x:e.x+rand(-8,8),y:e.y-e.r-6,str:''+Math.max(1,Math.round(dmg)),
     life:.7,vy:-46,col:'#ffd98a',size:12+Math.min(dmg/5,9)});
@@ -3239,6 +3267,8 @@ function onKill(e){
     texts.push({x:e.x,y:e.y-30,str:combo+' 连击',life:1,vy:-44,col:'#ff9a5c',size:Math.min(18+combo*.15,28)});
   /* 爆裂词缀:死亡时爆炸 */
   if(e._aff&&e._aff.volatile)volatileBlast(e.x,e.y,Math.max(14,e.maxhp*.12));
+  /* 遗物:燎原余烬 — 击杀非 Boss 敌人时爆裂溅射(伤害随目标耐久、封顶防滚雪球过头) */
+  if(relicMods.killExplode>0 && !e.boss) emberSplash(e.x,e.y,52,clamp(e.maxhp*.11,8,120));
   if(e._devourT>0){ explode(e.x,e.y,62,Math.max(15,e.maxhp*.16),'#ff5d7a'); heal(1); }
   if(e._plagueT>0){ for(const o of enemies){ if(o===e||o.dead||o._plagueT>0||o.boss)continue;
       if(dist2(e.x,e.y,o.x,o.y)<(90+o.r)*(90+o.r)){ o._plagueT=4.5; o._plagueDps=e._plagueDps; puff(o.x,o.y,'#9be86a',3); } }
@@ -3268,6 +3298,13 @@ function hurtPlayer(d){
   if(relicMods.dodge>0 && Math.random()<relicMods.dodge){
     player.iframe=.5; hurtFx=Math.max(hurtFx,.12); cam.shake=Math.min(cam.shake+2,6);
     texts.push({x:player.x,y:player.y-30,str:'闪避!',life:.7,vy:-34,col:'#7fe0ff',size:14}); S.hurt(); return;
+  }
+  /* 遗物:玄龟甲护盾 — 完全免疫这一次受击,消耗后重新计时 */
+  if(player._ward){
+    player._ward=false; player._wardT=0;
+    player.iframe=.5; hurtFx=Math.max(hurtFx,.12); cam.shake=Math.min(cam.shake+3,8);
+    texts.push({x:player.x,y:player.y-30,str:'护盾!',life:.75,vy:-34,col:'#9ad8ff',size:15});
+    puff(player.x,player.y,'#9ad8ff',12); S.hurt(); return;
   }
   /* 法盾优先:挡下绝大部分伤害,但仍漏 1 血(对齐说明,杜绝永久零伤) */
   if(player.shield && player.shield.hits<player.shield.max){
@@ -3614,7 +3651,9 @@ function buildCodex(){
   let h='<div class="cx-sec">⚔ 主动法术 · 占用法术槽(上限 '+SPELL_SLOT_MAX+')</div>';
   for(const id of SPELL_ORDER){ const d=SPELL_DEF[id]; if(!d)continue;
     const s=[]; if(d.dmg>0)s.push('伤害 '+d.dmg); if(d.cd)s.push('冷却 '+d.cd+'s');
-    h+=cxItem(d.icon,d.name,SPELL_TYPE[id]||'法术',s.join(' · '),d.desc); }
+    const _seen=profile.seenSpells.includes(id);
+    const _nm=d.name+(_seen?' <span style="color:#7be0a0;font-size:10.5px;font-weight:600;">✓ 已用过</span>':' <span style="color:#8a86b8;font-size:10.5px;">· 未遇见</span>');
+    h+=cxItem(d.icon,_nm,SPELL_TYPE[id]||'法术',s.join(' · '),d.desc); }
   h+='<div class="cx-sec">✨ 符文 · 强化(不占槽,叠加增益)</div>';
   for(const c of CARD_DEFS)if(c.kind==='mod') h+=cxItem(c.icon,c.name,stackTag(c.max),'',c.desc);
   h+='<div class="cx-sec">❤ 属性 · 被动</div>';
@@ -3632,8 +3671,9 @@ function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
 
 /* ===== 成就系统 + 异兽图鉴 ===== */
 /* 本地存档:成就解锁 + 跨局统计(沿用 localStorage,不碰服务器) */
-let profile=(()=>{ try{ const p=JSON.parse(localStorage.getItem('sf_profile')||'{}'); return {unlocked:p.unlocked||[], totalKills:p.totalKills||0, bosses:p.bosses||[], dashes:p.dashes||0, playSec:p.playSec||0}; }catch(e){ return {unlocked:[],totalKills:0,bosses:[],dashes:0,playSec:0}; } })();
+let profile=(()=>{ try{ const p=JSON.parse(localStorage.getItem('sf_profile')||'{}'); return {unlocked:p.unlocked||[], totalKills:p.totalKills||0, bosses:p.bosses||[], dashes:p.dashes||0, playSec:p.playSec||0, seenSpells:p.seenSpells||[]}; }catch(e){ return {unlocked:[],totalKills:0,bosses:[],dashes:0,playSec:0,seenSpells:[]}; } })();
 function saveProfile(){ try{ localStorage.setItem('sf_profile',JSON.stringify(profile)); }catch(e){} }
+function markSpellSeen(id){ if(!id||!SPELL_DEF[id])return; if(!profile.seenSpells.includes(id)){ profile.seenSpells.push(id); saveProfile(); } }
 function hasAch(id){ return profile.unlocked.indexOf(id)>=0; }
 const FOUR_FIENDS=[2,5,6,7]; /* BOSS_PALETTE 下标:帝江(浑敦)/穷奇/梼杌/饕餮 */
 const ACH=[
@@ -3799,6 +3839,7 @@ function applyCard(c){
   if(c.kind==='spell'){
     const s=player.spells[c.id];
     if(s)s.lv++; else player.spells[c.id]={lv:1,t:.2};
+    markSpellSeen(c.id);
     if(Object.keys(player.spells).length>=SPELL_SLOT_MAX) unlockAch('spellfull');
   } else if(c.kind==='mod'){ player.mods[c.id]++; }
   else if(c.kind==='curse'){
@@ -3932,6 +3973,12 @@ function buildSellRow(){
     el.style.width='auto'; el.style.padding='8px 12px';
     el.innerHTML='<div class="cic" style="font-size:20px;">'+def.icon+'</div><div class="ctx"><div class="cn" style="font-size:12.5px;">Lv'+s.lv+' ▸ '+(dis?'🔒保留':'+'+SELL_GAIN+'💰')+'</div></div>';
     if(!dis)el.onclick=()=>{
+      if(sellConfirm){
+        if(!el._armed){ el._armed=true; const _oh=el.innerHTML;
+          el.innerHTML='<div class="cic" style="font-size:20px;">❗</div><div class="ctx"><div class="cn" style="font-size:12px;color:#ffb4b4;">再点一次确认卖出</div></div>';
+          clearTimeout(el._aT); el._aT=setTimeout(()=>{ if(el._armed){el._armed=false; el.innerHTML=_oh;} },2600); return; }
+        clearTimeout(el._aT);
+      }
       s.lv--;
       if(s.lv<=0){
         delete player.spells[id];
@@ -4138,6 +4185,8 @@ function update(dt){
     if(player&&player.spells){ const _ns=Object.keys(player.spells).length; if(_ns>_runMaxSpells)_runMaxSpells=_ns; }
     if(typeof profile!=='undefined'){ profile.playSec=(profile.playSec||0)+dt; _playAcc+=dt; if(_playAcc>=30){_playAcc=0;saveProfile();} if(profile.playSec>=3600)unlockAch('playtime1h'); }
     if(_runT>=1200)unlockAch('marathon');
+    /* 遗物:玄龟甲 — 无护盾时累计计时,满 12 秒获得一层护盾(挡下一次受击) */
+    if(relicMods.wardEvery>0 && player && !player._ward){ player._wardT=(player._wardT||0)+dt; if(player._wardT>=relicMods.wardEvery){ player._wardT=0; player._ward=true; puff(player.x,player.y,'#7fe0ff',8); } }
   }
   /* —— 玩家 —— */
   let ix=0,iy=0;
@@ -4163,7 +4212,7 @@ function update(dt){
     player._ghostT=(player._ghostT||0)-dt;
     if(player._ghostT<=0){player._ghostT=.028;ghosts.push({x:player.x,y:player.y,life:.3});}
   } else {
-    const sp=player.spd*(1+.1*player.mods.boots)*(player.slowT>0?.55:1);
+    const sp=player.spd*(1+.1*player.mods.boots)*(player.slowT>0?.55:1)*relicMods.moveMul;
     player.x+=ix*sp*dt; player.y+=iy*sp*dt;
   }
   if(im>.1){player.dirx=ix/(im||1);player.diry=iy/(im||1);}
@@ -4317,6 +4366,7 @@ function update(dt){
   const _roundup=(spawnQ.length===0 && _bs===0 && _nb>0 && _nb<=3 && difficulty<5);
   roundupT=_roundup?roundupT+dt:0;
   const _pull=_roundup?Math.min(75+roundupT*25,120):0;   /* 温和回拢:封顶 120(普通怪~50),远超怪速会"躲不开",故压低 */
+  player._suckX=0; player._suckY=0;   /* 饕餮吞噬拉力·每帧清零,循环内累加,循环后统一封顶施加 */
   for(const e of enemies){
     if(e.dead)continue;
     updateEnemyLearning(e,dt);
@@ -4330,6 +4380,10 @@ function update(dt){
       if((e._aff&&e._aff.venomous)||modMult.contactPoison)applyPoison(3,4);
     }
   }
+  /* 饕餮吞噬·统一封顶:把本帧所有饕餮拉力汇总后限速到 SUCK_CAP(=150 < 玩家移速 215),保证全速永远走得出去、被减速时是减速本身的代价、多只饕餮也不再叠加失控 */
+  if(player._suckX||player._suckY){ const _sm=Math.hypot(player._suckX,player._suckY); if(_sm>0){ const SUCK_CAP=150, _k=Math.min(_sm,SUCK_CAP)/_sm;
+    player.x=clamp(player.x+player._suckX*_k*dt, ARENA.pad+player.r, ARENA.w-ARENA.pad-player.r);
+    player.y=clamp(player.y+player._suckY*_k*dt, ARENA.pad+player.r, ARENA.h-ARENA.pad-player.r); } }
 
   /* —— 敌方弹幕 —— */
   for(const b of ebullets){
@@ -4862,6 +4916,17 @@ function render(){
     ctx.globalAlpha=.62+.34*_pu; wizardSilhouette(_p,'#86f2ff'); ctx.restore();
     /* 真身重绘:盖住剪影中心,只留一圈贴合外形的发光描边 */
     ctx.globalAlpha=1; drawWizardBody(_p, _aA);
+    /* 法盾(法术):明显的青色护罩 + 剩余可挡次数(小亮点),解决"只有文字提示/看不出叠几层"(朋友十六) */
+    if(_p.shield){ const _rem=Math.max(0,(_p.shield.max||1)-(_p.shield.hits||0)), _rr=_p.r+13+_pu*2;
+      ctx.save();
+      ctx.fillStyle='rgba(120,200,255,'+(.10+.05*_pu)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.fill();
+      ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='#7fdcff'; ctx.lineWidth=2.5; ctx.globalAlpha=.55+.3*_pu; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.stroke();
+      for(let _i=0;_i<_rem;_i++){ const _a=-Math.PI/2+_i/Math.max(_rem,1)*TAU; ctx.globalAlpha=.96; ctx.fillStyle='#e3f5ff'; ctx.beginPath(); ctx.arc(_p.x+Math.cos(_a)*_rr,_p.y+Math.sin(_a)*_rr,2.7,0,TAU); ctx.fill(); }
+      ctx.restore(); }
+    /* 遗物·玄龟甲:免下一次受击 — 更醒目的金蓝护罩 */
+    if(_p._ward){ const _wr=_p.r+15+_pu*2; ctx.save(); ctx.globalCompositeOperation='lighter';
+      ctx.fillStyle='rgba(150,220,255,'+(.08+.05*_pu)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_wr,0,TAU); ctx.fill();
+      ctx.strokeStyle='#b6e8ff'; ctx.lineWidth=3; ctx.globalAlpha=.6+.34*_pu; ctx.beginPath(); ctx.arc(_p.x,_p.y,_wr,0,TAU); ctx.stroke(); ctx.restore(); }
     ctx.restore();
   }
   ctx.restore();
@@ -5682,6 +5747,8 @@ function drawHUD(){
   for(const id in player.spells)line1+=SPELL_DEF[id].icon+'Lv'+player.spells[id].lv+'  ';
   const MI={multi:'✨',homing:'🎯',bounce:'💫',pierce:'🪶',split:'💥',haste:'⏩',amp:'🔆',giant:'🌀'};
   for(const k in MI)if(player.mods[k]>0)line2+=MI[k]+'×'+player.mods[k]+' ';
+  const SI={boots:'👟',armor:'🛡️',leech:'🩸',pickup:'🪙'};   /* 属性卡层数(此前未显示) */
+  for(const k in SI)if(player.mods[k]>0)line2+=SI[k]+'×'+player.mods[k]+' ';
   const CI={pact_blood:'⚔️',pact_glass:'💔',pact_greed:'🪙',pact_chaos:'🌪️'};
   for(const k in CI)if(player.cc[k])line2+=CI[k]+' ';
   /* 协同 line3 */
@@ -5761,6 +5828,13 @@ try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa=
   try{ const sf=parseFloat(localStorage.getItem('sf_fx')); apply(sf>=.3&&sf<=1?sf:1); }catch(e){ apply(1); }
   if(fr) fr.oninput=()=>{ fxAlpha=Math.max(.3,Math.min(1,(+fr.value||100)/100)); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlpha*100)+'%'; try{localStorage.setItem('sf_fx',String(fxAlpha));}catch(e){} };
 })();
+/* 出售二次确认开关:读存档 + 绑定(默认开) */
+(function(){ const sb=document.getElementById('sellConfirmBtn');
+  try{ sellConfirm = localStorage.getItem('sf_sellconfirm')!=='0'; }catch(e){}
+  const upd=()=>{ if(sb)sb.textContent='出售技能二次确认：'+(sellConfirm?'开':'关'); };
+  upd();
+  if(sb) sb.onclick=()=>{ sellConfirm=!sellConfirm; try{localStorage.setItem('sf_sellconfirm',sellConfirm?'1':'0');}catch(e){} upd(); try{S.card();}catch(e){} };
+})();
 if(aimMode==='manual'&&!(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)) aimMode='smart';
 syncAimUI();
 /* 启动:读取存档难度(默认入圣),刷新选择器 + 榜单 */
@@ -5772,6 +5846,7 @@ function launchRun(w){
   clearResume();   /* 开新局:清掉续战存档,只保留一个槽 */
   setDiffMul(difficulty);   /* 同步所选难度倍率(防上一把每日局改了 diffMul) */
   resetGame(); applyWand(w);
+  for(const _id in player.spells) markSpellSeen(_id);   /* 起手/法杖自带法术也记入"已用过"(图鉴标记) */
   /* #warp 跳波测试钩子 */
   const wh=location.hash.match(/^#warp(\d+)/);
   if(wh){startWave(parseInt(wh[1]));}else startWave(1);
@@ -5854,6 +5929,9 @@ $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidd
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
 $('pauseSaveBtn').onclick=()=>{ if(difficulty>=5||dailyRun)return; saveResume(); paused=false; $('paused').classList.add('hidden'); state='menu'; $('menu').classList.remove('hidden'); refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+$('wandBack').onclick=()=>{ $('wandSel').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
+/* v64.1 菜单操作提示按设备区分:触屏默认只显示拖屏/冲刺;非触屏(PC)才切到 WASD/鼠标,免得手机用户看到无关的电脑操作 */
+(function(){ try{ var touch=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches); if(!touch){ var t=$('hintTouch'),pc=$('hintPC'); if(t)t.style.display='none'; if(pc)pc.style.display=''; } }catch(e){} })();
 $('resumeRunBtn').onclick=()=>{ initAudio(); resumeRun(); };
 $('wuCancel').onclick=()=>$('wandUnlock').classList.add('hidden');
 $('wuBuy').onclick=()=>{ if(!_wuWand)return; const cost=WAND_COST[_wuWand.id]||0;
