@@ -447,6 +447,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v66.3 · 2026-06-17</div><div class="cl-i">🐛 <b>修复 Boss 冲刺会卡在角落的问题</b>:此前 Boss 发动冲撞后,如果冲进没有石柱的角落、而你又躲开了,它的"冲一下就收手"判定在某些情况下不触发,会一直闷头往角落冲、看起来像卡死不动(其他东西照常)。现已修正:冲刺最多 0.6 秒必定收手,且<b>撞到场地边缘会立刻停下</b>,Boss 不会再冲出场地或卡在角落。对所有会冲撞的首领都生效。</div></div>
+<div class="cl-v"><div class="cl-h">v66.2 · 2026-06-17</div><div class="cl-i">💾 <b>新增自动存档,进度更安全</b>:以前只有手动「保存并退出」才会存档,万一中途页面被关掉(尤其微信里玩久了内存被回收)会退回上一次手动存的地方、丢不少进度。现在<b>每过一波都会自动存一次</b>,万一被关掉,回来点「继续上次战斗」最多只丢当前这一波。暂停菜单原来的按钮也改名为「🚪 退出（回主菜单）」并标注"进度已自动保存",更清楚——它现在只是用来回主菜单换难度 / 看榜单的,不用再担心不点就丢档。(弑神 / 每日挑战为公平上榜仍不存档;另:微信里玩若想最稳,可点右上「···」→「在浏览器打开」用系统浏览器,内存更宽松、不易被关。)</div></div>
 <div class="cl-v"><div class="cl-h">v66.1 · 2026-06-17</div><div class="cl-i">☄️ <b>「燎原余烬」威力提升</b>:击杀敌人时的爆裂溅射伤害上限调高,清理成群杂兵更有力、滚雪球更爽(视觉仍是 v66 的清爽小火花,不挡视线)。</div></div>
 <div class="cl-v"><div class="cl-h">v66 · 2026-06-17</div><div class="cl-i">🛠️ <b>修复后期被 Boss 拉到没法操控</b>:之前打到深层、同屏多只「饕餮」时,它们的「吸入」会互相叠加,把你硬生生拽去撞子弹、想走也走不动;现在所有吸力合并后统一限速,<b>正常移速永远挣脱得出</b>,多只饕餮也不再叠成无解(被冰冻减速时仍会更吃力,那是减速本身的代价)。🛡️ <b>护盾看得见了</b>:法盾 / 玄龟甲护盾现在身上有明显护罩,并用小亮点标出<b>还能挡几下</b>,不再只有文字。📊 <b>法术栏显示叠加层数</b>:聚宝 / 疾风之靴 / 血之契约 / 石肤术等属性卡现在会显示各叠了几层。📖 <b>法术图鉴标记</b>:每个法术后面会标「✓ 已用过 / · 未遇见」,一眼看出哪些玩过、哪些还没解锁。🛒 <b>新增「出售技能二次确认」开关</b>(暂停菜单里):开启后卖技能要再点一次确认,防手滑误卖,不想要可关。↩️ <b>选法杖界面加了「返回」</b>,不用再绕一圈回主页。☄️ <b>燎原余烬不再满屏冒烟挡视线</b>:击杀爆裂改成清爽小火花、不再震屏(伤害不变)。</div></div>
 <div class="cl-v"><div class="cl-h">v65.1 · 2026-06-17</div><div class="cl-i">🔧 <b>修正「山鬼宝囊」遗物的一个小问题</b>:之前在「保存并退出后继续」(续战)恢复到那一波时,会把这件遗物的每波金币又多发一次;现已修正,续战恢复的那波不再重复发币,正常推进每波照常 +15。</div></div>
@@ -539,7 +541,7 @@
     <button class="btn ghost" id="sellConfirmBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">出售技能二次确认：开</button>
     <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">开启后，在商店卖出技能要再点一次确认，防手滑误卖</div>
     <button class="btn ghost" id="pauseBeastBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">🐉 异兽图鉴</button>
-    <button class="btn ghost" id="pauseSaveBtn">💾 保存并退出（可续战）</button>
+    <button class="btn ghost" id="pauseSaveBtn">🚪 退出（回主菜单）</button>
     <div id="pauseSaveSub" style="font-size:11.5px;margin:-2px auto 6px;max-width:280px;color:#ffcaa0;opacity:.96;line-height:1.5;display:none;">🔒 弑神不可续战 · 一命冲榜</div>
     <button class="btn ghost" id="pauseEndBtn">🏁 结束并提交成绩</button>
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
@@ -650,7 +652,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v66.1', APP_TIME='2026-06-17 14:20';
+const APP_VER='v66.3', APP_TIME='2026-06-17 15:10';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1669,6 +1671,7 @@ const WAVE_TABLE={
 
 function startWave(n){
   waveNum=n; spawnQ=[]; waveT=0; waveStartKills=kills;   /* 快照开波击杀数,续战据此防重复计数 */
+  saveResume();   /* 自动存档:每波开始存一次续战(弑神/每日在 saveResume 内部自动跳过) → 崩溃/误关回来最多丢当前这一波 */
   if(endless){ if(n>=20) unlockAch('endless20'); if(n>=30) unlockAch('endless30'); if(n>=50) unlockAch('endless50'); }
   /* 遗物:山鬼宝囊 — 每波开始获得金币(续战恢复的那一波跳过,避免重复给币) */
   if(relicMods.waveCoins>0 && !_skipEmod){ coins+=relicMods.waveCoins; }
@@ -1867,7 +1870,7 @@ function makeBoss(tier,scale,forceIdx,px,py,cScale,dmgScale){
     anim:rand(0,9),seed:rand(0,9),flash:0,slowT:0,atkT:2,bursts:0,burstT:0,
     bladeCD:0,phase:1,_mv:{x:0,y:0},_moveMode:'chase',_ringAng:0,
     _phase2Used:false,_phase3Used:false,_laserT:0,_laserAngle:0,_laserDmg:14,_laserFlash:0,_laserFlashAng:0,
-    _bossId:idx,_charging:false,_chargeA:0,_chargeT:0,_chargeDmg:0,_multiCharge:0,_chargeWind:0,_cwDone:false,
+    _bossId:idx,_charging:false,_chargeA:0,_chargeT:0,_chargeTrailT:0,_chargeDmg:0,_multiCharge:0,_chargeWind:0,_cwDone:false,
     _shieldT:2.5,_pullT:0,dead:false};
 }
 
@@ -2685,29 +2688,32 @@ function enemyAI(e,dt){
         if(e._chargeWind<=0){ e._cwDone=true; e._chargeT=0; cam.shake=Math.min(cam.shake+3,10); }
       } else {
         e._chargeT+=dt;
+        e._chargeTrailT=(e._chargeTrailT||0)+dt;   /* 尾迹用独立计时,不再清零 _chargeT —— 修复老 bug:原来尾迹每 0.05s 把 _chargeT 清零,导致"冲 0.6s 收手"的保险永不触发,冲进无柱角落+玩家躲开会永远卡住 */
         const spd=480*(1+e.phase*.15);
-        const mvx=Math.cos(e._chargeA)*spd*dt;
-        const mvy=Math.sin(e._chargeA)*spd*dt;
-        e.x+=mvx; e.y+=mvy;
+        e.x+=Math.cos(e._chargeA)*spd*dt; e.y+=Math.sin(e._chargeA)*spd*dt;
+        /* 边界:钳回场内 + 撞到场边即视为撞墙结束(防止冲出竞技场 / 卡在角落) */
+        let blocked=false;
+        const _mnx=ARENA.pad+e.r,_mxx=ARENA.w-ARENA.pad-e.r,_mny=ARENA.pad+e.r,_mxy=ARENA.h-ARENA.pad-e.r;
+        if(e.x<_mnx){e.x=_mnx;blocked=true;} else if(e.x>_mxx){e.x=_mxx;blocked=true;}
+        if(e.y<_mny){e.y=_mny;blocked=true;} else if(e.y>_mxy){e.y=_mxy;blocked=true;}
         /* 撞到玩家 */
         if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+10){
           hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1));
           cam.shake=Math.min(cam.shake+8,14);
-          e._charging=false; e._cwDone=false; e._chargeWind=0;
+          e._charging=false; e._cwDone=false; e._chargeWind=0; e._chargeTrailT=0;
         }
-        /* 留弹幕尾迹 */
-        if(e._chargeT>.05){
-          e._chargeT=0;
+        /* 留弹幕尾迹(独立计时) */
+        if(e._chargeTrailT>.05){
+          e._chargeTrailT=0;
           for(let k=-1;k<=1;k++){
             const aa=e._chargeA+Math.PI/2*k*.3;
             ebullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*40,vy:Math.sin(aa)*40,r:7,life:2,dmg:(e._chargeDmg?e._chargeDmg*.4:8)*(e._dmgMul||1),dead:false,col:'#c83a3a'});
           }
         }
-        /* 撞墙或超时结束 */
-        let blocked=false;
+        /* 撞墙(石柱或场边)或超时 0.6s 结束 */
         for(const p of pillars){if(Math.hypot(p.x-e.x,p.y-e.y)<p.r+e.r){blocked=true;break;}}
         if(blocked || e._chargeT>0.6){
-          e._charging=false; e._cwDone=false; e._chargeWind=0;
+          e._charging=false; e._cwDone=false; e._chargeWind=0; e._chargeTrailT=0;
           if(e._multiCharge>0){
             e._multiCharge--;
             e._chargeA=Math.atan2(player.y-e.y,player.x-e.x);
@@ -5920,7 +5926,7 @@ function togglePause(p){
   $('paused').classList.toggle('hidden',!paused);
   if(paused){ const _no=(difficulty>=5||dailyRun), _b=$('pauseSaveBtn');
     if(_b){ _b.disabled=_no; _b.style.opacity=_no?'.4':''; _b.style.cursor=_no?'not-allowed':''; }
-    const _s=$('pauseSaveSub'); if(_s){ _s.style.display=_no?'block':'none'; _s.textContent= dailyRun?'🔒 每日挑战不可续战':'🔒 弑神不可续战 · 一命冲榜'; } }
+    const _s=$('pauseSaveSub'); if(_s){ _s.style.display='block'; if(_no){ _s.textContent= dailyRun?'🔒 每日挑战不可续战':'🔒 弑神不可续战 · 一命冲榜'; _s.style.color='#ffcaa0'; } else { _s.textContent='✅ 进度已自动保存 · 随时可回来续战'; _s.style.color='#a7e0b0'; } } }
 }
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
