@@ -107,7 +107,17 @@
   .codex-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:320px;margin-top:8px;}
   .codex-row button{min-width:0;padding:10px 4px;border-radius:999px;border:1px solid rgba(123,92,255,.4);background:rgba(123,92,255,.14);color:#cbbcff;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-sizing:border-box;}
   .codex-row button:active{background:rgba(123,92,255,.28);}
-  /* 成就解锁吐司 */
+  /* 外观:角色皮肤选择(v70) */
+  .ward-row{display:flex;flex-direction:column;gap:10px;width:100%;}
+  .ward-card{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;border:1px solid rgba(123,92,255,.3);background:rgba(30,22,60,.42);cursor:pointer;transition:border-color .12s,background .12s;}
+  .ward-card:active{background:rgba(40,30,72,.6);}
+  .ward-card.sel{border-color:#86f2ff;background:rgba(34,52,62,.45);cursor:default;}
+  .ward-cv{width:74px;height:84px;flex-shrink:0;border-radius:10px;background:#15102b;}
+  .ward-info{flex:1;text-align:left;min-width:0;}
+  .ward-name{font-size:15px;font-weight:700;color:#f2ecff;}
+  .ward-theme{font-size:11.5px;color:#cdbcff;margin-top:2px;}
+  .ward-sub{font-size:10.5px;color:#8a7fb8;margin-top:1px;}
+  .ward-act{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
   #achToast{position:fixed;left:50%;top:50px;transform:translate(-50%,-14px);z-index:60;display:flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;background:rgba(24,16,46,.93);border:1.5px solid var(--gold);box-shadow:0 4px 18px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:84vw;}
   #achToast.show{opacity:1;transform:translate(-50%,0);}
   #achToast .at-ic{font-size:22px;flex-shrink:0;}
@@ -271,8 +281,11 @@
     <div id="diffDesc" class="diff-desc"></div>
     <button class="btn" id="resumeRunBtn" style="margin-top:10px;display:none;background:linear-gradient(135deg,#2ea36b,#46d196);box-shadow:0 6px 22px rgba(60,201,138,.42);">▶ 继续上次战斗<span id="resumeRunSub" style="font-size:12px;font-weight:400;opacity:.9;margin-left:4px;"></span></button>
     <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
-    <button class="btn altar-btn" id="altarBtn">🔮 祭 坛 · 灵 晶 强 化</button>
-    <div class="codex-row" style="margin-top:12px;">
+    <div class="codex-row" style="margin-top:10px;">
+      <button id="altarBtn" style="border:1px solid var(--gold);background:rgba(48,36,12,.55);color:var(--gold);font-weight:700;letter-spacing:.04em;">🔮 祭坛·强化</button>
+      <button id="wardrobeBtn" style="border:1px solid #b98aff;background:rgba(40,28,60,.55);color:#dcc6ff;font-weight:700;letter-spacing:.04em;">🎭 外观·皮肤</button>
+    </div>
+    <div class="codex-row" style="margin-top:8px;">
       <button id="dailyBtn">🗓 每日挑战</button>
       <button id="bCodex">📖 法术图鉴</button>
       <button id="bBeast">🐉 异兽图鉴</button>
@@ -447,6 +460,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v70 · 2026-06-17</div><div class="cl-i">🎭 <b>新增「外观·皮肤」——给角色换一副皮囊!</b>菜单里多了<b>「🎭 外观·皮肤」</b>入口(和「🔮 祭坛·强化」并排一行),点开是角色选择界面,每个角色都有<b>实时预览</b>。除了原本的<b>巫师</b>,新增两位山海经角色用<b>灵晶</b>解锁:🦊<b>九尾妖狐</b>——白身赤尾、九尾后展、狐耳额纹,妖艳灵动;🌿<b>山鬼</b>——苔身藤叶、木角叶冠、面纹赤果,荒野古意。解锁后随时一键切换。<b>皮肤纯外观、不改任何战力数值</b>,所有难度(含弑神/无尽)一律公平;选好的皮肤会<b>自动跟着存档备份</b>。顺手把祭坛/外观两个入口收成小按钮并排,英雄榜往上挪、更好看。</div></div>
 <div class="cl-v"><div class="cl-h">v69 · 2026-06-17</div><div class="cl-i">🕹️ <b>操作方式可选了!</b>暂停菜单新增「🎮 操作方式」,两个开关随意组合:<b>双摇杆瞄准</b>——开启后左半屏拖动移动、右半屏拖动瞄准开火,想精准点杀的玩家可以自己控制射击方向(不推右摇杆时仍自动瞄准,不会没输出);<b>固定摇杆</b>——把摇杆底盘固定在屏幕左下/右下角,喜欢定点搓杆的可以打开。两个开关自由搭配:浮动/固定 × 单/双摇杆共四种。双摇杆模式下冲刺改为<b>双击左摇杆</b>(往移动方向冲)。菜单里会实时显示当前操作方式的说明,首次开启双摇杆进局还会有一句布局提示。默认仍是原来的浮动单摇杆+自动瞄准,不想换的不受影响。</div></div>
 <div class="cl-v"><div class="cl-h">v68 · 2026-06-17</div><div class="cl-i">📷 <b>暂停截图</b>:暂停菜单新增「📷 截图（隐藏菜单）」——画面保持冻结、菜单暂时隐藏，方便截下游戏画面，截完点一下屏幕菜单就回来。🔊 <b>声音修复</b>:① 静音后不再影响其他 App 播放音乐（彻底释放音频）;② 游戏中声音被来电/通知等打断后会自动恢复，不用再退出重进。🛡️ <b>说明修正</b>:法盾、治愈的升级说明此前错写成「伤害提升」,现已改为准确的「可挡次数 +1」「回复量提升」。</div></div>
 <div class="cl-v"><div class="cl-h">v67 · 2026-06-17</div><div class="cl-i">🎭 <b>法杖随手 · 整套换装</b>:11 把法杖现在各有专属外形——噬血杖配蝙蝠翼血珠、命运杖顶着金色星辰、御兽杖是兽角图腾、玻璃炮是水晶碎片、磐岩是顽石巨杖……连法袍和帽子的配色也随手中法杖一起变,每把杖都是一身不同的装扮。而且乱战中法杖也和人物一样始终透到最上层、清晰可见,不会被满屏法术埋住。</div></div>
@@ -625,6 +639,16 @@
   </div>
 </div>
 
+<!-- 外观:角色皮肤选择(v70) -->
+<div id="wardrobe" class="overlay hidden">
+  <div class="panel" style="max-width:480px;max-height:92vh;overflow-y:auto;gap:10px;">
+    <div class="diff-title" style="margin-top:6px;">🎭 外观 · 角色皮肤</div>
+    <div class="sub" style="font-size:11px;letter-spacing:.12em;margin-bottom:4px;color:#9a8fd0;">换一副皮囊 · 纯外观,不改任何战力</div>
+    <div id="wardrobeRow" class="ward-row"></div>
+    <button class="btn ghost" id="wardrobeBack" style="margin-top:6px;">返回</button>
+  </div>
+</div>
+
 <!-- 商店 -->
 <div id="shop" class="overlay hidden">
   <div class="panel" style="max-height:92vh;overflow-y:auto;gap:10px;">
@@ -656,7 +680,7 @@ const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(M
 const $=id=>document.getElementById(id);
 
 /* ============ 画布 ============ */
-const cv=$('game'), ctx=cv.getContext('2d');
+const cv=$('game'); let ctx=cv.getContext('2d');
 let W=0,H=0,DPR=1,vg=null,safeB=0;
 function resize(){
   DPR=Math.min(window.devicePixelRatio||1,1.5);   /* v59.7 性能:2→1.5,像素减约44%,绘制整体提速,高清屏上几乎无感 */
@@ -671,7 +695,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v69', APP_TIME='2026-06-17 20:40';
+const APP_VER='v70', APP_TIME='2026-06-17 22:15';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1433,8 +1457,8 @@ function newPlayer(){ return {
   shield:null, orb:null, beam:null, blackholes:[], cyclones:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
 };}
 /* ============ 元进度存档:灵晶(货币) + 强化等级 + 解锁内容 ============ */
-let META={lj:0,up:{},unlocked:{}}, runRewardBase=0;
-function loadMeta(){ try{ const m=JSON.parse(localStorage.getItem('sf_meta')||'{}'); META.lj=m.lj||0; META.up=m.up||{}; META.unlocked=m.unlocked||{}; }catch(e){} }
+let META={lj:0,up:{},unlocked:{},skin:'wizard'}, runRewardBase=0;
+function loadMeta(){ try{ const m=JSON.parse(localStorage.getItem('sf_meta')||'{}'); META.lj=m.lj||0; META.up=m.up||{}; META.unlocked=m.unlocked||{}; META.skin=m.skin||'wizard'; }catch(e){} }
 function saveMeta(){ try{ localStorage.setItem('sf_meta', JSON.stringify(META)); }catch(e){} }
 function refreshLj(){ const e=document.getElementById('ljBal'); if(e)e.textContent=META.lj; }
 /* ═══ 存档备份码:导出/导入(换机不丢档) ═══ */
@@ -1551,6 +1575,15 @@ const WAND_SKIN={
 };
 function wandSkin(id){ return WAND_SKIN[id]||WAND_SKIN.apprentice; }
 function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
+/* ===== 角色皮肤(v70):纯外观,不改任何战力;wizard 免费,其余灵晶解锁(记录于 META.unlocked,与法杖键不冲突) ===== */
+const SKIN_COST={fox:300, shangui:300};
+const CHARS=[
+  {id:'wizard',  icon:'🧙', name:'巫师',     theme:'经典 · 暗紫法师', sub:'最初的拔杖者'},
+  {id:'fox',     icon:'🦊', name:'九尾妖狐', theme:'妖艳 · 白身赤尾', sub:'九尾灼灼 · 狐耳额纹'},
+  {id:'shangui', icon:'🌿', name:'山鬼',     theme:'荒野 · 苔身藤叶', sub:'被薜荔兮带女萝 · 木角叶冠'},
+];
+function skinUnlocked(id){ return (SKIN_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
+let _wuSkin=null;
 function applyWand(w){
   player.wand=w; const f=w.fx;
   player.wandFx={dmgM:f.dmgM||1,cdM:f.cdM||1,spdM:f.spdM||1,extra:f.extra||0,
@@ -1649,11 +1682,41 @@ function buildWandSel(){
 }
 let _wuWand=null;
 function openWandUnlock(w){
-  _wuWand=w; const cost=WAND_COST[w.id]||0, enough=META.lj>=cost;
+  _wuWand=w; _wuSkin=null; const cost=WAND_COST[w.id]||0, enough=META.lj>=cost;
   $('wuIc').textContent=w.icon; $('wuName').textContent=w.name; $('wuDesc').textContent=w.desc;
   $('wuCost').textContent=cost; $('wuHave').textContent=META.lj;
   const buy=$('wuBuy'); buy.classList.toggle('dis',!enough); buy.textContent=enough?'解锁':'灵晶不足';
   $('wandUnlock').classList.remove('hidden');
+}
+/* ===== 外观:角色皮肤选择(v70) ===== */
+function openSkinUnlock(c){
+  _wuSkin=c; _wuWand=null; const cost=SKIN_COST[c.id]||0, enough=META.lj>=cost;
+  $('wuIc').textContent=c.icon||'🎭'; $('wuName').textContent=c.name; $('wuDesc').textContent='角色皮肤 · '+c.theme;
+  $('wuCost').textContent=cost; $('wuHave').textContent=META.lj;
+  const buy=$('wuBuy'); buy.classList.toggle('dis',!enough); buy.textContent=enough?'解锁':'灵晶不足';
+  $('wandUnlock').classList.remove('hidden');
+}
+function buildWardrobe(){
+  const row=$('wardrobeRow'); row.innerHTML=''; const cur=META.skin||'wizard';
+  for(const c of CHARS){
+    const ok=skinUnlocked(c.id), sel=(c.id===cur);
+    const card=document.createElement('div');
+    card.className='ward-card'+(sel?' sel':'');
+    const cvId='wc_'+c.id;
+    const actStyle = sel ? 'color:#86f2ff;' : ok ? 'color:#cbbcff;border:1px solid rgba(123,92,255,.5);' : 'color:#ffd98a;border:1px solid var(--gold);';
+    const actTxt = sel ? '✓ 使用中' : ok ? '选择' : '🔒 ✦'+(SKIN_COST[c.id]||0);
+    card.innerHTML='<canvas class="ward-cv" id="'+cvId+'" width="148" height="168"></canvas>'+
+      '<div class="ward-info"><div class="ward-name">'+c.name+'</div>'+
+      '<div class="ward-theme">'+c.theme+'</div><div class="ward-sub">'+c.sub+'</div></div>'+
+      '<div class="ward-act" style="'+actStyle+'">'+actTxt+'</div>';
+    row.appendChild(card);
+    paintCharCard(document.getElementById(cvId), c.id);
+    if(!sel){ card.onclick=()=>{
+      if(skinUnlocked(c.id)){ META.skin=c.id; saveMeta(); try{S.card();}catch(e){} buildWardrobe(); }
+      else { openSkinUnlock(c); }
+    }; }
+  }
+  $('wardrobe').classList.remove('hidden');
 }
 /* ============ 冲刺 ============ */
 const DASH_CD=1.6;   /* 冲刺基础冷却(v58:2→1.6);遗物「疾风步」按比例再减 */
@@ -4999,16 +5062,16 @@ function render(){
     ctx.save(); ctx.globalCompositeOperation='source-over';
     /* 柔和外发光:整体透出一圈光晕 */
     ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.5,1.5); ctx.translate(-_p.x,-_p.y);
-    ctx.globalAlpha=.1+.06*_pu; wizardSilhouette(_p,'#7df0ff'); ctx.restore();
+    ctx.globalAlpha=.1+.06*_pu; charSilhouette(_p,'#7df0ff'); ctx.restore();
     /* 细暗描边:浅色背景下勾出边界 */
     ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.26,1.26); ctx.translate(-_p.x,-_p.y);
-    ctx.globalAlpha=.4; wizardSilhouette(_p,'#08040f'); ctx.restore();
+    ctx.globalAlpha=.4; charSilhouette(_p,'#08040f'); ctx.restore();
     /* 青色脉冲亮边(主轮廓·贴合外形) */
     ctx.save(); ctx.translate(_p.x,_p.y); ctx.scale(1.18,1.18); ctx.translate(-_p.x,-_p.y);
-    ctx.globalAlpha=.62+.34*_pu; wizardSilhouette(_p,'#86f2ff'); ctx.restore();
+    ctx.globalAlpha=.62+.34*_pu; charSilhouette(_p,'#86f2ff'); ctx.restore();
     /* 真身重绘:盖住剪影中心,只留一圈贴合外形的发光描边 */
     /* v67:法杖也一并重绘到最上层(与本体同),否则只有人物透出、法杖仍被弹幕盖住 */
-    ctx.globalAlpha=1; drawWandShape(_p.x,_p.y,_p.r,_aA,_p.wand&&_p.wand.id,_p.anim); drawWizardBody(_p, _aA);
+    ctx.globalAlpha=1; drawWandShape(_p.x,_p.y,_p.r,_aA,_p.wand&&_p.wand.id,_p.anim); drawCharBody(_p, _aA);
     /* 法盾(法术):明显的青色护罩 + 剩余可挡次数(小亮点),解决"只有文字提示/看不出叠几层"(朋友十六) */
     if(_p.shield){ const _rem=Math.max(0,(_p.shield.max||1)-(_p.shield.hits||0)), _rr=_p.r+13+_pu*2;
       ctx.save();
@@ -5704,6 +5767,182 @@ function wizardSilhouette(p, color){
   ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
   ctx.restore();
 }
+/* ===== 角色皮肤(v70):九尾妖狐 / 山鬼 本体 + 剪影 + 分发器;纯渲染,法杖仍由 drawWandShape 画 ===== */
+/* ---------- 九尾妖狐:白身赤纹,九尾后展,狐耳替帽,额前火纹 ---------- */
+function drawFoxBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.06;
+  /* 九尾(身后扇形展开,白底柔赤尖,羽状大尾) */
+  ctx.save();
+  const baseX=p.x, baseY=p.y+r*0.30;
+  const N=9, spread=2.66, mid=-Math.PI/2;          // 中尾朝上,扇得宽、框住角色
+  for(let i=0;i<N;i++){
+    const t=(i/(N-1))-0.5;                          // -0.5..0.5
+    const ang=mid+t*spread + Math.sin(p.anim*1.6+i*0.7)*0.04; // 轻摆
+    const L=r*2.12*(1-Math.abs(t)*0.13);            // 拉长
+    const ux=Math.cos(ang),uy=Math.sin(ang),nx=-uy,ny=ux;
+    const ex=baseX+ux*L+nx*t*r*0.5, ey=baseY+uy*L+ny*t*r*0.5; // 末端向外弯
+    const mx=baseX+ux*L*0.5, my=baseY+uy*L*0.5;
+    const w=r*0.34;
+    // 白色尾身(羽状)
+    ctx.fillStyle = i%2 ? '#fff7f9' : '#ffeef2';
+    ctx.beginPath();
+    ctx.moveTo(baseX+nx*w*0.45, baseY+ny*w*0.45);
+    ctx.quadraticCurveTo(mx+nx*w, my+ny*w, ex, ey);
+    ctx.quadraticCurveTo(mx-nx*w, my-ny*w, baseX-nx*w*0.45, baseY-ny*w*0.45);
+    ctx.closePath();ctx.fill();
+    ctx.strokeStyle='rgba(228,150,172,.45)';ctx.lineWidth=1;ctx.stroke();
+    // 柔和赤尖(末端~34% 渐变)
+    const tbx=baseX+ux*L*0.66, tby=baseY+uy*L*0.66;
+    const tg=ctx.createLinearGradient(tbx,tby,ex,ey);
+    tg.addColorStop(0,'rgba(220,60,90,0)');tg.addColorStop(1,'#dd3450');
+    ctx.fillStyle=tg;const tw=w*0.66;
+    ctx.beginPath();
+    ctx.moveTo(tbx+nx*tw, tby+ny*tw);
+    ctx.quadraticCurveTo((tbx+ex)/2+nx*tw*0.6,(tby+ey)/2+ny*tw*0.6, ex, ey);
+    ctx.quadraticCurveTo((tbx+ex)/2-nx*tw*0.6,(tby+ey)/2-ny*tw*0.6, tbx-nx*tw, tby-ny*tw);
+    ctx.closePath();ctx.fill();
+  }
+  ctx.restore();
+  /* 斗篷本体(白→玫红渐变) */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#fff3f6');g.addColorStop(1,'#bd3257');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#ff9fb8';ctx.lineWidth=1.5;ctx.stroke();
+  /* 胸口赤纹(小三道) */
+  ctx.strokeStyle='rgba(216,50,79,.55)';ctx.lineWidth=Math.max(1,r*0.06);
+  for(let k=-1;k<=1;k++){ctx.beginPath();ctx.arc(p.x,p.y+r*0.18,r*0.5,Math.PI*0.32+k*0.001,Math.PI*0.68);ctx.stroke();}
+  /* 脸 */
+  ctx.fillStyle='#ffe4c8';ctx.beginPath();ctx.arc(p.x,p.y-3,r*.55,0,TAU);ctx.fill();
+  /* 腮红 */
+  ctx.fillStyle='rgba(255,120,150,.5)';
+  ctx.beginPath();ctx.ellipse(p.x-r*0.32,p.y-1,r*0.14,r*0.09,0,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.ellipse(p.x+r*0.32,p.y-1,r*0.14,r*0.09,0,0,TAU);ctx.fill();
+  /* 眼(略带媚意:眼尾上挑) */
+  const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
+  ctx.strokeStyle='#3a2030';ctx.lineWidth=Math.max(1.4,r*0.1);ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(p.x-4.2+ex,p.y-3+ey);ctx.lineTo(p.x-2.2+ex,p.y-4.6+ey);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(p.x+2.2+ex,p.y-4.6+ey);ctx.lineTo(p.x+4.2+ex,p.y-3+ey);ctx.stroke();
+  ctx.fillStyle='#3a2030';
+  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
+  ctx.lineCap='butt';
+  /* 额前火纹(金) */
+  ctx.fillStyle='#ffd24a';ctx.font=(r*0.5)+'px serif';ctx.textAlign='center';
+  ctx.fillText('✦',p.x,p.y-r*0.52);
+  ctx.textAlign='left';
+  /* 狐耳(顶部,白外赤内) */
+  ctx.save();ctx.translate(p.x,p.y-r*.62);ctx.rotate(sway);
+  [-1,1].forEach(s=>{
+    const ox=s*r*0.5;
+    ctx.fillStyle='#fceaed';
+    ctx.beginPath();ctx.moveTo(ox-r*0.26,0);ctx.lineTo(ox+r*0.26,0);ctx.lineTo(ox+s*r*0.06,-r*0.78);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#e07090';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='#e85278';
+    ctx.beginPath();ctx.moveTo(ox-r*0.13,-r*0.08);ctx.lineTo(ox+r*0.13,-r*0.08);ctx.lineTo(ox+s*r*0.04,-r*0.55);ctx.closePath();ctx.fill();
+  });
+  ctx.restore();
+}
+/* ---------- 山鬼:苔绿身,藤叶披挂,叶冠木角,赤果点缀,面纹 ---------- */
+function drawShanguiBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.05;
+  /* 斗篷本体(苔绿→暗土渐变) */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#90c060');g.addColorStop(1,'#27331a');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#b8e088';ctx.lineWidth=1.5;ctx.stroke();
+  /* 藤叶披挂(下半身一圈叶片) */
+  const leaf=(cx,cy,la,len,wid,col)=>{const ux=Math.cos(la),uy=Math.sin(la),nx=-uy,ny=ux;
+    ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.quadraticCurveTo(cx+ux*len*0.5+nx*wid,cy+uy*len*0.5+ny*wid,cx+ux*len,cy+uy*len);
+    ctx.quadraticCurveTo(cx+ux*len*0.5-nx*wid,cy+uy*len*0.5-ny*wid,cx,cy);ctx.closePath();ctx.fill();};
+  for(let k=0;k<5;k++){
+    const a=Math.PI*0.18 + k*(Math.PI*0.64/4);     // 沿下缘铺开
+    const cx=p.x+Math.cos(a)*r*0.74, cy=p.y+Math.sin(a)*r*0.74;
+    leaf(cx,cy,a+0.1,r*0.5,r*0.16, k%2?'#4f8a2e':'#3f6e22');
+  }
+  /* 缠绕藤蔓(斜跨身体一道) */
+  ctx.strokeStyle='#4a7a2e';ctx.lineWidth=Math.max(1.4,r*0.1);ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(p.x-r*0.6,p.y+r*0.2);ctx.quadraticCurveTo(p.x,p.y-r*0.1,p.x+r*0.55,p.y+r*0.35);ctx.stroke();ctx.lineCap='butt';
+  /* 赤果点缀(山鬼·乘赤豹之意) */
+  ctx.fillStyle='#e0443a';
+  ctx.beginPath();ctx.arc(p.x+r*0.5,p.y+r*0.34,r*0.1,0,TAU);ctx.arc(p.x-r*0.45,p.y+r*0.28,r*0.08,0,TAU);ctx.fill();
+  /* 脸(略偏古铜) */
+  ctx.fillStyle='#e6d0ac';ctx.beginPath();ctx.arc(p.x,p.y-3,r*.55,0,TAU);ctx.fill();
+  /* 面纹(双颊竖纹) */
+  ctx.strokeStyle='rgba(46,74,26,.7)';ctx.lineWidth=Math.max(1,r*0.05);
+  ctx.beginPath();ctx.moveTo(p.x-r*0.28,p.y-r*0.18);ctx.lineTo(p.x-r*0.28,p.y+r*0.12);
+  ctx.moveTo(p.x+r*0.28,p.y-r*0.18);ctx.lineTo(p.x+r*0.28,p.y+r*0.12);ctx.stroke();
+  /* 眼(淡绿微光) */
+  const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
+  ctx.fillStyle='rgba(180,255,140,.4)';
+  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,3,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,3,0,TAU);ctx.fill();
+  ctx.fillStyle='#243a14';
+  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.6,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.6,0,TAU);ctx.fill();
+  /* 顶部:木角 + 叶冠 */
+  ctx.save();ctx.translate(p.x,p.y-r*.58);ctx.rotate(sway);
+  /* 两侧木角 */
+  ctx.strokeStyle='#6b4a2a';ctx.lineWidth=Math.max(2,r*0.13);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(s*r*0.5,-r*0.05);
+    ctx.quadraticCurveTo(s*r*0.86,-r*0.5,s*r*0.66,-r*0.95);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(s*r*0.72,-r*0.52);ctx.lineTo(s*r*1.0,-r*0.66);ctx.stroke();});
+  ctx.lineCap='butt';
+  /* 叶冠(头顶一排叶) */
+  for(let k=-2;k<=2;k++){
+    const a=-Math.PI/2 + k*0.32;
+    leaf(0,-r*0.02, a, r*0.62, r*0.17, k%2?'#6aa840':'#3f6e22');
+  }
+  /* 冠中红花 */
+  ctx.fillStyle='#e0443a';ctx.beginPath();ctx.arc(0,-r*0.5,r*0.12,0,TAU);ctx.fill();
+  ctx.fillStyle='#ffcf3a';ctx.beginPath();ctx.arc(0,-r*0.5,r*0.05,0,TAU);ctx.fill();
+  ctx.restore();
+}
+/* 新角色剪影(给定位光环描边;贴合身体+头饰核心,尾/角不入剪影、靠真身重绘透出) */
+function foxSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.06;
+  ctx.save();ctx.translate(p.x,p.y-r*.62);ctx.rotate(sway);
+  [-1,1].forEach(s=>{const ox=s*r*0.5;
+    ctx.beginPath();ctx.moveTo(ox-r*0.26,0);ctx.lineTo(ox+r*0.26,0);ctx.lineTo(ox+s*r*0.06,-r*0.78);ctx.closePath();ctx.fill();});
+  ctx.restore();
+}
+function shanguiSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-r*.58);ctx.rotate(sway);
+  for(let k=-2;k<=2;k++){const a=-Math.PI/2+k*0.32, ux=Math.cos(a),uy=Math.sin(a),nx=-uy,ny=ux,len=r*0.62,wid=r*0.17;
+    ctx.beginPath();ctx.moveTo(0,-r*0.02);
+    ctx.quadraticCurveTo(ux*len*0.5+nx*wid,-r*0.02+uy*len*0.5+ny*wid,ux*len,-r*0.02+uy*len);
+    ctx.quadraticCurveTo(ux*len*0.5-nx*wid,-r*0.02+uy*len*0.5-ny*wid,0,-r*0.02);ctx.closePath();ctx.fill();}
+  ctx.restore();
+}
+/* 分发器:按所选皮肤(META.skin)绘制本体/剪影;skinId 可显式指定(选择界面预览用) */
+function drawCharBody(p, aimA, skinId){
+  const s=skinId||(META&&META.skin)||'wizard';
+  if(s==='fox') drawFoxBody(p, aimA);
+  else if(s==='shangui') drawShanguiBody(p, aimA);
+  else drawWizardBody(p, aimA);
+}
+function charSilhouette(p, color, skinId){
+  const s=skinId||(META&&META.skin)||'wizard';
+  if(s==='fox') foxSilhouette(p, color);
+  else if(s==='shangui') shanguiSilhouette(p, color);
+  else wizardSilhouette(p, color);
+}
+/* 选择界面卡片预览:临时把全局 ctx 切到小卡画布,画完还原(同步执行,不与游戏循环抢) */
+function paintCharCard(cardCv, skinId){
+  if(!cardCv) return; const gg=cardCv.getContext('2d'); const _save=ctx; ctx=gg;
+  try{
+    const Wd=cardCv.width, Hd=cardCv.height; gg.clearRect(0,0,Wd,Hd);
+    gg.fillStyle='#15102b'; gg.fillRect(0,0,Wd,Hd);
+    const p={x:Wd/2, y:Hd*0.54, r:Math.min(Wd,Hd)*0.27, anim:1.0, wand:{id:'apprentice'}}, aimA=0;
+    gg.save();gg.globalAlpha=.32;gg.fillStyle='#000';gg.beginPath();gg.ellipse(p.x,p.y+p.r*.92,p.r*.9,p.r*.34,0,0,TAU);gg.fill();gg.restore();
+    drawWandShape(p.x,p.y,p.r,aimA,'apprentice',p.anim);
+    gg.globalCompositeOperation='source-over';gg.globalAlpha=1;
+    drawCharBody(p, aimA, skinId);
+    gg.globalAlpha=1;
+  }catch(e){} finally{ ctx=_save; }
+}
 function drawPlayer(){
   const p=player;
   /* 冲刺残影 */
@@ -5782,7 +6021,7 @@ function drawPlayer(){
   drawWandShape(p.x,p.y,p.r,aimA,p.wand&&p.wand.id,p.anim);
   ctx.globalCompositeOperation='source-over';
   ctx.globalAlpha=p.iframe>0&&Math.floor(p.anim*16)%2===0?.45:1;
-  drawWizardBody(p, aimA);
+  drawCharBody(p, aimA);
   ctx.globalAlpha=1;
 }
 function drawHUD(){
@@ -6153,7 +6392,12 @@ $('wandBack').onclick=()=>{ $('wandSel').classList.add('hidden'); $('menu').clas
 (function(){ try{ var touch=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches); if(!touch){ var t=$('hintTouch'),pc=$('hintPC'); if(t)t.style.display='none'; if(pc)pc.style.display=''; } }catch(e){} })();
 $('resumeRunBtn').onclick=()=>{ initAudio(); resumeRun(); };
 $('wuCancel').onclick=()=>$('wandUnlock').classList.add('hidden');
-$('wuBuy').onclick=()=>{ if(!_wuWand)return; const cost=WAND_COST[_wuWand.id]||0;
+$('wuBuy').onclick=()=>{
+  if(_wuSkin){ const cost=SKIN_COST[_wuSkin.id]||0;
+    if(META.lj<cost){ try{S.no();}catch(e){} return; }
+    META.lj-=cost; META.unlocked[_wuSkin.id]=true; META.skin=_wuSkin.id; saveMeta(); refreshLj();
+    try{S.buy();}catch(e){} $('wandUnlock').classList.add('hidden'); buildWardrobe(); return; }
+  if(!_wuWand)return; const cost=WAND_COST[_wuWand.id]||0;
   if(META.lj<cost){ try{S.no();}catch(e){} return; }
   META.lj-=cost; META.unlocked[_wuWand.id]=true; saveMeta(); refreshLj();
   try{S.buy();}catch(e){} $('wandUnlock').classList.add('hidden'); buildWandSel(); };
@@ -6220,6 +6464,8 @@ $('scClose').onclick=()=>$('shareCard').classList.add('hidden');
 $('bBeast').onclick=openBestiary;
 $('bAchv').onclick=openAchv;
 $('altarBtn').onclick=openAltar;
+$('wardrobeBtn').onclick=buildWardrobe;
+$('wardrobeBack').onclick=()=>{ $('wardrobe').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
 $('altarBack').onclick=()=>$('altar').classList.add('hidden');
 $('altarCloseTop').onclick=()=>$('altar').classList.add('hidden');
 $('altarBackupBtn').onclick=()=>{ $('altar').classList.add('hidden'); openBackup(); };
