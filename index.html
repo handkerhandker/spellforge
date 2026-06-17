@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v66.4 · 2026-06-17</div><div class="cl-i">🎨 <b>全面整理了游戏图标</b>:把全游戏 136 个图标做到了<b>每个都不一样</b>——法术、符文、属性、契约、遗物、法杖、协同、词缀、御兽、成就,各有专属图标,一眼就能区分,不会再出现"两个东西长一样"的情况。(比如巨型法术、疾风步、血之契约、贪婪契约、混沌契约、先手等都换了新图标)</div></div>
 <div class="cl-v"><div class="cl-h">v66.3 · 2026-06-17</div><div class="cl-i">🐛 <b>修复 Boss 冲刺会卡在角落的问题</b>:此前 Boss 发动冲撞后,如果冲进没有石柱的角落、而你又躲开了,它的"冲一下就收手"判定在某些情况下不触发,会一直闷头往角落冲、看起来像卡死不动(其他东西照常)。现已修正:冲刺最多 0.6 秒必定收手,且<b>撞到场地边缘会立刻停下</b>,Boss 不会再冲出场地或卡在角落。对所有会冲撞的首领都生效。</div></div>
 <div class="cl-v"><div class="cl-h">v66.2 · 2026-06-17</div><div class="cl-i">💾 <b>新增自动存档,进度更安全</b>:以前只有手动「保存并退出」才会存档,万一中途页面被关掉(尤其微信里玩久了内存被回收)会退回上一次手动存的地方、丢不少进度。现在<b>每过一波都会自动存一次</b>,万一被关掉,回来点「继续上次战斗」最多只丢当前这一波。暂停菜单原来的按钮也改名为「🚪 退出（回主菜单）」并标注"进度已自动保存",更清楚——它现在只是用来回主菜单换难度 / 看榜单的,不用再担心不点就丢档。(弑神 / 每日挑战为公平上榜仍不存档;另:微信里玩若想最稳,可点右上「···」→「在浏览器打开」用系统浏览器,内存更宽松、不易被关。)</div></div>
 <div class="cl-v"><div class="cl-h">v66.1 · 2026-06-17</div><div class="cl-i">☄️ <b>「燎原余烬」威力提升</b>:击杀敌人时的爆裂溅射伤害上限调高,清理成群杂兵更有力、滚雪球更爽(视觉仍是 v66 的清爽小火花,不挡视线)。</div></div>
@@ -652,7 +653,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v66.3', APP_TIME='2026-06-17 15:10';
+const APP_VER='v66.4', APP_TIME='2026-06-17 16:05';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -842,71 +843,71 @@ const CARD_DEFS=[
   {id:'swarm',kind:'spell',rar:2},
   {id:'multi', kind:'mod',name:'多重施法',icon:'✨',desc:'每次施法 +1 发投射物',max:3,rar:3},
   {id:'homing',kind:'mod',name:'魔力追踪',icon:'🎯',desc:'法术会自动追踪附近敌人(开关型,一次即满)',max:1,rar:2},
-  {id:'bounce',kind:'mod',name:'弹射符文',icon:'💫',desc:'法术碰到墙壁与石柱弹射 +1 次',max:3,rar:1},
+  {id:'bounce',kind:'mod',name:'弹射符文',icon:'🪀',desc:'法术碰到墙壁与石柱弹射 +1 次',max:3,rar:1},
   {id:'pierce',kind:'mod',name:'穿透符文',icon:'🪶',desc:'法术穿透 +1 个敌人',max:3,rar:1},
-  {id:'split', kind:'mod',name:'分裂符文',icon:'💥',desc:'法术消散时分裂出 3 枚追击小弹(开关型,一次即满)',max:1,rar:3},
+  {id:'split', kind:'mod',name:'分裂符文',icon:'✂️',desc:'法术消散时分裂出 3 枚追击小弹(开关型,一次即满)',max:1,rar:3},
   {id:'haste', kind:'mod',name:'急速咏唱',icon:'⏩',desc:'所有法术施法间隔 -12%',max:6,rar:1},
-  {id:'amp',   kind:'mod',name:'奥术增幅',icon:'🔆',desc:'所有法术伤害 +25%',max:99,rar:1},
-  {id:'giant', kind:'mod',name:'巨型法术',icon:'🌀',desc:'法术体积 +40%，伤害 +20%',max:2,rar:2},
+  {id:'amp',   kind:'mod',name:'奥术增幅',icon:'📈',desc:'所有法术伤害 +25%',max:99,rar:1},
+  {id:'giant', kind:'mod',name:'巨型法术',icon:'🎈',desc:'法术体积 +40%，伤害 +20%',max:2,rar:2},
   {id:'hp',    kind:'stat',name:'生命祝福',icon:'❤️',desc:'最大生命 +25，并立即回复 25',max:99,rar:2},
   {id:'boots', kind:'stat',name:'疾风之靴',icon:'👟',desc:'移动速度 +10%',max:3,rar:2},
-  {id:'leech', kind:'stat',name:'血之契约',icon:'🩸',desc:'每次击杀回复 1 点生命',max:3,rar:3},
-  {id:'armor', kind:'stat',name:'石肤术',icon:'🛡️',desc:'受到的伤害 -15%',max:3,rar:3},
+  {id:'leech', kind:'stat',name:'血之契约',icon:'🧛',desc:'每次击杀回复 1 点生命',max:3,rar:3},
+  {id:'armor', kind:'stat',name:'石肤术',icon:'🪨',desc:'受到的伤害 -15%',max:3,rar:3},
   {id:'pickup',kind:'stat',name:'聚宝',icon:'🪙',desc:'金币 / 道具吸取范围 +30%',max:3,rar:1},
   /* —— 诅咒契约:高风险高回报,第4波起出现,各限1张 —— */
-  {id:'pact_blood',kind:'curse',name:'嗜血契约',icon:'⚔️',desc:'诅咒：敌人移速 +15% ▸ 你的伤害 +40%',max:1,rar:3},
+  {id:'pact_blood',kind:'curse',name:'嗜血契约',icon:'🔪',desc:'诅咒：敌人移速 +15% ▸ 你的伤害 +40%',max:1,rar:3},
   {id:'pact_glass',kind:'curse',name:'玻璃契约',icon:'💔',desc:'诅咒：受到的伤害 +50% ▸ 你的伤害 +50%',max:1,rar:3},
-  {id:'pact_greed',kind:'curse',name:'贪婪契约',icon:'🪙',desc:'诅咒：最大生命 -20 ▸ 金币获取 +75%',max:1,rar:3},
-  {id:'pact_chaos',kind:'curse',name:'混沌契约',icon:'🌪️',desc:'诅咒：弹道散乱难控 ▸ 多重施法 +1',max:1,rar:3}
+  {id:'pact_greed',kind:'curse',name:'贪婪契约',icon:'💵',desc:'诅咒：最大生命 -20 ▸ 金币获取 +75%',max:1,rar:3},
+  {id:'pact_chaos',kind:'curse',name:'混沌契约',icon:'🎲',desc:'诅咒：弹道散乱难控 ▸ 多重施法 +1',max:1,rar:3}
 ];
 
 /* ============ 法术协同（Synergy）============ */
 const SYNERGIES=[
-  {id:'meteor_swarm',name:'陨石雨',icon:'☄️',
+  {id:'meteor_swarm',name:'陨石雨',icon:'🌠',
     desc:'陨石 aoe 与伤害双倍',
     cond:s=>s.fire&&s.meteor,
     apply:(b,s)=>{if(b.id==='meteor'||b.id==='fire'){b.aoe=(b.aoe||0)*2;b.dmg*=1.4;}}},
-  {id:'frost_ray',name:'冰霜射线',icon:'❄️',
+  {id:'frost_ray',name:'冰霜射线',icon:'🌨️',
     desc:'冰锥减速时间 ×1.6',
     cond:s=>s.ice&&s.pierce>=1,
     apply:(b,s)=>{if(b.id==='ice'&&b.slow){b.slowT=1.6*b.slow;}}},
-  {id:'thunder_web',name:'雷霆网',icon:'⚡',
+  {id:'thunder_web',name:'雷霆网',icon:'🕸️',
     desc:'连锁闪电跳跃数 +1',
     cond:s=>s.zap&&s.multi>=1,
     apply:(b,s)=>{/* 命中时检测 +1,见 damageEnemy 链式扩展 */}},
-  {id:'arc_storm',name:'电弧风暴',icon:'🌩️',
+  {id:'arc_storm',name:'电弧风暴',icon:'⛈️',
     desc:'闪电弧可触发第二段连锁',
     cond:s=>s.arc&&s.zap,
     apply:(b,s)=>{if(b.id==='arc'){b.arcChain=2;}}},
-  {id:'nova_core',name:'星核爆裂',icon:'💥',
+  {id:'nova_core',name:'星核爆裂',icon:'✳️',
     desc:'火球命中后额外 aoe 40',
     cond:s=>s.fire&&s.split>=1,
     apply:(b,s)=>{if(b.id==='fire'){b.aoe=(b.aoe||0)+40;}}},
-  {id:'toxic_cloud',name:'毒沼',icon:'☠️',
+  {id:'toxic_cloud',name:'毒沼',icon:'🐍',
     desc:'毒雾弹消散留下 5s 毒云',
     cond:s=>s.venom&&s.pierce>=1,
     apply:(b,s)=>{if(b.id==='venom'){b.cloud=true;b.cloudLife=5.0;}}},
-  {id:'plasma_orb',name:'等离子球',icon:'🔵',
+  {id:'plasma_orb',name:'等离子球',icon:'🟣',
     desc:'奥术球环绕半径 +40',
     cond:s=>s.orb&&s.meteor,
     apply:(b,s)=>{/* 作用于 orb 状态,见 updateSpellStates */}},
-  {id:'void_echo',name:'虚空回响',icon:'⚫',
+  {id:'void_echo',name:'虚空回响',icon:'🌑',
     desc:'黑洞附近法术回响一次',
     cond:s=>s.blackhole&&s.zap,
     apply:(b,s)=>{/* 命中黑洞附近时触发,见 updateSpellStates */}},
-  {id:'sword_storm',name:'剑刃风暴',icon:'🗡️',
+  {id:'sword_storm',name:'剑刃风暴',icon:'🤺',
     desc:'急速咏唱 3 段以上时,环刃 +2',
     cond:s=>s.blade&&s.haste>=3,
     apply:(b,s)=>{/* 作用于 blade,见 blade update */}},
-  {id:'lifesteal',name:'生命虹吸',icon:'🩸',
+  {id:'lifesteal',name:'生命虹吸',icon:'🫀',
     desc:'毒云存在时持续回血',
     cond:s=>s.venom&&s.leech>=1,
     apply:(b,s)=>{/* updateSpellStates 中持续回血 */}},
-  {id:'arc_cleave',name:'弧光裂空',icon:'🌀',
+  {id:'arc_cleave',name:'弧光裂空',icon:'🌌',
     desc:'闪电弧伤害 +50%',
     cond:s=>s.arc&&s.amp>=1,
     apply:(b,s)=>{if(b.id==='arc'){b.dmg*=1.5;}}},
-  {id:'ice_armor',name:'寒铁甲',icon:'❄️',
+  {id:'ice_armor',name:'寒铁甲',icon:'⛄',
     desc:'寒冰锥命中自己时回 2HP',
     cond:s=>s.ice&&s.shield,
     apply:(b,s)=>{/* 命中时检测,见 damageEnemy */}}
@@ -945,12 +946,12 @@ const ETYPE={
 };
 /* ============ 词缀(精英/后期怪随机携带,改变应对方式) ============ */
 const AFFIX_DEFS={
-  swift:    {icon:'⚡',name:'迅捷',col:'#7df0ff'},  /* 移速大增 */
-  shielded: {icon:'🛡',name:'铁壁',col:'#9ad0ff'},  /* 额外护盾,需集火破盾 */
+  swift:    {icon:'🐆',name:'迅捷',col:'#7df0ff'},  /* 移速大增 */
+  shielded: {icon:'🚧',name:'铁壁',col:'#9ad0ff'},  /* 额外护盾,需集火破盾 */
   venomous: {icon:'🟢',name:'淬毒',col:'#9dff5a'},  /* 命中使你中毒 */
-  frenzied: {icon:'🔥',name:'狂暴',col:'#ff7a4a'},  /* 半血后暴走 */
-  volatile: {icon:'💥',name:'爆裂',col:'#ffaa3a'},  /* 死亡时爆炸 */
-  phasing:  {icon:'👻',name:'虚影',col:'#c8a8ff'},  /* 周期性免疫 */
+  frenzied: {icon:'🤬',name:'狂暴',col:'#ff7a4a'},  /* 半血后暴走 */
+  volatile: {icon:'💣',name:'爆裂',col:'#ffaa3a'},  /* 死亡时爆炸 */
+  phasing:  {icon:'🫥',name:'虚影',col:'#c8a8ff'},  /* 周期性免疫 */
   unstoppable:{icon:'💢',name:'不可阻挡',col:'#ffb84a'}  /* 免疫击退,顶弹冲锋 */
 };
 const AFFIX_KEYS=Object.keys(AFFIX_DEFS);
@@ -970,11 +971,11 @@ function rollAffixes(e,n){
 /* ============ 无尽难度修饰符(15波后每5波叠加一个,屏幕公告) ============ */
 const ENDLESS_MODS=[
   {id:'frenzy',icon:'😡',name:'狂暴潮',desc:'全场敌人移速 +25%',apply:m=>m.spdM*=1.25},
-  {id:'armor', icon:'🛡',name:'钢甲潮',desc:'全场敌人血量 +45%',apply:m=>m.hpM*=1.45},
-  {id:'rage',  icon:'⚔',name:'猎杀潮',desc:'全场敌人伤害 +35%',apply:m=>m.dmgM*=1.35},
+  {id:'armor', icon:'🔩',name:'钢甲潮',desc:'全场敌人血量 +45%',apply:m=>m.hpM*=1.45},
+  {id:'rage',  icon:'🏹',name:'猎杀潮',desc:'全场敌人伤害 +35%',apply:m=>m.dmgM*=1.35},
   {id:'swarm', icon:'🐛',name:'群涌潮',desc:'刷怪数量 +50%',apply:m=>m.spawnM*=1.5},
-  {id:'elite', icon:'👑',name:'精英潮',desc:'精英大幅增多',apply:m=>m.eliteBonus+=0.3},
-  {id:'venom', icon:'☠',name:'剧毒潮',desc:'敌人接触使你中毒',apply:m=>m.contactPoison=true}
+  {id:'elite', icon:'🎖️',name:'精英潮',desc:'精英大幅增多',apply:m=>m.eliteBonus+=0.3},
+  {id:'venom', icon:'☢️',name:'剧毒潮',desc:'敌人接触使你中毒',apply:m=>m.contactPoison=true}
 ];
 
 const BOSS_PALETTE=[
@@ -1424,8 +1425,8 @@ function awardLj(){ const total=Math.max(0, waveNum*3 + Math.floor(kills/8)); co
 
 /* 永久强化:体魄=生命上限,法力=法术伤害;均多级递增,弑神不生效 */
 const UPGRADES=[
-  {id:'hp',  icon:'❤️', name:'体魄', unit:'生命上限', per:6, max:5, base:40},
-  {id:'dmg', icon:'🔥', name:'法力', unit:'法术伤害', per:5, max:5, base:50},
+  {id:'hp',  icon:'💗', name:'体魄', unit:'生命上限', per:6, max:5, base:40},
+  {id:'dmg', icon:'🔷', name:'法力', unit:'法术伤害', per:5, max:5, base:50},
 ];
 function upCost(u){ const lv=META.up[u.id]||0; return Math.round(u.base*Math.pow(1.5,lv)); }
 function metaDmgMul(){ return (diffMul&&diffMul.nm)?1:(1+0.05*(META.up.dmg||0)); }
@@ -1480,15 +1481,15 @@ resetGame();
 const WANDS=[
   {id:'apprentice',icon:'🪄',name:'学徒法杖',desc:'均衡可靠 · 伤害 +8%，施法间隔 -8%',fx:{dmgM:1.08,cdM:.92}},
   {id:'scatter',icon:'🎇',name:'散射法杖',desc:'弹幕流 · 每次施法 +2 发,散射更广,单发伤害 -35%',fx:{dmgM:.65,extra:2,spreadM:2.1}},
-  {id:'sniper',icon:'🎯',name:'狙击法杖',desc:'重炮流 · 伤害 +42%,弹速 +25%,穿透 +1,施法间隔 +35%',fx:{dmgM:1.42,cdM:1.35,spdM:1.25,pierce:1}},
-  {id:'blood',icon:'🩸',name:'噬血法杖',desc:'吸血流 · 击杀回复 2 生命,伤害 -10%,生命上限 -15',fx:{dmgM:.9,killHeal:2,maxhpAdj:-15}},
-  {id:'charge',icon:'⚡',name:'蓄能法杖',desc:'蓄力流 · 每连续施放 6 次,下一发暴击(伤害×2.6 且穿透),平时伤害 -10%',fx:{dmgM:.9,charge:true}},
+  {id:'sniper',icon:'🔭',name:'狙击法杖',desc:'重炮流 · 伤害 +42%,弹速 +25%,穿透 +1,施法间隔 +35%',fx:{dmgM:1.42,cdM:1.35,spdM:1.25,pierce:1}},
+  {id:'blood',icon:'🦇',name:'噬血法杖',desc:'吸血流 · 击杀回复 2 生命,伤害 -10%,生命上限 -15',fx:{dmgM:.9,killHeal:2,maxhpAdj:-15}},
+  {id:'charge',icon:'🔋',name:'蓄能法杖',desc:'蓄力流 · 每连续施放 6 次,下一发暴击(伤害×2.6 且穿透),平时伤害 -10%',fx:{dmgM:.9,charge:true}},
   {id:'thorns',icon:'🌹',name:'荆棘法杖',desc:'反伤流 · 受伤时向四周弹射荆棘,生命上限 +30,伤害 -15%',fx:{dmgM:.85,maxhpAdj:30,thorns:true}},
   {id:'summon',icon:'🐾',name:'御兽法杖',desc:'御兽流 · 召唤山海灵兽并肩作战(随波次增援至 4 只),以兽破敌;自身法术伤害 -30%',fx:{dmgM:.7,summon:true}},
-  {id:'gcannon',icon:'💎',name:'玻璃炮法杖',desc:'玻璃大炮 · 伤害 +60%,但生命上限 -40%、受到伤害 +15%(极限输出，靠走位活命)',fx:{dmgM:1.6,maxhpMul:.6,takenMul:1.15}},
-  {id:'bastion',icon:'🛡️',name:'磐岩法杖',desc:'重甲苟命 · 生命上限 +80、受到伤害 -14%;代价伤害 -15%、施法间隔 +8%(稳健续航，宜冲弑神)',fx:{dmgM:.85,cdM:1.08,maxhpAdj:80,takenMul:.86}},
+  {id:'gcannon',icon:'🪩',name:'玻璃炮法杖',desc:'玻璃大炮 · 伤害 +60%,但生命上限 -40%、受到伤害 +15%(极限输出，靠走位活命)',fx:{dmgM:1.6,maxhpMul:.6,takenMul:1.15}},
+  {id:'bastion',icon:'⛰️',name:'磐岩法杖',desc:'重甲苟命 · 生命上限 +80、受到伤害 -14%;代价伤害 -15%、施法间隔 +8%(稳健续航，宜冲弑神)',fx:{dmgM:.85,cdM:1.08,maxhpAdj:80,takenMul:.86}},
   {id:'fate',icon:'🌟',name:'命运法杖',desc:'暴击运气流 · 暴击率 +40%、暴击伤害 ×2.2,代价基础伤害 -12%(看脸爆发，打出满屏暴击)',fx:{dmgM:.88,critBonus:.4,critMul:2.2}},
-  {id:'rebound',icon:'💫',name:'弹跳法杖',desc:'弹跳清群 · 子弹命中后弹向最近的另一敌人(最多 2 跳),代价单发伤害 -22%(怪越多越爽)',fx:{dmgM:.78,ricochet:2}}
+  {id:'rebound',icon:'🏀',name:'弹跳法杖',desc:'弹跳清群 · 子弹命中后弹向最近的另一敌人(最多 2 跳),代价单发伤害 -22%(怪越多越爽)',fx:{dmgM:.78,ricochet:2}}
 ];
 /* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked) */
 const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240};
@@ -1506,34 +1507,34 @@ function applyWand(w){
    平衡核心:伤害走「加法池」不做乘法;暴击/攻速/闪避封顶;每 5 波三选一,慢慢拿,不重复。 */
 const RELICS=[
   /* 🗡 攻击(进加法池 / 封顶) */
-  {id:'sharp',  icon:'🗡',name:'锋锐符',  rar:1,desc:'伤害 +12%',                  apply:m=>m.dmgAdd+=.12},
-  {id:'rapid',  icon:'⏩',name:'连发坠饰',rar:1,desc:'施法间隔 -12%(攻速)',       apply:m=>m.cdMul*=.88},
+  {id:'sharp',  icon:'🪓',name:'锋锐符',  rar:1,desc:'伤害 +12%',                  apply:m=>m.dmgAdd+=.12},
+  {id:'rapid',  icon:'⏱️',name:'连发坠饰',rar:1,desc:'施法间隔 -12%(攻速)',       apply:m=>m.cdMul*=.88},
   {id:'power',  icon:'💪',name:'巨力护符',rar:2,desc:'伤害 +20%',                  apply:m=>m.dmgAdd+=.20},
-  {id:'crit',   icon:'🎯',name:'致命纹章',rar:2,desc:'暴击率 +18%,暴击伤害 ×1.6', apply:m=>{m.critChance+=.18;}},
+  {id:'crit',   icon:'✴️',name:'致命纹章',rar:2,desc:'暴击率 +18%,暴击伤害 ×1.6', apply:m=>{m.critChance+=.18;}},
   /* 🛡 防御 */
-  {id:'vit',    icon:'🪨',name:'磐石护符',rar:1,desc:'生命上限 +25',               instant:p=>{p.maxhp+=25;p.hp+=25;}},
+  {id:'vit',    icon:'🧱',name:'磐石护符',rar:1,desc:'生命上限 +25',               instant:p=>{p.maxhp+=25;p.hp+=25;}},
   {id:'regen',  icon:'🌿',name:'再生苔',  rar:2,desc:'每秒回复 0.6 生命',          apply:m=>m.regen+=.6},
   {id:'dodge',  icon:'👻',name:'虚影斗篷',rar:3,desc:'闪避 +15%(受击概率免伤)',  apply:m=>m.dodge+=.15},
   /* 💰 经济 / 功能(无直接战力,最安全) */
-  {id:'greed',  icon:'💰',name:'贪婪之握',rar:1,desc:'金币获取 +40%',              apply:m=>m.coinMul*=1.4},
+  {id:'greed',  icon:'🤑',name:'贪婪之握',rar:1,desc:'金币获取 +40%',              apply:m=>m.coinMul*=1.4},
   {id:'magnet', icon:'🧲',name:'磁石',    rar:1,desc:'拾取范围 +70%',              apply:m=>m.pickupRange*=1.7},
   {id:'scholar',icon:'📜',name:'博学卷轴',rar:2,desc:'选卡时史诗强化出现率提升',   apply:m=>m.cardLuck+=3},
   /* 🎯 条件触发(只在特定情况生效,天然自限) */
-  {id:'last',   icon:'🔥',name:'背水一战',rar:2,desc:'生命低于 30% 时,伤害 +35%', apply:m=>m.lowHpDmg+=.35},
-  {id:'vamp',   icon:'🩸',name:'饮血',    rar:2,desc:'每次击杀回复 1.5 生命',      apply:m=>m.killHeal+=1.5},
+  {id:'last',   icon:'🆘',name:'背水一战',rar:2,desc:'生命低于 30% 时,伤害 +35%', apply:m=>m.lowHpDmg+=.35},
+  {id:'vamp',   icon:'🍷',name:'饮血',    rar:2,desc:'每次击杀回复 1.5 生命',      apply:m=>m.killHeal+=1.5},
   {id:'dashf',  icon:'💨',name:'迅捷余韵',rar:2,desc:'冲刺后 2.5 秒内伤害 +22%',   apply:m=>m.dashDmg+=.22},
-  {id:'dashcd', icon:'🌀',name:'疾风步',  rar:2,desc:'冲刺冷却 -25%',              apply:m=>m.dashCd*=.75},
-  {id:'first',  icon:'⚡',name:'先手',    rar:2,desc:'对满血敌人首发伤害 +50%',    apply:m=>m.firstHitDmg+=.5},
+  {id:'dashcd', icon:'🏃',name:'疾风步',  rar:2,desc:'冲刺冷却 -25%',              apply:m=>m.dashCd*=.75},
+  {id:'first',  icon:'🥇',name:'先手',    rar:2,desc:'对满血敌人首发伤害 +50%',    apply:m=>m.firstHitDmg+=.5},
   /* ⚖ 取舍(玻璃大炮,只有主动选才会有) */
-  {id:'glass',  icon:'💥',name:'易碎之刃',rar:2,desc:'伤害 +35%,但生命上限 -20%', apply:m=>m.dmgAdd+=.35, instant:p=>{const d=Math.round(p.maxhp*.2);p.maxhp-=d;p.hp=Math.min(p.hp,p.maxhp);}},
+  {id:'glass',  icon:'🥃',name:'易碎之刃',rar:2,desc:'伤害 +35%,但生命上限 -20%', apply:m=>m.dmgAdd+=.35, instant:p=>{const d=Math.round(p.maxhp*.2);p.maxhp-=d;p.hp=Math.min(p.hp,p.maxhp);}},
   {id:'berserk',icon:'😤',name:'狂战之怒',rar:3,desc:'攻速 +25%,但受到伤害 +18%', apply:m=>{m.cdMul*=.75;m.takenMul*=1.18;}},
   /* 🆕 新一批遗物 */
-  {id:'windfeather',icon:'🪶',name:'风后之羽',rar:1,desc:'移动速度 +12%',                apply:m=>m.moveMul*=1.12},
+  {id:'windfeather',icon:'🌬️',name:'风后之羽',rar:1,desc:'移动速度 +12%',                apply:m=>m.moveMul*=1.12},
   {id:'pouch',      icon:'💎',name:'山鬼宝囊',rar:1,desc:'每波开始获得 15 金币',         apply:m=>m.waveCoins+=15},
   {id:'bossbane',   icon:'👑',name:'屠神印',  rar:2,desc:'对 Boss 伤害 +25%',           apply:m=>m.bossDmg+=.25},
-  {id:'frostbite',  icon:'❄️',name:'玄冰碎',  rar:2,desc:'法术命中使敌人减速 0.8 秒',    apply:m=>{m.hitSlow=Math.max(m.hitSlow,.8);}},
-  {id:'ember',      icon:'☄️',name:'燎原余烬',rar:2,desc:'击杀的敌人爆裂,溅射伤害周围',  apply:m=>m.killExplode+=1},
-  {id:'aegis',      icon:'🛡',name:'玄龟甲',  rar:3,desc:'每 12 秒获得护盾,免疫下次受击',apply:m=>{m.wardEvery=12;}}
+  {id:'frostbite',  icon:'🥶',name:'玄冰碎',  rar:2,desc:'法术命中使敌人减速 0.8 秒',    apply:m=>{m.hitSlow=Math.max(m.hitSlow,.8);}},
+  {id:'ember',      icon:'🧨',name:'燎原余烬',rar:2,desc:'击杀的敌人爆裂,溅射伤害周围',  apply:m=>m.killExplode+=1},
+  {id:'aegis',      icon:'🐚',name:'玄龟甲',  rar:3,desc:'每 12 秒获得护盾,免疫下次受击',apply:m=>{m.wardEvery=12;}}
 ];
 function recomputeRelics(){
   relicMods={...RELIC_BASE};
@@ -3683,22 +3684,22 @@ function markSpellSeen(id){ if(!id||!SPELL_DEF[id])return; if(!profile.seenSpell
 function hasAch(id){ return profile.unlocked.indexOf(id)>=0; }
 const FOUR_FIENDS=[2,5,6,7]; /* BOSS_PALETTE 下标:帝江(浑敦)/穷奇/梼杌/饕餮 */
 const ACH=[
-  {id:'first_kill',icon:'🗡️',name:'初探山海',  desc:'首次击杀任意妖兽'},
+  {id:'first_kill',icon:'🔰',name:'初探山海',  desc:'首次击杀任意妖兽'},
   {id:'kill500',   icon:'💀',name:'百兽伏诛',  desc:'累计击杀 500 只妖兽', prog:()=>[Math.min(profile.totalKills,500),500]},
-  {id:'kill3000',  icon:'☠️',name:'千军辟易',  desc:'累计击杀 3000 只妖兽', prog:()=>[Math.min(profile.totalKills,3000),3000]},
+  {id:'kill3000',  icon:'🪖',name:'千军辟易',  desc:'累计击杀 3000 只妖兽', prog:()=>[Math.min(profile.totalKills,3000),3000]},
   {id:'boss1',     icon:'👁️',name:'初遇古神',  desc:'首次击败任意古神 Boss'},
   {id:'allboss',   icon:'🐲',name:'神话终结',  desc:'击败过全部 8 位古神', prog:()=>[profile.bosses.length,8]},
   {id:'fourfiend', icon:'😈',name:'四凶克星',  desc:'集齐击败四凶(帝江/穷奇/梼杌/饕餮)', prog:()=>[FOUR_FIENDS.filter(i=>profile.bosses.indexOf(i)>=0).length,4]},
-  {id:'endless20', icon:'🌀',name:'深渊行者',  desc:'无尽模式抵达第 20 波'},
+  {id:'endless20', icon:'🕳️',name:'深渊行者',  desc:'无尽模式抵达第 20 波'},
   {id:'endless50', icon:'♾️',name:'登峰造极',  desc:'无尽模式抵达第 50 波'},
   {id:'clear',     icon:'🏅',name:'凯旋归来',  desc:'通关(讨伐三位古神 · 第 15 波)'},
-  {id:'nohit',     icon:'🛡️',name:'全甲而归',  desc:'整局不吃一颗红心通关'},
+  {id:'nohit',     icon:'🦺',name:'全甲而归',  desc:'整局不吃一颗红心通关'},
   {id:'noshop',    icon:'🐺',name:'独狼',      desc:'整局不在商店购物通关'},
-  {id:'godslayer', icon:'⚡',name:'屠神者',    desc:'在「弑神」难度通关'},
-  {id:'combo50',   icon:'🔥',name:'战意滔天',  desc:'单局达成 50 连击'},
+  {id:'godslayer', icon:'⚰️',name:'屠神者',    desc:'在「弑神」难度通关'},
+  {id:'combo50',   icon:'🥊',name:'战意滔天',  desc:'单局达成 50 连击'},
   {id:'rich',      icon:'💰',name:'富甲一方',  desc:'单局持有 3000 金币'},
   {id:'relic6',    icon:'🏺',name:'遗物收藏家',desc:'单局集齐 6 件遗物'},
-  {id:'spellfull', icon:'📜',name:'法术宗师',  desc:'单局法术槽全满(4 种法术)'},
+  {id:'spellfull', icon:'🧙',name:'法术宗师',  desc:'单局法术槽全满(4 种法术)'},
   {id:'endless30', icon:'🌋',name:'深渊领主',  desc:'无尽模式抵达第 30 波'},
   {id:'combo100',  icon:'💯',name:'百连斩',    desc:'单局达成 100 连击'},
   {id:'scrooge',   icon:'🐷',name:'貔貅附体',  desc:'单局攒到 5000 金币,却一次商店都没逛'},
@@ -4047,8 +4048,8 @@ function telegraph(x,y,r,fn){ telegraphs.push({x,y,r,t:.7,max:.7,fn,done:false})
 const TOTEM_RANGE=235;
 const BEAST_DEF={
   suanni:  {name:'狻猊', icon:'🦁', col:'#ff8a3a', hp:130, spd:248, r:16, cd:1.0, dmg:40,  role:'melee',   resummon:3.5},
-  bifang:  {name:'毕方', icon:'🔥', col:'#ff5a2a', hp:78,  spd:212, r:13, cd:1.6, dmg:23,  role:'fire',    resummon:3.5, aoe:92},
-  yinglong:{name:'应龙', icon:'🐲', col:'#7fd4ff', hp:88,  spd:186, r:15, cd:3.0, dmg:105, role:'bolt',    resummon:4.5, aoe:76},
+  bifang:  {name:'毕方', icon:'🦅', col:'#ff5a2a', hp:78,  spd:212, r:13, cd:1.6, dmg:23,  role:'fire',    resummon:3.5, aoe:92},
+  yinglong:{name:'应龙', icon:'🐉', col:'#7fd4ff', hp:88,  spd:186, r:15, cd:3.0, dmg:105, role:'bolt',    resummon:4.5, aoe:76},
   baize:   {name:'白泽', icon:'🦄', col:'#ffe27a', hp:104, spd:216, r:14, cd:0,   dmg:0,   role:'support', resummon:5.0},
 };
 const SUMMON_ORDER=['suanni','bifang','yinglong','baize','suanni'];
@@ -5751,11 +5752,11 @@ function drawHUD(){
   let line1='', line2='';
   if(player.wand)line1+=player.wand.icon+'丨';
   for(const id in player.spells)line1+=SPELL_DEF[id].icon+'Lv'+player.spells[id].lv+'  ';
-  const MI={multi:'✨',homing:'🎯',bounce:'💫',pierce:'🪶',split:'💥',haste:'⏩',amp:'🔆',giant:'🌀'};
+  const MI={multi:'✨',homing:'🎯',bounce:'🪀',pierce:'🪶',split:'✂️',haste:'⏩',amp:'📈',giant:'🎈'};
   for(const k in MI)if(player.mods[k]>0)line2+=MI[k]+'×'+player.mods[k]+' ';
-  const SI={boots:'👟',armor:'🛡️',leech:'🩸',pickup:'🪙'};   /* 属性卡层数(此前未显示) */
+  const SI={boots:'👟',armor:'🪨',leech:'🧛',pickup:'🪙'};   /* 属性卡层数(此前未显示) */
   for(const k in SI)if(player.mods[k]>0)line2+=SI[k]+'×'+player.mods[k]+' ';
-  const CI={pact_blood:'⚔️',pact_glass:'💔',pact_greed:'🪙',pact_chaos:'🌪️'};
+  const CI={pact_blood:'🔪',pact_glass:'💔',pact_greed:'💵',pact_chaos:'🎲'};
   for(const k in CI)if(player.cc[k])line2+=CI[k]+' ';
   /* 协同 line3 */
   const syns=activeSynergies();
