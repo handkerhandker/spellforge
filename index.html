@@ -447,6 +447,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v68 · 2026-06-17</div><div class="cl-i">📷 <b>暂停截图</b>:暂停菜单新增「📷 截图（隐藏菜单）」——画面保持冻结、菜单暂时隐藏，方便截下游戏画面，截完点一下屏幕菜单就回来。🔊 <b>声音修复</b>:① 静音后不再影响其他 App 播放音乐（彻底释放音频）;② 游戏中声音被来电/通知等打断后会自动恢复，不用再退出重进。🛡️ <b>说明修正</b>:法盾、治愈的升级说明此前错写成「伤害提升」,现已改为准确的「可挡次数 +1」「回复量提升」。</div></div>
 <div class="cl-v"><div class="cl-h">v67 · 2026-06-17</div><div class="cl-i">🎭 <b>法杖随手 · 整套换装</b>:11 把法杖现在各有专属外形——噬血杖配蝙蝠翼血珠、命运杖顶着金色星辰、御兽杖是兽角图腾、玻璃炮是水晶碎片、磐岩是顽石巨杖……连法袍和帽子的配色也随手中法杖一起变,每把杖都是一身不同的装扮。而且乱战中法杖也和人物一样始终透到最上层、清晰可见,不会被满屏法术埋住。</div></div>
 <div class="cl-v"><div class="cl-h">v66.7 · 2026-06-17</div><div class="cl-i">🐛 <b>修复极端弹幕下画面糊成一片白的问题</b>:当屏上子弹/敌弹特别多时(比如多重施法叠满 + 深层波),子弹的发光叠在一起会糊成白屏、啥都看不清。现已修正——弹幕再密也能看清场面,子弹照样清晰。正常游戏画面与之前完全一致。</div></div>
 <div class="cl-v"><div class="cl-h">v66.6 · 2026-06-17</div><div class="cl-i">⚡ <b>深层波性能优化</b>:重写了子弹与敌人的碰撞计算方式,后期数百敌人同屏时大幅降低卡顿,让微信等内存紧张的环境更不容易卡死/闪退。手感、画面、打击特效与之前完全一致,只是跑得更顺。</div></div>
@@ -532,6 +533,8 @@
     <div class="eyebrow" style="color:#8b7df0;">Paused</div>
     <h1 class="title" style="font-size:34px;">已暂停</h1>
     <button class="btn" id="resumeBtn">继续</button>
+    <button class="btn ghost" id="pauseShotBtn" style="padding:9px 22px;font-size:12.5px;opacity:.92;">📷 截图（隐藏菜单）</button>
+    <div class="aim-hint" style="font-size:11px;margin:-2px auto 4px;max-width:280px;opacity:.72;line-height:1.45;">画面保持冻结、菜单暂时隐藏，方便截图；截完点一下屏幕菜单就回来</div>
     <div class="diff-title" style="margin-top:2px;font-size:13px;">🎯 瞄准模式</div>
     <div class="diff-sel">
       <button class="aim-pill" data-aim="manual">手动</button>
@@ -552,6 +555,7 @@
     <button class="btn ghost" id="pauseRestartBtn">重新开始</button>
   </div>
 </div>
+<div id="shotHint" style="position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;padding:7px 16px;border-radius:999px;background:rgba(20,14,40,.82);border:1px solid rgba(123,92,255,.45);color:#cbbcff;font-size:12px;pointer-events:none;opacity:0;transition:opacity .4s;white-space:nowrap;">📷 截图模式 · 点屏幕恢复菜单</div>
 
 <!-- 胜利 -->
 <div id="win" class="overlay hidden">
@@ -657,14 +661,18 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v67', APP_TIME='2026-06-17 19:01';
+const APP_VER='v68', APP_TIME='2026-06-17 19:35';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
-let AC=null, muted=false;
+let AC=null, muted=false, _sfxWinT=0, _sfxWinN=0;
 function initAudio(){ try{ if(!AC) AC=new (window.AudioContext||window.webkitAudioContext)();
-  if(AC&&AC.state==='suspended') AC.resume(); }catch(e){} }
-function sfx(f0,f1,dur,type,vol){ if(!AC||muted)return; try{
+  /* 只要不是 running 就尝试唤醒——覆盖 iOS/微信被来电/通知/控制中心打断后的 'interrupted' 态(原来只认 'suspended',被中断后永远醒不过来);静音时不唤醒,让它保持释放 */
+  if(AC&&AC.state!=='running'&&!muted) AC.resume(); }catch(e){} }
+function sfx(f0,f1,dur,type,vol){ if(!AC||muted)return;
+  /* 深波音效节流:防同一瞬间狂造振荡器拖累音频线程(60ms 内最多 8 个,正常游戏碰不到、只极端密集才生效) */
+  const _tn=AC.currentTime; if(_tn-_sfxWinT>.06){_sfxWinT=_tn;_sfxWinN=0;} if(_sfxWinN>=8)return; _sfxWinN++;
+  try{
   const t=AC.currentTime, o=AC.createOscillator(), g=AC.createGain();
   o.type=type; o.frequency.setValueAtTime(f0,t);
   o.frequency.exponentialRampToValueAtTime(Math.max(f1,1),t+dur);
@@ -686,7 +694,9 @@ const S={
   no:()=>sfx(170,110,.12,'square',.08),
   win:()=>{sfx(523,523,.15,'triangle',.11);setTimeout(()=>sfx(659,659,.15,'triangle',.11),150);setTimeout(()=>sfx(784,1046,.35,'triangle',.13),300);}
 };
-$('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'🔊'; initAudio(); };
+$('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'🔊';
+  /* 静音=真正挂起音频引擎,彻底松开 iOS 音频会话(否则空跑也会把后台音乐搅卡);取消静音=唤醒 */
+  try{ if(muted){ if(AC)AC.suspend(); } else { initAudio(); } }catch(e){} };
 
 /* ============ 输入 ============ */
 const keys={};
@@ -698,7 +708,7 @@ cv.addEventListener('mousemove',e=>{ if(usingTouch)return; mouse.x=e.clientX; mo
 const joy={id:null,ox:0,oy:0,dx:0,dy:0,on:false};
 let lastTapT=-9;
 function inDashBtn(x,y){ return state==='play'&&dist2(x,y,W-58,H-72-safeB)<46*46; }
-function tstart(e){ usingTouch=true; initAudio();
+function tstart(e){ if(shotMode){ exitShotMode(); e.preventDefault(); return; } usingTouch=true; initAudio();
   for(const t of e.changedTouches){
     if(inDashBtn(t.clientX,t.clientY)){ tryDash(); continue; }
     if(joy.id===null){ joy.id=t.identifier; joy.ox=t.clientX; joy.oy=t.clientY; joy.dx=0; joy.dy=0; joy.on=true;
@@ -715,6 +725,7 @@ function tend(e){ for(const t of e.changedTouches){ if(t.identifier===joy.id){ j
 cv.addEventListener('touchstart',tstart,{passive:false});
 cv.addEventListener('touchmove',tmove,{passive:false});
 cv.addEventListener('touchend',tend,{passive:false});
+cv.addEventListener('mousedown',e=>{ if(shotMode){ exitShotMode(); e.preventDefault(); } });   /* 截图模式下点画面(PC)恢复菜单 */
 cv.addEventListener('touchcancel',tend,{passive:false});
 
 /* ============ 世界 ============ */
@@ -802,12 +813,12 @@ const SPELL_DEF={
   ice:{name:'寒冰锥', icon:'❄️',col:'#a8ecff',cd:.85,dmg:8, spd:430,r:6,life:1.02,slow:1.7,desc:'冻结减速命中的敌人'},
   zap:{name:'连锁闪电',icon:'⚡',col:'#ffe96b',cd:1.35,dmg:11,desc:'闪电在多个敌人之间跳跃'},
   venom:{name:'毒雾弹',icon:'☠️',col:'#8df07a',cd:1.5,dmg:7,spd:300,r:7,life:1.35,desc:'消散时留下持续伤害的毒云'},
-  blade:{name:'环刃术',icon:'🗡️',col:'#d8c6ff',desc:'召唤环绕自身的魔刃'},
+  blade:{name:'环刃术',icon:'🗡️',col:'#d8c6ff',upg:'魔刃数量 +1',desc:'召唤环绕自身的魔刃'},
   arc:{name:'闪电弧',icon:'🌀',col:'#bbd9ff',cd:.7,dmg:22,spd:520,r:6,life:.82,arc:1,desc:'命中后链击附近敌人 50% 伤害'},
   meteor:{name:'陨石',icon:'☄️',col:'#ff7e3a',cd:2.2,dmg:35,spd:240,r:12,life:1.7,aoe:110,desc:'巨型火球，命中后大范围爆炸'},
   beam:{name:'灼热射线',icon:'🔆',col:'#ff7a30',cd:.3,dmg:4,beam:6,desc:'持续射线灼烧 6 段'},
-  heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,desc:'直接回复 6 点生命(随等级提升)'},
-  shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后短暂空窗才能再开'},
+  heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,upg:'回复量提升，冷却更短',desc:'直接回复 6 点生命(随等级提升)'},
+  shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,upg:'可挡次数 +1，冷却更短',desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后短暂空窗才能再开'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
   blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
@@ -3836,7 +3847,7 @@ function cardInfo(d){
     const def=SPELL_DEF[d.id], own=player.spells[d.id];
     let desc=def.desc, rar=d.rar;
     if(own){ rar=1;
-      desc=(d.id==='blade')?('升级 Lv'+(own.lv+1)+'：魔刃数量 +1'):('升级 Lv'+(own.lv+1)+'：伤害提升，施法更快');
+      desc='升级 Lv'+(own.lv+1)+'：'+(def.upg||'伤害提升，施法更快');
     }
     return {id:d.id,kind:d.kind,rar,name:def.name,icon:def.icon,desc};
   }
@@ -5909,11 +5920,15 @@ function drawHUD(){
 /* ============ 主循环 ============ */
 let last=performance.now();
 document.addEventListener('visibilitychange',()=>{last=performance.now(); if(document.hidden&&state==='play'&&!paused)togglePause(true);});
+let shotMode=false, _audChkT=0;   /* shotMode:截图模式(暂停但隐藏菜单);_audChkT:音频自动恢复节拍 */
 function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
   if(state==='play'&&!paused)update(dt);
-  $('pauseBtn').style.display=(state==='play')?'flex':'none';
-  $('muteBtn').style.display=(state==='play')?'flex':'none';
+  /* 音频被中断后自动恢复:每约 1 秒,非静音且引擎非 running 就尝试唤醒(无需手动开关静音) */
+  _audChkT+=dt; if(_audChkT>1){ _audChkT=0; if(AC&&AC.state!=='running'&&!muted){ try{AC.resume();}catch(e){} } }
+  const _hud=(state==='play'&&!shotMode);   /* 截图模式下藏起角标按钮,画面更干净 */
+  $('pauseBtn').style.display=_hud?'flex':'none';
+  $('muteBtn').style.display=_hud?'flex':'none';
   render();
   requestAnimationFrame(loop);
 }
@@ -6043,6 +6058,7 @@ function launchDaily(){
 }
 function togglePause(p){
   if(state!=='play')return;
+  if(shotMode){ shotMode=false; const _h=$('shotHint'); if(_h)_h.style.opacity='0'; }   /* 退出截图模式,防状态错乱 */
   paused=(p!==undefined)?p:!paused;
   $('paused').classList.toggle('hidden',!paused);
   if(paused){ const _no=(difficulty>=5||dailyRun), _b=$('pauseSaveBtn');
@@ -6051,6 +6067,12 @@ function togglePause(p){
 }
 $('pauseBtn').onclick=()=>togglePause();
 $('resumeBtn').onclick=()=>togglePause(false);
+/* 截图模式(朋友二十三):暂停时隐藏菜单+角标,画面保持冻结,点屏幕恢复 */
+let _shotHintT=0;
+function enterShotMode(){ if(!paused)return; $('paused').classList.add('hidden'); shotMode=true;
+  const h=$('shotHint'); if(h){ h.style.opacity='1'; clearTimeout(_shotHintT); _shotHintT=setTimeout(()=>{h.style.opacity='0';},1800); } }
+function exitShotMode(){ if(!shotMode)return; shotMode=false; const h=$('shotHint'); if(h)h.style.opacity='0'; clearTimeout(_shotHintT); if(paused)$('paused').classList.remove('hidden'); }
+$('pauseShotBtn').onclick=enterShotMode;
 $('pauseBeastBtn').onclick=openBestiary;
 $('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
 $('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
