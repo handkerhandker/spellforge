@@ -460,6 +460,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v71 · 2026-06-17</div><div class="cl-i">👁️ <b>新增遗物「被污染的千里眼」——想看得更远?拿命来换。</b>打 Boss 后的三选一里有几率出现这件<b>取舍型</b>遗物:拿到后<b>视野扩大 20%</b>(画面整体拉远一圈,更早看清四周来袭、走位预判更从容),代价是<b>受到伤害 +20%</b>(看得清也更脆,逼你别仗着视野好就浪)。<b>不可叠、拿到即生效</b>,镜头会柔和地拉远过去;<b>所有难度都能出</b>(含弑神/无尽)——因为它带着真实代价,不是白给的视野 buff,冲榜也公平。拉远后那个"视距外冲撞预警"、屏幕剔除、瞄准都已按新视野重新校准,放大场面下依旧跟手。不想要的话不选即可,默认视角和原来完全一样。</div></div>
 <div class="cl-v"><div class="cl-h">v70 · 2026-06-17</div><div class="cl-i">🎭 <b>新增「外观·皮肤」——给角色换一副皮囊!</b>菜单里多了<b>「🎭 外观·皮肤」</b>入口(和「🔮 祭坛·强化」并排一行),点开是角色选择界面,每个角色都有<b>实时预览</b>。除了原本的<b>巫师</b>,新增两位山海经角色用<b>灵晶</b>解锁:🦊<b>九尾妖狐</b>——白身赤尾、九尾后展、狐耳额纹,妖艳灵动;🌿<b>山鬼</b>——苔身藤叶、木角叶冠、面纹赤果,荒野古意。解锁后随时一键切换。<b>皮肤纯外观、不改任何战力数值</b>,所有难度(含弑神/无尽)一律公平;选好的皮肤会<b>自动跟着存档备份</b>。顺手把祭坛/外观两个入口收成小按钮并排,英雄榜往上挪、更好看。</div></div>
 <div class="cl-v"><div class="cl-h">v69 · 2026-06-17</div><div class="cl-i">🕹️ <b>操作方式可选了!</b>暂停菜单新增「🎮 操作方式」,两个开关随意组合:<b>双摇杆瞄准</b>——开启后左半屏拖动移动、右半屏拖动瞄准开火,想精准点杀的玩家可以自己控制射击方向(不推右摇杆时仍自动瞄准,不会没输出);<b>固定摇杆</b>——把摇杆底盘固定在屏幕左下/右下角,喜欢定点搓杆的可以打开。两个开关自由搭配:浮动/固定 × 单/双摇杆共四种。双摇杆模式下冲刺改为<b>双击左摇杆</b>(往移动方向冲)。菜单里会实时显示当前操作方式的说明,首次开启双摇杆进局还会有一句布局提示。默认仍是原来的浮动单摇杆+自动瞄准,不想换的不受影响。</div></div>
 <div class="cl-v"><div class="cl-h">v68 · 2026-06-17</div><div class="cl-i">📷 <b>暂停截图</b>:暂停菜单新增「📷 截图（隐藏菜单）」——画面保持冻结、菜单暂时隐藏，方便截下游戏画面，截完点一下屏幕菜单就回来。🔊 <b>声音修复</b>:① 静音后不再影响其他 App 播放音乐（彻底释放音频）;② 游戏中声音被来电/通知等打断后会自动恢复，不用再退出重进。🛡️ <b>说明修正</b>:法盾、治愈的升级说明此前错写成「伤害提升」,现已改为准确的「可挡次数 +1」「回复量提升」。</div></div>
@@ -695,7 +696,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v70', APP_TIME='2026-06-17 22:15';
+const APP_VER='v71', APP_TIME='2026-06-17 23:15';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1379,6 +1380,10 @@ function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); 
 function diffData(){ return DIFFICULTIES[difficulty-1]; }
 let novaFX=null;
 const cam={x:0,y:0,shake:0};
+/* —— 视野缩放(遗物「被污染的千里眼」):viewZoom=世界缩放系数(1=正常,<1=拉远看更多);
+   EX/EY=因拉远而多出的可视半宽/半高余量,用于把所有屏幕剔除边界一并放宽(viewZoom=1 时 EX=EY=0,行为与原版逐字节一致、零回归) —— */
+const VISION_GAIN=1.20;            /* 视野扩大倍率(每个方向多看 20%);改这一个数即可调 */
+let viewZoom=1, viewZoomT=1, EX=0, EY=0;
 let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spawnQ, waveT, telegraphs, beasts, summonT, totems, _synAnnounced;
 let ann={a:'',b:'',t:0};
 
@@ -1523,6 +1528,7 @@ function resetGame(){
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   _runUnlocked=[]; runTookHeart=false; runBoughtShop=false; _runDashed=false; _runMaxSpells=0; _runT=0;
   relicMods={...RELIC_BASE};
+  viewZoom=1; viewZoomT=1; EX=0; EY=0;   /* 开局视野复位(无遗物=正常视角) */
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
   /* 学习系统状态重置 */
   for(const k of Object.keys(playerProfile)) playerProfile[k]=Array.isArray(playerProfile[k])?[]:(typeof playerProfile[k]==='number'?0:playerProfile[k]);
@@ -1624,7 +1630,9 @@ const RELICS=[
   {id:'bossbane',   icon:'👑',name:'屠神印',  rar:2,desc:'对 Boss 伤害 +25%',           apply:m=>m.bossDmg+=.25},
   {id:'frostbite',  icon:'🥶',name:'玄冰碎',  rar:2,desc:'法术命中使敌人减速 0.8 秒',    apply:m=>{m.hitSlow=Math.max(m.hitSlow,.8);}},
   {id:'ember',      icon:'🧨',name:'燎原余烬',rar:2,desc:'击杀的敌人爆裂,溅射伤害周围',  apply:m=>m.killExplode+=1},
-  {id:'aegis',      icon:'🐚',name:'玄龟甲',  rar:3,desc:'每 12 秒获得护盾,免疫下次受击',apply:m=>{m.wardEvery=12;}}
+  {id:'aegis',      icon:'🐚',name:'玄龟甲',  rar:3,desc:'每 12 秒获得护盾,免疫下次受击',apply:m=>{m.wardEvery=12;}},
+  /* ⚖ 取舍·视野(主动选才会有;不可叠,遗物天然不重复) */
+  {id:'farsight',   icon:'👁️',name:'被污染的千里眼',rar:3,desc:'视野扩大 20%（看得更远），但受到伤害 +20%',apply:m=>{m.takenMul*=1.2;}}
 ];
 function recomputeRelics(){
   relicMods={...RELIC_BASE};
@@ -1633,6 +1641,8 @@ function recomputeRelics(){
   relicMods.cdMul=Math.max(.6,relicMods.cdMul);          /* 攻速最多 -40% */
   relicMods.critChance=Math.min(.5,relicMods.critChance);/* 暴击率 ≤ 50% */
   relicMods.dodge=Math.min(.35,relicMods.dodge);         /* 闪避 ≤ 35% */
+  /* 视野缩放目标:持有「被污染的千里眼」则拉远到 1/VISION_GAIN,否则正常 1(由 loop 平滑过渡) */
+  viewZoomT = player.relics.includes('farsight') ? 1/VISION_GAIN : 1;
 }
 function addRelic(r){ player.relics.push(r.id); if(r.instant)r.instant(player); recomputeRelics(); if(player.relics.length>=6) unlockAch('relic6'); }
 /* 伤害倍率:加法池(基础 + 残血 + 冲刺余韵)× 暴击掷骰 */
@@ -3087,7 +3097,7 @@ function aimPoint(){
   if(dualStick && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.2) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
   if(dualStick) return smartAim();
   /* 手动仅 PC(有鼠标)生效;手机选了手动会自动落到智能 */
-  if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+mouse.x,y:cam.y+mouse.y};
+  if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+W/2+(mouse.x-W/2)/viewZoom, y:cam.y+H/2+(mouse.y-H/2)/viewZoom};
   return aimMode==='near' ? nearAim() : smartAim();
 }
 function nearAim(){
@@ -4524,7 +4534,7 @@ function update(dt){
     updateEnemyLearning(e,dt);
     enemyAI(e,dt);
     e.x+=e._mv.x*dt;e.y+=e._mv.y*dt;
-    if(_pull>0 && !e.boss){ const _ox=e.x-cam.x,_oy=e.y-cam.y; if(_ox<-30||_ox>W+30||_oy<-30||_oy>H+30){ const _px=player.x-e.x,_py=player.y-e.y,_pd=Math.hypot(_px,_py)||1; e.x+=_px/_pd*_pull*dt; e.y+=_py/_pd*_pull*dt; } }   /* 只拢"屏幕外看不见"的躲藏残怪,屏内可见的一律不动,杜绝贴脸暴冲 */
+    if(_pull>0 && !e.boss){ const _ox=e.x-cam.x,_oy=e.y-cam.y; if(_ox<-30-EX||_ox>W+30+EX||_oy<-30-EY||_oy>H+30+EY){ const _px=player.x-e.x,_py=player.y-e.y,_pd=Math.hypot(_px,_py)||1; e.x+=_px/_pd*_pull*dt; e.y+=_py/_pd*_pull*dt; } }   /* 只拢"屏幕外看不见"的躲藏残怪,屏内可见的一律不动,杜绝贴脸暴冲 */
     collidePillars(e);
     if(e._cloaked && e._alpha<0.2) continue;
     if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+2)*(e.r+player.r+2)){
@@ -4659,7 +4669,7 @@ function drawTerrainDeco(){
   if(!t)return;
   ctx.save();
   for(const d of t.arr){
-    if(d.x<cam.x-40||d.x>cam.x+W+40||d.y<cam.y-40||d.y>cam.y+H+40)continue;
+    if(d.x<cam.x-40-EX||d.x>cam.x+W+40+EX||d.y<cam.y-40-EY||d.y>cam.y+H+40+EY)continue;
     const a=d.a*(0.6+0.4*Math.sin(time*0.6+d.ph));
     ctx.globalAlpha=a;
     const sz=6*d.s;
@@ -4815,23 +4825,26 @@ function render(){
   /* —— 视差背景层(在玩家/世界层之前) —— */
   drawParallaxBG();
   const _shk=cam.shake*fxAlpha; const sx=_shk?rand(-_shk,_shk):0, sy=_shk?rand(-_shk,_shk):0;
-  ctx.save();ctx.translate(-cam.x+sx,-cam.y+sy);
+  /* 世界层:以屏幕中心(=玩家)为锚做缩放。viewZoom=1 时等价于原来的纯平移(零差异);<1 则拉远看更多。
+     抖动 sx/sy 保持在屏幕像素空间(放在 scale 之前) */
+  ctx.save();
+  ctx.translate(W/2+sx, H/2+sy); ctx.scale(viewZoom,viewZoom); ctx.translate(-(cam.x+W/2), -(cam.y+H/2));
 
   /* 地面 */
   ctx.fillStyle=terrain.ground;ctx.fillRect(0,0,ARENA.w,ARENA.h);
   ctx.strokeStyle=terrain.grid;ctx.lineWidth=1;
-  const gx0=Math.max(0,Math.floor(cam.x/64)*64),gx1=Math.min(ARENA.w,cam.x+W+64);
-  const gy0=Math.max(0,Math.floor(cam.y/64)*64),gy1=Math.min(ARENA.h,cam.y+H+64);
+  const gx0=Math.max(0,Math.floor((cam.x-EX)/64)*64),gx1=Math.min(ARENA.w,cam.x+W+64+EX);
+  const gy0=Math.max(0,Math.floor((cam.y-EY)/64)*64),gy1=Math.min(ARENA.h,cam.y+H+64+EY);
   ctx.beginPath();
-  for(let x=gx0;x<=gx1;x+=64){ctx.moveTo(x,Math.max(0,cam.y));ctx.lineTo(x,Math.min(ARENA.h,cam.y+H));}
-  for(let y=gy0;y<=gy1;y+=64){ctx.moveTo(Math.max(0,cam.x),y);ctx.lineTo(Math.min(ARENA.w,cam.x+W),y);}
+  for(let x=gx0;x<=gx1;x+=64){ctx.moveTo(x,Math.max(0,cam.y-EY));ctx.lineTo(x,Math.min(ARENA.h,cam.y+H+EY));}
+  for(let y=gy0;y<=gy1;y+=64){ctx.moveTo(Math.max(0,cam.x-EX),y);ctx.lineTo(Math.min(ARENA.w,cam.x+W+EX),y);}
   ctx.stroke();
   /* 地形装饰:小草/沙丘/雪花/余烬/水晶碎片 */
   drawTerrainDeco();
   /* 符文地饰 */
   ctx.textAlign='center';ctx.textBaseline='middle';
   for(const r of runes){
-    if(r.x<cam.x-30||r.x>cam.x+W+30||r.y<cam.y-30||r.y>cam.y+H+30)continue;
+    if(r.x<cam.x-30-EX||r.x>cam.x+W+30+EX||r.y<cam.y-30-EY||r.y>cam.y+H+30+EY)continue;
     ctx.globalAlpha=r.al;ctx.fillStyle='#8b7df0';ctx.font=r.s+'px serif';ctx.fillText(r.g,r.x,r.y);
   }
   ctx.globalAlpha=1;
@@ -4894,7 +4907,7 @@ function render(){
   ctx.globalAlpha=1;
 
   /* 敌人 */
-  for(const e of enemies){ if(!e.boss){ const _sx=e.x-cam.x,_sy=e.y-cam.y,_m=(e.r||20)+72; if(_sx<-_m||_sx>W+_m||_sy<-_m||_sy>H+_m) continue; } drawEnemy(e); }   /* 屏幕外的杂兵不绘制(纯绘制无副作用,零画面变化);Boss 体大且少,始终画 */
+  for(const e of enemies){ if(!e.boss){ const _sx=e.x-cam.x,_sy=e.y-cam.y,_m=(e.r||20)+72; if(_sx<-_m-EX||_sx>W+_m+EX||_sy<-_m-EY||_sy>H+_m+EY) continue; } drawEnemy(e); }   /* 屏幕外的杂兵不绘制(纯绘制无副作用,零画面变化);Boss 体大且少,始终画 */
   drawTotems();
   drawBeasts();
   /* 玩家 */
@@ -5097,7 +5110,7 @@ function render(){
     const cx=W/2,cy=H/2,mh=W/2-24,mv=H/2-24;
     for(const e of enemies){
       if(e.dead||!e._charging||e._cwDone)continue;
-      const ex=e.x-cam.x, ey=e.y-cam.y;
+      const ex=W/2+(e.x-cam.x-W/2)*viewZoom, ey=H/2+(e.y-cam.y-H/2)*viewZoom;
       if(ex>=0&&ex<=W&&ey>=0&&ey<=H)continue;   /* 已在屏内:地面车道足够,不再加边缘箭头 */
       let ax=ex-cx,ay=ey-cy; const ad=Math.hypot(ax,ay)||1; ax/=ad; ay/=ad;
       const sc=Math.min(mh/(Math.abs(ax)||1e-4), mv/(Math.abs(ay)||1e-4));
@@ -5114,7 +5127,7 @@ function render(){
   if(state==='play'&&roundupT>0){
     const cx=W/2,cy=H/2,mh=W/2-22,mv=H/2-22;
     for(const e of enemies){ if(e.dead||e.boss)continue;
-      const ex=e.x-cam.x, ey=e.y-cam.y;
+      const ex=W/2+(e.x-cam.x-W/2)*viewZoom, ey=H/2+(e.y-cam.y-H/2)*viewZoom;
       if(ex>=0&&ex<=W&&ey>=0&&ey<=H)continue;
       let ax=ex-cx,ay=ey-cy; const ad=Math.hypot(ax,ay)||1; ax/=ad; ay/=ad;
       const sc=Math.min(mh/(Math.abs(ax)||1e-4), mv/(Math.abs(ay)||1e-4));
@@ -6213,6 +6226,9 @@ document.addEventListener('visibilitychange',()=>{last=performance.now(); if(doc
 let shotMode=false, _audChkT=0;   /* shotMode:截图模式(暂停但隐藏菜单);_audChkT:音频自动恢复节拍 */
 function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
+  /* 视野缩放:朝目标平滑过渡(拿到/失去千里眼时镜头柔和拉远/拉回);并据当前缩放算出剔除余量 EX/EY */
+  if(state==='play'&&!paused){ viewZoom += (viewZoomT-viewZoom)*Math.min(1,dt*6); if(Math.abs(viewZoom-viewZoomT)<.0006)viewZoom=viewZoomT; }
+  EX=(W/2)*(1/viewZoom-1); EY=(H/2)*(1/viewZoom-1);
   if(state==='play'&&!paused)update(dt);
   /* 音频被中断后自动恢复:每约 1 秒,非静音且引擎非 running 就尝试唤醒(无需手动开关静音) */
   _audChkT+=dt; if(_audChkT>1){ _audChkT=0; if(AC&&AC.state!=='running'&&!muted){ try{AC.resume();}catch(e){} } }
@@ -6344,6 +6360,7 @@ function resumeRun(){
   if(s.curse)  player.curse=s.curse;      /* 还原契约 */
   if(s.relics) player.relics=s.relics;    /* 还原遗物 */
   recomputeRelics();                       /* 据遗物重算被动 */
+  viewZoom=viewZoomT;                       /* 续战:视野直接吸附到目标(读档不做拉远动画) */
   player.maxhp=s.maxhp||player.maxhp;      /* 还原血量(存档即真实血,无回血漏洞) */
   player.hp=Math.max(1, Math.min(s.hp||player.maxhp, player.maxhp));
   coins=s.coins||0;                        /* 还原金币 */
