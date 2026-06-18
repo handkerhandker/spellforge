@@ -524,6 +524,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v80 · 2026-06-18</div><div class="cl-i">⚖️ 两件给「贴脸近战 / 堆血流」的新装备(数值先按平衡初版,之后看实战微调):①🍶<b>新法术「不死药」</b>——生命跌破 30% 时自动回复 25% 上限生命、14 秒一次(随等级提升),濒死才触发、不浪费,让贴脸近战流敢扑敢拼有兜底。②🛡️<b>新遗物「玄铁重甲」</b>——受到伤害 −12%、纯增益无代价,让"堆血 / 减伤"终于成为一条真正的活路,不再只能靠无敌盾撑场。两者都能在「武器·遗物图鉴」里查到。<b>都是新增内容、不动任何现有法杖数值,全难度通用不破榜。</b></div></div>
+<div class="cl-v"><div class="cl-h">v79 · 2026-06-18</div><div class="cl-i">⚙️ 两项体验优化:①🔋<b>新增「省电模式」</b>(暂停菜单里开)——限帧到 30 + 自动压低特效,明显降低手机发热和耗电,发烫的机器推荐开(画面会稍卡顿,但玩法手感完全不变)。②⚡<b>刷怪节奏优化</b>——妖兽现在会在你身边附近、更快地冒出来,不用再满地图跑去找零星几只怪、节奏也不被打断(怪的总数完全不变,只是出现得更近、更及时;深层波次几乎不受影响)。</div></div>
 <div class="cl-v"><div class="cl-h">v78 · 2026-06-18</div><div class="cl-i">🏆 <b>成就大扩充 · 一口气新增 50 个成就!</b>从 29 个直接翻到 79 个,各种角度都有:🔥热血的(万妖伏诛击杀1万、深渊尽头第100波、500 连击、累计击败古神50次)、😂搞笑的(恰好第13波阵亡「果然是13」、人为财死「钱没花完就走了」、开局10秒就没)、🎯刁钻的(法术全程不升级通关、全程不拿遗物、12分钟速通、残血通关)、😱望而生畏的(弑神难度不冲刺通关、累计游玩满10小时、击杀5万只)、🎭彩蛋(首次进化、卖出法术、险象环生、集齐全部皮肤),还有解锁其余全部成就才能拿到的压轴「🏆山海传说」。在主菜单「成就一览」里看进度,慢慢解锁。</div></div>
 <div class="cl-v"><div class="cl-h">v77 · 2026-06-18</div><div class="cl-i">🎭 <b>皮肤大改 · 每个皮肤现在自带一组「取舍 kit」!</b>不再是纯外观——换皮肤会带来一组**有得有失**的属性取舍,像法杖一样按角色气质设计:🦊九尾妖狐 暴击+12%/生命−12、🌿山鬼 击杀回血+1/伤害−10%、⚒️刑天 伤害+12%/受伤+12%、🕯️烛龙 攻速+8%/单发伤害−8%、🐦精卫 弹速+25%&穿透+1/攻速−10%、🌈女娲 生命+20&受伤−8%/伤害−10%;🧙巫师保持**纯均衡无取舍**。<b>每个 kit 净值中性、幅度比法杖轻、暴击有上限——只有取向不同、没有强弱,所以全难度通用(含弑神/无尽)也不破榜。</b>选皮肤时卡片上会用金字标明各自的加减,选前看清。</div></div>
 <div class="cl-v"><div class="cl-h">v76.6 · 2026-06-18</div><div class="cl-i">🧹 <b>所有弹窗页面统一收尾。</b>上版只把主菜单的滚动条藏了,这版**一次性作用到全部弹窗**——法术图鉴 / 异兽图鉴 / 成就 / 皮肤 / 每日挑战 等页面右侧的滚动条都已隐藏(画面干净,滚轮 / 滑动照常滚)。另外**给「皮肤」和「每日挑战」补上了右上角的关闭 ✕**(之前缺,得滑到底找返回键),现在所有弹窗的关闭按钮一致。纯界面整理,不影响任何玩法。</div></div>
@@ -656,6 +658,9 @@
     <div class="diff-title" style="margin-top:12px;font-size:13px;">💫 特效强度</div>
     <input id="fxRange" type="range" min="30" max="100" value="100" style="width:78%;max-width:280px;accent-color:#7a5cff;vertical-align:middle;">
     <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">调低让自己的粒子 / 辉光变淡、震屏更柔和,高难度看弹幕更清楚(敌方弹幕始终醒目)· <span id="fxVal">100%</span></div>
+    <div class="diff-title" style="margin-top:12px;font-size:13px;">🔋 省电模式</div>
+    <button class="btn ghost" id="powerSaveBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">省电模式：关</button>
+    <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">限帧到 30 帧 + 自动压低特效,明显降发热和耗电(画面稍卡顿,玩法手感不变)。发热严重的手机推荐开</div>
     <div class="diff-title" style="margin-top:12px;font-size:13px;">🛒 出售确认</div>
     <button class="btn ghost" id="sellConfirmBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">出售技能二次确认：开</button>
     <div class="aim-hint" style="font-size:11px;margin:5px auto 2px;max-width:280px;opacity:.72;line-height:1.45;">开启后，在商店卖出技能要再点一次确认，防手滑误卖</div>
@@ -786,7 +791,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v78', APP_TIME='2026-06-18 20:20';
+const APP_VER='v80', APP_TIME='2026-06-18 20:22';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -959,6 +964,7 @@ const SPELL_DEF={
   meteor:{name:'陨石',icon:'☄️',col:'#ff7e3a',cd:2.2,dmg:35,spd:240,r:12,life:1.7,aoe:110,desc:'巨型火球，命中后大范围爆炸'},
   beam:{name:'灼热射线',icon:'🔆',col:'#ff7a30',cd:.3,dmg:4,beam:6,desc:'持续射线灼烧 6 段'},
   heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,upg:'回复量提升，冷却更短',desc:'直接回复 6 点生命(随等级提升)'},
+  phoenix:{name:'不死药',icon:'🍶',col:'#ffd9a8',cd:14,dmg:0,upg:'回复量 +4% · 冷却 −0.6 秒',desc:'生命跌破 30% 时自动回复 25% 上限生命，14 秒一次(随等级提升)·濒死兜底，贴脸续航流的活路'},
   shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,upg:'可挡次数 +1，冷却更短',desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后短暂空窗才能再开'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
   blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
@@ -991,6 +997,7 @@ const CARD_DEFS=[
   {id:'meteor',kind:'spell',rar:3},
   {id:'beam',kind:'spell',rar:2},
   {id:'heal',kind:'spell',rar:2},
+  {id:'phoenix',kind:'spell',rar:2},
   {id:'shield',kind:'spell',rar:2},
   {id:'orb',kind:'spell',rar:2},
   {id:'blackhole',kind:'spell',rar:3},
@@ -1449,6 +1456,9 @@ buildBossArt();
 /* ============ 状态 ============ */
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let fxAlpha=1;   /* 特效强度:玩家粒子/辉光透明度(0.3~1);暂停菜单滑块控制。敌弹高亮、预警圈不受影响 */
+let fxAlphaUser=1;   /* 滑块原值;省电模式会在其基础上再压低(见 applyFx),所有 fxAlpha 用处自动跟 */
+let powerSave=false;   /* v79 省电模式:限帧30 + 压特效,存 sf_powersave */
+function applyFx(){ fxAlpha = powerSave ? Math.min(fxAlphaUser,.45) : fxAlphaUser; }
 const FX_CLOUD_DRAW=46, FX_BH_DRAW=18, FX_CYC_DRAW=14;  /* 持续特效「同屏最多画几个」的纯渲染上限(火海/毒云/黑洞/飓风高级时会铺满屏+卡)。超出的仍存在、照常吸入与造成伤害——只是不画 → 零数值改动、冲榜公平不变 */
 let sellConfirm=true;   /* 出售技能二次确认(防手滑误卖);暂停菜单开关,存 sf_sellconfirm,默认开 */
 let dailyRun=false; /* 当前是否为每日挑战局 */
@@ -1736,6 +1746,7 @@ const RELICS=[
   {id:'vit',    icon:'🧱',name:'磐石护符',rar:1,desc:'生命上限 +25',               instant:p=>{p.maxhp+=25;p.hp+=25;}},
   {id:'regen',  icon:'🌿',name:'再生苔',  rar:2,desc:'每秒回复 0.6 生命',          apply:m=>m.regen+=.6},
   {id:'dodge',  icon:'👻',name:'虚影斗篷',rar:3,desc:'闪避 +15%(受击概率免伤)',  apply:m=>m.dodge+=.15},
+  {id:'ironclad',icon:'🛡️',name:'玄铁重甲',rar:2,desc:'受到伤害 -12%(纯减伤·堆血流活路)',apply:m=>m.takenMul*=.88},
   /* 💰 经济 / 功能(无直接战力,最安全) */
   {id:'greed',  icon:'🤑',name:'贪婪之握',rar:1,desc:'金币获取 +40%',              apply:m=>m.coinMul*=1.4},
   {id:'magnet', icon:'🧲',name:'磁石',    rar:1,desc:'拾取范围 +70%',              apply:m=>m.pickupRange*=1.7},
@@ -2012,15 +2023,15 @@ function startWave(n){
       const type=row[0], c=row[1];
       if(type==='elite' && c){
         const base=row[2]||'brute';
-        spawnQ.push({t:rand(2,(5+n*.4)/sr),type:'elite',baseType:base,tier:pickTier()});
+        spawnQ.push({t:rand(1.5,(3+n*.4)/sr),type:'elite',baseType:base,tier:pickTier()});
       } else {
         const cc=Math.round(c*modMult.spawnM*diffMul.spawnM);
-        for(let i=0;i<cc;i++) spawnQ.push({t:rand(.5,(5+n*.8)/sr),type,tier:pickTier()});
+        for(let i=0;i<cc;i++) spawnQ.push({t:rand(.5,(3+n*.8)/sr),type,tier:pickTier()});
       }
     }
   } else {
     /* 兜底:未列出的波次用渐进式默认 */
-    const add=(type,c)=>{for(let i=0;i<c;i++) spawnQ.push({t:rand(.5,(5+n*.8)/sr),type,tier:pickTier()});};
+    const add=(type,c)=>{for(let i=0;i<c;i++) spawnQ.push({t:rand(.5,(3+n*.8)/sr),type,tier:pickTier()});};
     add('slime',6+Math.floor(n*1.5));
     if(n>=2)add('bat',2+Math.floor(n*1.15));
     if(n>=3)add('shooter',1+Math.floor(n*.7));
@@ -2038,9 +2049,19 @@ function startWave(n){
 
 /* 边界生成位置（远离玩家 360 像素以上） */
 function _pickSpawnPos(){
+  const p=ARENA.pad+40;
+  const halfDiag=Math.hypot(W/2,H/2)/(viewZoom||1);   /* 可视区半对角:超此即在屏幕外 */
+  const minD=halfDiag+30;                              /* 至少刚出屏一点点 */
+  /* v79:绕玩家一圈、刚好出屏处生成(怪总在身边冒出来,治"满地找怪、跑半天");夹到墙内后仍要求基本出屏才采用 */
+  for(let i=0;i<14;i++){
+    const a=rand(0,TAU), d=minD+rand(0,210);
+    const x=clamp(player.x+Math.cos(a)*d, p, ARENA.w-p);
+    const y=clamp(player.y+Math.sin(a)*d, p, ARENA.h-p);
+    if(dist2(x,y,player.x,player.y) > halfDiag*halfDiag) return {x,y};
+  }
+  /* 兜底:玩家被逼到角落等极端情形 → 老式贴边随机 */
   for(let i=0;i<9;i++){
-    const side=irand(0,3), p=ARENA.pad+40;
-    let x,y;
+    const side=irand(0,3); let x,y;
     if(side===0){x=rand(p,ARENA.w-p);y=p;}
     else if(side===1){x=rand(p,ARENA.w-p);y=ARENA.h-p;}
     else if(side===2){x=p;y=rand(p,ARENA.h-p);}
@@ -3264,10 +3285,18 @@ function smartAim(){
 }
 function castAll(dt){
   /* 自给型法术(治愈/法盾):不依赖敌人,任何时候都按冷却自动触发——修复朋友34"无怪时不回血/不开盾" */
-  for(const _uid of ['heal','shield']){
+  for(const _uid of ['heal','shield','phoenix']){
     const us=player.spells[_uid]; if(!us) continue;
     const udef=SPELL_DEF[_uid];
-    us.t-=dt; if(us.t>0) continue; us.t=cdOf(udef,us.lv);
+    us.t-=dt; if(us.t>0) continue;
+    if(_uid==='phoenix'){   /* 不死药:濒死(≤30%生命)才回血,平时保持待命、不进长CD;救回后才进入长冷却 */
+      if(player.hp>player.maxhp*0.30){ us.t=0.12; continue; }
+      const pct=0.25+0.04*(us.lv-1); heal(Math.round(player.maxhp*pct));
+      us.t=Math.max(7,14-0.6*(us.lv-1));
+      S.card(); announce('🍶 不死药 · 起死回生','濒死自动回 '+Math.round(pct*100)+'% 生命'); puff(player.x,player.y,'#ffd9a8',18);
+      continue;
+    }
+    us.t=cdOf(udef,us.lv);
     if(_uid==='heal'){ heal(6+2*(us.lv-1)); S.card(); puff(player.x,player.y,'#a8ffb0',8); }
     else { if(player.shield||player.shieldLock>0){ us.t=0.05; continue; } player.shield={hits:0,max:udef.shield+1*us.lv,life:4}; S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); }
   }
@@ -3278,7 +3307,7 @@ function castAll(dt){
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
   if(!_hasBal)player.spells.bolt={lv:1,t:.2};
   for(const id in player.spells){
-    if(id==='blade'||id==='thousandblade'||id==='heal'||id==='shield') continue;  /* 治愈/法盾已在函数顶部自给处理 */
+    if(id==='blade'||id==='thousandblade'||id==='heal'||id==='shield'||id==='phoenix') continue;  /* 治愈/法盾/不死药已在函数顶部自给处理 */
     const s=player.spells[id], def=SPELL_DEF[id];
     s.t-=dt;
     if(s.t>0) continue;
@@ -3952,8 +3981,8 @@ async function shareImage(){
 
 /* ============ 卡牌 ============ */
 /* ===== 法术图鉴 ===== */
-const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬' };
-const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','shield','totem','cyclone','plague','tidal','devour'];
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', phoenix:'辅助·急救', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬' };
+const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','phoenix','shield','totem','cyclone','plague','tidal','devour'];
 function cxItem(icon,name,tag,stat,desc){
   return '<div class="cx-item"><div class="cx-ic">'+icon+'</div><div class="cx-main"><div class="cx-head">'
     +'<span class="cx-name">'+name+'</span>'+(tag?'<span class="cx-tag">'+tag+'</span>':'')
@@ -6857,6 +6886,7 @@ function pollGamepad(dt){
   }
 }
 function loop(now){
+  if(powerSave && (now-last)<30){ requestAnimationFrame(loop); return; }   /* 省电:限到约 33 帧/秒(跳帧少渲染少耗电;模拟仍用真实 dt,玩法手感不变) */
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
   pollGamepad(dt);   /* 🎮 手柄轮询(战斗驱动 / 菜单导航) */
   /* 视野缩放:朝目标平滑过渡(拿到/失去千里眼时镜头柔和拉远/拉回);并据当前缩放算出剔除余量 EX/EY */
@@ -6925,9 +6955,9 @@ syncCtrlUI();
 try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa==='smart') aimMode=sa; }catch(e){}
 /* 特效强度滑块:读存档 + 绑定(0.3~1) */
 (function(){ const fr=document.getElementById('fxRange');
-  const apply=v=>{ fxAlpha=Math.max(.3,Math.min(1,v)); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlpha*100)+'%'; if(fr)fr.value=Math.round(fxAlpha*100); };
+  const apply=v=>{ fxAlphaUser=Math.max(.3,Math.min(1,v)); applyFx(); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlphaUser*100)+'%'; if(fr)fr.value=Math.round(fxAlphaUser*100); };
   try{ const sf=parseFloat(localStorage.getItem('sf_fx')); apply(sf>=.3&&sf<=1?sf:1); }catch(e){ apply(1); }
-  if(fr) fr.oninput=()=>{ fxAlpha=Math.max(.3,Math.min(1,(+fr.value||100)/100)); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlpha*100)+'%'; try{localStorage.setItem('sf_fx',String(fxAlpha));}catch(e){} };
+  if(fr) fr.oninput=()=>{ fxAlphaUser=Math.max(.3,Math.min(1,(+fr.value||100)/100)); applyFx(); const fv=document.getElementById('fxVal'); if(fv)fv.textContent=Math.round(fxAlphaUser*100)+'%'; try{localStorage.setItem('sf_fx',String(fxAlphaUser));}catch(e){} };
 })();
 /* 出售二次确认开关:读存档 + 绑定(默认开) */
 (function(){ const sb=document.getElementById('sellConfirmBtn');
@@ -6935,6 +6965,14 @@ try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa=
   const upd=()=>{ if(sb)sb.textContent='出售技能二次确认：'+(sellConfirm?'开':'关'); };
   upd();
   if(sb) sb.onclick=()=>{ sellConfirm=!sellConfirm; try{localStorage.setItem('sf_sellconfirm',sellConfirm?'1':'0');}catch(e){} upd(); try{S.card();}catch(e){} };
+})();
+/* v79 省电模式开关:读存档 + 绑定(默认关) */
+(function(){ const pb=document.getElementById('powerSaveBtn');
+  try{ powerSave = localStorage.getItem('sf_powersave')==='1'; }catch(e){}
+  applyFx();
+  const upd=()=>{ if(pb)pb.textContent='省电模式：'+(powerSave?'开':'关'); };
+  upd();
+  if(pb) pb.onclick=()=>{ powerSave=!powerSave; applyFx(); try{localStorage.setItem('sf_powersave',powerSave?'1':'0');}catch(e){} upd(); try{S.card();}catch(e){} };
 })();
 if(aimMode==='manual'&&!(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)) aimMode='smart';
 syncAimUI();
