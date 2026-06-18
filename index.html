@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v81.2 · 2026-06-18</div><div class="cl-i">🪙 <b>后期金币终于花得出去了!</b>以前深入无尽后钱袋暴涨到一万多却没处花(升个 Lv75 法术才几十块、回满血才 30)。现在<b>商店价格随波数上涨、法术升级价跟着实际等级走</b>——越深的波、越高级的法术,升级和补给越贵,囤的金币真正有用武之地、每次进商店都是真选择。<b>第10波前价格完全不变</b>,只动深层经济、不碰任何法术伤害数值。</div></div>
 <div class="cl-v"><div class="cl-h">v81.1 · 2026-06-18</div><div class="cl-i">🐞 <b>修复"小怪吸在身上、打不到、冲刺甩不掉"</b>:以前贴脸的近战小怪会一路钻进你身体正中心、像卡进模型一样,你的子弹打不到它,它却一直贴着你扣血。现在它们会被<b>挡在你身体外缘</b>——你能正常瞄到、反击它,接触伤害照常但不再"赖在身体里"。另外最快的小兵<b>「狰」不再叠加「迅捷」词缀</b>(以前可能比你跑得还快、冲刺都甩不开),现在能正常拉开距离、风筝它。</div></div>
 <div class="cl-v"><div class="cl-h">v81 · 2026-06-18</div><div class="cl-i">🪄 <b>三把全新机制法杖登场!</b>(灵晶解锁,在「选择法杖」页):①🧭<b>司南法杖</b>——你的法术弹会自动拐弯追踪最近的敌人,手残福音、移动靶随便打,<b>手机上尤其友好</b>(瞄准没那么累);②💥<b>轰天雷法杖</b>——每发命中都炸出一小片溅射伤害,怪越密越爽,清群利器;③🌀<b>连珠法杖</b>——施法快得像连珠炮、火力如泼水,以快制胜、命中机会多。三把都是之前没有的新机制(追踪 / 爆裂 / 速射),也给攒不完的灵晶添了去处。<b>数值平衡初版、之后看实战微调,全难度通用不破榜。</b></div></div>
 <div class="cl-v"><div class="cl-h">v80 · 2026-06-18</div><div class="cl-i">⚖️ 两件给「贴脸近战 / 堆血流」的新装备(数值先按平衡初版,之后看实战微调):①🍶<b>新法术「不死药」</b>——生命跌破 30% 时自动回复 25% 上限生命、14 秒一次(随等级提升),濒死才触发、不浪费,让贴脸近战流敢扑敢拼有兜底。②🛡️<b>新遗物「玄铁重甲」</b>——受到伤害 −12%、纯增益无代价,让"堆血 / 减伤"终于成为一条真正的活路,不再只能靠无敌盾撑场。两者都能在「武器·遗物图鉴」里查到。<b>都是新增内容、不动任何现有法杖数值,全难度通用不破榜。</b></div></div>
@@ -793,7 +794,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v81.1', APP_TIME='2026-06-18 20:24';
+const APP_VER='v81.2', APP_TIME='2026-06-18 20:25';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1900,6 +1901,10 @@ function tryDash(){
 /* ============ 金币 & 连击 ============ */
 const PRICE={1:18,2:30,3:50}, REROLL_COST=8, SHOP_REROLL=10, HEAL_COST=30, SELL_GAIN=8;
 const SPELL_SLOT_MAX=4; /* 法术槽位上限:最多同时持有这么多种法术(符文mod不限) */
+/* 后期金币花不掉修复:商店价格随波数上涨(>第10波起每波+5%),早期不变、深层逐步变贵,让囤积的金币真正花得出去 */
+function shopPriceMul(){ return 1 + Math.max(0, waveNum-10)*0.05; }
+function healCost(){ return Math.round(HEAL_COST * shopPriceMul()); }
+function rerollCost(){ return Math.round(SHOP_REROLL * shopPriceMul()); }
 /* 连杀强化(只奖励进攻 + 掉落,绝不加防御;封顶不滚雪球;挨打/3.2秒不杀即清) */
 const COMBO_WINDOW=3.2, COMBO_DMG_PER=.006, COMBO_DMG_CAP=.40; /* 伤害加成:每连击+0.6%,封顶+40%(约67连封顶) */
 const COMBO_TIERS=[
@@ -4346,9 +4351,12 @@ function buildShopItems(){
   const row=$('shopRow'); row.innerHTML='';
   const opts=rollCards(3);
   for(const c of opts){
-    /* 平衡:买得越多越贵 — 同一项每多拥有1层,价格 +65%,杜绝无脑堆满级 */
+    /* 平衡:买得越多越贵 — 同一项每多拥有1层,价格 +65%,杜绝无脑堆满级;另叠加波数系数(A),后期更贵 */
     const owned=player.cc[c.id]||0;
-    const price=Math.round((PRICE[c.rar]||15)*(1+owned*.65));
+    const isUpg=c.kind==='spell'&&player.spells[c.id];   /* 已持有的法术=升级(非新法术/符文) */
+    const price=isUpg
+      ? Math.round((PRICE[c.rar]||15)*(1+player.spells[c.id].lv*0.16)*shopPriceMul())   /* B:升级价跟实际等级走(高级法术升级当然贵)+ A 波数系数 */
+      : Math.round((PRICE[c.rar]||15)*(1+owned*.65)*shopPriceMul());                      /* 新法术/符文:按拥有层数 + A 波数系数 */
     const el=document.createElement('button');
     el._bought=false; el._card=c; el._price=price;
     el._render=()=>{
@@ -4419,9 +4427,10 @@ function buildSellRow(){
   }
 }
 function refreshShopBtns(){
-  $('shopHeal').textContent='❤️ 回满生命 ('+HEAL_COST+'💰)';
-  $('shopHeal').style.opacity=(coins>=HEAL_COST&&player.hp<player.maxhp)?'1':'.45';
-  $('shopReroll').style.opacity=coins>=SHOP_REROLL?'1':'.45';
+  $('shopHeal').textContent='❤️ 回满生命 ('+healCost()+'💰)';
+  $('shopHeal').style.opacity=(coins>=healCost()&&player.hp<player.maxhp)?'1':'.45';
+  $('shopReroll').textContent='🔄 换一批 ('+rerollCost()+'💰)';
+  $('shopReroll').style.opacity=coins>=rerollCost()?'1':'.45';
 }
 function openShop(){
   state='shop';
@@ -7205,8 +7214,8 @@ bindConfirm($('retryBtn'), '⚠️ 确定再次挑战？再点一次', ()=>{ ini
 $('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
-$('shopHeal').onclick=()=>{ if(coins>=HEAL_COST&&player.hp<player.maxhp){coins-=HEAL_COST;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
-$('shopReroll').onclick=()=>{ if(coins>=SHOP_REROLL){coins-=SHOP_REROLL;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
+$('shopHeal').onclick=()=>{ const _hc=healCost(); if(coins>=_hc&&player.hp<player.maxhp){coins-=_hc;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
+$('shopReroll').onclick=()=>{ const _rc=rerollCost(); if(coins>=_rc){coins-=_rc;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopLeave').onclick=()=>{ $('shop').classList.add('hidden'); startWave(waveNum+1); state='play'; };
 $('endlessBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden');
   endless=true; startWave(waveNum+1); state='play'; };
