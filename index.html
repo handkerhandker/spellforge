@@ -41,11 +41,8 @@
   #menu .hint{line-height:1.35;font-size:11px;text-align:left;}
   #menu .lb-title{margin-top:7px;}
   #menu .lb-board{max-height:none;overflow-y:visible;margin-top:6px;flex-shrink:0;}
-  #menu .panel,#menu .lb-board{scrollbar-width:thin;scrollbar-color:rgba(123,92,255,.4) transparent;}
-  #menu .panel::-webkit-scrollbar,#menu .lb-board::-webkit-scrollbar{width:7px;}
-  #menu .panel::-webkit-scrollbar-thumb,#menu .lb-board::-webkit-scrollbar-thumb{background:rgba(123,92,255,.4);border-radius:4px;}
-  #menu .panel::-webkit-scrollbar-thumb:hover,#menu .lb-board::-webkit-scrollbar-thumb:hover{background:rgba(123,92,255,.6);}
-  #menu .panel::-webkit-scrollbar-track,#menu .lb-board::-webkit-scrollbar-track{background:transparent;}
+  #menu .panel{scrollbar-width:none;}   /* 隐藏滚动条(滚动功能保留:PC 滚轮 / 手机滑动);菜单只此一个滚动容器,英雄榜不再单独滚→不会出现两条 */
+  #menu .panel::-webkit-scrollbar{width:0;height:0;}
   /* 结算页(通关/失败):榜展开不自己滚,整页面板滚动,避免把底部按钮顶出屏幕又滑不到 */
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
   #win .panel,#over .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
@@ -275,7 +272,7 @@
     .menu-col-r{border-left:1px solid rgba(123,92,255,.18);padding-left:26px;}
     #menu .title{font-size:42px;}
     #menu .desc{font-size:13px;}
-    #menu .lb-board{max-height:300px;overflow-y:auto;}
+    #menu .lb-board{max-height:none;overflow-y:visible;}
     /* —— 选牌 / 遗物:卡片横向并排,卡片本身转成竖版(图标在上、文字在下、居中) —— */
     #cardRow,#relicRow,#evoRow{flex-direction:row;width:auto;max-width:96vw;align-items:stretch;justify-content:center;flex-wrap:wrap;}
     #wandRow{flex-direction:row!important;width:auto!important;max-width:96vw;align-items:stretch;justify-content:center;flex-wrap:wrap;}
@@ -525,6 +522,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v76.5 · 2026-06-18</div><div class="cl-i">🐛 <b>两个修复。</b>① <b>修复「钦原」(蓝色冰箭手) 错误显示 Boss 冲撞预警</b>：这种射手蓄力射冰箭时,以前会错误地弹出红色冲撞车道、甚至屏幕边缘的红色方向箭头,让人以为它要冲撞——可它根本不冲。现在它只显示自己该有的蓄力光环和瞄准虚线。② <b>修复 PC 网页主菜单的滚动条问题</b>：之前菜单右侧会出现滚动条(一度还冒成两条、连英雄榜都单独带一条),现在滚动条已隐藏、画面干净——滚轮 / 滑动照常可滚动查看完整英雄榜。<b>纯显示修复,未动任何玩法或数值,弑神 / 无尽冲榜公平不变。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.4 · 2026-06-18</div><div class="cl-i">📱🎮 <b>手机横屏自适应 + 手柄瞄准修复。</b>① <b>修复 v76.3 引入的手机横屏菜单显示异常</b>：横屏(屏幕又宽又矮)时,主菜单会自动切换成单栏布局——标题、难度、拔出法杖等正常显示,不再"左边一片空白、右边被截断";矮屏还会自动隐掉装饰性副标题,保证核心按钮在首屏可见。PC / 平板(够高的宽屏)的两栏布局、手机竖屏均不变。② <b>修复手柄两个瞄准问题</b>：A 方案(自动瞄准)以前在 PC 上会错误地跟着鼠标转、不自动瞄敌,现在稳定自动锁定最近的威胁;B 方案(右摇杆瞄准)以前斜推右摇杆会和自动瞄准抢方向、瞄起来一卡一卡,现在右摇杆瞄准顺滑(推杆时纯手动、松杆才回到自动瞄)。<b>仅调整界面与控制,法术的伤害 / 范围 / 冷却一概未动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.3 · 2026-06-18</div><div class="cl-i">🖥️ <b>PC 网页 + 手柄体验打磨(3 项)。</b>① <b>主菜单在宽屏上更耐看</b>：左侧标题改为垂直居中、与右侧栏更平衡,英雄榜过长时改为榜内滚动,不再一直挂着一条粗滚动条。② <b>手柄「已连接」提示会自动消失了</b>：连上手柄后顶部那行提示飘一下(约 2 秒)就淡出,不再一直占着屏幕顶端。③ <b>连手柄时,暂停菜单的操作设置自动切成手柄设置</b>：直接显示「🎮 手柄方案 A / B 切换」,并把只对鼠标 / 触屏有用的「瞄准模式」「摇杆设置」收起来(手柄瞄准由方案决定、无需再设);拔掉手柄又会自动换回鼠标 / 触屏设置。</div></div>
 <div class="cl-v"><div class="cl-h">v76.2 · 2026-06-18</div><div class="cl-i">💧 <b>修复弹幕「叠成一片白、看不清」(接 v76.1)。</b>水龙吟、奥术球这类高射速法术练到高级、疯狂连发时,成片重叠的弹幕会在中间<b>叠加成一大坨纯白</b>,人物和敌弹全被盖住;而且之前把「💫 特效强度」调到最低也压不下这层白。现在:① <b>弹幕的白芯也跟着「特效强度」滑块走了</b>——调低就大幅变淡,随时能从弹幕里看清自己和飞来的敌弹;② 同屏弹幕极多时<b>更早自动收敛叠加亮度</b>,满特效下也不至于糊成全白。<b>法术的伤害、范围、冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
@@ -782,7 +780,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v76.4', APP_TIME='2026-06-18 18:40';
+const APP_VER='v76.5', APP_TIME='2026-06-18 19:10';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3096,13 +3094,13 @@ function enemyAI(e,dt){
       else if(d>ETYPE.frostarcher.shootR){e._mv={x:dx/d*spd,y:dy/d*spd};}
       else {e._mv={x:-dy/d*spd*.5,y:dx/d*spd*.5};}
       e.shootT-=dt;
-      if(e._charging){
+      if(e._fbWind){
         e.charge=clamp(1-e.shootT/ETYPE.frostarcher.windup,0,1);
-        if(e.shootT<=0){ e._charging=false; e.shootT=ETYPE.frostarcher.shootCD; e.charge=0;
+        if(e.shootT<=0){ e._fbWind=false; e.shootT=ETYPE.frostarcher.shootCD; e.charge=0;
           const fa=Math.atan2(player.y-e.y,player.x-e.x);
           ebullets.push({x:e.x,y:e.y,vx:Math.cos(fa)*320,vy:Math.sin(fa)*320,r:9,life:3,dmg:11,dead:false,_slow:ETYPE.frostarcher.slowDur,col:'#7ad0ff'});
           S.zap(); }
-      } else if(d<ETYPE.frostarcher.shootR){ e._charging=true; e.shootT=ETYPE.frostarcher.windup; }
+      } else if(d<ETYPE.frostarcher.shootR){ e._fbWind=true; e.shootT=ETYPE.frostarcher.windup; }
     } break;
   }
 }
@@ -5661,7 +5659,7 @@ function dqDraw(type, e, lookA){
     ctx.beginPath();ctx.moveTo(-r*.35,-r*.55);ctx.lineTo(0,-r*1.45);ctx.lineTo(r*.35,-r*.55);ctx.closePath();ctx.fill();ctx.stroke();
     ctx.beginPath();ctx.moveTo(-r*.7,-r*.1);ctx.lineTo(-r*1.2,-r*.5);ctx.moveTo(r*.7,-r*.1);ctx.lineTo(r*1.2,-r*.5);ctx.stroke();
     dqDrawEyes(0,-r*.05,lookA,eyeR,2.2,'#2a8ad0');
-    if(e._charging){ctx.strokeStyle='#aee8ff';ctx.lineWidth=Math.max(2,r*.2);ctx.globalAlpha*=.5+e.charge*.5;ctx.beginPath();ctx.arc(0,0,r*1.3,-1,1);ctx.stroke();ctx.globalAlpha=1;}
+    if(e._fbWind){ctx.strokeStyle='#aee8ff';ctx.lineWidth=Math.max(2,r*.2);ctx.globalAlpha*=.5+e.charge*.5;ctx.beginPath();ctx.arc(0,0,r*1.3,-1,1);ctx.stroke();ctx.globalAlpha=1;}
   } else if(type==='qiongqi'){
     /* 穷奇:带翼甲虎,霸体冲锋 */
     dqFill('#8a4030');ctx.beginPath();ctx.moveTo(-r*.5,-r*.2);ctx.lineTo(-r*1.45,-r*.95);ctx.lineTo(-r*.7,-r*.55);ctx.closePath();ctx.fill();ctx.stroke();
@@ -5741,7 +5739,7 @@ function drawEnemy(e){
     ctx.strokeStyle='#9ad0ff';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(e.x,e.y,e.r+5,0,TAU);ctx.stroke();ctx.restore(); }
   if(e._phaseInv){ ctx.save();ctx.globalAlpha*=.7;ctx.strokeStyle='#c8a8ff';ctx.lineWidth=2;ctx.setLineDash([4,4]);
     ctx.beginPath();ctx.arc(e.x,e.y,e.r+8,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.restore(); }
-  if(e._ai==='frostbow'&&e._charging){ ctx.save();ctx.globalAlpha*=.25+e.charge*.45;ctx.strokeStyle='#7ad0ff';ctx.lineWidth=2;ctx.setLineDash([6,6]);
+  if(e._ai==='frostbow'&&e._fbWind){ ctx.save();ctx.globalAlpha*=.25+e.charge*.45;ctx.strokeStyle='#7ad0ff';ctx.lineWidth=2;ctx.setLineDash([6,6]);
     ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(player.x,player.y);ctx.stroke();ctx.setLineDash([]);ctx.restore(); }
   if(e._affList&&e._affList.length){ ctx.save();ctx.textAlign='center';ctx.font='11px serif';
     let ax=e.x-(e._affList.length-1)*6;
