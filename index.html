@@ -292,6 +292,17 @@
     .ward-info{flex:0 0 auto;text-align:center;}
     .ward-act{align-self:center;}
   }
+  @media (min-aspect-ratio: 13/10) and (max-height: 600px){
+    /* 又宽又矮的屏(手机横屏等):菜单退回单栏——标题在上、内容依次纵向排列、面板内滚动;避免两栏在有限高度里把左栏标题挤出可视区、右栏底部被截断。够高的宽屏(PC/平板)仍走上面的两栏 */
+    #menu{justify-content:flex-start;}
+    #menu .panel{max-width:min(94vw,480px);width:min(94vw,480px);}
+    .menu-cols{flex-direction:column;align-items:center;gap:6px;}
+    .menu-col-l{justify-content:flex-start;}
+    .menu-col-r{border-left:none;padding-left:0;}
+    #menu .title{font-size:30px;}
+    #menu .eyebrow,#menu .sub,#menu .desc{display:none;}   /* 矮屏寸土寸金:隐掉装饰副标题+剧情简介,保留 标题/操作提示/难度/拔出法杖 进首屏,其余面板内滚动 */
+    #menu .lb-board{max-height:none;overflow-y:visible;}
+  }
 </style>
 </head>
 <body>
@@ -514,6 +525,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v76.4 · 2026-06-18</div><div class="cl-i">📱🎮 <b>手机横屏自适应 + 手柄瞄准修复。</b>① <b>修复 v76.3 引入的手机横屏菜单显示异常</b>：横屏(屏幕又宽又矮)时,主菜单会自动切换成单栏布局——标题、难度、拔出法杖等正常显示,不再"左边一片空白、右边被截断";矮屏还会自动隐掉装饰性副标题,保证核心按钮在首屏可见。PC / 平板(够高的宽屏)的两栏布局、手机竖屏均不变。② <b>修复手柄两个瞄准问题</b>：A 方案(自动瞄准)以前在 PC 上会错误地跟着鼠标转、不自动瞄敌,现在稳定自动锁定最近的威胁;B 方案(右摇杆瞄准)以前斜推右摇杆会和自动瞄准抢方向、瞄起来一卡一卡,现在右摇杆瞄准顺滑(推杆时纯手动、松杆才回到自动瞄)。<b>仅调整界面与控制,法术的伤害 / 范围 / 冷却一概未动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.3 · 2026-06-18</div><div class="cl-i">🖥️ <b>PC 网页 + 手柄体验打磨(3 项)。</b>① <b>主菜单在宽屏上更耐看</b>：左侧标题改为垂直居中、与右侧栏更平衡,英雄榜过长时改为榜内滚动,不再一直挂着一条粗滚动条。② <b>手柄「已连接」提示会自动消失了</b>：连上手柄后顶部那行提示飘一下(约 2 秒)就淡出,不再一直占着屏幕顶端。③ <b>连手柄时,暂停菜单的操作设置自动切成手柄设置</b>：直接显示「🎮 手柄方案 A / B 切换」,并把只对鼠标 / 触屏有用的「瞄准模式」「摇杆设置」收起来(手柄瞄准由方案决定、无需再设);拔掉手柄又会自动换回鼠标 / 触屏设置。</div></div>
 <div class="cl-v"><div class="cl-h">v76.2 · 2026-06-18</div><div class="cl-i">💧 <b>修复弹幕「叠成一片白、看不清」(接 v76.1)。</b>水龙吟、奥术球这类高射速法术练到高级、疯狂连发时,成片重叠的弹幕会在中间<b>叠加成一大坨纯白</b>,人物和敌弹全被盖住;而且之前把「💫 特效强度」调到最低也压不下这层白。现在:① <b>弹幕的白芯也跟着「特效强度」滑块走了</b>——调低就大幅变淡,随时能从弹幕里看清自己和飞来的敌弹;② 同屏弹幕极多时<b>更早自动收敛叠加亮度</b>,满特效下也不至于糊成全白。<b>法术的伤害、范围、冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.1 · 2026-06-18</div><div class="cl-i">🔥 <b>修复高级法术「糊屏 + 卡顿」。</b>焚天的火海、蛊毒的毒云、黑洞、飓风练到高级后,特效会铺满整个屏幕——看不见自己、也看不清飞来的敌弹,手机还会发烫卡顿。现在这几类持续特效:① <b>会跟着暂停菜单的「💫 特效强度」滑块走</b>,调低就大幅变淡、甚至基本隐形,随时能把画面看清;② 同屏堆太多时<b>只绘制最近的若干个</b>(其余照常吸入 / 造成伤害,只是不重复画出来),画面更稳、更省电。<b>法术的伤害、范围、冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
@@ -770,7 +782,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v76.3', APP_TIME='2026-06-18 18:05';
+const APP_VER='v76.4', APP_TIME='2026-06-18 18:40';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3194,8 +3206,9 @@ const AIM_DESC={manual:'鼠标精准手瞄,自由点杀(仅 PC)',near:'自动锁
 function aimPoint(){
   const _pdB = padConnected && padMode==='B';   /* 🎮 B方案:右摇杆瞄准,与双摇杆同路径 */
   /* 双摇杆/手柄B:推右摇杆时朝那个方向开火;不推时回落到智能自动瞄准 */
-  if((dualStick||_pdB) && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.2) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
+  if((dualStick||_pdB) && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.05) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
   if(dualStick||_pdB) return smartAim();
+  if(padConnected) return aimMode==='near' ? nearAim() : smartAim();   /* 🎮 连手柄(A方案等):自动瞄准,绝不跟鼠标方向 */
   /* 手动仅 PC(有鼠标)生效;手机选了手动会自动落到智能 */
   if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+W/2+(mouse.x-W/2)/viewZoom, y:cam.y+H/2+(mouse.y-H/2)/viewZoom};
   return aimMode==='near' ? nearAim() : smartAim();
@@ -6711,8 +6724,8 @@ function pollGamepad(dt){
     const lm=Math.hypot(lx,ly);
     if(lm>0){ joy.on=true; joy.dx=lx; joy.dy=ly; } else { joy.on=false; joy.dx=0; joy.dy=0; }
     if(padMode==='B'){
-      const rm=Math.hypot(rx,ry);
-      if(rm>0){ joyR.on=true; joyR.dx=rx; joyR.dy=ry; _padHoldFire=false; }
+      const rgx=ax[2]||0, rgy=ax[3]||0, rmRaw=Math.hypot(rgx,rgy), onTh=joyR.on?0.16:DZ;   /* 径向死区+迟滞:斜推也能瞄(不再逐轴卡)、贴着死区不抖闪回落自动瞄准 */
+      if(rmRaw>onTh){ joyR.on=true; joyR.dx=rgx; joyR.dy=rgy; _padHoldFire=false; }
       else { joyR.on=false; joyR.dx=0; joyR.dy=0; _padHoldFire=true; }
       if(eRB) tryDash();
     } else { joyR.on=false; joyR.dx=joyR.dy=0; _padHoldFire=false; if(eA) tryDash(); }
