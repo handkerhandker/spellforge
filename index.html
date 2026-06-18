@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82 · 2026-06-19</div><div class="cl-i">🎭 <b>三位山海经新角色登场!</b>(灵晶解锁,在「外观·皮肤」里换):①🏹<b>后羿</b>——射九日的神射手,单发伤害 +12%、穿透 +1(一箭洞穿一排怪),代价是出手稍慢(攻速 −15%);②🦬<b>夸父</b>——逐日的巨人,生命上限 +40、皮糙肉厚,代价同样是出手慢些(攻速 −13%),适合稳扎稳打;③⚔️<b>蚩尤</b>——铜头铁额的兵主战神,暴击率 +10%、击杀回血 +1 的激进打法,但身子骨脆(生命上限 −30、受伤 +8%),越凶越爽。每位都各有取舍、净值均衡,<b>全难度通用不破榜</b>,也给攒不完的灵晶添了去处。</div></div>
 <div class="cl-v"><div class="cl-h">v81.2 · 2026-06-18</div><div class="cl-i">🪙 <b>后期金币终于花得出去了!</b>以前深入无尽后钱袋暴涨到一万多却没处花(升个 Lv75 法术才几十块、回满血才 30)。现在<b>商店价格随波数上涨、法术升级价跟着实际等级走</b>——越深的波、越高级的法术,升级和补给越贵,囤的金币真正有用武之地、每次进商店都是真选择。<b>第10波前价格完全不变</b>,只动深层经济、不碰任何法术伤害数值。</div></div>
 <div class="cl-v"><div class="cl-h">v81.1 · 2026-06-18</div><div class="cl-i">🐞 <b>修复"小怪吸在身上、打不到、冲刺甩不掉"</b>:以前贴脸的近战小怪会一路钻进你身体正中心、像卡进模型一样,你的子弹打不到它,它却一直贴着你扣血。现在它们会被<b>挡在你身体外缘</b>——你能正常瞄到、反击它,接触伤害照常但不再"赖在身体里"。另外最快的小兵<b>「狰」不再叠加「迅捷」词缀</b>(以前可能比你跑得还快、冲刺都甩不开),现在能正常拉开距离、风筝它。</div></div>
 <div class="cl-v"><div class="cl-h">v81 · 2026-06-18</div><div class="cl-i">🪄 <b>三把全新机制法杖登场!</b>(灵晶解锁,在「选择法杖」页):①🧭<b>司南法杖</b>——你的法术弹会自动拐弯追踪最近的敌人,手残福音、移动靶随便打,<b>手机上尤其友好</b>(瞄准没那么累);②💥<b>轰天雷法杖</b>——每发命中都炸出一小片溅射伤害,怪越密越爽,清群利器;③🌀<b>连珠法杖</b>——施法快得像连珠炮、火力如泼水,以快制胜、命中机会多。三把都是之前没有的新机制(追踪 / 爆裂 / 速射),也给攒不完的灵晶添了去处。<b>数值平衡初版、之后看实战微调,全难度通用不破榜。</b></div></div>
@@ -794,7 +795,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v81.2', APP_TIME='2026-06-18 20:25';
+const APP_VER='v82', APP_TIME='2026-06-19 01:00';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1695,7 +1696,7 @@ const WAND_SKIN={
 function wandSkin(id){ return WAND_SKIN[id]||WAND_SKIN.apprentice; }
 function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
 /* ===== 角色皮肤(v70 加入;v77 起各带取舍 kit,见上方 SKIN_FX);wizard 免费,其余灵晶解锁(记录于 META.unlocked,与法杖键不冲突) ===== */
-const SKIN_COST={fox:300, shangui:300, jingwei:300};
+const SKIN_COST={fox:300, shangui:300, jingwei:300, houyi:300, kuafu:300, chiyou:300};
 const SKIN_ACH={xingtian:'godslayer', zhulong:'endless50', nuwa:'allboss'};   /* 成就解锁皮肤:皮肤id → 所需成就id;打出该成就即免费解锁(无灵晶售价、随成就永久) */
 /* ===== v77 皮肤取舍 kit:复用法杖 wandFx 同字段,开局在 applyWand 折入(净值中性的侧向取舍=玩法 kit 非养成 → 全难度通用含弑神,与法杖同理不破榜);幅度比法杖轻;`kit` 文案仅供卡片显示,注入时忽略 ===== */
 const SKIN_FX={
@@ -1706,6 +1707,9 @@ const SKIN_FX={
   zhulong: {cdM:.92,       dmgM:.92,               kit:'攻速 +8% · 单发伤害 −8%'},
   jingwei: {spdM:1.25,     pierce:1, cdM:1.10,     kit:'弹速 +25% · 穿透 +1 · 攻速 −10%'},
   nuwa:    {maxhpAdj:20,   takenMul:.92, dmgM:.90, kit:'生命上限 +20 · 受伤 −8% · 伤害 −10%'},
+  houyi:   {dmgM:1.12,     pierce:1, cdM:1.15,     kit:'单发伤害 +12% · 穿透 +1 · 攻速 −15%'},
+  kuafu:   {maxhpAdj:40,   cdM:1.13,               kit:'生命上限 +40 · 攻速 −13%'},
+  chiyou:  {critBonus:.10, killHeal:1, maxhpAdj:-30, takenMul:1.08, kit:'暴击率 +10% · 击杀回血 +1 · 生命上限 −30 · 受伤 +8%'},
 };
 const CHARS=[
   {id:'wizard',  icon:'🧙', name:'巫师',     theme:'经典 · 暗紫法师', sub:'最初的拔杖者'},
@@ -1715,6 +1719,9 @@ const CHARS=[
   {id:'zhulong', icon:'🕯️', name:'烛龙',     theme:'幽冥 · 人面赤蛇', sub:'视为昼 瞑为夜 · 无尽 50 波解锁'},
   {id:'jingwei', icon:'🐦', name:'精卫',     theme:'执念 · 文首白喙', sub:'衔石填海 · 赤足彩羽'},
   {id:'nuwa',    icon:'🌈', name:'女娲',     theme:'创世 · 人首蛇身', sub:'五色补天 抟土造人 · 神话终结解锁'},
+  {id:'houyi',   icon:'🏹', name:'后羿',     theme:'神射 · 古铜猎装', sub:'羿射九日 · 负弓挟矢'},
+  {id:'kuafu',   icon:'🦬', name:'夸父',     theme:'巨人 · 毛氅桃杖', sub:'逐日不及 · 弃杖为林'},
+  {id:'chiyou',  icon:'⚔️', name:'蚩尤',     theme:'兵主 · 铜头铁额', sub:'牛角狰狞 · 赤目嗜血'},
 ];
 /* 解锁判定:已购记录 > 成就皮肤看成就 > 其余(免费如巫师即解锁,有价未购则锁) */
 function skinUnlocked(id){
@@ -4114,7 +4121,7 @@ const ACH=[
   {id:'nohit_wave10',icon:'🛡️',name:'铜墙铁壁',desc:'一滴血不掉抵达第 10 波'},
   {id:'sell_first',icon:'♻️',name:'断舍离',    desc:'首次在商店卖出一个法术'},
   {id:'close_call',icon:'😰',name:'险象环生',  desc:'被一击打到只剩 5% 生命却活了下来'},
-  {id:'allskin',   icon:'🎭',name:'衣橱大师',  desc:'解锁全部 7 个角色皮肤', prog:()=>[CHARS.filter(c=>skinUnlocked(c.id)).length,CHARS.length]},
+  {id:'allskin',   icon:'🎭',name:'衣橱大师',  desc:'解锁全部角色皮肤', prog:()=>[CHARS.filter(c=>skinUnlocked(c.id)).length,CHARS.length]},
   {id:'legend',    icon:'🏆',name:'山海传说',  desc:'解锁其余全部成就 · 你就是传说', prog:()=>[profile.unlocked.filter(x=>x!=='legend').length,ACH.length-1]}
 ];
 function unlockAch(id){
@@ -6464,6 +6471,191 @@ function nuwaSilhouette(p, color){
   ctx.restore();
   ctx.beginPath();ctx.moveTo(p.x-r*0.8,p.y+r*0.5);ctx.quadraticCurveTo(p.x-r*1.18,p.y+r*0.28,p.x-r*0.96,p.y-r*0.12);ctx.lineTo(p.x-r*0.82,p.y-r*0.04);ctx.quadraticCurveTo(p.x-r*1.02,p.y+r*0.24,p.x-r*0.74,p.y+r*0.46);ctx.closePath();ctx.fill();
 }
+/* ---------- 🏹 后羿(羿):射九日的神射手,负长弓挟箭袋,胸前金乌日纹、额心日珠,雕翎抹额 ---------- */
+function drawHouyiBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.05, pulse=.6+Math.sin(p.anim*3.5)*.4;
+  const ex=Math.cos(aimA)*1.6, ey=Math.sin(aimA)*1.2;
+  /* 身后微光日轮(射日余晖) */
+  ctx.globalCompositeOperation='lighter';
+  ctx.fillStyle='rgba(255,170,60,'+(0.22*pulse)+')';
+  ctx.beginPath();ctx.arc(p.x+r*0.5,p.y-r*0.46,r*0.5,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  /* 背后长弓(身体左后,弧臂+弓弦) */
+  ctx.save();ctx.translate(p.x-r*0.94,p.y+r*0.04);ctx.rotate(sway*0.5-0.16);
+    ctx.strokeStyle='#7a4a22';ctx.lineWidth=Math.max(2,r*0.12);ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(0,-r*0.92);ctx.quadraticCurveTo(-r*0.6,0,0,r*0.92);ctx.stroke();
+    ctx.lineCap='butt';ctx.strokeStyle='rgba(255,240,200,.7)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(0,-r*0.92);ctx.lineTo(0,r*0.92);ctx.stroke();
+  ctx.restore();
+  /* 古铜猎装身 */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#d89a4e');g.addColorStop(1,'#5a3410');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#e8b860';ctx.lineWidth=1.5;ctx.stroke();
+  /* 斜挎箭袋带 */
+  ctx.strokeStyle='#7a4a22';ctx.lineWidth=Math.max(1.6,r*0.1);
+  ctx.beginPath();ctx.moveTo(p.x-r*0.56,p.y-r*0.48);ctx.lineTo(p.x+r*0.5,p.y+r*0.56);ctx.stroke();
+  /* ★胸前金乌日纹(日轮+短芒,射日母题;置于下颌下方可见区,不被脸盖住) */
+  ctx.globalCompositeOperation='lighter';
+  ctx.fillStyle='rgba(255,170,50,'+(0.5*pulse)+')';ctx.beginPath();ctx.arc(p.x,p.y+r*0.58,r*0.2,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle='#ffcf4a';ctx.beginPath();ctx.arc(p.x,p.y+r*0.58,r*0.11,0,TAU);ctx.fill();
+  ctx.strokeStyle='#ffcf4a';ctx.lineWidth=Math.max(1,r*0.04);ctx.lineCap='round';
+  for(let k=0;k<8;k++){const a=k/8*TAU;ctx.beginPath();ctx.moveTo(p.x+Math.cos(a)*r*0.15,p.y+r*0.58+Math.sin(a)*r*0.15);ctx.lineTo(p.x+Math.cos(a)*r*0.23,p.y+r*0.58+Math.sin(a)*r*0.23);ctx.stroke();}
+  ctx.lineCap='butt';
+  ctx.fillStyle='#5a3410';ctx.beginPath();ctx.ellipse(p.x,p.y+r*0.58,r*0.05,r*0.035,0,0,TAU);ctx.fill();
+  /* 脸(古铜) */
+  ctx.fillStyle='#e8c89a';ctx.beginPath();ctx.arc(p.x,p.y-r*0.04,r*0.5,0,TAU);ctx.fill();
+  /* 剑眉 + 锐眼(随瞄准) */
+  ctx.strokeStyle='#3a2410';ctx.lineWidth=Math.max(1.3,r*0.085);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.34+ex,p.y-r*0.16+ey);ctx.lineTo(p.x+s*r*0.13+ex,p.y-r*0.08+ey);ctx.stroke();});
+  ctx.lineCap='butt';
+  [-1,1].forEach(s=>{ctx.fillStyle='#2a1c0a';ctx.beginPath();ctx.arc(p.x+s*r*0.22+ex,p.y-r*0.02+ey,r*0.07,0,TAU);ctx.fill();});
+  /* 抹额(暗红)+ 额心日珠 + 雕翎 */
+  ctx.save();ctx.translate(p.x,p.y-r*0.42);ctx.rotate(sway);
+    ctx.fillStyle='#8a2a1e';ctx.fillRect(-r*0.5,-r*0.04,r*1.0,r*0.16);
+    ctx.fillStyle='#ffcf4a';ctx.beginPath();ctx.arc(0,r*0.04,r*0.08,0,TAU);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.55)';ctx.beginPath();ctx.arc(-r*0.02,r*0.02,r*0.03,0,TAU);ctx.fill();
+    ctx.save();ctx.translate(r*0.36,-r*0.02);ctx.rotate(0.55);
+      ctx.fillStyle='#caa050';ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(r*0.1,-r*0.4,0,-r*0.72);ctx.quadraticCurveTo(-r*0.1,-r*0.4,0,0);ctx.closePath();ctx.fill();
+      ctx.strokeStyle='#7a5a2e';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-r*0.66);ctx.stroke();
+    ctx.restore();
+  ctx.restore();
+}
+function houyiSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-r*0.42);ctx.rotate(sway);
+    ctx.fillRect(-r*0.5,-r*0.04,r*1.0,r*0.18);
+    ctx.save();ctx.translate(r*0.36,-r*0.02);ctx.rotate(0.55);
+      ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(r*0.1,-r*0.4,0,-r*0.72);ctx.quadraticCurveTo(-r*0.1,-r*0.4,0,0);ctx.closePath();ctx.fill();
+    ctx.restore();
+  ctx.restore();
+}
+/* ---------- 🦬 夸父:逐日的巨人,毛氅披肩、手植桃杖(弃杖为邓林),身后落日,鬓发狂野络腮 ---------- */
+function drawKuafuBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.04;
+  const ex=Math.cos(aimA)*1.4, ey=Math.sin(aimA)*1.1;
+  /* 身后落日(逐日:大而暗的暖橙轮) */
+  ctx.globalCompositeOperation='lighter';
+  const sg=ctx.createRadialGradient(p.x+r*0.42,p.y-r*0.28,r*0.1,p.x+r*0.42,p.y-r*0.28,r*0.92);
+  sg.addColorStop(0,'rgba(255,150,50,.42)');sg.addColorStop(1,'rgba(255,90,40,0)');
+  ctx.fillStyle=sg;ctx.beginPath();ctx.arc(p.x+r*0.42,p.y-r*0.28,r*0.92,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  /* 桃杖(邓林:身后斜插木杖,梢头一桃一叶) */
+  ctx.save();ctx.translate(p.x+r*0.72,p.y+r*0.12);ctx.rotate(0.32);
+    ctx.strokeStyle='#6b4a2a';ctx.lineWidth=Math.max(2,r*0.1);ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(0,r*0.82);ctx.lineTo(0,-r*0.92);ctx.stroke();ctx.lineCap='butt';
+    ctx.fillStyle='#e86a78';ctx.beginPath();ctx.arc(0,-r*0.98,r*0.15,0,TAU);ctx.fill();
+    ctx.fillStyle='#4f8a2e';ctx.beginPath();ctx.ellipse(r*0.13,-r*1.08,r*0.1,r*0.05,-0.6,0,TAU);ctx.fill();
+  ctx.restore();
+  /* 魁梧躯干(鬃褐渐变) */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#bb834a');g.addColorStop(1,'#3e2812');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#d8a060';ctx.lineWidth=1.6;ctx.stroke();
+  /* 兽皮缠胸(粗犷斜束) */
+  ctx.fillStyle='#7a5230';ctx.beginPath();
+  ctx.moveTo(p.x-r*0.58,p.y-r*0.28);ctx.lineTo(p.x+r*0.52,p.y+r*0.4);ctx.lineTo(p.x+r*0.36,p.y+r*0.6);ctx.lineTo(p.x-r*0.68,p.y-r*0.08);ctx.closePath();ctx.fill();
+  /* 毛氅披肩(上缘蓬松两层,显巨人厚重) */
+  ctx.fillStyle='#caa878';for(let k=-3;k<=3;k++){const a=-Math.PI/2+k*0.36;ctx.beginPath();ctx.arc(p.x+Math.cos(a)*r*0.78,p.y+Math.sin(a)*r*0.78,r*0.2,0,TAU);ctx.fill();}
+  ctx.fillStyle='#9a7848';for(let k=-3;k<=3;k++){const a=-Math.PI/2+k*0.36;ctx.beginPath();ctx.arc(p.x+Math.cos(a)*r*0.78,p.y+Math.sin(a)*r*0.78,r*0.1,0,TAU);ctx.fill();}
+  /* 脸(粗犷古铜) */
+  ctx.fillStyle='#d8a874';ctx.beginPath();ctx.arc(p.x,p.y-r*0.02,r*0.5,0,TAU);ctx.fill();
+  /* 络腮短髯(下巴暗髯,挂于下半脸) */
+  ctx.fillStyle='#3a2814';ctx.beginPath();
+  ctx.moveTo(p.x-r*0.34,p.y+r*0.1);ctx.quadraticCurveTo(p.x-r*0.3,p.y+r*0.5,p.x,p.y+r*0.52);
+  ctx.quadraticCurveTo(p.x+r*0.3,p.y+r*0.5,p.x+r*0.34,p.y+r*0.1);
+  ctx.quadraticCurveTo(p.x,p.y+r*0.26,p.x-r*0.34,p.y+r*0.1);ctx.closePath();ctx.fill();
+  /* 浓眉(粗壮) */
+  ctx.strokeStyle='#2a1c0e';ctx.lineWidth=Math.max(1.8,r*0.12);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.36+ex*0.6,p.y-r*0.2+ey*0.6);ctx.lineTo(p.x+s*r*0.1+ex*0.6,p.y-r*0.13+ey*0.6);ctx.stroke();});
+  ctx.lineCap='butt';
+  /* 眼(坚毅,随瞄准) */
+  [-1,1].forEach(s=>{ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x+s*r*0.24+ex,p.y-r*0.04+ey,r*0.1,0,TAU);ctx.fill();
+    ctx.fillStyle='#2a1810';ctx.beginPath();ctx.arc(p.x+s*r*0.24+ex,p.y-r*0.04+ey,r*0.06,0,TAU);ctx.fill();});
+  /* 狂野鬓发(顶部后掠数缕)+ 骨簪 */
+  ctx.save();ctx.translate(p.x,p.y-r*0.44);ctx.rotate(sway);
+    ctx.fillStyle='#241608';for(let k=-2;k<=2;k++){const ox=k*r*0.2;ctx.beginPath();ctx.moveTo(ox-r*0.12,r*0.06);ctx.quadraticCurveTo(ox+r*0.06,-r*0.5,ox+r*0.22,-r*0.62);ctx.quadraticCurveTo(ox+r*0.04,-r*0.4,ox+r*0.12,r*0.06);ctx.closePath();ctx.fill();}
+    ctx.strokeStyle='#e8dcc0';ctx.lineWidth=Math.max(1.4,r*0.07);ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(-r*0.22,-r*0.18);ctx.lineTo(r*0.26,-r*0.34);ctx.stroke();ctx.lineCap='butt';
+  ctx.restore();
+}
+function kuafuSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  for(let k=-3;k<=3;k++){const a=-Math.PI/2+k*0.36;ctx.beginPath();ctx.arc(p.x+Math.cos(a)*r*0.78,p.y+Math.sin(a)*r*0.78,r*0.2,0,TAU);ctx.fill();}
+  const sway=Math.sin(p.anim*3)*.04;
+  ctx.save();ctx.translate(p.x,p.y-r*0.44);ctx.rotate(sway);
+    for(let k=-2;k<=2;k++){const ox=k*r*0.2;ctx.beginPath();ctx.moveTo(ox-r*0.12,r*0.06);ctx.quadraticCurveTo(ox+r*0.06,-r*0.5,ox+r*0.22,-r*0.62);ctx.quadraticCurveTo(ox+r*0.04,-r*0.4,ox+r*0.12,r*0.06);ctx.closePath();ctx.fill();}
+  ctx.restore();
+}
+/* ---------- ⚔️ 蚩尤:铜头铁额的兵主战神,牛角狰狞、赤目嗜血,胸甲血纹獠牙,身后交戟 ---------- */
+function drawChiyouBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.05, rage=.5+Math.sin(p.anim*4.5)*.5;
+  const ex=Math.cos(aimA)*1.6, ey=Math.sin(aimA)*1.2;
+  /* 身后交戟(兵主:两柄青铜戈交叉) */
+  ctx.save();ctx.translate(p.x,p.y-r*0.08);
+    [-1,1].forEach(s=>{ctx.save();ctx.rotate(s*0.5+sway*0.4);
+      ctx.strokeStyle='#6b4a2a';ctx.lineWidth=Math.max(1.6,r*0.08);ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(0,r*0.5);ctx.lineTo(0,-r*1.12);ctx.stroke();ctx.lineCap='butt';
+      ctx.fillStyle='#b8a060';ctx.beginPath();ctx.moveTo(-r*0.04,-r*1.12);ctx.lineTo(r*0.26,-r*0.98);ctx.lineTo(-r*0.04,-r*0.84);ctx.closePath();ctx.fill();
+    ctx.restore();});
+  ctx.restore();
+  /* 铁甲身(暗铁渐变) */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#6a6070');g.addColorStop(1,'#181420');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#9a90a8';ctx.lineWidth=1.5;ctx.stroke();
+  /* 甲片分界 */
+  ctx.strokeStyle='rgba(20,16,28,.5)';ctx.lineWidth=Math.max(1,r*0.05);
+  ctx.beginPath();ctx.arc(p.x,p.y+r*0.12,r*0.6,Math.PI*1.18,Math.PI*1.82);ctx.stroke();
+  /* ★胸甲血纹(獠齿状血红印,嗜血) */
+  ctx.globalCompositeOperation='lighter';
+  ctx.fillStyle='rgba(230,30,40,'+(0.5*rage)+')';ctx.beginPath();ctx.arc(p.x,p.y+r*0.28,r*0.22,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle='#c01828';ctx.beginPath();
+  ctx.moveTo(p.x-r*0.22,p.y+r*0.18);ctx.quadraticCurveTo(p.x,p.y+r*0.5,p.x+r*0.22,p.y+r*0.18);
+  ctx.quadraticCurveTo(p.x,p.y+r*0.3,p.x-r*0.22,p.y+r*0.18);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#3a0810';for(let k=-1;k<=1;k++){const tx=p.x+k*r*0.13;ctx.beginPath();ctx.moveTo(tx-r*0.04,p.y+r*0.22);ctx.lineTo(tx+r*0.04,p.y+r*0.22);ctx.lineTo(tx,p.y+r*0.34);ctx.closePath();ctx.fill();}
+  /* 脸(铜头·暗金属面) */
+  ctx.fillStyle='#8a7a5a';ctx.beginPath();ctx.arc(p.x,p.y-r*0.04,r*0.5,0,TAU);ctx.fill();
+  ctx.strokeStyle='rgba(40,30,16,.4)';ctx.lineWidth=1;ctx.stroke();
+  /* 铁额(护额) */
+  ctx.fillStyle='#5a4f44';ctx.beginPath();ctx.ellipse(p.x,p.y-r*0.3,r*0.42,r*0.12,0,0,TAU);ctx.fill();
+  /* 怒眉 */
+  ctx.strokeStyle='#1a1008';ctx.lineWidth=Math.max(1.4,r*0.1);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.36+ex,p.y-r*0.16+ey);ctx.lineTo(p.x+s*r*0.12+ex,p.y-r*0.05+ey);ctx.stroke();});
+  ctx.lineCap='butt';
+  /* ★赤目嗜血(发光红) */
+  ctx.globalCompositeOperation='lighter';
+  [-1,1].forEach(s=>{ctx.fillStyle='rgba(255,40,50,'+(0.6*rage)+')';ctx.beginPath();ctx.arc(p.x+s*r*0.24+ex,p.y-r*0.02+ey,r*0.13,0,TAU);ctx.fill();});
+  ctx.globalCompositeOperation='source-over';
+  [-1,1].forEach(s=>{ctx.fillStyle='#ff6a5a';ctx.beginPath();ctx.arc(p.x+s*r*0.24+ex,p.y-r*0.02+ey,r*0.06,0,TAU);ctx.fill();});
+  /* 獠牙(嘴角两颗) */
+  ctx.fillStyle='#f0e6cc';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.15,p.y+r*0.18);ctx.lineTo(p.x+s*r*0.25,p.y+r*0.18);ctx.lineTo(p.x+s*r*0.19,p.y+r*0.32);ctx.closePath();ctx.fill();});
+  /* 牛角(顶部巨角外张,蚩尤标志) */
+  ctx.save();ctx.translate(p.x,p.y-r*0.46);ctx.rotate(sway);
+    [-1,1].forEach(s=>{ctx.fillStyle='#3a3038';
+      ctx.beginPath();ctx.moveTo(s*r*0.32,r*0.04);
+      ctx.quadraticCurveTo(s*r*0.9,-r*0.08,s*r*0.84,-r*0.68);
+      ctx.quadraticCurveTo(s*r*0.66,-r*0.32,s*r*0.16,-r*0.06);ctx.closePath();ctx.fill();
+      ctx.strokeStyle='#6a5f54';ctx.lineWidth=1.2;ctx.stroke();
+      ctx.fillStyle='#d8d0c0';ctx.beginPath();ctx.arc(s*r*0.84,-r*0.68,r*0.06,0,TAU);ctx.fill();});
+  ctx.restore();
+}
+function chiyouSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-r*0.46);ctx.rotate(sway);
+    [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(s*r*0.2,r*0.04);
+      ctx.quadraticCurveTo(s*r*0.68,-r*0.08,s*r*0.6,-r*0.58);
+      ctx.quadraticCurveTo(s*r*0.48,-r*0.3,s*r*0.12,-r*0.04);ctx.closePath();ctx.fill();});
+  ctx.restore();
+}
 /* 分发器:按所选皮肤(META.skin)绘制本体/剪影;skinId 可显式指定(选择界面预览用) */
 function drawCharBody(p, aimA, skinId){
   const s=skinId||(META&&META.skin)||'wizard';
@@ -6473,6 +6665,9 @@ function drawCharBody(p, aimA, skinId){
   else if(s==='zhulong') drawZhulongBody(p, aimA);
   else if(s==='jingwei') drawJingweiBody(p, aimA);
   else if(s==='nuwa') drawNuwaBody(p, aimA);
+  else if(s==='houyi') drawHouyiBody(p, aimA);
+  else if(s==='kuafu') drawKuafuBody(p, aimA);
+  else if(s==='chiyou') drawChiyouBody(p, aimA);
   else drawWizardBody(p, aimA);
 }
 function charSilhouette(p, color, skinId){
@@ -6483,6 +6678,9 @@ function charSilhouette(p, color, skinId){
   else if(s==='zhulong') zhulongSilhouette(p, color);
   else if(s==='jingwei') jingweiSilhouette(p, color);
   else if(s==='nuwa') nuwaSilhouette(p, color);
+  else if(s==='houyi') houyiSilhouette(p, color);
+  else if(s==='kuafu') kuafuSilhouette(p, color);
+  else if(s==='chiyou') chiyouSilhouette(p, color);
   else wizardSilhouette(p, color);
 }
 /* 选择界面卡片预览:临时把全局 ctx 切到小卡画布,画完还原(同步执行,不与游戏循环抢) */
