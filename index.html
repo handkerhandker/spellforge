@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v81 · 2026-06-18</div><div class="cl-i">🪄 <b>三把全新机制法杖登场!</b>(灵晶解锁,在「选择法杖」页):①🧭<b>司南法杖</b>——你的法术弹会自动拐弯追踪最近的敌人,手残福音、移动靶随便打,<b>手机上尤其友好</b>(瞄准没那么累);②💥<b>轰天雷法杖</b>——每发命中都炸出一小片溅射伤害,怪越密越爽,清群利器;③🌀<b>连珠法杖</b>——施法快得像连珠炮、火力如泼水,以快制胜、命中机会多。三把都是之前没有的新机制(追踪 / 爆裂 / 速射),也给攒不完的灵晶添了去处。<b>数值平衡初版、之后看实战微调,全难度通用不破榜。</b></div></div>
 <div class="cl-v"><div class="cl-h">v80 · 2026-06-18</div><div class="cl-i">⚖️ 两件给「贴脸近战 / 堆血流」的新装备(数值先按平衡初版,之后看实战微调):①🍶<b>新法术「不死药」</b>——生命跌破 30% 时自动回复 25% 上限生命、14 秒一次(随等级提升),濒死才触发、不浪费,让贴脸近战流敢扑敢拼有兜底。②🛡️<b>新遗物「玄铁重甲」</b>——受到伤害 −12%、纯增益无代价,让"堆血 / 减伤"终于成为一条真正的活路,不再只能靠无敌盾撑场。两者都能在「武器·遗物图鉴」里查到。<b>都是新增内容、不动任何现有法杖数值,全难度通用不破榜。</b></div></div>
 <div class="cl-v"><div class="cl-h">v79 · 2026-06-18</div><div class="cl-i">⚙️ 两项体验优化:①🔋<b>新增「省电模式」</b>(暂停菜单里开)——限帧到 30 + 自动压低特效,明显降低手机发热和耗电,发烫的机器推荐开(画面会稍卡顿,但玩法手感完全不变)。②⚡<b>刷怪节奏优化</b>——妖兽现在会在你身边附近、更快地冒出来,不用再满地图跑去找零星几只怪、节奏也不被打断(怪的总数完全不变,只是出现得更近、更及时;深层波次几乎不受影响)。</div></div>
 <div class="cl-v"><div class="cl-h">v78 · 2026-06-18</div><div class="cl-i">🏆 <b>成就大扩充 · 一口气新增 50 个成就!</b>从 29 个直接翻到 79 个,各种角度都有:🔥热血的(万妖伏诛击杀1万、深渊尽头第100波、500 连击、累计击败古神50次)、😂搞笑的(恰好第13波阵亡「果然是13」、人为财死「钱没花完就走了」、开局10秒就没)、🎯刁钻的(法术全程不升级通关、全程不拿遗物、12分钟速通、残血通关)、😱望而生畏的(弑神难度不冲刺通关、累计游玩满10小时、击杀5万只)、🎭彩蛋(首次进化、卖出法术、险象环生、集齐全部皮肤),还有解锁其余全部成就才能拿到的压轴「🏆山海传说」。在主菜单「成就一览」里看进度,慢慢解锁。</div></div>
@@ -791,7 +792,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v80', APP_TIME='2026-06-18 20:22';
+const APP_VER='v81', APP_TIME='2026-06-18 20:23';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1666,10 +1667,13 @@ const WANDS=[
   {id:'gcannon',icon:'🪩',name:'玻璃炮法杖',desc:'玻璃大炮 · 伤害 +60%,但生命上限 -40%、受到伤害 +15%(极限输出，靠走位活命)',fx:{dmgM:1.6,maxhpMul:.6,takenMul:1.15}},
   {id:'bastion',icon:'⛰️',name:'磐岩法杖',desc:'重甲苟命 · 生命上限 +80、受到伤害 -14%;代价伤害 -15%、施法间隔 +8%(稳健续航，宜冲弑神)',fx:{dmgM:.85,cdM:1.08,maxhpAdj:80,takenMul:.86}},
   {id:'fate',icon:'🌟',name:'命运法杖',desc:'暴击运气流 · 暴击率 +40%、暴击伤害 ×2.2,代价基础伤害 -12%(看脸爆发，打出满屏暴击)',fx:{dmgM:.88,critBonus:.4,critMul:2.2}},
-  {id:'rebound',icon:'🏀',name:'弹跳法杖',desc:'弹跳清群 · 子弹命中后弹向最近的另一敌人(最多 2 跳),代价单发伤害 -22%(怪越多越爽)',fx:{dmgM:.78,ricochet:2}}
+  {id:'rebound',icon:'🏀',name:'弹跳法杖',desc:'弹跳清群 · 子弹命中后弹向最近的另一敌人(最多 2 跳),代价单发伤害 -22%(怪越多越爽)',fx:{dmgM:.78,ricochet:2}},
+  {id:'compass',icon:'🧭',name:'司南法杖',desc:'追踪流 · 你的法术弹会自动拐弯追踪最近的敌人(轻度转向),代价单发伤害 -20%(手残福音、移动靶随便点)',fx:{dmgM:.80,homing:1.0}},
+  {id:'blast',  icon:'💥',name:'轰天雷法杖',desc:'爆裂流 · 每发命中都炸出一小片溅射伤害,单发伤害降低但溅射补足,怪越密越爽(清群利器)',fx:{dmgM:.62,splash:40}},
+  {id:'gatling',icon:'🌀',name:'连珠法杖',desc:'速射流 · 施法间隔 -40%(连珠炮般快),代价单发伤害 -38%(以快制胜、火力如泼水、命中机会多)',fx:{dmgM:.62,cdM:.60}}
 ];
 /* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked) */
-const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240};
+const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240,compass:260,blast:280,gatling:240};
 /* 法杖皮肤配色(v67):每把杖给巫师法袍/帽子/点缀一套主题色 → 整个人物随杖换装。
    c0/c1=斗篷渐变内→外,st=斗篷描边,hat=帽身,band=帽檐,star=帽尖✦。纯渲染、不碰玩法。 */
 const WAND_SKIN={
@@ -1721,7 +1725,7 @@ function applyWand(w){
   player.wandFx={dmgM:f.dmgM||1,cdM:f.cdM||1,spdM:f.spdM||1,extra:f.extra||0,
     spreadM:f.spreadM||1,pierce:f.pierce||0,killHeal:f.killHeal||0,
     charge:f.charge||false,thorns:f.thorns||false,summon:f.summon||false,
-    takenMul:f.takenMul||1,critBonus:f.critBonus||0,critMul:f.critMul||0,ricochet:f.ricochet||0};
+    takenMul:f.takenMul||1,critBonus:f.critBonus||0,critMul:f.critMul||0,ricochet:f.ricochet||0,homing:f.homing||0,splash:f.splash||0};
   if(f.maxhpMul){player.maxhp=Math.max(40,Math.round(player.maxhp*f.maxhpMul));player.hp=Math.min(player.hp,player.maxhp);}
   if(f.maxhpAdj){player.maxhp=Math.max(40,player.maxhp+f.maxhpAdj);player.hp=Math.min(player.hp,player.maxhp);}
   /* —— v77 皮肤取舍 kit:与法杖同管线折入 wandFx + 生命(严格照搬法杖 maxhp 处理:−生命满血在低上限、+生命不额外回满,零法杖数值改动);净值中性侧向取舍,全难度通用含弑神 —— */
@@ -3430,8 +3434,8 @@ function makeBullet(id,lv,a){
   const b={id,lv,x:player.x+Math.cos(a)*20,y:player.y+Math.sin(a)*20,
     vx:Math.cos(a)*def.spd*player.wandFx.spdM,vy:Math.sin(a)*def.spd*player.wandFx.spdM,
     r:def.r*(1+.4*m.giant),dmg:dmgOf(def,lv),life:def.life*(1+m.bounce*.35),col:def.col,
-    pierce:m.pierce+player.wandFx.pierce,bounce:m.bounce,homing:m.homing,split:m.split,
-    slow:def.slow||0,aoe:def.aoe?def.aoe*(1+.16*(lv-1))*(1+.2*m.giant):0,
+    pierce:m.pierce+player.wandFx.pierce,bounce:m.bounce,homing:m.homing+(player.wandFx.homing||0),split:m.split,
+    slow:def.slow||0,aoe:(def.aoe?def.aoe*(1+.16*(lv-1))*(1+.2*m.giant):0)+(player.wandFx.splash||0),
     cloud:id==='venom',small:false,hits:new Set(),tt:0,dead:false,
     arcChain:def.arc||0,chain:def.chain||0,returning:false,ricochet:player.wandFx.ricochet||0};
   /* 协同修饰 */
