@@ -86,6 +86,9 @@
   .bx-boss{display:flex;gap:12px;padding:10px;border-radius:11px;background:rgba(30,22,60,.5);margin-bottom:8px;align-items:center;}
   .bx-boss img{width:56px;height:56px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));}
   .bx-mob-cv{width:46px;height:46px;flex-shrink:0;align-self:center;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));}
+  .pad-focus{outline:3px solid #6fe3ff !important;outline-offset:2px;box-shadow:0 0 14px rgba(111,227,255,.65) !important;border-radius:10px;}
+  #padBadge{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;background:rgba(16,12,36,.86);border:1px solid #6fe3ff;color:#cfe9ff;font-size:12.5px;font-weight:700;letter-spacing:.03em;pointer-events:none;box-shadow:0 3px 14px rgba(0,0,0,.4);}
+  #padBadge .pb-ic{font-size:14px;}
   .bx-bmain{flex:1;min-width:0;}
   .bx-bname{color:#fff;font-weight:800;font-size:15px;}
   .bx-batk{font-size:11px;color:#ffd98a;margin-top:1px;}
@@ -288,6 +291,7 @@
 </head>
 <body>
 <canvas id="game"></canvas>
+<div id="padBadge" style="display:none;"><span class="pb-ic">🎮</span><span class="pb-msg">手柄已连接</span></div>
 <button id="muteBtn" title="声音">🔊</button>
 <button id="pauseBtn" title="暂停">⏸</button>
 
@@ -307,7 +311,7 @@
     <h1 class="title">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
-    <p class="hint"><span id="hintTouch">📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</span><span id="hintPC" style="display:none;">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式</span></p>
+    <p class="hint"><span id="hintTouch">📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</span><span id="hintPC" style="display:none;">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式</span><span id="hintPad" style="display:none;"></span></p>
     </div>
     <div class="menu-col menu-col-r">
     <div class="diff-title">⚔ 选择难度</div>
@@ -321,6 +325,7 @@
     <div id="diffDesc" class="diff-desc"></div>
     <button class="btn" id="resumeRunBtn" style="margin-top:10px;display:none;background:linear-gradient(135deg,#2ea36b,#46d196);box-shadow:0 6px 22px rgba(60,201,138,.42);">▶ 继续上次战斗<span id="resumeRunSub" style="font-size:12px;font-weight:400;opacity:.9;margin-left:4px;"></span></button>
     <button class="btn" id="startBtn" style="margin-top:10px;">拔出法杖</button>
+    <button class="btn ghost" id="padModeBtn" style="display:none;margin-top:8px;padding:7px 18px;font-size:12.5px;border:1px solid #6fe3ff;color:#cfe9ff;"></button>
     <div class="codex-row" style="margin-top:10px;">
       <button id="altarBtn" style="border:1px solid var(--gold);background:rgba(48,36,12,.55);color:var(--gold);font-weight:700;letter-spacing:.04em;">🔮 祭坛·强化</button>
       <button id="wardrobeBtn" style="border:1px solid #b98aff;background:rgba(40,28,60,.55);color:#dcc6ff;font-weight:700;letter-spacing:.04em;">🎭 外观·皮肤</button>
@@ -504,6 +509,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v76 · 2026-06-18</div><div class="cl-i">🎮 <b>支持游戏手柄了！</b>把蓝牙手柄（Xbox / PS / Backbone 等）连上设备就能玩,Windows / Mac / iOS / 安卓通用（鸿蒙看浏览器是否支持）。两套操作随你选（暂停菜单或主菜单里切）：<b>A 休闲</b>——左摇杆移动、自动瞄准开火、<b>A 键冲刺</b>,拿起就玩;<b>B 双摇杆</b>——左摇杆移动、<b>右摇杆瞄准并开火</b>（松开停火、自己控制射击）、<b>右肩键 RB 冲刺</b>,适合想精准点杀的玩家。<b>菜单也能用手柄全程操作</b>：十字键 / 左摇杆移动光标、<b>A 确认、B 返回、Start 暂停/继续</b>,选难度、拔法杖、逛祭坛皮肤、暂停都不用碰屏幕。连上手柄后顶部会显示「🎮 已连接」,屏幕上的触屏摇杆 / 冲刺键自动隐藏,菜单操作提示也会换成手柄说明。</div></div>
+<div class="cl-v"><div class="cl-h">v75.1 · 2026-06-18</div><div class="cl-i">🛡️ <b>修复:治愈 / 法盾在身边没有怪时不会自动触发。</b>之前这两个法术被错误地和"开火"绑在了一起——身边没有敌人、人物没在放招的时候,既不会自动回血、也不会自动开盾(贴脸近战、或刚清完一波的间隙最明显)。现在<b>治愈和法盾都改成按各自的冷却独立自动触发</b>,不管周围有没有怪都照常回血 / 开盾,保命更稳。</div></div>
 <div class="cl-v"><div class="cl-h">v75 · 2026-06-18</div><div class="cl-i">🐎 <b>新增遗物「乘黄」——可连续冲刺。</b>打 Boss 后的三选一里会出:拿到后<b>冲刺能储存 3 次</b>(基础是 1 次),可以<b>接连冲三下</b>甩开追兵、穿过弹幕,用掉的充能再<b>逐格慢慢回满</b>,不用每冲一次都干等一整段冷却。冲刺键右上角会显示<b>当前还剩几次</b>。和「疾风步(冷却 -25%)」可叠着用,机动流更顺手。🐾 <b>异兽图鉴升级:所有杂兵都画上了「真实样子」。</b>之前图鉴里只有 8 位古神 Boss 有立绘、十六种杂兵只是文字 + 小图标;现在<b>每种妖兽都用游戏里的真实造型渲染成一张小立绘</b>(罔象、毕方、凿齿、句芒、诸怀、钦原、狰…),配上各自的<b>定位、血量/伤害和一句应对贴士</b>,一眼就能把名字和长相对上号。</div></div>
 <div class="cl-v"><div class="cl-h">v74.2 · 2026-06-18</div><div class="cl-i">👹 <b>Boss 血条更清爽,横屏更不挡视野。</b>① <b>名字改为内嵌在血条里</b>(原本是血条上方一个朱砂印章框,会压住「剩余 N」计数)——现在 Boss 名字直接显示在血条左侧、更干净;② <b>横屏</b>时血条改用<b>紧凑细条</b>,又矮又短、不再横跨半屏;③ <b>无尽模式多个 Boss</b>(三、四只乃至更多)横屏时<b>自动分两~三列排布</b>,而不是一条条竖着堆满整个上半屏,再多 Boss 也只占两三行、看得清也不挡路。竖屏维持单列排布(竖屏本就有高度)。纯界面优化,不改任何数值。</div></div>
 <div class="cl-v"><div class="cl-h">v74.1 · 2026-06-18</div><div class="cl-i">🛡️ <b>新增「放弃」按钮 + 关键操作二次确认(防手滑)。</b>① <b>选牌 / 遗物</b>界面加了「🚫 放弃本次(不选)」——刷出来的都不想要、又没钱重抽时,不用再被迫硬选一个,可以直接放弃、进入下一波;② <b>暂停菜单</b>的「重新开始」「结束本局」、以及<b>结算页</b>的「再次挑战」现在都要<b>再点一次确认</b>(按钮会先变成"⚠️ 确定…?再点一次",3 秒内不点就自动复原),防止手滑误触把一局白白葬送。沿用商店卖技能那套熟悉的确认手感,不弹窗、不啰嗦。📱 <b>横屏修复</b>:横屏用<b>固定摇杆</b>时,底部的法术信息栏会被左下摇杆挤到上半屏、和血条挤在一起;现已让它<b>留在底部、自动避开摇杆</b>(挪到摇杆右侧),不再打架(浮动摇杆不受影响)。</div></div>
@@ -607,6 +614,7 @@
     <div class="diff-title" style="margin-top:2px;font-size:13px;">🎮 操作方式</div>
     <button class="btn ghost" id="dualBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;">双摇杆瞄准：关</button>
     <button class="btn ghost" id="fixedBtn" style="padding:8px 22px;font-size:12.5px;opacity:.92;margin-top:6px;">固定摇杆：关</button>
+    <button class="btn ghost" id="padModeBtn2" style="display:none;padding:8px 22px;font-size:12.5px;margin-top:6px;border:1px solid #6fe3ff;color:#cfe9ff;"></button>
     <div class="diff-desc" id="ctrlDesc" style="font-size:11.5px;margin:7px auto 2px;max-width:292px;line-height:1.5;"></div>
     </div>
     <div id="aimSection">
@@ -750,7 +758,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v75', APP_TIME='2026-06-18 11:11';
+const APP_VER='v76', APP_TIME='2026-06-18 11:13';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3171,9 +3179,10 @@ function updateSpellStates(dt){
 const AIM_THREAT={healer:3.0,totem:2.6,summon:2.4,frostbow:2.3,kiter:2.2,charger:2.0,kamikaze:1.9,stealth:1.6,sine:1.4,weave:1.4,tank:1.2,meteor:.5};
 const AIM_DESC={manual:'鼠标精准手瞄,自由点杀(仅 PC)',near:'自动锁定最近的敌人',smart:'自动优先高威胁(奶妈/护盾/远程/冲锋/Boss),兼顾距离'};
 function aimPoint(){
-  /* 双摇杆:推右摇杆时朝那个方向开火;不推时回落到智能自动瞄准(保证不推也有输出) */
-  if(dualStick && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.2) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
-  if(dualStick) return smartAim();
+  const _pdB = padConnected && padMode==='B';   /* 🎮 B方案:右摇杆瞄准,与双摇杆同路径 */
+  /* 双摇杆/手柄B:推右摇杆时朝那个方向开火;不推时回落到智能自动瞄准 */
+  if((dualStick||_pdB) && joyR.on){ const m=Math.hypot(joyR.dx,joyR.dy); if(m>.2) return {x:player.x+joyR.dx/m*400, y:player.y+joyR.dy/m*400}; }
+  if(dualStick||_pdB) return smartAim();
   /* 手动仅 PC(有鼠标)生效;手机选了手动会自动落到智能 */
   if(aimMode==='manual' && !usingTouch && mouse.active) return {x:cam.x+W/2+(mouse.x-W/2)/viewZoom, y:cam.y+H/2+(mouse.y-H/2)/viewZoom};
   return aimMode==='near' ? nearAim() : smartAim();
@@ -3201,28 +3210,27 @@ function smartAim(){
   return best;
 }
 function castAll(dt){
+  /* 自给型法术(治愈/法盾):不依赖敌人,任何时候都按冷却自动触发——修复朋友34"无怪时不回血/不开盾" */
+  for(const _uid of ['heal','shield']){
+    const us=player.spells[_uid]; if(!us) continue;
+    const udef=SPELL_DEF[_uid];
+    us.t-=dt; if(us.t>0) continue; us.t=cdOf(udef,us.lv);
+    if(_uid==='heal'){ heal(6+2*(us.lv-1)); S.card(); puff(player.x,player.y,'#a8ffb0',8); }
+    else { if(player.shield||player.shieldLock>0){ us.t=0.05; continue; } player.shield={hits:0,max:udef.shield+1*us.lv,life:4}; S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); }
+  }
+  if(_padHoldFire) return;   /* 🎮 B方案右摇杆松手:停火(治愈/法盾已在上方自给触发) */
   if(!enemies.length) return;
   /* 兜底:玩家把所有能射出子弹的法术卖光后会"完全不能攻击",此时注入保底奥术飞弹 */
   const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','firestorm','winterspear','thunderjudge','thousandblade','cyclone','plague','tidal','devour'];
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
   if(!_hasBal)player.spells.bolt={lv:1,t:.2};
   for(const id in player.spells){
-    if(id==='blade'||id==='thousandblade') continue;
+    if(id==='blade'||id==='thousandblade'||id==='heal'||id==='shield') continue;  /* 治愈/法盾已在函数顶部自给处理 */
     const s=player.spells[id], def=SPELL_DEF[id];
     s.t-=dt;
     if(s.t>0) continue;
     s.t=cdOf(def,s.lv);
-    /* 时长型法术：直接触发状态,不入 bullets */
-    if(id==='heal'){
-      const amt=6+2*(s.lv-1);
-      heal(amt); S.card(); puff(player.x,player.y,'#a8ffb0',8); continue;
-    }
-    if(id==='shield'){
-      /* 法盾不能永久挂:盾还在场、或处于结束后的强制空窗(2秒,不受急速影响)时,不重放 */
-      if(player.shield||player.shieldLock>0){ s.t=0.05; continue; }
-      player.shield={hits:0,max:def.shield+1*s.lv,life:4};
-      S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); continue;
-    }
+    /* 时长型法术：直接触发状态,不入 bullets(治愈/法盾已在函数顶部自给处理,这里不再重复) */
     if(id==='orb'){
       const rad=def.orb+(activeSynergies().find(x=>x.id==='plasma_orb')?40:0);
       /* 已有球则只续命+更新半径,保持平滑旋转(不再每秒跳回起点) */
@@ -5243,7 +5251,7 @@ function render(){
 
   if(state!=='menu')drawHUD();
   /* 冲刺按钮/冷却(双摇杆模式下不画:右下让给瞄准杆,冲刺改双击左摇杆) */
-  if(state==='play' && !dualStick){
+  if(state==='play' && !dualStick && !padConnected){
     const bx=W-58-safeR, by=H-72-safeB, br=30;
     const dmax=player.dashMax||1, stock=player.dashStock||0, ready=stock>0;
     ctx.globalAlpha=usingTouch?.85:.6;
@@ -5272,7 +5280,7 @@ function render(){
     ctx.globalAlpha=1;
   }
   /* 摇杆(v69:固定底盘常驻 + 双摇杆右瞄准杆) */
-  if(state==='play'){
+  if(state==='play' && !padConnected){
     /* 左/移动摇杆 */
     let lbx=null,lby=0; const lon=joy.on;
     if(fixedStick&&usingTouch){ lbx=ljBaseX(); lby=jBaseY(); }
@@ -6590,8 +6598,108 @@ function drawHUD(){
 let last=performance.now();
 document.addEventListener('visibilitychange',()=>{last=performance.now(); if(document.hidden&&state==='play'&&!paused)togglePause(true);});
 let shotMode=false, _audChkT=0;   /* shotMode:截图模式(暂停但隐藏菜单);_audChkT:音频自动恢复节拍 */
+/* ============ 🎮 手柄支持(v76) ============
+   一套 Gamepad API,全平台通用(Win/Mac/iOS/安卓;鸿蒙看浏览器内核)。
+   A 方案:左摇杆移动 + 自动瞄准开火 + A键(0)冲刺。
+   B 方案:左摇杆移动 + 右摇杆瞄准开火(松手停火) + 右肩键 RB(5)冲刺。
+   菜单:十字键/左摇杆移焦点、A 确认、B 返回、Start(9) 暂停/继续。 */
+let padConnected=false, padMode='A', _padPrev={}, _padFocus=null, _padOv=null, _padItems=[], _padNavT=0, _padHoldFire=false, _padHintT=0;
+try{ const _pm=localStorage.getItem('sf_padmode'); if(_pm==='A'||_pm==='B') padMode=_pm; }catch(e){}
+
+function padToast(msg){ _padHintT=2.4; const t=$('padBadge'); if(t){ const m=t.querySelector('.pb-msg'); if(m)m.textContent=msg; } }
+function updatePadUI(){
+  const on=padConnected;
+  const bd=$('padBadge'); if(bd) bd.style.display=on?'flex':'none';
+  const hp=$('hintPad'); if(hp){ hp.style.display=on?'':'none'; if(on) hp.textContent='🎮 左摇杆移动 · '+(padMode==='A'?'自动瞄准开火 · A键冲刺':'右摇杆瞄准开火 · RB冲刺')+' · 菜单：十字键选 / A确认 / B返回'; }
+  const ht=$('hintTouch'), hc=$('hintPC');
+  if(on){ if(ht)ht.style.display='none'; if(hc)hc.style.display='none'; }
+  else { const isPC=window.matchMedia&&window.matchMedia('(pointer:fine)').matches; if(ht)ht.style.display=isPC?'none':''; if(hc)hc.style.display=isPC?'':'none'; }
+  for(const id of ['padModeBtn','padModeBtn2']){ const pb=$(id); if(pb){ pb.style.display=on?'':'none'; pb.textContent='🎮 手柄方案：'+(padMode==='A'?'A 休闲（自动瞄准）':'B 双摇杆（右摇杆瞄准）'); } }
+}
+function setPadMode(m){ padMode=m; try{localStorage.setItem('sf_padmode',m);}catch(e){} updatePadUI(); padToast('手柄方案 '+(m==='A'?'A · 休闲':'B · 双摇杆')); }
+function togglePadMode(){ setPadMode(padMode==='A'?'B':'A'); try{S.card&&S.card();}catch(e){} }
+function onPadConnect(){ padConnected=true; updatePadUI(); padToast('手柄已连接'); try{S.card&&S.card();}catch(e){} }
+function onPadDisconnect(){ padConnected=false; if(_padFocus&&_padFocus.classList)_padFocus.classList.remove('pad-focus'); _padFocus=null;_padOv=null;_padItems=[]; joy.on=false;joy.dx=joy.dy=0; joyR.on=false;joyR.dx=joyR.dy=0; _padHoldFire=false; updatePadUI(); }
+
+function padFocusables(ov){
+  const out=[], seen=new Set();
+  const all=ov.querySelectorAll('button, [data-diff], [data-aim], [data-period], .lb-tab, .ward-card, .up-card, .vb-link, [onclick]');
+  for(const el of all){ if(seen.has(el))continue; if(el.offsetWidth>0&&el.offsetHeight>0&&!el.disabled){ const cs=getComputedStyle(el); if(cs.pointerEvents!=='none'&&cs.visibility!=='hidden'){ out.push(el); seen.add(el); } } }
+  return out;
+}
+function padActiveOverlay(){
+  const ids=['paused','over','win','shop','wandUnlock','wandSel','cards','relic','wardrobe','altar','backup','daily','codex','bestiary','achv','changelog','shareCard','tutorial','menu'];
+  for(const id of ids){ const el=$(id); if(el&&!el.classList.contains('hidden')) return el; }
+  return null;
+}
+function padMarkFocus(items){ for(const el of items) el.classList.toggle('pad-focus', el===_padFocus); if(_padFocus){ try{_padFocus.scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){} } }
+function padNearest(cur, items, dir){
+  if(!cur) return items[0]||null;
+  const cr=cur.getBoundingClientRect(), cx=cr.left+cr.width/2, cy=cr.top+cr.height/2;
+  let best=null, bestScore=1e15;
+  for(const el of items){ if(el===cur)continue;
+    const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, dx=x-cx, dy=y-cy;
+    let ok=false, primary=0, cross=0;
+    if(dir==='up'){ ok=dy<-3; primary=-dy; cross=Math.abs(dx); }
+    else if(dir==='down'){ ok=dy>3; primary=dy; cross=Math.abs(dx); }
+    else if(dir==='left'){ ok=dx<-3; primary=-dx; cross=Math.abs(dy); }
+    else { ok=dx>3; primary=dx; cross=Math.abs(dy); }
+    if(!ok)continue;
+    const score=primary+cross*2.2;
+    if(score<bestScore){ bestScore=score; best=el; }
+  }
+  return best;
+}
+function padBack(ov){
+  const btns=ov.querySelectorAll('[id$="CloseTop"],[id$="Back"],.ovx-close,[id$="Close"]');
+  for(const b of btns){ if(b.offsetWidth>0&&!b.disabled){ try{b.click();}catch(e){} return; } }
+}
+function padMenuNav(lx,ly,b,dt){
+  const ov=padActiveOverlay();
+  if(!ov){ if(_padFocus&&_padFocus.classList)_padFocus.classList.remove('pad-focus'); _padFocus=null;_padOv=null; return; }
+  if(_padOv!==ov){ document.querySelectorAll('.pad-focus').forEach(e=>e.classList.remove('pad-focus')); _padOv=ov; _padItems=padFocusables(ov); _padFocus=_padItems[0]||null; padMarkFocus(_padItems); }
+  let items=_padItems;
+  if(!items.length||!_padFocus||items.indexOf(_padFocus)<0){ items=_padItems=padFocusables(ov); if(!items.length)return; if(!_padFocus||items.indexOf(_padFocus)<0){ _padFocus=items[0]; padMarkFocus(items); } }
+  let dir=b.eDU?'up':b.eDD?'down':b.eDL?'left':b.eDR?'right':null;
+  _padNavT-=dt;
+  const sm=Math.hypot(lx,ly);
+  if(!dir){ if(sm>0.6){ if(_padNavT<=0){ _padNavT=0.17; dir=Math.abs(lx)>=Math.abs(ly)?(lx>0?'right':'left'):(ly>0?'down':'up'); } } else _padNavT=0; }
+  if(dir){ const nx=padNearest(_padFocus,items,dir); if(nx){ _padFocus=nx; padMarkFocus(items); } }
+  if(b.eA&&_padFocus){ try{_padFocus.click();}catch(e){} }
+  if(b.eB){ padBack(ov); }
+  if(b.eStart&&ov.id==='paused'){ togglePause(); }
+}
+function pollGamepad(dt){
+  if(_padHintT>0)_padHintT-=dt;
+  let gp=null;
+  try{ const pads=navigator.getGamepads?navigator.getGamepads():[]; for(const p of pads){ if(p&&p.connected){ gp=p; break; } } }catch(e){ gp=null; }
+  if(!gp){ if(padConnected) onPadDisconnect(); return; }
+  if(!padConnected) onPadConnect();
+  const DZ=0.28, ax=gp.axes||[], B=gp.buttons||[];
+  const lx=Math.abs(ax[0]||0)>DZ?ax[0]:0, ly=Math.abs(ax[1]||0)>DZ?ax[1]:0;
+  const rx=Math.abs(ax[2]||0)>DZ?ax[2]:0, ry=Math.abs(ax[3]||0)>DZ?ax[3]:0;
+  const down=i=>!!(B[i]&&B[i].pressed);
+  const edge=i=>{ const n=down(i), w=_padPrev[i]; _padPrev[i]=n; return n&&!w; };
+  const eA=edge(0), eB=edge(1), eRB=edge(5), eStart=edge(9), eDU=edge(12), eDD=edge(13), eDL=edge(14), eDR=edge(15);
+  const ov=padActiveOverlay();
+  if(state==='play'&&!paused&&!ov){
+    const lm=Math.hypot(lx,ly);
+    if(lm>0){ joy.on=true; joy.dx=lx; joy.dy=ly; } else { joy.on=false; joy.dx=0; joy.dy=0; }
+    if(padMode==='B'){
+      const rm=Math.hypot(rx,ry);
+      if(rm>0){ joyR.on=true; joyR.dx=rx; joyR.dy=ry; _padHoldFire=false; }
+      else { joyR.on=false; joyR.dx=0; joyR.dy=0; _padHoldFire=true; }
+      if(eRB) tryDash();
+    } else { joyR.on=false; joyR.dx=joyR.dy=0; _padHoldFire=false; if(eA) tryDash(); }
+    if(eStart) togglePause();
+  } else {
+    _padHoldFire=false; joy.on=false; joyR.on=false;
+    padMenuNav(lx,ly,{eA,eB,eRB,eStart,eDU,eDD,eDL,eDR},dt);
+  }
+}
 function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now; time+=dt;
+  pollGamepad(dt);   /* 🎮 手柄轮询(战斗驱动 / 菜单导航) */
   /* 视野缩放:朝目标平滑过渡(拿到/失去千里眼时镜头柔和拉远/拉回);并据当前缩放算出剔除余量 EX/EY */
   if(state==='play'&&!paused){ viewZoom += (viewZoomT-viewZoom)*Math.min(1,dt*6); if(Math.abs(viewZoom-viewZoomT)<.0006)viewZoom=viewZoomT; }
   EX=(W/2)*(1/viewZoom-1); EY=(H/2)*(1/viewZoom-1);
@@ -6650,6 +6758,7 @@ let _dualHintT=0;
 function showDualHint(){ const h=$('dualHint'); if(!h)return; h.style.opacity='1'; clearTimeout(_dualHintT); _dualHintT=setTimeout(()=>{h.style.opacity='0';},3600); }
 $('dualBtn').onclick=()=>{ dualStick=!dualStick; try{localStorage.setItem('sf_dual',dualStick?'1':'0');}catch(e){} if(!dualStick){ joyR.id=null;joyR.on=false;joyR.dx=joyR.dy=0; } syncCtrlUI(); try{S.card();}catch(e){} };
 $('fixedBtn').onclick=()=>{ fixedStick=!fixedStick; try{localStorage.setItem('sf_fixed',fixedStick?'1':'0');}catch(e){} joy.id=null;joy.on=false;joy.dx=joy.dy=0; joyR.id=null;joyR.on=false;joyR.dx=joyR.dy=0; syncCtrlUI(); try{S.card();}catch(e){} };   /* 切换底盘方式复位摇杆,防 origin 错乱 */
+{ const _pmb=$('padModeBtn'); if(_pmb)_pmb.onclick=togglePadMode; const _pmb2=$('padModeBtn2'); if(_pmb2)_pmb2.onclick=togglePadMode; }   /* 🎮 A/B 方案切换 */
 /* 非触屏设备(PC)隐藏操作方式区块(纯触摸功能) */
 (function(){ const touch=('ontouchstart' in window)||navigator.maxTouchPoints>0||(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches); if(!touch){ const cs=$('ctrlSection'); if(cs)cs.style.display='none'; } })();
 syncCtrlUI();
@@ -6891,6 +7000,7 @@ $('shopLeave').onclick=()=>{ $('shop').classList.add('hidden'); startWave(waveNu
 $('endlessBtn').onclick=()=>{ initAudio(); $('win').classList.add('hidden');
   endless=true; startWave(waveNum+1); state='play'; };
 refreshResumeBtn();   /* 启动时:有续战存档则显示「继续上次战斗」 */
+updatePadUI();        /* 🎮 初始化手柄相关 UI(默认隐藏,连上后由轮询点亮) */
 })();
 </script>
 </body>
