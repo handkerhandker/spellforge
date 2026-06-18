@@ -503,6 +503,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v74.2 · 2026-06-18</div><div class="cl-i">👹 <b>Boss 血条更清爽,横屏更不挡视野。</b>① <b>名字改为内嵌在血条里</b>(原本是血条上方一个朱砂印章框,会压住「剩余 N」计数)——现在 Boss 名字直接显示在血条左侧、更干净;② <b>横屏</b>时血条改用<b>紧凑细条</b>,又矮又短、不再横跨半屏;③ <b>无尽模式多个 Boss</b>(三、四只乃至更多)横屏时<b>自动分两~三列排布</b>,而不是一条条竖着堆满整个上半屏,再多 Boss 也只占两三行、看得清也不挡路。竖屏维持单列排布(竖屏本就有高度)。纯界面优化,不改任何数值。</div></div>
 <div class="cl-v"><div class="cl-h">v74.1 · 2026-06-18</div><div class="cl-i">🛡️ <b>新增「放弃」按钮 + 关键操作二次确认(防手滑)。</b>① <b>选牌 / 遗物</b>界面加了「🚫 放弃本次(不选)」——刷出来的都不想要、又没钱重抽时,不用再被迫硬选一个,可以直接放弃、进入下一波;② <b>暂停菜单</b>的「重新开始」「结束本局」、以及<b>结算页</b>的「再次挑战」现在都要<b>再点一次确认</b>(按钮会先变成"⚠️ 确定…?再点一次",3 秒内不点就自动复原),防止手滑误触把一局白白葬送。沿用商店卖技能那套熟悉的确认手感,不弹窗、不啰嗦。📱 <b>横屏修复</b>:横屏用<b>固定摇杆</b>时,底部的法术信息栏会被左下摇杆挤到上半屏、和血条挤在一起;现已让它<b>留在底部、自动避开摇杆</b>(挪到摇杆右侧),不再打架(浮动摇杆不受影响)。</div></div>
 <div class="cl-v"><div class="cl-h">v74 · 2026-06-18</div><div class="cl-i">📱 <b>横屏适配·全套。</b>现在把手机横过来玩,整套界面都会重新排布、用上横向空间(竖屏完全不变):① <b>主菜单</b>分左右两栏——左边标题简介、右边难度/拔出法杖/各入口,开始键不再被挤到屏幕外;② <b>选牌 / 遗物</b>三张卡<b>并排</b>、一眼看全;③ <b>选法杖</b>整排平铺;④ <b>符文商店</b>商品两列;⑤ <b>外观·皮肤</b>角色两列;⑥ 暂停 / 图鉴 / 成就 / 每日 / 结算等也都居中可读、内容多时可滚。⚙️ <b>刘海让位</b>:横屏时左/右摇杆与冲刺键会自动避开屏幕侧边的刘海与圆角,不再被挡。智能分档:只有画面<b>明确够宽</b>才切横屏布局,竖屏 / 接近正方形一律走稳妥的竖排,不会错位。视野不设限——横屏能看多大就看多大(和大屏 / PC 一致,不再让手机吃亏)。</div></div>
 <div class="cl-v"><div class="cl-h">v73.1 · 2026-06-18</div><div class="cl-i">🐞 <b>重要修复:法术升到 5 级后「刷不出升级卡、卡住升不上去」。</b>之前有个隐藏 bug——法术练到 <b>Lv5</b>(环刃是 Lv4)之后,它的升级卡会被悄悄从选牌池里剔除,导致再也刷不到、等级死死卡住(打到四五十波还是 5 级)。这和法术「<b>等级本就无上限</b>」的设定是冲突的。现已修复:① <b>所有法术的等级上限去掉</b>,和设定一致、可一直升,深层无尽能继续变强;② <b>环刃</b>原本卡在 Lv4、连 Lv5 都到不了(导致「万刃」进化根本触发不了),现已放开、能正常升到 5 级觉醒;③ <b>四个进化形态(焚天 / 雷罚 / 万刃 / 永冬之矛)进化之后也能继续升级了</b>(之前进化反而把等级锁死)。若你之前的版本能升到很高级、是正常的;这次是把所有人都拉回到「无上限」的正确状态。<b>纯修复,不改任何数值与平衡公式。</b></div></div>
@@ -747,7 +748,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v74.1', APP_TIME='2026-06-18 10:35';
+const APP_VER='v74.2', APP_TIME='2026-06-18 11:10';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -6427,41 +6428,47 @@ function drawHUD(){
   }
   /* 首领血条(加大字号 + 朱砂方框印章) */
   const bosses=enemies.filter(e=>e.boss);
-  if(bosses.length===1){
+  const landBoss = W > H*1.3;   /* 横屏:Boss 血条用紧凑细条 + 名字内嵌 + 多只自动分列网格,避免又长又高、多只堆满屏;竖屏维持原样 */
+  if(landBoss && bosses.length>=1){
+    const n=bosses.length;
+    const cols = n<=3?1 : (n<=8?2:3);
+    const Wbar = cols===1?240 : (cols===2?184:148);
+    const Hbar=11, gapX=12, pitch=17;
+    const gridW = cols*Wbar + (cols-1)*gapX, gx0=(W-gridW)/2, gy0=top+34;
+    ctx.textAlign='left'; ctx.textBaseline='middle';
+    for(let i=0;i<n;i++){
+      const boss=bosses[i], col=i%cols, row=Math.floor(i/cols);
+      const x=gx0+col*(Wbar+gapX), y=gy0+row*pitch, shielded=boss._shieldT>0;
+      ctx.fillStyle='rgba(10,8,24,.8)'; rrect(x-3,y-3,Wbar+6,Hbar+6,5); ctx.fill();
+      ctx.fillStyle='#33152a'; rrect(x,y,Wbar,Hbar,4); ctx.fill();
+      const bhr=clamp(boss.hp/boss.maxhp,0,1);
+      const bg=ctx.createLinearGradient(x,0,x+Wbar,0);
+      if(shielded){bg.addColorStop(0,'#6fa8ff');bg.addColorStop(1,'#33559e');}
+      else{bg.addColorStop(0,'#c83a3a');bg.addColorStop(1,'#7a1a1a');}
+      ctx.fillStyle=bg; rrect(x,y,Wbar*bhr,Hbar,4); ctx.fill();
+      ctx.fillStyle=boss.col; ctx.beginPath(); ctx.arc(x+8,y+Hbar/2,3,0,TAU); ctx.fill();
+      ctx.font='900 11px "Songti SC","STSong",serif'; ctx.fillStyle='#fff';
+      ctx.fillText((boss.name||'')+(shielded?' 🛡️':''), x+16, y+Hbar/2+0.5);
+    }
+  } else if(bosses.length===1){
+    /* 竖屏单 Boss:细条 + 名字内嵌(不再用上方朱砂印章,更清爽,也不压住「剩余」计数) */
     const boss=bosses[0];
-    const bw=Math.min(W*.62,440), bx=(W-bw)/2, by=top+42;
-    /* 浓墨外底 */
-    ctx.fillStyle='rgba(10,8,24,.8)';rrect(bx-4,by-4,bw+8,24,8);ctx.fill();
-    /* 暗血底 */
-    ctx.fillStyle='#33152a';rrect(bx,by,bw,16,5);ctx.fill();
-    /* 当前血量条 */
+    const bw=Math.min(W*.62, 300), bx=(W-bw)/2, by=top+42, Hbar=15;
+    const shielded=boss._shieldT>0;
+    ctx.fillStyle='rgba(10,8,24,.8)';rrect(bx-4,by-4,bw+8,Hbar+8,7);ctx.fill();
+    ctx.fillStyle='#33152a';rrect(bx,by,bw,Hbar,5);ctx.fill();
     const bhr=clamp(boss.hp/boss.maxhp,0,1);
     const bg=ctx.createLinearGradient(bx,0,bx+bw,0);
-    bg.addColorStop(0,'#c83a3a');bg.addColorStop(1,'#7a1a1a');
-    ctx.fillStyle=bg;rrect(bx,by,bw*bhr,16,5);ctx.fill();
-    /* Boss 名字(浓墨 + 加大字号) */
-    const bname=boss.name||'';
-    ctx.font='900 18px "Songti SC","STSong",serif';
-    const tw=ctx.measureText(bname).width;
-    /* 朱砂方框印章(框 1.5px 朱砂) */
-    const sealW=tw+18, sealH=22, sealX=W/2-sealW/2, sealY=by-2-sealH;
-    ctx.strokeStyle='#c83a3a';ctx.lineWidth=1.8;
-    ctx.strokeRect(sealX,sealY,sealW,sealH);
-    /* 印章内填半透明朱砂 */
-    ctx.fillStyle='rgba(200,58,58,.12)';
-    ctx.fillRect(sealX,sealY,sealW,sealH);
-    /* 印章文字 */
-    ctx.fillStyle='#1a1a2e';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(bname,W/2,sealY+sealH/2+1);
-    /* 角标(方框角落) */
-    ctx.fillStyle='#c83a3a';
-    ctx.fillRect(sealX,sealY,3,3);
-    ctx.fillRect(sealX+sealW-3,sealY,3,3);
-    ctx.fillRect(sealX,sealY+sealH-3,3,3);
-    ctx.fillRect(sealX+sealW-3,sealY+sealH-3,3,3);
+    if(shielded){bg.addColorStop(0,'#6fa8ff');bg.addColorStop(1,'#33559e');}
+    else{bg.addColorStop(0,'#c83a3a');bg.addColorStop(1,'#7a1a1a');}
+    ctx.fillStyle=bg;rrect(bx,by,bw*bhr,Hbar,5);ctx.fill();
+    ctx.fillStyle=boss.col;ctx.beginPath();ctx.arc(bx+10,by+Hbar/2,4,0,TAU);ctx.fill();
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.font='900 14px "Songti SC","STSong",serif';ctx.fillStyle='#fff';
+    ctx.fillText((boss.name||'')+(shielded?' 🛡️':''),bx+20,by+Hbar/2+0.5);
   } else if(bosses.length>1){
     /* 多 Boss:紧凑血条竖向堆叠,各自标名 + 体色点;护罩中显示蓝条 */
-    const bw=Math.min(W*.5,300), bx=(W-bw)/2;
+    const bw=Math.min(W*.5, (W>H*1.3)?240:300), bx=(W-bw)/2;
     let by=top+30;
     ctx.textAlign='left';ctx.textBaseline='middle';
     for(const boss of bosses){
