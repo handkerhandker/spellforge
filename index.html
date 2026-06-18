@@ -509,6 +509,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v76.2 · 2026-06-18</div><div class="cl-i">💧 <b>修复弹幕「叠成一片白、看不清」(接 v76.1)。</b>水龙吟、奥术球这类高射速法术练到高级、疯狂连发时,成片重叠的弹幕会在中间<b>叠加成一大坨纯白</b>,人物和敌弹全被盖住;而且之前把「💫 特效强度」调到最低也压不下这层白。现在:① <b>弹幕的白芯也跟着「特效强度」滑块走了</b>——调低就大幅变淡,随时能从弹幕里看清自己和飞来的敌弹;② 同屏弹幕极多时<b>更早自动收敛叠加亮度</b>,满特效下也不至于糊成全白。<b>法术的伤害、范围、冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
+<div class="cl-v"><div class="cl-h">v76.1 · 2026-06-18</div><div class="cl-i">🔥 <b>修复高级法术「糊屏 + 卡顿」。</b>焚天的火海、蛊毒的毒云、黑洞、飓风练到高级后,特效会铺满整个屏幕——看不见自己、也看不清飞来的敌弹,手机还会发烫卡顿。现在这几类持续特效:① <b>会跟着暂停菜单的「💫 特效强度」滑块走</b>,调低就大幅变淡、甚至基本隐形,随时能把画面看清;② 同屏堆太多时<b>只绘制最近的若干个</b>(其余照常吸入 / 造成伤害,只是不重复画出来),画面更稳、更省电。<b>法术的伤害、范围、冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76 · 2026-06-18</div><div class="cl-i">🎮 <b>支持游戏手柄了！</b>把蓝牙手柄（Xbox / PS / Backbone 等）连上设备就能玩,Windows / Mac / iOS / 安卓通用（鸿蒙看浏览器是否支持）。两套操作随你选（暂停菜单或主菜单里切）：<b>A 休闲</b>——左摇杆移动、自动瞄准开火、<b>A 键冲刺</b>,拿起就玩;<b>B 双摇杆</b>——左摇杆移动、<b>右摇杆瞄准并开火</b>（松开停火、自己控制射击）、<b>右肩键 RB 冲刺</b>,适合想精准点杀的玩家。<b>菜单也能用手柄全程操作</b>：十字键 / 左摇杆移动光标、<b>A 确认、B 返回、Start 暂停/继续</b>,选难度、拔法杖、逛祭坛皮肤、暂停都不用碰屏幕。连上手柄后顶部会显示「🎮 已连接」,屏幕上的触屏摇杆 / 冲刺键自动隐藏,菜单操作提示也会换成手柄说明。</div></div>
 <div class="cl-v"><div class="cl-h">v75.1 · 2026-06-18</div><div class="cl-i">🛡️ <b>修复:治愈 / 法盾在身边没有怪时不会自动触发。</b>之前这两个法术被错误地和"开火"绑在了一起——身边没有敌人、人物没在放招的时候,既不会自动回血、也不会自动开盾(贴脸近战、或刚清完一波的间隙最明显)。现在<b>治愈和法盾都改成按各自的冷却独立自动触发</b>,不管周围有没有怪都照常回血 / 开盾,保命更稳。</div></div>
 <div class="cl-v"><div class="cl-h">v75 · 2026-06-18</div><div class="cl-i">🐎 <b>新增遗物「乘黄」——可连续冲刺。</b>打 Boss 后的三选一里会出:拿到后<b>冲刺能储存 3 次</b>(基础是 1 次),可以<b>接连冲三下</b>甩开追兵、穿过弹幕,用掉的充能再<b>逐格慢慢回满</b>,不用每冲一次都干等一整段冷却。冲刺键右上角会显示<b>当前还剩几次</b>。和「疾风步(冷却 -25%)」可叠着用,机动流更顺手。🐾 <b>异兽图鉴升级:所有杂兵都画上了「真实样子」。</b>之前图鉴里只有 8 位古神 Boss 有立绘、十六种杂兵只是文字 + 小图标;现在<b>每种妖兽都用游戏里的真实造型渲染成一张小立绘</b>(罔象、毕方、凿齿、句芒、诸怀、钦原、狰…),配上各自的<b>定位、血量/伤害和一句应对贴士</b>,一眼就能把名字和长相对上号。</div></div>
@@ -758,7 +760,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v76', APP_TIME='2026-06-18 11:13';
+const APP_VER='v76.2', APP_TIME='2026-06-18 17:35';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1421,6 +1423,7 @@ buildBossArt();
 /* ============ 状态 ============ */
 let state='menu', time=0, waveNum=0, kills=0, endless=false, hurtFx=0, lastHitS=0, paused=false, aimMode=(window.matchMedia&&window.matchMedia('(pointer:fine)').matches)?'manual':'smart';
 let fxAlpha=1;   /* 特效强度:玩家粒子/辉光透明度(0.3~1);暂停菜单滑块控制。敌弹高亮、预警圈不受影响 */
+const FX_CLOUD_DRAW=46, FX_BH_DRAW=18, FX_CYC_DRAW=14;  /* 持续特效「同屏最多画几个」的纯渲染上限(火海/毒云/黑洞/飓风高级时会铺满屏+卡)。超出的仍存在、照常吸入与造成伤害——只是不画 → 零数值改动、冲榜公平不变 */
 let sellConfirm=true;   /* 出售技能二次确认(防手滑误卖);暂停菜单开关,存 sf_sellconfirm,默认开 */
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
@@ -3153,7 +3156,7 @@ function updateSpellStates(dt){
         damageEnemy(e,bh.dmg*(d<bh.r*.5?1.7:1)*dt);
       }
     }
-    spawnPart(bh.x+Math.cos(bh.ang)*bh.r*.3,bh.y+Math.sin(bh.ang)*bh.r*.3,rand(-30,30),rand(-30,30),.2,3,'#a06fff');
+    if(Math.random()<fxAlpha) spawnPart(bh.x+Math.cos(bh.ang)*bh.r*.3,bh.y+Math.sin(bh.ang)*bh.r*.3,rand(-30,30),rand(-30,30),.2,3,'#a06fff');
   }
   player.blackholes=player.blackholes.filter(b=>b.life>0);
   /* 飓风:移动风暴,吸入+持续切割 */
@@ -4964,12 +4967,14 @@ function render(){
   ctx.strokeStyle=terrain.glow+'30';ctx.lineWidth=9;
   ctx.strokeRect(ARENA.pad-8,ARENA.pad-8,ARENA.w-2*(ARENA.pad-8),ARENA.h-2*(ARENA.pad-8));
 
-  /* 毒云 */
-  for(const c of clouds){
-    const a=Math.min(1,c.life/1.2);
-    ctx.globalAlpha=.16*a;ctx.fillStyle=c.kind==='fire'?'#ff7a3a':(c.kind==='frost'?'#9fe8ff':'#6fce58');
-    for(let i=0;i<6;i++){const aa=i/6*TAU+c.life;
-      ctx.beginPath();ctx.arc(c.x+Math.cos(aa)*c.r*.45,c.y+Math.sin(aa)*c.r*.45,c.r*.55,0,TAU);ctx.fill();}
+  /* 毒云/火海/冰雾 —— 渲染受「特效强度」滑块控制(调低→大幅变淡甚至基本隐形);高密度时只画最近 FX_CLOUD_DRAW 团,超出的仍存在并照常造成伤害(零数值改动) */
+  { const _cN=clouds.length, _cStart=Math.max(0,_cN-FX_CLOUD_DRAW);
+    for(let ci=_cStart;ci<_cN;ci++){ const c=clouds[ci];
+      const a=Math.min(1,c.life/1.2);
+      ctx.globalAlpha=.16*a*fxAlpha;ctx.fillStyle=c.kind==='fire'?'#ff7a3a':(c.kind==='frost'?'#9fe8ff':'#6fce58');
+      for(let i=0;i<6;i++){const aa=i/6*TAU+c.life;
+        ctx.beginPath();ctx.arc(c.x+Math.cos(aa)*c.r*.45,c.y+Math.sin(aa)*c.r*.45,c.r*.55,0,TAU);ctx.fill();}
+    }
     ctx.globalAlpha=1;
   }
 
@@ -5041,7 +5046,7 @@ function render(){
   ctx.globalAlpha=1;
   /* 弹幕（叠光） */
   ctx.globalCompositeOperation='lighter';
-  const _bdim = bullets.length>140 ? 140/bullets.length : 1;   /* 弹幕极多时按数量调暗叠加发光,防几百颗白核叠加成满屏白(弹下方有深色垫底,仍清晰可辨);≤140 颗时系数=1、与原渲染逐字节一致 */
+  const _bdim = bullets.length>90 ? 90/bullets.length : 1;   /* 弹幕极多时按数量调暗叠加发光,防几十上百颗('lighter'叠加)糊成满屏白(弹下方有深色垫底,仍清晰可辨);≤90 颗时系数=1、与原渲染一致。v76.2:阈值 140→90,高密度更早收敛 */
   for(const b of bullets){
     if(b.id==='chain'){
       /* 回旋刃:高速旋转的双刃回旋镖 */
@@ -5086,7 +5091,7 @@ function render(){
     ctx.globalAlpha=.22*fxAlpha*_bdim;ctx.fillStyle=b.col;
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.4,0,TAU);ctx.fill();
     ctx.globalAlpha=.6*fxAlpha*_bdim;ctx.beginPath();ctx.arc(b.x,b.y,b.r*1.2,0,TAU);ctx.fill();
-    ctx.globalAlpha=.95*_bdim;ctx.fillStyle='#fff';
+    ctx.globalAlpha=.95*_bdim*fxAlpha;ctx.fillStyle='#fff';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*.6,0,TAU);ctx.fill();
   }
   /* 预警危险圈:红色虚线圈 + 随时间填充,提示弹幕即将在此爆发 */
@@ -5118,36 +5123,38 @@ function render(){
     ctx.globalCompositeOperation='source-over';
   }
   /* 黑洞吸力场(此前本体缺失,只有零星粒子) */
-  for(const bh of player.blackholes){
+  { const _bN=player.blackholes.length, _bStart=Math.max(0,_bN-FX_BH_DRAW), _fa=fxAlpha;
+  for(let bi=_bStart;bi<_bN;bi++){ const bh=player.blackholes[bi];
     ctx.save();
     /* 深邃黑洞:全深色系 — 外深环→暗紫渐层→纯黑核心→暗紫吸积线 */
-    ctx.globalAlpha=.72;ctx.strokeStyle='#05020e';ctx.lineWidth=5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r,0,TAU);ctx.stroke();
-    ctx.globalAlpha=.5;ctx.fillStyle='#241046';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.96,0,TAU);ctx.fill();
-    ctx.globalAlpha=.72;ctx.fillStyle='#140730';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.72,0,TAU);ctx.fill();
-    ctx.globalAlpha=.9;ctx.fillStyle='#0a0420';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.52,0,TAU);ctx.fill();
-    ctx.globalAlpha=1;ctx.fillStyle='#020106';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.36,0,TAU);ctx.fill();
-    ctx.globalAlpha=.6;ctx.strokeStyle='#9a5ce0';ctx.lineWidth=2.5;
+    ctx.globalAlpha=.72*_fa;ctx.strokeStyle='#05020e';ctx.lineWidth=5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.5*_fa;ctx.fillStyle='#241046';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.96,0,TAU);ctx.fill();
+    ctx.globalAlpha=.72*_fa;ctx.fillStyle='#140730';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.72,0,TAU);ctx.fill();
+    ctx.globalAlpha=.9*_fa;ctx.fillStyle='#0a0420';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.52,0,TAU);ctx.fill();
+    ctx.globalAlpha=1*_fa;ctx.fillStyle='#020106';ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.36,0,TAU);ctx.fill();
+    ctx.globalAlpha=.6*_fa;ctx.strokeStyle='#9a5ce0';ctx.lineWidth=2.5;
     for(let k=0;k<3;k++){const za=bh.ang*2+k/3*TAU;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.64,za,za+1.4);ctx.stroke();}
-    ctx.globalAlpha=.6;ctx.strokeStyle='#b07fe8';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.82,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.6*_fa;ctx.strokeStyle='#b07fe8';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r*.82,0,TAU);ctx.stroke();
     /* === 高对比事件视界环:浅色/深色背景下都清晰可辨 === */
-    ctx.globalAlpha=.85;ctx.strokeStyle='#120626';ctx.lineWidth=6;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r+2.5,0,TAU);ctx.stroke(); /* 外侧暗描边:浅底勾轮廓 */
-    ctx.globalAlpha=1;ctx.strokeStyle='#c77dff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r,0,TAU);ctx.stroke(); /* 亮紫主环:深底醒目 */
-    ctx.globalAlpha=.9;ctx.strokeStyle='#f1e3ff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r-2.5,0,TAU);ctx.stroke(); /* 白色高光细环 */
+    ctx.globalAlpha=.85*_fa;ctx.strokeStyle='#120626';ctx.lineWidth=6;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r+2.5,0,TAU);ctx.stroke(); /* 外侧暗描边:浅底勾轮廓 */
+    ctx.globalAlpha=1*_fa;ctx.strokeStyle='#c77dff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r,0,TAU);ctx.stroke(); /* 亮紫主环:深底醒目 */
+    ctx.globalAlpha=.9*_fa;ctx.strokeStyle='#f1e3ff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(bh.x,bh.y,bh.r-2.5,0,TAU);ctx.stroke(); /* 白色高光细环 */
     ctx.restore();
-  }
-  /* 飓风:旋转风暴 */
-  for(const cy of player.cyclones){
+  } }
+  /* 飓风:旋转风暴 —— 渲染受滑块控制 + 高密度只画最近 FX_CYC_DRAW 个(超出仍存在并照常吸入/伤害) */
+  { const _yN=player.cyclones.length, _yStart=Math.max(0,_yN-FX_CYC_DRAW);
+  for(let yi=_yStart;yi<_yN;yi++){ const cy=player.cyclones[yi];
     ctx.save();
-    ctx.globalAlpha=.5;ctx.strokeStyle='#dff2ff';ctx.lineWidth=2.4;
+    ctx.globalAlpha=.5*fxAlpha;ctx.strokeStyle='#dff2ff';ctx.lineWidth=2.4;
     for(let k=0;k<3;k++){ const ra=cy.r*(.42+k*.27), za=cy.ang*(k%2?-1:1);
       ctx.beginPath();
       for(let sgi=0;sgi<=14;sgi++){ const tt=sgi/14, ang=za+tt*5.6, rr=ra*(1-tt*.18); const px=cy.x+Math.cos(ang)*rr, py=cy.y+Math.sin(ang)*rr; if(sgi===0)ctx.moveTo(px,py);else ctx.lineTo(px,py); }
       ctx.stroke();
     }
-    ctx.globalAlpha=.85;ctx.strokeStyle='#aadcff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r,0,TAU);ctx.stroke();
-    ctx.globalAlpha=.28;ctx.fillStyle='#cfeeff';ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r*.3,0,TAU);ctx.fill();
+    ctx.globalAlpha=.85*fxAlpha;ctx.strokeStyle='#aadcff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.28*fxAlpha;ctx.fillStyle='#cfeeff';ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r*.3,0,TAU);ctx.fill();
     ctx.restore();
-  }
+  } }
   /* 粒子 */
   for(const p of parts){
     const a=p.life/p.ml;
