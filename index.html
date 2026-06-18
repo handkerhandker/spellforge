@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v78 · 2026-06-18</div><div class="cl-i">🏆 <b>成就大扩充 · 一口气新增 50 个成就!</b>从 29 个直接翻到 79 个,各种角度都有:🔥热血的(万妖伏诛击杀1万、深渊尽头第100波、500 连击、累计击败古神50次)、😂搞笑的(恰好第13波阵亡「果然是13」、人为财死「钱没花完就走了」、开局10秒就没)、🎯刁钻的(法术全程不升级通关、全程不拿遗物、12分钟速通、残血通关)、😱望而生畏的(弑神难度不冲刺通关、累计游玩满10小时、击杀5万只)、🎭彩蛋(首次进化、卖出法术、险象环生、集齐全部皮肤),还有解锁其余全部成就才能拿到的压轴「🏆山海传说」。在主菜单「成就一览」里看进度,慢慢解锁。</div></div>
 <div class="cl-v"><div class="cl-h">v77 · 2026-06-18</div><div class="cl-i">🎭 <b>皮肤大改 · 每个皮肤现在自带一组「取舍 kit」!</b>不再是纯外观——换皮肤会带来一组**有得有失**的属性取舍,像法杖一样按角色气质设计:🦊九尾妖狐 暴击+12%/生命−12、🌿山鬼 击杀回血+1/伤害−10%、⚒️刑天 伤害+12%/受伤+12%、🕯️烛龙 攻速+8%/单发伤害−8%、🐦精卫 弹速+25%&穿透+1/攻速−10%、🌈女娲 生命+20&受伤−8%/伤害−10%;🧙巫师保持**纯均衡无取舍**。<b>每个 kit 净值中性、幅度比法杖轻、暴击有上限——只有取向不同、没有强弱,所以全难度通用(含弑神/无尽)也不破榜。</b>选皮肤时卡片上会用金字标明各自的加减,选前看清。</div></div>
 <div class="cl-v"><div class="cl-h">v76.6 · 2026-06-18</div><div class="cl-i">🧹 <b>所有弹窗页面统一收尾。</b>上版只把主菜单的滚动条藏了,这版**一次性作用到全部弹窗**——法术图鉴 / 异兽图鉴 / 成就 / 皮肤 / 每日挑战 等页面右侧的滚动条都已隐藏(画面干净,滚轮 / 滑动照常滚)。另外**给「皮肤」和「每日挑战」补上了右上角的关闭 ✕**(之前缺,得滑到底找返回键),现在所有弹窗的关闭按钮一致。纯界面整理,不影响任何玩法。</div></div>
 <div class="cl-v"><div class="cl-h">v76.5 · 2026-06-18</div><div class="cl-i">🐛 <b>两个修复。</b>① <b>修复「钦原」(蓝色冰箭手) 错误显示 Boss 冲撞预警</b>：这种射手蓄力射冰箭时,以前会错误地弹出红色冲撞车道、甚至屏幕边缘的红色方向箭头,让人以为它要冲撞——可它根本不冲。现在它只显示自己该有的蓄力光环和瞄准虚线。② <b>修复 PC 网页主菜单的滚动条问题</b>：之前菜单右侧会出现滚动条(一度还冒成两条、连英雄榜都单独带一条),现在滚动条已隐藏、画面干净——滚轮 / 滑动照常可滚动查看完整英雄榜。<b>纯显示修复,未动任何玩法或数值,弑神 / 无尽冲榜公平不变。</b></div></div>
@@ -785,7 +786,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v77', APP_TIME='2026-06-18 20:10';
+const APP_VER='v78', APP_TIME='2026-06-18 20:20';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1857,6 +1858,7 @@ function buildWardrobe(){
       else { openSkinUnlock(c); }
     }; }
   }
+  if(typeof CHARS!=='undefined' && CHARS.every(c=>skinUnlocked(c.id))) unlockAch('allskin');
   $('wardrobe').classList.remove('hidden');
 }
 /* ============ 冲刺 ============ */
@@ -1876,7 +1878,7 @@ function tryDash(){
   player._dashBuff=2.5; /* 遗物:迅捷余韵 — 冲刺后伤害加成窗口 */
   player.iframe=Math.max(player.iframe,.26);
   S.dash(); puff(player.x,player.y,'#9d8ffc',6);
-  _runDashed=true; profile.dashes=(profile.dashes||0)+1; if(profile.dashes>=1000)unlockAch('dash1000'); if(profile.dashes%20===0)saveProfile();
+  _runDashed=true; profile.dashes=(profile.dashes||0)+1; if(profile.dashes>=1000)unlockAch('dash1000'); if(profile.dashes>=5000)unlockAch('dash5000'); if(profile.dashes%20===0)saveProfile();
 }
 /* ============ 金币 & 连击 ============ */
 const PRICE={1:18,2:30,3:50}, REROLL_COST=8, SHOP_REROLL=10, HEAL_COST=30, SELL_GAIN=8;
@@ -1894,7 +1896,7 @@ function comboTier(c){ let t=0; for(let i=0;i<COMBO_TIERS.length;i++) if(c>=COMB
 function comboCoinMult(){ return 1+Math.min(combo,60)*.012; } /* 掉落奖励:60连击 ×1.72 */
 function addCoins(n){
   n=Math.max(1,Math.round(n*(1+player.curse.coin)*comboCoinMult()*relicMods.coinMul));
-  coins+=n; return n;
+  coins+=n; profile.coinsEarned=(profile.coinsEarned||0)+n; if(profile.coinsEarned>=100000)unlockAch('lifecoins'); return n;
 }
 function dropCoins(e){
   /* 平衡:普通精怪 45% 概率不掉币,削弱后期金币雪球 */
@@ -1935,9 +1937,11 @@ const WAVE_TABLE={
 };
 
 function startWave(n){
+  if(waveNum>0 && (kills-waveStartKills)>=60) unlockAch('wavekill');   /* 上一波击杀数(用旧快照,本波开始前结算) */
   waveNum=n; spawnQ=[]; waveT=0; waveStartKills=kills;   /* 快照开波击杀数,续战据此防重复计数 */
   saveResume();   /* 自动存档:每波开始存一次续战(弑神/每日在 saveResume 内部自动跳过) → 崩溃/误关回来最多丢当前这一波 */
-  if(endless){ if(n>=20) unlockAch('endless20'); if(n>=30) unlockAch('endless30'); if(n>=50) unlockAch('endless50'); }
+  if(n>=10 && !runTookHeart) unlockAch('nohit_wave10');
+  if(endless){ if(n>=20) unlockAch('endless20'); if(n>=30) unlockAch('endless30'); if(n>=50) unlockAch('endless50'); if(n>=75) unlockAch('endless75'); if(n>=100) unlockAch('endless100'); }
   /* 遗物:山鬼宝囊 — 每波开始获得金币(续战恢复的那一波跳过,避免重复给币) */
   if(relicMods.waveCoins>0 && !_skipEmod){ coins+=relicMods.waveCoins; }
   /* 随机地形(Boss 波沿用上波地形,避免转场突兀) */
@@ -3445,7 +3449,7 @@ function explode(x,y,r,dmg,col){
   let _ek=0;
   for(const e of enemies){ if(e.dead)continue;
     if(dist2(x,y,e.x,e.y)<(r+e.r)*(r+e.r)){ damageEnemy(e,dmg,{kx:e.x-x,ky:e.y-y}); if(e.dead)_ek++; } }
-  if(_ek>=8)unlockAch('megakill');
+  if(_ek>=8)unlockAch('megakill'); if(_ek>=12)unlockAch('megakill12');
   for(let i=0;i<14;i++){ const a=rand(0,TAU),s=rand(60,260);
     spawnPart(x,y,Math.cos(a)*s,Math.sin(a)*s,rand(.25,.5),rand(2,5),col); }
   spawnPart(x,y,0,0,.22,r*.8,col,true);
@@ -3454,7 +3458,7 @@ function explode(x,y,r,dmg,col){
 function emberSplash(x,y,r,dmg){ let _ek=0;
   for(const e of enemies){ if(e.dead)continue;
     if(dist2(x,y,e.x,e.y)<(r+e.r)*(r+e.r)){ damageEnemy(e,dmg,{kx:e.x-x,ky:e.y-y}); if(e.dead)_ek++; } }
-  if(_ek>=8)unlockAch('megakill');
+  if(_ek>=8)unlockAch('megakill'); if(_ek>=12)unlockAch('megakill12');
   for(let i=0;i<4;i++){ const a=rand(0,TAU),s=rand(50,130); spawnPart(x,y,Math.cos(a)*s,Math.sin(a)*s,rand(.18,.3),rand(1.5,2.6),'#ff8a3a'); }
 }
 /* —— 词缀/状态辅助 —— */
@@ -3533,6 +3537,9 @@ function onKill(e){
   comboDmg=Math.min(COMBO_DMG_CAP, combo*COMBO_DMG_PER);
   if(combo>=50) unlockAch('combo50');
   if(combo>=100) unlockAch('combo100');
+  if(combo>=200) unlockAch('combo200');
+  if(combo>=300) unlockAch('combo300');
+  if(combo>=500) unlockAch('combo500');
   const _ct=comboTier(combo);
   if(_ct>runMaxComboTier)runMaxComboTier=_ct;
   if(_ct>comboTierLv){ comboTierLv=_ct; const _ti=COMBO_TIERS[_ct-1];
@@ -3550,7 +3557,9 @@ function onKill(e){
     puff(e.x,e.y,'#9be86a',8); }
   /* 金币 & 噬血法杖 */
   dropCoins(e);
+  if(coins>=1000) unlockAch('coins1k');
   if(coins>=3000) unlockAch('rich');
+  if(coins>=9999) unlockAch('coinsmax');
   if(coins>=5000 && !runBoughtShop) unlockAch('scrooge');
   if(player.wandFx.killHeal)heal(player.wandFx.killHeal);
   if(relicMods.killHeal)heal(relicMods.killHeal);
@@ -3600,6 +3609,7 @@ function hurtPlayer(d){
       const tb=makeBullet('bolt',1,a); tb.dmg=14+waveNum*.7; tb.col='#ff7a4a'; tb.r=5; tb._thorn=true; bullets.push(tb); }
     S.shoot();
   }
+  if(player.hp>0 && player.maxhp>0 && player.hp<=player.maxhp*0.05) unlockAch('close_call');
   if(player.hp<=0){ player.hp=0; gameOver(); }
 }
 /* ============ 排行榜(Supabase) ============ */
@@ -3785,6 +3795,14 @@ function gameOver(manual){
   state='over'; clearResume(); if(!manual)S.die();
   { const _b=$('retryBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
   if(waveNum<=1) unlockAch('wave1death');
+  if(!manual){
+    profile.deaths=(profile.deaths||0)+1;
+    if(profile.deaths>=10) unlockAch('deaths10');
+    if(profile.deaths>=50) unlockAch('deaths50');
+    if(waveNum===13) unlockAch('die_wave13');
+    if(coins>=5000) unlockAch('die_rich');
+    if(_runT<10) unlockAch('die_fast');
+  }
   if(dailyRun){ saveDailyBest(waveNum,kills); bumpDailyStreak(); }
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
@@ -3805,6 +3823,25 @@ function victory(){
   if(player.wand && player.wand.id==='gcannon') unlockAch('glassclear');
   if(_runMaxSpells===1) unlockAch('solospell');
   if(!_runDashed) unlockAch('nodash');
+  /* —— v78 条件通关 —— */
+  const _w=player.wand&&player.wand.id;
+  if(_w==='summon') unlockAch('clear_summon');
+  if(_w==='blood') unlockAch('clear_blood');
+  if(_w==='scatter') unlockAch('clear_scatter');
+  if(_w==='fate') unlockAch('clear_fate');
+  if(_w==='bastion') unlockAch('clear_bastion');
+  const _sk=META.skin||'wizard';
+  if(_sk==='xingtian') unlockAch('clear_xingtian');
+  if(_sk==='nuwa') unlockAch('clear_nuwa');
+  if(_sk==='fox') unlockAch('clear_fox');
+  if(!player.relics||player.relics.length===0) unlockAch('clear_norelic');
+  if(player.spells&&Object.values(player.spells).every(s=>(s.lv||0)<=1)) unlockAch('clear_pure');
+  if(_runT<720) unlockAch('clear_speed');
+  if(player.maxhp>0 && player.hp<=player.maxhp*0.15) unlockAch('clear_lowhp');
+  if(difficulty===1) unlockAch('clear_fan');
+  if(difficulty>=5 && !_runDashed) unlockAch('god_nodash');
+  if(difficulty>=5 && _runMaxSpells===1) unlockAch('god_solospell');
+  if(difficulty>=5 && _runT<900) unlockAch('god_speed');
   saveProfile();
   $('wnKill').textContent=kills;
   awardLj(); $('wnGain').innerHTML='✦ 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj;
@@ -3953,7 +3990,7 @@ function openCodex(){ buildCodex(); $('codex').classList.remove('hidden'); }
 
 /* ===== 成就系统 + 异兽图鉴 ===== */
 /* 本地存档:成就解锁 + 跨局统计(沿用 localStorage,不碰服务器) */
-let profile=(()=>{ try{ const p=JSON.parse(localStorage.getItem('sf_profile')||'{}'); return {unlocked:p.unlocked||[], totalKills:p.totalKills||0, bosses:p.bosses||[], dashes:p.dashes||0, playSec:p.playSec||0, seenSpells:p.seenSpells||[]}; }catch(e){ return {unlocked:[],totalKills:0,bosses:[],dashes:0,playSec:0,seenSpells:[]}; } })();
+let profile=(()=>{ try{ const p=JSON.parse(localStorage.getItem('sf_profile')||'{}'); return {unlocked:p.unlocked||[], totalKills:p.totalKills||0, bosses:p.bosses||[], dashes:p.dashes||0, playSec:p.playSec||0, seenSpells:p.seenSpells||[], games:p.games||0, deaths:p.deaths||0, bossKills:p.bossKills||0, coinsEarned:p.coinsEarned||0}; }catch(e){ return {unlocked:[],totalKills:0,bosses:[],dashes:0,playSec:0,seenSpells:[],games:0,deaths:0,bossKills:0,coinsEarned:0}; } })();
 function saveProfile(){ try{ localStorage.setItem('sf_profile',JSON.stringify(profile)); }catch(e){} }
 function markSpellSeen(id){ if(!id||!SPELL_DEF[id])return; if(!profile.seenSpells.includes(id)){ profile.seenSpells.push(id); saveProfile(); } }
 function hasAch(id){ return profile.unlocked.indexOf(id)>=0; }
@@ -3987,7 +4024,58 @@ const ACH=[
   {id:'marathon',  icon:'🐌',name:'龟仙人',    desc:'单局存活超过 20 分钟'},
   {id:'megakill',  icon:'🎆',name:'一锅端',    desc:'一次爆炸同时消灭 8 只以上妖兽'},
   {id:'earlyhit',  icon:'🤕',name:'出师不利',  desc:'开局 5 秒内就被妖兽打中'},
-  {id:'wave1death',icon:'🪦',name:'出门没看黄历',desc:'第 1 波就阵亡'}
+  {id:'wave1death',icon:'🪦',name:'出门没看黄历',desc:'第 1 波就阵亡'},
+  /* ===== v78 新增 50 成就 ===== */
+  {id:'kill100',   icon:'🗡️',name:'小试牛刀',  desc:'累计击杀 100 只妖兽', prog:()=>[Math.min(profile.totalKills,100),100]},
+  {id:'kill1000',  icon:'⚔️',name:'身经百战',  desc:'累计击杀 1000 只妖兽', prog:()=>[Math.min(profile.totalKills,1000),1000]},
+  {id:'kill10000', icon:'🌪️',name:'万妖伏诛',  desc:'累计击杀 10000 只妖兽', prog:()=>[Math.min(profile.totalKills,10000),10000]},
+  {id:'kill50000', icon:'☄️',name:'山海浩劫',  desc:'累计击杀 50000 只妖兽 · 你和山海经结下了血海深仇', prog:()=>[Math.min(profile.totalKills,50000),50000]},
+  {id:'games10',   icon:'🎮',name:'初心不改',  desc:'累计开局 10 次', prog:()=>[Math.min(profile.games,10),10]},
+  {id:'games100',  icon:'🕹️',name:'百战之身',  desc:'累计开局 100 次', prog:()=>[Math.min(profile.games,100),100]},
+  {id:'deaths10',  icon:'⚱️',name:'越挫越勇',  desc:'累计阵亡 10 次', prog:()=>[Math.min(profile.deaths,10),10]},
+  {id:'deaths50',  icon:'☠️',name:'不死鸟',    desc:'累计阵亡 50 次 · 失败乃成功之母', prog:()=>[Math.min(profile.deaths,50),50]},
+  {id:'bosskill10',icon:'🐉',name:'弑神成瘾',  desc:'累计击败古神 10 次', prog:()=>[Math.min(profile.bossKills,10),10]},
+  {id:'bosskill50',icon:'🌌',name:'神明黄昏',  desc:'累计击败古神 50 次', prog:()=>[Math.min(profile.bossKills,50),50]},
+  {id:'lifecoins', icon:'💎',name:'富可敌国',  desc:'累计赚取 100000 金币', prog:()=>[Math.min(profile.coinsEarned,100000),100000]},
+  {id:'dash5000',  icon:'🏎️',name:'神行太保',  desc:'累计冲刺 5000 次', prog:()=>[Math.min(profile.dashes||0,5000),5000]},
+  {id:'playtime10h',icon:'🕰️',name:'时间黑洞', desc:'累计游玩满 10 小时', prog:()=>[Math.min(Math.floor(profile.playSec||0),36000),36000]},
+  {id:'endless75', icon:'🌑',name:'万劫不复',  desc:'无尽模式抵达第 75 波'},
+  {id:'endless100',icon:'🌀',name:'深渊尽头',  desc:'无尽模式抵达第 100 波 · 下面……还有吗?'},
+  {id:'combo200',  icon:'🥋',name:'杀意觉醒',  desc:'单局达成 200 连击'},
+  {id:'combo300',  icon:'👹',name:'阿修罗',    desc:'单局达成 300 连击'},
+  {id:'combo500',  icon:'⚡',name:'一念神魔',  desc:'单局达成 500 连击'},
+  {id:'survive30', icon:'🧓',name:'老当益壮',  desc:'单局存活超过 30 分钟'},
+  {id:'survive45', icon:'🗿',name:'钉子户',    desc:'单局存活超过 45 分钟'},
+  {id:'survive60', icon:'⏰',name:'与时间为敌',desc:'单局存活超过 60 分钟 · 真的该睡了'},
+  {id:'coins1k',   icon:'🪙',name:'第一桶金',  desc:'单局持有 1000 金币'},
+  {id:'coinsmax',  icon:'🤑',name:'金满箱',    desc:'单局持有 9999 金币'},
+  {id:'clear_summon',  icon:'🐾',name:'山海之主', desc:'用御兽法杖通关一局'},
+  {id:'clear_blood',   icon:'🦇',name:'血色浪漫', desc:'用噬血法杖通关一局'},
+  {id:'clear_scatter', icon:'🎇',name:'弹幕地狱', desc:'用散射法杖通关一局'},
+  {id:'clear_fate',    icon:'🍀',name:'天选之子', desc:'用命运法杖通关一局'},
+  {id:'clear_bastion', icon:'🛡️',name:'固若金汤', desc:'用磐岩法杖通关一局'},
+  {id:'clear_xingtian',icon:'⚒️',name:'战神归位', desc:'以「刑天」皮肤通关一局'},
+  {id:'clear_nuwa',    icon:'🌈',name:'补天之功', desc:'以「女娲」皮肤通关一局'},
+  {id:'clear_fox',     icon:'🦊',name:'倾国倾城', desc:'以「九尾妖狐」皮肤通关一局'},
+  {id:'clear_norelic', icon:'🧘',name:'苦行僧',   desc:'全程不拿任何遗物通关'},
+  {id:'clear_pure',    icon:'🎯',name:'大道至简', desc:'法术全程不升级(都停在 1 级)通关'},
+  {id:'clear_speed',   icon:'🏃',name:'闪电战',   desc:'12 分钟内通关一局'},
+  {id:'clear_lowhp',   icon:'🩸',name:'命悬一线', desc:'残血(≤15% 生命)状态下通关'},
+  {id:'clear_fan',     icon:'🌫️',name:'凡尘俗世', desc:'在「凡尘」难度通关 · 万事开头难'},
+  {id:'god_nodash',    icon:'🔥',name:'神之领域', desc:'「弑神」难度全程不冲刺通关'},
+  {id:'god_solospell', icon:'🗡️',name:'一剑光寒', desc:'「弑神」难度只用一种法术通关'},
+  {id:'god_speed',     icon:'👑',name:'神速降临', desc:'「弑神」难度 15 分钟内通关'},
+  {id:'die_wave13',icon:'🃏',name:'不吉之数',  desc:'恰好在第 13 波阵亡 · 果然是 13'},
+  {id:'die_rich',  icon:'💸',name:'人为财死',  desc:'持有 5000+ 金币时阵亡 · 钱还没花完呢'},
+  {id:'die_fast',  icon:'💨',name:'出师未捷',  desc:'开局 10 秒内阵亡'},
+  {id:'megakill12',icon:'🎆',name:'横扫千军',  desc:'一次爆炸同时消灭 12 只以上妖兽'},
+  {id:'wavekill',  icon:'🌊',name:'浪潮终结者',desc:'单一波次内击杀 60 只以上妖兽'},
+  {id:'evolve1',   icon:'🦋',name:'破茧成蝶',  desc:'首次将一个法术进化'},
+  {id:'nohit_wave10',icon:'🛡️',name:'铜墙铁壁',desc:'一滴血不掉抵达第 10 波'},
+  {id:'sell_first',icon:'♻️',name:'断舍离',    desc:'首次在商店卖出一个法术'},
+  {id:'close_call',icon:'😰',name:'险象环生',  desc:'被一击打到只剩 5% 生命却活了下来'},
+  {id:'allskin',   icon:'🎭',name:'衣橱大师',  desc:'解锁全部 7 个角色皮肤', prog:()=>[CHARS.filter(c=>skinUnlocked(c.id)).length,CHARS.length]},
+  {id:'legend',    icon:'🏆',name:'山海传说',  desc:'解锁其余全部成就 · 你就是传说', prog:()=>[profile.unlocked.filter(x=>x!=='legend').length,ACH.length-1]}
 ];
 function unlockAch(id){
   if(hasAch(id))return;
@@ -3995,19 +4083,27 @@ function unlockAch(id){
   const a=ACH.find(x=>x.id===id); if(!a)return;
   _runUnlocked.push(a);
   if(state==='play') achToast(a);
+  if(id!=='legend' && ACH.every(x=>x.id==='legend'||hasAch(x.id))) unlockAch('legend');   /* v78:集齐其余全部成就 → 自动解锁「山海传说」 */
 }
 function recordBoss(idx){
   if(idx==null)return;
-  if(profile.bosses.indexOf(idx)<0){ profile.bosses.push(idx); saveProfile(); }
+  if(profile.bosses.indexOf(idx)<0){ profile.bosses.push(idx); }
+  profile.bossKills=(profile.bossKills||0)+1; saveProfile();
   unlockAch('boss1');
+  if(profile.bossKills>=10) unlockAch('bosskill10');
+  if(profile.bossKills>=50) unlockAch('bosskill50');
   if(profile.bosses.length>=8) unlockAch('allboss');
   if(FOUR_FIENDS.every(i=>profile.bosses.indexOf(i)>=0)) unlockAch('fourfiend');
 }
 function recordKill(){
   unlockAch('first_kill');
   profile.totalKills++;
+  if(profile.totalKills>=100) unlockAch('kill100');
   if(profile.totalKills>=500) unlockAch('kill500');
+  if(profile.totalKills>=1000) unlockAch('kill1000');
   if(profile.totalKills>=3000) unlockAch('kill3000');
+  if(profile.totalKills>=10000) unlockAch('kill10000');
+  if(profile.totalKills>=50000) unlockAch('kill50000');
   if(profile.totalKills%50===0) saveProfile();
 }
 /* 解锁吐司:顶部中央一闪而过、自动消失,不挡控制 */
@@ -4078,7 +4174,7 @@ function buildAchv(){
     h+='<div class="ach-item'+(done?'':' locked')+'"><div class="ach-ic">'+(done?a.icon:'🔒')+'</div><div class="ach-main"><div class="ach-name">'+a.name+(done?'<span class="ach-done">✓ 已解锁</span>':'')+'</div><div class="ach-desc">'+a.desc+'</div>'+prog+'</div></div>'; }
   $('achvBody').innerHTML=h;
 }
-function openAchv(){ buildAchv(); $('achv').classList.remove('hidden'); }
+function openAchv(){ if(typeof CHARS!=='undefined' && CHARS.every(c=>skinUnlocked(c.id))) unlockAch('allskin'); buildAchv(); $('achv').classList.remove('hidden'); }
 function achSummaryHTML(){
   if(!_runUnlocked.length)return '';
   let h='<div class="ach-sum" style="color:var(--gold);margin-top:12px;">🎉 本局解锁 '+_runUnlocked.length+' 项成就</div>';
@@ -4167,6 +4263,7 @@ function doEvolve(e){
   const cur=player.spells[e.base], lv=Math.max(EVO_LV,(cur&&cur.lv)||EVO_LV);
   delete player.spells[e.base];
   player.spells[e.id]={lv:lv,t:.2,evo:true};
+  unlockAch('evolve1');
   const bd=SPELL_DEF[e.base], ed=SPELL_DEF[e.id];
   try{announce('✨ 进化！'+ed.icon+' '+ed.name, bd.name+' → '+ed.name);}catch(err){}
   try{S.fire();}catch(err){}
@@ -4280,7 +4377,7 @@ function buildSellRow(){
         else if(id==='blackhole')player.blackholes=[];
       }
       if(player.cc[id])player.cc[id]--;
-      coins+=SELL_GAIN; S.coin();
+      coins+=SELL_GAIN; S.coin(); unlockAch('sell_first');
       refreshShopHead(); buildSellRow(); refreshShopBtns(); syncSpellOffers();
     };
     row.appendChild(el);
@@ -4495,8 +4592,9 @@ function update(dt){
   if(state==='play'){
     _runT+=dt;
     if(player&&player.spells){ const _ns=Object.keys(player.spells).length; if(_ns>_runMaxSpells)_runMaxSpells=_ns; }
-    if(typeof profile!=='undefined'){ profile.playSec=(profile.playSec||0)+dt; _playAcc+=dt; if(_playAcc>=30){_playAcc=0;saveProfile();} if(profile.playSec>=3600)unlockAch('playtime1h'); }
+    if(typeof profile!=='undefined'){ profile.playSec=(profile.playSec||0)+dt; _playAcc+=dt; if(_playAcc>=30){_playAcc=0;saveProfile();} if(profile.playSec>=3600)unlockAch('playtime1h'); if(profile.playSec>=36000)unlockAch('playtime10h'); }
     if(_runT>=1200)unlockAch('marathon');
+    if(_runT>=1800)unlockAch('survive30'); if(_runT>=2700)unlockAch('survive45'); if(_runT>=3600)unlockAch('survive60');
     /* 遗物:玄龟甲 — 无护盾时累计计时,满 12 秒获得一层护盾(挡下一次受击) */
     if(relicMods.wardEvery>0 && player && !player._ward){ player._wardT=(player._wardT||0)+dt; if(player._wardT>=relicMods.wardEvery){ player._wardT=0; player._ward=true; puff(player.x,player.y,'#7fe0ff',8); } }
   }
@@ -6849,6 +6947,7 @@ function launchRun(w){
   clearResume();   /* 开新局:清掉续战存档,只保留一个槽 */
   setDiffMul(difficulty);   /* 同步所选难度倍率(防上一把每日局改了 diffMul) */
   resetGame(); applyWand(w);
+  profile.games=(profile.games||0)+1; saveProfile(); if(profile.games>=10)unlockAch('games10'); if(profile.games>=100)unlockAch('games100');
   for(const _id in player.spells) markSpellSeen(_id);   /* 起手/法杖自带法术也记入"已用过"(图鉴标记) */
   /* #warp 跳波测试钩子 */
   const wh=location.hash.match(/^#warp(\d+)/);
