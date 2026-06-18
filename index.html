@@ -460,6 +460,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v73.1 · 2026-06-18</div><div class="cl-i">🐞 <b>重要修复:法术升到 5 级后「刷不出升级卡、卡住升不上去」。</b>之前有个隐藏 bug——法术练到 <b>Lv5</b>(环刃是 Lv4)之后,它的升级卡会被悄悄从选牌池里剔除,导致再也刷不到、等级死死卡住(打到四五十波还是 5 级)。这和法术「<b>等级本就无上限</b>」的设定是冲突的。现已修复:① <b>所有法术的等级上限去掉</b>,和设定一致、可一直升,深层无尽能继续变强;② <b>环刃</b>原本卡在 Lv4、连 Lv5 都到不了(导致「万刃」进化根本触发不了),现已放开、能正常升到 5 级觉醒;③ <b>四个进化形态(焚天 / 雷罚 / 万刃 / 永冬之矛)进化之后也能继续升级了</b>(之前进化反而把等级锁死)。若你之前的版本能升到很高级、是正常的;这次是把所有人都拉回到「无上限」的正确状态。<b>纯修复,不改任何数值与平衡公式。</b></div></div>
 <div class="cl-v"><div class="cl-h">v73 · 2026-06-18</div><div class="cl-i">🎭 <b>再添两位山海经皮肤——一个攒灵晶买、一个打成就送。</b>进「🎭 外观·皮肤」即见:🐦<b>精卫</b>——文首白喙、赤足彩冠的小神鸟,口中<b>衔着一枚石子</b>(衔石填海的执念),青羽双翼;走<b>灵晶购买</b>(✦300,和九尾妖狐/山鬼一样,攒够即可解锁)。🌈<b>女娲</b>——人首蛇身的创世神,圆眼含笑、头戴<b>金凤冠</b>,冠上一排<b>五色石</b>幽幽流光(炼石补天),翠玉蛇尾盘绕;走<b>成就解锁</b>,达成 <b>🐲神话终结(击败全部 8 位古神)</b>自动解锁。至此外观界面共 <b>7 个角色</b>(巫师 + 狐/山鬼/精卫走灵晶,刑天/烛龙/女娲走成就)。<b>皮肤一律纯外观、不改任何战力数值</b>,所有难度(含弑神/无尽)公平不变;解锁状态随存档 / 成就走、<b>备份码自带</b>,换机不丢。</div></div>
 <div class="cl-v"><div class="cl-h">v72 · 2026-06-18</div><div class="cl-i">🎭 <b>新增两个「成就解锁」山海经皮肤——打硬成就才能披上身的炫耀皮!</b>进「🎭 外观·皮肤」就能看到这两位,<b>不卖灵晶</b>,只有达成指定硬成就才会<b>自动解锁</b>:🗡️<b>刑天</b>——青铜断首战神,「以乳为目、以脐为口」,胸口一张怒目獠牙的脸、左挎圆盾、断颈以铜领示意(不血腥),达成 <b>⚰️屠神者(弑神难度通关)</b>解锁;🕯️<b>烛龙</b>(烛九阴)——人面赤蛇,一对竖瞳幽幽发光、「视为昼、瞑为夜」,额心一点烛火、龙角龙须、赤鳞盘身,达成 <b>♾️登峰造极(无尽第 50 波)</b>解锁。还没解锁时,外观界面会直接<b>写明要打哪个成就</b>,目标一目了然;打出成就的瞬间就解锁,随时一键切换。<b>皮肤纯外观、不改任何战力数值</b>,所有难度(含弑神/无尽)一律公平;解锁状态<b>随成就走、备份码自带</b>,换机/清缓存都不丢。</div></div>
 <div class="cl-v"><div class="cl-h">v71.1 · 2026-06-17</div><div class="cl-i">✨ <b>法术等级不再让人误会「满级 5」了。</b>之前打到深层会看到法术 Lv6、Lv19 这样的大数字，不少人以为上限是 5、纳闷怎么超了——其实<b>法术等级根本没有上限</b>，越升伤害越高、冷却越短，正是靠它在深层把越来越肉的怪砍得动。Lv5 只是<b>「进化门槛」</b>:🔥火球 / ⚡连锁闪电 / 🗡️环刃 / ❄️寒冰锥这四个法术练到 Lv5、再配上对应符文，就能在选牌时进化成更强的形态。现在做了三处提示让这件事一目了然:① <b>法术栏</b>里这四个法术到 Lv5 起，等级后面会带一个 ✨(进化了就不带);② <b>升级卡</b>升到 Lv5 时会注明「进化门槛·配对应符文可进化」;③ <b>异兽图鉴</b>的武器进化区写明了「进化门槛·等级无上限」。纯提示，不改任何数值与平衡。</div></div>
@@ -699,7 +700,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v73', APP_TIME='2026-06-18 01:00';
+const APP_VER='v73.1', APP_TIME='2026-06-18 09:05';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -910,6 +911,11 @@ const CARD_DEFS=[
   {id:'chain',kind:'spell',rar:2},
   {id:'nova',kind:'spell',rar:2},
   {id:'swarm',kind:'spell',rar:2},
+  /* 进化形态:标 evoForm —— 仅在已进化(已拥有)后作为升级卡出现,不会被当新法术抽到;让进化后也能继续升级、同样无上限 */
+  {id:'firestorm',   kind:'spell',rar:3,evoForm:true},
+  {id:'thunderjudge',kind:'spell',rar:3,evoForm:true},
+  {id:'thousandblade',kind:'spell',rar:3,evoForm:true},
+  {id:'winterspear', kind:'spell',rar:3,evoForm:true},
   {id:'multi', kind:'mod',name:'多重施法',icon:'✨',desc:'每次施法 +1 发投射物',max:3,rar:3},
   {id:'homing',kind:'mod',name:'魔力追踪',icon:'🎯',desc:'法术会自动追踪附近敌人(开关型,一次即满)',max:1,rar:2},
   {id:'bounce',kind:'mod',name:'弹射符文',icon:'🪀',desc:'法术碰到墙壁与石柱弹射 +1 次',max:3,rar:1},
@@ -3975,10 +3981,13 @@ function cardInfo(d){
 function rollCards(n){
   let pool=CARD_DEFS.filter(d=>{
     if(d.kind==='curse'&&waveNum<4)return false;
+    /* 进化形态:只在已进化(已拥有该形态)时作为升级卡出现,绝不会作为新法术被抽到 */
+    if(d.evoForm&&!player.spells[d.id])return false;
     /* 法术槽位上限:已满且这是张没拥有的新法术 -> 不出;已有法术的升级与所有符文照常 */
     if(d.kind==='spell'&&!player.spells[d.id]&&Object.keys(player.spells).length>=SPELL_SLOT_MAX)return false;
     const c=player.cc[d.id]||0;
-    const max=d.kind==='spell'?(d.id==='blade'?4:5):d.max;
+    /* 法术等级无上限(含环刃 blade、进化形态):升级卡始终可出;只有符文/属性/契约卡各有自己的 max */
+    const max=d.kind==='spell'?Infinity:d.max;
     return c<max;
   }).map(cardInfo);
   const W3=[0,4,4,2+(relicMods.cardLuck||0)], out=[];
