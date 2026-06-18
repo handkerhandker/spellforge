@@ -460,6 +460,7 @@
   <div id="evoRow"></div>
   <button class="btn ghost" id="rerollBtn" style="margin-top:2px;padding:10px 26px;font-size:13px;">🔄 重抽一组 (8💰)</button>
   <button class="btn ghost" id="cardCodexBtn" style="margin-top:6px;padding:8px 22px;font-size:12.5px;opacity:.92;">📖 法术图鉴</button>
+  <button class="btn ghost" id="cardSkipBtn" style="margin-top:6px;padding:8px 22px;font-size:12px;opacity:.62;color:#b9b0d8;">🚫 放弃本次（不选）</button>
 </div>
 
 <!-- 遗物三选一 -->
@@ -468,6 +469,7 @@
   <h1 class="title" style="font-size:30px;">获得遗物 · 三选一</h1>
   <div class="sub" id="relicSub" style="font-size:12px;letter-spacing:.18em;">击败 Boss 的奖励 · 选一件永久强化</div>
   <div id="relicRow"></div>
+  <button class="btn ghost" id="relicSkipBtn" style="margin-top:12px;padding:8px 22px;font-size:12px;opacity:.62;color:#b9b0d8;">🚫 放弃本次（不选）</button>
 </div>
 
 <!-- 失败 -->
@@ -501,6 +503,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v74.1 · 2026-06-18</div><div class="cl-i">🛡️ <b>新增「放弃」按钮 + 关键操作二次确认(防手滑)。</b>① <b>选牌 / 遗物</b>界面加了「🚫 放弃本次(不选)」——刷出来的都不想要、又没钱重抽时,不用再被迫硬选一个,可以直接放弃、进入下一波;② <b>暂停菜单</b>的「重新开始」「结束本局」、以及<b>结算页</b>的「再次挑战」现在都要<b>再点一次确认</b>(按钮会先变成"⚠️ 确定…?再点一次",3 秒内不点就自动复原),防止手滑误触把一局白白葬送。沿用商店卖技能那套熟悉的确认手感,不弹窗、不啰嗦。📱 <b>横屏修复</b>:横屏用<b>固定摇杆</b>时,底部的法术信息栏会被左下摇杆挤到上半屏、和血条挤在一起;现已让它<b>留在底部、自动避开摇杆</b>(挪到摇杆右侧),不再打架(浮动摇杆不受影响)。</div></div>
 <div class="cl-v"><div class="cl-h">v74 · 2026-06-18</div><div class="cl-i">📱 <b>横屏适配·全套。</b>现在把手机横过来玩,整套界面都会重新排布、用上横向空间(竖屏完全不变):① <b>主菜单</b>分左右两栏——左边标题简介、右边难度/拔出法杖/各入口,开始键不再被挤到屏幕外;② <b>选牌 / 遗物</b>三张卡<b>并排</b>、一眼看全;③ <b>选法杖</b>整排平铺;④ <b>符文商店</b>商品两列;⑤ <b>外观·皮肤</b>角色两列;⑥ 暂停 / 图鉴 / 成就 / 每日 / 结算等也都居中可读、内容多时可滚。⚙️ <b>刘海让位</b>:横屏时左/右摇杆与冲刺键会自动避开屏幕侧边的刘海与圆角,不再被挡。智能分档:只有画面<b>明确够宽</b>才切横屏布局,竖屏 / 接近正方形一律走稳妥的竖排,不会错位。视野不设限——横屏能看多大就看多大(和大屏 / PC 一致,不再让手机吃亏)。</div></div>
 <div class="cl-v"><div class="cl-h">v73.1 · 2026-06-18</div><div class="cl-i">🐞 <b>重要修复:法术升到 5 级后「刷不出升级卡、卡住升不上去」。</b>之前有个隐藏 bug——法术练到 <b>Lv5</b>(环刃是 Lv4)之后,它的升级卡会被悄悄从选牌池里剔除,导致再也刷不到、等级死死卡住(打到四五十波还是 5 级)。这和法术「<b>等级本就无上限</b>」的设定是冲突的。现已修复:① <b>所有法术的等级上限去掉</b>,和设定一致、可一直升,深层无尽能继续变强;② <b>环刃</b>原本卡在 Lv4、连 Lv5 都到不了(导致「万刃」进化根本触发不了),现已放开、能正常升到 5 级觉醒;③ <b>四个进化形态(焚天 / 雷罚 / 万刃 / 永冬之矛)进化之后也能继续升级了</b>(之前进化反而把等级锁死)。若你之前的版本能升到很高级、是正常的;这次是把所有人都拉回到「无上限」的正确状态。<b>纯修复,不改任何数值与平衡公式。</b></div></div>
 <div class="cl-v"><div class="cl-h">v73 · 2026-06-18</div><div class="cl-i">🎭 <b>再添两位山海经皮肤——一个攒灵晶买、一个打成就送。</b>进「🎭 外观·皮肤」即见:🐦<b>精卫</b>——文首白喙、赤足彩冠的小神鸟,口中<b>衔着一枚石子</b>(衔石填海的执念),青羽双翼;走<b>灵晶购买</b>(✦300,和九尾妖狐/山鬼一样,攒够即可解锁)。🌈<b>女娲</b>——人首蛇身的创世神,圆眼含笑、头戴<b>金凤冠</b>,冠上一排<b>五色石</b>幽幽流光(炼石补天),翠玉蛇尾盘绕;走<b>成就解锁</b>,达成 <b>🐲神话终结(击败全部 8 位古神)</b>自动解锁。至此外观界面共 <b>7 个角色</b>(巫师 + 狐/山鬼/精卫走灵晶,刑天/烛龙/女娲走成就)。<b>皮肤一律纯外观、不改任何战力数值</b>,所有难度(含弑神/无尽)公平不变;解锁状态随存档 / 成就走、<b>备份码自带</b>,换机不丢。</div></div>
@@ -744,7 +747,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v74', APP_TIME='2026-06-18 09:55';
+const APP_VER='v74.1', APP_TIME='2026-06-18 10:35';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3713,6 +3716,7 @@ function setupEndLeaderboard(prefix){
 }
 function gameOver(manual){
   state='over'; clearResume(); if(!manual)S.die();
+  { const _b=$('retryBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
   if(waveNum<=1) unlockAch('wave1death');
   if(dailyRun){ saveDailyBest(waveNum,kills); bumpDailyStreak(); }
   saveProfile();
@@ -4095,6 +4099,7 @@ function doEvolve(e){
 }
 function buildCards(){
   const row=$('cardRow'); row.innerHTML='';
+  { const _b=$('cardSkipBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
   const opts=rollCards(3);
   for(const c of opts){
     const el=document.createElement('button');
@@ -4718,6 +4723,7 @@ function proceedAfterWave(){
 }
 function buildRelicChoice(){
   const row=$('relicRow'); row.innerHTML='';
+  { const _b=$('relicSkipBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
   const opts=rollRelics(3);
   if(!opts.length){ $('relic').classList.add('hidden'); proceedAfterWave(); return; }
   $('relicSub').textContent='击败 Boss 的奖励 · 选一件永久强化（已有 '+player.relics.length+' 件）';
@@ -6495,25 +6501,31 @@ function drawHUD(){
   ctx.font='12px sans-serif';const w2m=ctx.measureText(line2).width;
   ctx.font='900 12px sans-serif';const w3m=ctx.measureText(line3).width;
   const bw2=Math.max(w1m,w2m,w3m,150)+30;
-  const PW=Math.min(bw2+60,W-108);   /* 面板宽度封顶:右侧给冲刺键留出空当 */
-  const tMaxW=PW-24;                  /* 文字最大宽度:过长则自动横向压缩,绝不溢出怼到冲刺键 */
+  /* 横屏+固定摇杆:法术栏不再上移(那是竖屏的避让,横屏会顶到上半屏与血条/击杀挤一起),改为留在底部、右移到左下摇杆右侧——横屏底部横向空间足够 */
+  const landscapeFx = (W > H*1.3) && fixedStick && usingTouch;
+  let bx0 = 12;
   const by0b=H-bh-12-(usingTouch?6:0);
   let by0=by0b;
-  if(fixedStick&&usingTouch) by0=Math.min(by0, jBaseY()-56-bh);   /* 固定摇杆时上移,避开左下底盘 */
-  const lift=by0-by0b;   /* 文字随面板一起上移;非固定时 lift=0,位置与原来完全一致 */
+  if(fixedStick&&usingTouch){
+    if(landscapeFx){ bx0 = Math.round(ljBaseX()+78); }            /* 横屏:右移避开摇杆底盘,Y 仍在底部 */
+    else { by0=Math.min(by0, jBaseY()-56-bh); }                   /* 竖屏:维持原来的上移避让 */
+  }
+  const lift=by0-by0b;   /* 文字随面板一起上移;非固定/横屏时 lift=0,与原位置一致 */
+  const PW=Math.min(bw2+60, landscapeFx ? (W-bx0-110-safeR) : (W-108));   /* 面板宽度封顶:右侧给冲刺键留空当;横屏从 bx0 起算 */
+  const tMaxW=PW-24;                  /* 文字最大宽度:过长则自动横向压缩,绝不溢出怼到冲刺键 */
   ctx.fillStyle='rgba(10,8,24,.7)';
-  rrect(12,by0,PW,bh,10);ctx.fill();
+  rrect(bx0,by0,PW,bh,10);ctx.fill();
   /* 构筑栏顶部 1px 浓墨上边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
-  ctx.fillRect(14,by0,PW-4,1);
+  ctx.fillRect(bx0+2,by0,PW-4,1);
   ctx.textAlign='left';ctx.font='14px sans-serif';ctx.fillStyle='#fff';
-  ctx.fillText(line1,24,H-bh+8-(usingTouch?6:0)+lift,tMaxW);
+  ctx.fillText(line1,bx0+12,H-bh+8-(usingTouch?6:0)+lift,tMaxW);
   if(line2){ctx.font='12px sans-serif';ctx.fillStyle='#a79fd6';
-    ctx.fillText(line2,24,H-bh+30-(usingTouch?6:0)+lift,tMaxW);}
+    ctx.fillText(line2,bx0+12,H-bh+30-(usingTouch?6:0)+lift,tMaxW);}
   if(line3){
     const pulse=.7+Math.sin(time*5)*.3;
     ctx.font='900 12px sans-serif';ctx.fillStyle=`rgba(255,210,77,${pulse})`;
-    ctx.fillText(line3,24,H-bh+30+(hasLine2?20:44)+lift,tMaxW);
+    ctx.fillText(line3,bx0+12,H-bh+30+(hasLine2?20:44)+lift,tMaxW);
   }
 }
 
@@ -6685,6 +6697,7 @@ function togglePause(p){
   paused=(p!==undefined)?p:!paused;
   $('paused').classList.toggle('hidden',!paused);
   if(paused){ const _no=(difficulty>=5||dailyRun), _b=$('pauseSaveBtn');
+    { const _r1=$('pauseRestartBtn'),_r2=$('pauseEndBtn'); if(_r1&&_r1._resetConfirm)_r1._resetConfirm(); if(_r2&&_r2._resetConfirm)_r2._resetConfirm(); }
     if(_b){ _b.disabled=_no; _b.style.opacity=_no?'.4':''; _b.style.cursor=_no?'not-allowed':''; }
     const _s=$('pauseSaveSub'); if(_s){ _s.style.display='block'; if(_no){ _s.textContent= dailyRun?'🔒 每日挑战不可续战':'🔒 弑神不可续战 · 一命冲榜'; _s.style.color='#ffcaa0'; } else { _s.textContent='✅ 进度已自动保存 · 随时可回来续战'; _s.style.color='#a7e0b0'; } } }
 }
@@ -6697,8 +6710,20 @@ function enterShotMode(){ if(!paused)return; $('paused').classList.add('hidden')
 function exitShotMode(){ if(!shotMode)return; shotMode=false; const h=$('shotHint'); if(h)h.style.opacity='0'; clearTimeout(_shotHintT); if(paused)$('paused').classList.remove('hidden'); }
 $('pauseShotBtn').onclick=enterShotMode;
 $('pauseBeastBtn').onclick=openBestiary;
-$('pauseRestartBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); };
-$('pauseEndBtn').onclick=()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); };
+/* 通用「再点一次确认」按钮(防手滑):首点变确认字样、3 秒内再点才执行,超时自动复原。复用 v66 卖技能那套手感 */
+function bindConfirm(btn, confirmLabel, action){
+  if(!btn) return;
+  const orig=btn.textContent;
+  let armed=false, ct=null;
+  const reset=()=>{ armed=false; if(ct){clearTimeout(ct);ct=null;} btn.textContent=orig; };
+  btn._resetConfirm=reset;
+  btn.onclick=()=>{ if(armed){ reset(); action(); } else { armed=true; btn.textContent=confirmLabel; ct=setTimeout(reset,3000); } };
+}
+bindConfirm($('pauseRestartBtn'), '⚠️ 确定重新开始？再点一次', ()=>{ paused=false; $('paused').classList.add('hidden'); state='menu'; buildWandSel(); });
+bindConfirm($('pauseEndBtn'), '⚠️ 确定结束本局？再点一次', ()=>{ paused=false; $('paused').classList.add('hidden'); gameOver(true); });
+/* 选牌/遗物「放弃本次」:不拿任何东西、直接推进(到下一波或商店) */
+bindConfirm($('cardSkipBtn'), '⚠️ 确定放弃？再点一次', ()=>{ $('cards').classList.add('hidden'); $('cards').classList.remove('has-evo'); if(shopWave(waveNum)){ openShop(); } else { startWave(waveNum+1); state='play'; } });
+bindConfirm($('relicSkipBtn'), '⚠️ 确定放弃？再点一次', ()=>{ $('relic').classList.add('hidden'); proceedAfterWave(); });
 $('pauseSaveBtn').onclick=()=>{ if(difficulty>=5||dailyRun)return; saveResume(); paused=false; $('paused').classList.add('hidden'); state='menu'; $('menu').classList.remove('hidden'); refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
 $('wandBack').onclick=()=>{ $('wandSel').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
@@ -6799,7 +6824,7 @@ $('achvClose').onclick=()=>$('achv').classList.add('hidden');
 $('achvCloseTop').onclick=()=>$('achv').classList.add('hidden');
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
-$('retryBtn').onclick=()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); };
+bindConfirm($('retryBtn'), '⚠️ 确定再次挑战？再点一次', ()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); });
 $('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
