@@ -41,8 +41,8 @@
   #menu .hint{line-height:1.35;font-size:11px;text-align:left;}
   #menu .lb-title{margin-top:7px;}
   #menu .lb-board{max-height:none;overflow-y:visible;margin-top:6px;flex-shrink:0;}
-  #menu .panel{scrollbar-width:none;}   /* 隐藏滚动条(滚动功能保留:PC 滚轮 / 手机滑动);菜单只此一个滚动容器,英雄榜不再单独滚→不会出现两条 */
-  #menu .panel::-webkit-scrollbar{width:0;height:0;}
+  .overlay .panel{scrollbar-width:none;}   /* 隐藏滚动条(滚动功能保留:PC 滚轮 / 手机滑动)——统一作用于所有浮层弹窗(菜单/图鉴/异兽/成就/皮肤/商店/祭坛…),一处定义,新浮层自动生效,不必逐个加 */
+  .overlay .panel::-webkit-scrollbar{width:0;height:0;}
   /* 结算页(通关/失败):榜展开不自己滚,整页面板滚动,避免把底部按钮顶出屏幕又滑不到 */
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
   #win .panel,#over .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
@@ -418,6 +418,7 @@
 <!-- 每日挑战 -->
 <div id="daily" class="overlay hidden">
   <div class="panel">
+    <button class="ovx-close" id="dailyCloseTop" aria-label="关闭" title="关闭">✕</button>
     <div class="eyebrow" style="color:#7fd4ff;">Daily Challenge</div>
     <h1 class="title" style="font-size:34px;">每日挑战</h1>
     <div class="sub" id="dailyDate"></div>
@@ -522,6 +523,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v76.6 · 2026-06-18</div><div class="cl-i">🧹 <b>所有弹窗页面统一收尾。</b>上版只把主菜单的滚动条藏了,这版**一次性作用到全部弹窗**——法术图鉴 / 异兽图鉴 / 成就 / 皮肤 / 每日挑战 等页面右侧的滚动条都已隐藏(画面干净,滚轮 / 滑动照常滚)。另外**给「皮肤」和「每日挑战」补上了右上角的关闭 ✕**(之前缺,得滑到底找返回键),现在所有弹窗的关闭按钮一致。纯界面整理,不影响任何玩法。</div></div>
 <div class="cl-v"><div class="cl-h">v76.5 · 2026-06-18</div><div class="cl-i">🐛 <b>两个修复。</b>① <b>修复「钦原」(蓝色冰箭手) 错误显示 Boss 冲撞预警</b>：这种射手蓄力射冰箭时,以前会错误地弹出红色冲撞车道、甚至屏幕边缘的红色方向箭头,让人以为它要冲撞——可它根本不冲。现在它只显示自己该有的蓄力光环和瞄准虚线。② <b>修复 PC 网页主菜单的滚动条问题</b>：之前菜单右侧会出现滚动条(一度还冒成两条、连英雄榜都单独带一条),现在滚动条已隐藏、画面干净——滚轮 / 滑动照常可滚动查看完整英雄榜。<b>纯显示修复,未动任何玩法或数值,弑神 / 无尽冲榜公平不变。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.4 · 2026-06-18</div><div class="cl-i">📱🎮 <b>手机横屏自适应 + 手柄瞄准修复。</b>① <b>修复 v76.3 引入的手机横屏菜单显示异常</b>：横屏(屏幕又宽又矮)时,主菜单会自动切换成单栏布局——标题、难度、拔出法杖等正常显示,不再"左边一片空白、右边被截断";矮屏还会自动隐掉装饰性副标题,保证核心按钮在首屏可见。PC / 平板(够高的宽屏)的两栏布局、手机竖屏均不变。② <b>修复手柄两个瞄准问题</b>：A 方案(自动瞄准)以前在 PC 上会错误地跟着鼠标转、不自动瞄敌,现在稳定自动锁定最近的威胁;B 方案(右摇杆瞄准)以前斜推右摇杆会和自动瞄准抢方向、瞄起来一卡一卡,现在右摇杆瞄准顺滑(推杆时纯手动、松杆才回到自动瞄)。<b>仅调整界面与控制,法术的伤害 / 范围 / 冷却一概未动,弑神 / 无尽冲榜公平不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v76.3 · 2026-06-18</div><div class="cl-i">🖥️ <b>PC 网页 + 手柄体验打磨(3 项)。</b>① <b>主菜单在宽屏上更耐看</b>：左侧标题改为垂直居中、与右侧栏更平衡,英雄榜过长时改为榜内滚动,不再一直挂着一条粗滚动条。② <b>手柄「已连接」提示会自动消失了</b>：连上手柄后顶部那行提示飘一下(约 2 秒)就淡出,不再一直占着屏幕顶端。③ <b>连手柄时,暂停菜单的操作设置自动切成手柄设置</b>：直接显示「🎮 手柄方案 A / B 切换」,并把只对鼠标 / 触屏有用的「瞄准模式」「摇杆设置」收起来(手柄瞄准由方案决定、无需再设);拔掉手柄又会自动换回鼠标 / 触屏设置。</div></div>
@@ -725,6 +727,7 @@
 <!-- 外观:角色皮肤选择(v70) -->
 <div id="wardrobe" class="overlay hidden">
   <div class="panel" style="max-width:480px;max-height:92vh;overflow-y:auto;gap:10px;">
+    <button class="ovx-close" id="wardrobeCloseTop" aria-label="关闭" title="关闭">✕</button>
     <div class="diff-title" style="margin-top:6px;">🎭 外观 · 角色皮肤</div>
     <div class="sub" style="font-size:11px;letter-spacing:.12em;margin-bottom:4px;color:#9a8fd0;">换一副皮囊 · 纯外观,不改任何战力</div>
     <div id="wardrobeRow" class="ward-row"></div>
@@ -780,7 +783,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v76.5', APP_TIME='2026-06-18 19:10';
+const APP_VER='v76.6', APP_TIME='2026-06-18 19:11';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -6962,6 +6965,7 @@ function openDaily(){
 }
 $('dailyBtn').onclick=()=>{ initAudio(); openDaily(); };
 $('dailyBack').onclick=()=>{ $('daily').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
+$('dailyCloseTop').onclick=$('dailyBack').onclick;   /* 顶部✕与底部「返回」同一行为,统一 */
 $('dailyStart').onclick=()=>{ initAudio(); $('daily').classList.add('hidden'); launchDaily(); };
 $('clOpen').onclick=()=>$('changelog').classList.remove('hidden');
 /* ===== 新手引导 ===== */
@@ -7007,6 +7011,7 @@ $('bAchv').onclick=openAchv;
 $('altarBtn').onclick=openAltar;
 $('wardrobeBtn').onclick=buildWardrobe;
 $('wardrobeBack').onclick=()=>{ $('wardrobe').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
+$('wardrobeCloseTop').onclick=$('wardrobeBack').onclick;   /* 顶部✕与底部「返回」同一行为,和其他浮层统一 */
 $('altarBack').onclick=()=>$('altar').classList.add('hidden');
 $('altarCloseTop').onclick=()=>$('altar').classList.add('hidden');
 $('altarBackupBtn').onclick=()=>{ $('altar').classList.add('hidden'); openBackup(); };
