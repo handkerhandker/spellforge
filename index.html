@@ -504,6 +504,8 @@
       <div class="stat"><b id="ovWave">0</b><span>抵达波次</span></div>
       <div class="stat"><b id="ovKill">0</b><span>击杀</span></div>
     </div>
+    <div id="ovCause" style="font-size:13px;color:#d9a6b8;margin:2px 0 8px;line-height:1.4;"></div>
+    <div id="ovDmg" style="width:100%;margin:0 0 8px;"></div>
     <div class="lj-gain" id="ovGain"></div>
     <div id="ovAch"></div>
     <div class="win-actions">
@@ -526,6 +528,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.2 · 2026-06-19</div><div class="cl-i">🛡️ <b>修复:护盾现在能挡住「中毒」了。</b>之前法盾展开时,中毒掉血会无视护盾直接扣你血——现在护盾期间免疫中毒,护盾消失后毒才继续。💀 <b>死亡结算页新增「死因」:</b>会告诉你致命一击是被什么击败的(首领招式 / 妖兽近身 / 敌方弹幕 / 范围爆炸 / 中毒),死得明白。📊 <b>还新增「本局失血来源」色条:</b>一眼看出这一局你的血主要被什么扣的(近身 / 首领 / 弹幕 / 范围 / 中毒 各占多少),方便针对性调整打法。(说明:深层无尽 + 弑神后期本就极度致命,一次满额攻击可能直接超过你的血量;善用护盾的开/合时机。)</div></div>
 <div class="cl-v"><div class="cl-h">v83.1 · 2026-06-19</div><div class="cl-i">🔔 <b>有重要更新时,进游戏会自动弹出这个更新说明</b>,第一时间让你知道新增了什么——看过一次就不再弹,小修复不打扰你(就像现在这样 👀)。🔧 顺手修正了新手引导首页「下一步」按钮的位置,现在居中了。</div></div>
 <div class="cl-v"><div class="cl-h">v83.0 · 2026-06-19</div><div class="cl-i">💾 <b>存档备份码升级:换机现在连「设置」也一起带走。</b>以前备份码只保存进度(灵晶 / 解锁 / 成就 / 昵称 / 难度),现在会<b>一并保存你的设置</b>——特效强度、操作方式(摇杆 / 手柄方案)、出售确认、省电模式、法术数据条开关——换设备导入后这些偏好也跟着回来,不用再一项项重设。<b>放心:之前已分享 / 保存的旧备份码照样能用</b>(导入时只是不带来这几项设置而已,绝不失效)。⚠ 导入仍会覆盖当前设备的存档(现在也含设置),确认提示照旧。🐉 <b>续战更完整:</b>打一半关掉再「继续上次战斗」,这局「本局已遇见」的妖兽 / Boss 击杀与伤害统计现在<b>会保留</b>,不再从头计。</div></div>
 <div class="cl-v"><div class="cl-h">v82.9 · 2026-06-19</div><div class="cl-i">👑 <b>异兽图鉴「本局已遇见」现在也收录 Boss 了。</b>这局打过的古神 Boss 会<b>单独列一栏</b>(主题色标识 + 名字),标出<b>本局击败次数</b>和<b>对它累计造成的总伤害</b>——无尽里反复刷的 Boss、被你喂了多少火力,一目了然(数字大了用万 / 亿显示)。📊 <b>左下角法术数据条改为「默认隐藏」。</b>之前默认显示、不少人觉得挡视线;现在<b>默认收起、画面更清爽</b>,想让它常驻的可在<b>暂停菜单「📊 法术数据条」</b>里打开。随时查构筑可点「📖 法术图鉴」的「本局构筑」。</div></div>
@@ -812,10 +815,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.1', APP_TIME='2026-06-19 12:00';
+const APP_VER='v83.2', APP_TIME='2026-06-19 13:40';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v83.1';
+const APP_NOTIFY_VER='v83.2';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1493,6 +1496,8 @@ let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
 let runMobKills={}, runMobDmg={}; /* 本局逐怪统计:击杀数 / 累计伤害(异兽图鉴「本局已遇见」用)*/
 let runBossKills={}, runBossDmg={}; /* 本局逐 Boss 统计(按 _bossId 0-7):击败次数 / 累计伤害 */
+let deathCause=''; /* 本局致命一击来源(死亡结算页显示「被什么击败」,消除暴毙迷惑感)*/
+let runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0}; /* 本局实际失血按来源累计(死亡结算页「失血来源」色条)*/
 let roundupT=0, waveStartKills=0, _skipEmod=false; /* 残怪围拢计时 / 开波击杀快照 / 续战恢复那波跳过加无尽修饰符 */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false, _runDashed=false, _runMaxSpells=0, _runT=0, _playAcc=0; /* 本局成就追踪(需在 resetGame 前声明) */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -1662,7 +1667,7 @@ function resetGame(){
   enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; beasts=[]; summonT=0; totems=[]; _synAnnounced=false;
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
-  runMaxComboTier=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runBossKills={}; runBossDmg={};
+  runMaxComboTier=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runBossKills={}; runBossDmg={}; deathCause=''; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   _runUnlocked=[]; runTookHeart=false; runBoughtShop=false; _runDashed=false; _runMaxSpells=0; _runT=0;
   relicMods={...RELIC_BASE};
@@ -2577,19 +2582,19 @@ function bossAttack(e){
   /* ===== 6 梼杌(顽固凶兽,裂地不退) ===== */
   else if(e._bossId===6){
     const dm=e._dmgMul||1, ph=phase;
-    moveSet.push(()=>{ const ex=e.x,ey=e.y; S.boom(); telegraph(ex,ey,170+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<185+ph*20) hurtPlayer((16+ph*4)*dm); const n=18+ph*4; for(let i=0;i<n;i++){const a=i/n*TAU; ebullets.push({x:ex,y:ey,vx:Math.cos(a)*(190+ph*15),vy:Math.sin(a)*(190+ph*15),r:8,life:4,dmg:(8+ph)*dm,dead:false,col:'#9aa84e'});} cam.shake=14; }); }); /* 裂地冲击·扩散环 */
+    moveSet.push(()=>{ const ex=e.x,ey=e.y; S.boom(); telegraph(ex,ey,170+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<185+ph*20) hurtPlayer((16+ph*4)*dm, e); const n=18+ph*4; for(let i=0;i<n;i++){const a=i/n*TAU; ebullets.push({x:ex,y:ey,vx:Math.cos(a)*(190+ph*15),vy:Math.sin(a)*(190+ph*15),r:8,life:4,dmg:(8+ph)*dm,dead:false,col:'#9aa84e'});} cam.shake=14; }); }); /* 裂地冲击·扩散环 */
     moveSet.push(()=>{ const base=Math.atan2(player.y-e.y,player.x-e.x); for(let i=0;i<5+ph;i++) ebul(e.x,e.y,base+rand(-.35,.35),170+rand(0,90),8+ph); }); /* 碎石抛掷 */
     moveSet.push(()=>{ e._chargeA=Math.atan2(player.y-e.y,player.x-e.x); e._chargeT=0; e._charging=true; e._chargeDmg=22+ph*4; }); /* 践踏追击 */
-    if(phase>=2) moveSet.push(()=>{ const ex=e.x,ey=e.y,px=player.x,py=player.y; telegraph(ex,ey,160+ph*18,()=>{const n=14+ph*3;for(let i=0;i<n;i++){const a=i/n*TAU;ebullets.push({x:ex,y:ey,vx:Math.cos(a)*200,vy:Math.sin(a)*200,r:8,life:3.5,dmg:(8+ph)*dm,dead:false,col:'#9aa84e'});}}); telegraph(px,py,150,()=>{ if(Math.hypot(player.x-px,player.y-py)<165) hurtPlayer((14+ph*4)*dm); cam.shake=12; }); }); /* 双重裂地 */
-    if(phase>=3) moveSet.push(()=>{ for(let j=0;j<4+ph;j++){ const tx=clamp(player.x+rand(-260,260),ARENA.pad+40,ARENA.w-ARENA.pad-40), ty=clamp(player.y+rand(-260,260),ARENA.pad+40,ARENA.h-ARENA.pad-40); telegraph(tx,ty,130,()=>{ if(Math.hypot(player.x-tx,player.y-ty)<145) hurtPlayer((12+ph*3)*dm); }); } cam.shake=16; }); /* 地动山摇 */
+    if(phase>=2) moveSet.push(()=>{ const ex=e.x,ey=e.y,px=player.x,py=player.y; telegraph(ex,ey,160+ph*18,()=>{const n=14+ph*3;for(let i=0;i<n;i++){const a=i/n*TAU;ebullets.push({x:ex,y:ey,vx:Math.cos(a)*200,vy:Math.sin(a)*200,r:8,life:3.5,dmg:(8+ph)*dm,dead:false,col:'#9aa84e'});}}); telegraph(px,py,150,()=>{ if(Math.hypot(player.x-px,player.y-py)<165) hurtPlayer((14+ph*4)*dm, e); cam.shake=12; }); }); /* 双重裂地 */
+    if(phase>=3) moveSet.push(()=>{ for(let j=0;j<4+ph;j++){ const tx=clamp(player.x+rand(-260,260),ARENA.pad+40,ARENA.w-ARENA.pad-40), ty=clamp(player.y+rand(-260,260),ARENA.pad+40,ARENA.h-ARENA.pad-40); telegraph(tx,ty,130,()=>{ if(Math.hypot(player.x-tx,player.y-ty)<145) hurtPlayer((12+ph*3)*dm, e); }); } cam.shake=16; }); /* 地动山摇 */
   }
   /* ===== 7 饕餮(贪食巨口,万物归腹) ===== */
   else if(e._bossId===7){
     const dm=e._dmgMul||1, ph=phase;
-    moveSet.push(()=>{ e._pullT=1.0; S.boom(); const ex=e.x,ey=e.y; telegraph(ex,ey,150+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<165+ph*20) hurtPlayer((24+ph*6)*dm); const n=16+ph*4; for(let i=0;i<n;i++){const a=i/n*TAU; ebullets.push({x:ex,y:ey,vx:Math.cos(a)*(200+ph*15),vy:Math.sin(a)*(200+ph*15),r:7,life:4,dmg:(7+ph)*dm,dead:false,col:'#c8203a'});} cam.shake=16; }); }); /* 吞噬·吸入+咬合 */
+    moveSet.push(()=>{ e._pullT=1.0; S.boom(); const ex=e.x,ey=e.y; telegraph(ex,ey,150+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<165+ph*20) hurtPlayer((24+ph*6)*dm, e); const n=16+ph*4; for(let i=0;i<n;i++){const a=i/n*TAU; ebullets.push({x:ex,y:ey,vx:Math.cos(a)*(200+ph*15),vy:Math.sin(a)*(200+ph*15),r:7,life:4,dmg:(7+ph)*dm,dead:false,col:'#c8203a'});} cam.shake=16; }); }); /* 吞噬·吸入+咬合 */
     moveSet.push(()=>{ const base=Math.atan2(player.y-e.y,player.x-e.x); for(let k=-3;k<=3;k++) ebul(e.x,e.y,base+k*.16,240+phase*20,7+phase); }); /* 饕风喷吐 */
     moveSet.push(()=>{ const base=Math.atan2(player.y-e.y,player.x-e.x); const m=4+ph; for(let i=0;i<m;i++){ const a=base+(i-m/2)*.2; ebullets.push({x:e.x,y:e.y,vx:Math.cos(a)*220,vy:Math.sin(a)*220,r:9,life:3.5,dmg:(8+ph*2)*dm,dead:false,_homing:true,col:'#c8203a'}); } }); /* 噬咬弹·追踪 */
-    if(phase>=2) moveSet.push(()=>{ e._pullT=1.4; const ex=e.x,ey=e.y; telegraph(ex,ey,180+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<195+ph*20) hurtPlayer((30+ph*6)*dm); cam.shake=18; }); }); /* 饕餮巨口 */
+    if(phase>=2) moveSet.push(()=>{ e._pullT=1.4; const ex=e.x,ey=e.y; telegraph(ex,ey,180+ph*20,()=>{ if(Math.hypot(player.x-ex,player.y-ey)<195+ph*20) hurtPlayer((30+ph*6)*dm, e); cam.shake=18; }); }); /* 饕餮巨口 */
     if(phase>=3) moveSet.push(()=>{ e._pullT=1.2; const ex=e.x,ey=e.y; telegraph(ex,ey,170,()=>{ const n=26+ph*4; for(let i=0;i<n;i++){const a=i/n*TAU; ebullets.push({x:ex,y:ey,vx:Math.cos(a)*(220+ph*15),vy:Math.sin(a)*(220+ph*15),r:7,life:4,dmg:(8+ph)*dm,dead:false,col:'#c8203a'});} cam.shake=16; }); }); /* 万物归腹 */
   }
   /* ===== 智能选招:基于玩家行为调整权重 ===== */
@@ -3006,7 +3011,7 @@ function enemyAI(e,dt){
         const proj=px*lx+py*ly;
         if(proj>0 && proj<900){
           const perp=Math.abs(px*ly-py*lx);
-          if(perp<40) hurtPlayer(dmg*(e._dmgMul||1));
+          if(perp<40) hurtPlayer(dmg*(e._dmgMul||1), e);
         }
         cam.shake=Math.min(cam.shake+10,16);
         e._laserFlash=.16; e._laserFlashAng=e._laserAngle;
@@ -3036,7 +3041,7 @@ function enemyAI(e,dt){
         if(e.y<_mny){e.y=_mny;blocked=true;} else if(e.y>_mxy){e.y=_mxy;blocked=true;}
         /* 撞到玩家 */
         if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+10){
-          hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1));
+          hurtPlayer((e._chargeDmg||20)*(e._dmgMul||1), e);
           cam.shake=Math.min(cam.shake+8,14);
           e._charging=false; e._cwDone=false; e._chargeWind=0; e._chargeTrailT=0;
         }
@@ -3089,7 +3094,7 @@ function enemyAI(e,dt){
       if(e.y>=e.ty){
         /* 命中玩家 */
         if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+18)*(e.r+player.r+18)){
-          hurtPlayer(e.dmg);
+          hurtPlayer(e.dmg, e);
         }
         explode(e.x,e.y,80,e.dmg*.7,'#ff7a3a');
         e.dead=true; e._sui=true;
@@ -3132,7 +3137,7 @@ function enemyAI(e,dt){
         e._mv={x:Math.cos(e._dir)*ETYPE.charger.dashSpd, y:Math.sin(e._dir)*ETYPE.charger.dashSpd};
         if(e._dashT<=0){ e._phase='cooldown'; e._cd=ETYPE.charger.cooldown; }
         /* 接触时给玩家 1 次额外伤害 */
-        if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+4)*(e.r+player.r+4)) hurtPlayer(ETYPE.charger.dashDmg);
+        if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+4)*(e.r+player.r+4)) hurtPlayer(ETYPE.charger.dashDmg, e);
       } else if(e._phase==='cooldown'){
         e._mv={x:0,y:0};
         if(e._cd<=0) e._phase='chase';
@@ -3576,7 +3581,7 @@ function shieldNearby(t){
 function volatileBlast(x,y,dmg){
   for(const e of enemies){ if(e.dead)continue;
     if(dist2(x,y,e.x,e.y)<(95+e.r)*(95+e.r))damageEnemy(e,dmg*.5,{kx:e.x-x,ky:e.y-y}); }
-  if(player.iframe<=0&&dist2(x,y,player.x,player.y)<(95+player.r)*(95+player.r))hurtPlayer(dmg);
+  if(player.iframe<=0&&dist2(x,y,player.x,player.y)<(95+player.r)*(95+player.r))hurtPlayer(dmg, '范围爆炸');
   for(let i=0;i<14;i++){const a=rand(0,TAU),s=rand(60,260);spawnPart(x,y,Math.cos(a)*s,Math.sin(a)*s,rand(.25,.5),rand(2,5),'#ffaa3a');}
   spawnPart(x,y,0,0,.22,76,'#ffaa3a',true);
   addHitShake(4); S.boom();
@@ -3660,7 +3665,21 @@ function onKill(e){
   }
 }
 function heal(n){ player.hp=Math.min(player.hp+n,player.maxhp); }
-function hurtPlayer(d){
+/* 把伤害来源转成给玩家看的死因文案:Boss 用真名+招式,普通怪用等级分类(怪的 ETYPE.name 不可靠故不用) */
+function dmgSrcLabel(s){
+  if(!s) return '敌人攻击';
+  if(typeof s==='string') return s;
+  if(s.boss) return '首领「'+(s.name||'未知')+'」'+(s.atkName?(' · '+s.atkName):'');
+  const tn=(s._tier===3?'「煞」级':s._tier===2?'「妖」级':'');
+  return (s._elite?'精英 ':'')+tn+'妖兽 · 近身';
+}
+/* 把伤害来源归到 5 个失血类别(死亡结算页色条用) */
+function dmgCat(s){
+  if(typeof s==='string'){ if(s.indexOf('弹幕')>=0)return 'bullet'; if(s.indexOf('爆炸')>=0||s.indexOf('范围')>=0)return 'blast'; if(s.indexOf('毒')>=0)return 'poison'; return 'melee'; }
+  if(s&&s.boss) return 'boss';
+  return 'melee';
+}
+function hurtPlayer(d, src){
   if(location.hash==='#debug')return; // 测试模式:URL 加 #debug 玩家无敌
   if(player.iframe>0||state!=='play')return;
   /* 遗物:闪避(虚影斗篷) */
@@ -3678,12 +3697,18 @@ function hurtPlayer(d){
   /* 法盾优先:挡下绝大部分伤害,但仍漏 1 血(对齐说明,杜绝永久零伤) */
   if(player.shield && player.shield.hits<player.shield.max){
     player.shield.hits++;
+    deathCause=dmgSrcLabel(src);
+    { const _c=dmgCat(src); runDmgBySrc[_c]=(runDmgBySrc[_c]||0)+1; }
     player.hp-=1;
     player.iframe=.4; hurtFx=.2; cam.shake=Math.min(cam.shake+3,8);
     S.hurt(); puff(player.x,player.y,'#9ad8ff',6);
+    if(player.hp<=0){ player.hp=0; gameOver(); }
     return;
   }
-  player.hp-=d*Math.pow(.85,player.mods.armor)*(1+player.curse.taken)*relicMods.takenMul*(player.wandFx.takenMul||1);
+  deathCause=dmgSrcLabel(src);
+  const _dmg=d*Math.pow(.85,player.mods.armor)*(1+player.curse.taken)*relicMods.takenMul*(player.wandFx.takenMul||1);
+  { const _c=dmgCat(src); runDmgBySrc[_c]=(runDmgBySrc[_c]||0)+_dmg; }
+  player.hp-=_dmg;
   if(_runT<5&&state==='play')unlockAch('earlyhit');
   if(combo>=5)texts.push({x:player.x,y:player.y-30,str:'连击中断',life:.8,vy:-30,col:'#ff7b9c',size:13});
   combo=0;comboT=0;comboDmg=0;comboTierLv=0;
@@ -3926,6 +3951,23 @@ function setupEndLeaderboard(prefix){
     if(_h) boardEl.insertAdjacentHTML('afterbegin',_h);
   };
 }
+/* 死亡结算页「本局失血来源」色条:把 runDmgBySrc 画成一根分段横条 + 小图例,一眼看出血被什么扣的 */
+const DMG_CAT_META={melee:{n:'近身',c:'#ff6b6b'},boss:{n:'首领',c:'#b07bff'},bullet:{n:'弹幕',c:'#5fb0ff'},blast:{n:'范围',c:'#ffb24d'},poison:{n:'中毒',c:'#9ddb5a'}};
+function buildDmgBreakdown(){
+  const el=$('ovDmg'); if(!el) return;
+  const order=['melee','boss','bullet','blast','poison'];
+  let total=0; for(const k of order) total+=(runDmgBySrc[k]||0);
+  if(total<=0){ el.innerHTML=''; return; }
+  const items=order.map(k=>({k,v:runDmgBySrc[k]||0})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+  let bar='', leg='';
+  for(const it of items){ const pct=it.v/total*100, m=DMG_CAT_META[it.k];
+    bar+='<div style="width:'+pct.toFixed(2)+'%;background:'+m.c+';"></div>';
+    leg+='<span style="color:#cdbce0;white-space:nowrap;"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+m.c+';margin-right:4px;vertical-align:middle;"></span>'+m.n+' '+Math.round(pct)+'%</span>';
+  }
+  el.innerHTML='<div style="font-size:11.5px;color:#9a8fc0;letter-spacing:.04em;margin-bottom:5px;text-align:center;">本局共失血 '+fmtNum(Math.round(total))+' · 来源构成</div>'+
+    '<div style="display:flex;width:100%;height:13px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.07);">'+bar+'</div>'+
+    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px 12px;margin-top:7px;font-size:11px;">'+leg+'</div>';
+}
 function gameOver(manual){
   state='over'; clearResume(); if(!manual)S.die();
   { const _b=$('retryBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
@@ -3941,6 +3983,8 @@ function gameOver(manual){
   recordRunBest();   /* 破纪录判定(存盘前比旧值)+ 持久化个人最佳;含每日 streak */
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
+  { const _cz=$('ovCause'); if(_cz) _cz.innerHTML=(deathCause && !manual)?('💀 致命一击 · 被 <b style="color:#ff9ab0;">'+deathCause+'</b> 击败'):''; }
+  { const _dm=$('ovDmg'); if(_dm){ if(manual) _dm.innerHTML=''; else buildDmgBreakdown(); } }
   awardLj(); $('ovGain').innerHTML='✦ 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj;
   $('ovAch').innerHTML=achSummaryHTML();
   $('over').classList.remove('hidden');
@@ -4807,9 +4851,11 @@ function update(dt){
   if(player.slowT>0)player.slowT-=dt;
   if(player.poisonT>0){ player.poisonT-=dt; player._poiTick=(player._poiTick||0)-dt;
     if(player._poiTick<=0){ player._poiTick=.5;
-      player.hp-=player.poisonDmg*.5; hurtFx=Math.max(hurtFx,.12);
-      texts.push({x:player.x+rand(-6,6),y:player.y-22,str:'-'+Math.round(player.poisonDmg*.5),life:.5,vy:-28,col:'#9dff5a',size:11});
-      if(player.hp<=0){ player.hp=0; gameOver(); } } }
+      if(!player.shield){   /* 修复:法盾生效期间免疫中毒(泡泡把毒挡在外面);护盾消失后毒继续。原本毒直接扣血、绕过护盾,造成「有盾却被毒磨死」的迷惑 */
+        player.hp-=player.poisonDmg*.5; runDmgBySrc.poison=(runDmgBySrc.poison||0)+player.poisonDmg*.5; hurtFx=Math.max(hurtFx,.12);
+        texts.push({x:player.x+rand(-6,6),y:player.y-22,str:'-'+Math.round(player.poisonDmg*.5),life:.5,vy:-28,col:'#9dff5a',size:11});
+        deathCause='中毒';
+        if(player.hp<=0){ player.hp=0; gameOver(); } } } }
   if(player.dashT>0){
     player.dashT-=dt;
     player.x+=player.dashDX*760*dt; player.y+=player.dashDY*760*dt;
@@ -4986,7 +5032,7 @@ function update(dt){
       if(_sd<_md){ if(_sd>0.01){ e.x=player.x+_sx/_sd*_md; e.y=player.y+_sy/_sd*_md; } else { e.x=player.x+_md; e.y=player.y; } }
     }
     if(dist2(e.x,e.y,player.x,player.y)<(e.r+player.r+2)*(e.r+player.r+2)){
-      hurtPlayer(e.dmg*(e._dmgMul||1));
+      hurtPlayer(e.dmg*(e._dmgMul||1), e);
       if((e._aff&&e._aff.venomous)||modMult.contactPoison)applyPoison(3,4);
     }
   }
@@ -5024,7 +5070,7 @@ function update(dt){
     for(const p of pillars){const dx=b.x-p.x,dy=b.y-p.y;
       if(dx*dx+dy*dy<(p.r+b.r)*(p.r+b.r)){b.dead=true;puff(b.x,b.y,b.col||'#ff5d7a',3);break;}}
     if(!b.dead&&player.iframe<=0&&dist2(b.x,b.y,player.x,player.y)<(b.r+player.r)*(b.r+player.r)){
-      b.dead=true;hurtPlayer(b._dot?b.dmg*.3:b.dmg);
+      b.dead=true;hurtPlayer(b._dot?b.dmg*.3:b.dmg, '敌方弹幕');
       if(b._dot)player.dotT=Math.max(player.dotT||0,1.2);
       if(b._slow)applySlow(b._slow);
     }
