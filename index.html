@@ -526,6 +526,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82.6 · 2026-06-19</div><div class="cl-i">🔧 <b>Boss 强度已恢复原本水平。</b>上次的增强经体验反馈偏硬,现已撤回,Boss 的强弱回到原来的样子。</div></div>
 <div class="cl-v"><div class="cl-h">v82.5 · 2026-06-19</div><div class="cl-i">⚔️ <b>Boss 整体变强,后期更有压迫感(应玩家反馈:技能一直涨、Boss 却没跟上)。</b>① 以前正赛里每尊 Boss 每下打你的伤害都一样、高波 Boss 只是血更厚却不更凶;现在 <b>Boss 伤害会随波数往上走</b>,越靠后的 Boss 越危险,逼你认真走位。② <b>无尽深入后 Boss 的血量与伤害涨得更陡</b>,跟得上你越滚越高的战力,不再越打越像纸。<b>所有难度一并加强,但各自保持原有强弱比例</b>——凡尘依旧最轻松、弑神依旧最狠。法术 / 玩家数值一概没动。</div></div>
 <div class="cl-v"><div class="cl-h">v82.4 · 2026-06-19</div><div class="cl-i">🪨 <b>修复「继续上次战斗后人物卡在场地中央石柱里」。</b>之前点「继续上次战斗」回到战场时,人物会正好生成在中央那根石柱的正中心、卡在里面挪不动——你的法术能打出去,怪却被石柱挡着够不到你。现在人物会自动从石柱里挪出来,正常对战。<b>(开新局也一并更稳,不会再贴在柱心。)</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.3 · 2026-06-19</div><div class="cl-i">📜 <b>修复「选法杖界面在部分手机上下都滑不到头」。</b>之前在屏幕较矮的手机上,选法杖页的标题和最上面几把、以及底部的「返回」键会被推出屏幕、怎么滑都够不着(屏幕大的机子不明显)。现在这页改成<b>从顶部对齐、整页可上下滚动</b>,并避开刘海和底部小黑条,任意机型都能从标题一路滑到返回键、每把法杖都点得到。<b>只改了这页的滚动方式,法杖内容本身没动。</b></div></div>
@@ -802,7 +803,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82.5', APP_TIME='2026-06-19 01:05';
+const APP_VER='v82.6', APP_TIME='2026-06-19 09:50';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1485,14 +1486,14 @@ let relicMods={...RELIC_BASE};
    只调敌人血量/伤害/刷怪量(玩家不变);eHp/eDmg 是无尽逐波复利的底数(弑神更陡)。
    现版本难度 = 通玄(第2档,全 ×1.0);默认入圣(标准)。 */
 const DIFFICULTIES=[
-  {id:1,name:'凡尘',sub:'轻松',desc:'敌人更弱更少 · 休闲 / 新手向',     hpM:0.70,dmgM:0.65,spawnM:0.88,eHp:1.12,eDmg:1.085},
-  {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.12,eDmg:1.085},
-  {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.12,eDmg:1.085},
-  {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.12,eDmg:1.085},
-  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.15,eDmg:1.11}
+  {id:1,name:'凡尘',sub:'轻松',desc:'敌人更弱更少 · 休闲 / 新手向',     hpM:0.70,dmgM:0.65,spawnM:0.88,eHp:1.11,eDmg:1.085},
+  {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.11,eDmg:1.085},
+  {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.11,eDmg:1.085},
+  {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.11,eDmg:1.085},
+  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.14,eDmg:1.11}
 ];
 let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
-let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.12,eDmg:1.085,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关 */
+let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.11,eDmg:1.085,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关 */
 function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg,nm:d.id===5}; }
 function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
 function diffData(){ return DIFFICULTIES[difficulty-1]; }
@@ -2003,9 +2004,9 @@ function startWave(n){
        原本血量是线性(+12%/波)、伤害写死 16 从不缩放 → 后期秒 Boss 且站脸上不掉血。
        只在 16 波后生效,战役 1-15 波完全不变。数值温和起步、越深越狠。 */
     const scale=(n>15?Math.pow(diffMul.eHp,n-15):1);       /* Boss 血量复利(弑神更陡;无尽底数已上调 1.10→1.12 / 弑神 1.13→1.15) */
-    /* 正赛(5-15波)Boss 伤害随波缓涨:补上"正赛里每尊 Boss 每下伤害都一样、高波 Boss 不更危险"的缺。
-       封顶 1.6×(第15波 vs 第5波),并整体带入无尽 → Boss 越深越凶,而不是只靠血厚。各难度按各自 dmgM 等比生效。 */
-    const campDmg=1+0.06*(clamp(n,5,15)-5);
+    /* 正赛(5-15波)Boss 伤害随波缓涨【低档增强】:补"正赛 boss 每下伤害都一样"的缺,但力度温和。
+       封顶 1.3×(第15波 vs 第5波),并带入无尽。中等档=0.06(→1.6×)、低档=0.03(→1.3×),嫌不够改这里。 */
+    const campDmg=1+0.03*(clamp(n,5,15)-5);
     const dmgScale=campDmg*(n>15?Math.pow(diffMul.eDmg,n-15):1);   /* Boss 伤害 = 正赛缓涨 × 无尽逐波复利 */
     /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
     const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
