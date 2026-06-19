@@ -526,6 +526,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.1 · 2026-06-19</div><div class="cl-i">🔔 <b>有重要更新时,进游戏会自动弹出这个更新说明</b>,第一时间让你知道新增了什么——看过一次就不再弹,小修复不打扰你(就像现在这样 👀)。🔧 顺手修正了新手引导首页「下一步」按钮的位置,现在居中了。</div></div>
 <div class="cl-v"><div class="cl-h">v83.0 · 2026-06-19</div><div class="cl-i">💾 <b>存档备份码升级:换机现在连「设置」也一起带走。</b>以前备份码只保存进度(灵晶 / 解锁 / 成就 / 昵称 / 难度),现在会<b>一并保存你的设置</b>——特效强度、操作方式(摇杆 / 手柄方案)、出售确认、省电模式、法术数据条开关——换设备导入后这些偏好也跟着回来,不用再一项项重设。<b>放心:之前已分享 / 保存的旧备份码照样能用</b>(导入时只是不带来这几项设置而已,绝不失效)。⚠ 导入仍会覆盖当前设备的存档(现在也含设置),确认提示照旧。🐉 <b>续战更完整:</b>打一半关掉再「继续上次战斗」,这局「本局已遇见」的妖兽 / Boss 击杀与伤害统计现在<b>会保留</b>,不再从头计。</div></div>
 <div class="cl-v"><div class="cl-h">v82.9 · 2026-06-19</div><div class="cl-i">👑 <b>异兽图鉴「本局已遇见」现在也收录 Boss 了。</b>这局打过的古神 Boss 会<b>单独列一栏</b>(主题色标识 + 名字),标出<b>本局击败次数</b>和<b>对它累计造成的总伤害</b>——无尽里反复刷的 Boss、被你喂了多少火力,一目了然(数字大了用万 / 亿显示)。📊 <b>左下角法术数据条改为「默认隐藏」。</b>之前默认显示、不少人觉得挡视线;现在<b>默认收起、画面更清爽</b>,想让它常驻的可在<b>暂停菜单「📊 法术数据条」</b>里打开。随时查构筑可点「📖 法术图鉴」的「本局构筑」。</div></div>
 <div class="cl-v"><div class="cl-h">v82.8 · 2026-06-19</div><div class="cl-i">🐉 <b>异兽图鉴升级:局内能看「本局已遇见」实时战况。</b>局内<b>随时打开异兽图鉴(暂停菜单里)</b>,顶部会多出一栏<b>「本局已遇见」</b>:把你这局<b>交过手的妖兽按击杀数排好</b>,标出对每种的<b>本局击杀数</b>和<b>累计造成的总伤害</b>——一眼看清这局都在虐谁、火力都喂给了谁。🔢 <b>大数字不再挤成一长串。</b>图鉴里的伤害 / 总伤害等数值变大后会自动用<b>「万 / 亿」缩写</b>显示(比如 1234567 → <b>123万</b>),又短又好认;法术图鉴的「本局构筑」数值同样适用。</div></div>
@@ -811,7 +812,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.0', APP_TIME='2026-06-19 11:45';
+const APP_VER='v83.1', APP_TIME='2026-06-19 12:00';
+/* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
+   普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
+const APP_NOTIFY_VER='v83.1';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -7506,7 +7510,7 @@ function renderTutStep(){
     +'<div style="font-size:14px;line-height:1.65;color:#d8cffa;max-width:300px;">'+p.body+'</div>';
   const dots=$('tutDots');
   if(dots) dots.innerHTML=TUTORIAL_PAGES.map((_,i)=>'<span style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+(i===tutStep?'#7a5cff':'rgba(123,92,255,.3)')+';"></span>').join('');
-  const prev=$('tutPrev'); if(prev) prev.style.visibility=(tutStep===0)?'hidden':'visible';
+  const prev=$('tutPrev'); if(prev) prev.style.display=(tutStep===0)?'none':'';   /* 首页用 display:none(不占位)而非 visibility:hidden(占位致下一步偏右);单按钮时下一步 flex:1 撑满整行=居中 */
   const next=$('tutNext'); if(next) next.textContent=(tutStep>=TUTORIAL_PAGES.length-1)?'开始游戏!':'下一步';
 }
 function openTutorial(){ tutStep=0; renderTutStep(); const t=$('tutorial'); if(t)t.classList.remove('hidden'); }
@@ -7518,6 +7522,8 @@ $('tutNext').onclick=()=>{ if(tutStep>=TUTORIAL_PAGES.length-1){ closeTutorial()
 /* 仅对"全新玩家"自动弹一次;有任何旧存档(灵晶/昵称/成就/难度/瞄准/备份码/连续天数)的老玩家直接豁免 */
 function _hasPriorData(){ try{ return !!(localStorage.getItem('sf_meta')||localStorage.getItem('sf_name')||localStorage.getItem('sf_profile')||localStorage.getItem('sf_diff')||localStorage.getItem('sf_aim')||localStorage.getItem('backup-code')||localStorage.getItem('sf_daily_streak')); }catch(e){ return true; } }
 try{ if(!localStorage.getItem('sf_tut_seen')){ if(_hasPriorData()) localStorage.setItem('sf_tut_seen','1'); else setTimeout(openTutorial,350); } }catch(e){}
+/* 更新说明自动弹一次:仅当"通知版本"变化、且是老玩家(有存档)时弹;新玩家只弹引导、把版本静默记下(下次通知版本变化才弹),两者永不撞车。看过即记 sf_seen_ver,同版本不再弹。本机标记,不进备份码。 */
+try{ const _sv=localStorage.getItem('sf_seen_ver'); if(_sv!==APP_NOTIFY_VER){ if(_hasPriorData()) setTimeout(function(){ const c=$('changelog'); if(c) c.classList.remove('hidden'); },450); localStorage.setItem('sf_seen_ver',APP_NOTIFY_VER); } }catch(e){}
 $('clClose').onclick=()=>$('changelog').classList.add('hidden');
 $('codexClose').onclick=()=>$('codex').classList.add('hidden');
 $('clCloseTop').onclick=()=>$('changelog').classList.add('hidden');
