@@ -528,6 +528,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.3 · 2026-06-19</div><div class="cl-i">🛡️ <b>过波清场:每波打完会自动清掉残留的弹幕和未结算的预警。</b>以前最后一只怪倒下的瞬间还在飞的敌弹、还没落地的预警攻击会冻在原地,等你选完法术一恢复就正好怼你一下——现在过波即清,选完法术回到场上不会再莫名挨那一下。🏃 <b>绕石柱走位更顺滑:</b>以前贴着石柱绕圈会有种"被拉扯减速 / 黏住"的感觉,现在贴桩滑行能<b>保持全速</b>,绕柱、借柱躲弹更跟手(正对着柱子直推仍然能停住,不会打滑)。</div></div>
 <div class="cl-v"><div class="cl-h">v83.2 · 2026-06-19</div><div class="cl-i">🛡️ <b>修复:护盾现在能挡住「中毒」了。</b>之前法盾展开时,中毒掉血会无视护盾直接扣你血——现在护盾期间免疫中毒,护盾消失后毒才继续。💀 <b>死亡结算页新增「死因」:</b>会告诉你致命一击是被什么击败的(首领招式 / 妖兽近身 / 敌方弹幕 / 范围爆炸 / 中毒),死得明白。📊 <b>还新增「本局失血来源」色条:</b>一眼看出这一局你的血主要被什么扣的(近身 / 首领 / 弹幕 / 范围 / 中毒 各占多少),方便针对性调整打法。(说明:深层无尽 + 弑神后期本就极度致命,一次满额攻击可能直接超过你的血量;善用护盾的开/合时机。)</div></div>
 <div class="cl-v"><div class="cl-h">v83.1 · 2026-06-19</div><div class="cl-i">🔔 <b>有重要更新时,进游戏会自动弹出这个更新说明</b>,第一时间让你知道新增了什么——看过一次就不再弹,小修复不打扰你(就像现在这样 👀)。🔧 顺手修正了新手引导首页「下一步」按钮的位置,现在居中了。</div></div>
 <div class="cl-v"><div class="cl-h">v83.0 · 2026-06-19</div><div class="cl-i">💾 <b>存档备份码升级:换机现在连「设置」也一起带走。</b>以前备份码只保存进度(灵晶 / 解锁 / 成就 / 昵称 / 难度),现在会<b>一并保存你的设置</b>——特效强度、操作方式(摇杆 / 手柄方案)、出售确认、省电模式、法术数据条开关——换设备导入后这些偏好也跟着回来,不用再一项项重设。<b>放心:之前已分享 / 保存的旧备份码照样能用</b>(导入时只是不带来这几项设置而已,绝不失效)。⚠ 导入仍会覆盖当前设备的存档(现在也含设置),确认提示照旧。🐉 <b>续战更完整:</b>打一半关掉再「继续上次战斗」,这局「本局已遇见」的妖兽 / Boss 击杀与伤害统计现在<b>会保留</b>,不再从头计。</div></div>
@@ -815,10 +816,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.2', APP_TIME='2026-06-19 13:40';
+const APP_VER='v83.3', APP_TIME='2026-06-19 15:00';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v83.2';
+const APP_NOTIFY_VER='v83.3';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -4664,6 +4665,30 @@ function collidePillars(o){
   o.x=clamp(o.x,ARENA.pad+o.r,ARENA.w-ARENA.pad-o.r);
   o.y=clamp(o.y,ARENA.pad+o.r,ARENA.h-ARENA.pad-o.r);
 }
+/* 玩家专用:带"贴桩顺滑滑行"的移动。若本帧位移会撞进某根石柱,就把"往柱里钻"的那部分劲改成沿柱边切线方向、并重标到满速,
+   这样绕桩/贴桩走位不再有"被拉扯减速"的黏滞感。只作用于玩家(敌人仍走 collidePillars 原逻辑、本函数不碰它);
+   每帧位移极小(约3px)故至多触碰一根柱,多柱罕见情形由末尾 collidePillars 安全网兜底防卡死;
+   正对柱心直推时切向分量≈0→不滑、由 collidePillars 停在柱边(保留"贴着柱子能停住"的手感)。 */
+function movePlayerSlide(vx, vy, dt){
+  let nx=player.x+vx*dt, ny=player.y+vy*dt;
+  const sp=Math.hypot(vx,vy);
+  if(sp>1e-3){
+    for(const p of pillars){
+      const dx=nx-p.x, dy=ny-p.y, min=p.r+player.r, d2=dx*dx+dy*dy;
+      if(d2<min*min && d2>1e-6){
+        const d=Math.sqrt(d2), nrx=dx/d, nry=dy/d;   /* 撞点处的外法线 */
+        const into=vx*nrx+vy*nry;                     /* 速度的径向分量(<0 表示正往柱里钻) */
+        if(into<0){
+          let tx=vx-into*nrx, ty=vy-into*nry;          /* 切向分量 */
+          const tl=Math.hypot(tx,ty);
+          if(tl>1e-3){ const k=sp/tl; nx=player.x+tx*k*dt; ny=player.y+ty*k*dt; }   /* 切向重标到满速→绕桩不掉速(满速=玩家本来的移速,不会更快) */
+          /* 否则(正对柱心直推、切向≈0):不滑,保留 nx,ny,交由后续 collidePillars 停在柱边 */
+        }
+      }
+    }
+  }
+  player.x=nx; player.y=ny;
+}
 let _bossAtkMul=1; /* 多 Boss 同屏时对每尊 Boss 的子弹伤害统一缩放,仅在 bossAttack 期间生效 */
 function ebul(x,y,a,sp,dmg){
   dmg*=_bossAtkMul;
@@ -4883,7 +4908,7 @@ function update(dt){
     if(player._ghostT<=0){player._ghostT=.028;ghosts.push({x:player.x,y:player.y,life:.3});}
   } else {
     const sp=player.spd*(1+.1*player.mods.boots)*(player.slowT>0?.55:1)*relicMods.moveMul;
-    player.x+=ix*sp*dt; player.y+=iy*sp*dt;
+    movePlayerSlide(ix*sp, iy*sp, dt);   /* 贴桩顺滑滑行(替代原 player.x+=ix*sp*dt) */
   }
   if(im>.1){player.dirx=ix/(im||1);player.diry=iy/(im||1);}
   collidePillars(player);
@@ -5147,6 +5172,7 @@ function update(dt){
 
   /* —— 过波 —— */
   if(state==='play'&&!spawnQ.length&&!enemies.length){
+    ebullets.length=0; telegraphs.length=0;   /* 过波清场:清掉残留敌弹 + 未结算的预警延迟攻击,免得玩家选完法术一恢复就被冻结在原地的弹/预警白怼一下 */
     heal(8);
     /* 每 5 波(Boss 节奏)打完 → 遗物三选一,选完再继续 */
     if(waveNum>0 && waveNum%5===0 && player.relics.length<RELICS.length){
