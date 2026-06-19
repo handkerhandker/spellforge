@@ -35,6 +35,8 @@
   /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
   #menu{justify-content:flex-start;padding-top:calc(6px + env(safe-area-inset-top));}
   #menu .panel{max-height:calc(100vh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:16px 20px 18px;gap:6px;}
+  /* 选法杖页:内容(标题+14法杖+返回)直接放在 overlay 里、原本居中且无滚动容器,内容超过屏高时两头会被推出屏幕够不着(矮屏尤甚)。改为顶部对齐 + 整页可滚 + 上下安全区内边距,任意屏高都能滑到标题与返回键。 */
+  #wandSel{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
   #menu .title{font-size:38px;}
   #menu .desc{font-size:12.5px;line-height:1.4;}
@@ -524,6 +526,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82.3 · 2026-06-19</div><div class="cl-i">📜 <b>修复「选法杖界面在部分手机上下都滑不到头」。</b>之前在屏幕较矮的手机上,选法杖页的标题和最上面几把、以及底部的「返回」键会被推出屏幕、怎么滑都够不着(屏幕大的机子不明显)。现在这页改成<b>从顶部对齐、整页可上下滚动</b>,并避开刘海和底部小黑条,任意机型都能从标题一路滑到返回键、每把法杖都点得到。<b>只改了这页的滚动方式,法杖内容本身没动。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.2 · 2026-06-19</div><div class="cl-i">🌊 <b>修复「水龙吟贴着墙放不出来」。</b>水龙吟的水波很宽,以前你<b>背靠墙壁或沿着墙</b>施放时,水波一出生就被判定撞进墙里、当帧消失,看着就像没放出来。现在贴墙也能正常放出水波、沿墙横扫一整条线的敌人;贴着石柱施放同理修好。<b>只修这个出不来的判定,水龙吟的伤害、宽度、击退、冷却一概没动,其它法术不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.1 · 2026-06-19</div><div class="cl-i">🏆 <b>排行榜更清爽 + 每局都给你名次反馈。</b>① <b>同名只留最高那条</b>:以前同一个人反复刷、榜上一个名字出现一大串,现在每个榜里相同昵称只显示他最好的一次,前 10 名都是不同的人,看着干净、名次更有含金量(五档难度榜 + 每日挑战榜都生效)。② <b>每局结算告诉你「你排第几」</b>:不管有没有进前 10,打完都会显示你在该榜的真实名次和上榜总人数;要是这局<b>刷新了个人最好成绩</b>,还会有「🎉 刷新个人最好成绩」的庆祝。每一局都有奔头,不用非得破纪录才看得到自己。<b>纯显示优化,不动任何玩法 / 数值,冲榜公平不变。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82 · 2026-06-19</div><div class="cl-i">🎭 <b>三位山海经新角色登场!</b>(灵晶解锁,在「外观·皮肤」里换):①🏹<b>后羿</b>——射九日的神射手,单发伤害 +12%、穿透 +1(一箭洞穿一排怪),代价是出手稍慢(攻速 −15%);②🦬<b>夸父</b>——逐日的巨人,生命上限 +40、皮糙肉厚,代价同样是出手慢些(攻速 −13%),适合稳扎稳打;③⚔️<b>蚩尤</b>——铜头铁额的兵主战神,暴击率 +10%、击杀回血 +1 的激进打法,但身子骨脆(生命上限 −30、受伤 +8%),越凶越爽。每位都各有取舍、净值均衡,<b>全难度通用不破榜</b>,也给攒不完的灵晶添了去处。</div></div>
@@ -797,7 +800,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82.2', APP_TIME='2026-06-19 01:02';
+const APP_VER='v82.3', APP_TIME='2026-06-19 01:03';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
