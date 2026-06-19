@@ -526,6 +526,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82.4 · 2026-06-19</div><div class="cl-i">🪨 <b>修复「继续上次战斗后人物卡在场地中央石柱里」。</b>之前点「继续上次战斗」回到战场时,人物会正好生成在中央那根石柱的正中心、卡在里面挪不动——你的法术能打出去,怪却被石柱挡着够不到你。现在人物会自动从石柱里挪出来,正常对战。<b>(开新局也一并更稳,不会再贴在柱心。)</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.3 · 2026-06-19</div><div class="cl-i">📜 <b>修复「选法杖界面在部分手机上下都滑不到头」。</b>之前在屏幕较矮的手机上,选法杖页的标题和最上面几把、以及底部的「返回」键会被推出屏幕、怎么滑都够不着(屏幕大的机子不明显)。现在这页改成<b>从顶部对齐、整页可上下滚动</b>,并避开刘海和底部小黑条,任意机型都能从标题一路滑到返回键、每把法杖都点得到。<b>只改了这页的滚动方式,法杖内容本身没动。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.2 · 2026-06-19</div><div class="cl-i">🌊 <b>修复「水龙吟贴着墙放不出来」。</b>水龙吟的水波很宽,以前你<b>背靠墙壁或沿着墙</b>施放时,水波一出生就被判定撞进墙里、当帧消失,看着就像没放出来。现在贴墙也能正常放出水波、沿墙横扫一整条线的敌人;贴着石柱施放同理修好。<b>只修这个出不来的判定,水龙吟的伤害、宽度、击退、冷却一概没动,其它法术不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.1 · 2026-06-19</div><div class="cl-i">🏆 <b>排行榜更清爽 + 每局都给你名次反馈。</b>① <b>同名只留最高那条</b>:以前同一个人反复刷、榜上一个名字出现一大串,现在每个榜里相同昵称只显示他最好的一次,前 10 名都是不同的人,看着干净、名次更有含金量(五档难度榜 + 每日挑战榜都生效)。② <b>每局结算告诉你「你排第几」</b>:不管有没有进前 10,打完都会显示你在该榜的真实名次和上榜总人数;要是这局<b>刷新了个人最好成绩</b>,还会有「🎉 刷新个人最好成绩」的庆祝。每一局都有奔头,不用非得破纪录才看得到自己。<b>纯显示优化,不动任何玩法 / 数值,冲榜公平不变。</b></div></div>
@@ -800,7 +801,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82.3', APP_TIME='2026-06-19 01:03';
+const APP_VER='v82.4', APP_TIME='2026-06-19 01:04';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -4518,7 +4519,10 @@ function puff(x,y,col,n){
 function collidePillars(o){
   for(const p of pillars){
     const dx=o.x-p.x,dy=o.y-p.y,d=Math.hypot(dx,dy),min=p.r+o.r;
-    if(d<min&&d>0){o.x=p.x+dx/d*min;o.y=p.y+dy/d*min;}
+    if(d<min){
+      if(d>0){o.x=p.x+dx/d*min;o.y=p.y+dy/d*min;}
+      else o.y=p.y-min;   /* 正中心(d=0,如出生点与中央石柱重合)无方向可推 → 默认向上顶出,避免卡死在柱心 */
+    }
   }
   o.x=clamp(o.x,ARENA.pad+o.r,ARENA.w-ARENA.pad-o.r);
   o.y=clamp(o.y,ARENA.pad+o.r,ARENA.h-ARENA.pad-o.r);
