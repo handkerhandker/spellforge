@@ -536,6 +536,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v84.6 · 2026-06-20</div><div class="cl-i">📝 <b>文案润色:把一批法术 / 法杖 / 连携的说明改得更清楚、更统一。</b>重点是<b>不死药</b>(说明精简、一眼看懂)和<b>御风弓</b>(补上了准确数值——之前写"单发略降",实际是 -20%、施法间隔 -10%、穿透 +1);另外把几处混进中文的英文缩写(aoe / HP)也都换成了中文。<b>纯文字调整,不动任何玩法 / 数值 / 平衡。</b></div></div>
 <div class="cl-v"><div class="cl-h">v84.5 · 2026-06-20</div><div class="cl-i">☯ <b>名望供奉系统:灵晶有了"永远花不完"的新去处,弑神党也能晒境界了!</b><br><br>之前祭坛的永久强化在「弑神」难度不生效,主玩弑神的朋友灵晶攒一堆没处花。现在新增 <b>「名望供奉」</b>——把灵晶供奉上去,换一个<b>纯炫耀、不影响战力</b>的修真境界,从 凡尘 一路 <b>散修 → 炼气 → 筑基 → 金丹 → 元婴 → 化神 → 炼虚 → 合体 → 大乘 → 渡劫 → 仙人</b> 往上爬。<br><br>🔹 <b>无限级、每重价格递增</b>,盈余灵晶永远填不满下一重、彻底告别"用不完"。<br>🔹 <b>全难度通用(弑神也能供奉)</b>——因为是纯炫耀、零战力,冲榜公平丝毫不受影响。<br>🔹 <b>境界越高越炫</b>:主菜单的境界徽章、每局结算页的称号、以及局内角色身上一圈境界色光环,都会随境界升级越来越亮。<br><br>(在祭坛最上方供奉。想要实打实的新角色皮肤?那是后续单独的内容,敬请期待。)</div></div>
 <div class="cl-v"><div class="cl-h">v84.4 · 2026-06-20</div><div class="cl-i">✦ <b>祭坛大扩充:灵晶终于有处花了!新增 3 项永久强化 + 体魄/法力解除等级上限。</b><br><br>之前祭坛只有体魄 / 法力两项、各封顶 5 级,买满之后灵晶就没处花了。现在:<br>💗 <b>体魄(生命) / 🔷 法力(法术伤害)</b> 解除封顶,可一直往上买;<br>⚡ <b>急速(施法速度)</b>、👟 <b>身法(移动速度)</b>、🛡️ <b>坚壁(受伤减免)</b> 三项全新登场。<br><br>全部<b>无限级、每级价格递增</b>(越往上越贵),所以盈余灵晶<b>永远有去处、再也不会"用不完"</b>;其中坚壁是<b>递减式减伤</b>(每级削掉一点剩余伤害、无限趋近但永远不会变无敌)。<br><br>照旧:<b>所有永久强化在「弑神」难度不生效</b>——弑神是纯凭操作的公平竞技档,冲榜完全不受影响。</div></div>
 <div class="cl-v"><div class="cl-h">v84.3 · 2026-06-20</div><div class="cl-i">🛡️ <b>修复几处"被首领秒杀却躲不掉"的不公平问题 + 不死药增强(来自大家反馈)。</b><br><br>🔴 <b>修复多尊首领的"红圈骗人"bug</b> —— 之前红圈预警范围比实际命中范围小一圈,导致你"明明站到红圈外了还是被打中";现在红圈如实显示完整危险范围,<b>站到圈外就是安全的</b>(梼杌的裂地冲击 / 地动山摇、饕餮的吞噬 / 巨口等都已修正)。<br>🌀 <b>梼杌「双重裂地」走位能躲了</b> —— 之前它在你脚下砸的那个圈,以基础移速根本来不及跑出去;现在<b>给足了反应时间</b>,不堆移速也能走出去。<br>🍶 <b>不死药增强:现在能扛住「致命一击」</b> —— 之前它只在血量跌破 30% 时才回血,可深层一发动辄超过你整条血、直接秒杀,血量根本没机会停在 30% 区间、不死药来不及触发;现在改成<b>受到致命一击时直接免死、保命回 25% 上限生命(随等级提升),之后进入冷却</b>,连一发入魂也兜得住(冷却中不会重复免死、不是无敌)。<br><br>说明:这些都是修不公平 / bug,让深层的"秒杀"变得<b>能躲、能救</b>,而不是单纯比血厚;全难度通用。</div></div>
@@ -836,10 +837,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v84.5', APP_TIME='2026-06-20 01:05';
+const APP_VER='v84.6', APP_TIME='2026-06-20 01:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v84.5';
+const APP_NOTIFY_VER='v84.6';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1012,18 +1013,18 @@ const SPELL_DEF={
   meteor:{name:'陨石',icon:'☄️',col:'#ff7e3a',cd:2.2,dmg:35,spd:240,r:12,life:1.7,aoe:110,desc:'巨型火球，命中后大范围爆炸'},
   beam:{name:'灼热射线',icon:'🔆',col:'#ff7a30',cd:.3,dmg:4,beam:6,desc:'持续射线灼烧 6 段'},
   heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,upg:'回复量提升，冷却更短',desc:'直接回复 6 点生命(随等级提升)'},
-  phoenix:{name:'不死药',icon:'🍶',col:'#ffd9a8',cd:14,dmg:0,upg:'回复量 +4% · 冷却 −0.6 秒',desc:'濒死(≤30%生命)自动回血,且受到致命一击时直接免死、保命回 25% 上限生命,14 秒一次(随等级提升)·连一发入魂也兜得住'},
+  phoenix:{name:'不死药',icon:'🍶',col:'#ffd9a8',cd:14,dmg:0,upg:'回复量 +4% · 冷却 −0.6 秒',desc:'受致命一击时免死、回 25% 生命;血量过低时也会自动回血 · 14 秒一次(随等级提升)'},
   shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,upg:'可挡次数 +1，冷却更短',desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后短暂空窗才能再开'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
   blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
   swarm:{name:'蜂群飞弹',icon:'🐝',col:'#ffd24d',dmg:5,cd:1.4,spd:300,r:5,life:1.5,desc:'射出 3 枚自动追踪的飞弹'},
   chain:{name:'回旋刃',icon:'🪃',col:'#d8c6ff',cd:.9,dmg:14,spd:480,r:6,life:1.15,chain:1,desc:'飞行一段后回旋,可二次命中'},
-  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽提速+回血+多召一只'},
+  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽攻速提升、持续回血,并额外多召一只'},
   cyclone:{name:'飓风',icon:'🌪️',col:'#bfe3ff',cd:6.5,dmg:9,vortex:140,desc:'放出缓慢移动的风暴,吸入并持续切割周围敌人(出处:风兽飞廉)'},
   plague:{name:'蛊毒',icon:'🦠',col:'#9be86a',cd:2.0,dmg:8,spd:300,r:9,life:1.2,desc:'命中使敌人染疫,染疫者死亡或靠近他人时传染,连锁烂场(出处:疫鬼)'},
   tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
-  devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射并回你1血(出处:饕餮)'},
+  devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射、回复 1 生命(出处:饕餮)'},
   thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,desc:'天降数道惊雷轰击敌群,每道炸开小范围电击;雷数随等级增加'},
   swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
@@ -1084,7 +1085,7 @@ const CARD_DEFS=[
 /* ============ 法术协同（Synergy）============ */
 const SYNERGIES=[
   {id:'meteor_swarm',name:'陨石雨',icon:'🌠',
-    desc:'陨石 aoe 与伤害双倍',
+    desc:'陨石范围与伤害翻倍',
     cond:s=>s.fire&&s.meteor,
     apply:(b,s)=>{if(b.id==='meteor'||b.id==='fire'){b.aoe=(b.aoe||0)*2;b.dmg*=1.4;}}},
   {id:'frost_ray',name:'冰霜射线',icon:'🌨️',
@@ -1100,7 +1101,7 @@ const SYNERGIES=[
     cond:s=>s.arc&&s.zap,
     apply:(b,s)=>{if(b.id==='arc'){b.arcChain=2;}}},
   {id:'nova_core',name:'星核爆裂',icon:'✳️',
-    desc:'火球命中后额外 aoe 40',
+    desc:'火球命中后额外造成 40 点范围伤害',
     cond:s=>s.fire&&s.split>=1,
     apply:(b,s)=>{if(b.id==='fire'){b.aoe=(b.aoe||0)+40;}}},
   {id:'toxic_cloud',name:'毒沼',icon:'🐍',
@@ -1128,7 +1129,7 @@ const SYNERGIES=[
     cond:s=>s.arc&&s.amp>=1,
     apply:(b,s)=>{if(b.id==='arc'){b.dmg*=1.5;}}},
   {id:'ice_armor',name:'寒铁甲',icon:'⛄',
-    desc:'寒冰锥命中自己时回 2HP',
+    desc:'寒冰锥命中自己时回 2 点生命',
     cond:s=>s.ice&&s.shield,
     apply:(b,s)=>{/* 命中时检测,见 damageEnemy */}},
   {id:'frostbind',name:'冰封',icon:'🧊',
@@ -1783,7 +1784,7 @@ const WANDS=[
   {id:'gatling',icon:'🌀',name:'连珠法杖',desc:'速射流 · 施法间隔 -40%(连珠炮般快),代价单发伤害 -38%(以快制胜、火力如泼水、命中机会多)',fx:{dmgM:.62,cdM:.60}},
   {id:'frost',  icon:'🧊',name:'玄霜法杖',desc:'控场流 · 法术命中令敌人减速 1 秒,代价单发伤害 -16%(放风筝神器、克黏人 / 冲撞怪)',fx:{dmgM:.84,hitSlow:1.0}},
   {id:'ember',  icon:'🔥',name:'熔火法杖',desc:'灼烧流 · 法术命中在落点燃起火池、持续灼烧范围内的敌人,代价单发伤害 -20%(怪越密、地上火池越多越爽)',fx:{dmgM:.80,firePool:true}},
-  {id:'windbow',icon:'🏹',name:'御风弓',desc:'弦动如风,法力成箭,一线贯穿。<br>主打穿透 / 攻速 / 追踪,代价单发略降。<br><br>—— 法师,偶尔也想拉一张弓。',fx:{dmgM:.80,pierce:1,cdM:.90,homing:.8,arrowStyle:true}}
+  {id:'windbow',icon:'🏹',name:'御风弓',desc:'穿透追踪流 · 穿透 +1、施法间隔 -10%、法术弹自动追踪,代价单发伤害 -20%<br><br>—— 法师,偶尔也想拉一张弓。',fx:{dmgM:.80,pierce:1,cdM:.90,homing:.8,arrowStyle:true}}
 ];
 /* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked);列于 WAND_ACH 者改走成就解锁(见下) */
 const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240,compass:260,blast:280,gatling:240};
