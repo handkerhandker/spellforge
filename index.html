@@ -526,6 +526,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.0 · 2026-06-19</div><div class="cl-i">💾 <b>存档备份码升级:换机现在连「设置」也一起带走。</b>以前备份码只保存进度(灵晶 / 解锁 / 成就 / 昵称 / 难度),现在会<b>一并保存你的设置</b>——特效强度、操作方式(摇杆 / 手柄方案)、出售确认、省电模式、法术数据条开关——换设备导入后这些偏好也跟着回来,不用再一项项重设。<b>放心:之前已分享 / 保存的旧备份码照样能用</b>(导入时只是不带来这几项设置而已,绝不失效)。⚠ 导入仍会覆盖当前设备的存档(现在也含设置),确认提示照旧。🐉 <b>续战更完整:</b>打一半关掉再「继续上次战斗」,这局「本局已遇见」的妖兽 / Boss 击杀与伤害统计现在<b>会保留</b>,不再从头计。</div></div>
 <div class="cl-v"><div class="cl-h">v82.9 · 2026-06-19</div><div class="cl-i">👑 <b>异兽图鉴「本局已遇见」现在也收录 Boss 了。</b>这局打过的古神 Boss 会<b>单独列一栏</b>(主题色标识 + 名字),标出<b>本局击败次数</b>和<b>对它累计造成的总伤害</b>——无尽里反复刷的 Boss、被你喂了多少火力,一目了然(数字大了用万 / 亿显示)。📊 <b>左下角法术数据条改为「默认隐藏」。</b>之前默认显示、不少人觉得挡视线;现在<b>默认收起、画面更清爽</b>,想让它常驻的可在<b>暂停菜单「📊 法术数据条」</b>里打开。随时查构筑可点「📖 法术图鉴」的「本局构筑」。</div></div>
 <div class="cl-v"><div class="cl-h">v82.8 · 2026-06-19</div><div class="cl-i">🐉 <b>异兽图鉴升级:局内能看「本局已遇见」实时战况。</b>局内<b>随时打开异兽图鉴(暂停菜单里)</b>,顶部会多出一栏<b>「本局已遇见」</b>:把你这局<b>交过手的妖兽按击杀数排好</b>,标出对每种的<b>本局击杀数</b>和<b>累计造成的总伤害</b>——一眼看清这局都在虐谁、火力都喂给了谁。🔢 <b>大数字不再挤成一长串。</b>图鉴里的伤害 / 总伤害等数值变大后会自动用<b>「万 / 亿」缩写</b>显示(比如 1234567 → <b>123万</b>),又短又好认;法术图鉴的「本局构筑」数值同样适用。</div></div>
 <div class="cl-v"><div class="cl-h">v82.7 · 2026-06-19</div><div class="cl-i">📊 <b>左下角法术数据条可以关了。</b>暂停菜单新增「📊 法术数据条」开关——左下角那条显示<b>法杖 / 法术等级 / 符文层数 / 连携</b>的信息栏,嫌它挡视线的可以<b>随时关掉</b>;<b>默认开</b>,不想动的不受影响。📖 <b>法术图鉴升级:局内能看「本局构筑」实时数据了。</b>局内<b>随时打开「📖 法术图鉴」(暂停菜单 / 选牌 / 商店里都能进)</b>,顶部会多出一栏<b>「本局构筑」</b>:你这把的<b>法杖</b>、所有<b>法术</b>(按<b>等级</b>从高到低排,标出<b>实际伤害 / 冷却 / 每秒伤害,可进化的标 ✨</b>)、以及到手的<b>符文 / 属性 / 契约 / 遗物</b>全列出来——一页看清自己攒了套啥、哪个法术最猛、该往哪升。关掉左下角数据条后,想看构筑随时来这查,清爽又不丢信息。</div></div>
@@ -810,7 +811,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82.9', APP_TIME='2026-06-19 11:00';
+const APP_VER='v83.0', APP_TIME='2026-06-19 11:45';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1597,7 +1598,10 @@ function loadMeta(){ try{ const m=JSON.parse(localStorage.getItem('sf_meta')||'{
 function saveMeta(){ try{ localStorage.setItem('sf_meta', JSON.stringify(META)); }catch(e){} }
 function refreshLj(){ const e=document.getElementById('ljBal'); if(e)e.textContent=META.lj; }
 /* ═══ 存档备份码:导出/导入(换机不丢档) ═══ */
-const BK_KEYS=['sf_meta','sf_profile','sf_name','sf_aim','sf_diff'];
+/* 备份码白名单:前 5 项=进度 + 核心偏好(原有);后 7 项=玩家设置(v83 加入,让换机也带走设置)。
+   旧码兼容:genBackup 只打包当下 BK_KEYS;applyBackup 遍历 BK_KEYS 时,旧码里没有的新键值=undefined,
+   两个分支(string→写入 / null→删除)都不命中 → 自动跳过、保留目标机当前设置 → 旧备份码永不失效,无需升 SF1/v1 版本。 */
+const BK_KEYS=['sf_meta','sf_profile','sf_name','sf_aim','sf_diff','sf_fx','sf_sellconfirm','sf_powersave','sf_dual','sf_fixed','sf_padmode','sf_spellbar'];
 let _bkConfirm=false;
 function genBackup(){
   const obj={v:1}; for(const k of BK_KEYS) obj[k]=localStorage.getItem(k);
@@ -7359,6 +7363,7 @@ function saveResume(){
     spells:player.spells, mods:player.mods, curse:player.curse,
     relics:player.relics, maxhp:player.maxhp, hp:player.hp, coins:coins,
     kills:waveStartKills, took:runTookHeart, shop:runBoughtShop, mct:runMaxComboTier, lastb:runLastBoss, unl:_runUnlocked,
+    mk:runMobKills, md:runMobDmg, bk:runBossKills, bd:runBossDmg,
     endless:endless, emods:endlessMods.map(m=>m.id)
   })); return true; }catch(e){ return false; }
 }
@@ -7393,6 +7398,7 @@ function resumeRun(){
   player.hp=Math.max(1, Math.min(s.hp||player.maxhp, player.maxhp));
   coins=s.coins||0;                        /* 还原金币 */
   kills=s.kills||0; runTookHeart=!!s.took; runBoughtShop=!!s.shop; runMaxComboTier=s.mct||0; runLastBoss=(typeof s.lastb==='number'?s.lastb:-1); if(Array.isArray(s.unl))_runUnlocked=s.unl;   /* 还原击杀数(波首快照)+本局成就/连杀/Boss 统计,保证结算与上榜数据正确 */
+  runMobKills=(s.mk&&typeof s.mk==='object')?s.mk:{}; runMobDmg=(s.md&&typeof s.md==='object')?s.md:{}; runBossKills=(s.bk&&typeof s.bk==='object')?s.bk:{}; runBossDmg=(s.bd&&typeof s.bd==='object')?s.bd:{};   /* 还原本局逐怪/逐Boss统计(异兽图鉴「本局已遇见」);旧存档无此字段则为空对象 */
   endless=!!s.endless;                     /* 还原无尽模式 */
   if(s.emods && s.emods.length){ endlessMods=s.emods.map(function(id){return ENDLESS_MODS.find(function(m){return m.id===id;});}).filter(Boolean); modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false}; for(const _md of endlessMods)_md.apply(modMult); }   /* 还原无尽修饰符,避免续战后怪变弱=刷榜 */
   _skipEmod=true;                          /* 续战恢复的这一波不再重复加修饰符 */
