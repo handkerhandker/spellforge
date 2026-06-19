@@ -78,8 +78,8 @@
   .cl-i{font-size:12.5px;color:#b8aed8;line-height:1.7;}
   .cx-sec{color:#bdb4ea;font-size:12px;letter-spacing:.16em;margin:15px 0 7px;font-weight:700;}
   .cx-sec:first-child{margin-top:2px;}
-  .cx-item{display:flex;gap:10px;padding:8px 10px;border-radius:9px;background:rgba(30,22,60,.42);margin-bottom:6px;}
-  .cx-ic{font-size:21px;flex-shrink:0;width:28px;text-align:center;line-height:1.3;}
+  .cx-item{display:flex;gap:10px;padding:8px 10px;border-radius:9px;background:linear-gradient(180deg,rgba(38,28,72,.5),rgba(24,17,48,.42));border:1px solid rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);margin-bottom:6px;align-items:center;}
+  .cx-ic{font-size:20px;flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.09),rgba(255,255,255,.012) 72%);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 8px rgba(0,0,0,.26);line-height:1;}
   .cx-main{flex:1;min-width:0;}
   .cx-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .cx-name{color:#fff;font-weight:700;font-size:13.5px;}
@@ -87,7 +87,7 @@
   .cx-stat{font-size:11px;color:#ffd98a;margin-left:auto;white-space:nowrap;}
   .cx-desc{font-size:12px;color:#b8aed4;margin-top:3px;line-height:1.4;}
   /* 异兽图鉴:Boss 大卡 */
-  .bx-boss{display:flex;gap:12px;padding:10px;border-radius:11px;background:rgba(30,22,60,.5);margin-bottom:8px;align-items:center;}
+  .bx-boss{display:flex;gap:12px;padding:10px;border-radius:11px;background:linear-gradient(180deg,rgba(40,29,76,.55),rgba(25,18,50,.46));border:1px solid rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);margin-bottom:8px;align-items:center;}
   .bx-boss img{width:56px;height:56px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));}
   .bx-mob-cv{width:46px;height:46px;flex-shrink:0;align-self:center;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));}
   .pad-focus{outline:3px solid #6fe3ff !important;outline-offset:2px;box-shadow:0 0 14px rgba(111,227,255,.65) !important;border-radius:10px;}
@@ -99,9 +99,9 @@
   .bx-btip{font-size:11.5px;color:#b8aed4;margin-top:4px;line-height:1.4;}
   .bx-fiend{font-size:9px;padding:1px 6px;border-radius:999px;background:rgba(200,32,58,.22);color:#ff9aa8;border:1px solid rgba(200,32,58,.5);margin-left:6px;vertical-align:middle;}
   /* 成就 */
-  .ach-item{display:flex;gap:11px;padding:9px 11px;border-radius:10px;margin-bottom:6px;background:rgba(30,22,60,.42);align-items:center;}
+  .ach-item{display:flex;gap:11px;padding:9px 11px;border-radius:10px;margin-bottom:6px;background:linear-gradient(180deg,rgba(38,28,72,.5),rgba(24,17,48,.42));border:1px solid rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);align-items:center;}
   .ach-item.locked{opacity:.5;filter:grayscale(.7);}
-  .ach-ic{font-size:24px;flex-shrink:0;width:34px;text-align:center;}
+  .ach-ic{font-size:22px;flex-shrink:0;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.09),rgba(255,255,255,.012) 72%);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 8px rgba(0,0,0,.26);}
   .ach-main{flex:1;min-width:0;}
   .ach-name{color:#fff;font-weight:700;font-size:13.5px;}
   .ach-name .ach-done{color:#ffd24d;font-size:11px;margin-left:6px;}
@@ -118,8 +118,9 @@
   .win-actions .btn{flex:1;margin-top:0;padding:14px 10px;}
   /* 菜单:图鉴/成就按钮行 */
   .codex-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:320px;margin-top:8px;}
-  .codex-row button{min-width:0;padding:10px 4px;border-radius:999px;border:1px solid rgba(123,92,255,.4);background:rgba(123,92,255,.14);color:#cbbcff;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-sizing:border-box;}
-  .codex-row button:active{background:rgba(123,92,255,.28);}
+  .codex-row button{min-width:0;padding:10px 4px;border-radius:999px;border:1px solid rgba(140,110,255,.34);background:linear-gradient(180deg,rgba(126,96,255,.20),rgba(88,64,176,.10));color:#cbbcff;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-sizing:border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 -2px 7px rgba(0,0,0,.20),0 2px 8px rgba(0,0,0,.16);transition:background .14s,border-color .14s,box-shadow .14s,transform .08s;}
+  @media(hover:hover){ .codex-row button:hover{border-color:rgba(162,132,255,.5);background:linear-gradient(180deg,rgba(146,116,255,.27),rgba(102,76,198,.14));} }
+  .codex-row button:active{background:linear-gradient(180deg,rgba(150,120,255,.32),rgba(108,80,205,.18));border-color:rgba(170,140,255,.52);box-shadow:inset 0 2px 8px rgba(0,0,0,.30),0 1px 3px rgba(0,0,0,.18);transform:translateY(1px);}
   /* 外观:角色皮肤选择(v70) */
   .ward-row{display:flex;flex-direction:column;gap:10px;width:100%;}
   .ward-card{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;border:1px solid rgba(123,92,255,.3);background:rgba(30,22,60,.42);cursor:pointer;transition:border-color .12s,background .12s;}
@@ -144,21 +145,22 @@
     box-shadow:0 8px 28px rgba(110,90,255,.45), inset 0 1px 0 rgba(255,255,255,.35);
     transition:transform .12s ease, box-shadow .12s ease;}
   .btn:active{transform:scale(.96);}
-  .btn.ghost{background:transparent;border:1px solid #4a4380;box-shadow:none;color:#bdb4ea;font-weight:600;}
+  .btn.ghost{background:linear-gradient(180deg,rgba(74,67,128,.16),rgba(74,67,128,.05));border:1px solid #4a4380;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#bdb4ea;font-weight:600;}
+  @media(hover:hover){ .btn.ghost:hover{border-color:#5d56a0;background:linear-gradient(180deg,rgba(92,84,160,.22),rgba(74,67,128,.08));} }
   .lb-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:16px;margin-bottom:2px;}
   .lb-tabs{display:flex;gap:6px;margin-top:6px;}
-  .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;transition:background .12s,color .12s;}
+  .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:linear-gradient(180deg,rgba(34,26,60,.55),rgba(17,12,36,.55));color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s,color .12s,box-shadow .12s;}
   .lb-tab.active{background:linear-gradient(135deg,#7a5cff,#37a4ff);color:#fff;border-color:transparent;font-weight:700;}
   .diff-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:10px;margin-bottom:6px;}
   .diff-sel{display:flex;gap:5px;justify-content:center;}
-  .diff-pill{padding:6px 0;flex:1;min-width:50px;max-width:72px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:color .12s,border-color .12s,box-shadow .12s;}
+  .diff-pill{padding:6px 0;flex:1;min-width:50px;max-width:72px;border-radius:10px;border:1px solid #3b3370;background:linear-gradient(180deg,rgba(34,26,60,.55),rgba(17,12,36,.55));color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:color .12s,border-color .12s,box-shadow .12s;}
   .diff-pill.active{color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(0,0,0,.3);}
   .diff-pill[data-diff="1"].active{background-color:#358f64;background-image:linear-gradient(135deg,#3fa776,#2d8a5f);}
   .diff-pill[data-diff="2"].active{background-color:#4b8ce8;background-image:linear-gradient(135deg,#5a9cff,#3a7fd4);}
   .diff-pill[data-diff="3"].active{background-color:#6a72ff;background-image:linear-gradient(135deg,#7a5cff,#37a4ff);}
   .diff-pill[data-diff="4"].active{background-color:#f0851f;background-image:linear-gradient(135deg,#ff9a3c,#e0701a);}
   .diff-pill[data-diff="5"].active{background-color:#e23838;background-image:linear-gradient(135deg,#ff4d4d,#c81e1e);}
-  .aim-pill{padding:6px 0;flex:1;min-width:50px;max-width:90px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.5);color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .12s,color .12s,border-color .12s;}
+  .aim-pill{padding:6px 0;flex:1;min-width:50px;max-width:90px;border-radius:10px;border:1px solid #3b3370;background:linear-gradient(180deg,rgba(34,26,60,.55),rgba(17,12,36,.55));color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s,color .12s,border-color .12s,box-shadow .12s;}
   .aim-pill.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,#2ea6b8,#1f8090);box-shadow:0 2px 12px rgba(0,0,0,.3);}
   .aim-pill.hide{display:none;}
   .aim-hint{color:#8a7fb8;font-size:10px;margin-top:4px;letter-spacing:.02em;opacity:.85;}
@@ -166,7 +168,10 @@
   .lb{width:min(360px,90vw);margin-top:6px;display:flex;gap:8px;}
   .lb input{flex:1;min-width:0;box-sizing:border-box;padding:11px 14px;border-radius:10px;border:1px solid #3b3370;background:rgba(20,15,42,.6);color:#fff;font-size:14px;text-align:center;}
   .lb-board{width:min(360px,90vw);margin-top:10px;max-height:34vh;overflow-y:auto;}
-  .lb-row{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:rgba(30,22,60,.45);margin-bottom:5px;font-size:13px;}
+  .lb-row{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:8px;background:linear-gradient(180deg,rgba(38,28,72,.5),rgba(24,17,48,.44));border:1px solid rgba(255,255,255,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);margin-bottom:5px;font-size:13px;}
+  .lb-row.lb-top1{background:linear-gradient(180deg,rgba(62,49,16,.52),rgba(34,26,50,.46));border-color:rgba(255,210,77,.34);}
+  .lb-row.lb-top2{background:linear-gradient(180deg,rgba(48,49,60,.52),rgba(30,28,48,.46));border-color:rgba(206,212,224,.3);}
+  .lb-row.lb-top3{background:linear-gradient(180deg,rgba(58,40,26,.52),rgba(34,26,46,.46));border-color:rgba(214,150,90,.32);}
   .lb-medal{width:22px;text-align:center;flex-shrink:0;}
   .lb-rank{display:inline-block;width:22px;text-align:center;color:#8b7df0;font-weight:bold;flex-shrink:0;}
   .lb-id{flex:1;min-width:0;display:flex;align-items:baseline;gap:7px;overflow:hidden;}
@@ -224,16 +229,16 @@
   #wuBuy.dis{opacity:.4;pointer-events:none;}
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(15px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
-    background:rgba(20,15,42,.7);color:#cfc8f2;font-size:16px;align-items:center;justify-content:center;line-height:1;}
+    background:linear-gradient(180deg,rgba(34,26,60,.78),rgba(18,13,38,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);color:#cfc8f2;font-size:16px;align-items:center;justify-content:center;line-height:1;}
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
-    background:rgba(20,15,42,.7);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
+    background:linear-gradient(180deg,rgba(34,26,60,.78),rgba(18,13,38,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
   #verBadge{text-align:left;line-height:1.4;}
   #verBadge .vb-top{font-size:11px;color:#a99fd6;}
   #verBadge .vb-top b{color:#cbbcff;font-weight:700;}
   #verBadge .vb-link{cursor:pointer;text-decoration:underline;color:#cbbcff;pointer-events:auto;}
   #verBadge .vb-time{font-size:9.5px;color:#8078ab;margin-top:1px;}
-  #ljBadge{font-size:12.5px;color:var(--gold);font-weight:700;letter-spacing:.02em;white-space:nowrap;}
+  #ljBadge{font-size:12.5px;color:var(--gold);font-weight:700;letter-spacing:.02em;white-space:nowrap;padding:4px 11px;border-radius:999px;background:rgba(58,44,16,.42);border:1px solid rgba(255,210,77,.26);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .menu-head{display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:10px;margin-bottom:2px;}
   .lj-gain{color:var(--gold);font-size:13px;font-weight:700;margin:8px 0 2px;letter-spacing:.03em;}
   .lj-gain b{font-size:15.5px;}
@@ -529,6 +534,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.9 · 2026-06-19</div><div class="cl-i">🎨 <b>全面 UI 精致化</b>(纯外观,不影响任何玩法 / 数值 / 平衡,冲榜公平不变):<br>🏠 <b>主菜单</b> —— 菜单按钮立体化(顶部高光 + 投影)、灵晶变金边货币药丸、难度 / 榜单标签加高光<br>⏸️ <b>暂停 & 设置</b> —— 所有次级按钮加淡底高光、瞄准模式按钮统一<br>💀 <b>结算页 & 🏆 成就一览</b> —— 成就图标嵌入「宝石凹槽」、卡面升级<br>📖 <b>法术 / 异兽图鉴</b> —— 每个图标进宝石槽、条目卡面统一<br>🏆 <b>排行榜</b> —— 前三名金 / 银 / 铜 podium 高亮<br>整体延续暗紫山海风,克制不浮夸;血条 / 波数 / 预警等战斗信息保持原样清晰。</div></div>
 <div class="cl-v"><div class="cl-h">v83.8 · 2026-06-19</div><div class="cl-i">✨ <b>卡片界面小美化:</b>选卡 / 遗物 / 法杖的图标现在都嵌进统一的『宝石凹槽』(圆角凹陷 + 按稀有度发光),看着更精致、更有"锻造"感,图标大小也齐整了,卡片描述也更清晰一点。<b>纯外观,不影响任何玩法和数值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v83.7 · 2026-06-19</div><div class="cl-i">🛠️ <b>三处朋友反馈的优化 / 修复:</b><br>🎈 <b>巨型法术不再撑爆屏幕:</b>满层放大从 +80% 收到 <b>+40%</b>,后期魔法球小一圈、看得更清;<b>陨石 / 新星的爆炸特效也加了尺寸上限</b>(伤害范围不变,不影响实力)。<br>💫 <b>特效强度滑块现在能拉到 0%:</b>想要极致清爽,可以把自己的粒子 / 辉光 / 震屏<b>全部关掉</b>(火海、毒云等照常造成伤害,只是不显示),敌方弹幕始终醒目。<br>🔵 <b>奥术球瞄准修复:</b>之前环绕的法球发射小弹时会从球的位置斜着偏出去、经常擦过敌人(像在"射空气");现在改成<b>从球的实际位置对准敌人直射</b>,命中稳多了。</div></div>
 <div class="cl-v"><div class="cl-h">v83.6 · 2026-06-19</div><div class="cl-i">🏆 <b>新增 4 个成就,给老手添新目标:</b><br>👺 <b>无间炼狱</b> —— 无尽模式抵达第 60 波<br>🗯️ <b>伤害狂潮</b> —— 单局法术总输出突破 1000 万<br>🩹 <b>绝处逢生</b> —— 在生命值低于 15% 时击败首领(残血翻盘)<br>👆 <b>一法通天</b> —— 仅用 1 种法术通关「弑神」难度<br>(成就总数来到 83 个;"集齐其余全部成就"的山海传说也会把这 4 个算进门槛。)</div></div>
@@ -822,10 +828,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.8', APP_TIME='2026-06-19 19:20';
+const APP_VER='v83.9', APP_TIME='2026-06-19 20:20';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v83.8';
+const APP_NOTIFY_VER='v83.9';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3929,7 +3935,8 @@ function renderBoard(el,list){
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
     const t=fmtTime(r.created_at);
-    return '<div class="lb-row"><span class="lb-medal">'+medal+'</span>'
+    const rk=i<3?' lb-top'+(i+1):'';
+    return '<div class="lb-row'+rk+'"><span class="lb-medal">'+medal+'</span>'
       +'<span class="lb-id"><span class="lb-name">'+escHtml(r.name)+'</span>'
       +(t?'<span class="lb-date">'+t+'</span>':'')+'</span>'
       +'<span class="lb-score">第 '+r.wave+' 波 · '+r.kills+' 杀</span></div>';
