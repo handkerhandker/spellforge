@@ -1507,14 +1507,14 @@ let relicMods={...RELIC_BASE};
    只调敌人血量/伤害/刷怪量(玩家不变);eHp/eDmg 是无尽逐波复利的底数(弑神更陡)。
    现版本难度 = 通玄(第2档,全 ×1.0);默认入圣(标准)。 */
 const DIFFICULTIES=[
-  {id:1,name:'凡尘',sub:'轻松',desc:'敌人更弱更少 · 休闲 / 新手向',     hpM:0.70,dmgM:0.65,spawnM:0.88,eHp:1.11,eDmg:1.085},
-  {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.11,eDmg:1.085},
-  {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.11,eDmg:1.085},
-  {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.11,eDmg:1.085},
-  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.14,eDmg:1.11}
+  {id:1,name:'凡尘',sub:'轻松',desc:'敌人更弱更少 · 休闲 / 新手向',     hpM:0.70,dmgM:0.65,spawnM:0.88,eHp:1.10,eDmg:1.085},
+  {id:2,name:'通玄',sub:'进阶',desc:'当前版本难度 · 多数人的起点',       hpM:1.00,dmgM:1.00,spawnM:1.00,eHp:1.10,eDmg:1.085},
+  {id:3,name:'入圣',sub:'标准',desc:'正经平衡基准 · 每日挑战固定此档',   hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085},
+  {id:4,name:'渡劫',sub:'困难',desc:'敌人更强更多 · 老手进阶',           hpM:1.45,dmgM:1.40,spawnM:1.15,eHp:1.10,eDmg:1.085},
+  {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.13,eDmg:1.11}
 ];
 let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
-let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.11,eDmg:1.085,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关 */
+let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关 */
 function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg,nm:d.id===5}; }
 function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
 function diffData(){ return DIFFICULTIES[difficulty-1]; }
@@ -2030,7 +2030,7 @@ function startWave(n){
     const scale=(n>15?Math.pow(diffMul.eHp,n-15):1);       /* Boss 血量复利(弑神更陡;无尽底数已上调 1.10→1.12 / 弑神 1.13→1.15) */
     /* 正赛(5-15波)Boss 伤害随波缓涨【低档增强】:补"正赛 boss 每下伤害都一样"的缺,但力度温和。
        封顶 1.3×(第15波 vs 第5波),并带入无尽。中等档=0.06(→1.6×)、低档=0.03(→1.3×),嫌不够改这里。 */
-    const campDmg=1+0.03*(clamp(n,5,15)-5);
+    const campDmg=1+0*(clamp(n,5,15)-5);
     const dmgScale=campDmg*(n>15?Math.pow(diffMul.eDmg,n-15):1);   /* Boss 伤害 = 正赛缓涨 × 无尽逐波复利 */
     /* 无尽模式 Boss 数量:16-20 波 1 个,21-25 波 2 个,26-30 波 3 个…每 5 波 +1,且每个都是不同的 Boss */
     const bossCount=(endless&&n>15)?(Math.floor((n-16)/5)+1):1;
@@ -3205,6 +3205,26 @@ function enemyAI(e,dt){
           S.zap(); }
       } else if(d<ETYPE.frostarcher.shootR){ e._fbWind=true; e.shootT=ETYPE.frostarcher.windup; }
     } break;
+  }
+  /* 拦截 / 侧翼(修复:STRATEGY_DEFS 里这俩策略原本只设 extra 标志、却没有任何代码读取=空操作。
+     这里仅作用于移动向量 e._mv、不碰射击瞄准 a;且排除冲锋怪蓄力冲刺(那是预警过的直线攻击,不该被拐弯)。 */
+  if((strat.extra.intercept||strat.extra.flank) && !e._charging && (e._mv.x||e._mv.y)){
+    if((e._mv.x*dx+e._mv.y*dy)>0){   /* 仅当正朝玩家移动(追击)时调整;风筝/逃离方向不动它 */
+      const sp=Math.hypot(e._mv.x,e._mv.y)||1;
+      if(strat.extra.intercept){
+        const pv=playerProfile.velHist[playerProfile.velHist.length-1];
+        if(pv&&pv.v>30){   /* 预判玩家落点,抄近路堵在前面(治"闷头直线跑");预判时间≈到达时间、封顶 0.55s 防过度神预判 */
+          const lead=Math.min(d/sp,0.55);
+          const ang=Math.atan2((player.y+pv.vy*lead)-e.y,(player.x+pv.vx*lead)-e.x);
+          e._mv.x=Math.cos(ang)*sp; e._mv.y=Math.sin(ang)*sp;
+        }
+      } else {   /* 侧翼:把追击方向偏转约 29°,从斜侧切入而非正面直冲(治"满地图乱走位");方向每怪固定一次、不左右抖动 */
+        if(e._flankSide===undefined) e._flankSide=Math.random()<.5?-1:1;
+        const ca=Math.cos(e._flankSide*0.5), sa=Math.sin(e._flankSide*0.5);
+        const nx=e._mv.x*ca-e._mv.y*sa, ny=e._mv.x*sa+e._mv.y*ca;
+        e._mv.x=nx; e._mv.y=ny;
+      }
+    }
   }
 }
 
