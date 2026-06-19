@@ -534,6 +534,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v84.0 · 2026-06-19</div><div class="cl-i">🌊🐲 <b>两位山海经新角色登场!</b>(成就解锁,在「🎭 外观·皮肤」里换装):<br>🌊 <b>共工(水神)</b> —— 怒触不周山的玄蓝水神。kit「每次施法 +1 发、散布更广、单发 −28%」=<b>怒涛多弹流</b>,清群尤其爽、打单体接近原样。<b>单波击杀 60 只妖兽</b>(成就「🌊 浪潮终结者」)即可解锁。<br>🐲 <b>白泽(神兽)</b> —— 知万物之情的祥瑞神兽,额生慧眼、明察一切。kit「法术弹自动追踪敌人、伤害 −12%」=<b>手残福音</b>,移动靶随便点。<b>单局集齐 6 件遗物</b>(成就「🏺 遗物收藏家」)即可解锁。<br>角色现来到 <b>12 个</b>;两套 kit 都是净值中性的侧向取舍,全难度通用(含弑神)、不破榜。后续还有新法杖、新法术陆续登场。</div></div>
 <div class="cl-v"><div class="cl-h">v83.9 · 2026-06-19</div><div class="cl-i">🎨 <b>全面 UI 精致化</b>(纯外观,不影响任何玩法 / 数值 / 平衡,冲榜公平不变):<br>🏠 <b>主菜单</b> —— 菜单按钮立体化(顶部高光 + 投影)、灵晶变金边货币药丸、难度 / 榜单标签加高光<br>⏸️ <b>暂停 & 设置</b> —— 所有次级按钮加淡底高光、瞄准模式按钮统一<br>💀 <b>结算页 & 🏆 成就一览</b> —— 成就图标嵌入「宝石凹槽」、卡面升级<br>📖 <b>法术 / 异兽图鉴</b> —— 每个图标进宝石槽、条目卡面统一<br>🏆 <b>排行榜</b> —— 前三名金 / 银 / 铜 podium 高亮<br>整体延续暗紫山海风,克制不浮夸;血条 / 波数 / 预警等战斗信息保持原样清晰。</div></div>
 <div class="cl-v"><div class="cl-h">v83.8 · 2026-06-19</div><div class="cl-i">✨ <b>卡片界面小美化:</b>选卡 / 遗物 / 法杖的图标现在都嵌进统一的『宝石凹槽』(圆角凹陷 + 按稀有度发光),看着更精致、更有"锻造"感,图标大小也齐整了,卡片描述也更清晰一点。<b>纯外观,不影响任何玩法和数值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v83.7 · 2026-06-19</div><div class="cl-i">🛠️ <b>三处朋友反馈的优化 / 修复:</b><br>🎈 <b>巨型法术不再撑爆屏幕:</b>满层放大从 +80% 收到 <b>+40%</b>,后期魔法球小一圈、看得更清;<b>陨石 / 新星的爆炸特效也加了尺寸上限</b>(伤害范围不变,不影响实力)。<br>💫 <b>特效强度滑块现在能拉到 0%:</b>想要极致清爽,可以把自己的粒子 / 辉光 / 震屏<b>全部关掉</b>(火海、毒云等照常造成伤害,只是不显示),敌方弹幕始终醒目。<br>🔵 <b>奥术球瞄准修复:</b>之前环绕的法球发射小弹时会从球的位置斜着偏出去、经常擦过敌人(像在"射空气");现在改成<b>从球的实际位置对准敌人直射</b>,命中稳多了。</div></div>
@@ -828,10 +829,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.9', APP_TIME='2026-06-19 20:20';
+const APP_VER='v84.0', APP_TIME='2026-06-19 21:15';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v83.9';
+const APP_NOTIFY_VER='v84.0';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1745,7 +1746,7 @@ function wandSkin(id){ return WAND_SKIN[id]||WAND_SKIN.apprentice; }
 function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
 /* ===== 角色皮肤(v70 加入;v77 起各带取舍 kit,见上方 SKIN_FX);wizard 免费,其余灵晶解锁(记录于 META.unlocked,与法杖键不冲突) ===== */
 const SKIN_COST={fox:300, shangui:300, jingwei:300, houyi:300, kuafu:300, chiyou:300};
-const SKIN_ACH={xingtian:'godslayer', zhulong:'endless50', nuwa:'allboss'};   /* 成就解锁皮肤:皮肤id → 所需成就id;打出该成就即免费解锁(无灵晶售价、随成就永久) */
+const SKIN_ACH={xingtian:'godslayer', zhulong:'endless50', nuwa:'allboss', gonggong:'wavekill', baize:'relic6'};   /* 成就解锁皮肤:皮肤id → 所需成就id;打出该成就即免费解锁(无灵晶售价、随成就永久) */
 /* ===== v77 皮肤取舍 kit:复用法杖 wandFx 同字段,开局在 applyWand 折入(净值中性的侧向取舍=玩法 kit 非养成 → 全难度通用含弑神,与法杖同理不破榜);幅度比法杖轻;`kit` 文案仅供卡片显示,注入时忽略 ===== */
 const SKIN_FX={
   wizard:  {kit:'纯均衡 · 无取舍'},
@@ -1758,6 +1759,8 @@ const SKIN_FX={
   houyi:   {dmgM:1.12,     pierce:1, cdM:1.15,     kit:'单发伤害 +12% · 穿透 +1 · 攻速 −15%'},
   kuafu:   {maxhpAdj:40,   cdM:1.13,               kit:'生命上限 +40 · 攻速 −13%'},
   chiyou:  {critBonus:.10, killHeal:1, maxhpAdj:-30, takenMul:1.08, kit:'暴击率 +10% · 击杀回血 +1 · 生命上限 −30 · 受伤 +8%'},
+  gonggong:{extra:1, spreadM:1.55, dmgM:.72,     kit:'每次施法 +1 发 · 散布更广 · 单发 −28%'},
+  baize:   {homing:1.0, dmgM:.88,                kit:'法术弹自动追踪敌人 · 伤害 −12%'},
 };
 const CHARS=[
   {id:'wizard',  icon:'🧙', name:'巫师',     theme:'经典 · 暗紫法师', sub:'最初的拔杖者'},
@@ -1770,6 +1773,8 @@ const CHARS=[
   {id:'houyi',   icon:'🏹', name:'后羿',     theme:'神射 · 古铜猎装', sub:'羿射九日 · 负弓挟矢'},
   {id:'kuafu',   icon:'🦬', name:'夸父',     theme:'巨人 · 毛氅桃杖', sub:'逐日不及 · 弃杖为林'},
   {id:'chiyou',  icon:'⚔️', name:'蚩尤',     theme:'兵主 · 铜头铁额', sub:'牛角狰狞 · 赤目嗜血'},
+  {id:'gonggong',icon:'🌊', name:'共工',     theme:'水神 · 玄蓝怒涛', sub:'怒触不周山 · 天倾地陷 · 单波击杀60解锁'},
+  {id:'baize',   icon:'🐲', name:'白泽',     theme:'祥瑞 · 白金慧眼', sub:'知万物之情 · 通晓鬼神 · 集齐6遗物解锁'},
 ];
 /* 解锁判定:已购记录 > 成就皮肤看成就 > 其余(免费如巫师即解锁,有价未购则锁) */
 function skinUnlocked(id){
@@ -6928,6 +6933,126 @@ function chiyouSilhouette(p, color){
       ctx.quadraticCurveTo(s*r*0.48,-r*0.3,s*r*0.12,-r*0.04);ctx.closePath();ctx.fill();});
   ctx.restore();
 }
+/* ---------- 🌊 共工:怒触不周山的水神。玄蓝水袍、奔涌水发(梢带白沫),额心水珠、胸前白卷浪纹,身后上卷涌浪;眼粼粼水光、怒眉 ---------- */
+function drawGonggongBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.05, surge=.5+Math.sin(p.anim*3.2)*.5;
+  const ex=Math.cos(aimA)*1.6, ey=Math.sin(aimA)*1.2;
+  /* 身后涌浪(两道上卷的水波,发光) */
+  ctx.globalCompositeOperation='lighter';
+  ctx.strokeStyle='rgba(96,184,240,'+(0.34*surge+0.16)+')';ctx.lineWidth=Math.max(2,r*0.13);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();
+    ctx.moveTo(p.x+s*r*0.5,p.y+r*0.5);
+    ctx.quadraticCurveTo(p.x+s*r*1.12,p.y-r*0.18,p.x+s*r*0.56,p.y-r*0.92);
+    ctx.stroke();});
+  ctx.lineCap='butt';ctx.globalCompositeOperation='source-over';
+  /* 玄蓝水袍躯干 */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#3f86d0');g.addColorStop(1,'#0e2a5e');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#6ab6ec';ctx.lineWidth=1.5;ctx.stroke();
+  /* 胸前浪纹(白卷波) */
+  ctx.strokeStyle='rgba(212,238,255,.85)';ctx.lineWidth=Math.max(1.4,r*0.08);ctx.lineCap='round';
+  ctx.beginPath();
+  ctx.moveTo(p.x-r*0.36,p.y+r*0.42);
+  ctx.quadraticCurveTo(p.x-r*0.1,p.y+r*0.2,p.x,p.y+r*0.4);
+  ctx.quadraticCurveTo(p.x+r*0.1,p.y+r*0.58,p.x+r*0.36,p.y+r*0.36);
+  ctx.stroke();ctx.lineCap='butt';
+  /* 脸(水气微蓝) */
+  ctx.fillStyle='#dbe7ee';ctx.beginPath();ctx.arc(p.x,p.y-r*0.04,r*0.5,0,TAU);ctx.fill();
+  /* 怒眉 */
+  ctx.strokeStyle='#162a4a';ctx.lineWidth=Math.max(1.3,r*0.09);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.36+ex,p.y-r*0.16+ey);ctx.lineTo(p.x+s*r*0.12+ex,p.y-r*0.05+ey);ctx.stroke();});
+  ctx.lineCap='butt';
+  /* 眼(粼粼水光:发光青底 + 深蓝瞳) */
+  ctx.globalCompositeOperation='lighter';
+  [-1,1].forEach(s=>{ctx.fillStyle='rgba(120,212,255,'+(0.5*surge+0.3)+')';ctx.beginPath();ctx.arc(p.x+s*r*0.23+ex,p.y-r*0.02+ey,r*0.12,0,TAU);ctx.fill();});
+  ctx.globalCompositeOperation='source-over';
+  [-1,1].forEach(s=>{ctx.fillStyle='#1b3a66';ctx.beginPath();ctx.arc(p.x+s*r*0.23+ex,p.y-r*0.02+ey,r*0.055,0,TAU);ctx.fill();});
+  /* 奔涌水发(数道上扬水流,梢带白沫)+ 额心水珠 */
+  ctx.save();ctx.translate(p.x,p.y-r*0.44);ctx.rotate(sway);
+    for(let k=-2;k<=2;k++){const ox=k*r*0.22, ph=Math.sin(p.anim*2.4+k)*r*0.05;
+      ctx.fillStyle='#163464';
+      ctx.beginPath();
+      ctx.moveTo(ox-r*0.1,r*0.06);
+      ctx.quadraticCurveTo(ox-r*0.1,-r*0.42,ox+r*0.16+ph,-r*0.64);
+      ctx.quadraticCurveTo(ox+r*0.02,-r*0.4,ox+r*0.1,r*0.06);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(200,236,255,.8)';ctx.beginPath();ctx.arc(ox+r*0.16+ph,-r*0.64,r*0.05,0,TAU);ctx.fill();}
+    ctx.globalCompositeOperation='lighter';
+    ctx.fillStyle='rgba(120,212,255,'+(0.55*surge)+')';ctx.beginPath();ctx.arc(0,r*0.16,r*0.12,0,TAU);ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#aee0ff';ctx.beginPath();ctx.arc(0,r*0.16,r*0.07,0,TAU);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.85)';ctx.beginPath();ctx.arc(-r*0.02,r*0.13,r*0.025,0,TAU);ctx.fill();
+  ctx.restore();
+}
+function gonggongSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-r*0.44);ctx.rotate(sway);
+    for(let k=-2;k<=2;k++){const ox=k*r*0.22;
+      ctx.beginPath();
+      ctx.moveTo(ox-r*0.1,r*0.06);
+      ctx.quadraticCurveTo(ox-r*0.1,-r*0.42,ox+r*0.16,-r*0.64);
+      ctx.quadraticCurveTo(ox+r*0.02,-r*0.4,ox+r*0.1,r*0.06);ctx.closePath();ctx.fill();}
+  ctx.restore();
+}
+/* ---------- 🐲 白泽:知万物之情的祥瑞神兽。白金法袍、额生金色慧眼(竖瞳·明察万物,随瞄准转),双角后掠、胸前卦纹,身后金辉 ---------- */
+function drawBaizeBody(p, aimA){
+  const r=p.r, sway=Math.sin(p.anim*3)*.04, glow=.5+Math.sin(p.anim*3)*.5;
+  const ex=Math.cos(aimA)*1.5, ey=Math.sin(aimA)*1.1;
+  /* 身后金辉(知万物的祥光) */
+  ctx.globalCompositeOperation='lighter';
+  const hg=ctx.createRadialGradient(p.x,p.y-r*0.1,r*0.2,p.x,p.y-r*0.1,r*1.05);
+  hg.addColorStop(0,'rgba(255,224,140,'+(0.28*glow+0.12)+')');hg.addColorStop(1,'rgba(255,200,80,0)');
+  ctx.fillStyle=hg;ctx.beginPath();ctx.arc(p.x,p.y-r*0.1,r*1.05,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  /* 白金法袍躯干 */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,r+2);
+  g.addColorStop(0,'#f4eedc');g.addColorStop(1,'#b39458');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#e8cf8a';ctx.lineWidth=1.5;ctx.stroke();
+  /* 胸前卦纹(八卦·知万物之书:外环 + 三爻) */
+  ctx.strokeStyle='rgba(122,94,42,.6)';ctx.lineWidth=Math.max(1,r*0.04);
+  ctx.beginPath();ctx.arc(p.x,p.y+r*0.36,r*0.2,0,TAU);ctx.stroke();
+  ctx.strokeStyle='#7a5e2a';ctx.lineWidth=Math.max(1.2,r*0.05);ctx.lineCap='round';
+  for(let k=0;k<3;k++){const yy=p.y+r*0.36+(k-1)*r*0.085;
+    if(k===1){ctx.beginPath();ctx.moveTo(p.x-r*0.13,yy);ctx.lineTo(p.x-r*0.03,yy);ctx.moveTo(p.x+r*0.03,yy);ctx.lineTo(p.x+r*0.13,yy);ctx.stroke();}
+    else{ctx.beginPath();ctx.moveTo(p.x-r*0.13,yy);ctx.lineTo(p.x+r*0.13,yy);ctx.stroke();}}
+  ctx.lineCap='butt';
+  /* 脸(白皙) */
+  ctx.fillStyle='#f3e6d2';ctx.beginPath();ctx.arc(p.x,p.y-r*0.04,r*0.5,0,TAU);ctx.fill();
+  /* 慧眉(平和) */
+  ctx.strokeStyle='#8a6a3a';ctx.lineWidth=Math.max(1.2,r*0.07);ctx.lineCap='round';
+  [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(p.x+s*r*0.34+ex*0.7,p.y-r*0.12+ey*0.7);ctx.lineTo(p.x+s*r*0.16+ex*0.7,p.y-r*0.15+ey*0.7);ctx.stroke();});
+  ctx.lineCap='butt';
+  /* 眼(沉静) */
+  [-1,1].forEach(s=>{ctx.fillStyle='#3a2c18';ctx.beginPath();ctx.arc(p.x+s*r*0.22+ex,p.y-r*0.02+ey,r*0.06,0,TAU);ctx.fill();});
+  /* ★额生慧眼(竖瞳金眼,明察万物;随瞄准转) */
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(p.x+ex*0.6,p.y-r*0.2+ey*0.6,r*0.14,r*0.1,0,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='lighter';
+  ctx.fillStyle='rgba(255,210,90,'+(0.5*glow+0.28)+')';ctx.beginPath();ctx.arc(p.x+ex*0.9,p.y-r*0.2+ey*0.9,r*0.1,0,TAU);ctx.fill();
+  ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle='#caa030';ctx.beginPath();ctx.ellipse(p.x+ex*0.9,p.y-r*0.2+ey*0.9,r*0.045,r*0.085,0,0,TAU);ctx.fill();
+  /* 双角后掠(金角,梢带光点) */
+  ctx.save();ctx.translate(p.x,p.y-r*0.46);ctx.rotate(sway);
+    [-1,1].forEach(s=>{ctx.fillStyle='#d8c074';
+      ctx.beginPath();ctx.moveTo(s*r*0.24,r*0.06);
+      ctx.quadraticCurveTo(s*r*0.66,-r*0.06,s*r*0.5,-r*0.6);
+      ctx.quadraticCurveTo(s*r*0.42,-r*0.3,s*r*0.1,-r*0.02);ctx.closePath();ctx.fill();
+      ctx.strokeStyle='#a8852e';ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle='#f0e2a8';ctx.beginPath();ctx.arc(s*r*0.5,-r*0.6,r*0.05,0,TAU);ctx.fill();});
+  ctx.restore();
+}
+function baizeSilhouette(p, color){
+  const r=p.r; ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.fill();
+  const sway=Math.sin(p.anim*3)*.04;
+  ctx.save();ctx.translate(p.x,p.y-r*0.46);ctx.rotate(sway);
+    [-1,1].forEach(s=>{ctx.beginPath();ctx.moveTo(s*r*0.24,r*0.06);
+      ctx.quadraticCurveTo(s*r*0.66,-r*0.06,s*r*0.5,-r*0.6);
+      ctx.quadraticCurveTo(s*r*0.42,-r*0.3,s*r*0.1,-r*0.02);ctx.closePath();ctx.fill();});
+  ctx.restore();
+}
 /* 分发器:按所选皮肤(META.skin)绘制本体/剪影;skinId 可显式指定(选择界面预览用) */
 function drawCharBody(p, aimA, skinId){
   const s=skinId||(META&&META.skin)||'wizard';
@@ -6940,6 +7065,8 @@ function drawCharBody(p, aimA, skinId){
   else if(s==='houyi') drawHouyiBody(p, aimA);
   else if(s==='kuafu') drawKuafuBody(p, aimA);
   else if(s==='chiyou') drawChiyouBody(p, aimA);
+  else if(s==='gonggong') drawGonggongBody(p, aimA);
+  else if(s==='baize') drawBaizeBody(p, aimA);
   else drawWizardBody(p, aimA);
 }
 function charSilhouette(p, color, skinId){
@@ -6953,6 +7080,8 @@ function charSilhouette(p, color, skinId){
   else if(s==='houyi') houyiSilhouette(p, color);
   else if(s==='kuafu') kuafuSilhouette(p, color);
   else if(s==='chiyou') chiyouSilhouette(p, color);
+  else if(s==='gonggong') gonggongSilhouette(p, color);
+  else if(s==='baize') baizeSilhouette(p, color);
   else wizardSilhouette(p, color);
 }
 /* 选择界面卡片预览:临时把全局 ctx 切到小卡画布,画完还原(同步执行,不与游戏循环抢) */
