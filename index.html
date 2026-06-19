@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82.2 · 2026-06-19</div><div class="cl-i">🌊 <b>修复「水龙吟贴着墙放不出来」。</b>水龙吟的水波很宽,以前你<b>背靠墙壁或沿着墙</b>施放时,水波一出生就被判定撞进墙里、当帧消失,看着就像没放出来。现在贴墙也能正常放出水波、沿墙横扫一整条线的敌人;贴着石柱施放同理修好。<b>只修这个出不来的判定,水龙吟的伤害、宽度、击退、冷却一概没动,其它法术不受影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82.1 · 2026-06-19</div><div class="cl-i">🏆 <b>排行榜更清爽 + 每局都给你名次反馈。</b>① <b>同名只留最高那条</b>:以前同一个人反复刷、榜上一个名字出现一大串,现在每个榜里相同昵称只显示他最好的一次,前 10 名都是不同的人,看着干净、名次更有含金量(五档难度榜 + 每日挑战榜都生效)。② <b>每局结算告诉你「你排第几」</b>:不管有没有进前 10,打完都会显示你在该榜的真实名次和上榜总人数;要是这局<b>刷新了个人最好成绩</b>,还会有「🎉 刷新个人最好成绩」的庆祝。每一局都有奔头,不用非得破纪录才看得到自己。<b>纯显示优化,不动任何玩法 / 数值,冲榜公平不变。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82 · 2026-06-19</div><div class="cl-i">🎭 <b>三位山海经新角色登场!</b>(灵晶解锁,在「外观·皮肤」里换):①🏹<b>后羿</b>——射九日的神射手,单发伤害 +12%、穿透 +1(一箭洞穿一排怪),代价是出手稍慢(攻速 −15%);②🦬<b>夸父</b>——逐日的巨人,生命上限 +40、皮糙肉厚,代价同样是出手慢些(攻速 −13%),适合稳扎稳打;③⚔️<b>蚩尤</b>——铜头铁额的兵主战神,暴击率 +10%、击杀回血 +1 的激进打法,但身子骨脆(生命上限 −30、受伤 +8%),越凶越爽。每位都各有取舍、净值均衡,<b>全难度通用不破榜</b>,也给攒不完的灵晶添了去处。</div></div>
 <div class="cl-v"><div class="cl-h">v81.2 · 2026-06-18</div><div class="cl-i">🪙 <b>后期金币终于花得出去了!</b>以前深入无尽后钱袋暴涨到一万多却没处花(升个 Lv75 法术才几十块、回满血才 30)。现在<b>商店价格随波数上涨、法术升级价跟着实际等级走</b>——越深的波、越高级的法术,升级和补给越贵,囤的金币真正有用武之地、每次进商店都是真选择。<b>第10波前价格完全不变</b>,只动深层经济、不碰任何法术伤害数值。</div></div>
@@ -796,7 +797,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82.1', APP_TIME='2026-06-19 01:01';
+const APP_VER='v82.2', APP_TIME='2026-06-19 01:02';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3457,6 +3458,10 @@ function makeBullet(id,lv,a){
   if(id==='winterspear')b.pierce+=6;
   if(id==='tidal')b.pierce+=8;
   synergyApplyToBullet(b);
+  /* 防贴墙/贴柱"放不出来":宽弹体(如水龙吟 r=30,大于玩家贴墙时与墙的间距)出生点会卡进"撞墙/撞柱即销毁"区、当帧被秒掉,看着像没放出来。把出生点顶出销毁区即可,弹体飞行方向不变。 */
+  { const _mnX=ARENA.pad,_mxX=ARENA.w-ARENA.pad,_mnY=ARENA.pad,_mxY=ARENA.h-ARENA.pad;
+    b.x=clamp(b.x,_mnX+b.r,_mxX-b.r); b.y=clamp(b.y,_mnY+b.r,_mxY-b.r);
+    for(const p of pillars){ const dx=b.x-p.x,dy=b.y-p.y,mn=p.r+b.r,d2v=dx*dx+dy*dy; if(d2v>0&&d2v<mn*mn){ const d=Math.sqrt(d2v); b.x=p.x+dx/d*mn; b.y=p.y+dy/d*mn; } } }
   return b;
 }
 function chainZap(jumps,dmg,range){
@@ -4810,11 +4815,11 @@ function update(dt){
     /* 墙 */
     if(b.x<minX+b.r||b.x>maxX-b.r){
       if(b.bounce>0){b.vx*=-1;b.x=clamp(b.x,minX+b.r,maxX-b.r);b.bounce--;puff(b.x,b.y,b.col,3);}
-      else expire(b);
+      else if(b.x<minX||b.x>maxX)expire(b);   /* 非弹射:中心越过墙界才销毁(宽弹体如水龙吟贴墙扫射不被边缘触墙当帧秒杀) */
     }
     if(!b.dead&&(b.y<minY+b.r||b.y>maxY-b.r)){
       if(b.bounce>0){b.vy*=-1;b.y=clamp(b.y,minY+b.r,maxY-b.r);b.bounce--;puff(b.x,b.y,b.col,3);}
-      else expire(b);
+      else if(b.y<minY||b.y>maxY)expire(b);
     }
     /* 石柱 */
     if(!b.dead)for(const p of pillars){
