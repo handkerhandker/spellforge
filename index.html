@@ -536,6 +536,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v84.7 · 2026-06-20</div><div class="cl-i">🏹 <b>修复御风弓的箭被画在一个圆球里的问题。</b>之前箭的外面套了一圈深色圆形垫底(本是给普通圆形子弹用来在亮背景上看清的),箭是细的、垫底圆比它宽,就露成了"球"。现在<b>箭改成沿箭身的深色描边</b>——亮背景照样看得清,但是干净的箭形、不再有球。纯显示修复,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v84.6 · 2026-06-20</div><div class="cl-i">📝 <b>文案润色:把一批法术 / 法杖 / 连携的说明改得更清楚、更统一。</b>重点是<b>不死药</b>(说明精简、一眼看懂)和<b>御风弓</b>(补上了准确数值——之前写"单发略降",实际是 -20%、施法间隔 -10%、穿透 +1);另外把几处混进中文的英文缩写(aoe / HP)也都换成了中文。<b>纯文字调整,不动任何玩法 / 数值 / 平衡。</b></div></div>
 <div class="cl-v"><div class="cl-h">v84.5 · 2026-06-20</div><div class="cl-i">☯ <b>名望供奉系统:灵晶有了"永远花不完"的新去处,弑神党也能晒境界了!</b><br><br>之前祭坛的永久强化在「弑神」难度不生效,主玩弑神的朋友灵晶攒一堆没处花。现在新增 <b>「名望供奉」</b>——把灵晶供奉上去,换一个<b>纯炫耀、不影响战力</b>的修真境界,从 凡尘 一路 <b>散修 → 炼气 → 筑基 → 金丹 → 元婴 → 化神 → 炼虚 → 合体 → 大乘 → 渡劫 → 仙人</b> 往上爬。<br><br>🔹 <b>无限级、每重价格递增</b>,盈余灵晶永远填不满下一重、彻底告别"用不完"。<br>🔹 <b>全难度通用(弑神也能供奉)</b>——因为是纯炫耀、零战力,冲榜公平丝毫不受影响。<br>🔹 <b>境界越高越炫</b>:主菜单的境界徽章、每局结算页的称号、以及局内角色身上一圈境界色光环,都会随境界升级越来越亮。<br><br>(在祭坛最上方供奉。想要实打实的新角色皮肤?那是后续单独的内容,敬请期待。)</div></div>
 <div class="cl-v"><div class="cl-h">v84.4 · 2026-06-20</div><div class="cl-i">✦ <b>祭坛大扩充:灵晶终于有处花了!新增 3 项永久强化 + 体魄/法力解除等级上限。</b><br><br>之前祭坛只有体魄 / 法力两项、各封顶 5 级,买满之后灵晶就没处花了。现在:<br>💗 <b>体魄(生命) / 🔷 法力(法术伤害)</b> 解除封顶,可一直往上买;<br>⚡ <b>急速(施法速度)</b>、👟 <b>身法(移动速度)</b>、🛡️ <b>坚壁(受伤减免)</b> 三项全新登场。<br><br>全部<b>无限级、每级价格递增</b>(越往上越贵),所以盈余灵晶<b>永远有去处、再也不会"用不完"</b>;其中坚壁是<b>递减式减伤</b>(每级削掉一点剩余伤害、无限趋近但永远不会变无敌)。<br><br>照旧:<b>所有永久强化在「弑神」难度不生效</b>——弑神是纯凭操作的公平竞技档,冲榜完全不受影响。</div></div>
@@ -837,10 +838,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v84.6', APP_TIME='2026-06-20 01:30';
+const APP_VER='v84.7', APP_TIME='2026-06-20 01:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v84.6';
+const APP_NOTIFY_VER='v84.7';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -5656,7 +5657,7 @@ function render(){
   }
   /* 可读性:先垫深色底,浅色地形(雪原/沙漠)上法术也清晰可辨 */
   ctx.globalCompositeOperation='source-over';
-  for(const b of bullets){ ctx.globalAlpha=.5;ctx.fillStyle='#080414';
+  for(const b of bullets){ if(player.wandFx.arrowStyle)continue; ctx.globalAlpha=.5;ctx.fillStyle='#080414';
     ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.1+2.5,0,TAU);ctx.fill();
     ctx.globalAlpha=.5;ctx.strokeStyle='#000';ctx.lineWidth=1.5;ctx.stroke(); }
   for(const b of ebullets){ ctx.globalAlpha=.5;ctx.fillStyle='#16000c';
@@ -5674,6 +5675,7 @@ function render(){
       ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.4*fxAlpha*_bdim;ctx.strokeStyle=b.col;ctx.lineWidth=Math.max(2,b.r*.55);ctx.lineCap='round';
       ctx.beginPath();ctx.moveTo(-L*.85,0);ctx.lineTo(L*.5,0);ctx.stroke();
       ctx.globalCompositeOperation='source-over';ctx.globalAlpha=_bdim*fxAlpha;
+      ctx.strokeStyle='rgba(8,4,20,.9)';ctx.lineWidth=Math.max(4,b.r*.6+2.5);ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-L*.55,0);ctx.lineTo(L*.48,0);ctx.stroke();   /* 深色描边垫底:亮地图也看得清,沿箭身(非圆球) */
       ctx.strokeStyle=b.col;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-L*.5,0);ctx.lineTo(L*.42,0);ctx.stroke();
       ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(L*.5,0);ctx.lineTo(L*.42,-3);ctx.lineTo(L*.42,3);ctx.closePath();ctx.fill();
       ctx.strokeStyle=b.col;ctx.lineWidth=1.4;
