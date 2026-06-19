@@ -506,6 +506,7 @@
     </div>
     <div id="ovCause" style="font-size:13px;color:#d9a6b8;margin:2px 0 8px;line-height:1.4;"></div>
     <div id="ovDmg" style="width:100%;margin:0 0 8px;"></div>
+    <div id="ovMvp" style="width:100%;margin:0 0 8px;"></div>
     <div class="lj-gain" id="ovGain"></div>
     <div id="ovAch"></div>
     <div class="win-actions">
@@ -528,6 +529,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v83.5 · 2026-06-19</div><div class="cl-i">⚔️ <b>死亡结算页新增『本局输出担当』:一眼看出你这局哪个法术打的伤害最高。</b>死亡页会按伤害排出你这局的<b>前三名法术</b>(🥇🥈🥉),每个标出<b>总伤害和占比</b>,正好和上方"被什么扣血"配成一对——上看你怎么死的、下看你怎么打的,复盘自己的构筑更直观,也方便看出哪个法术其实在划水。</div></div>
 <div class="cl-v"><div class="cl-h">v83.4 · 2026-06-19</div><div class="cl-i">💀 <b>死亡结算页死因更详细了:现在会写明「被谁的什么招式击败」+ 那一下的伤害。</b>以前只显示"被敌方弹幕击败",经常让人一头雾水"到底被啥秒的";现在会直接告诉你<b>是哪尊首领、用的哪个招式</b>(比如「首领「应龙」· 裂地冲击」),还单独标出<b>致命一击的实际伤害值</b>(比如 −653),死得明明白白。(说明:深层无尽 + 弑神后期,单颗首领弹的伤害可能就直接超过你的血量,看到大数字别惊讶——那就是"一发入魂"的真相;善用走位 + 护盾躲开首领"红圈预警"的范围。)</div></div>
 <div class="cl-v"><div class="cl-h">v83.3 · 2026-06-19</div><div class="cl-i">🛡️ <b>过波清场:每波打完会自动清掉残留的弹幕和未结算的预警。</b>以前最后一只怪倒下的瞬间还在飞的敌弹、还没落地的预警攻击会冻在原地,等你选完法术一恢复就正好怼你一下——现在过波即清,选完法术回到场上不会再莫名挨那一下。🏃 <b>绕石柱走位更顺滑:</b>以前贴着石柱绕圈会有种"被拉扯减速 / 黏住"的感觉,现在贴桩滑行能<b>保持全速</b>,绕柱、借柱躲弹更跟手(正对着柱子直推仍然能停住,不会打滑)。</div></div>
 <div class="cl-v"><div class="cl-h">v83.2 · 2026-06-19</div><div class="cl-i">🛡️ <b>修复:护盾现在能挡住「中毒」了。</b>之前法盾展开时,中毒掉血会无视护盾直接扣你血——现在护盾期间免疫中毒,护盾消失后毒才继续。💀 <b>死亡结算页新增「死因」:</b>会告诉你致命一击是被什么击败的(首领招式 / 妖兽近身 / 敌方弹幕 / 范围爆炸 / 中毒),死得明白。📊 <b>还新增「本局失血来源」色条:</b>一眼看出这一局你的血主要被什么扣的(近身 / 首领 / 弹幕 / 范围 / 中毒 各占多少),方便针对性调整打法。(说明:深层无尽 + 弑神后期本就极度致命,一次满额攻击可能直接超过你的血量;善用护盾的开/合时机。)</div></div>
@@ -817,10 +819,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v83.4', APP_TIME='2026-06-19 15:40';
+const APP_VER='v83.5', APP_TIME='2026-06-19 16:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v83.4';
+const APP_NOTIFY_VER='v83.5';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1497,6 +1499,8 @@ let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let runMaxComboTier=0, runLastBoss=-1; /* 战绩卡用:本局最高连杀段位 / 本局打到的 Boss */
 let runMobKills={}, runMobDmg={}; /* 本局逐怪统计:击杀数 / 累计伤害(异兽图鉴「本局已遇见」用)*/
+let runSpellDmg={}; /* 本局逐法术输出统计(死亡/通关页「输出担当」MVP 用)*/
+let _atkSpell=null; /* 当前正在结算伤害的法术id;damageEnemy 读它归因到 runSpellDmg */
 let runBossKills={}, runBossDmg={}; /* 本局逐 Boss 统计(按 _bossId 0-7):击败次数 / 累计伤害 */
 let deathCause=''; /* 本局致命一击来源(死亡结算页显示「被什么击败」,消除暴毙迷惑感)*/
 let deathBlowDmg=0; /* 致命一击的实际伤害值(扣血后,死亡结算页显示「这一下 -X」)*/
@@ -1670,7 +1674,7 @@ function resetGame(){
   enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; beasts=[]; summonT=0; totems=[]; _synAnnounced=false;
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
-  runMaxComboTier=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runBossKills={}; runBossDmg={}; deathCause=''; deathBlowDmg=0; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
+  runMaxComboTier=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runSpellDmg={}; runBossKills={}; runBossDmg={}; deathCause=''; deathBlowDmg=0; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
   _runUnlocked=[]; runTookHeart=false; runBoughtShop=false; _runDashed=false; _runMaxSpells=0; _runT=0;
   relicMods={...RELIC_BASE};
@@ -2949,7 +2953,7 @@ function enemyAI(e,dt){
   if(e._kbCool>0)e._kbCool-=dt;
   if(e._devourT>0)e._devourT-=dt;
   if(e._plagueT>0){ e._plagueT-=dt; e._ptick=(e._ptick||0)-dt;
-    if(e._ptick<=0){ e._ptick=.5; damageEnemy(e,e._plagueDps*.5);
+    if(e._ptick<=0){ e._ptick=.5; (_atkSpell='plague',damageEnemy(e,e._plagueDps*.5),_atkSpell=null);
       for(const o of enemies){ if(o===e||o.dead||o._plagueT>0||o.boss)continue;
         if(dist2(e.x,e.y,o.x,o.y)<(72+o.r)*(72+o.r)){ o._plagueT=4.5; o._plagueDps=e._plagueDps; puff(o.x,o.y,'#9be86a',2); break; } } }
   }
@@ -3282,7 +3286,7 @@ function updateSpellStates(dt){
         const dx=x2-player.x,dy=y2-player.y,len2=dx*dx+dy*dy;
         const t=clamp(((e.x-player.x)*dx+(e.y-player.y)*dy)/len2,0,1);
         const px=player.x+dx*t,py=player.y+dy*t;
-        if(dist2(e.x,e.y,px,py)<(e.r+8)*(e.r+8)) damageEnemy(e,player.beam.dmg);
+        if(dist2(e.x,e.y,px,py)<(e.r+8)*(e.r+8)) (_atkSpell='beam',damageEnemy(e,player.beam.dmg),_atkSpell=null);
       }
     }
     if(player.beam.life<=0)player.beam=null;
@@ -3299,7 +3303,7 @@ function updateSpellStates(dt){
         const pull=((1-d/bh.r)*100+70)*(e.boss?.35:1);
         e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt;
         /* 全范围持续伤害,中心更疼 */
-        damageEnemy(e,bh.dmg*(d<bh.r*.5?1.7:1)*dt);
+        (_atkSpell='blackhole',damageEnemy(e,bh.dmg*(d<bh.r*.5?1.7:1)*dt),_atkSpell=null);
       }
     }
     if(Math.random()<fxAlpha) spawnPart(bh.x+Math.cos(bh.ang)*bh.r*.3,bh.y+Math.sin(bh.ang)*bh.r*.3,rand(-30,30),rand(-30,30),.2,3,'#a06fff');
@@ -3313,7 +3317,7 @@ function updateSpellStates(dt){
       const dx=cy.x-e.x,dy=cy.y-e.y,d=Math.hypot(dx,dy)||1;
       if(d<cy.r){
         if(!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); const pull=(1-d/cy.r)*120*km; e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt; }
-        damageEnemy(e,cy.dmg*(d<cy.r*.5?1.5:1)*dt);
+        (_atkSpell='cyclone',damageEnemy(e,cy.dmg*(d<cy.r*.5?1.5:1)*dt),_atkSpell=null);
       }
     }
     for(let i=0;i<2;i++){ const aa=cy.ang*2+i*3.14; spawnPart(cy.x+Math.cos(aa)*cy.r*.45,cy.y+Math.sin(aa)*cy.r*.45,rand(-50,50),rand(-50,50),.25,3,'#dff2ff'); }
@@ -3426,7 +3430,7 @@ function castAll(dt){
       const rad=def.nova*(1+.12*(s.lv-1))*(1+.2*player.mods.giant), dm=dmgOf(def,s.lv);
       for(const e of enemies){ if(e.dead)continue;
         if(dist2(player.x,player.y,e.x,e.y)<rad*rad){
-          damageEnemy(e,dm,{kx:e.x-player.x,ky:e.y-player.y});
+          (_atkSpell='nova',damageEnemy(e,dm,{kx:e.x-player.x,ky:e.y-player.y}),_atkSpell=null);
           const m=Math.hypot(e.x-player.x,e.y-player.y)||1;
           const km=e._kbm!==undefined?e._kbm:1;
           if(!e.boss&&km>0){e.x+=(e.x-player.x)/m*34*km;e.y+=(e.y-player.y)/m*34*km;}
@@ -3629,6 +3633,7 @@ function damageEnemy(e,dmg,kb){
   /* 遗物:玄冰碎 — 命中使敌人短暂减速(Boss 除外,保留威胁) */
   if(relicMods.hitSlow>0 && !e.boss) e.slowT=Math.max(e.slowT||0,relicMods.hitSlow);
   playerProfile._dmgDealt=(playerProfile._dmgDealt||0)+dmg;
+  if(_atkSpell) runSpellDmg[_atkSpell]=(runSpellDmg[_atkSpell]||0)+dmg; /* 输出MVP:归因到当前法术 */
   { const _mk=e.baseType||e.type; if(_mk && !e.boss) runMobDmg[_mk]=(runMobDmg[_mk]||0)+dmg;
     if(e.boss && e._bossId!=null) runBossDmg[e._bossId]=(runBossDmg[e._bossId]||0)+dmg; }   /* 本局逐怪/逐Boss累计伤害(异兽图鉴用) */
   texts.push({x:e.x+rand(-8,8),y:e.y-e.r-6,str:''+Math.max(1,Math.round(dmg)),
@@ -3976,6 +3981,20 @@ function setupEndLeaderboard(prefix){
 }
 /* 死亡结算页「本局失血来源」色条:把 runDmgBySrc 画成一根分段横条 + 小图例,一眼看出血被什么扣的 */
 const DMG_CAT_META={melee:{n:'近身',c:'#ff6b6b'},boss:{n:'首领',c:'#b07bff'},bullet:{n:'弹幕',c:'#5fb0ff'},blast:{n:'范围',c:'#ffb24d'},poison:{n:'中毒',c:'#9ddb5a'}};
+function buildMvp(){
+  const el=$('ovMvp'); if(!el){return;}
+  const ents=Object.entries(runSpellDmg).filter(x=>x[1]>0&&SPELL_DEF[x[0]]).sort((a,b)=>b[1]-a[1]);
+  if(!ents.length){ el.innerHTML=''; return; }
+  const tot=ents.reduce((s,x)=>s+x[1],0), top=ents.slice(0,3), medal=['🥇','🥈','🥉'];
+  let h='<div style="font-size:12px;color:#9a8fb8;margin-bottom:5px;letter-spacing:.5px;">⚔ 本局输出担当</div>';
+  top.forEach((x,i)=>{ const d=SPELL_DEF[x[0]], pct=Math.round(x[1]/tot*100);
+    h+='<div style="display:flex;align-items:center;gap:7px;font-size:13px;margin:3px 0;">'
+      +'<span>'+medal[i]+'</span><span>'+d.icon+'</span><b style="color:#e8dcff;">'+d.name+'</b>'
+      +'<span style="flex:1;"></span><b style="color:#ffd97a;">'+fmtNum(x[1])+'</b>'
+      +'<span style="color:#8a7fb8;font-size:11px;min-width:32px;text-align:right;">'+pct+'%</span></div>';
+  });
+  el.innerHTML=h;
+}
 function buildDmgBreakdown(){
   const el=$('ovDmg'); if(!el) return;
   const order=['melee','boss','bullet','blast','poison'];
@@ -4008,6 +4027,7 @@ function gameOver(manual){
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
   { const _cz=$('ovCause'); if(_cz){ if(deathCause && !manual){ const _dt=deathBlowDmg>0?(' · <span style="color:#ff6b6b;font-weight:800;">−'+deathBlowDmg+'</span>'):''; _cz.innerHTML='<div style="font-size:15px;font-weight:800;color:#ff8aa3;letter-spacing:.5px;">💀 致命一击'+_dt+'</div><div style="font-size:12.5px;color:#cba0b8;margin-top:3px;line-height:1.4;">被 <b style="color:#ffb3c8;">'+deathCause+'</b> 击败</div>'; } else _cz.innerHTML=''; } }
   { const _dm=$('ovDmg'); if(_dm){ if(manual) _dm.innerHTML=''; else buildDmgBreakdown(); } }
+  { const _mv=$('ovMvp'); if(_mv){ if(manual) _mv.innerHTML=''; else buildMvp(); } }
   awardLj(); $('ovGain').innerHTML='✦ 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj;
   $('ovAch').innerHTML=achSummaryHTML();
   $('over').classList.remove('hidden');
@@ -4969,6 +4989,7 @@ function update(dt){
   buildEnemyGrid();   /* 每帧建格,供下方弹幕碰撞/归航就近查询(此刻敌人尚未本帧移动,与原碰撞同位置) */
   for(const b of bullets){
     if(b.dead)continue;
+    _atkSpell=b.id; /* 输出MVP:本子弹及其爆炸归因到此法术 */
     if(b.homing>0){
       let best=null,bd=480*480;
       for(const e of enemiesNear(b.x,b.y,480)){ if(e.dead||b.hits.has(e))continue;
@@ -5055,6 +5076,7 @@ function update(dt){
       }
     }
   }
+  _atkSpell=null; /* 输出MVP:子弹结算完毕,复位避免后续误记 */
   bullets=bullets.filter(b=>!b.dead);
 
   /* —— 敌人（统一 AI 调度） —— */
