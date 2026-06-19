@@ -534,6 +534,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v84.1 · 2026-06-19</div><div class="cl-i">🪄✨ <b>两把新机制法杖 + 两个全新法术,一次到位!</b><br><br>🪄 <b>法杖(成就解锁,在「选择法杖」页)</b>:<br>🧊 <b>玄霜法杖</b> —— 控场流,法术命中令敌人<b>减速 1 秒</b>(被减速的怪会罩一层淡青冰霜、一眼看出),放风筝神器、专克黏人 / 冲撞怪;代价单发伤害 −16%。<b>无尽抵达第 30 波</b>(成就「🌋 深渊领主」)解锁。<br>🔥 <b>熔火法杖</b> —— 灼烧流,法术命中在落点<b>燃起火池、持续灼烧</b>范围内的敌人,怪越密、地上火池越多越爽;代价单发伤害 −20%。<b>一次爆炸消灭 12 只以上</b>(成就「🎆 横扫千军」)解锁。<br>(顺带:玄冰碎遗物的减速现在也有了冰霜视觉。)<br><br>🔮 <b>法术(三选一里直接出,无需解锁)</b>:<br>🌩️ <b>落雷</b> —— 天降数道惊雷轰击敌群,每道炸开一小片范围电击,雷数随等级增加(区别于连锁闪电的\"跳跃\",这是\"天降点炸\")。<br>⚔️ <b>御剑</b> —— 召唤数把飞剑环绕自身、每隔片刻就近齐射贯穿剑气、自动锁敌,剑数随等级增加(持续输出、手不用瞄)。<br><br>法术现来到 <b>24 种</b>。<b>全部数值为初版、之后看实战微调;全难度通用(含弑神)、不破榜。</b></div></div>
 <div class="cl-v"><div class="cl-h">v84.0 · 2026-06-19</div><div class="cl-i">🌊🐲 <b>两位山海经新角色登场!</b>(成就解锁,在「🎭 外观·皮肤」里换装):<br>🌊 <b>共工(水神)</b> —— 怒触不周山的玄蓝水神。kit「每次施法 +1 发、散布更广、单发 −28%」=<b>怒涛多弹流</b>,清群尤其爽、打单体接近原样。<b>单波击杀 60 只妖兽</b>(成就「🌊 浪潮终结者」)即可解锁。<br>🐲 <b>白泽(神兽)</b> —— 知万物之情的祥瑞神兽,额生慧眼、明察一切。kit「法术弹自动追踪敌人、伤害 −12%」=<b>手残福音</b>,移动靶随便点。<b>单局集齐 6 件遗物</b>(成就「🏺 遗物收藏家」)即可解锁。<br>角色现来到 <b>12 个</b>;两套 kit 都是净值中性的侧向取舍,全难度通用(含弑神)、不破榜。后续还有新法杖、新法术陆续登场。</div></div>
 <div class="cl-v"><div class="cl-h">v83.9 · 2026-06-19</div><div class="cl-i">🎨 <b>全面 UI 精致化</b>(纯外观,不影响任何玩法 / 数值 / 平衡,冲榜公平不变):<br>🏠 <b>主菜单</b> —— 菜单按钮立体化(顶部高光 + 投影)、灵晶变金边货币药丸、难度 / 榜单标签加高光<br>⏸️ <b>暂停 & 设置</b> —— 所有次级按钮加淡底高光、瞄准模式按钮统一<br>💀 <b>结算页 & 🏆 成就一览</b> —— 成就图标嵌入「宝石凹槽」、卡面升级<br>📖 <b>法术 / 异兽图鉴</b> —— 每个图标进宝石槽、条目卡面统一<br>🏆 <b>排行榜</b> —— 前三名金 / 银 / 铜 podium 高亮<br>整体延续暗紫山海风,克制不浮夸;血条 / 波数 / 预警等战斗信息保持原样清晰。</div></div>
 <div class="cl-v"><div class="cl-h">v83.8 · 2026-06-19</div><div class="cl-i">✨ <b>卡片界面小美化:</b>选卡 / 遗物 / 法杖的图标现在都嵌进统一的『宝石凹槽』(圆角凹陷 + 按稀有度发光),看着更精致、更有"锻造"感,图标大小也齐整了,卡片描述也更清晰一点。<b>纯外观,不影响任何玩法和数值。</b></div></div>
@@ -829,10 +830,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v84.0', APP_TIME='2026-06-19 21:15';
+const APP_VER='v84.1', APP_TIME='2026-06-19 22:10';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v84.0';
+const APP_NOTIFY_VER='v84.1';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -1017,6 +1018,8 @@ const SPELL_DEF={
   plague:{name:'蛊毒',icon:'🦠',col:'#9be86a',cd:2.0,dmg:8,spd:300,r:9,life:1.2,desc:'命中使敌人染疫,染疫者死亡或靠近他人时传染,连锁烂场(出处:疫鬼)'},
   tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
   devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射并回你1血(出处:饕餮)'},
+  thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,desc:'天降数道惊雷轰击敌群,每道炸开小范围电击;雷数随等级增加'},
+  swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
   thousandblade:{name:'万刃',icon:'⚔️',col:'#e6d4ff',evo:'blade',desc:'【进化·环刃术】环刃数量翻倍、高速旋转,化作贴身绞肉风暴'},
@@ -1045,6 +1048,8 @@ const CARD_DEFS=[
   {id:'chain',kind:'spell',rar:2},
   {id:'nova',kind:'spell',rar:2},
   {id:'swarm',kind:'spell',rar:2},
+  {id:'thunderfall',kind:'spell',rar:2},
+  {id:'swordarray',kind:'spell',rar:3},
   /* 进化形态:标 evoForm —— 仅在已进化(已拥有)后作为升级卡出现,不会被当新法术抽到;让进化后也能继续升级、同样无上限 */
   {id:'firestorm',   kind:'spell',rar:3,evoForm:true},
   {id:'thunderjudge',kind:'spell',rar:3,evoForm:true},
@@ -1616,7 +1621,7 @@ function newPlayer(){ return {
   poisonT:0,poisonDmg:0,noFireT:0,slowT:0,
   spells:{bolt:{lv:1,t:.4}},
   mods:{multi:0,homing:0,bounce:0,pierce:0,split:0,haste:0,amp:0,giant:0,boots:0,armor:0,leech:0,pickup:0},
-  shield:null, orb:null, beam:null, blackholes:[], cyclones:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
+  shield:null, orb:null, sword:null, beam:null, blackholes:[], cyclones:[], orbShots:[], relics:[], _dashBuff:0, shieldLock:0
 };}
 /* ============ 元进度存档:灵晶(货币) + 强化等级 + 解锁内容 ============ */
 let META={lj:0,up:{},unlocked:{},skin:'wizard'}, runRewardBase=0;
@@ -1723,10 +1728,14 @@ const WANDS=[
   {id:'rebound',icon:'🏀',name:'弹跳法杖',desc:'弹跳清群 · 子弹命中后弹向最近的另一敌人(最多 2 跳),代价单发伤害 -22%(怪越多越爽)',fx:{dmgM:.78,ricochet:2}},
   {id:'compass',icon:'🧭',name:'司南法杖',desc:'追踪流 · 你的法术弹会自动拐弯追踪最近的敌人(轻度转向),代价单发伤害 -20%(手残福音、移动靶随便点)',fx:{dmgM:.80,homing:1.0}},
   {id:'blast',  icon:'💥',name:'轰天雷法杖',desc:'爆裂流 · 每发命中都炸出一小片溅射伤害,单发伤害降低但溅射补足,怪越密越爽(清群利器)',fx:{dmgM:.62,splash:40}},
-  {id:'gatling',icon:'🌀',name:'连珠法杖',desc:'速射流 · 施法间隔 -40%(连珠炮般快),代价单发伤害 -38%(以快制胜、火力如泼水、命中机会多)',fx:{dmgM:.62,cdM:.60}}
+  {id:'gatling',icon:'🌀',name:'连珠法杖',desc:'速射流 · 施法间隔 -40%(连珠炮般快),代价单发伤害 -38%(以快制胜、火力如泼水、命中机会多)',fx:{dmgM:.62,cdM:.60}},
+  {id:'frost',  icon:'🧊',name:'玄霜法杖',desc:'控场流 · 法术命中令敌人减速 1 秒,代价单发伤害 -16%(放风筝神器、克黏人 / 冲撞怪)',fx:{dmgM:.84,hitSlow:1.0}},
+  {id:'ember',  icon:'🔥',name:'熔火法杖',desc:'灼烧流 · 法术命中在落点燃起火池、持续灼烧范围内的敌人,代价单发伤害 -20%(怪越密、地上火池越多越爽)',fx:{dmgM:.80,firePool:true}}
 ];
-/* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked) */
+/* 法杖解锁:0/未列=默认免费;有价者需灵晶解锁(记录于 META.unlocked);列于 WAND_ACH 者改走成就解锁(见下) */
 const WAND_COST={summon:250,gcannon:320,bastion:200,fate:280,rebound:240,compass:260,blast:280,gatling:240};
+/* 成就解锁法杖(v84.1):法杖id → 所需成就id;打出该成就即免费解锁(不进 WAND_COST、无灵晶售价、随成就永久)。选杖页自动显示🔒成就、点击不弹购买 */
+const WAND_ACH={frost:'endless30', ember:'megakill12'};
 /* 法杖皮肤配色(v67):每把杖给巫师法袍/帽子/点缀一套主题色 → 整个人物随杖换装。
    c0/c1=斗篷渐变内→外,st=斗篷描边,hat=帽身,band=帽檐,star=帽尖✦。纯渲染、不碰玩法。 */
 const WAND_SKIN={
@@ -1740,10 +1749,17 @@ const WAND_SKIN={
   gcannon:   {c0:'#7fb8e8',c1:'#2e5a86',st:'#cfeaff',hat:'#2a4a66',band:'#3a6088',star:'#eaf7ff'},
   bastion:   {c0:'#8a8478',c1:'#3a362e',st:'#c0bab0',hat:'#2e2a24',band:'#4a463e',star:'#e8e0d0'},
   fate:      {c0:'#7a4ad0',c1:'#34146e',st:'#d8b8ff',hat:'#2a1452',band:'#b8902a',star:'#ffe680'},
-  rebound:   {c0:'#e8683a',c1:'#6e2410',st:'#ffb27a',hat:'#4a2614',band:'#6a3a1e',star:'#ffd0a8'}
+  rebound:   {c0:'#e8683a',c1:'#6e2410',st:'#ffb27a',hat:'#4a2614',band:'#6a3a1e',star:'#ffd0a8'},
+  frost:     {c0:'#5ec8e8',c1:'#1a4a6e',st:'#bfeaff',hat:'#163a52',band:'#246a86',star:'#dffaff'},
+  ember:     {c0:'#e86a2a',c1:'#6e1e0e',st:'#ffb27a',hat:'#4a1e0e',band:'#7a3214',star:'#ffd24d'}
 };
 function wandSkin(id){ return WAND_SKIN[id]||WAND_SKIN.apprentice; }
-function wandUnlocked(id){ return (WAND_COST[id]||0)===0 || (META.unlocked&&META.unlocked[id]===true); }
+/* 解锁判定:已购记录 > 成就法杖看成就 > 其余(免费=未列入 WAND_COST/价0则解锁,有价未购则锁) */
+function wandUnlocked(id){
+  if(META.unlocked&&META.unlocked[id]===true) return true;
+  if(WAND_ACH[id]) return (typeof hasAch==='function') && hasAch(WAND_ACH[id]);
+  return (WAND_COST[id]||0)===0;
+}
 /* ===== 角色皮肤(v70 加入;v77 起各带取舍 kit,见上方 SKIN_FX);wizard 免费,其余灵晶解锁(记录于 META.unlocked,与法杖键不冲突) ===== */
 const SKIN_COST={fox:300, shangui:300, jingwei:300, houyi:300, kuafu:300, chiyou:300};
 const SKIN_ACH={xingtian:'godslayer', zhulong:'endless50', nuwa:'allboss', gonggong:'wavekill', baize:'relic6'};   /* 成就解锁皮肤:皮肤id → 所需成就id;打出该成就即免费解锁(无灵晶售价、随成就永久) */
@@ -1788,7 +1804,8 @@ function applyWand(w){
   player.wandFx={dmgM:f.dmgM||1,cdM:f.cdM||1,spdM:f.spdM||1,extra:f.extra||0,
     spreadM:f.spreadM||1,pierce:f.pierce||0,killHeal:f.killHeal||0,
     charge:f.charge||false,thorns:f.thorns||false,summon:f.summon||false,
-    takenMul:f.takenMul||1,critBonus:f.critBonus||0,critMul:f.critMul||0,ricochet:f.ricochet||0,homing:f.homing||0,splash:f.splash||0};
+    takenMul:f.takenMul||1,critBonus:f.critBonus||0,critMul:f.critMul||0,ricochet:f.ricochet||0,homing:f.homing||0,splash:f.splash||0,
+    hitSlow:f.hitSlow||0,firePool:f.firePool||false};
   if(f.maxhpMul){player.maxhp=Math.max(40,Math.round(player.maxhp*f.maxhpMul));player.hp=Math.min(player.hp,player.maxhp);}
   if(f.maxhpAdj){player.maxhp=Math.max(40,player.maxhp+f.maxhpAdj);player.hp=Math.min(player.hp,player.maxhp);}
   /* —— v77 皮肤取舍 kit:与法杖同管线折入 wandFx + 生命(严格照搬法杖 maxhp 处理:−生命满血在低上限、+生命不额外回满,零法杖数值改动);净值中性侧向取舍,全难度通用含弑神 —— */
@@ -1889,9 +1906,11 @@ function buildWandSel(){
         '</div><div class="cd">'+w.desc+'</div></div>';
       el.onclick=()=>{ S.card(); $('wandSel').classList.add('hidden'); launchRun(w); };
     } else {
+      const _wa = WAND_ACH[w.id] ? (typeof ACH!=='undefined' && ACH.find(a=>a.id===WAND_ACH[w.id])) : null;
+      const _costTxt = _wa ? ('🔒 '+_wa.icon+_wa.name) : ('✦ '+(WAND_COST[w.id]||0));
       el.innerHTML='<div class="cic">'+w.icon+'</div><div class="ctx"><div class="cn">'+w.name+
-        ' 🔒</div><div class="cd">'+w.desc+'</div></div><div class="wcost">✦ '+(WAND_COST[w.id]||0)+'</div>';
-      el.onclick=()=>{ openWandUnlock(w); };
+        ' 🔒</div><div class="cd">'+w.desc+'</div></div><div class="wcost"'+(_wa?' style="color:#ffce4d;"':'')+'>'+_costTxt+'</div>';
+      el.onclick = _wa ? (()=>{ try{S.no();}catch(e){} }) : (()=>{ openWandUnlock(w); });   /* 成就法杖:卡面已写明解锁成就,点击只提示音、不弹购买 */
     }
     row.appendChild(el);
   }
@@ -3287,6 +3306,34 @@ function updateSpellStates(dt){
     }
     if(player.orb.life<=0)player.orb=null;
   }
+  /* 御剑 旋转 + 周期就近齐射(仿奥术球持久态;每把剑各自锁最近敌、射出贯穿剑气) */
+  if(player.sword){
+    player.sword.life-=dt;
+    player.sword.ang+=dt*2.0;
+    player.sword.tick+=dt;
+    if(player.sword.tick>=.55){
+      player.sword.tick=0;
+      const slv=player.spells.swordarray?player.spells.swordarray.lv:1;
+      const n=player.sword.n;
+      for(let k=0;k<n;k++){
+        const sa=player.sword.ang+k*TAU/n;
+        const sx=player.x+Math.cos(sa)*player.sword.rad, sy=player.y+Math.sin(sa)*player.sword.rad;
+        let best=null,bd=340*340;
+        for(const e of enemies){if(e.dead)continue;const d=dist2(sx,sy,e.x,e.y);if(d<bd){bd=d;best=e;}}
+        if(best){
+          const a=Math.atan2(best.y-sy,best.x-sx);
+          const b={id:'bolt',lv:slv,small:true,
+            x:sx,y:sy,vx:Math.cos(a)*560,vy:Math.sin(a)*560,r:5,
+            dmg:dmgOf(SPELL_DEF.swordarray,slv),life:.62,col:SPELL_DEF.swordarray.col,
+            pierce:2,bounce:0,homing:0,split:0,slow:0,aoe:0,cloud:false,
+            hits:new Set(),tt:0,dead:false,arcChain:0,chain:0,returning:false,
+            _wslow:player.wandFx.hitSlow||0,_wfire:player.wandFx.firePool||false};
+          bullets.push(b);
+        }
+      }
+    }
+    if(player.sword.life<=0)player.sword=null;
+  }
   /* beam 持续 tick */
   if(player.beam){
     player.beam.life-=dt;
@@ -3463,6 +3510,13 @@ function castAll(dt){
         const b=makeBullet('swarm',s.lv,a); b.homing=Math.max(b.homing,1.2); bullets.push(b); }
       S.shoot(); continue;
     }
+    if(id==='thunderfall'){ thunderfall(dmgOf(def,s.lv),s.lv); S.zap(); cam.shake=Math.min(cam.shake+2,8); continue; }
+    if(id==='swordarray'){   /* 御剑:数把飞剑环绕自身,周期就近齐射(仿奥术球持久态) */
+      const rad=def.sword, n=Math.min(6,2+Math.floor(s.lv/2));
+      if(player.sword){ player.sword.life=8+2*s.lv; player.sword.rad=rad; player.sword.n=n; }
+      else player.sword={ang:0,rad,life:8+2*s.lv,tick:0,n};
+      S.card(); continue;
+    }
     /* 弹道型 */
     const tgt=aimPoint(); if(!tgt){s.t=.1;continue;}
     const base=Math.atan2(tgt.y-player.y,tgt.x-player.x);
@@ -3529,7 +3583,8 @@ function makeBullet(id,lv,a){
     pierce:m.pierce+player.wandFx.pierce,bounce:m.bounce,homing:m.homing+(player.wandFx.homing||0),split:m.split,
     slow:def.slow||0,aoe:(def.aoe?def.aoe*(1+.16*(lv-1))*(1+.2*m.giant):0)+(player.wandFx.splash||0),
     cloud:id==='venom',small:false,hits:new Set(),tt:0,dead:false,
-    arcChain:def.arc||0,chain:def.chain||0,returning:false,ricochet:player.wandFx.ricochet||0};
+    arcChain:def.arc||0,chain:def.chain||0,returning:false,ricochet:player.wandFx.ricochet||0,
+    _wslow:player.wandFx.hitSlow||0,_wfire:player.wandFx.firePool||false};
   /* 协同修饰 */
   if(id==='winterspear')b.pierce+=6;
   if(id==='tidal')b.pierce+=8;
@@ -3608,6 +3663,18 @@ function thunderJudge(dmg,lv){
     for(let i=0;i<6;i++){ const a=Math.random()*TAU; spawnPart(tg.x,tg.y,Math.cos(a)*130,Math.sin(a)*130,.3,3,'#ffe96b'); }
   }
   addHitShake(2);
+}
+function thunderfall(dmg,lv){
+  const alive=enemies.filter(e=>!e.dead); if(!alive.length)return;
+  const strikes=2+lv, R=52*(1+.05*(lv-1));
+  alive.sort((a,b)=>dist2(player.x,player.y,a.x,a.y)-dist2(player.x,player.y,b.x,b.y));
+  for(let k=0;k<strikes;k++){
+    const tg=alive[k]||alive[Math.floor(Math.random()*alive.length)];
+    const tx=tg.x+rand(-12,12), ty=tg.y+rand(-12,12);
+    zapFX(tx,ty-300,tx,ty);   /* 天降竖直惊雷 */
+    for(const e of enemies){ if(!e.dead&&dist2(tx,ty,e.x,e.y)<R*R){ (_atkSpell='thunderfall',damageEnemy(e,dmg,{kx:e.x-tx,ky:e.y-ty}),_atkSpell=null); } }
+    for(let i=0;i<7;i++){ const a=Math.random()*TAU; spawnPart(tx,ty,Math.cos(a)*rand(60,150),Math.sin(a)*rand(60,150),rand(.2,.4),rand(2,3.5),pick(['#ffe96b','#fff6c0','#bfe3ff'])); }
+  }
 }
 function applyPoison(dur,dps){ player.poisonT=Math.max(player.poisonT,dur); player.poisonDmg=Math.max(player.poisonDmg,dps); }
 function applySlow(dur){ player.slowT=Math.max(player.slowT,dur); }
@@ -4194,8 +4261,8 @@ async function shareImage(){
 
 /* ============ 卡牌 ============ */
 /* ===== 法术图鉴 ===== */
-const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', phoenix:'辅助·急救', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬' };
-const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','heal','phoenix','shield','totem','cyclone','plague','tidal','devour'];
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', phoenix:'辅助·急救', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬', thunderfall:'范围·天雷', swordarray:'环绕·飞剑' };
+const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','thunderfall','swordarray','heal','phoenix','shield','totem','cyclone','plague','tidal','devour'];
 /* 大数字缩写显示:≥1万用「万」、≥1亿用「亿」,避免七八位数一长串。仅用于展示(法术图鉴/异兽统计),不影响内部计算。 */
 function fmtNum(n){ n=Math.round(n||0); const g=n<0?'-':''; n=Math.abs(n);
   if(n<10000) return g+n;
@@ -4667,6 +4734,7 @@ function buildSellRow(){
         delete player.spells[id];
         /* FIX: 卖光后清理常驻运行态,否则 updateSpellStates 引用已删法术会崩 */
         if(id==='orb')player.orb=null;
+        else if(id==='swordarray')player.sword=null;
         else if(id==='beam')player.beam=null;
         else if(id==='shield')player.shield=null;
         else if(id==='blackhole')player.blackholes=[];
@@ -5062,6 +5130,8 @@ function update(dt){
         damageEnemy(e,b.dmg,{kx:b.vx,ky:b.vy});
         hitFX(b);
         if(b.slow)e.slowT=Math.max(e.slowT,b.slowT||0)||b.slow;
+        if(b._wslow && !e.boss) e.slowT=Math.max(e.slowT||0,b._wslow);   /* 🧊玄霜法杖:命中减速(Boss 除外,保留威胁) */
+        if(b._wfire && !b._firedPool){ b._firedPool=true; clouds.push({x:b.x,y:b.y,r:34,life:2.0,dps:Math.max(5,b.dmg*.4),tick:0,kind:'fire'}); }   /* 🔥熔火法杖:命中落点燃起火池,持续灼烧(每发一次,dps 随子弹伤害缩放) */
         if(b.id==='plague'){ e._plagueT=Math.max(e._plagueT||0,4.5); e._plagueDps=Math.max(e._plagueDps||0,5+1.6*b.lv); }
         if(b.id==='devour')e._devourT=Math.max(e._devourT||0,6);
         if(b.id==='tidal'&&!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); if(km>0){ const mm=Math.hypot(b.vx,b.vy)||1; e.x+=b.vx/mm*14*km; e.y+=b.vy/mm*14*km; } }
@@ -6205,6 +6275,13 @@ function drawEnemy(e){
     ctx.beginPath();ctx.arc(e.x,e.y,e.r+3,0,TAU);ctx.stroke();
     for(let k=0;k<6;k++){const a2=k*Math.PI/3+e.anim*.3;ctx.beginPath();ctx.arc(e.x+Math.cos(a2)*(e.r+3),e.y+Math.sin(a2)*(e.r+3),1.6,0,TAU);ctx.fillStyle='#d4a050';ctx.fill();}
     ctx.restore(); }
+  /* 减速视觉(🧊玄霜法杖 / 🥶玄冰碎遗物:被减速的怪罩一层淡青冰霜,让"控场"看得见;Boss 不被减速故不触发) */
+  if(e.slowT>0 && !e.boss){ ctx.save();
+    ctx.globalAlpha*=.5; ctx.strokeStyle='#9fe4ff'; ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(e.x,e.y,e.r+3,0,TAU);ctx.stroke();
+    ctx.globalCompositeOperation='lighter'; ctx.globalAlpha*=.55; ctx.fillStyle='#7ad0ff';
+    for(let k=0;k<3;k++){const a2=k*TAU/3+e.anim*.5;ctx.beginPath();ctx.arc(e.x+Math.cos(a2)*(e.r+3),e.y+Math.sin(a2)*(e.r+3),1.8,0,TAU);ctx.fill();}
+    ctx.restore(); }
   if(e.boss){
     /* 山海经古神 - SVG 主体 + Canvas 动态层 */
     const variant=(e._bossId!==undefined?e._bossId:(e.tier||1)-1);
@@ -6366,6 +6443,20 @@ function drawWandShape(x,y,r,ang,id,anim){
     const o=P(TIP,0);ctx.beginPath();ctx.arc(o[0]+ux*r*0.3,o[1]+uy*r*0.3-r*0.1,r*0.32,Math.PI,TAU);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=a0;
     ctx.globalAlpha=a0*0.35;dot(TIP+r*0.5,-r*0.2,r*0.14,'#ff8a3a');ctx.globalAlpha=a0;
     glowDot(TIP,r*0.18,'#ffd0a8','#ff8a3a');
+  } else if(id==='frost'){
+    shaft('#5a8aa8',LW,HAND,TIP);
+    glowDot(TIP,r*0.13,'#eaffff','#7fd8ff');
+    ctx.strokeStyle='#cfeeff';ctx.lineWidth=LW*0.5;ctx.lineCap='round';
+    for(let k=0;k<4;k++){const an=ang+k*Math.PI*0.5+Math.PI*0.25;const A=P(TIP,0),B=[x+Math.cos(an)*(TIP+r*0.36),y+Math.sin(an)*(TIP+r*0.36)];ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();}
+    ctx.lineCap='butt';
+  } else if(id==='ember'){
+    shaft('#6e2e16',LW,HAND,TIP);
+    glowDot(TIP,r*0.2,'#fff0c0','#ff6a2a');
+    ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(255,150,50,'+(a0*0.7)+')';
+    const c=P(TIP,0),t1=[x+ux*(TIP+r*0.52),y+uy*(TIP+r*0.52)];
+    ctx.beginPath();ctx.moveTo(c[0]-nx*r*0.18,c[1]-ny*r*0.18);ctx.lineTo(t1[0],t1[1]);ctx.lineTo(c[0]+nx*r*0.18,c[1]+ny*r*0.18);ctx.closePath();ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+    dot(TIP+r*0.36,r*0.14,r*0.045,'#ffd24d');
   } else {  /* apprentice / 默认 */
     shaft('#7a5230',LW,HAND,TIP);
     glowDot(TIP,r*0.16,'#ffffff','#6fe3ff');
@@ -7144,6 +7235,27 @@ function drawPlayer(){
     ctx.globalAlpha=.32;ctx.beginPath();ctx.arc(ox,oy,12,0,TAU);ctx.fill();
     ctx.globalAlpha=.75;ctx.beginPath();ctx.arc(ox,oy,7,0,TAU);ctx.fill();
     ctx.globalAlpha=1;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ox,oy,3.2,0,TAU);ctx.fill();
+    ctx.restore();
+  }
+  /* 御剑:数把飞剑环绕自身(剑指切线方向,辉光剑身 + 白尖 + 剑格) */
+  if(p.sword){
+    const sc=SPELL_DEF.swordarray.col, n=p.sword.n;
+    ctx.save();
+    ctx.globalAlpha=.12;ctx.strokeStyle=sc;ctx.lineWidth=1.2;ctx.setLineDash([3,8]);
+    ctx.beginPath();ctx.arc(p.x,p.y,p.sword.rad,0,TAU);ctx.stroke();ctx.setLineDash([]);
+    for(let k=0;k<n;k++){
+      const sa=p.sword.ang+k*TAU/n;
+      const sx=p.x+Math.cos(sa)*p.sword.rad, sy=p.y+Math.sin(sa)*p.sword.rad;
+      ctx.save();ctx.translate(sx,sy);ctx.rotate(sa+Math.PI/2);
+        ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.45;ctx.strokeStyle=sc;ctx.lineWidth=3.5;ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(-7,0);ctx.lineTo(11,0);ctx.stroke();
+        ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+        ctx.strokeStyle='#eaf0ff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-6,0);ctx.lineTo(10,0);ctx.stroke();
+        ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(10,-1.7);ctx.lineTo(13.5,0);ctx.lineTo(10,1.7);ctx.closePath();ctx.fill();
+        ctx.strokeStyle='#9fb4e0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-6,-2.6);ctx.lineTo(-6,2.6);ctx.stroke();
+        ctx.lineCap='butt';
+      ctx.restore();
+    }
     ctx.restore();
   }
   /* 环刃:旋转魔刃(此前缺失渲染,导致看不见) */
