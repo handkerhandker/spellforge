@@ -524,6 +524,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v82.1 · 2026-06-19</div><div class="cl-i">🏆 <b>排行榜更清爽 + 每局都给你名次反馈。</b>① <b>同名只留最高那条</b>:以前同一个人反复刷、榜上一个名字出现一大串,现在每个榜里相同昵称只显示他最好的一次,前 10 名都是不同的人,看着干净、名次更有含金量(五档难度榜 + 每日挑战榜都生效)。② <b>每局结算告诉你「你排第几」</b>:不管有没有进前 10,打完都会显示你在该榜的真实名次和上榜总人数;要是这局<b>刷新了个人最好成绩</b>,还会有「🎉 刷新个人最好成绩」的庆祝。每一局都有奔头,不用非得破纪录才看得到自己。<b>纯显示优化,不动任何玩法 / 数值,冲榜公平不变。</b></div></div>
 <div class="cl-v"><div class="cl-h">v82 · 2026-06-19</div><div class="cl-i">🎭 <b>三位山海经新角色登场!</b>(灵晶解锁,在「外观·皮肤」里换):①🏹<b>后羿</b>——射九日的神射手,单发伤害 +12%、穿透 +1(一箭洞穿一排怪),代价是出手稍慢(攻速 −15%);②🦬<b>夸父</b>——逐日的巨人,生命上限 +40、皮糙肉厚,代价同样是出手慢些(攻速 −13%),适合稳扎稳打;③⚔️<b>蚩尤</b>——铜头铁额的兵主战神,暴击率 +10%、击杀回血 +1 的激进打法,但身子骨脆(生命上限 −30、受伤 +8%),越凶越爽。每位都各有取舍、净值均衡,<b>全难度通用不破榜</b>,也给攒不完的灵晶添了去处。</div></div>
 <div class="cl-v"><div class="cl-h">v81.2 · 2026-06-18</div><div class="cl-i">🪙 <b>后期金币终于花得出去了!</b>以前深入无尽后钱袋暴涨到一万多却没处花(升个 Lv75 法术才几十块、回满血才 30)。现在<b>商店价格随波数上涨、法术升级价跟着实际等级走</b>——越深的波、越高级的法术,升级和补给越贵,囤的金币真正有用武之地、每次进商店都是真选择。<b>第10波前价格完全不变</b>,只动深层经济、不碰任何法术伤害数值。</div></div>
 <div class="cl-v"><div class="cl-h">v81.1 · 2026-06-18</div><div class="cl-i">🐞 <b>修复"小怪吸在身上、打不到、冲刺甩不掉"</b>:以前贴脸的近战小怪会一路钻进你身体正中心、像卡进模型一样,你的子弹打不到它,它却一直贴着你扣血。现在它们会被<b>挡在你身体外缘</b>——你能正常瞄到、反击它,接触伤害照常但不再"赖在身体里"。另外最快的小兵<b>「狰」不再叠加「迅捷」词缀</b>(以前可能比你跑得还快、冲刺都甩不开),现在能正常拉开距离、风筝它。</div></div>
@@ -795,7 +796,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v82', APP_TIME='2026-06-19 01:00';
+const APP_VER='v82.1', APP_TIME='2026-06-19 01:01';
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -3677,7 +3678,7 @@ function periodStart(period){
   return new Date(n.getFullYear(),n.getMonth(),1).toISOString(); /* 本月 1 号 00:00 */
 }
 async function fetchLeaderboard(period){
-  const order='order=wave.desc,kills.desc&limit=30';   /* 多取做缓冲:滤掉脏名字后仍凑得满前 10 */
+  const order='order=wave.desc,kills.desc&limit=100';   /* 多取做缓冲:滤脏名 + 同名合并后仍凑得满前 10 */
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
   let tf=''; /* 本周/本月按 created_at 筛选;总榜不筛 */
   if(period==='week'||period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(period));
@@ -3719,6 +3720,18 @@ function todaysDaily(){
 function dailyKey(){ return 'sf_daily_'+todayStr(); }
 function getDailyBest(){ try{ return JSON.parse(localStorage.getItem(dailyKey())||'null'); }catch(e){ return null; } }
 function saveDailyBest(w,k){ try{ const b=getDailyBest(); if(!b||w>b.wave||(w===b.wave&&k>b.kills)) localStorage.setItem(dailyKey(),JSON.stringify({wave:w,kills:k})); }catch(e){} }
+/* 普通局个人最佳(按难度档,本地;像 sf_daily_ 一样独立存,不进备份码) */
+function getRunPB(d){ try{ return JSON.parse(localStorage.getItem('sf_pb_'+d)||'null'); }catch(e){ return null; } }
+function saveRunPB(d,w,k){ try{ const b=getRunPB(d); if(!b||w>b.wave||(w===b.wave&&k>b.kills)) localStorage.setItem('sf_pb_'+d,JSON.stringify({wave:w,kills:k})); }catch(e){} }
+/* 本局是否刷新了个人最好成绩(结算页用);必须在写入新纪录"之前"比对旧值,故在 gameOver/victory 里调一次 */
+let _runNewPB=false;
+function recordRunBest(){
+  try{
+    if(dailyRun){ const b=getDailyBest(); _runNewPB=!b||waveNum>b.wave||(waveNum===b.wave&&kills>b.kills); saveDailyBest(waveNum,kills); bumpDailyStreak(); }
+    else { const b=getRunPB(difficulty); _runNewPB=!b||waveNum>b.wave||(waveNum===b.wave&&kills>b.kills); saveRunPB(difficulty,waveNum,kills); }
+  }catch(e){ _runNewPB=false; }
+}
+function _pbBanner(w,k){ return '<div class="lb-myrank">🎉 刷新个人最好成绩!第 '+w+' 波 · '+k+' 杀</div>'; }
 
 /* ===== 全球每日挑战榜(不改 Supabase 表:每日成绩用专属难度值入库,与 1~5 普通榜互不干扰;靠 created_at 当天范围分"今日/昨日") ===== */
 const DAILY_DIFF=90;
@@ -3726,7 +3739,7 @@ function _ymd(off){ const d=new Date(); d.setDate(d.getDate()+(off||0)); const p
 function dayStartISO(off){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+(off||0)); return d.toISOString(); }
 async function fetchDailyBoard(){
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
-  const q='?select=name,wave,kills,created_at,difficulty&difficulty=eq.'+DAILY_DIFF+'&created_at=gte.'+encodeURIComponent(dayStartISO(0))+'&order=wave.desc,kills.desc&limit=30';
+  const q='?select=name,wave,kills,created_at,difficulty&difficulty=eq.'+DAILY_DIFF+'&created_at=gte.'+encodeURIComponent(dayStartISO(0))+'&order=wave.desc,kills.desc&limit=100';
   try{ const r=await fetch(SB_URL+'/rest/v1/scores'+q,{headers:hdr}); const d=await r.json(); return Array.isArray(d)?d:[]; }
   catch(e){ console.warn('读每日榜失败',e); return []; }
 }
@@ -3740,6 +3753,31 @@ async function fetchDailyRank(wave,kills){
     const r2=await fetch(SB_URL+'/rest/v1/scores?select=name'+base,{headers:hdr});
     return {rank:ext(r1.headers.get('content-range'))+1, total:ext(r2.headers.get('content-range'))};
   }catch(e){ return {rank:0,total:0}; }
+}
+/* 结算页名次:在"同名合并后"的榜里算"我"的名次 + 上榜真实人数(distinct),与榜单显示完全一致。
+   多拉一大段(limit 1000)做去重底数;名次取我的显示名在去重榜里的位次(=我的最佳所处名次)。
+   opts.daily=true 走今日挑战榜;否则按当前难度档(可带 period=week/month)。读取侧,零 Supabase 表改动。 */
+async function fetchStanding(myName, opts){
+  opts=opts||{};
+  const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
+  let url;
+  if(opts.daily){
+    url=SB_URL+'/rest/v1/scores?select=name,wave,kills&difficulty=eq.'+DAILY_DIFF+'&created_at=gte.'+encodeURIComponent(dayStartISO(0))+'&order=wave.desc,kills.desc&limit=1000';
+  } else {
+    let tf=''; if(opts.period==='week'||opts.period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(opts.period));
+    url=SB_URL+'/rest/v1/scores?select=name,wave,kills&difficulty=eq.'+difficulty+'&order=wave.desc,kills.desc&limit=1000'+tf;
+  }
+  try{
+    let r=await fetch(url,{headers:hdr});
+    if(!r.ok && !opts.daily){ /* 无 difficulty 列时回退(同 fetchLeaderboard 的逐级降级思路) */
+      r=await fetch(SB_URL+'/rest/v1/scores?select=name,wave,kills&order=wave.desc,kills.desc&limit=1000',{headers:hdr});
+    }
+    const data=await r.json();
+    const arr=Array.isArray(data)?data:[];
+    const dq=dedupeByName(arr.filter(x=>!isBadName(x&&x.name)));   /* 与 renderBoard 同款滤脏名+去重,保证名次与榜单一致 */
+    const idx=dq.findIndex(x=>((x&&x.name)||'')===myName);
+    return { rank: idx>=0?idx+1:0, total: dq.length, capped: arr.length>=1000 };
+  }catch(e){ console.warn('读名次失败',e); return {rank:0,total:0,capped:false}; }
 }
 async function fetchYesterdayChamp(){
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
@@ -3782,9 +3820,16 @@ function isBadName(name){
   const hit=w=> raw.indexOf(w)>=0 || norm.indexOf(String(w).toLowerCase())>=0;
   return BAD_WORDS.some(hit) || SENSITIVE_WORDS.some(hit) || BLOCKED_NAMES.some(b=> b && raw.indexOf(b.toLowerCase())>=0 );
 }
+/* 同名只保留一条(传入列表须已按成绩从高到低排好);榜单显示与名次计算共用同一函数,确保两者一致。
+   精确匹配名字、不做大小写/空白归一,避免把"不同玩家的相同显示名"之外的近似名误并。 */
+function dedupeByName(list){
+  const seen=Object.create(null), out=[];
+  for(const r of (Array.isArray(list)?list:[])){ const k=(r&&r.name)||''; if(k in seen) continue; seen[k]=1; out.push(r); }
+  return out;
+}
 function renderBoard(el,list){
   if(!el)return;
-  if(Array.isArray(list)) list=list.filter(r=>!isBadName(r&&r.name)).slice(0,10);   /* 滤掉不文明昵称后,再取前 10(避免被滤后不足 10 条) */
+  if(Array.isArray(list)) list=dedupeByName(list.filter(r=>!isBadName(r&&r.name))).slice(0,10);   /* 滤脏名 → 同名合并(留排名最高的一条)→ 取前 10 */
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
     const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
@@ -3805,19 +3850,23 @@ function setupEndLeaderboard(prefix){
     nameEl.value=lastName();
     submitBtn.disabled=false; submitBtn.textContent='提交今日成绩';
     boardEl.innerHTML='<div class="lb-load">加载今日榜…</div>';
-    fetchDailyBoard().then(b=>{ renderBoard(boardEl,b);
-      boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🗓 今日挑战 · 本次第 '+waveNum+' 波 · '+kills+' 杀</div>');
-    });
     const w=waveNum, k=kills;
+    fetchDailyBoard().then(b=>{ renderBoard(boardEl,b);
+      let _h=''; if(_runNewPB) _h+=_pbBanner(w,k);
+      _h+='<div class="lb-myrank">🗓 今日挑战 · 本局第 '+w+' 波 · '+k+' 杀</div>';
+      boardEl.insertAdjacentHTML('afterbegin',_h);
+    });
     submitBtn.onclick=async()=>{
       const n=(nameEl.value.trim()||'无名英雄').slice(0,16);
       if(isBadName(n)){ submitBtn.textContent='昵称不可用,请换一个'; if(nameEl)nameEl.style.borderColor='#ff6b6b'; setTimeout(()=>{ submitBtn.textContent='提交今日成绩'; if(nameEl)nameEl.style.borderColor=''; },2200); return; }
       saveName(n); submitBtn.disabled=true; submitBtn.textContent='已提交 ✓';
       await submitScore(n,w,k,DAILY_DIFF);
       boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
-      const [bd,ri]=await Promise.all([fetchDailyBoard(),fetchDailyRank(w,k)]);
+      const [bd,st]=await Promise.all([fetchDailyBoard(),fetchStanding(n,{daily:true})]);
       renderBoard(boardEl, bd);
-      if(ri.rank>0)boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🗓 今日挑战 · 本次第 '+ri.rank+' 名 · 共 '+ri.total+' 人</div>');
+      let _h=''; if(_runNewPB) _h+=_pbBanner(w,k);
+      if(st.rank>0) _h+='<div class="lb-myrank">🗓 今日挑战 · 你排第 '+st.rank+' 名'+(st.total?' · 共 '+st.total+(st.capped?'+':'')+' 人':'')+'</div>';
+      if(_h) boardEl.insertAdjacentHTML('afterbegin',_h);
     };
     return;
   }
@@ -3825,17 +3874,19 @@ function setupEndLeaderboard(prefix){
   nameEl.value=lastName();
   submitBtn.disabled=false; submitBtn.textContent='提交';
   boardEl.innerHTML='<div class="lb-load">加载榜单中…</div>';
-  fetchLeaderboard().then(b=>renderBoard(boardEl,b));
   const w=waveNum, k=kills;
+  fetchLeaderboard().then(b=>{ renderBoard(boardEl,b); if(_runNewPB) boardEl.insertAdjacentHTML('afterbegin',_pbBanner(w,k)); });
   submitBtn.onclick=async()=>{
     const n=(nameEl.value.trim()||'无名英雄').slice(0,16);
     if(isBadName(n)){ submitBtn.textContent='昵称不可用,请换一个'; if(nameEl)nameEl.style.borderColor='#ff6b6b'; setTimeout(()=>{ submitBtn.textContent='提交'; if(nameEl)nameEl.style.borderColor=''; },2200); return; }   /* 不文明 / 敏感昵称拒绝上榜 */
     saveName(n); submitBtn.disabled=true; submitBtn.textContent='已提交 ✓';
     await submitScore(n,w,k);
     boardEl.innerHTML='<div class="lb-load">刷新中…</div>';
-    const [bd,ri]=await Promise.all([fetchLeaderboard(),fetchRank(w,k)]);
+    const [bd,st]=await Promise.all([fetchLeaderboard(),fetchStanding(n,{})]);
     renderBoard(boardEl, bd);
-    if(ri.rank>0)boardEl.insertAdjacentHTML('afterbegin','<div class="lb-myrank">🏆 '+diffData().name+'榜 · 本次第 '+ri.rank+' 名 · 共 '+ri.total+' 人</div>');
+    let _h=''; if(_runNewPB) _h+=_pbBanner(w,k);
+    if(st.rank>0) _h+='<div class="lb-myrank">🏆 '+diffData().name+'榜 · 你排第 '+st.rank+' 名'+(st.total?' · 共 '+st.total+(st.capped?'+':'')+' 人':'')+'</div>';
+    if(_h) boardEl.insertAdjacentHTML('afterbegin',_h);
   };
 }
 function gameOver(manual){
@@ -3850,7 +3901,7 @@ function gameOver(manual){
     if(coins>=5000) unlockAch('die_rich');
     if(_runT<10) unlockAch('die_fast');
   }
-  if(dailyRun){ saveDailyBest(waveNum,kills); bumpDailyStreak(); }
+  recordRunBest();   /* 破纪录判定(存盘前比旧值)+ 持久化个人最佳;含每日 streak */
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
   awardLj(); $('ovGain').innerHTML='✦ 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj;
@@ -3860,7 +3911,7 @@ function gameOver(manual){
 }
 function victory(){
   state='win'; clearResume(); S.win();
-  if(dailyRun){ saveDailyBest(waveNum,kills); bumpDailyStreak(); }
+  recordRunBest();   /* 破纪录判定(存盘前比旧值)+ 持久化个人最佳;含每日 streak */
   /* 通关类成就(全甲=不吃红心 / 独狼=不逛商店 / 屠神=弑神难度) */
   unlockAch('clear');
   if(!runTookHeart) unlockAch('nohit');
