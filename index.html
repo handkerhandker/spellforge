@@ -537,6 +537,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.3 · 2026-06-20</div><div class="cl-i">🏹 修复御风弓在战斗中<b>弓身被人物挡住、几乎只看得到那支箭</b>的问题——现在整把弓持于身前、完整可见(像拉弓瞄准的样子)。纯显示修复,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.2 · 2026-06-20</div><div class="cl-i">🎨 <b>图标焕新继续:全部 83 个成就都换上了专属手绘图标。</b>成就面板、本局结算的「本局解锁」、解锁成就时顶部弹出的提示、以及衣橱里成就皮肤的解锁条件,图标全部更新。法杖 / 法术 / 符文 / 遗物 / 成就五大类至此全部焕新完毕(共 183 个手绘图标)。纯外观,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.1 · 2026-06-20</div><div class="cl-i">🔧 修复 v85.0 里进化法术(焚天 / 雷罚 / 万刃 / 永冬之矛)的来源图标显示过大的问题。</div></div>
 <div class="cl-v"><div class="cl-h">v85.0 · 2026-06-20</div><div class="cl-i">🎨 <b>图标焕新继续:全部 26 件遗物都换上了专属手绘图标。</b>Boss 奖励选遗物、以及「法术图鉴 / 本局构筑」里的遗物图标全部更新。法杖、角色的解锁确认弹窗里也用上了新图标(角色在衣橱里本来就是手绘立绘)。到这一步,法杖 / 法术 / 符文 / 遗物四大类的图标都焕新完毕了。(成就的图标还在陆续更新;战斗里左下角「法术数据条」仍是 emoji。)纯外观,数值 / 玩法不变。</div></div>
@@ -844,10 +845,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.2', APP_TIME='2026-06-20 13:00';
+const APP_VER='v85.3', APP_TIME='2026-06-20 14:10';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.2';
+const APP_NOTIFY_VER='v85.3';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
@@ -6749,21 +6750,22 @@ function drawWandShape(x,y,r,ang,id,anim){
     ctx.globalCompositeOperation='source-over';
     dot(TIP+r*0.36,r*0.14,r*0.045,'#ffd24d');
   } else if(id==='windbow'){
-    /* 御风弓:不画杖杆,改画一张法弓(弓臂前凸 + 拉满的弦 + 搭箭朝准星 + 法力辉光) */
-    const tipO=r*0.95, ctrl=P(HAND+r*0.78,0);
-    const top=P(HAND,tipO), bot=P(HAND,-tipO), nock=P(HAND-r*0.12,0);
+    /* 御风弓:法弓持于身前(手臂前伸到身体外、不被身体遮挡);弓臂前凸 + 拉满的弦 + 搭箭朝准星 + 法力辉光 */
+    const G=HAND+r*0.72;   /* 握把前移到身体前缘外,整把弓可见(修复弓身被身体盖住) */
+    const tipO=r*0.88, ctrl=P(G+r*0.6,0);
+    const top=P(G,tipO), bot=P(G,-tipO), nock=P(G-r*0.14,0);
     ctx.strokeStyle='#7a5a30';ctx.lineWidth=LW*0.9;ctx.lineCap='round';
     ctx.beginPath();ctx.moveTo(top[0],top[1]);ctx.quadraticCurveTo(ctrl[0],ctrl[1],bot[0],bot[1]);ctx.stroke();
     ctx.strokeStyle='#caa050';ctx.lineWidth=LW*0.32;
     ctx.beginPath();ctx.moveTo(top[0],top[1]);ctx.quadraticCurveTo(ctrl[0],ctrl[1],bot[0],bot[1]);ctx.stroke();
     ctx.strokeStyle='#e8e0d0';ctx.lineWidth=1.3;
     ctx.beginPath();ctx.moveTo(top[0],top[1]);ctx.lineTo(nock[0],nock[1]);ctx.lineTo(bot[0],bot[1]);ctx.stroke();
-    const aTail=P(HAND-r*0.12,0), aHead=P(HAND+r*1.28,0);
+    const aTail=P(G-r*0.14,0), aHead=P(G+r*0.92,0);
     ctx.globalCompositeOperation='lighter';ctx.globalAlpha=a0*0.7;ctx.strokeStyle='#bfe2ff';ctx.lineWidth=LW*0.5;
     ctx.beginPath();ctx.moveTo(aTail[0],aTail[1]);ctx.lineTo(aHead[0],aHead[1]);ctx.stroke();
     ctx.globalCompositeOperation='source-over';ctx.globalAlpha=a0;
     ctx.strokeStyle='#e6f2ff';ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(aTail[0],aTail[1]);ctx.lineTo(aHead[0],aHead[1]);ctx.stroke();
-    const hd=P(HAND+r*1.42,0), h1=P(HAND+r*1.12,r*0.15), h2=P(HAND+r*1.12,-r*0.15);
+    const hd=P(G+r*1.06,0), h1=P(G+r*0.78,r*0.15), h2=P(G+r*0.78,-r*0.15);
     ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(hd[0],hd[1]);ctx.lineTo(h1[0],h1[1]);ctx.lineTo(h2[0],h2[1]);ctx.closePath();ctx.fill();
     ctx.lineCap='butt';
   } else {  /* apprentice / 默认 */
