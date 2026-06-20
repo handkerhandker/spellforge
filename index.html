@@ -537,6 +537,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.7 · 2026-06-20</div><div class="cl-i">🩹 <b>根治后期「法术糊成黑屏、看不见东西」的问题(来自试玩反馈)。</b>水龙吟、陨石这类高射速 / 大范围法术练到后期、弹幕成片时,每颗法术弹底下垫的那层深色底会越叠越黑、糊成一片黑屏,把自己和敌人全盖住;而且之前<b>把「特效强度」调到 0% 也压不下这层黑</b>(法术反而全变成黑团)。现在这层垫底:① <b>跟着「特效强度」滑块走</b>——调到 0% 就彻底不垫、画面干净(深色地形上怪和人物全清楚);② <b>弹幕越密、垫底越淡</b>,不再叠成黑;③ <b>加了尺寸上限</b>,巨化 / 陨石 / 水龙吟也不会画出超大黑圈。顺带把<b>奥术球</b>的同款深色垫底也接上了滑块。<b>法术的伤害 / 范围 / 冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b><br>📌 这类「成片特效铺满屏」之前已逐个修过(火海 / 毒云 / 黑洞 / 飓风),这次是把漏网的「子弹垫底」也补齐,并把整套特效又系统排查了一遍。</div></div>
 <div class="cl-v"><div class="cl-h">v85.6 · 2026-06-20</div><div class="cl-i">🎨 <b>战斗里两处 emoji 也换成了手绘图标:左上角的「遗物图标条」+ 精英怪头顶的「词缀标记」。</b>它们以前是画在画布上的 emoji,现在用上了和图鉴一致的专属图标。(实现上新做了「SVG 转图片」的栅格化处理。若个别机型上这两处显示异常,会自动回退成原来的 emoji、不会空白。)纯外观,数值 / 玩法不变。<br>📌 战斗里仍是 emoji 的还有:无尽「潮汐变数」图标、召唤的山海灵兽、以及默认关闭的左下角「法术数据条」——这几类要么还没画专属图标、要么是文字混排,留待后续。</div></div>
 <div class="cl-v"><div class="cl-h">v85.5 · 2026-06-20</div><div class="cl-i">🎨 <b>图鉴里 7 个精英词缀也换上了专属手绘图标。</b>翻「妖兽图鉴 → 精英词缀」时,迅捷 / 铁壁 / 淬毒 / 狂暴 / 爆裂 / 虚影 / 不可阻挡这七条不再是简单 emoji,而是各自专属的小图标(疾射、盾、毒滴、怒目、炸弹、幽灵、破壁冲锋)。至此全游戏 UI 图标焕新工程基本收尾。(战斗中精英怪头顶的小标记仍是 emoji,那是画在画布上的、属另一套,后续再说。)纯外观,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.4 · 2026-06-20</div><div class="cl-i">🎨 <b>司南 / 轰天雷 / 连珠这三把法杖,战斗里终于换上了专属造型与法袍。</b>以前这三把在战斗中拿的是默认学徒杖、穿的是默认紫袍;现在:🧭<b>司南法杖</b>——青铜罗盘配指向磁针(亮端朝着你瞄的方向,呼应它的自动追踪),一身青铜青磁的航向者装束;💥<b>轰天雷法杖</b>——杖头一颗冒着火花引信的铁雷球、四周爆裂纹,火药铁灰加橙焰的爆破手装束;🌀<b>连珠法杖</b>——旋转的多管枪口配蓝色能量核(对应它的速射),钢灰枪械装束。纯外观,数值 / 玩法完全不变。</div></div>
@@ -848,10 +849,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.6', APP_TIME='2026-06-20 15:30';
+const APP_VER='v85.7', APP_TIME='2026-06-20 16:25';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.6';
+const APP_NOTIFY_VER='v85.7';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
@@ -5890,14 +5891,18 @@ function render(){
       ctx.strokeStyle='#b9a0ff';ctx.lineWidth=4+novaFX.t*4;
       ctx.beginPath();ctx.arc(novaFX.x,novaFX.y,novaFX.r*(1.1-novaFX.t*.5),0,TAU);ctx.stroke();ctx.restore(); }
   }
-  /* 可读性:先垫深色底,浅色地形(雪原/沙漠)上法术也清晰可辨 */
+  /* 可读性:先垫深色底(浅色地形上法术也清晰)。
+     v85.7 根治「后期黑屏」:① 垫底跟随「特效强度」滑块(fx=0→不垫,与"特效全关"一致,不再变黑屏)
+     ② 随弹幕数量收敛(成片大弹时每个垫底变淡,不叠成黑) ③ 半径设上限(巨化/陨石/水龙吟也不画超大黑圈) ④ 去掉额外黑描边(减少黑色累积+省一次绘制)。纯显示,伤害/范围/冷却不变。 */
   ctx.globalCompositeOperation='source-over';
-  for(const b of bullets){ if(player.wandFx.arrowStyle)continue; ctx.globalAlpha=.5;ctx.fillStyle='#080414';
-    ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.1+2.5,0,TAU);ctx.fill();
-    ctx.globalAlpha=.5;ctx.strokeStyle='#000';ctx.lineWidth=1.5;ctx.stroke(); }
-  for(const b of ebullets){ ctx.globalAlpha=.5;ctx.fillStyle='#16000c';
-    ctx.beginPath();ctx.arc(b.x,b.y,b.r*2.1+2.5,0,TAU);ctx.fill();
-    ctx.globalAlpha=.5;ctx.strokeStyle='#000';ctx.lineWidth=1.5;ctx.stroke(); }
+  const _bbDim = bullets.length>40 ? 40/bullets.length : 1;
+  const _bbA = .4*fxAlpha*_bbDim;
+  if(_bbA>0.012) for(const b of bullets){ if(player.wandFx.arrowStyle)continue;
+    ctx.globalAlpha=_bbA;ctx.fillStyle='#080414';
+    ctx.beginPath();ctx.arc(b.x,b.y,Math.min(b.r*2.1+2.5,30),0,TAU);ctx.fill(); }
+  const _ebDim = ebullets.length>60 ? 60/ebullets.length : 1;   /* 敌弹垫底:不接特效滑块(敌弹永远要看得见),但同样随数量收敛+半径上限,防密集弹幕叠黑 */
+  for(const b of ebullets){ ctx.globalAlpha=.42*_ebDim;ctx.fillStyle='#16000c';
+    ctx.beginPath();ctx.arc(b.x,b.y,Math.min(b.r*2.1+2.5,26),0,TAU);ctx.fill(); }
   ctx.globalAlpha=1;
   /* 弹幕（叠光） */
   ctx.globalCompositeOperation='lighter';
@@ -7628,8 +7633,8 @@ function drawPlayer(){
     /* 球本体:外晕+核 */
     const ox=p.x+Math.cos(p.orb.ang)*p.orb.rad, oy=p.y+Math.sin(p.orb.ang)*p.orb.rad;
     ctx.globalCompositeOperation='source-over';
-    ctx.globalAlpha=.55;ctx.fillStyle='#05101a';ctx.beginPath();ctx.arc(ox,oy,10,0,TAU);ctx.fill();
-    ctx.globalAlpha=.6;ctx.strokeStyle='#000';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.globalAlpha=.55*fxAlpha;ctx.fillStyle='#05101a';ctx.beginPath();ctx.arc(ox,oy,10,0,TAU);ctx.fill();
+    ctx.globalAlpha=.6*fxAlpha;ctx.strokeStyle='#000';ctx.lineWidth=1.5;ctx.stroke();
     ctx.globalCompositeOperation='lighter';ctx.fillStyle=oc;
     ctx.globalAlpha=.32;ctx.beginPath();ctx.arc(ox,oy,12,0,TAU);ctx.fill();
     ctx.globalAlpha=.75;ctx.beginPath();ctx.arc(ox,oy,7,0,TAU);ctx.fill();
