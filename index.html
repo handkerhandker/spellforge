@@ -537,6 +537,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.8 · 2026-06-20</div><div class="cl-i">⚔️ <b>三处玩法优化(来自试玩反馈):</b><br>🎲 <b>首领出生位置改为全场随机。</b>以前首领固定从上方出现,导致站某些位置就能"躲着首领挂机刷波"。现在首领会随机出现在场地任意位置(离你保持安全距离、避开石柱),没法再靠固定站位钻空子——也让排行榜更公平。首领出场仍有 <b>2.5 秒无敌护罩</b>给你走位备战,绝不会贴脸瞬秒。<br>⏱️ <b>刷怪不再慢吞吞拖时间。</b>以前深层波的小怪会在几十秒里慢慢往外挤,打完首领还得满地图等最后几只冒出来。现在每波的怪<b>都在约 10 秒内依次刷完</b>(依次出、不是一帧全冒,所以不会卡),节奏紧凑多了。<b>怪的数量、血量、伤害一概没变,只是出得更快。</b><br>🧲 <b>收尾更利落:</b>一波快打完、只剩零星几只躲远处的小怪时,会把它们缓缓拉近的触发范围从"剩 3 只"放宽到"剩 5 只",少跑冤枉路。<br>说明:这些只改"首领在哪出现 / 怪什么时候出现 / 残怪怎么收尾",<b>不碰任何法术或敌人的数值,弑神 / 无尽冲榜公平不受影响</b>(弑神维持一命纯净、残怪不强拉)。</div></div>
 <div class="cl-v"><div class="cl-h">v85.7 · 2026-06-20</div><div class="cl-i">🩹 <b>根治后期「法术糊成黑屏、看不见东西」的问题(来自试玩反馈)。</b>水龙吟、陨石这类高射速 / 大范围法术练到后期、弹幕成片时,每颗法术弹底下垫的那层深色底会越叠越黑、糊成一片黑屏,把自己和敌人全盖住;而且之前<b>把「特效强度」调到 0% 也压不下这层黑</b>(法术反而全变成黑团)。现在这层垫底:① <b>跟着「特效强度」滑块走</b>——调到 0% 就彻底不垫、画面干净(深色地形上怪和人物全清楚);② <b>弹幕越密、垫底越淡</b>,不再叠成黑;③ <b>加了尺寸上限</b>,巨化 / 陨石 / 水龙吟也不会画出超大黑圈。顺带把<b>奥术球</b>的同款深色垫底也接上了滑块。<b>法术的伤害 / 范围 / 冷却一概没动,弑神 / 无尽冲榜公平不受影响。</b><br>📌 这类「成片特效铺满屏」之前已逐个修过(火海 / 毒云 / 黑洞 / 飓风),这次是把漏网的「子弹垫底」也补齐,并把整套特效又系统排查了一遍。</div></div>
 <div class="cl-v"><div class="cl-h">v85.6 · 2026-06-20</div><div class="cl-i">🎨 <b>战斗里两处 emoji 也换成了手绘图标:左上角的「遗物图标条」+ 精英怪头顶的「词缀标记」。</b>它们以前是画在画布上的 emoji,现在用上了和图鉴一致的专属图标。(实现上新做了「SVG 转图片」的栅格化处理。若个别机型上这两处显示异常,会自动回退成原来的 emoji、不会空白。)纯外观,数值 / 玩法不变。<br>📌 战斗里仍是 emoji 的还有:无尽「潮汐变数」图标、召唤的山海灵兽、以及默认关闭的左下角「法术数据条」——这几类要么还没画专属图标、要么是文字混排,留待后续。</div></div>
 <div class="cl-v"><div class="cl-h">v85.5 · 2026-06-20</div><div class="cl-i">🎨 <b>图鉴里 7 个精英词缀也换上了专属手绘图标。</b>翻「妖兽图鉴 → 精英词缀」时,迅捷 / 铁壁 / 淬毒 / 狂暴 / 爆裂 / 虚影 / 不可阻挡这七条不再是简单 emoji,而是各自专属的小图标(疾射、盾、毒滴、怒目、炸弹、幽灵、破壁冲锋)。至此全游戏 UI 图标焕新工程基本收尾。(战斗中精英怪头顶的小标记仍是 emoji,那是画在画布上的、属另一套,后续再说。)纯外观,数值 / 玩法不变。</div></div>
@@ -849,10 +850,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.7', APP_TIME='2026-06-20 16:25';
+const APP_VER='v85.8', APP_TIME='2026-06-20 16:55';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.7';
+const APP_NOTIFY_VER='v85.8';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
@@ -2329,6 +2330,25 @@ const WAVE_TABLE={
   14: [['brute',2],['qiongqi',3],['totem',1],['frostarcher',3],['ghost',3],['charger',3],['bomber',3]]
 };
 
+/* v85.8:Boss 随机出生位置 —— 场地内任意点,离玩家保持最小距离(防贴脸;出场仍有 2.5s 无敌护罩给反应时间)、
+   避开石柱、多 boss 彼此不重叠。解决"boss 固定在上方→站某些位置就能挂机刷波"的漏洞。
+   纯位置随机,不碰任何伤害/范围/冷却数值;反而堵了挂机刷分、让排行榜更公平。collidePillars 本体未动(仅读取 pillars 位置)。 */
+function randBossPos(bossR, placed){
+  const mx=ARENA.pad+bossR+8, MX=ARENA.w-ARENA.pad-bossR-8;
+  const my=ARENA.pad+bossR+8, MY=ARENA.h-ARENA.pad-bossR-8;
+  const minDP=300;   /* 离玩家最小距离 */
+  for(let tries=0;tries<40;tries++){
+    const x=mx+Math.random()*(MX-mx), y=my+Math.random()*(MY-my);
+    if(Math.hypot(x-player.x,y-player.y)<minDP) continue;
+    let bad=false;
+    for(const p of pillars){ if(Math.hypot(x-p.x,y-p.y)<p.r+bossR+10){bad=true;break;} }
+    if(!bad&&placed) for(const q of placed){ if(Math.hypot(x-q.x,y-q.y)<140){bad=true;break;} }
+    if(!bad) return {x,y};
+  }
+  /* 兜底:玩家随机方向 minDP 处、夹进场地内(若压到石柱,运行时 collidePillars 会顶开) */
+  const a=Math.random()*TAU;
+  return { x:clamp(player.x+Math.cos(a)*minDP,mx,MX), y:clamp(player.y+Math.sin(a)*minDP,my,MY) };
+}
 function startWave(n){
   if(waveNum>0 && (kills-waveStartKills)>=60) unlockAch('wavekill');   /* 上一波击杀数(用旧快照,本波开始前结算) */
   waveNum=n; spawnQ=[]; waveT=0; waveStartKills=kills;   /* 快照开波击杀数,续战据此防重复计数 */
@@ -2378,22 +2398,19 @@ function startWave(n){
       if(fc>0&&Math.random()<fc) order.push(fiends[_fi++%fiends.length]);
       else order.push(reg[_ri++%reg.length]);
     }
+    const _bPlaced=[];   /* v85.8:多 boss 防重叠 */
     for(let i=0;i<bossCount;i++){
       const idx=order[i];
-      let px,py;
-      if(bossCount===1){ px=ARENA.w/2; py=ARENA.pad+160; }
-      else {
-        const span=Math.max(0,ARENA.w-2*(ARENA.pad+140));
-        px=clamp(ARENA.pad+140+span*(i/(bossCount-1)),ARENA.pad+60,ARENA.w-ARENA.pad-60);
-        py=clamp(ARENA.pad+130+(i%2)*70,ARENA.pad+60,ARENA.h*.5);
-      }
+      const _bR=34+tClamp*7;                          /* 与 makeBoss 半径一致 */
+      const _bp=randBossPos(_bR,_bPlaced); _bPlaced.push(_bp);
+      const px=_bp.x, py=_bp.y;
       spawnQ.push({t:.8+i*1.6,type:'boss',tier:tClamp,scale,bossIdx:idx,px,py,cScale,dmgScale});
     }
     const guard=Math.min(tier,3);
     /* Boss 波按压力插入妖/煞护卫 */
     const guardTier=Math.max(2,Math.min(3,1+Math.floor(difficultyPool.pressure*3)));
-    for(let i=0;i<2+guard;i++) spawnQ.push({t:rand(3,(11+n*.6)/sr),type:pick(['slime','bat','snake']),tier:guardTier});
-    if(n>=10) for(let i=0;i<1+Math.floor(guard/2);i++) spawnQ.push({t:rand(5,(13)/sr),type:pick(['brute','summoner']),tier:guardTier});
+    for(let i=0;i<2+guard;i++) spawnQ.push({t:rand(3,Math.min((11+n*.6)/sr,10)),type:pick(['slime','bat','snake']),tier:guardTier});   /* v85.8:刷怪窗封顶10s,深层波 guard 不再慢慢挤、打完boss不用干等 */
+    if(n>=10) for(let i=0;i<1+Math.floor(guard/2);i++) spawnQ.push({t:rand(5,Math.min((13)/sr,10)),type:pick(['brute','summoner']),tier:guardTier});
     spawnQ.sort((a,b)=>a.t-b.t);
     announce(bossCount>1?('⚠ '+bossCount+' 尊首领围攻'):'⚠ 首领来袭','BOSS · WAVE '+n); cam.shake=8;
     /* 水墨飞白:Boss 波 — 竖向朱砂 */
@@ -2408,15 +2425,15 @@ function startWave(n){
       const type=row[0], c=row[1];
       if(type==='elite' && c){
         const base=row[2]||'brute';
-        spawnQ.push({t:rand(1.5,(3+n*.4)/sr),type:'elite',baseType:base,tier:pickTier()});
+        spawnQ.push({t:rand(1.5,Math.min((3+n*.4)/sr,10)),type:'elite',baseType:base,tier:pickTier()});
       } else {
         const cc=Math.round(c*modMult.spawnM*diffMul.spawnM);
-        for(let i=0;i<cc;i++) spawnQ.push({t:rand(.5,(3+n*.8)/sr),type,tier:pickTier()});
+        for(let i=0;i<cc;i++) spawnQ.push({t:rand(.5,Math.min((3+n*.8)/sr,10)),type,tier:pickTier()});
       }
     }
   } else {
     /* 兜底:未列出的波次用渐进式默认 */
-    const add=(type,c)=>{for(let i=0;i<c;i++) spawnQ.push({t:rand(.5,(3+n*.8)/sr),type,tier:pickTier()});};
+    const add=(type,c)=>{for(let i=0;i<c;i++) spawnQ.push({t:rand(.5,Math.min((3+n*.8)/sr,10)),type,tier:pickTier()});};
     add('slime',6+Math.floor(n*1.5));
     if(n>=2)add('bat',2+Math.floor(n*1.15));
     if(n>=3)add('shooter',1+Math.floor(n*.7));
@@ -5485,9 +5502,9 @@ function update(dt){
 
   /* —— 敌人（统一 AI 调度） —— */
   updateFormations(dt);
-  /* 残怪围拢:无 Boss、无待生成、只剩≤3 只杂兵时,把"远处躲藏"的缓缓拉近(免去满地图追)。弑神(第5档)不启用:保持一命纯净、杜绝残怪暴冲。 */
+  /* 残怪围拢:无 Boss、无待生成、只剩≤5 只杂兵时,把"远处躲藏"的缓缓拉近(免去满地图追)。v85.8:阈值 3→5,尾巴更利落。弑神(第5档)不启用:保持一命纯净、杜绝残怪暴冲。 */
   let _nb=0,_bs=0; for(const _e of enemies){ if(_e.dead)continue; _e.boss?_bs++:_nb++; }
-  const _roundup=(spawnQ.length===0 && _bs===0 && _nb>0 && _nb<=3 && difficulty<5);
+  const _roundup=(spawnQ.length===0 && _bs===0 && _nb>0 && _nb<=5 && difficulty<5);
   roundupT=_roundup?roundupT+dt:0;
   const _pull=_roundup?Math.min(75+roundupT*25,120):0;   /* 温和回拢:封顶 120(普通怪~50),远超怪速会"躲不开",故压低 */
   player._suckX=0; player._suckY=0;   /* 饕餮吞噬拉力·每帧清零,循环内累加,循环后统一封顶施加 */
