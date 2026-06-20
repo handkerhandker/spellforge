@@ -537,6 +537,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.6 · 2026-06-20</div><div class="cl-i">🎨 <b>战斗里两处 emoji 也换成了手绘图标:左上角的「遗物图标条」+ 精英怪头顶的「词缀标记」。</b>它们以前是画在画布上的 emoji,现在用上了和图鉴一致的专属图标。(实现上新做了「SVG 转图片」的栅格化处理。若个别机型上这两处显示异常,会自动回退成原来的 emoji、不会空白。)纯外观,数值 / 玩法不变。<br>📌 战斗里仍是 emoji 的还有:无尽「潮汐变数」图标、召唤的山海灵兽、以及默认关闭的左下角「法术数据条」——这几类要么还没画专属图标、要么是文字混排,留待后续。</div></div>
 <div class="cl-v"><div class="cl-h">v85.5 · 2026-06-20</div><div class="cl-i">🎨 <b>图鉴里 7 个精英词缀也换上了专属手绘图标。</b>翻「妖兽图鉴 → 精英词缀」时,迅捷 / 铁壁 / 淬毒 / 狂暴 / 爆裂 / 虚影 / 不可阻挡这七条不再是简单 emoji,而是各自专属的小图标(疾射、盾、毒滴、怒目、炸弹、幽灵、破壁冲锋)。至此全游戏 UI 图标焕新工程基本收尾。(战斗中精英怪头顶的小标记仍是 emoji,那是画在画布上的、属另一套,后续再说。)纯外观,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.4 · 2026-06-20</div><div class="cl-i">🎨 <b>司南 / 轰天雷 / 连珠这三把法杖,战斗里终于换上了专属造型与法袍。</b>以前这三把在战斗中拿的是默认学徒杖、穿的是默认紫袍;现在:🧭<b>司南法杖</b>——青铜罗盘配指向磁针(亮端朝着你瞄的方向,呼应它的自动追踪),一身青铜青磁的航向者装束;💥<b>轰天雷法杖</b>——杖头一颗冒着火花引信的铁雷球、四周爆裂纹,火药铁灰加橙焰的爆破手装束;🌀<b>连珠法杖</b>——旋转的多管枪口配蓝色能量核(对应它的速射),钢灰枪械装束。纯外观,数值 / 玩法完全不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.3 · 2026-06-20</div><div class="cl-i">🏹 修复御风弓在战斗中<b>弓身被人物挡住、几乎只看得到那支箭</b>的问题——现在整把弓持于身前、完整可见(像拉弓瞄准的样子)。纯显示修复,数值 / 玩法不变。</div></div>
@@ -847,10 +848,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.5', APP_TIME='2026-06-20 15:20';
+const APP_VER='v85.6', APP_TIME='2026-06-20 15:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.5';
+const APP_NOTIFY_VER='v85.6';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
@@ -1046,6 +1047,33 @@ const ICONS = {
 };
 function iconHTML(cat,id,emoji){ const v=ICONS[cat+'_'+id]; return v||emoji; }
 function cardIcon(c){ return iconHTML(c.kind==='spell'?'spell':'mod', c.id, c.icon); }
+/* ===== canvas 图标栅格化(v85.6):把 ICONS 里的 SVG 转 Image 缓存,供 canvas drawImage 用;
+   未就绪 / 无 SVG / 失败 一律回退到 emoji fillText —— 绝不空白、无视觉回退风险。
+   ⚠️ canvas drawImage(SVG) 与 DOM 内联 SVG 是两条渲染路径,需真机(微信 iOS)验证。 */
+const _iconImgCache={};
+function iconImg(cat,id){
+  const key=cat+'_'+id, c=_iconImgCache[key];
+  if(c) return c.ready?c.img:null;
+  const svg=ICONS[key];
+  if(!svg){ _iconImgCache[key]={ready:false,fail:true}; return null; }
+  const rec={ready:false,fail:false,img:new Image()};
+  _iconImgCache[key]=rec;
+  rec.img.onload=function(){ rec.ready=true; };
+  rec.img.onerror=function(){ rec.fail=true; };
+  /* 注入显式宽高(iOS canvas 栅格化要求 SVG 有 intrinsic size),base64 data URL(webview 兼容更稳) */
+  let s=svg;
+  if(s.indexOf(' width=')<0) s=s.replace('<svg ','<svg width="64" height="64" ');
+  try{ rec.img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(s))); }
+  catch(e){ rec.fail=true; }
+  return null;
+}
+/* 在 canvas 当前 ctx 上画一个图标:有 SVG 且已栅格化→drawImage 居中;否则 fillText(emoji)。
+   size=目标边长(px)。回退分支沿用调用处已设好的 font/textAlign/textBaseline。 */
+function drawCanvasIcon(cat,id,emoji,cx,cy,size){
+  const img=iconImg(cat,id);
+  if(img){ ctx.drawImage(img, cx-size/2, cy-size/2, size, size); }
+  else { ctx.fillText(emoji, cx, cy); }
+}
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
 
 /* ============ 音效（极简合成器） ============ */
@@ -6562,9 +6590,9 @@ function drawEnemy(e){
     ctx.beginPath();ctx.arc(e.x,e.y,e.r+8,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.restore(); }
   if(e._ai==='frostbow'&&e._fbWind){ ctx.save();ctx.globalAlpha*=.25+e.charge*.45;ctx.strokeStyle='#7ad0ff';ctx.lineWidth=2;ctx.setLineDash([6,6]);
     ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(player.x,player.y);ctx.stroke();ctx.setLineDash([]);ctx.restore(); }
-  if(e._affList&&e._affList.length){ ctx.save();ctx.textAlign='center';ctx.font='11px serif';
-    let ax=e.x-(e._affList.length-1)*6;
-    for(const k of e._affList){ ctx.fillText(AFFIX_DEFS[k].icon,ax,e.y-e.r-15); ax+=12; } ctx.restore(); }
+  if(e._affList&&e._affList.length){ ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='13px serif';
+    let ax=e.x-(e._affList.length-1)*7; const ay=e.y-e.r-18;
+    for(const k of e._affList){ drawCanvasIcon('affix',k,AFFIX_DEFS[k].icon,ax,ay,15); ax+=14; } ctx.restore(); }
   /* 霸体标识:铁甲铆钉环(推不动的怪) */
   if(e._kbm!==undefined&&e._kbm<=.3&&!e.boss){ ctx.save();ctx.globalAlpha*=.5;ctx.strokeStyle='#d4a050';ctx.lineWidth=2;
     ctx.beginPath();ctx.arc(e.x,e.y,e.r+3,0,TAU);ctx.stroke();
@@ -7736,7 +7764,7 @@ function drawHUD(){
       const r=RELICS.find(x=>x.id===id); if(!r)continue;
       ctx.globalAlpha=.5;ctx.fillStyle='rgba(20,14,40,.8)';
       ctx.beginPath();ctx.arc(rx,ry,9,0,TAU);ctx.fill();ctx.globalAlpha=1;
-      ctx.fillText(r.icon,rx,ry+.5); rx+=rw;
+      drawCanvasIcon('relic',id,r.icon,rx,ry,15); rx+=rw;
     }
     ctx.textAlign='left';ctx.textBaseline='alphabetic';
   }
