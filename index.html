@@ -252,6 +252,9 @@
   #altarList{width:100%;display:flex;flex-direction:column;gap:10px;margin:6px 0 4px;}
   .up-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(30,22,60,.5);border:1px solid rgba(123,92,255,.22);text-align:left;}
   .up-ic{font-size:26px;flex-shrink:0;width:34px;text-align:center;}
+  .up-ic svg{width:30px;height:30px;vertical-align:middle;}
+  .pi-ic{display:inline-flex;width:1.2em;height:1.2em;vertical-align:-.2em;}
+  .pi-ic svg{width:100%;height:100%;}
   .up-main{flex:1;min-width:0;}
   .up-name{color:#fff;font-weight:700;font-size:15px;}
   .up-lv{color:var(--gold);font-size:12px;margin-left:6px;font-weight:600;}
@@ -438,7 +441,7 @@
     <div id="dailyBest" class="lb-myrank"></div>
     <div id="dailyStreak" class="lb-myrank" style="display:none;"></div>
     <div id="dailyChamp" class="lb-myrank" style="display:none;"></div>
-    <div class="sub" style="margin:10px 0 3px;font-size:12px;opacity:.72;">🗓 今日挑战榜 · 全球前 10</div>
+    <div class="sub" style="margin:10px 0 3px;font-size:12px;opacity:.72;"><svg class="ico-i" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="21" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="39.4" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="11" y="14" width="42" height="41" rx="6" fill="#f0ece0" stroke="#241636" stroke-width="2.8"/><path d="M11 23 Q11 14 17 14 L47 14 Q53 14 53 23 L53 25 L11 25 Z" fill="#e5566a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 31 l2.1 5.1 5.5 .4 -4.2 3.6 1.4 5.3 -4.8 -3 -4.8 3 1.4 -5.3 -4.2 -3.6 5.5 -.4 z" fill="#ffcf5a" stroke="#241636" stroke-width="1.6" stroke-linejoin="round"/></svg> 今日挑战榜 · 全球前 10</div>
     <div id="dailyBoard" class="lb-board" style="margin:0 0 10px;width:100%;"></div>
     <button class="btn" id="dailyStart">开始挑战</button>
     <button class="btn ghost" id="dailyBack">返回</button>
@@ -456,7 +459,7 @@
     <div id="altarRenown"></div>
     <div id="altarList"></div>
     <div class="altar-note"><svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg> 永久强化在「弑神」难度<b>不生效</b>——弑神是纯净竞技档，大家凭操作公平冲榜</div>
-    <button class="btn ghost" id="altarBackupBtn" style="margin-bottom:8px;">📋 存档备份码 · 换机不丢档</button>
+    <button class="btn ghost" id="altarBackupBtn" style="margin-bottom:8px;"><svg class="mbi" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="12" width="36" height="45" rx="5" fill="#cdd8e8" stroke="#241636" stroke-width="2.8"/><rect x="24" y="7" width="16" height="10" rx="3.5" fill="#8a96a8" stroke="#241636" stroke-width="2.6"/><path d="M22 28 L42 28 M22 36 L42 36 M22 44 L34 44" stroke="#6f7d92" stroke-width="2.4" stroke-linecap="round"/></svg> 存档备份码 · 换机不丢档</button>
     <button class="btn ghost" id="altarBack">返回</button>
   </div>
 </div>
@@ -539,6 +542,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.12 · 2026-06-20</div><div class="cl-i">🎨 <b>祭坛、每日挑战两个面板里的图标也全换成手绘 SVG 了。</b>祭坛的体魄 / 法力 / 急速 / 身法 / 坚壁、名望(太极)、存档备份码;每日挑战的今日法杖、六种潮汐变数(狂暴 / 钢甲 / 猎杀 / 群涌 / 精英 / 剧毒)、昨日冠军、连续挑战、今日最佳——之前都是系统 emoji,在不同手机上长得不一样,也跟卡牌 / 图鉴那套手绘图标不搭。现在<b>统一成同一种手绘风格</b>。<br>至此游戏里基本看不到系统 emoji 了。<b>纯视觉统一,玩法 / 数值 / 平衡一概没动,冲榜不受任何影响。</b></div></div>
+<div class="cl-v"><div class="cl-h">v85.11 · 2026-06-20</div><div class="cl-i">🐾 <b>异兽图鉴里「毕方」「旋龟」图标背后那圈光环去掉了</b>,现在跟其它妖兽一样清爽、只剩图标本身。<br>说明:这俩光环在<b>游戏里是功能性的</b>(毕方的辨识光晕帮你追踪这只又小又快的怪、旋龟的护盾环显示它的护盾范围),<b>战斗中照常保留、不受任何影响</b>;只是图鉴这种静态预览里它们显得多余,所以只在图鉴预览里不画了。</div></div>
 <div class="cl-v"><div class="cl-h">v85.10 · 2026-06-20</div><div class="cl-i">🎨 <b>主菜单的按钮图标也全换成手绘 SVG 了。</b>祭坛 / 外观 / 每日挑战 / 法术图鉴 / 异兽图鉴 / 成就一览这几个按钮,之前还是系统 emoji——在不同手机上长得不一样,也跟卡牌、图鉴里那套手绘图标不搭。现在<b>统一成同一种手绘风格</b>,看着清爽整齐多了。顺手把「选择难度 / 英雄榜」标题的交叉剑、灵晶徽章的宝石、「继续上次战斗」的播放键等小符号也一并换了。<b>纯视觉统一,玩法 / 数值 / 平衡一概没动,冲榜不受任何影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v85.9 · 2026-06-20</div><div class="cl-i">📈 <b>「奥术增幅」「生命祝福」现在真的可以无限叠了。</b>这两张卡图鉴里一直标着"可无限叠",但其实之前偷偷封顶 99 层、到顶后就不再出现在三选一里——有朋友真叠到了 99、发现加不动了。现在<b>名副其实:卡池会一直发,想叠多少叠多少</b>。<br>说明:奥术增幅是<b>递减</b>的(前 6 层每层 +25%、之后每层 +9%),所以叠到很高也是约 11 倍上下、不会无限膨胀;深层(尤其弑神)敌人血量是逐波指数级上涨,<b>叠满也终有一堵打不过的墙——那是「弑神 · 为冲榜而生」该有的天花板</b>,不是 bug。本次只解除这两张卡的层数上限、全难度公平开放,<b>冲榜公平不受影响</b>。</div></div>
 <div class="cl-v"><div class="cl-h">v85.8 · 2026-06-20</div><div class="cl-i">⚔️ <b>三处玩法优化(来自试玩反馈):</b><br>🎲 <b>首领出生位置改为全场随机。</b>以前首领固定从上方出现,导致站某些位置就能"躲着首领挂机刷波"。现在首领会随机出现在场地任意位置(离你保持安全距离、避开石柱),没法再靠固定站位钻空子——也让排行榜更公平。首领出场仍有 <b>2.5 秒无敌护罩</b>给你走位备战,绝不会贴脸瞬秒。<br>⏱️ <b>刷怪不再慢吞吞拖时间。</b>以前深层波的小怪会在几十秒里慢慢往外挤,打完首领还得满地图等最后几只冒出来。现在每波的怪<b>都在约 10 秒内依次刷完</b>(依次出、不是一帧全冒,所以不会卡),节奏紧凑多了。<b>怪的数量、血量、伤害一概没变,只是出得更快。</b><br>🧲 <b>收尾更利落:</b>一波快打完、只剩零星几只躲远处的小怪时,会把它们缓缓拉近的触发范围从"剩 3 只"放宽到"剩 5 只",少跑冤枉路。<br>说明:这些只改"首领在哪出现 / 怪什么时候出现 / 残怪怎么收尾",<b>不碰任何法术或敌人的数值,弑神 / 无尽冲榜公平不受影响</b>(弑神维持一命纯净、残怪不强拉)。</div></div>
@@ -856,12 +861,27 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.10', APP_TIME='2026-06-20 18:50';
+const APP_VER='v85.12', APP_TIME='2026-06-20 19:25';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.10';
+const APP_NOTIFY_VER='v85.12';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
+  up_hp: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 53 C12 39 7 26 7 19 C7 11 13 7 20 7 C26 7 30 11 32 16 C34 11 38 7 44 7 C51 7 57 11 57 19 C57 26 52 39 32 53 Z" fill="#ff5a7a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M19 15 C15 15 13 18 14 23" fill="none" stroke="#ffd0dc" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  up_dmg: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M15 14 L49 14 L59 26 L32 57 L5 26 Z" fill="#3a9af0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M15 14 L23 26 L31 14 Z M33 14 L41 26 L49 14 Z" fill="#a9d6ff"/><path d="M5 26 L59 26 M23 26 L32 57 L41 26" stroke="#241636" stroke-width="1.8" fill="none"/></svg>',
+  up_haste: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M37 5 L15 36 L29 36 L25 59 L49 26 L34 26 Z" fill="#ffcf3a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M33 12 L22 31" fill="none" stroke="#fff0b0" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  up_speed: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M11 24 Q11 20 15 20 L25 20 L30 33 L52 39 Q57 40 57 45 L57 47 Q57 50 53 50 L11 50 Z" fill="#cfd6e2" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M30 33 L41 36 M25 24 L27 31" fill="none" stroke="#8fa0b8" stroke-width="2.2" stroke-linecap="round"/><rect x="9" y="49" width="50" height="6" rx="3" fill="#7a8597" stroke="#241636" stroke-width="2.4"/></svg>',
+  up_guard: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 6 L53 13 Q53 39 32 58 Q11 39 11 13 Z" fill="#5b8fd9" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 6 L53 13 Q53 39 32 58 Z" fill="#4577bd"/><path d="M32 19 L32 45 M20 27 L44 27" stroke="#cfe0ff" stroke-width="2.6" stroke-linecap="round"/></svg>',
+  tide_frenzy: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 4 L38 22 L56 17 L43 31 L59 41 L40 41 L45 59 L32 46 L19 59 L24 41 L5 41 L21 31 L8 17 L26 22 Z" fill="#e5423a" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="32" cy="33" r="6" fill="#ff9a7a"/></svg>',
+  tide_armor: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M12 16 L24 13 Q32 20 40 13 L52 16 L49 28 Q50 44 32 56 Q14 44 15 28 Z" fill="#8a97a8" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M12 16 L24 13 Q32 20 40 13 L52 16 L50 23 Q32 18 14 23 Z" fill="#a3b0c0"/><path d="M32 20 L32 54" stroke="#454f5e" stroke-width="2.2"/><path d="M22 37 Q32 41 42 37" fill="none" stroke="#454f5e" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="20" r="2.1" fill="#454f5e"/><circle cx="46" cy="20" r="2.1" fill="#454f5e"/></svg>',
+  tide_rage: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5 L51 40 L32 31 L13 40 Z" fill="#e5423a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 31 L32 59" stroke="#241636" stroke-width="3.2" stroke-linecap="round"/><path d="M32 5 L41 22 L32 18 Z" fill="#ff9a7a"/></svg>',
+  tide_swarm: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="25" r="11" fill="#7ec850" stroke="#241636" stroke-width="2.6"/><circle cx="43" cy="23" r="9" fill="#9ad86a" stroke="#241636" stroke-width="2.6"/><circle cx="34" cy="43" r="10.5" fill="#6bb840" stroke="#241636" stroke-width="2.6"/><circle cx="19" cy="23" r="2" fill="#241636"/><circle cx="25" cy="23" r="2" fill="#241636"/><circle cx="31" cy="41" r="2" fill="#241636"/><circle cx="37" cy="41" r="2" fill="#241636"/></svg>',
+  tide_elite: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M21 6 L31 27 L19 27 Z M43 6 L45 27 L33 27 Z" fill="#c0563a" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="32" cy="41" r="17" fill="#ffcf3a" stroke="#241636" stroke-width="2.8"/><path d="M32 31 l2.5 6.2 6.7 .3 -5.2 4.3 1.8 6.5 -5.6 -3.7 -5.6 3.7 1.8 -6.5 -5.2 -4.3 6.7 -.3 z" fill="#fff3c0" stroke="#241636" stroke-width="1.4" stroke-linejoin="round"/></svg>',
+  tide_venom: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 7 C32 7 13 32 13 43 A19 19 0 0 0 51 43 C51 32 32 7 32 7 Z" fill="#7ed040" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><circle cx="25" cy="41" r="3.6" fill="#241636"/><circle cx="39" cy="41" r="3.6" fill="#241636"/><path d="M27 49 L29.5 46 L32 49 L34.5 46 L37 49" fill="none" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 27 C21 27 20 30 21 33" fill="none" stroke="#d8f0b0" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  ui_renown: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="25" fill="#efeae0" stroke="#241636" stroke-width="2.8"/><path d="M32 7 A25 25 0 0 1 32 57 A12.5 12.5 0 0 1 32 32 A12.5 12.5 0 0 0 32 7 Z" fill="#3a2f4a"/><circle cx="32" cy="19.5" r="4" fill="#efeae0"/><circle cx="32" cy="44.5" r="4" fill="#3a2f4a"/></svg>',
+  ui_streak: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M34 5 C34 5 19 18 19 37 A15 15 0 0 0 49 37 C49 28 42 24 42 24 C42 31 37 33 37 28 C37 17 34 5 34 5 Z" fill="#ff7a2a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M33 31 C31 33 29 37 31 43 A6 6 0 0 0 41 41 C41 35 35 35 35 31 C35 35 33 35 33 31 Z" fill="#ffcf3a" stroke="#241636" stroke-width="2" stroke-linejoin="round"/></svg>',
+  ui_crown: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M9 23 L20 37 L32 17 L44 37 L55 23 L51 51 L13 51 Z" fill="#ffcf3a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M13 51 L51 51" stroke="#241636" stroke-width="2.6"/><circle cx="9" cy="21" r="3.6" fill="#ffe88a" stroke="#241636" stroke-width="2.2"/><circle cx="32" cy="14" r="3.6" fill="#ffe88a" stroke="#241636" stroke-width="2.2"/><circle cx="55" cy="21" r="3.6" fill="#ffe88a" stroke="#241636" stroke-width="2.2"/><circle cx="32" cy="40" r="3" fill="#e5423a"/></svg>',
+  ui_trophy: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M18 20 Q10 20 12 30 Q13 35 20 35" fill="none" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M46 20 Q54 20 52 30 Q51 35 44 35" fill="none" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M18 15 L46 15 L44 32 Q32 43 20 32 Z" fill="#ffcf3a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><rect x="29" y="40" width="6" height="7" fill="#d99a2a" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><rect x="22" y="46" width="20" height="5" rx="2" fill="#ffcf5a" stroke="#241636" stroke-width="2.6"/><rect x="17" y="51" width="30" height="5" rx="2" fill="#d99a2a" stroke="#241636" stroke-width="2.8"/></svg>',
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
   wand_scatter: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><rect x="30" y="9" width="4" height="17" rx="2" fill="#ffe14d" stroke="#241636" stroke-width="2.4" transform="rotate(-30 32 26)"/><rect x="30" y="9" width="4" height="17" rx="2" fill="#ffe14d" stroke="#241636" stroke-width="2.4"/><rect x="30" y="9" width="4" height="17" rx="2" fill="#ffe14d" stroke="#241636" stroke-width="2.4" transform="rotate(30 32 26)"/><circle cx="32" cy="24.5" r="4.2" fill="#ff7a3c" stroke="#241636" stroke-width="3"/><circle cx="30.2" cy="23" r="1.5" fill="#ffd24d"/></svg>',
   wand_sniper: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="26" width="4" height="31" rx="2.5" fill="#c9d2e0" stroke="#241636" stroke-width="3"/><rect x="27.5" y="42.5" width="9" height="4.5" rx="2" fill="#8a93a8" stroke="#241636" stroke-width="2.6"/><line x1="32" y1="3.5" x2="32" y2="27" stroke="#241636" stroke-width="1.8"/><line x1="17" y1="15" x2="47" y2="15" stroke="#241636" stroke-width="1.8"/><circle cx="32" cy="15" r="10" fill="#c9d2e0" stroke="#241636" stroke-width="3"/><circle cx="32" cy="15" r="6" fill="#5bb8e8" stroke="#241636" stroke-width="2.4"/><line x1="20" y1="15" x2="44" y2="15" stroke="#241636" stroke-width="1.8"/><line x1="32" y1="5" x2="32" y2="25" stroke="#241636" stroke-width="1.8"/><circle cx="32" cy="15" r="1.9" fill="#e5566a"/><circle cx="27" cy="10" r="2.1" fill="#eef2f8" opacity=".85"/></svg>',
@@ -1054,6 +1074,7 @@ const ICONS = {
   affix_unstoppable: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="45" y="10" width="8" height="16" rx="2" fill="#9a8a78" stroke="#241636" stroke-width="2.6" transform="rotate(18 49 18)"/><rect x="45" y="38" width="8" height="16" rx="2" fill="#9a8a78" stroke="#241636" stroke-width="2.6" transform="rotate(-18 49 46)"/><path d="M12 19 L42 32 L12 45 L21 32 Z" fill="#ffb84a" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M44 32 L52 32 M46 26 L53 23 M46 38 L53 41" fill="none" stroke="#ffd98a" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="27" r="2.4" fill="#ffe6bb" opacity=".85"/></svg>',
 };
 function iconHTML(cat,id,emoji){ const v=ICONS[cat+'_'+id]; return v||emoji; }
+function piIcon(c,i,e){ return '<span class="pi-ic">'+iconHTML(c,i,e)+'</span>'; }
 function cardIcon(c){ return iconHTML(c.kind==='spell'?'spell':'mod', c.id, c.icon); }
 /* ===== canvas 图标栅格化(v85.6):把 ICONS 里的 SVG 转 Image 缓存,供 canvas drawImage 用;
    未就绪 / 无 SVG / 失败 一律回退到 emoji fillText —— 绝不空白、无视觉回退风险。
@@ -1880,7 +1901,7 @@ let META={lj:0,up:{},unlocked:{},skin:'wizard',renown:0}, runRewardBase=0;
 function loadMeta(){ try{ const m=JSON.parse(localStorage.getItem('sf_meta')||'{}'); META.lj=m.lj||0; META.up=m.up||{}; META.unlocked=m.unlocked||{}; META.skin=m.skin||'wizard'; META.renown=m.renown||0; }catch(e){} }
 function saveMeta(){ try{ localStorage.setItem('sf_meta', JSON.stringify(META)); }catch(e){} }
 function refreshLj(){ const e=document.getElementById('ljBal'); if(e)e.textContent=META.lj; refreshRenown(); }
-function refreshRenown(){ const b=document.getElementById('renownBadge'); if(!b)return; const lv=META.renown||0; if(lv<=0){ b.innerHTML=''; return; } const t=renownTier(lv); b.innerHTML='<span style="display:inline-block;padding:3px 13px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.05em;color:'+t.c+';background:'+t.c+'1f;border:1px solid '+t.c+'66;text-shadow:0 0 10px '+t.c+'66;">☯ 名望 · '+renownTitle(lv)+'</span>'; }
+function refreshRenown(){ const b=document.getElementById('renownBadge'); if(!b)return; const lv=META.renown||0; if(lv<=0){ b.innerHTML=''; return; } const t=renownTier(lv); b.innerHTML='<span style="display:inline-block;padding:3px 13px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.05em;color:'+t.c+';background:'+t.c+'1f;border:1px solid '+t.c+'66;text-shadow:0 0 10px '+t.c+'66;">'+piIcon('ui','renown','☯')+' 名望 · '+renownTitle(lv)+'</span>'; }
 /* ═══ 存档备份码:导出/导入(换机不丢档) ═══ */
 /* 备份码白名单:前 5 项=进度 + 核心偏好(原有);后 7 项=玩家设置(v83 加入,让换机也带走设置)。
    旧码兼容:genBackup 只打包当下 BK_KEYS;applyBackup 遍历 BK_KEYS 时,旧码里没有的新键值=undefined,
@@ -1944,7 +1965,7 @@ function renownTier(lv){ let t=RENOWN_TIERS[0]; for(const x of RENOWN_TIERS){ if
 function renownCost(lv){ return Math.round(300*Math.pow(1.45,lv)); }   /* 指数成本:盈余灵晶永远填不满下一重 */
 function renownName(lv){ return renownTier(lv).name; }
 function renownTitle(lv){ return renownName(lv)+(lv>0?(' · '+lv+'重'):''); }   /* 例:筑基 · 9重 */
-function renownEndHTML(){ const lv=META.renown||0; if(lv<=0)return ''; const t=renownTier(lv); return '<div style="font-size:13px;font-weight:700;letter-spacing:.04em;color:'+t.c+';text-shadow:0 0 10px '+t.c+'66;margin-top:4px;">☯ 名望 · '+renownTitle(lv)+'</div>'; }
+function renownEndHTML(){ const lv=META.renown||0; if(lv<=0)return ''; const t=renownTier(lv); return '<div style="font-size:13px;font-weight:700;letter-spacing:.04em;color:'+t.c+';text-shadow:0 0 10px '+t.c+'66;margin-top:4px;">'+piIcon('ui','renown','☯')+' 名望 · '+renownTitle(lv)+'</div>'; }
 function renderAltar(){
   const ljEl=document.getElementById('altarLj'); if(ljEl)ljEl.textContent=META.lj;
   /* 名望供奉块(纯炫耀·弑神也能花) */
@@ -1952,7 +1973,7 @@ function renderAltar(){
   if(rEl){
     const rlv=META.renown||0, t=renownTier(rlv), rcost=renownCost(rlv), rcan=META.lj>=rcost;
     rEl.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;margin-bottom:12px;border-radius:14px;background:linear-gradient(135deg,'+t.c+'1f,rgba(20,16,30,.45));border:1px solid '+t.c+'66;">'
-      +'<div style="flex:1;min-width:0;"><div style="font-size:19px;font-weight:800;letter-spacing:.04em;color:'+t.c+';text-shadow:0 0 14px '+t.c+'88;">☯ '+renownTitle(rlv)+'</div>'
+      +'<div style="flex:1;min-width:0;"><div style="font-size:19px;font-weight:800;letter-spacing:.04em;color:'+t.c+';text-shadow:0 0 14px '+t.c+'88;">'+piIcon('ui','renown','☯')+' '+renownTitle(rlv)+'</div>'
       +'<div style="font-size:11px;color:#b6b0c8;margin-top:3px;line-height:1.45;">名望供奉 · 纯炫耀不影响战力 · <b style="color:#d8cf66;">全难度通用(弑神也能供奉)</b></div></div>'
       +'<button class="up-buy'+(rcan?'':' dis')+'" style="white-space:nowrap;flex:none;">供奉<br>'+rcost+' '+GEM+'</button></div>';
     const rbtn=rEl.querySelector('.up-buy');
@@ -1968,7 +1989,7 @@ function renderAltar(){
     const perTxt = u.mult ? ('每级削 '+u.per+'% 剩余伤害') : ('每级 +'+u.per+'%');
     const lvTxt = inf ? ('Lv '+lv) : ('Lv '+lv+'/'+u.max);
     const el=document.createElement('div'); el.className='up-card';
-    el.innerHTML='<div class="up-ic">'+u.icon+'</div><div class="up-main"><div class="up-name">'+u.name+'<span class="up-lv">'+lvTxt+'</span></div><div class="up-desc">'+u.unit+' · '+perTxt+' · '+cur+'</div>'+(inf?'':'<div class="up-dots">'+dots+'</div>')+'</div>'+
+    el.innerHTML='<div class="up-ic">'+iconHTML('up',u.id,u.icon)+'</div><div class="up-main"><div class="up-name">'+u.name+'<span class="up-lv">'+lvTxt+'</span></div><div class="up-desc">'+u.unit+' · '+perTxt+' · '+cur+'</div>'+(inf?'':'<div class="up-dots">'+dots+'</div>')+'</div>'+
       (maxed?'<div class="up-buy maxed">已满级</div>':'<button class="up-buy'+(can?'':' dis')+'">下一级<br>'+cost+' '+GEM+'</button>');
     if(!maxed){ const btn=el.querySelector('.up-buy'); btn.onclick=()=>{ const c=upCost(u); if(!inf && (META.up[u.id]||0)>=u.max)return; if(META.lj<c){S.no();return;} META.lj-=c; META.up[u.id]=(META.up[u.id]||0)+1; saveMeta(); refreshLj(); S.buy(); renderAltar(); }; }
     list.appendChild(el);
@@ -6369,7 +6390,7 @@ function dqDraw(type, e, lookA){
   const bob=type==='bat'||type==='ghost'||type==='wraith'?Math.sin(e.anim*6)*r*.15:Math.sin(e.anim*4)*r*.08;
   const wobble=type==='slime'?Math.sin(e.anim*3)*r*.12:0;
   ctx.save();ctx.translate(x,y+bob);
-  if(type==='bat'){ /* 辨识光晕:小而快的毕方需要可追踪 */
+  if(type==='bat' && !e._card){ /* 辨识光晕:小而快的毕方需要可追踪(图鉴预览不画) */
     ctx.save();ctx.globalCompositeOperation='lighter';
     ctx.globalAlpha=.34;ctx.fillStyle=e.col;ctx.beginPath();ctx.arc(0,0,r*2.0,0,TAU);ctx.fill();
     ctx.globalAlpha=.24;ctx.beginPath();ctx.arc(0,0,r*1.35,0,TAU);ctx.fill();
@@ -6520,8 +6541,8 @@ function dqDraw(type, e, lookA){
     dqFill('#c83a3a');ctx.beginPath();ctx.moveTo(r*.4,-r*.1);ctx.lineTo(r*.1,-r*.2);ctx.lineTo(r*.1,r*.05);ctx.closePath();ctx.fill();
   } else if(type==='totem'){
     /* 旋龟:守护图腾 + 龟壳 */
-    ctx.save();ctx.globalAlpha*=.14+Math.sin(e.anim*1.5)*.06;
-    dqFill('#6ad0a0');ctx.beginPath();ctx.arc(0,0,r*2.1,0,TAU);ctx.fill();ctx.restore();
+    if(!e._card){ ctx.save();ctx.globalAlpha*=.14+Math.sin(e.anim*1.5)*.06;
+    dqFill('#6ad0a0');ctx.beginPath();ctx.arc(0,0,r*2.1,0,TAU);ctx.fill();ctx.restore(); }
     dqFill(e.col);dqOutline(r);
     ctx.beginPath();ctx.ellipse(0,r*.1,r*1.05,r*.85,0,0,TAU);ctx.fill();ctx.stroke();
     ctx.strokeStyle='#2a6a50';ctx.lineWidth=Math.max(1.5,r*.12);
@@ -7605,7 +7626,7 @@ function paintEnemyCard(cardCv, type){
     const Wd=cardCv.width, Hd=cardCv.height; gg.clearRect(0,0,Wd,Hd);
     const t=ETYPE[type], r=Math.min(Wd,Hd)*0.29, LOOKA=0.62;
     const e={ x:Wd/2, y:Hd*0.56, r:r, anim:1.0, col:t.col||'#a8a0c8', type:type,
-              _tier:1, _charging:false, charge:0, _aff:{}, _affList:[], _shield:0, flash:0, _cloaked:false };
+              _tier:1, _charging:false, charge:0, _aff:{}, _affList:[], _shield:0, flash:0, _cloaked:false, _card:true };
     /* 接地影 */
     gg.save();gg.globalAlpha=.26;gg.fillStyle='#000';gg.beginPath();gg.ellipse(e.x,e.y+r*.82,r*.82,r*.3,0,0,TAU);gg.fill();gg.restore();
     gg.globalAlpha=1;
@@ -8278,16 +8299,16 @@ function openDaily(){
   const {wand,mods}=todaysDaily();
   $('dailyDate').textContent=todayStr()+' · 全员同一套挑战';
   $('dailyInfo').innerHTML='<div style="margin:8px 0;color:#cdbcff;font-weight:700;">今日法杖</div>'
-    +'<div style="margin-bottom:10px;">'+wand.icon+' '+wand.name+'<br><span style="font-size:12px;opacity:.75;">'+wand.desc+'</span></div>'
+    +'<div style="margin-bottom:10px;">'+piIcon('wand',wand.id,wand.icon)+' '+wand.name+'<br><span style="font-size:12px;opacity:.75;">'+wand.desc+'</span></div>'
     +'<div style="margin:8px 0;color:#ff9c7b;font-weight:700;">今日变数</div>'
-    +mods.map(m=>'<div style="margin-bottom:6px;">'+m.icon+' '+m.name+' <span style="font-size:12px;opacity:.75;">· '+m.desc+'</span></div>').join('');
+    +mods.map(m=>'<div style="margin-bottom:6px;">'+piIcon('tide',m.id,m.icon)+' '+m.name+' <span style="font-size:12px;opacity:.75;">· '+m.desc+'</span></div>').join('');
   const best=getDailyBest();
-  $('dailyBest').innerHTML = best ? ('🏆 今日最佳:第 '+best.wave+' 波 · '+best.kills+' 杀') : '今日尚无记录 · 来打第一把!';
+  $('dailyBest').innerHTML = best ? (piIcon('ui','trophy','🏆')+' 今日最佳:第 '+best.wave+' 波 · '+best.kills+' 杀') : '今日尚无记录 · 来打第一把!';
   /* 连续挑战天数 */
   const _stk=dailyStreakN(), _se=$('dailyStreak');
-  if(_se){ if(_stk>=1){ _se.style.display=''; _se.innerHTML='🔥 连续挑战 '+_stk+' 天'; } else _se.style.display='none'; }
+  if(_se){ if(_stk>=1){ _se.style.display=''; _se.innerHTML=piIcon('ui','streak','🔥')+' 连续挑战 '+_stk+' 天'; } else _se.style.display='none'; }
   /* 昨日冠军 */
-  const _ce=$('dailyChamp'); if(_ce){ _ce.style.display='none'; fetchYesterdayChamp().then(c=>{ if(c&&_ce){ _ce.style.display=''; _ce.innerHTML='👑 昨日冠军 '+escHtml(c.name)+' · 第 '+c.wave+' 波 · '+c.kills+' 杀'; } }); }
+  const _ce=$('dailyChamp'); if(_ce){ _ce.style.display='none'; fetchYesterdayChamp().then(c=>{ if(c&&_ce){ _ce.style.display=''; _ce.innerHTML=piIcon('ui','crown','👑')+' 昨日冠军 '+escHtml(c.name)+' · 第 '+c.wave+' 波 · '+c.kills+' 杀'; } }); }
   /* 今日全球榜 */
   const _be=$('dailyBoard'); if(_be){ _be.innerHTML='<div class="lb-load">加载今日榜…</div>'; fetchDailyBoard().then(b=>renderBoard(_be,b)); }
   $('menu').classList.add('hidden'); $('daily').classList.remove('hidden');
