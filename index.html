@@ -544,6 +544,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.16 · 2026-06-20</div><div class="cl-i">⚡ <b>给上一版 3 把新法杖补上了专属的战斗手持造型。</b>之前链雷杖 / 回旋杖 / 引力杖在战斗里拿的还是通用法杖外形,这版各画了一套:链雷杖是蓝色能量球前喷出黄色锯齿闪电、引力杖是会旋转的紫色漩涡、回旋杖是会自转的回旋镖(身后还带一圈折返光弧)。<b>纯视觉,玩法 / 数值一概没动。</b></div></div>
+<div class="cl-v"><div class="cl-h">v85.15 · 2026-06-20</div><div class="cl-i">🎨 <b>给上一版 6 件新遗物补上了手绘图标。</b>v85.14 的贯穿符 / 奥术回响 / 荆棘符 / 残影靴 / 首杀祭礼 / 连杀战意之前还是系统 emoji,这版换成和全游戏统一的手绘 SVG。纯视觉,玩法 / 数值一概没动。</div></div>
 <div class="cl-v"><div class="cl-h">v85.14 · 2026-06-20</div><div class="cl-i">⚡ <b>新增 3 把法杖 + 6 件遗物（纯新增，不改任何现有数值，冲榜公平不受影响）。</b><br><b>法杖：</b>链雷杖（命中后闪电链击附近敌人、各 50% 伤害，怪越密越强）、回旋杖（法术弹飞出一段后回旋折返，去程回程各命中一次）、引力杖（缓慢引力球把周围敌人拖拽聚成一团，球身伤害低、专配范围法术连招）。三把均可用灵晶解锁。<br><b>遗物：</b>贯穿符（穿透 +1）、奥术回响（22% 几率立即额外射一发）、荆棘符（接触受伤反弹 50%）、残影靴（冲刺穿过的敌人受伤）、首杀祭礼（每波首次击杀回 6 血）、连杀战意（连杀加伤上限与每层都提升）。<br>新法杖 / 遗物数值一经上线即固定（护榜铁律），均按现有同类强度谨慎设定。</div></div>
 <div class="cl-v"><div class="cl-h">v85.13 · 2026-06-20</div><div class="cl-i">🎨 <b>游戏里剩下的 emoji 也全换成手绘 SVG 了——至此基本清零。</b>这次收尾的有:新手引导 5 页的插画、异兽图鉴 / 成就图鉴的小标题和「未解锁」锁、本局构筑里的法杖 / 法术 / 妖兽 / 古神等标题、本局解锁提示;还有<b>战斗里召唤的山海灵兽</b>(狻猊 / 毕方 / 应龙 / 白泽)和<b>无尽「潮汐变数」</b>的图标。<br>从主菜单到祭坛、每日、图鉴、成就、战斗,<b>整个游戏的图标风格彻底统一</b>了。<b>纯视觉,玩法 / 数值 / 平衡一概没动,冲榜不受任何影响。</b>(战斗里灵兽 / 潮汐图标在个别机型上若显示异常,会自动退回原来的 emoji、不会空白。)</div></div>
 <div class="cl-v"><div class="cl-h">v85.12 · 2026-06-20</div><div class="cl-i">🎨 <b>祭坛、每日挑战两个面板里的图标也全换成手绘 SVG 了。</b>祭坛的体魄 / 法力 / 急速 / 身法 / 坚壁、名望(太极)、存档备份码;每日挑战的今日法杖、六种潮汐变数(狂暴 / 钢甲 / 猎杀 / 群涌 / 精英 / 剧毒)、昨日冠军、连续挑战、今日最佳——之前都是系统 emoji,在不同手机上长得不一样,也跟卡牌 / 图鉴那套手绘图标不搭。现在<b>统一成同一种手绘风格</b>。<br>至此游戏里基本看不到系统 emoji 了。<b>纯视觉统一,玩法 / 数值 / 平衡一概没动,冲榜不受任何影响。</b></div></div>
@@ -865,12 +867,18 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.14', APP_TIME='2026-06-20 20:30';
+const APP_VER='v85.16', APP_TIME='2026-06-20 22:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.14';
+const APP_NOTIFY_VER='v85.16';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
+  relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
+  relic_echo: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="21" cy="32" r="6.5" fill="#a86eff" stroke="#241636" stroke-width="2.8"/><circle cx="18.5" cy="29.5" r="2.2" fill="#e8d6ff" opacity=".9"/><path d="M33 19 A17 17 0 0 1 33 45" fill="none" stroke="#241636" stroke-width="5.5" stroke-linecap="round"/><path d="M33 19 A17 17 0 0 1 33 45" fill="none" stroke="#8a5cf0" stroke-width="3" stroke-linecap="round"/><path d="M44 15 A23 23 0 0 1 44 49" fill="none" stroke="#241636" stroke-width="5" stroke-linecap="round"/><path d="M44 15 A23 23 0 0 1 44 49" fill="none" stroke="#b48cff" stroke-width="2.6" stroke-linecap="round"/></svg>',
+  relic_thornsR: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="#c0392b" stroke="#241636" stroke-width="2.3" stroke-linejoin="round"><path d="M58 32 L45 27 L45 37 Z"/><path d="M6 32 L19 37 L19 27 Z"/><path d="M32 58 L27 45 L37 45 Z"/><path d="M32 6 L37 19 L27 19 Z"/><path d="M50.4 50.4 L37.7 44.7 L44.7 37.7 Z"/><path d="M13.6 13.6 L26.3 19.3 L19.3 26.3 Z"/><path d="M50.4 13.6 L44.7 26.3 L37.7 19.3 Z"/><path d="M13.6 50.4 L19.3 37.7 L26.3 44.7 Z"/></g><circle cx="32" cy="32" r="11.5" fill="#e74c3c" stroke="#241636" stroke-width="2.8"/><circle cx="28" cy="28" r="3" fill="#ffb3a7" opacity=".85"/></svg>',
+  relic_afterimg: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="24" width="4" height="20" rx="2" fill="#b49cf0" opacity=".25"/><rect x="17" y="20" width="4" height="24" rx="2" fill="#b49cf0" opacity=".5"/><path d="M28 12 L40 12 L40 30 L53 40 Q58 43 52 44 L28 44 Z" fill="#8a6ed0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M40 30 L52 39" stroke="#241636" stroke-width="2.4" stroke-linecap="round"/><rect x="31" y="16" width="6" height="2.6" rx="1.3" fill="#cbb8f5" opacity=".75"/></svg>',
+  relic_firstheal: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 50 C8 32 8 16 22 16 C29 16 32 22 32 22 C32 22 35 16 42 16 C56 16 56 32 32 50 Z" fill="#e0556a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 26 L32 38 M26 32 L38 32" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/><path d="M20 23 C18 26 18 29 19 31" fill="none" stroke="#ff9aa8" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></svg>',
+  relic_comborage: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 47 L26 39 L38 47" fill="none" stroke="#241636" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 47 L26 39 L38 47" fill="none" stroke="#e07a2e" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 35 L32 27 L44 35" fill="none" stroke="#241636" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 35 L32 27 L44 35" fill="none" stroke="#f0a038" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 23 L38 15 L50 23" fill="none" stroke="#241636" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 23 L38 15 L50 23" fill="none" stroke="#ffc24d" stroke-width="4.3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   wand_chainbolt: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="26" width="5" height="32" rx="2.5" fill="#5a4a7a" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="20" r="13" fill="#3a6ea8" stroke="#241636" stroke-width="2.8"/><path d="M35 10 L26 21 L31.5 21 L28 30 L39 17 L33.5 17 Z" fill="#ffe14d" stroke="#241636" stroke-width="1.9" stroke-linejoin="round"/></svg>',
   wand_boomerang: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="34" width="5" height="24" rx="2.5" fill="#5a4a7a" stroke="#241636" stroke-width="2.6"/><path d="M14 15 L32 34 L49 13" fill="none" stroke="#241636" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15 L32 34 L49 13" fill="none" stroke="#c0a8ef" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   wand_gravity: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="28" width="5" height="30" rx="2.5" fill="#5a4a7a" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="20" r="14" fill="#2e1a55" stroke="#241636" stroke-width="2.8"/><path d="M32 12 A8 8 0 1 1 25.5 15.2" fill="none" stroke="#b48cff" stroke-width="2.8" stroke-linecap="round"/><circle cx="32" cy="20" r="3" fill="#e0ccff"/></svg>',
@@ -6941,6 +6949,50 @@ function drawWandShape(x,y,r,ang,id,anim){
       ctx.fillStyle='#1a222c';ctx.beginPath();ctx.arc(bx,by,R*0.13,0,TAU);ctx.fill();}
     ctx.fillStyle='#cfd8e2';ctx.beginPath();ctx.arc(c[0],c[1],R*0.2,0,TAU);ctx.fill();
     ctx.fillStyle='#eaffff';ctx.beginPath();ctx.arc(c[0],c[1],R*0.1*pls,0,TAU);ctx.fill();
+  } else if(id==='chainbolt'){
+    /* 链雷杖:深蓝杖 + 蓝能量球 + 球前锯齿主闪电 + 两道侧向分叉(链击近敌) */
+    shaft('#42426e',LW,HAND,TIP*0.86);shaft('#8e8ed6',LW*0.3,HAND,TIP*0.86);
+    glowDot(TIP*0.86,r*0.17,'#e2efff','#3a9aff');
+    const d0=TIP*0.86+r*0.06, L=r*0.92;
+    ctx.globalCompositeOperation='lighter';ctx.lineCap='round';ctx.lineJoin='round';
+    const zig=(wid,col)=>{ctx.strokeStyle=col;ctx.lineWidth=wid;ctx.beginPath();
+      for(let k=0;k<=4;k++){const dd=d0+L*(k/4),oo=(k===0||k===4?0:(k%2?1:-1)*r*0.17*(1+Math.sin((anim||0)*22+k)*0.25)),pt=P(dd,oo);k?ctx.lineTo(pt[0],pt[1]):ctx.moveTo(pt[0],pt[1]);}
+      ctx.stroke();};
+    ctx.globalAlpha=a0*0.95;zig(LW*0.55,'#ffe14d');zig(LW*0.22,'#fff8cc');
+    [-1,1].forEach(s=>{ctx.strokeStyle='#9ad0ff';ctx.lineWidth=LW*0.3;ctx.globalAlpha=a0*0.8;
+      const A=P(d0+L*0.5,0),m=P(d0+L*0.62,s*r*0.32),e=P(d0+L*0.48,s*r*0.56);
+      ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(m[0],m[1]);ctx.lineTo(e[0],e[1]);ctx.stroke();});
+    ctx.globalAlpha=a0;ctx.lineCap='butt';ctx.lineJoin='miter';ctx.globalCompositeOperation='source-over';
+  } else if(id==='boomerang'){
+    /* 回旋杖:紫杖 + 自转的回旋镖(深描边+亮紫芯)+ 身后淡折返虚弧 */
+    shaft('#5a4a86',LW,HAND,TIP*0.74);
+    const c=P(TIP*0.74+r*0.34,0),bs=r*0.52,spin=(anim||0)*4.2;
+    ctx.globalAlpha=a0*0.4;ctx.strokeStyle='#c0a8ef';ctx.lineWidth=1.4;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.arc(c[0]-ux*r*0.18,c[1]-uy*r*0.18,bs*0.95,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=a0;
+    ctx.save();ctx.translate(c[0],c[1]);ctx.rotate(ang+spin);ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.strokeStyle='#241636';ctx.lineWidth=LW*1.35;
+    ctx.beginPath();ctx.moveTo(bs*0.55,bs*0.6);ctx.lineTo(-bs*0.34,0);ctx.lineTo(bs*0.55,-bs*0.6);ctx.stroke();
+    ctx.strokeStyle='#c0a8ef';ctx.lineWidth=LW*0.7;
+    ctx.beginPath();ctx.moveTo(bs*0.55,bs*0.6);ctx.lineTo(-bs*0.34,0);ctx.lineTo(bs*0.55,-bs*0.6);ctx.stroke();
+    ctx.fillStyle='#e8d8ff';ctx.beginPath();ctx.arc(-bs*0.34,0,LW*0.42,0,TAU);ctx.fill();
+    ctx.lineCap='butt';ctx.lineJoin='miter';ctx.restore();
+  } else if(id==='gravity'){
+    /* 引力杖:暗紫杖 + 深紫引力球(亮紫螺旋+亮芯)+ 四周向内收拢的拖拽弧(吸敌) */
+    shaft('#3a2a64',LW,HAND,TIP*0.92);
+    const c=P(TIP*0.92+r*0.04,0),R=r*0.3;
+    ctx.globalCompositeOperation='lighter';ctx.globalAlpha=a0*0.42;ctx.fillStyle='#7a4ad0';
+    ctx.beginPath();ctx.arc(c[0],c[1],R*1.5*pls,0,TAU);ctx.fill();
+    ctx.globalAlpha=a0;ctx.globalCompositeOperation='source-over';
+    ctx.strokeStyle='#b48cff';ctx.lineWidth=LW*0.3;ctx.lineCap='round';ctx.globalAlpha=a0*0.7;
+    for(let k=0;k<4;k++){const aa=(anim||0)*1.6+k*TAU/4,r0=R*2.0,r1=R*1.18;
+      const A=[c[0]+Math.cos(aa)*r0,c[1]+Math.sin(aa)*r0],M=[c[0]+Math.cos(aa+0.5)*((r0+r1)/2),c[1]+Math.sin(aa+0.5)*((r0+r1)/2)],B=[c[0]+Math.cos(aa+0.9)*r1,c[1]+Math.sin(aa+0.9)*r1];
+      ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.quadraticCurveTo(M[0],M[1],B[0],B[1]);ctx.stroke();}
+    ctx.globalAlpha=a0;ctx.lineCap='butt';
+    ctx.fillStyle='#2e1a55';ctx.strokeStyle='#160c30';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(c[0],c[1],R,0,TAU);ctx.fill();ctx.stroke();
+    ctx.strokeStyle='#b48cff';ctx.lineWidth=LW*0.34;ctx.lineCap='round';ctx.beginPath();
+    for(let k=0;k<=22;k++){const tt=k/22,sa=(anim||0)*2+tt*Math.PI*3.2,rr=R*0.82*(1-tt*0.86),px=c[0]+Math.cos(sa)*rr,py=c[1]+Math.sin(sa)*rr;k?ctx.lineTo(px,py):ctx.moveTo(px,py);}
+    ctx.stroke();ctx.lineCap='butt';
+    ctx.fillStyle='#e0ccff';ctx.beginPath();ctx.arc(c[0],c[1],R*0.16*pls,0,TAU);ctx.fill();
   } else {  /* apprentice / 默认 */
     shaft('#7a5230',LW,HAND,TIP);
     glowDot(TIP,r*0.16,'#ffffff','#6fe3ff');
