@@ -537,6 +537,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.4 · 2026-06-20</div><div class="cl-i">🎨 <b>司南 / 轰天雷 / 连珠这三把法杖,战斗里终于换上了专属造型与法袍。</b>以前这三把在战斗中拿的是默认学徒杖、穿的是默认紫袍;现在:🧭<b>司南法杖</b>——青铜罗盘配指向磁针(亮端朝着你瞄的方向,呼应它的自动追踪),一身青铜青磁的航向者装束;💥<b>轰天雷法杖</b>——杖头一颗冒着火花引信的铁雷球、四周爆裂纹,火药铁灰加橙焰的爆破手装束;🌀<b>连珠法杖</b>——旋转的多管枪口配蓝色能量核(对应它的速射),钢灰枪械装束。纯外观,数值 / 玩法完全不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.3 · 2026-06-20</div><div class="cl-i">🏹 修复御风弓在战斗中<b>弓身被人物挡住、几乎只看得到那支箭</b>的问题——现在整把弓持于身前、完整可见(像拉弓瞄准的样子)。纯显示修复,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.2 · 2026-06-20</div><div class="cl-i">🎨 <b>图标焕新继续:全部 83 个成就都换上了专属手绘图标。</b>成就面板、本局结算的「本局解锁」、解锁成就时顶部弹出的提示、以及衣橱里成就皮肤的解锁条件,图标全部更新。法杖 / 法术 / 符文 / 遗物 / 成就五大类至此全部焕新完毕(共 183 个手绘图标)。纯外观,数值 / 玩法不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.1 · 2026-06-20</div><div class="cl-i">🔧 修复 v85.0 里进化法术(焚天 / 雷罚 / 万刃 / 永冬之矛)的来源图标显示过大的问题。</div></div>
@@ -845,10 +846,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.3', APP_TIME='2026-06-20 14:10';
+const APP_VER='v85.4', APP_TIME='2026-06-20 15:00';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.3';
+const APP_NOTIFY_VER='v85.4';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   wand_apprentice: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="29.5" y="26" width="5" height="31" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="3"/><rect x="27" y="42.5" width="10" height="4.5" rx="2" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="17" r="8.5" fill="#b48cff" stroke="#241636" stroke-width="3"/><circle cx="28.8" cy="13.8" r="3" fill="#d9c6ff" opacity=".9"/><path d="M45 7 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#d9c6ff"/></svg>',
@@ -2000,6 +2001,9 @@ const WAND_SKIN={
   bastion:   {c0:'#8a8478',c1:'#3a362e',st:'#c0bab0',hat:'#2e2a24',band:'#4a463e',star:'#e8e0d0'},
   fate:      {c0:'#7a4ad0',c1:'#34146e',st:'#d8b8ff',hat:'#2a1452',band:'#b8902a',star:'#ffe680'},
   rebound:   {c0:'#e8683a',c1:'#6e2410',st:'#ffb27a',hat:'#4a2614',band:'#6a3a1e',star:'#ffd0a8'},
+  compass:   {c0:'#36a6b4',c1:'#103a46',st:'#86e6f2',hat:'#123036',band:'#9a7438',star:'#caeefb'},
+  blast:     {c0:'#6a5240',c1:'#281c14',st:'#ffae5a',hat:'#281a12',band:'#a85228',star:'#ffd24d'},
+  gatling:   {c0:'#6e7a88',c1:'#2a3038',st:'#a8d4ea',hat:'#262c34',band:'#46566a',star:'#dff0ff'},
   frost:     {c0:'#5ec8e8',c1:'#1a4a6e',st:'#bfeaff',hat:'#163a52',band:'#246a86',star:'#dffaff'},
   ember:     {c0:'#e86a2a',c1:'#6e1e0e',st:'#ffb27a',hat:'#4a1e0e',band:'#7a3214',star:'#ffd24d'},
   windbow:   {c0:'#3aa07a',c1:'#0e4a3a',st:'#7fe2c0',hat:'#123a2e',band:'#1a5246',star:'#c8f0e0'}
@@ -6768,6 +6772,47 @@ function drawWandShape(x,y,r,ang,id,anim){
     const hd=P(G+r*1.06,0), h1=P(G+r*0.78,r*0.15), h2=P(G+r*0.78,-r*0.15);
     ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(hd[0],hd[1]);ctx.lineTo(h1[0],h1[1]);ctx.lineTo(h2[0],h2[1]);ctx.closePath();ctx.fill();
     ctx.lineCap='butt';
+  } else if(id==='compass'){
+    /* 司南法杖:青铜罗盘地盘 + 双色指向磁针(亮端朝准星=自动追踪) + 磁青脉冲辉光 */
+    shaft('#7a5a30',LW,HAND,TIP*0.92);
+    const c=P(TIP+r*0.16,0), R=r*0.32;
+    ctx.globalCompositeOperation='lighter';ctx.globalAlpha=a0*0.52;ctx.fillStyle='#7fd8ff';
+    ctx.beginPath();ctx.arc(c[0],c[1],R*1.34*pls,0,TAU);ctx.fill();
+    ctx.globalAlpha=a0;ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#caa050';ctx.strokeStyle='#7a5a30';ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(c[0],c[1],R,0,TAU);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#2c2414';ctx.beginPath();ctx.arc(c[0],c[1],R*0.74,0,TAU);ctx.fill();
+    ctx.strokeStyle='#e8d0a0';ctx.lineWidth=1.4;
+    for(let k=0;k<4;k++){const aa=ang+k*Math.PI*0.5;ctx.beginPath();ctx.moveTo(c[0]+Math.cos(aa)*R*0.8,c[1]+Math.sin(aa)*R*0.8);ctx.lineTo(c[0]+Math.cos(aa)*R*0.98,c[1]+Math.sin(aa)*R*0.98);ctx.stroke();}
+    const fwd=[c[0]+ux*R*0.74,c[1]+uy*R*0.74],bwd=[c[0]-ux*R*0.72,c[1]-uy*R*0.72],s1=[c[0]+nx*R*0.21,c[1]+ny*R*0.21],s2=[c[0]-nx*R*0.21,c[1]-ny*R*0.21];
+    ctx.fillStyle='#aef2ff';ctx.beginPath();ctx.moveTo(fwd[0],fwd[1]);ctx.lineTo(s1[0],s1[1]);ctx.lineTo(s2[0],s2[1]);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#d05a5a';ctx.beginPath();ctx.moveTo(bwd[0],bwd[1]);ctx.lineTo(s1[0],s1[1]);ctx.lineTo(s2[0],s2[1]);ctx.closePath();ctx.fill();
+    dot(TIP+r*0.16,0,r*0.06,'#fff6d0');
+  } else if(id==='blast'){
+    /* 轰天雷法杖:暗铁雷球 + 弧形引信 + 火花 + 八向爆裂纹(密怪溅射) */
+    shaft('#5a4a3a',LW,HAND,TIP*0.86);
+    const c=P(TIP+r*0.04,0), R=r*0.28;
+    ctx.globalCompositeOperation='lighter';ctx.strokeStyle='#ff9a3a';ctx.lineWidth=LW*0.42;ctx.lineCap='round';ctx.globalAlpha=a0*0.8;
+    for(let k=0;k<8;k++){const aa=ang+k*Math.PI*0.25;ctx.beginPath();ctx.moveTo(c[0]+Math.cos(aa)*R*1.12,c[1]+Math.sin(aa)*R*1.12);ctx.lineTo(c[0]+Math.cos(aa)*(R*1.5+r*0.1*pls),c[1]+Math.sin(aa)*(R*1.5+r*0.1*pls));ctx.stroke();}
+    ctx.lineCap='butt';ctx.globalAlpha=a0;ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#3a3530';ctx.strokeStyle='#1c1814';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(c[0],c[1],R,0,TAU);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#6a6258';ctx.beginPath();ctx.arc(c[0]-ux*R*0.32-nx*R*0.3,c[1]-uy*R*0.32-ny*R*0.3,R*0.26,0,TAU);ctx.fill();
+    const fb=[c[0]+nx*R*0.72-ux*R*0.22,c[1]+ny*R*0.72-uy*R*0.22],fs=[c[0]+nx*R*1.38-ux*R*0.52,c[1]+ny*R*1.38-uy*R*0.52];
+    ctx.strokeStyle='#9a8a6a';ctx.lineWidth=1.6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(fb[0],fb[1]);ctx.quadraticCurveTo(c[0]+nx*R*1.22-ux*R*0.06,c[1]+ny*R*1.22-uy*R*0.06,fs[0],fs[1]);ctx.stroke();ctx.lineCap='butt';
+    ctx.globalCompositeOperation='lighter';ctx.fillStyle='#ffd24d';ctx.globalAlpha=a0*0.9;ctx.beginPath();ctx.arc(fs[0],fs[1],r*0.1+r*0.04*pls,0,TAU);ctx.fill();
+    ctx.fillStyle='#fff6c0';ctx.globalAlpha=a0;ctx.beginPath();ctx.arc(fs[0],fs[1],r*0.05*pls,0,TAU);ctx.fill();
+    ctx.globalCompositeOperation='source-over';
+  } else if(id==='gatling'){
+    /* 连珠法杖:多管旋转枪口(随 anim 转=速射) + 蓝能量核 */
+    shaft('#6e7886',LW*1.1,HAND,TIP*0.8);shaft('#aab4c0',LW*0.4,HAND,TIP*0.8);
+    const c=P(TIP*0.8+r*0.2,0), R=r*0.26, spin=(anim||0)*2.4;
+    ctx.fillStyle='#4a5460';ctx.strokeStyle='#28303a';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(c[0],c[1],R*1.2,0,TAU);ctx.fill();ctx.stroke();
+    ctx.globalCompositeOperation='lighter';ctx.globalAlpha=a0*0.6;ctx.fillStyle='#7fc8ff';ctx.beginPath();ctx.arc(c[0],c[1],R*0.95*pls,0,TAU);ctx.fill();
+    ctx.globalAlpha=a0;ctx.globalCompositeOperation='source-over';
+    for(let k=0;k<6;k++){const aa=spin+k*TAU/6,bx=c[0]+Math.cos(aa)*R*0.62,by=c[1]+Math.sin(aa)*R*0.62;
+      ctx.fillStyle='#8a94a0';ctx.beginPath();ctx.arc(bx,by,R*0.27,0,TAU);ctx.fill();
+      ctx.fillStyle='#1a222c';ctx.beginPath();ctx.arc(bx,by,R*0.13,0,TAU);ctx.fill();}
+    ctx.fillStyle='#cfd8e2';ctx.beginPath();ctx.arc(c[0],c[1],R*0.2,0,TAU);ctx.fill();
+    ctx.fillStyle='#eaffff';ctx.beginPath();ctx.arc(c[0],c[1],R*0.1*pls,0,TAU);ctx.fill();
   } else {  /* apprentice / 默认 */
     shaft('#7a5230',LW,HAND,TIP);
     glowDot(TIP,r*0.16,'#ffffff','#6fe3ff');
