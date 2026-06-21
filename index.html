@@ -571,6 +571,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.23 · 2026-06-21</div><div class="cl-i">🐛 <b>修复左下「法术数据条」有时不显示的问题</b>:上版用到的画布裁剪在微信浏览器里有兼容问题,某些情况会把这条的内容整块裁掉。已改用别的方式防溢出,法术条不会再无故消失。纯修复,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.22 · 2026-06-21</div><div class="cl-i">🎨 <b>战斗界面里的系统 emoji 全部换成手绘图标</b>:右上角暂停 / 静音按钮、左上血量 / 击杀 / 金币、拾取金币飘字、回血道具、冲刺键的风、Boss 护罩标记,以及左下「法术数据条」里的法杖 / 法术 / 符文 / 诅咒图标——现在都是统一画风。固定图标用 canvas 笔刷直接画(任何设备表现一致);法杖 / 法术那种每个不同的,复用现成手绘 SVG。纯显示,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.21 · 2026-06-21</div><div class="cl-i">🔧 <b>「上局战报」现在实时按数据生成</b>,不再是阵亡时存下的旧快照——以后任何图标 / 样式更新都会<b>自动反映到战报里</b>(这也是之前修过的图标在旧战报里没更新的原因;你的旧战报会刷新一次)。另外把死亡页 / 通关页「生成战绩图 · 分享」按钮上最后一个系统 emoji(相机)也换成了手绘。纯显示修复,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.20 · 2026-06-21</div><div class="cl-i">🎨 <b>修复两处显示问题。</b>① <b>结算页 /「上局战报」里几个还是系统 emoji 的小图标</b>(致命一击的骷髅、「本局输出担当」与英雄榜前三的金 / 银 / 铜奖牌、法术图标)<b>统一换成手绘风格</b>,和全游戏一致;② <b>「上局战报」里「本局获得 X 灵晶」那行字之前偏暗、看不清</b>,现已改回醒目的<b>金色</b>。纯显示修复,玩法 / 数值一概不变。</div></div>
@@ -906,10 +907,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.22', APP_TIME='2026-06-21 11:20';
+const APP_VER='v85.23', APP_TIME='2026-06-21 12:45';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.22';
+const APP_NOTIFY_VER='v85.23';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -1172,7 +1173,7 @@ function iconImg(cat,id){
    size=目标边长(px)。回退分支沿用调用处已设好的 font/textAlign/textBaseline。 */
 function drawCanvasIcon(cat,id,emoji,cx,cy,size){
   const img=iconImg(cat,id);
-  if(img){ ctx.drawImage(img, cx-size/2, cy-size/2, size, size); }
+  if(img){ try{ ctx.drawImage(img, cx-size/2, cy-size/2, size, size); }catch(e){ ctx.fillText(emoji, cx, cy); } }
   else { ctx.fillText(emoji, cx, cy); }
 }
 { const _sv=(id,t)=>{const e=$(id); if(e)e.textContent=t;}; _sv('vbVer',APP_VER); _sv('vbTime','更新于 '+APP_TIME); _sv('clVer',APP_VER); _sv('clTime',APP_TIME); }
@@ -5923,8 +5924,9 @@ function measBuildRun(segs,baseSz){
   for(const s of segs){ if(s.ic){ w+=(s.sz||16)+1; } else { ctx.font=s.font||(baseSz+'px sans-serif'); w+=ctx.measureText(s.t).width+(s.gap!=null?s.gap:3); } }
   return w;
 }
-function drawBuildRun(segs,x,yc,baseSz,txtCol){
+function drawBuildRun(segs,x,yc,baseSz,txtCol,maxX){
   for(const s of segs){
+    if(maxX!=null && x>maxX) break;   /* 到面板右界就停,替代 clip(微信 clip 有兼容坑)*/
     if(s.ic){ const sz=s.sz||16; ctx.font=Math.round(sz)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fff';
       drawCanvasIcon(s.ic[0],s.ic[1],s.ic[2],x+sz/2,yc,sz); x+=sz+1; }
     else { ctx.font=s.font||(baseSz+'px sans-serif');ctx.fillStyle=s.col||txtCol||'#fff';ctx.textAlign='left';ctx.textBaseline='middle';
@@ -8235,11 +8237,10 @@ function drawHUD(){
   rrect(bx0,by0,PW,bh,10);ctx.fill();
   ctx.fillStyle='rgba(26,26,46,.35)';
   ctx.fillRect(bx0+2,by0,PW-4,1);
-  ctx.save(); rrect(bx0,by0,PW,bh,10); ctx.clip();   /* 裁剪:过长构筑不溢出怼冲刺键 */
-  drawBuildRun(segs1, bx0+12, by0+16, 14);
-  if(hasLine2) drawBuildRun(segs2, bx0+12, by0+38, 12);
-  if(hasLine3){ const pulse=.7+Math.sin(time*5)*.3; drawBuildRun(segs3, bx0+12, by0+(hasLine2?58:38), 12, 'rgba(255,210,77,'+pulse+')'); }
-  ctx.restore();
+  const maxX=bx0+PW-10;   /* 到右界就停,替代 clip(微信对 roundRect+clip 有坑,会把内容整块裁没)*/
+  drawBuildRun(segs1, bx0+12, by0+16, 14, null, maxX);
+  if(hasLine2) drawBuildRun(segs2, bx0+12, by0+38, 12, null, maxX);
+  if(hasLine3){ const pulse=.7+Math.sin(time*5)*.3; drawBuildRun(segs3, bx0+12, by0+(hasLine2?58:38), 12, 'rgba(255,210,77,'+pulse+')', maxX); }
   } /* end if(showSpellBar) */
 }
 
