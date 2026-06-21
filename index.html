@@ -103,6 +103,7 @@
   .ach-item.locked{opacity:.5;filter:grayscale(.7);}
   .mbi{width:1.2em;height:1.2em;vertical-align:-.2em;margin-right:.06em;flex:none;}
   .ico-i{width:1.05em;height:1.05em;vertical-align:-.15em;}
+  .mvp-sic svg{width:1.3em;height:1.3em;vertical-align:-.32em;}
   .ach-ic{font-size:22px;flex-shrink:0;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.09),rgba(255,255,255,.012) 72%);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 8px rgba(0,0,0,.26);}
   .ach-main{flex:1;min-width:0;}
   .ach-name{color:#fff;font-weight:700;font-size:13.5px;}
@@ -557,7 +558,7 @@
     <div id="lrCause" style="font-size:13px;color:#d9a6b8;margin:2px 0 8px;line-height:1.4;"></div>
     <div id="lrDmg" style="width:100%;margin:0 0 8px;"></div>
     <div id="lrMvp" style="width:100%;margin:0 0 8px;"></div>
-    <div id="lrGain" style="width:100%;margin:0 0 8px;"></div>
+    <div id="lrGain" class="lj-gain" style="width:100%;margin:0 0 8px;"></div>
     <div id="lrAch"></div>
     <button class="btn ghost" id="lastReportBack" style="margin-top:8px;">返回</button>
   </div>
@@ -569,6 +570,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.20 · 2026-06-21</div><div class="cl-i">🎨 <b>修复两处显示问题。</b>① <b>结算页 /「上局战报」里几个还是系统 emoji 的小图标</b>(致命一击的骷髅、「本局输出担当」与英雄榜前三的金 / 银 / 铜奖牌、法术图标)<b>统一换成手绘风格</b>,和全游戏一致;② <b>「上局战报」里「本局获得 X 灵晶」那行字之前偏暗、看不清</b>,现已改回醒目的<b>金色</b>。纯显示修复,玩法 / 数值一概不变。</div></div>
+<div class="cl-v"><div class="cl-h">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
 <div class="cl-v"><div class="cl-h">v85.18 · 2026-06-21</div><div class="cl-i">📜 <b>新增「上局战报」——随时回看上一局打成什么样。</b>主菜单英雄榜上方多了个<b>「上局战报」</b>入口(打过一局才出现),点开就能重温上一局的完整结算:<b>抵达波数、击杀、被谁的什么招式击败</b>(战死时)、<b>本局失血来源</b>色条、<b>输出最高的前三个法术</b>、以及<b>本局解锁的成就</b>。不管赢还是输都会记录,下一局开始前想复盘一下很方便。<b>纯新增的查看功能,不影响任何玩法 / 数值 / 平衡。</b></div></div>
 <div class="cl-v"><div class="cl-h">v85.17 · 2026-06-20</div><div class="cl-i">🔧 <b>两处体验优化(来自试玩反馈)。</b>① <b>战斗里「剩余 N 只」更醒目了</b>——原来字小又暗,容易没注意到,现在加大加粗、颜色提亮,还补上了「只」字。② <b>进化技能升级时不再显示成「普通」了</b>——焚天 / 雷罚 / 万刃 / 永冬之矛这类组合进化技能,之前在选牌升级时被标成「普通」稀有度,现在正确显示为「史诗」。<b>纯显示,出现频率与升级价分毫未动,玩法 / 平衡 / 冲榜公平不受任何影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v85.16 · 2026-06-20</div><div class="cl-i">⚡ <b>给上一版 3 把新法杖补上了专属的战斗手持造型。</b>之前链雷杖 / 回旋杖 / 引力杖在战斗里拿的还是通用法杖外形,这版各画了一套:链雷杖是蓝色能量球前喷出黄色锯齿闪电、引力杖是会旋转的紫色漩涡、回旋杖是会自转的回旋镖(身后还带一圈折返光弧)。<b>纯视觉,玩法 / 数值一概没动。</b></div></div>
@@ -871,6 +874,12 @@ const irand=(a,b)=>Math.floor(rand(a,b+1));
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const GEM='<svg class="ico-i" viewBox="0 0 64 64"><path d="M32 8 L50 25 L32 56 L14 25 Z" fill="#9a5ce0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 8 L42 17 L32 25 L22 17 Z" fill="#c9a0ff"/><path d="M50 25 L32 56 L32 25 Z" fill="#7e44c4"/><path d="M14 25 L50 25 M32 8 L32 56 M22 17 L32 25 L42 17" stroke="#241636" stroke-width="1.7" fill="none"/></svg>';
 const SWD='<svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg>';
+const SKULL='<svg class="ico-i" viewBox="0 0 64 64"><path d="M32 7 C18 7 11 17 11 29 C11 37 15 42 18 45 L18 51 Q18 55 23 55 L41 55 Q46 55 46 51 L46 45 C49 42 53 37 53 29 C53 17 46 7 32 7 Z" fill="#ece2f2" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><ellipse cx="23" cy="30" rx="5" ry="6" fill="#241636"/><ellipse cx="41" cy="30" rx="5" ry="6" fill="#241636"/><path d="M32 37 L29 43 L35 43 Z" fill="#241636"/><path d="M25 51 L25 55 M32 51 L32 55 M39 51 L39 55" stroke="#241636" stroke-width="2.2" stroke-linecap="round"/></svg>';
+const MEDAL=[
+  '<svg class="ico-i" viewBox="0 0 64 64"><path d="M22 6 L31 28 L20 33 L13 12 Z" fill="#5a7fd8" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><path d="M42 6 L33 28 L44 33 L51 12 Z" fill="#e06a7a" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="42" r="17" fill="#ffcf5a" stroke="#241636" stroke-width="3"/><circle cx="32" cy="42" r="11" fill="#ffe49a" stroke="#241636" stroke-width="1.6"/><path d="M32 34 l2.2 4.8 5.3 .5 -4 3.6 1.2 5.2 -4.7 -2.8 -4.7 2.8 1.2 -5.2 -4 -3.6 5.3 -.5 z" fill="#ffb43a" stroke="#241636" stroke-width="1" stroke-linejoin="round"/></svg>',
+  '<svg class="ico-i" viewBox="0 0 64 64"><path d="M22 6 L31 28 L20 33 L13 12 Z" fill="#5a7fd8" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><path d="M42 6 L33 28 L44 33 L51 12 Z" fill="#e06a7a" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="42" r="17" fill="#d2d8e2" stroke="#241636" stroke-width="3"/><circle cx="32" cy="42" r="11" fill="#eef1f6" stroke="#241636" stroke-width="1.6"/><path d="M32 34 l2.2 4.8 5.3 .5 -4 3.6 1.2 5.2 -4.7 -2.8 -4.7 2.8 1.2 -5.2 -4 -3.6 5.3 -.5 z" fill="#b8c0cc" stroke="#241636" stroke-width="1" stroke-linejoin="round"/></svg>',
+  '<svg class="ico-i" viewBox="0 0 64 64"><path d="M22 6 L31 28 L20 33 L13 12 Z" fill="#5a7fd8" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><path d="M42 6 L33 28 L44 33 L51 12 Z" fill="#e06a7a" stroke="#241636" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="42" r="17" fill="#d99a5a" stroke="#241636" stroke-width="3"/><circle cx="32" cy="42" r="11" fill="#ecc090" stroke="#241636" stroke-width="1.6"/><path d="M32 34 l2.2 4.8 5.3 .5 -4 3.6 1.2 5.2 -4.7 -2.8 -4.7 2.8 1.2 -5.2 -4 -3.6 5.3 -.5 z" fill="#c47f3a" stroke="#241636" stroke-width="1" stroke-linejoin="round"/></svg>'
+];
 const dist2=(ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay;return dx*dx+dy*dy;};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;};
@@ -894,10 +903,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.18', APP_TIME='2026-06-21 08:45';
+const APP_VER='v85.20', APP_TIME='2026-06-21 10:05';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.18';
+const APP_NOTIFY_VER='v85.20';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -984,6 +993,9 @@ const ICONS = {
   spell_thunderjudge: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="31" r="24" fill="#fff39a" opacity=".22"/><path d="M15 12 L22 24 L25 13 Z" fill="#fff39a" opacity=".5"/><path d="M49 12 L42 24 L39 13 Z" fill="#fff39a" opacity=".5"/><path d="M12 40 L20 38 L18 49 Z" fill="#fff39a" opacity=".4"/><path d="M52 40 L44 38 L46 49 Z" fill="#fff39a" opacity=".4"/><path d="M38 5 L17 33 L29 33 L25 58 L49 27 L36 27 L44 5 Z" fill="#ffe14d" stroke="#241636" stroke-width="3.2" stroke-linejoin="round"/><path d="M38 5 L17 33 L29 33 L27 46 Z" fill="#fff39a"/><circle cx="33" cy="13" r="2.2" fill="#ffffff" opacity=".85"/></svg>',
   spell_thousandblade: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M 28.38 51.92 L 7.90 19.83 L 32.10 49.22 Z" fill="#c9d2e0" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 28.68 51.19 L 15.32 15.54 L 32.88 49.32 Z" fill="#8a93a8" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 29.13 50.54 L 23.48 12.90 L 33.63 49.59 Z" fill="#c9d2e0" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 29.70 50.00 L 32.00 12.00 L 34.30 50.00 Z" fill="#eef2f8" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 30.37 49.59 L 40.52 12.90 L 34.87 50.54 Z" fill="#c9d2e0" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 31.12 49.32 L 48.68 15.54 L 35.32 51.19 Z" fill="#8a93a8" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><path d="M 31.90 49.22 L 56.10 19.83 L 35.62 51.92 Z" fill="#c9d2e0" stroke="#241636" stroke-width="1.8" stroke-linejoin="round"/><rect x="25" y="49" width="14" height="7" rx="3" fill="#8a93a8" stroke="#241636" stroke-width="2.6"/><rect x="26.5" y="50.5" width="11" height="1.8" fill="#eef2f8" opacity=".7"/><circle cx="32" cy="53" r="1.5" fill="#ffffff" opacity=".85"/></svg>',
   spell_winterspear: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M20.31 52.91 L49.31 17.91 L44.69 14.09 L15.69 49.09 Z" fill="#5bb8e8" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M18.5 49 L47.5 14.5" fill="none" stroke="#9fd8ff" stroke-width="1.8" stroke-linecap="round" opacity=".8"/><path d="M57 6 L53.24 18.24 L41 22 L44.76 9.76 Z" fill="#cdeeff" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M49 8 L46 19 M54 11 L44 15" fill="none" stroke="#5bb8e8" stroke-width="1.6" stroke-linecap="round" opacity=".6"/><circle cx="16.5" cy="50.5" r="2.8" fill="#9fd8ff" stroke="#241636" stroke-width="2.4"/><path d="M38 7 l1.7 2.2 -1.7 2.2 -1.7 -2.2 z" fill="#cdeeff" opacity=".9"/><circle cx="51" cy="12" r="2" fill="#ffffff" opacity=".85"/></svg>',
+  spell_meteorrain: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M52 5 L41 21 M40 7 L31 21 M59 17 L50 29" stroke="#ffd24d" stroke-width="2.6" stroke-linecap="round" opacity=".7"/><circle cx="40" cy="23" r="6" fill="#ff7a3c" stroke="#241636" stroke-width="2.8"/><circle cx="29" cy="23" r="4.4" fill="#ffd24d" stroke="#241636" stroke-width="2.4"/><circle cx="49" cy="31" r="4.8" fill="#ff6a2a" stroke="#241636" stroke-width="2.6"/><circle cx="38" cy="21" r="1.9" fill="#fff3c2" opacity=".9"/><circle cx="27.6" cy="21.6" r="1.4" fill="#fff3c2" opacity=".85"/><path d="M12 51 Q23 45 33 51 Q44 57 54 50" fill="none" stroke="#8a5a32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="50.5" r="2.4" fill="#ff8a3a"/><circle cx="34" cy="52" r="2" fill="#ffd24d"/><circle cx="46" cy="50.5" r="1.8" fill="#ff8a3a"/></svg>',
+  spell_singularity: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="23" fill="#3a1a6e" stroke="#241636" stroke-width="3"/><path d="M32 7 L32 18 M57 32 L46 32 M32 57 L32 46 M7 32 L18 32" stroke="#d9c6ff" stroke-width="3.2" stroke-linecap="round"/><path d="M49.5 14.5 L42 22 M14.5 14.5 L22 22 M49.5 49.5 L42 42 M14.5 49.5 L22 42" stroke="#b48cff" stroke-width="2.4" stroke-linecap="round" opacity=".85"/><circle cx="32" cy="32" r="9.5" fill="#efe6ff" stroke="#241636" stroke-width="2.4"/><circle cx="32" cy="32" r="4.4" fill="#ffffff"/><circle cx="28.8" cy="28.8" r="1.7" fill="#ffffff" opacity=".9"/></svg>',
+  spell_hive: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M21 9 L31 9 L36 18 L31 27 L21 27 L16 18 Z" fill="#ffcf5a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M37 16 L47 16 L52 25 L47 34 L37 34 L32 25 Z" fill="#f0b23a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M21 31 L31 31 L36 40 L31 49 L21 49 L16 40 Z" fill="#f0b23a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><circle cx="25.5" cy="18" r="2.2" fill="#8a5a32" opacity=".55"/><circle cx="41.5" cy="25" r="2.2" fill="#8a5a32" opacity=".55"/><circle cx="25.5" cy="40" r="2.2" fill="#8a5a32" opacity=".55"/><ellipse cx="49" cy="48" rx="7" ry="5" fill="#ffd24d" stroke="#241636" stroke-width="2.2"/><path d="M46 48 L52 48" stroke="#241636" stroke-width="1.8"/><ellipse cx="46" cy="43.5" rx="3.4" ry="2" fill="#ffffff" opacity=".7" stroke="#241636" stroke-width="1.2"/><circle cx="55" cy="46" r="1.6" fill="#241636"/></svg>',
   mod_multi: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M15 12 L17.5 18.5 L24 21 L17.5 23.5 L15 30 L12.5 23.5 L6 21 L12.5 18.5 Z" fill="#d9c6ff" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M49 34 L51.5 40.5 L58 43 L51.5 45.5 L49 52 L46.5 45.5 L40 43 L46.5 40.5 Z" fill="#d9c6ff" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M33 19 L37 31 L49 35 L37 39 L33 51 L29 39 L17 35 L29 31 Z" fill="#b48cff" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><circle cx="27.5" cy="29.5" r="2.3" fill="#efe6ff" opacity=".85"/></svg>',
   mod_homing: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="16.5" fill="#ff97a6" stroke="#241636" stroke-width="3"/><path d="M32 7 V19 M32 45 V57 M7 32 H19 M45 32 H57" fill="none" stroke="#241636" stroke-width="3.2" stroke-linecap="round"/><circle cx="32" cy="32" r="6.5" fill="#e5566a" stroke="#241636" stroke-width="2.6"/><circle cx="27" cy="27" r="2.2" fill="#ffd6db" opacity=".85"/></svg>',
   mod_bounce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M13 14 L25 32 L39 20 L51 38 M51 38 L51 27 M51 38 L41 34" fill="none" stroke="#241636" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 14 L25 32 L39 20 L51 38 M51 38 L51 27 M51 38 L41 34" fill="none" stroke="#9fd8ff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="14" r="4.6" fill="#cdeeff" stroke="#241636" stroke-width="2.6"/><circle cx="11.5" cy="12.5" r="1.5" fill="#fff" opacity=".85"/></svg>',
@@ -1349,7 +1361,10 @@ const SPELL_DEF={
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
   thousandblade:{name:'万刃',icon:'⚔️',col:'#e6d4ff',evo:'blade',desc:'【进化·环刃术】环刃数量翻倍、高速旋转,化作贴身绞肉风暴'},
-  winterspear:{name:'永冬之矛',icon:'🧊',col:'#a8ecff',cd:.9,dmg:12,spd:520,r:8,life:1.1,slow:2.6,evo:'ice',desc:'【进化·寒冰锥】贯穿全场的寒冰长矛,冻结沿途之敌并留下减速冰径'}
+  winterspear:{name:'永冬之矛',icon:'🧊',col:'#a8ecff',cd:.9,dmg:12,spd:520,r:8,life:1.1,slow:2.6,evo:'ice',desc:'【进化·寒冰锥】贯穿全场的寒冰长矛,冻结沿途之敌并留下减速冰径'},
+  meteorrain:{name:'天陨',icon:'☄️',col:'#ff7a2e',cd:2.0,dmg:38,spd:240,r:13,life:1.7,aoe:120,evo:'meteor',desc:'【进化·陨石】巨陨砸地炸开,同时召来一片小陨石覆盖轰炸'},
+  singularity:{name:'湮灭奇点',icon:'🌀',col:'#7a3aff',cd:4.5,dmg:16,bhole:160,evo:'blackhole',desc:'【进化·黑洞】强吸持续灼烧,寿命终结时坍缩内爆,对吸入之敌造成毁灭性爆发'},
+  hive:{name:'蜂巢',icon:'🐝',col:'#ffc83a',cd:1.2,dmg:6,spd:320,r:5,life:1.6,evo:'swarm',desc:'【进化·蜂群飞弹】一次喷出更多追踪飞蜂,击杀敌人会从尸体涌出新蜂,蜂拥不绝'}
 };
 const CARD_DEFS=[
   {id:'bolt',kind:'spell',rar:1},
@@ -1381,6 +1396,9 @@ const CARD_DEFS=[
   {id:'thunderjudge',kind:'spell',rar:3,evoForm:true},
   {id:'thousandblade',kind:'spell',rar:3,evoForm:true},
   {id:'winterspear', kind:'spell',rar:3,evoForm:true},
+  {id:'meteorrain',  kind:'spell',rar:3,evoForm:true},
+  {id:'singularity', kind:'spell',rar:3,evoForm:true},
+  {id:'hive',        kind:'spell',rar:3,evoForm:true},
   {id:'multi', kind:'mod',name:'多重施法',icon:'✨',desc:'每次施法 +1 发投射物',max:3,rar:3},
   {id:'homing',kind:'mod',name:'魔力追踪',icon:'🎯',desc:'法术会自动追踪附近敌人(开关型,一次即满)',max:1,rar:2},
   {id:'bounce',kind:'mod',name:'弹射符文',icon:'🪀',desc:'法术碰到墙壁与石柱弹射 +1 次',max:3,rar:1},
@@ -3765,7 +3783,7 @@ function updateSpellStates(dt){
   /* blackhole 引力 + 持续伤害 */
   for(const bh of player.blackholes){
     bh.life-=dt; bh.ang+=dt*2;
-    if(bh.life<=0)continue;
+    if(bh.life<=0){ if(bh._singularity && !bh._imploded){ bh._imploded=true; singularityImplode(bh.x,bh.y,bh.dmg,bh.r); } continue; }
     for(const e of enemies){
       if(e.dead)continue;
       const dx=bh.x-e.x,dy=bh.y-e.y,d=Math.hypot(dx,dy)||1;
@@ -3854,7 +3872,7 @@ function castAll(dt){
   if(_padHoldFire) return;   /* 🎮 B方案右摇杆松手:停火(治愈/法盾已在上方自给触发) */
   if(!enemies.length) return;
   /* 兜底:玩家把所有能射出子弹的法术卖光后会"完全不能攻击",此时注入保底奥术飞弹 */
-  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','firestorm','winterspear','thunderjudge','thousandblade','cyclone','plague','tidal','devour'];
+  const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','hive','firestorm','winterspear','thunderjudge','thousandblade','meteorrain','cyclone','plague','tidal','devour'];
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
   if(!_hasBal)player.spells.bolt={lv:1,t:.2};
   for(const id in player.spells){
@@ -3877,11 +3895,11 @@ function castAll(dt){
       player.cyclones.push({x:player.x+Math.cos(ca)*30,y:player.y+Math.sin(ca)*30,vx:Math.cos(ca)*72,vy:Math.sin(ca)*72,r:def.vortex*(1+.08*(s.lv-1))*(1+.15*player.mods.giant),life:3.4+.4*s.lv,ang:0,dmg:dmgOf(def,s.lv)});
       S.zap(); continue;
     }
-    if(id==='blackhole'){
+    if(id==='blackhole'||id==='singularity'){
       const tgt=aimPoint()||{x:player.x+200,y:player.y};
-      const bh={x:tgt.x,y:tgt.y,r:def.bhole,life:5+1.5*s.lv,tick:0,ang:0,dmg:dmgOf(def,s.lv)};
+      const bh={x:tgt.x,y:tgt.y,r:def.bhole,life:5+1.5*s.lv,tick:0,ang:0,dmg:dmgOf(def,s.lv),_singularity:(id==='singularity')};
       player.blackholes.push(bh);
-      spawnPart(tgt.x,tgt.y,0,0,.22,bh.r*.6,'#3a0d6e',true);
+      spawnPart(tgt.x,tgt.y,0,0,.22,bh.r*.6,id==='singularity'?'#7a3aff':'#3a0d6e',true);
       S.zap(); continue;
     }
     if(id==='totem'){ spawnTotem(s.lv); continue; }
@@ -3911,12 +3929,12 @@ function castAll(dt){
       for(let i=0;i<18;i++){const a=i/18*TAU;spawnPart(player.x,player.y,Math.cos(a)*_vr*2.4,Math.sin(a)*_vr*2.4,.3,4,def.col);}
       S.fire(); cam.shake=Math.min(cam.shake+3,10); continue;
     }
-    if(id==='swarm'){   /* 蜂群飞弹:多枚追踪弹 */
+    if(id==='swarm'||id==='hive'){   /* 蜂群飞弹 / 蜂巢:多枚追踪弹(蜂巢更多) */
       const tgt=aimPoint();
       const baseA=tgt?Math.atan2(tgt.y-player.y,tgt.x-player.x):rand(0,TAU);
-      const n=3+player.mods.multi+player.wandFx.extra;
+      const n=(id==='hive'?5:3)+player.mods.multi+player.wandFx.extra;
       for(let i=0;i<n;i++){ const a=baseA+rand(-.6,.6);
-        const b=makeBullet('swarm',s.lv,a); b.homing=Math.max(b.homing,1.2); bullets.push(b); }
+        const b=makeBullet(id,s.lv,a); b.homing=Math.max(b.homing,1.2); bullets.push(b); }
       S.shoot(); continue;
     }
     if(id==='thunderfall'){ thunderfall(dmgOf(def,s.lv),s.lv); S.zap(); cam.shake=Math.min(cam.shake+2,8); continue; }
@@ -3946,7 +3964,7 @@ function castAll(dt){
     }
     if(relicMods.echoChance>0 && Math.random()<relicMods.echoChance){ const _ea=base+rand(-.09,.09); bullets.push(makeBullet(id,s.lv,_ea)); }
     if(chargedShot){ S.fire(); puff(player.x,player.y,'#fff3b0',8); }
-    if(id==='fire'||id==='meteor'||id==='firestorm'||id==='tidal')S.fire();
+    if(id==='fire'||id==='meteor'||id==='meteorrain'||id==='firestorm'||id==='tidal')S.fire();
     else if(id==='arc'||id==='chain')S.zap();
     else S.shoot();
   }
@@ -4028,6 +4046,7 @@ function expire(b,skipAoe){
   if(b.aoe&&!skipAoe) explode(b.x,b.y,b.aoe,b.dmg*.75,b.col);
   if(b.cloud && !b._cloudDone) clouds.push({x:b.x,y:b.y,r:58+12*b.lv,life:b.cloudLife||3.2,dps:6+3*b.lv*(1+.25*player.mods.amp),tick:0});
   if(b.id==='firestorm')firestormBurst(b.x,b.y,b.dmg,b.lv);
+  if(b.id==='meteorrain')meteorRain(b.x,b.y,b.dmg,b.lv);
   if(b.split>0&&!b.small){
     const n=1+b.split*2;
     for(let i=0;i<n;i++){
@@ -4063,6 +4082,41 @@ function firestormBurst(x,y,dmg,lv){
     for(let i=0;i<8;i++){ const aa=Math.random()*TAU, sp=rand(60,200); spawnPart(ex,ey,Math.cos(aa)*sp,Math.sin(aa)*sp,rand(.2,.45),rand(2,4),pick(['#ff9a3a','#ffd24d','#ff5a2a'])); }
   }
   clouds.push({x,y,r:66+8*lv,life:2.4,dps:7+3*lv*(1+.25*player.mods.amp),tick:0,kind:'fire'});
+}
+/* 天陨(陨石进化):主弹照常 explode,额外在落点四周召一片小陨石覆盖轰炸。
+   纯走 spawnPart——自动乘 fxAlpha、受 450 粒子上限、敌弹高亮层永远盖在其上=绝不挡视线;
+   无云团 / 无新覆盖物 / 仅一次节流震屏(防"自己特效糊屏"老坑)。 */
+function meteorRain(x,y,dmg,lv){
+  const K=4+Math.floor(lv/3);   /* Lv5→5, Lv8→6, Lv11→7… 保守增长 */
+  for(let k=0;k<K;k++){
+    const a=Math.random()*TAU, dd=rand(30,118);
+    const ex=clamp(x+Math.cos(a)*dd,ARENA.pad+10,ARENA.w-ARENA.pad-10),
+          ey=clamp(y+Math.sin(a)*dd,ARENA.pad+10,ARENA.h-ARENA.pad-10);
+    for(const e of enemies){ if(!e.dead && dist2(ex,ey,e.x,e.y)<44*44) damageEnemy(e,dmg*.40,{kx:e.x-ex,ky:e.y-ey}); }
+    for(let i=0;i<3;i++) spawnPart(ex+rand(-5,5), ey-rand(38,74), rand(-14,14), rand(190,300), rand(.12,.2), rand(1.6,2.6), '#ffb86a');
+    for(let i=0;i<5;i++){ const aa=Math.random()*TAU, sp=rand(50,135); spawnPart(ex,ey,Math.cos(aa)*sp,Math.sin(aa)*sp,rand(.16,.3),rand(1.5,2.8),pick(['#ff9a3a','#ffd24d','#ff6a2a'])); }
+    spawnPart(ex,ey,0,0,.2,38,'#ff8a3a',true);
+  }
+  addHitShake(2);
+}
+/* 湮灭奇点(黑洞进化)坍缩内爆:对吸入之敌一次毁灭爆发 + 限定在球半径内的"收束→爆发"视觉。
+   纯走 spawnPart(吃 fxAlpha、不叠白、无深色垫底)+ 一次节流震屏;爆发半径封顶、不随等级无限膨胀。 */
+function singularityImplode(x,y,dmg,r){
+  const R=Math.min(r,170);
+  for(const e of enemies){ if(e.dead)continue; const d=Math.hypot(e.x-x,e.y-y); if(d<R){ const k=d<R*.5?1:.7; (_atkSpell='singularity',damageEnemy(e,dmg*2.5*k,{kx:e.x-x,ky:e.y-y}),_atkSpell=null); } }
+  for(let i=0;i<7;i++){ const a=Math.random()*TAU, rr=R*rand(.6,1.0); spawnPart(x+Math.cos(a)*rr,y+Math.sin(a)*rr,-Math.cos(a)*rand(180,320),-Math.sin(a)*rand(180,320),rand(.12,.2),rand(1.6,2.6),'#a878f0'); }
+  for(let i=0;i<10;i++){ const a=Math.random()*TAU, sp=rand(70,200); spawnPart(x,y,Math.cos(a)*sp,Math.sin(a)*sp,rand(.2,.4),rand(2,4),pick(['#9a6cf0','#b07fe8','#7a4ad0'])); }
+  spawnPart(x,y,0,0,.26,Math.min(R*.75,70),'#b48cff',true);
+  spawnPart(x,y,0,0,.18,Math.min(R*.35,34),'#c8a8ff',true);
+  addHitShake(3);
+}
+/* 蜂巢(蜂群进化)击杀炸蜂:从尸体涌出新蜂。硬性同屏数量上限=30(防蜂群失控 + 性能),每次最多 1 只。 */
+function spawnHiveBees(x,y,lv){
+  let n=0; for(const _b of bullets) if(_b.id==='hive') n++;
+  if(n>=30) return;
+  const a=Math.random()*TAU;
+  const b=makeBullet('hive',lv||5,a); b.x=x; b.y=y; b.homing=Math.max(b.homing,1.3);
+  bullets.push(b);
 }
 function thunderJudge(dmg,lv){
   const R=300+18*lv, r2=R*R;
@@ -4431,7 +4485,7 @@ function renderBoard(el,list){
   if(Array.isArray(list)) list=dedupeByName(list.filter(r=>!isBadName(r&&r.name))).slice(0,10);   /* 滤脏名 → 同名合并(留排名最高的一条)→ 取前 10 */
   if(!Array.isArray(list)||!list.length){ el.innerHTML='<div class="lb-empty">还没有记录,来当第一个上榜的人!</div>'; return; }
   el.innerHTML=list.map((r,i)=>{
-    const medal=['🥇','🥈','🥉'][i]||('<span class="lb-rank">'+(i+1)+'</span>');
+    const medal=MEDAL[i]||('<span class="lb-rank">'+(i+1)+'</span>');
     const t=fmtTime(r.created_at);
     const rk=i<3?' lb-top'+(i+1):'';
     return '<div class="lb-row'+rk+'"><span class="lb-medal">'+medal+'</span>'
@@ -4495,11 +4549,11 @@ function buildMvp(){
   const el=$('ovMvp'); if(!el){return;}
   const ents=Object.entries(runSpellDmg).filter(x=>x[1]>0&&SPELL_DEF[x[0]]).sort((a,b)=>b[1]-a[1]);
   if(!ents.length){ el.innerHTML=''; return; }
-  const tot=ents.reduce((s,x)=>s+x[1],0), top=ents.slice(0,3), medal=['🥇','🥈','🥉'];
+  const tot=ents.reduce((s,x)=>s+x[1],0), top=ents.slice(0,3), medal=MEDAL;
   let h='<div style="font-size:12px;color:#9a8fb8;margin-bottom:5px;letter-spacing:.5px;">'+SWD+' 本局输出担当</div>';
   top.forEach((x,i)=>{ const d=SPELL_DEF[x[0]], pct=Math.round(x[1]/tot*100);
     h+='<div style="display:flex;align-items:center;gap:7px;font-size:13px;margin:3px 0;">'
-      +'<span>'+medal[i]+'</span><span>'+d.icon+'</span><b style="color:#e8dcff;">'+d.name+'</b>'
+      +'<span>'+medal[i]+'</span><span class="mvp-sic">'+iconHTML('spell',x[0],d.icon)+'</span><b style="color:#e8dcff;">'+d.name+'</b>'
       +'<span style="flex:1;"></span><b style="color:#ffd97a;">'+fmtNum(x[1])+'</b>'
       +'<span style="color:#8a7fb8;font-size:11px;min-width:32px;text-align:right;">'+pct+'%</span></div>';
   });
@@ -4536,7 +4590,7 @@ function gameOver(manual){
   recordRunBest();   /* 破纪录判定(存盘前比旧值)+ 持久化个人最佳;含每日 streak */
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
-  { const _cz=$('ovCause'); if(_cz){ if(deathCause && !manual){ const _dt=deathBlowDmg>0?(' · <span style="color:#ff6b6b;font-weight:800;">−'+deathBlowDmg+'</span>'):''; _cz.innerHTML='<div style="font-size:15px;font-weight:800;color:#ff8aa3;letter-spacing:.5px;">💀 致命一击'+_dt+'</div><div style="font-size:12.5px;color:#cba0b8;margin-top:3px;line-height:1.4;">被 <b style="color:#ffb3c8;">'+deathCause+'</b> 击败</div>'; } else _cz.innerHTML=''; } }
+  { const _cz=$('ovCause'); if(_cz){ if(deathCause && !manual){ const _dt=deathBlowDmg>0?(' · <span style="color:#ff6b6b;font-weight:800;">−'+deathBlowDmg+'</span>'):''; _cz.innerHTML='<div style="font-size:15px;font-weight:800;color:#ff8aa3;letter-spacing:.5px;">'+SKULL+' 致命一击'+_dt+'</div><div style="font-size:12.5px;color:#cba0b8;margin-top:3px;line-height:1.4;">被 <b style="color:#ffb3c8;">'+deathCause+'</b> 击败</div>'; } else _cz.innerHTML=''; } }
   { const _dm=$('ovDmg'); if(_dm){ if(manual) _dm.innerHTML=''; else buildDmgBreakdown(); } }
   { const _mv=$('ovMvp'); if(_mv){ if(manual) _mv.innerHTML=''; else buildMvp(); } }
   awardLj(); $('ovGain').innerHTML=GEM+' 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj + renownEndHTML();
@@ -4780,7 +4834,7 @@ function buildCodex(){
   h+='<div class="cx-sec">✦ 古神遗物 · 每 5 波击败 Boss 后三选一(不重复 · 所有难度通用)</div>';
   for(const r of RELICS) h+=cxItem(iconHTML('relic',r.id,r.icon), r.name, ({1:'普通',2:'稀有',3:'史诗'})[r.rar]||'', '', r.desc);
   h+='<div class="cx-sec">✨ 武器进化 · 法术练到 Lv'+EVO_LV+'（进化门槛 · 法术等级无上限）+ 持有对应符文 → 选牌时出现进化卡</div>';
-  const _RCN={split:'分裂符文',multi:'多重符文',haste:'急速符文',pierce:'穿透符文'};
+  const _RCN={split:'分裂符文',multi:'多重符文',haste:'急速符文',pierce:'穿透符文',giant:'巨型符文',homing:'追踪符文'};
   for(const e of EVOS){ const bd=SPELL_DEF[e.base], ed=SPELL_DEF[e.id];
     h+=cxItem(iconHTML('spell',e.id,ed.icon), ed.name, iconHTML('spell',e.base,bd.icon)+bd.name+' + '+(_RCN[e.rune]||e.rune), '', ed.desc.replace(/^【[^】]*】/,'')); }
   $('codexBody').innerHTML=h;
@@ -5079,7 +5133,10 @@ const EVOS=[
   {base:'fire',rune:'split',id:'firestorm'},
   {base:'zap',rune:'multi',id:'thunderjudge'},
   {base:'blade',rune:'haste',id:'thousandblade'},
-  {base:'ice',rune:'pierce',id:'winterspear'}
+  {base:'ice',rune:'pierce',id:'winterspear'},
+  {base:'meteor',rune:'giant',id:'meteorrain'},
+  {base:'blackhole',rune:'pierce',id:'singularity'},
+  {base:'swarm',rune:'homing',id:'hive'}
 ];
 const EVO_BASES={}; for(const _e of EVOS) EVO_BASES[_e.base]=_e;   /* 派生:可进化的基础法术 id（火/雷/刃/冰）。给法术栏/选牌的"✨ 进化门槛"提示用:等级≥EVO_LV 即标，表明 5 是进化点而非上限（是否凑齐符文另由进化卡判定）*/
 function eligibleEvos(){ if(!player||!player.spells)return []; return EVOS.filter(e=> player.spells[e.base] && (player.spells[e.base].lv||0)>=EVO_LV && (player.mods[e.rune]||0)>=1 && !player.spells[e.id] ); }
@@ -5596,6 +5653,7 @@ function update(dt){
       if(dist2(b.x,b.y,e.x,e.y)<rr*rr){
         b.hits.add(e);
         damageEnemy(e,b.dmg,{kx:b.vx,ky:b.vy});
+        if(b.id==='hive'&&e.dead)spawnHiveBees(e.x,e.y,b.lv);
         hitFX(b);
         if(b.slow)e.slowT=Math.max(e.slowT,b.slowT||0)||b.slow;
         if(b._wslow && !e.boss) e.slowT=Math.max(e.slowT||0,b._wslow);   /* 🧊玄霜法杖:命中减速(Boss 除外,保留威胁) */
@@ -6101,8 +6159,8 @@ function render(){
       ctx.restore();
       continue;
     }
-    if(b.id==='swarm'){
-      /* 蜂群飞弹:黑黄条纹小蜂 + 振翅尾迹 */
+    if(b.id==='swarm'||b.id==='hive'){
+      /* 蜂群飞弹 / 蜂巢:黑黄条纹小蜂 + 振翅尾迹(source-over 实色,无叠加白芯/无深色垫底=不糊白也不糊黑) */
       const ang=Math.atan2(b.vy,b.vx), wob=Math.sin(time*38+b.x*.05)*b.r*.5;
       ctx.save();ctx.globalCompositeOperation='source-over';ctx.translate(b.x,b.y);ctx.rotate(ang);
       ctx.translate(0,wob*.2);
