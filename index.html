@@ -47,7 +47,7 @@
   .overlay .panel::-webkit-scrollbar{width:0;height:0;}
   /* 结算页(通关/失败):榜展开不自己滚,整页面板滚动,避免把底部按钮顶出屏幕又滑不到 */
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
-  #win .panel,#over .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+  #win .panel,#over .panel,#lastReport .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
   /* 选择/信息类浮层保险:内容超屏时可滚动,放得下时仍居中(safe center 保证正常外观不变),避免选项/按钮被切到点不到 */
   #wandSel,#cards,#relic,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
@@ -572,7 +572,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
-<div class="cl-v"><div class="cl-h">v85.20–v85.26 · 2026-06-21</div><div class="cl-i">✨ <b>更新说明改版</b> + 战斗界面收尾。① 更新说明里<b>重大更新(新法杖 / 法术 / 进化 / 遗物 / Boss / 角色 / 系统)的版本号标成醒目青色</b>,一眼能找到;两版重大之间的小更新合并精简。② 左下「法术数据条」改为默认显示,并修好「退出再进就消失 / 有时被裁掉」,位置下调不挡画面。③ 战斗界面剩余系统 emoji(暂停 / 静音 / 血量 / 击杀 / 金币 / 护罩等)全换成手绘图标;「上局战报」改为实时按数据生成。纯显示 / 修复,玩法数值不变。</div></div>
+<div class="cl-v"><div class="cl-h">v85.20–v85.27 · 2026-06-21</div><div class="cl-i">✨ <b>更新说明改版</b> + 战斗界面收尾。① 更新说明里<b>重大更新(新法杖 / 法术 / 进化 / 遗物 / Boss / 角色 / 系统)的版本号标成醒目青色</b>,一眼能找到;两版重大之间的小更新合并精简。② 左下「法术数据条」改为默认显示,并修好「退出再进就消失 / 有时被裁掉」,位置下调不挡画面。③ 战斗界面剩余系统 emoji(暂停 / 静音 / 血量 / 击杀 / 金币 / 护罩等)全换成手绘图标;「上局战报」改为实时按数据生成。④ 修好御风弓 + 大型法术(如水龙波)化成的巨箭被一圈黑边 / 黑团裹住的问题——箭芯随大小填满、深色只留一圈细描边、拖尾收成锥形,大箭干净清晰。⑤ 「上局战报」改为可上下滑动,矮屏 / 折叠屏也能滑到底部的成就与返回键。纯显示 / 修复,玩法数值不变。</div></div>
 <div class="cl-v"><div class="cl-h maj">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
 <div class="cl-v"><div class="cl-h">v85.15–v85.18 · 2026-06-21</div><div class="cl-i">📜 新增「上局战报」+ 打磨。主菜单新增「上局战报」入口,随时回看上一局结算(波数 / 击杀 / 死因 / 输出担当 / 解锁)。另:战斗「剩余 N 只」更醒目、进化技能稀有度修正、3 把新法杖补上专属战斗造型、6 件新遗物补上手绘图标。</div></div>
 <div class="cl-v"><div class="cl-h maj">v85.14 · 2026-06-20</div><div class="cl-i">⚡ <b>新增 3 把法杖 + 6 件遗物（纯新增，不改任何现有数值，冲榜公平不受影响）。</b><br><b>法杖：</b>链雷杖（命中后闪电链击附近敌人、各 50% 伤害，怪越密越强）、回旋杖（法术弹飞出一段后回旋折返，去程回程各命中一次）、引力杖（缓慢引力球把周围敌人拖拽聚成一团，球身伤害低、专配范围法术连招）。三把均可用灵晶解锁。<br><b>遗物：</b>贯穿符（穿透 +1）、奥术回响（22% 几率立即额外射一发）、荆棘符（接触受伤反弹 50%）、残影靴（冲刺穿过的敌人受伤）、首杀祭礼（每波首次击杀回 6 血）、连杀战意（连杀加伤上限与每层都提升）。<br>新法杖 / 遗物数值一经上线即固定（护榜铁律），均按现有同类强度谨慎设定。</div></div>
@@ -810,10 +810,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.26', APP_TIME='2026-06-21 14:15';
+const APP_VER='v85.27', APP_TIME='2026-06-21 14:50';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.26';
+const APP_NOTIFY_VER='v85.27';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -6113,17 +6113,18 @@ function render(){
   for(const b of bullets){
     if(player.wandFx.arrowStyle){
       /* 🏹御风弓:所有法术弹画成锐利细箭(顺飞行方向);后期巨化也只是变长、不糊成满屏大球 */
-      const ang=Math.atan2(b.vy,b.vx), L=Math.max(11,b.r*2.4);
+      const ang=Math.atan2(b.vy,b.vx), L=Math.max(11,b.r*2.4), T=Math.max(2,b.r*.5), hw=Math.max(3.5,b.r*.5);
       ctx.save();ctx.globalCompositeOperation='source-over';ctx.translate(b.x,b.y);ctx.rotate(ang);
-      ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.4*fxAlpha*_bdim;ctx.strokeStyle=b.col;ctx.lineWidth=Math.max(2,b.r*.55);ctx.lineCap='round';
-      ctx.beginPath();ctx.moveTo(-L*.85,0);ctx.lineTo(L*.5,0);ctx.stroke();
-      ctx.globalCompositeOperation='source-over';ctx.globalAlpha=_bdim*fxAlpha;
-      ctx.strokeStyle='rgba(8,4,20,.9)';ctx.lineWidth=Math.max(4,b.r*.6+2.5);ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-L*.55,0);ctx.lineTo(L*.48,0);ctx.stroke();   /* 深色描边垫底:亮地图也看得清,沿箭身(非圆球) */
-      ctx.strokeStyle=b.col;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-L*.5,0);ctx.lineTo(L*.42,0);ctx.stroke();
-      ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(L*.5,0);ctx.lineTo(L*.42,-3);ctx.lineTo(L*.42,3);ctx.closePath();ctx.fill();
-      ctx.strokeStyle=b.col;ctx.lineWidth=1.4;
-      ctx.beginPath();ctx.moveTo(-L*.5,0);ctx.lineTo(-L*.5-4,-3);ctx.moveTo(-L*.5,0);ctx.lineTo(-L*.5-4,3);ctx.stroke();
-      ctx.lineCap='butt';ctx.restore();
+      ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.3*fxAlpha*_bdim;ctx.fillStyle=b.col;
+      ctx.beginPath();ctx.moveTo(L*.52,0);ctx.lineTo(0,-T*.7-1);ctx.lineTo(-L*.92,0);ctx.lineTo(0,T*.7+1);ctx.closePath();ctx.fill();   /* 发光拖尾:首尾收成尖的菱形(中间宽),自然拖尾、不再在尾部叠成团块 */
+      ctx.globalCompositeOperation='source-over';ctx.globalAlpha=_bdim*fxAlpha;ctx.lineCap='butt';
+      ctx.strokeStyle='rgba(8,4,20,.9)';ctx.lineWidth=T+3.5;ctx.beginPath();ctx.moveTo(-L*.48,0);ctx.lineTo(L*.4,0);ctx.stroke();   /* 深色描边:平头帽(不画圆尾),只沿箭身两侧露一圈细边(亮地图也看得清);青芯圆头会盖过尾端,巨型箭(如水龙波化箭)不再被黑团裹住 */
+      ctx.strokeStyle=b.col;ctx.lineWidth=T;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-L*.48,0);ctx.lineTo(L*.4,0);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(L*.55,0);ctx.lineTo(L*.36,-hw);ctx.lineTo(L*.36,hw);ctx.closePath();
+      ctx.fillStyle='#fff';ctx.strokeStyle='rgba(8,4,20,.85)';ctx.lineWidth=Math.max(1.5,b.r*.16);ctx.lineJoin='round';ctx.stroke();ctx.fill();
+      ctx.strokeStyle=b.col;ctx.lineWidth=Math.max(1.4,b.r*.16);ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(-L*.48,0);ctx.lineTo(-L*.48-hw*1.1,-hw*.8);ctx.moveTo(-L*.48,0);ctx.lineTo(-L*.48-hw*1.1,hw*.8);ctx.stroke();
+      ctx.lineCap='butt';ctx.lineJoin='miter';ctx.restore();
       continue;
     }
     if(b.id==='chain'){
