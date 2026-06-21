@@ -238,6 +238,7 @@
   #muteBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(15px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:linear-gradient(180deg,rgba(34,26,60,.78),rgba(18,13,38,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);color:#cfc8f2;font-size:16px;align-items:center;justify-content:center;line-height:1;}
+  #muteBtn svg,#pauseBtn svg{width:19px;height:19px;display:block;}
   #pauseBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(58px + env(safe-area-inset-right));
     z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid #3b3370;cursor:pointer;
     background:linear-gradient(180deg,rgba(34,26,60,.78),rgba(18,13,38,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);color:#cfc8f2;font-size:14px;display:none;align-items:center;justify-content:center;}
@@ -326,8 +327,8 @@
 <body>
 <canvas id="game"></canvas>
 <div id="padBadge"><span class="pb-ic">🎮</span><span class="pb-msg">手柄已连接</span></div>
-<button id="muteBtn" title="声音">🔊</button>
-<button id="pauseBtn" title="暂停">⏸</button>
+<button id="muteBtn" title="声音"><svg viewBox="0 0 64 64"><path d="M8 25 L19 25 L31 14 L31 50 L19 39 L8 39 Z" fill="#cfc8f2"/><path d="M38 24 Q44 32 38 40" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/><path d="M45 18 Q55 32 45 46" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/></svg></button>
+<button id="pauseBtn" title="暂停"><svg viewBox="0 0 64 64"><rect x="17" y="13" width="12" height="38" rx="4" fill="#cfc8f2"/><rect x="35" y="13" width="12" height="38" rx="4" fill="#cfc8f2"/></svg></button>
 
 <!-- 主菜单 -->
 <div id="menu" class="overlay">
@@ -570,6 +571,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.22 · 2026-06-21</div><div class="cl-i">🎨 <b>战斗界面里的系统 emoji 全部换成手绘图标</b>:右上角暂停 / 静音按钮、左上血量 / 击杀 / 金币、拾取金币飘字、回血道具、冲刺键的风、Boss 护罩标记,以及左下「法术数据条」里的法杖 / 法术 / 符文 / 诅咒图标——现在都是统一画风。固定图标用 canvas 笔刷直接画(任何设备表现一致);法杖 / 法术那种每个不同的,复用现成手绘 SVG。纯显示,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.21 · 2026-06-21</div><div class="cl-i">🔧 <b>「上局战报」现在实时按数据生成</b>,不再是阵亡时存下的旧快照——以后任何图标 / 样式更新都会<b>自动反映到战报里</b>(这也是之前修过的图标在旧战报里没更新的原因;你的旧战报会刷新一次)。另外把死亡页 / 通关页「生成战绩图 · 分享」按钮上最后一个系统 emoji(相机)也换成了手绘。纯显示修复,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.20 · 2026-06-21</div><div class="cl-i">🎨 <b>修复两处显示问题。</b>① <b>结算页 /「上局战报」里几个还是系统 emoji 的小图标</b>(致命一击的骷髅、「本局输出担当」与英雄榜前三的金 / 银 / 铜奖牌、法术图标)<b>统一换成手绘风格</b>,和全游戏一致;② <b>「上局战报」里「本局获得 X 灵晶」那行字之前偏暗、看不清</b>,现已改回醒目的<b>金色</b>。纯显示修复,玩法 / 数值一概不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
@@ -904,10 +906,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.21', APP_TIME='2026-06-21 10:35';
+const APP_VER='v85.22', APP_TIME='2026-06-21 11:20';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.21';
+const APP_NOTIFY_VER='v85.22';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -1205,7 +1207,7 @@ const S={
   no:()=>sfx(170,110,.12,'square',.08),
   win:()=>{sfx(523,523,.15,'triangle',.11);setTimeout(()=>sfx(659,659,.15,'triangle',.11),150);setTimeout(()=>sfx(784,1046,.35,'triangle',.13),300);}
 };
-$('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').textContent=muted?'🔇':'🔊';
+$('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').innerHTML=muted?'<svg viewBox="0 0 64 64"><path d="M8 25 L19 25 L31 14 L31 50 L19 39 L8 39 Z" fill="#cfc8f2"/><path d="M40 25 L54 39 M54 25 L40 39" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/></svg>':'<svg viewBox="0 0 64 64"><path d="M8 25 L19 25 L31 14 L31 50 L19 39 L8 39 Z" fill="#cfc8f2"/><path d="M38 24 Q44 32 38 40" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/><path d="M45 18 Q55 32 45 46" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/></svg>';
   /* 静音=真正挂起音频引擎,彻底松开 iOS 音频会话(否则空跑也会把后台音乐搅卡);取消静音=唤醒 */
   try{ if(muted){ if(AC)AC.suspend(); } else { initAudio(); } }catch(e){} };
 
@@ -5600,7 +5602,7 @@ function update(dt){
       p.dead=true;
       if(p.kind==='coin'){
         const got=addCoins(p.val||1); S.coin();
-        texts.push({x:player.x,y:player.y-20,str:'+'+got+'💰',life:.6,vy:-44,col:'#ffd98a',size:12});
+        texts.push({x:player.x,y:player.y-20,str:'+'+got,coin:true,life:.6,vy:-44,col:'#ffd98a',size:12});
       } else {
         heal(12); S.pickup(); runTookHeart=true;
         texts.push({x:player.x,y:player.y-24,str:'+12',life:.8,vy:-40,col:'#8df07a',size:14});
@@ -5862,6 +5864,73 @@ function buildRelicChoice(){
 
 /* ============ 渲染 ============ */
 function rrect(x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);}
+/* HUD 状态图标:纯 canvas 画笔(❤血 / ☠杀 / 💰币),不走 SVG 栅格化 → 真机微信必定正常。cx,cy=中心,r≈半高 */
+function drawHeartIcon(cx,cy,r,col){
+  ctx.save();ctx.fillStyle=col;ctx.beginPath();
+  ctx.moveTo(cx,cy+r*0.92);
+  ctx.bezierCurveTo(cx-r*1.45,cy-r*0.35,cx-r*0.72,cy-r*1.3,cx,cy-r*0.42);
+  ctx.bezierCurveTo(cx+r*0.72,cy-r*1.3,cx+r*1.45,cy-r*0.35,cx,cy+r*0.92);
+  ctx.closePath();ctx.fill();ctx.restore();
+}
+function drawCoinIcon(cx,cy,r,col){
+  ctx.save();
+  ctx.fillStyle=col;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fill();
+  ctx.strokeStyle='rgba(40,22,54,.5)';ctx.lineWidth=Math.max(1,r*0.34);
+  ctx.beginPath();ctx.arc(cx,cy,r*0.55,0,TAU);ctx.stroke();
+  ctx.restore();
+}
+function drawSkullIcon(cx,cy,r,col){
+  ctx.save();ctx.fillStyle=col;
+  ctx.beginPath();ctx.arc(cx,cy-r*0.18,r*0.92,0,TAU);ctx.fill();            /* 颅骨 */
+  ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(cx-r*0.46,cy+r*0.38,r*0.92,r*0.5,r*0.16);else ctx.rect(cx-r*0.46,cy+r*0.38,r*0.92,r*0.5);
+  ctx.fill();                                                              /* 下颌 */
+  ctx.fillStyle='#1a1226';                                                 /* 眼窝 + 鼻 */
+  ctx.beginPath();ctx.arc(cx-r*0.36,cy-r*0.18,r*0.26,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(cx+r*0.36,cy-r*0.18,r*0.26,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.moveTo(cx,cy+r*0.02);ctx.lineTo(cx-r*0.13,cy+r*0.26);ctx.lineTo(cx+r*0.13,cy+r*0.26);ctx.closePath();ctx.fill();
+  ctx.restore();
+}
+/* 疾风图标(冲刺键):canvas 画笔三道风线,不走 emoji */
+function drawWindIcon(cx,cy,s,col){
+  ctx.save();ctx.strokeStyle=col;ctx.lineWidth=Math.max(1.6,s*0.14);ctx.lineCap='round';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.75,cy-s*0.4); ctx.quadraticCurveTo(cx+s*0.5,cy-s*0.55,cx+s*0.55,cy-s*0.12);
+  ctx.moveTo(cx-s*0.8,cy+s*0.05); ctx.quadraticCurveTo(cx+s*0.72,cy-s*0.1,cx+s*0.68,cy+s*0.32);
+  ctx.moveTo(cx-s*0.6,cy+s*0.5); ctx.quadraticCurveTo(cx+s*0.3,cy+s*0.4,cx+s*0.32,cy+s*0.62);
+  ctx.stroke();ctx.restore();
+}
+/* 护盾图标(Boss 护罩):canvas 画笔盾形 + 中线高光,不走 emoji */
+function drawShieldIcon(cx,cy,s,col){
+  ctx.save();ctx.fillStyle=col;ctx.beginPath();
+  ctx.moveTo(cx,cy-s*0.85);ctx.lineTo(cx+s*0.78,cy-s*0.48);ctx.lineTo(cx+s*0.78,cy+s*0.12);
+  ctx.quadraticCurveTo(cx+s*0.78,cy+s*0.7,cx,cy+s*0.95);
+  ctx.quadraticCurveTo(cx-s*0.78,cy+s*0.7,cx-s*0.78,cy+s*0.12);
+  ctx.lineTo(cx-s*0.78,cy-s*0.48);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=Math.max(1,s*0.14);
+  ctx.beginPath();ctx.moveTo(cx,cy-s*0.45);ctx.lineTo(cx,cy+s*0.5);ctx.stroke();
+  ctx.restore();
+}
+/* 画 Boss 名(左对齐),若有护罩则在名后画盾图标(替代原来的 🛡️ emoji)。调用前需先设好 font */
+function drawBossLabel(name,shielded,x,yc,shS){
+  ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle='#fff';
+  ctx.fillText(name||'',x,yc);
+  if(shielded){ const w=ctx.measureText(name||'').width; drawShieldIcon(x+w+shS+3,yc,shS,'#add2ff'); }
+}
+/* 左下构筑条:把 [{ic:[cat,id,emoji],sz} | {t:文字,col,font,gap}] 段从左到右画(图标走 drawCanvasIcon=SVG/emoji兜底,文字 fillText)。measBuildRun 仅量宽用于面板尺寸。 */
+function measBuildRun(segs,baseSz){
+  let w=0;
+  for(const s of segs){ if(s.ic){ w+=(s.sz||16)+1; } else { ctx.font=s.font||(baseSz+'px sans-serif'); w+=ctx.measureText(s.t).width+(s.gap!=null?s.gap:3); } }
+  return w;
+}
+function drawBuildRun(segs,x,yc,baseSz,txtCol){
+  for(const s of segs){
+    if(s.ic){ const sz=s.sz||16; ctx.font=Math.round(sz)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fff';
+      drawCanvasIcon(s.ic[0],s.ic[1],s.ic[2],x+sz/2,yc,sz); x+=sz+1; }
+    else { ctx.font=s.font||(baseSz+'px sans-serif');ctx.fillStyle=s.col||txtCol||'#fff';ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(s.t,x,yc); x+=ctx.measureText(s.t).width+(s.gap!=null?s.gap:3); }
+  }
+}
 /* 地形点缀:草尖/沙丘/雪花/余烬/水晶 */
 function drawTerrainDeco(){
   const t=TERRAIN_DECO.find(d=>d.id===terrain.id);
@@ -6073,8 +6142,7 @@ function render(){
       ctx.strokeStyle='#9a6a10';ctx.lineWidth=1.5;ctx.stroke();
       ctx.globalAlpha=1;
     } else {
-      ctx.font='20px serif';ctx.globalAlpha=.95;
-      ctx.fillText('💗',p.x,p.y+bob);ctx.globalAlpha=1;
+      drawHeartIcon(p.x,p.y+bob,7,'#ff5b7a');
     }
   }
 
@@ -6288,6 +6356,7 @@ function render(){
     ctx.fillStyle=t.col;ctx.font='bold '+Math.round(t.size)+'px sans-serif';
     ctx.strokeStyle='rgba(0,0,0,.6)';ctx.lineWidth=3;
     ctx.strokeText(t.str,t.x,t.y);ctx.fillText(t.str,t.x,t.y);
+    if(t.coin){ const w=ctx.measureText(t.str).width, cr=t.size*0.4; const cx=(ctx.textAlign==='center')?(t.x+w/2+cr+2):(t.x+w+cr+2); drawCoinIcon(cx,t.y-t.size*0.3,cr,t.col); }
   }
   ctx.globalAlpha=1;
   /* —— 角色定位轮廓:贴合人物外形(身体+帽子)的发光剪影描边 + 真身重绘在最上层;成片法术之下也能一眼找到自己(满亮,不受特效强度影响) —— */
@@ -6377,8 +6446,8 @@ function render(){
     }
     ctx.fillStyle=ready?'#cfe9ff':'#7e76ad';ctx.font='19px serif';
     ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('💨',bx,by-4);
-    ctx.font='8px sans-serif';
+    drawWindIcon(bx,by-3,10,ready?'#cfe9ff':'#7e76ad');
+    ctx.font='8px sans-serif';ctx.fillStyle=ready?'#cfe9ff':'#7e76ad';
     ctx.fillText(usingTouch?'双击/点我':'空格冲刺',bx,by+14);
     /* 多充能(乘黄)时:右上角弹药式徽章显示当前可用次数 */
     if(dmax>1){
@@ -8017,8 +8086,9 @@ function drawHUD(){
   const hg=ctx.createLinearGradient(16,0,16+hw,0);
   hg.addColorStop(0,hpCol);hg.addColorStop(1,hpCol2);
   ctx.fillStyle=hg;rrect(16,top+4,hw*hr,14,6);ctx.fill();
-  ctx.fillStyle='#fff';ctx.font='bold 11px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
-  ctx.fillText('❤ '+Math.ceil(player.hp)+' / '+player.maxhp,22,top+11.5);
+  ctx.font='bold 11px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
+  drawHeartIcon(25,top+11.5,4,'#fff');
+  ctx.fillStyle='#fff';ctx.fillText(Math.ceil(player.hp)+' / '+player.maxhp,32,top+11.5);
   /* 波次 + 剩余:居中显示;若左端会与血条相撞,则整体右移到血条右侧,确保不重叠 */
   const hpRight=12+hw+8;
   ctx.textAlign='center';ctx.font='900 16px "Songti SC","STSong",serif';
@@ -8032,9 +8102,8 @@ function drawHUD(){
   ctx.fillText('剩余 '+(enemies.length+spawnQ.length)+' 只',waveCx,top+27);
   /* 击杀/金币:移到血条下方左侧,避开右上角的暂停/静音按钮(原先在右上角被按钮遮挡) */
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
-  ctx.fillText('☠ '+kills,16,top+40);
-  ctx.fillStyle='#ffd24d';
-  ctx.fillText('💰 '+coins,16,top+60);
+  drawSkullIcon(21,top+40,5,'#cfc8f2');ctx.fillStyle='#cfc8f2';ctx.fillText(kills,31,top+40);
+  drawCoinIcon(21,top+60,5,'#ffd24d');ctx.fillStyle='#ffd24d';ctx.fillText(coins,31,top+60);
   /* 遗物图标条(常驻,压力条下方) */
   if(player.relics.length){
     const ry=top+106, rw=19; let rx=18;
@@ -8095,7 +8164,7 @@ function drawHUD(){
       ctx.fillStyle=bg; rrect(x,y,Wbar*bhr,Hbar,4); ctx.fill();
       ctx.fillStyle=boss.col; ctx.beginPath(); ctx.arc(x+8,y+Hbar/2,3,0,TAU); ctx.fill();
       ctx.font='900 11px "Songti SC","STSong",serif'; ctx.fillStyle='#fff';
-      ctx.fillText((boss.name||'')+(shielded?' 🛡️':''), x+16, y+Hbar/2+0.5);
+      drawBossLabel(boss.name,shielded,x+16,y+Hbar/2+0.5,5.5);
     }
   } else if(bosses.length===1){
     /* 竖屏单 Boss:细条 + 名字内嵌(不再用上方朱砂印章,更清爽,也不压住「剩余」计数) */
@@ -8112,7 +8181,7 @@ function drawHUD(){
     ctx.fillStyle=boss.col;ctx.beginPath();ctx.arc(bx+10,by+Hbar/2,4,0,TAU);ctx.fill();
     ctx.textAlign='left';ctx.textBaseline='middle';
     ctx.font='900 14px "Songti SC","STSong",serif';ctx.fillStyle='#fff';
-    ctx.fillText((boss.name||'')+(shielded?' 🛡️':''),bx+20,by+Hbar/2+0.5);
+    drawBossLabel(boss.name,shielded,bx+20,by+Hbar/2+0.5,6.5);
   } else if(bosses.length>1){
     /* 多 Boss:紧凑血条竖向堆叠,各自标名 + 体色点;护罩中显示蓝条 */
     const bw=Math.min(W*.5, (W>H*1.3)?240:300), bx=(W-bw)/2;
@@ -8130,58 +8199,47 @@ function drawHUD(){
       ctx.fillStyle=boss.col;ctx.beginPath();ctx.arc(bx+9,by+6,3.5,0,TAU);ctx.fill();
       ctx.font='900 12px "Songti SC","STSong",serif';
       ctx.fillStyle='#fff';
-      ctx.fillText((boss.name||'')+(shielded?' 🛡️':''),bx+18,by+6);
+      drawBossLabel(boss.name,shielded,bx+18,by+6,6);
       by+=20;
     }
   }
   /* 法术构筑栏(可在暂停菜单「法术数据条」开关显隐) */
   if(showSpellBar){
-  let line1='', line2='';
-  if(player.wand)line1+=player.wand.icon+'丨';
+  /* 构筑条:图标走 drawCanvasIcon(SVG 栅格化,失败回退 emoji)+ 文字逐段绘制;裁剪到面板内,过长不溢出 */
+  const segs1=[], segs2=[], segs3=[];
+  if(player.wand) segs1.push({ic:['wand',player.wand.id,player.wand.icon],sz:17},{t:'丨',col:'#fff',gap:3});
   for(const id in player.spells){ const _sp=player.spells[id];
-    /* 可进化法术（火/雷/刃/冰，未进化时）练到进化门槛 Lv5 起，在等级后标 ✨——表明 5 是进化点、不是等级上限（已进化的形态 id 不在 EVO_BASES 里，自动不标）*/
-    line1+=SPELL_DEF[id].icon+'Lv'+_sp.lv+((EVO_BASES[id]&&(_sp.lv||0)>=EVO_LV)?'✨':'')+'  '; }
+    const evoMk=(EVO_BASES[id]&&(_sp.lv||0)>=EVO_LV)?'★':'';   /* 进化点(Lv5起);★ 单色非 emoji */
+    segs1.push({ic:['spell',id,SPELL_DEF[id].icon],sz:16},{t:'Lv'+_sp.lv+evoMk,col:'#fff',gap:8}); }
   const MI={multi:'✨',homing:'🎯',bounce:'🪀',pierce:'🪶',split:'✂️',haste:'⏩',amp:'📈',giant:'🎈'};
-  for(const k in MI)if(player.mods[k]>0)line2+=MI[k]+'×'+player.mods[k]+' ';
-  const SI={boots:'👟',armor:'🪨',leech:'🧛',pickup:'🪙'};   /* 属性卡层数(此前未显示) */
-  for(const k in SI)if(player.mods[k]>0)line2+=SI[k]+'×'+player.mods[k]+' ';
+  for(const k in MI)if(player.mods[k]>0)segs2.push({ic:['mod',k,MI[k]],sz:14},{t:'×'+player.mods[k],col:'#a79fd6',gap:7});
+  const SI={boots:'👟',armor:'🪨',leech:'🧛',pickup:'🪙'};
+  for(const k in SI)if(player.mods[k]>0)segs2.push({ic:['mod',k,SI[k]],sz:14},{t:'×'+player.mods[k],col:'#a79fd6',gap:7});
   const CI={pact_blood:'🔪',pact_glass:'💔',pact_greed:'💵',pact_chaos:'🎲'};
-  for(const k in CI)if(player.cc[k])line2+=CI[k]+' ';
-  /* 协同 line3 */
-  const syns=activeSynergies();
-  let line3=syns.map(s=>s.icon+s.name).join('  ');
-  const hasLine2=!!line2, hasLine3=!!line3;
+  for(const k in CI)if(player.cc[k])segs2.push({ic:['mod',k,CI[k]],sz:15},{t:'',gap:5});
+  for(const s of activeSynergies())segs3.push({ic:['syn',s.id,s.icon],sz:14},{t:s.name,gap:9});
+  const hasLine2=segs2.length>0, hasLine3=segs3.length>0;
   const bh=(hasLine2?52:32)+(hasLine3?20:0);
-  ctx.font='14px sans-serif';const w1m=ctx.measureText(line1).width;
-  ctx.font='12px sans-serif';const w2m=ctx.measureText(line2).width;
-  ctx.font='900 12px sans-serif';const w3m=ctx.measureText(line3).width;
-  const bw2=Math.max(w1m,w2m,w3m,150)+30;
-  /* 横屏+固定摇杆:法术栏不再上移(那是竖屏的避让,横屏会顶到上半屏与血条/击杀挤一起),改为留在底部、右移到左下摇杆右侧——横屏底部横向空间足够 */
+  const bw2=Math.max(measBuildRun(segs1,14),measBuildRun(segs2,12),measBuildRun(segs3,12),150)+30;
+  /* 横屏+固定摇杆:留在底部、右移到摇杆右侧;竖屏:维持上移避让 */
   const landscapeFx = (W > H*1.3) && fixedStick && usingTouch;
   let bx0 = 12;
   const by0b=H-bh-12-(usingTouch?6:0);
   let by0=by0b;
   if(fixedStick&&usingTouch){
-    if(landscapeFx){ bx0 = Math.round(ljBaseX()+78); }            /* 横屏:右移避开摇杆底盘,Y 仍在底部 */
-    else { by0=Math.min(by0, jBaseY()-56-bh); }                   /* 竖屏:维持原来的上移避让 */
+    if(landscapeFx){ bx0 = Math.round(ljBaseX()+78); }
+    else { by0=Math.min(by0, jBaseY()-56-bh); }
   }
-  const lift=by0-by0b;   /* 文字随面板一起上移;非固定/横屏时 lift=0,与原位置一致 */
-  const PW=Math.min(bw2+60, landscapeFx ? (W-bx0-110-safeR) : (W-108));   /* 面板宽度封顶:右侧给冲刺键留空当;横屏从 bx0 起算 */
-  const tMaxW=PW-24;                  /* 文字最大宽度:过长则自动横向压缩,绝不溢出怼到冲刺键 */
+  const PW=Math.min(bw2+60, landscapeFx ? (W-bx0-110-safeR) : (W-108));
   ctx.fillStyle='rgba(10,8,24,.7)';
   rrect(bx0,by0,PW,bh,10);ctx.fill();
-  /* 构筑栏顶部 1px 浓墨上边线 */
   ctx.fillStyle='rgba(26,26,46,.35)';
   ctx.fillRect(bx0+2,by0,PW-4,1);
-  ctx.textAlign='left';ctx.font='14px sans-serif';ctx.fillStyle='#fff';
-  ctx.fillText(line1,bx0+12,H-bh+8-(usingTouch?6:0)+lift,tMaxW);
-  if(line2){ctx.font='12px sans-serif';ctx.fillStyle='#a79fd6';
-    ctx.fillText(line2,bx0+12,H-bh+30-(usingTouch?6:0)+lift,tMaxW);}
-  if(line3){
-    const pulse=.7+Math.sin(time*5)*.3;
-    ctx.font='900 12px sans-serif';ctx.fillStyle=`rgba(255,210,77,${pulse})`;
-    ctx.fillText(line3,bx0+12,H-bh+30+(hasLine2?20:44)+lift,tMaxW);
-  }
+  ctx.save(); rrect(bx0,by0,PW,bh,10); ctx.clip();   /* 裁剪:过长构筑不溢出怼冲刺键 */
+  drawBuildRun(segs1, bx0+12, by0+16, 14);
+  if(hasLine2) drawBuildRun(segs2, bx0+12, by0+38, 12);
+  if(hasLine3){ const pulse=.7+Math.sin(time*5)*.3; drawBuildRun(segs3, bx0+12, by0+(hasLine2?58:38), 12, 'rgba(255,210,77,'+pulse+')'); }
+  ctx.restore();
   } /* end if(showSpellBar) */
 }
 
