@@ -534,7 +534,7 @@
       <button class="btn" id="retryBtn">再次挑战</button>
       <button class="btn ghost" id="ovHomeBtn">回到初始页面</button>
     </div>
-    <button class="btn share-btn" id="ovShareBtn">📸 生成战绩图 · 分享</button>
+    <button class="btn share-btn" id="ovShareBtn"><svg class="ico-i" viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="36" rx="6" fill="#ede8fb" stroke="#241636" stroke-width="2.8"/><path d="M22 18 L26 11 L38 11 L42 18 Z" fill="#ede8fb" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><circle cx="32" cy="37" r="11" fill="#a98fe8" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="37" r="5.5" fill="#6a4fd0" stroke="#241636" stroke-width="2"/><circle cx="49" cy="26" r="2.6" fill="#ffd24d" stroke="#241636" stroke-width="1.4"/></svg> 生成战绩图 · 分享</button>
     <div class="lb-title"><svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg> 英雄榜</div>
     <div class="lb">
       <input id="ovName" maxlength="16" placeholder="留名上榜">
@@ -570,6 +570,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.21 · 2026-06-21</div><div class="cl-i">🔧 <b>「上局战报」现在实时按数据生成</b>,不再是阵亡时存下的旧快照——以后任何图标 / 样式更新都会<b>自动反映到战报里</b>(这也是之前修过的图标在旧战报里没更新的原因;你的旧战报会刷新一次)。另外把死亡页 / 通关页「生成战绩图 · 分享」按钮上最后一个系统 emoji(相机)也换成了手绘。纯显示修复,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.20 · 2026-06-21</div><div class="cl-i">🎨 <b>修复两处显示问题。</b>① <b>结算页 /「上局战报」里几个还是系统 emoji 的小图标</b>(致命一击的骷髅、「本局输出担当」与英雄榜前三的金 / 银 / 铜奖牌、法术图标)<b>统一换成手绘风格</b>,和全游戏一致;② <b>「上局战报」里「本局获得 X 灵晶」那行字之前偏暗、看不清</b>,现已改回醒目的<b>金色</b>。纯显示修复,玩法 / 数值一概不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
 <div class="cl-v"><div class="cl-h">v85.18 · 2026-06-21</div><div class="cl-i">📜 <b>新增「上局战报」——随时回看上一局打成什么样。</b>主菜单英雄榜上方多了个<b>「上局战报」</b>入口(打过一局才出现),点开就能重温上一局的完整结算:<b>抵达波数、击杀、被谁的什么招式击败</b>(战死时)、<b>本局失血来源</b>色条、<b>输出最高的前三个法术</b>、以及<b>本局解锁的成就</b>。不管赢还是输都会记录,下一局开始前想复盘一下很方便。<b>纯新增的查看功能,不影响任何玩法 / 数值 / 平衡。</b></div></div>
@@ -794,7 +795,7 @@
       <button class="btn" id="endlessBtn">无尽模式</button>
       <button class="btn ghost" id="winHomeBtn">回到初始页面</button>
     </div>
-    <button class="btn share-btn" id="wnShareBtn">📸 生成战绩图 · 分享</button>
+    <button class="btn share-btn" id="wnShareBtn"><svg class="ico-i" viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="36" rx="6" fill="#ede8fb" stroke="#241636" stroke-width="2.8"/><path d="M22 18 L26 11 L38 11 L42 18 Z" fill="#ede8fb" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><circle cx="32" cy="37" r="11" fill="#a98fe8" stroke="#241636" stroke-width="2.6"/><circle cx="32" cy="37" r="5.5" fill="#6a4fd0" stroke="#241636" stroke-width="2"/><circle cx="49" cy="26" r="2.6" fill="#ffd24d" stroke="#241636" stroke-width="1.4"/></svg> 生成战绩图 · 分享</button>
     <div class="lb-title"><svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg> 英雄榜</div>
     <div class="lb">
       <input id="wnName" maxlength="16" placeholder="留名上榜">
@@ -903,10 +904,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.20', APP_TIME='2026-06-21 10:05';
+const APP_VER='v85.21', APP_TIME='2026-06-21 10:35';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.20';
+const APP_NOTIFY_VER='v85.21';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -4545,10 +4546,9 @@ function setupEndLeaderboard(prefix){
 }
 /* 死亡结算页「本局失血来源」色条:把 runDmgBySrc 画成一根分段横条 + 小图例,一眼看出血被什么扣的 */
 const DMG_CAT_META={melee:{n:'近身',c:'#ff6b6b'},boss:{n:'首领',c:'#b07bff'},bullet:{n:'弹幕',c:'#5fb0ff'},blast:{n:'范围',c:'#ffb24d'},poison:{n:'中毒',c:'#9ddb5a'}};
-function buildMvp(){
-  const el=$('ovMvp'); if(!el){return;}
-  const ents=Object.entries(runSpellDmg).filter(x=>x[1]>0&&SPELL_DEF[x[0]]).sort((a,b)=>b[1]-a[1]);
-  if(!ents.length){ el.innerHTML=''; return; }
+function mvpHTML(spellDmg){
+  const ents=Object.entries(spellDmg||{}).filter(x=>x[1]>0&&SPELL_DEF[x[0]]).sort((a,b)=>b[1]-a[1]);
+  if(!ents.length) return '';
   const tot=ents.reduce((s,x)=>s+x[1],0), top=ents.slice(0,3), medal=MEDAL;
   let h='<div style="font-size:12px;color:#9a8fb8;margin-bottom:5px;letter-spacing:.5px;">'+SWD+' 本局输出担当</div>';
   top.forEach((x,i)=>{ const d=SPELL_DEF[x[0]], pct=Math.round(x[1]/tot*100);
@@ -4557,22 +4557,33 @@ function buildMvp(){
       +'<span style="flex:1;"></span><b style="color:#ffd97a;">'+fmtNum(x[1])+'</b>'
       +'<span style="color:#8a7fb8;font-size:11px;min-width:32px;text-align:right;">'+pct+'%</span></div>';
   });
-  el.innerHTML=h;
+  return h;
 }
-function buildDmgBreakdown(){
-  const el=$('ovDmg'); if(!el) return;
+function buildMvp(){ const el=$('ovMvp'); if(!el){return;} el.innerHTML=mvpHTML(runSpellDmg); }
+function dmgBreakdownHTML(src){
+  src=src||{};
   const order=['melee','boss','bullet','blast','poison'];
-  let total=0; for(const k of order) total+=(runDmgBySrc[k]||0);
-  if(total<=0){ el.innerHTML=''; return; }
-  const items=order.map(k=>({k,v:runDmgBySrc[k]||0})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+  let total=0; for(const k of order) total+=(src[k]||0);
+  if(total<=0) return '';
+  const items=order.map(k=>({k,v:src[k]||0})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
   let bar='', leg='';
   for(const it of items){ const pct=it.v/total*100, m=DMG_CAT_META[it.k];
     bar+='<div style="width:'+pct.toFixed(2)+'%;background:'+m.c+';"></div>';
     leg+='<span style="color:#cdbce0;white-space:nowrap;"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+m.c+';margin-right:4px;vertical-align:middle;"></span>'+m.n+' '+Math.round(pct)+'%</span>';
   }
-  el.innerHTML='<div style="font-size:11.5px;color:#9a8fc0;letter-spacing:.04em;margin-bottom:5px;text-align:center;">本局共失血 '+fmtNum(Math.round(total))+' · 来源构成</div>'+
+  return '<div style="font-size:11.5px;color:#9a8fc0;letter-spacing:.04em;margin-bottom:5px;text-align:center;">本局共失血 '+fmtNum(Math.round(total))+' · 来源构成</div>'+
     '<div style="display:flex;width:100%;height:13px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.07);">'+bar+'</div>'+
     '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px 12px;margin-top:7px;font-size:11px;">'+leg+'</div>';
+}
+function buildDmgBreakdown(){ const el=$('ovDmg'); if(!el) return; el.innerHTML=dmgBreakdownHTML(runDmgBySrc); }
+/* 致命一击 / 灵晶获得:抽成纯函数,死亡页与「上局战报」共用(战报存原始数据→打开时用当前图标重渲染,图标修复自动生效) */
+function causeHTML(cause, blowDmg){
+  if(!cause) return '';
+  const _dt=blowDmg>0?(' · <span style="color:#ff6b6b;font-weight:800;">−'+blowDmg+'</span>'):'';
+  return '<div style="font-size:15px;font-weight:800;color:#ff8aa3;letter-spacing:.5px;">'+SKULL+' 致命一击'+_dt+'</div><div style="font-size:12.5px;color:#cba0b8;margin-top:3px;line-height:1.4;">被 <b style="color:#ffb3c8;">'+cause+'</b> 击败</div>';
+}
+function gainHTML(reward, total, renownHTML){
+  return GEM+' 本局获得 <b>'+reward+'</b> 灵晶 · 累计 '+total+(renownHTML||'');
 }
 function gameOver(manual){
   state='over'; clearResume(); if(!manual)S.die();
@@ -4590,12 +4601,12 @@ function gameOver(manual){
   recordRunBest();   /* 破纪录判定(存盘前比旧值)+ 持久化个人最佳;含每日 streak */
   saveProfile();
   $('ovWave').textContent=waveNum; $('ovKill').textContent=kills;
-  { const _cz=$('ovCause'); if(_cz){ if(deathCause && !manual){ const _dt=deathBlowDmg>0?(' · <span style="color:#ff6b6b;font-weight:800;">−'+deathBlowDmg+'</span>'):''; _cz.innerHTML='<div style="font-size:15px;font-weight:800;color:#ff8aa3;letter-spacing:.5px;">'+SKULL+' 致命一击'+_dt+'</div><div style="font-size:12.5px;color:#cba0b8;margin-top:3px;line-height:1.4;">被 <b style="color:#ffb3c8;">'+deathCause+'</b> 击败</div>'; } else _cz.innerHTML=''; } }
+  { const _cz=$('ovCause'); if(_cz) _cz.innerHTML=(deathCause&&!manual)?causeHTML(deathCause,deathBlowDmg):''; }
   { const _dm=$('ovDmg'); if(_dm){ if(manual) _dm.innerHTML=''; else buildDmgBreakdown(); } }
   { const _mv=$('ovMvp'); if(_mv){ if(manual) _mv.innerHTML=''; else buildMvp(); } }
-  awardLj(); $('ovGain').innerHTML=GEM+' 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj + renownEndHTML();
+  awardLj(); $('ovGain').innerHTML=gainHTML(runRewardBase, META.lj, renownEndHTML());
   $('ovAch').innerHTML=achSummaryHTML();
-  if(!manual) saveLastReport({result:'over', wave:waveNum, kill:kills, cause:$('ovCause').innerHTML, dmg:$('ovDmg').innerHTML, mvp:$('ovMvp').innerHTML, gain:$('ovGain').innerHTML, ach:$('ovAch').innerHTML});
+  if(!manual) saveLastReport({v:2, result:'over', wave:waveNum, kill:kills, cause:deathCause, blowDmg:deathBlowDmg, dmgBySrc:Object.assign({},runDmgBySrc), spellDmg:Object.assign({},runSpellDmg), gainReward:runRewardBase, gainTotal:META.lj, renownHTML:renownEndHTML(), ach:$('ovAch').innerHTML});
   $('over').classList.remove('hidden');
   setupEndLeaderboard('ov');
 }
@@ -4634,9 +4645,9 @@ function victory(){
   if(difficulty>=5 && _runT<900) unlockAch('god_speed');
   saveProfile();
   $('wnKill').textContent=kills;
-  awardLj(); $('wnGain').innerHTML=GEM+' 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj + renownEndHTML();
+  awardLj(); $('wnGain').innerHTML=gainHTML(runRewardBase, META.lj, renownEndHTML());
   $('wnAch').innerHTML=achSummaryHTML();
-  saveLastReport({result:'win', wave:waveNum, kill:kills, cause:'', dmg:'', mvp:'', gain:$('wnGain').innerHTML, ach:$('wnAch').innerHTML});
+  saveLastReport({v:2, result:'win', wave:waveNum, kill:kills, cause:'', blowDmg:0, dmgBySrc:{}, spellDmg:{}, gainReward:runRewardBase, gainTotal:META.lj, renownHTML:renownEndHTML(), ach:$('wnAch').innerHTML});
   $('win').classList.remove('hidden');
   setupEndLeaderboard('wn');
 }
@@ -4645,7 +4656,7 @@ function victory(){
 function saveLastReport(rep){
   try{ rep.t=Date.now(); rep.diff=(typeof diffData==='function'?diffData().name:''); localStorage.setItem('sf_last_report', JSON.stringify(rep)); }catch(e){}
 }
-function getLastReport(){ try{ return JSON.parse(localStorage.getItem('sf_last_report')||'null'); }catch(e){ return null; } }
+function getLastReport(){ try{ const r=JSON.parse(localStorage.getItem('sf_last_report')||'null'); return (r&&r.v===2)?r:null; }catch(e){ return null; } }
 function _lrRelTime(t){
   if(!t) return ''; const d=Date.now()-t;
   if(d<60000) return '刚刚';
@@ -4668,10 +4679,10 @@ function openLastReport(){
   if(meta) meta.innerHTML=tag+' · '+(rep.diff||'')+(when?(' · '+when):'');
   document.getElementById('lrWave').textContent=rep.wave;
   document.getElementById('lrKill').textContent=rep.kill;
-  document.getElementById('lrCause').innerHTML=rep.cause||'';
-  document.getElementById('lrDmg').innerHTML=rep.dmg||'';
-  document.getElementById('lrMvp').innerHTML=rep.mvp||'';
-  document.getElementById('lrGain').innerHTML=rep.gain||'';
+  document.getElementById('lrCause').innerHTML=rep.cause?causeHTML(rep.cause,rep.blowDmg||0):'';
+  document.getElementById('lrDmg').innerHTML=dmgBreakdownHTML(rep.dmgBySrc||{});
+  document.getElementById('lrMvp').innerHTML=mvpHTML(rep.spellDmg||{});
+  document.getElementById('lrGain').innerHTML=gainHTML(rep.gainReward||0,rep.gainTotal||0,rep.renownHTML||'');
   document.getElementById('lrAch').innerHTML=rep.ach||'';
   document.getElementById('lastReport').classList.remove('hidden');
 }
