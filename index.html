@@ -150,6 +150,10 @@
   .btn.ghost{background:linear-gradient(180deg,rgba(74,67,128,.16),rgba(74,67,128,.05));border:1px solid #4a4380;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#bdb4ea;font-weight:600;}
   @media(hover:hover){ .btn.ghost:hover{border-color:#5d56a0;background:linear-gradient(180deg,rgba(92,84,160,.22),rgba(74,67,128,.08));} }
   .lb-title{color:#bdb4ea;font-size:12px;letter-spacing:.22em;margin-top:16px;margin-bottom:2px;}
+  .last-report-entry{display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;max-width:100%;margin:15px auto 1px;padding:7px 17px;border-radius:20px;border:1px solid rgba(150,120,230,.34);background:rgba(42,32,66,.5);color:#c2b4ec;font-size:12px;font-weight:600;letter-spacing:.03em;text-align:center;cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+  .last-report-entry:hover{border-color:rgba(178,148,252,.62);color:#e8dcff;background:rgba(56,44,86,.62);}
+  .last-report-entry svg{width:15px;height:15px;flex:none;}
+  .last-report-entry .lre-sub{opacity:.66;font-weight:400;margin-left:1px;}
   .lb-tabs{display:flex;gap:6px;margin-top:6px;}
   .lb-tab{padding:4px 13px;border-radius:999px;border:1px solid #3b3370;background:linear-gradient(180deg,rgba(34,26,60,.55),rgba(17,12,36,.55));color:#9a8fd0;font-size:11px;cursor:pointer;letter-spacing:.05em;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s,color .12s,box-shadow .12s;}
   .lb-tab.active{background:linear-gradient(135deg,#7a5cff,#37a4ff);color:#fff;border-color:transparent;font-weight:700;}
@@ -366,6 +370,7 @@
       <button id="bBeast"><svg class="mbi" viewBox="0 0 64 64"><path d="M20 21 Q13 10 15 5 Q22 12 24 21 Z" fill="#caa050" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M44 21 Q51 10 49 5 Q42 12 40 21 Z" fill="#caa050" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M15 27 Q15 16 32 16 Q49 16 49 27 Q51 41 40 51 Q32 57 24 51 Q13 41 15 27 Z" fill="#5ec5a0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M22 31 L30 33 M42 31 L34 33" stroke="#241636" stroke-width="2.6" stroke-linecap="round"/><circle cx="26" cy="34" r="2.5" fill="#241636"/><circle cx="38" cy="34" r="2.5" fill="#241636"/><path d="M27 43 Q32 47 37 43" fill="none" stroke="#241636" stroke-width="2.4" stroke-linecap="round"/><path d="M29.5 43 L28.5 48 M34.5 43 L35.5 48" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="25" r="2" fill="#bff0dd" opacity=".8"/></svg> 异兽图鉴</button>
       <button id="bAchv"><svg class="mbi" viewBox="0 0 64 64"><path d="M18 20 Q10 20 12 30 Q13 35 20 35" fill="none" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M46 20 Q54 20 52 30 Q51 35 44 35" fill="none" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M18 15 L46 15 L44 32 Q32 43 20 32 Z" fill="#ffcf5a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><rect x="29" y="40" width="6" height="7" fill="#d99a2a" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><rect x="22" y="46" width="20" height="5" rx="2" fill="#ffcf5a" stroke="#241636" stroke-width="2.6"/><rect x="17" y="51" width="30" height="5" rx="2" fill="#d99a2a" stroke="#241636" stroke-width="2.8"/><path d="M32 19 l1.7 4.2 4.4 .3 -3.4 2.8 1.1 4.3 -3.8 -2.4 -3.8 2.4 1.1 -4.3 -3.4 -2.8 4.4 -.3 z" fill="#fff3c0" stroke="#241636" stroke-width="1.3" stroke-linejoin="round"/></svg> 成就一览</button>
     </div>
+    <button id="lastReportEntry" class="last-report-entry" style="display:none;"><svg viewBox="0 0 64 64"><path d="M16 12 Q16 9 19 9 L40 9 L52 21 L52 52 Q52 55 49 55 L19 55 Q16 55 16 52 Z" fill="#f2e8d0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M40 9 L40 21 L52 21" fill="#ddcfae" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><path d="M23 30 L45 30 M23 38 L45 38 M23 46 L38 46" stroke="#a8966e" stroke-width="2.4" stroke-linecap="round"/></svg>上局战报<span class="lre-sub" id="lreLabel"></span></button>
     <div class="lb-title" id="lbTitle"><svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg> 英雄榜 · TOP 10</div>
     <div id="lbTabs" class="lb-tabs">
       <button class="lb-tab active" data-period="all">总榜</button>
@@ -538,12 +543,34 @@
   </div>
 </div>
 
+<!-- 上局战报 -->
+<div id="lastReport" class="overlay hidden" style="z-index:55;">
+  <div class="panel">
+    <button class="ovx-close" id="lastReportClose" aria-label="关闭" title="关闭">✕</button>
+    <div class="eyebrow" style="color:#8b7df0;">Last Run</div>
+    <h1 class="title" style="font-size:30px;margin-bottom:4px;">上局战报</h1>
+    <div id="lrMeta" style="font-size:12.5px;color:#b3a8d8;margin:0 0 12px;letter-spacing:.04em;"></div>
+    <div class="stats">
+      <div class="stat"><b id="lrWave">0</b><span>抵达波次</span></div>
+      <div class="stat"><b id="lrKill">0</b><span>击杀</span></div>
+    </div>
+    <div id="lrCause" style="font-size:13px;color:#d9a6b8;margin:2px 0 8px;line-height:1.4;"></div>
+    <div id="lrDmg" style="width:100%;margin:0 0 8px;"></div>
+    <div id="lrMvp" style="width:100%;margin:0 0 8px;"></div>
+    <div id="lrGain" style="width:100%;margin:0 0 8px;"></div>
+    <div id="lrAch"></div>
+    <button class="btn ghost" id="lastReportBack" style="margin-top:8px;">返回</button>
+  </div>
+</div>
+
 <!-- 暂停 -->
 <div id="changelog" class="overlay hidden"><div class="panel" style="max-width:560px;max-height:80vh;overflow-y:auto;text-align:left;">
 <button class="ovx-close" id="clCloseTop" aria-label="关闭" title="关闭">✕</button>
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.18 · 2026-06-21</div><div class="cl-i">📜 <b>新增「上局战报」——随时回看上一局打成什么样。</b>主菜单英雄榜上方多了个<b>「上局战报」</b>入口(打过一局才出现),点开就能重温上一局的完整结算:<b>抵达波数、击杀、被谁的什么招式击败</b>(战死时)、<b>本局失血来源</b>色条、<b>输出最高的前三个法术</b>、以及<b>本局解锁的成就</b>。不管赢还是输都会记录,下一局开始前想复盘一下很方便。<b>纯新增的查看功能,不影响任何玩法 / 数值 / 平衡。</b></div></div>
+<div class="cl-v"><div class="cl-h">v85.17 · 2026-06-20</div><div class="cl-i">🔧 <b>两处体验优化(来自试玩反馈)。</b>① <b>战斗里「剩余 N 只」更醒目了</b>——原来字小又暗,容易没注意到,现在加大加粗、颜色提亮,还补上了「只」字。② <b>进化技能升级时不再显示成「普通」了</b>——焚天 / 雷罚 / 万刃 / 永冬之矛这类组合进化技能,之前在选牌升级时被标成「普通」稀有度,现在正确显示为「史诗」。<b>纯显示,出现频率与升级价分毫未动,玩法 / 平衡 / 冲榜公平不受任何影响。</b></div></div>
 <div class="cl-v"><div class="cl-h">v85.16 · 2026-06-20</div><div class="cl-i">⚡ <b>给上一版 3 把新法杖补上了专属的战斗手持造型。</b>之前链雷杖 / 回旋杖 / 引力杖在战斗里拿的还是通用法杖外形,这版各画了一套:链雷杖是蓝色能量球前喷出黄色锯齿闪电、引力杖是会旋转的紫色漩涡、回旋杖是会自转的回旋镖(身后还带一圈折返光弧)。<b>纯视觉,玩法 / 数值一概没动。</b></div></div>
 <div class="cl-v"><div class="cl-h">v85.15 · 2026-06-20</div><div class="cl-i">🎨 <b>给上一版 6 件新遗物补上了手绘图标。</b>v85.14 的贯穿符 / 奥术回响 / 荆棘符 / 残影靴 / 首杀祭礼 / 连杀战意之前还是系统 emoji,这版换成和全游戏统一的手绘 SVG。纯视觉,玩法 / 数值一概没动。</div></div>
 <div class="cl-v"><div class="cl-h">v85.14 · 2026-06-20</div><div class="cl-i">⚡ <b>新增 3 把法杖 + 6 件遗物（纯新增，不改任何现有数值，冲榜公平不受影响）。</b><br><b>法杖：</b>链雷杖（命中后闪电链击附近敌人、各 50% 伤害，怪越密越强）、回旋杖（法术弹飞出一段后回旋折返，去程回程各命中一次）、引力杖（缓慢引力球把周围敌人拖拽聚成一团，球身伤害低、专配范围法术连招）。三把均可用灵晶解锁。<br><b>遗物：</b>贯穿符（穿透 +1）、奥术回响（22% 几率立即额外射一发）、荆棘符（接触受伤反弹 50%）、残影靴（冲刺穿过的敌人受伤）、首杀祭礼（每波首次击杀回 6 血）、连杀战意（连杀加伤上限与每层都提升）。<br>新法杖 / 遗物数值一经上线即固定（护榜铁律），均按现有同类强度谨慎设定。</div></div>
@@ -867,10 +894,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.16', APP_TIME='2026-06-20 22:30';
+const APP_VER='v85.18', APP_TIME='2026-06-21 08:45';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.16';
+const APP_NOTIFY_VER='v85.18';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -4514,6 +4541,7 @@ function gameOver(manual){
   { const _mv=$('ovMvp'); if(_mv){ if(manual) _mv.innerHTML=''; else buildMvp(); } }
   awardLj(); $('ovGain').innerHTML=GEM+' 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj + renownEndHTML();
   $('ovAch').innerHTML=achSummaryHTML();
+  if(!manual) saveLastReport({result:'over', wave:waveNum, kill:kills, cause:$('ovCause').innerHTML, dmg:$('ovDmg').innerHTML, mvp:$('ovMvp').innerHTML, gain:$('ovGain').innerHTML, ach:$('ovAch').innerHTML});
   $('over').classList.remove('hidden');
   setupEndLeaderboard('ov');
 }
@@ -4554,8 +4582,44 @@ function victory(){
   $('wnKill').textContent=kills;
   awardLj(); $('wnGain').innerHTML=GEM+' 本局获得 <b>'+runRewardBase+'</b> 灵晶 · 累计 '+META.lj + renownEndHTML();
   $('wnAch').innerHTML=achSummaryHTML();
+  saveLastReport({result:'win', wave:waveNum, kill:kills, cause:'', dmg:'', mvp:'', gain:$('wnGain').innerHTML, ach:$('wnAch').innerHTML});
   $('win').classList.remove('hidden');
   setupEndLeaderboard('wn');
+}
+
+/* ═══ 上局战报:死亡/通关时快照已渲染好的结算内容 + 主菜单入口重看(纯展示,不影响任何玩法/数值) ═══ */
+function saveLastReport(rep){
+  try{ rep.t=Date.now(); rep.diff=(typeof diffData==='function'?diffData().name:''); localStorage.setItem('sf_last_report', JSON.stringify(rep)); }catch(e){}
+}
+function getLastReport(){ try{ return JSON.parse(localStorage.getItem('sf_last_report')||'null'); }catch(e){ return null; } }
+function _lrRelTime(t){
+  if(!t) return ''; const d=Date.now()-t;
+  if(d<60000) return '刚刚';
+  if(d<3600000) return Math.floor(d/60000)+' 分钟前';
+  if(d<86400000) return Math.floor(d/3600000)+' 小时前';
+  if(d<7*86400000) return Math.floor(d/86400000)+' 天前';
+  const dt=new Date(t); return (dt.getMonth()+1)+'月'+dt.getDate()+'日';
+}
+function refreshLastReportEntry(){
+  const el=document.getElementById('lastReportEntry'); if(!el) return;
+  const rep=getLastReport();
+  if(rep){ el.style.display=''; const lab=document.getElementById('lreLabel'); if(lab) lab.textContent=' · '+(rep.diff||'')+' · 第 '+rep.wave+' 波'; }
+  else el.style.display='none';
+}
+function openLastReport(){
+  const rep=getLastReport(); if(!rep) return;
+  const meta=document.getElementById('lrMeta');
+  const tag=rep.result==='win'?'<b style="color:#9be0a8;">⚑ 通关</b>':'<b style="color:#ff8aa3;">✦ 战死</b>';
+  const when=_lrRelTime(rep.t);
+  if(meta) meta.innerHTML=tag+' · '+(rep.diff||'')+(when?(' · '+when):'');
+  document.getElementById('lrWave').textContent=rep.wave;
+  document.getElementById('lrKill').textContent=rep.kill;
+  document.getElementById('lrCause').innerHTML=rep.cause||'';
+  document.getElementById('lrDmg').innerHTML=rep.dmg||'';
+  document.getElementById('lrMvp').innerHTML=rep.mvp||'';
+  document.getElementById('lrGain').innerHTML=rep.gain||'';
+  document.getElementById('lrAch').innerHTML=rep.ach||'';
+  document.getElementById('lastReport').classList.remove('hidden');
 }
 
 /* ═══════════ 战绩卡 · 一键分享(v57) ═══════════ */
@@ -4945,15 +5009,17 @@ function achSummaryHTML(){
 function cardInfo(d){
   if(d.kind==='spell'){
     const def=SPELL_DEF[d.id], own=player.spells[d.id];
-    let desc=def.desc, rar=d.rar;
-    if(own){ rar=1;
+    let desc=def.desc, rar=d.rar, dispRar=d.rar;
+    if(own){ rar=1; dispRar=1;
       desc='升级 Lv'+(own.lv+1)+'：'+(def.upg||'伤害提升，施法更快');
       /* 可进化法术升到进化门槛起，点明 Lv5 是进化点（非上限），配齐对应符文即可进化 */
       if(EVO_BASES[d.id]&&(own.lv+1)>=EVO_LV) desc+='（Lv'+EVO_LV+' 进化门槛 ✨·配对应符文可进化）';
+      /* 进化形态(组合技)升级卡:权重/升级价仍按普通(出现频率与价格分毫不变=不动平衡/榜),仅"显示稀有度"标为史诗,符合"组合技应为稀有"的反馈 */
+      if(d.evoForm) dispRar=3;
     }
-    return {id:d.id,kind:d.kind,rar,name:def.name,icon:def.icon,desc};
+    return {id:d.id,kind:d.kind,rar,dispRar,name:def.name,icon:def.icon,desc};
   }
-  return {id:d.id,kind:d.kind,rar:d.rar,name:d.name,icon:d.icon,desc:d.desc};
+  return {id:d.id,kind:d.kind,rar:d.rar,dispRar:d.rar,name:d.name,icon:d.icon,desc:d.desc};
 }
 function rollCards(n){
   let pool=CARD_DEFS.filter(d=>{
@@ -5033,9 +5099,9 @@ function buildCards(){
   const opts=rollCards(3);
   for(const c of opts){
     const el=document.createElement('button');
-    el.className='card r'+c.rar;
+    el.className='card r'+(c.dispRar||c.rar);
     el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">'+c.name+
-      '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+['','普通','稀有','史诗'][c.rar]+'</div>';
+      '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+['','普通','稀有','史诗'][c.dispRar||c.rar]+'</div>';
     el.onclick=()=>{ S.card(); applyCard(c);
       $('cards').classList.add('hidden');
       if(shopWave(waveNum)){ openShop(); }
@@ -5089,7 +5155,7 @@ function buildShopItems(){
         el.className='card r1 dis';
         el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">法术槽已满 · 先卖出</div></div>';
       }else{
-        el.className='card r'+c.rar;
+        el.className='card r'+(c.dispRar||c.rar);
         el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">'+c.name+
           '</div><div class="cd">'+c.desc+'</div></div><div class="cr">'+price+'💰</div>';
       }
@@ -7893,8 +7959,8 @@ function drawHUD(){
   if(waveCx-wWaveW/2 < hpRight+10) waveCx=hpRight+10+wWaveW/2;
   ctx.fillStyle='#ffd98a';
   ctx.fillText(waveStr,waveCx,top+10);
-  ctx.fillStyle='#8b7df0';ctx.font='10px sans-serif';
-  ctx.fillText('剩余 '+(enemies.length+spawnQ.length),waveCx,top+26);
+  ctx.fillStyle='#c3b6ff';ctx.font='bold 13px sans-serif';
+  ctx.fillText('剩余 '+(enemies.length+spawnQ.length)+' 只',waveCx,top+27);
   /* 击杀/金币:移到血条下方左侧,避开右上角的暂停/静音按钮(原先在右上角被按钮遮挡) */
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
   ctx.fillText('☠ '+kills,16,top+40);
@@ -8092,7 +8158,7 @@ function padFocusables(ov){
   return out;
 }
 function padActiveOverlay(){
-  const ids=['paused','over','win','shop','wandUnlock','wandSel','cards','relic','wardrobe','altar','backup','daily','codex','bestiary','achv','changelog','shareCard','tutorial','menu'];
+  const ids=['paused','over','win','lastReport','shop','wandUnlock','wandSel','cards','relic','wardrobe','altar','backup','daily','codex','bestiary','achv','changelog','shareCard','tutorial','menu'];
   for(const id of ids){ const el=$(id); if(el&&!el.classList.contains('hidden')) return el; }
   return null;
 }
@@ -8305,6 +8371,7 @@ function refreshResumeBtn(){
   if(s){ b.style.display=''; const sub=$('resumeRunSub');
     if(sub) sub.textContent='（'+(s.endless?'无尽 · ':'')+'第 '+s.wave+' 波 · '+((DIFFICULTIES[s.diff-1]||{}).name||'')+'）'; }
   else b.style.display='none';
+  try{ refreshLastReportEntry(); }catch(e){}
 }
 function resumeRun(){
   if(state==='play') return;               /* 防连点/重复进入 */
@@ -8481,6 +8548,9 @@ $('shopCodexBtn').onclick=openCodex;
 bindConfirm($('retryBtn'), '⚠️ 确定再次挑战？再点一次', ()=>{ initAudio(); $('over').classList.add('hidden'); buildWandSel(); });
 $('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
+{ const _lre=$('lastReportEntry'); if(_lre) _lre.onclick=()=>{ try{S.card();}catch(e){} openLastReport(); }; }
+{ const _lc=$('lastReportClose'); if(_lc) _lc.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
+{ const _lb=$('lastReportBack'); if(_lb) _lb.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
 $('rerollBtn').onclick=()=>{ if(coins>=REROLL_COST){coins-=REROLL_COST;S.card();buildCards();} else S.no(); };
 $('shopHeal').onclick=()=>{ const _hc=healCost(); if(coins>=_hc&&player.hp<player.maxhp){coins-=_hc;heal(9999);S.buy();runBoughtShop=true;refreshShopHead();refreshShopBtns();} else S.no(); };
 $('shopReroll').onclick=()=>{ const _rc=rerollCost(); if(coins>=_rc){coins-=_rc;S.card();runBoughtShop=true;buildShopItems();refreshShopHead();refreshShopBtns();} else S.no(); };
