@@ -571,6 +571,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v85.24 · 2026-06-21</div><div class="cl-i">🐛 <b>再修左下「法术条」退出再进就消失的问题</b>:之前它的位置贴着屏幕最底、没避开微信底部工具栏/安全区,某些情况会被挡住且不恢复。现在把它抬到和右下「冲刺键」同一安全高度(冲刺键一直都正常显示),就不会再被挡了。纯位置调整,玩法/数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.23 · 2026-06-21</div><div class="cl-i">🐛 <b>修复左下「法术数据条」有时不显示的问题</b>:上版用到的画布裁剪在微信浏览器里有兼容问题,某些情况会把这条的内容整块裁掉。已改用别的方式防溢出,法术条不会再无故消失。纯修复,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.22 · 2026-06-21</div><div class="cl-i">🎨 <b>战斗界面里的系统 emoji 全部换成手绘图标</b>:右上角暂停 / 静音按钮、左上血量 / 击杀 / 金币、拾取金币飘字、回血道具、冲刺键的风、Boss 护罩标记,以及左下「法术数据条」里的法杖 / 法术 / 符文 / 诅咒图标——现在都是统一画风。固定图标用 canvas 笔刷直接画(任何设备表现一致);法杖 / 法术那种每个不同的,复用现成手绘 SVG。纯显示,玩法 / 数值不变。</div></div>
 <div class="cl-v"><div class="cl-h">v85.21 · 2026-06-21</div><div class="cl-i">🔧 <b>「上局战报」现在实时按数据生成</b>,不再是阵亡时存下的旧快照——以后任何图标 / 样式更新都会<b>自动反映到战报里</b>(这也是之前修过的图标在旧战报里没更新的原因;你的旧战报会刷新一次)。另外把死亡页 / 通关页「生成战绩图 · 分享」按钮上最后一个系统 emoji(相机)也换成了手绘。纯显示修复,玩法 / 数值不变。</div></div>
@@ -907,10 +908,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v85.23', APP_TIME='2026-06-21 12:45';
+const APP_VER='v85.24', APP_TIME='2026-06-21 13:00';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v85.23';
+const APP_NOTIFY_VER='v85.24';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   relic_pierce: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="13" fill="#6b7a8f" stroke="#241636" stroke-width="2.8"/><circle cx="32" cy="32" r="4.5" fill="#39434f"/><path d="M13 51 L49 15" stroke="#241636" stroke-width="8.5" stroke-linecap="round"/><path d="M13 51 L49 15" stroke="#46c8d8" stroke-width="4.2" stroke-linecap="round"/><path d="M54 10 L43 13 L51 21 Z" fill="#46c8d8" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 52 L19 49 M12 52 L15 59" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><circle cx="45" cy="19" r="1.8" fill="#cdf3f8" opacity=".85"/></svg>',
@@ -8226,7 +8227,8 @@ function drawHUD(){
   /* 横屏+固定摇杆:留在底部、右移到摇杆右侧;竖屏:维持上移避让 */
   const landscapeFx = (W > H*1.3) && fixedStick && usingTouch;
   let bx0 = 12;
-  const by0b=H-bh-12-(usingTouch?6:0);
+  /* 触屏:抬到冲刺键同档高度(底边 = H-72-safeB),避开微信底部工具栏/安全区——冲刺键在此高度每局都可见,是安全参照。桌面维持原位 */
+  const by0b=usingTouch ? (H-bh-72-safeB) : (H-bh-12);
   let by0=by0b;
   if(fixedStick&&usingTouch){
     if(landscapeFx){ bx0 = Math.round(ljBaseX()+78); }
