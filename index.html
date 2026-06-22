@@ -572,7 +572,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
-<div class="cl-v"><div class="cl-h">v86.3 · 2026-06-22</div><div class="cl-i">🟡 修复:<b>水龙吟 / 蛟龙出海</b>的大水球(尤其配<b>引力杖</b>聚团、或<b>巨化</b>放大后)会糊成一大片白、挡住视野——大球改用实色混合 + 钳制光晕尺寸,重叠时也是清晰可辨的青色水珠,不再相加爆白;普通法术弹不受影响</div></div><div class="cl-v"><div class="cl-h">v86.1–v86.2 · 2026-06-21</div><div class="cl-i">🟡 <b>战斗界面 HUD 优化</b>:波次+剩余合并为一行;Boss 血条上移并避让右上角按钮与「剩余」文字;阵型播报「围猎」等改为屏幕中央闪现(不再常驻顶部挡血条);移除顶部分隔线——顶栏更清爽、战斗区更开阔<br>🟡 修复图鉴里「万蛊噬天 / 饕餮吞天」进化符文要求误显示为英文(amp / bounce)→ 增幅符文 / 弹射符文<br>🟡 渲染加坐标兜底:任何实体坐标异常(NaN)跳过该帧绘制,杜绝主循环白屏卡死</div></div>
+<div class="cl-v"><div class="cl-h">v86.3–v86.5 · 2026-06-22</div><div class="cl-i">🟡 修复:<b>水龙吟 / 蛟龙出海</b>的大水球(尤其配<b>引力杖</b>聚团、或<b>巨化</b>放大后)会糊成一大片白、挡住视野——大球改用实色混合 + 钳制光晕尺寸,重叠时也是清晰可辨的青色水珠,不再相加爆白;普通法术弹不受影响<br>🟡 左下角<b>法术数据条改为默认隐藏</b>(需要的话在暂停菜单可重新开启)——多数玩家平时用不到,隐藏后战斗界面更清爽<br>🟡 修复<b>窄屏</b>(如 iPhone SE / mini)下顶部「波次 + 剩余」一行可能被右上角按钮压住——窄屏自动等比缩小该行,确保与血条、按钮都不重叠;宽屏显示不变</div></div><div class="cl-v"><div class="cl-h">v86.1–v86.2 · 2026-06-21</div><div class="cl-i">🟡 <b>战斗界面 HUD 优化</b>:波次+剩余合并为一行;Boss 血条上移并避让右上角按钮与「剩余」文字;阵型播报「围猎」等改为屏幕中央闪现(不再常驻顶部挡血条);移除顶部分隔线——顶栏更清爽、战斗区更开阔<br>🟡 修复图鉴里「万蛊噬天 / 饕餮吞天」进化符文要求误显示为英文(amp / bounce)→ 增幅符文 / 弹射符文<br>🟡 渲染加坐标兜底:任何实体坐标异常(NaN)跳过该帧绘制,杜绝主循环白屏卡死</div></div>
 <div class="cl-v"><div class="cl-h maj">v86.0 · 2026-06-21</div><div class="cl-i">⚡ <b>新增 4 个法术进化!</b>(基础法术升至 <b>Lv5</b> + 对应符文,选牌时出现进化卡)<br><br>🌊 <b>水龙吟 → 蛟龙出海</b>(巨化):滔天巨浪横扫整线,贯穿击退更猛,沿途之敌濡湿减速<br>🦠 <b>蛊毒 → 万蛊噬天</b>(增幅):疫气更烈、传染更广,染疫者死亡炸开自我蔓延的尸毒云,连锁烂遍全场<br>🔵 <b>奥术球 → 星环</b>(多重):双星环绕、更大更快,持续射出可穿透的奥术弹<br>🩸 <b>噬魂印 → 饕餮吞天</b>(弹射):带印之敌死亡尸爆更大、连锁引爆周围带印之敌,回血翻倍<br><br>四进化均配手绘 SVG 图标 · 护榜铁律,现有数值一律不动</div></div>
 <div class="cl-v"><div class="cl-h">v85.20–v85.30 · 2026-06-21</div><div class="cl-i">✨ <b>更新说明改版</b> + 战斗界面收尾 + 难度灵晶系数 + 续局存档修复。① 更新说明里<b>重大更新(新法杖 / 法术 / 进化 / 遗物 / Boss / 角色 / 系统)的版本号标成醒目青色</b>,一眼能找到;两版重大之间的小更新合并精简。② 左下「法术数据条」改为默认显示,并修好「退出再进就消失 / 有时被裁掉」,位置下调不挡画面。③ 战斗界面剩余系统 emoji(暂停 / 静音 / 血量 / 击杀 / 金币 / 护罩等)全换成手绘图标;「上局战报」改为实时按数据生成。④ 修好御风弓 + 大型法术(如水龙波)化成的巨箭被一圈黑边 / 黑团裹住的问题——箭芯随大小填满、深色只留一圈细描边、拖尾收成锥形,大箭干净清晰。⑤ 「上局战报」改为可上下滑动,矮屏 / 折叠屏也能滑到底部的成就与返回键。⑥ <b>新增「难度灵晶系数」</b>:结算灵晶按难度缩放——凡尘 ×0.8 / 通玄 ×1.0 / 入圣 ×1.25 / 渡劫 ×1.6 / 弑神 ×2.2,越难拿得越多、作为对挑战的回报;难度选择界面与战报都标出系数与基础值。<b>仅影响灵晶产出,战斗数值(伤害 / 血量 / 冷却)与榜单不受影响。</b>⑦ 补齐 13 个「协同」手绘图标(陨石雨 / 雷霆网 / 毒沼 / 虚空回响 / 剑刃风暴 / 冰封 等),<b>至此战斗界面再无 emoji、全部手绘 SVG</b>。纯显示,玩法数值不变。⑧ <b>修好「续上一局」后存档还原不全的问题</b>:此前切后台 / 网页重载再续局,会丢失抽卡计数,导致<b>满级开关型符文(如分裂符文)被重复刷到、甚至能借续局突破符文上限</b>;同时战报的「最高伤害法术 / 致死来源」与「限时 / 无冲刺 / 单法术」成就判定也会被续局重置。现在这些状态全部正确存档还原(旧存档也据现有信息重建修复)。<b>只修存档还原,不动任何战斗数值;灵晶与上榜分数本就由波数 + 击杀现算、一直正确。</b></div></div>
 <div class="cl-v"><div class="cl-h maj">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
@@ -812,10 +812,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v86.3', APP_TIME='2026-06-22 00:18';
+const APP_VER='v86.5', APP_TIME='2026-06-22 10:45';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v86.3';
+const APP_NOTIFY_VER='v86.5';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1791,8 +1791,8 @@ let powerSave=false;   /* v79 省电模式:限帧30 + 压特效,存 sf_powersave
 function applyFx(){ fxAlpha = powerSave ? Math.min(fxAlphaUser,.45) : fxAlphaUser; }
 const FX_CLOUD_DRAW=46, FX_BH_DRAW=18, FX_CYC_DRAW=14;  /* 持续特效「同屏最多画几个」的纯渲染上限(火海/毒云/黑洞/飓风高级时会铺满屏+卡)。超出的仍存在、照常吸入与造成伤害——只是不画 → 零数值改动、冲榜公平不变 */
 let sellConfirm=true;   /* 出售技能二次确认(防手滑误卖);暂停菜单开关,存 sf_sellconfirm,默认开 */
-let showSpellBar=true;  /* 左下角法术构筑栏显隐;暂停菜单开关,存 sf_spellbar,默认关(碍眼;想看构筑可点法术图鉴的「本局构筑」)。仅当玩家手动开过(键='1')才显示 */
-try{ showSpellBar = localStorage.getItem('sf_spellbar')!=='0'; }catch(e){}
+let showSpellBar=false;  /* 左下角法术构筑栏显隐;暂停菜单开关,存 sf_spellbar,默认关(碍眼;想看构筑可点法术图鉴的「本局构筑」)。仅当玩家手动开过(键='1')才显示 */
+try{ showSpellBar = localStorage.getItem('sf_spellbar')==='1'; }catch(e){}
 let dailyRun=false; /* 当前是否为每日挑战局 */
 let coins=0, combo=0, comboT=0, comboDmg=0, comboTierLv=0, ghosts=[];
 let _waveFirstKilled=false;
@@ -8041,19 +8041,23 @@ function drawHUD(){
   ctx.fillStyle='#fff';ctx.fillText(Math.ceil(player.hp)+' / '+player.maxhp,32,top+11.5);
   /* 波次 + 剩余:居中显示;若左端会与血条相撞,则整体右移到血条右侧,确保不重叠 */
   const hpRight=12+hw+8;
-  /* 波次 + 剩余 合并为一行(节省竖向空间;整组居中,撞血条则右移) */
+  /* 波次 + 剩余 合并为一行(节省竖向空间);窄屏整行等比缩放到「血条右缘 ↔ 右上按钮左缘」可用带内,杜绝与血条/按钮重叠 */
   ctx.textBaseline='alphabetic';
   ctx.font='900 16px "Songti SC","STSong",serif';
   const waveStr='第 '+waveNum+' 波'+(endless?' ∞':'');
-  const _wW=ctx.measureText(waveStr).width;
+  const _wW0=ctx.measureText(waveStr).width;
   const remStr='  剩余 '+(enemies.length+spawnQ.length)+' 只';
-  ctx.font='bold 12px sans-serif'; const _rW=ctx.measureText(remStr).width;
+  ctx.font='bold 12px sans-serif'; const _rW0=ctx.measureText(remStr).width;
+  const _btnL=W-100, _bandL=hpRight+8, _bandW=Math.max(40,_btnL-_bandL), _lineW0=_wW0+_rW0;
+  const _wsc=_lineW0>_bandW ? _bandW/_lineW0 : 1;   /* 仅窄屏触发缩放;宽屏 _wsc=1、与原渲染一致 */
+  const _wW=_wW0*_wsc, _rW=_rW0*_wsc;
   let _gx=W/2-(_wW+_rW)/2;
-  if(_gx < hpRight+8) _gx=hpRight+8;
+  if(_gx < _bandL) _gx=_bandL;
+  if(_gx+_wW+_rW > _btnL) _gx=_btnL-(_wW+_rW);
   ctx.textAlign='left';
-  ctx.font='900 16px "Songti SC","STSong",serif';ctx.fillStyle='#ffd98a';
+  ctx.font='900 '+(16*_wsc).toFixed(1)+'px "Songti SC","STSong",serif';ctx.fillStyle='#ffd98a';
   ctx.fillText(waveStr,_gx,top+16);
-  ctx.font='bold 12px sans-serif';ctx.fillStyle='#b3a6e0';
+  ctx.font='bold '+(12*_wsc).toFixed(1)+'px sans-serif';ctx.fillStyle='#b3a6e0';
   ctx.fillText(remStr,_gx+_wW,top+16);
   /* 击杀/金币:移到血条下方左侧,避开右上角的暂停/静音按钮(原先在右上角被按钮遮挡) */
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
@@ -8392,7 +8396,7 @@ try{ const sa=localStorage.getItem('sf_aim'); if(sa==='manual'||sa==='near'||sa=
 })();
 /* 左下角法术数据条 显隐开关:读存档 + 绑定(默认开) */
 (function(){ const sb=document.getElementById('spellBarBtn');
-  try{ showSpellBar = localStorage.getItem('sf_spellbar')!=='0'; }catch(e){}
+  try{ showSpellBar = localStorage.getItem('sf_spellbar')==='1'; }catch(e){}
   const upd=()=>{ if(sb)sb.textContent='左下角法术数据条：'+(showSpellBar?'开':'关'); };
   upd();
   if(sb) sb.onclick=()=>{ showSpellBar=!showSpellBar; try{localStorage.setItem('sf_spellbar',showSpellBar?'1':'0');}catch(e){} upd(); try{S.card();}catch(e){} };
