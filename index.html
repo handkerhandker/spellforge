@@ -572,7 +572,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
-<div class="cl-v"><div class="cl-h">v87.1 · 2026-06-22</div><div class="cl-i">🟡 <b>法盾 / 不死药图鉴说明修正</b>:这两个法术之前套用通用「冷却 X s」模板、数字会误导(法盾真实节奏是<b>持续 4s + 强制空窗 2s</b>、不死药免死有<b>7 秒冷却地板</b>,显示的小冷却数并不是真实保护频率)。现在图鉴、本局构筑、选牌升级说明都改成<b>如实反映机制</b>。<br>🟡 修复<b>不死药「免死回血」会溢出超过满血</b>(高等级时回到生命上限的 117%)——现在钳到满血。<br>🟡 <b>不死药练满后不再出现在三选一里</b>:它的冷却(Lv13 封顶 7s)与回血(Lv20 封顶满血)双双触顶、再升级零收益,满效后就不再作为升级卡刷出来、不浪费选牌(与满级符文同理)。<br>以上<b>不改动任何战斗数值</b>(伤害 / 冷却 / 范围 / 次数),仅修显示误导 + 免死溢出 + 满效退池,护榜与排行公平不受影响。</div></div><div class="cl-v"><div class="cl-h maj">v87.0 · 2026-06-22</div><div class="cl-i">✨ <b>全新「终极技」系统!</b>战斗中<b>击杀与受击会积攒能量</b>,蓄满后可释放一记横扫全场的大招(右下角能量满时<b>青光跳动提醒</b>;触屏点按键 / 键盘 <b>R</b> / 手柄 <b>Y</b> 均可放)。<br><br>六把法杖各有<b>专属大招</b>,其余法杖通用「法术新星」:<br>✦ <b>学徒 · 法术新星</b>:环形冲击波,击退 + 范围伤害<br>⚡ <b>链雷 · 天罚雷网</b>:全场连锁闪电<br>🌌 <b>引力 · 坍缩黑洞</b>:吸入聚拢 → 坍缩内爆<br>🏹 <b>御风 · 万箭齐发</b>:漫天追踪箭雨、贯穿全场<br>🔥 <b>熔火 · 炎狱火海</b>:烈焰覆盖全场、持续灼烧<br>❄ <b>玄霜 · 寒冰天牢</b>:全场冻结定身<br><br>所有大招特效都做了<b>全地图底色可读性</b>(雪原 / 沙漠等亮地形上也清晰),顺带让链雷杖平时的链电在亮地图更醒目。<b>纯新增系统,不改动任何现有法杖 / 法术 / 敌人数值;大招数值为初版,将按真机反馈调平衡。</b></div></div><div class="cl-v"><div class="cl-h">v86.3–v86.5 · 2026-06-22</div><div class="cl-i">🟡 修复:<b>水龙吟 / 蛟龙出海</b>的大水球(尤其配<b>引力杖</b>聚团、或<b>巨化</b>放大后)会糊成一大片白、挡住视野——大球改用实色混合 + 钳制光晕尺寸,重叠时也是清晰可辨的青色水珠,不再相加爆白;普通法术弹不受影响<br>🟡 左下角<b>法术数据条改为默认隐藏</b>(需要的话在暂停菜单可重新开启)——多数玩家平时用不到,隐藏后战斗界面更清爽<br>🟡 修复<b>窄屏</b>(如 iPhone SE / mini)下顶部「波次 + 剩余」一行可能被右上角按钮压住——窄屏自动等比缩小该行,确保与血条、按钮都不重叠;宽屏显示不变</div></div><div class="cl-v"><div class="cl-h">v86.1–v86.2 · 2026-06-21</div><div class="cl-i">🟡 <b>战斗界面 HUD 优化</b>:波次+剩余合并为一行;Boss 血条上移并避让右上角按钮与「剩余」文字;阵型播报「围猎」等改为屏幕中央闪现(不再常驻顶部挡血条);移除顶部分隔线——顶栏更清爽、战斗区更开阔<br>🟡 修复图鉴里「万蛊噬天 / 饕餮吞天」进化符文要求误显示为英文(amp / bounce)→ 增幅符文 / 弹射符文<br>🟡 渲染加坐标兜底:任何实体坐标异常(NaN)跳过该帧绘制,杜绝主循环白屏卡死</div></div>
+<div class="cl-v"><div class="cl-h">v87.2 · 2026-06-22</div><div class="cl-i">🟡 <b>大招伤害大幅提升、不再后期乏力</b>:之前大招伤害只随波次线性增长,跟不上后期敌人血量的成长,越打越像挠痒痒。现在<b>大招伤害随你的构筑成长</b>(挂钩当前最强单发、含等级 / 增幅 / 连击 / 遗物等全部加成),前中后期都能横扫成片、对精英 Boss 也有实打实的一大块伤害。(感谢玩家反馈)<br>🟡 <b>显示修正</b>:本局构筑里<b>环刃术 / 万刃</b>不再显示「冷却 NaN」(改为「环绕魔刃 · 接触持续伤害」);<b>11 个进化法术</b>(火球进化 / 雷罚 / 万刃 / 永冬之矛 / 天陨 / 奇点 / 蜂巢 / 蛟龙 / 万蛊 / 星环 / 饕餮)的类型标签也补全了(之前误显示为通用「法术」)。<br>🟡 <b>法盾 / 不死药图鉴说明修正</b>:这俩之前套用通用「冷却 X s」模板、数字会误导(法盾真实是<b>持续 4s + 强制空窗 2s</b>、不死药免死有<b>7 秒冷却地板</b>),现在图鉴 / 本局构筑 / 选牌说明都<b>如实反映机制</b>;并修复<b>不死药免死回血会溢出超过满血</b>、以及<b>不死药练满后仍占用三选一</b>(满效后不再作为升级卡出现)。<br>除大招外<b>不改动任何现有法杖 / 法术 / 敌人数值</b>;大招仍在按真机手感调平衡。</div></div><div class="cl-v"><div class="cl-h maj">v87.0 · 2026-06-22</div><div class="cl-i">✨ <b>全新「终极技」系统!</b>战斗中<b>击杀与受击会积攒能量</b>,蓄满后可释放一记横扫全场的大招(右下角能量满时<b>青光跳动提醒</b>;触屏点按键 / 键盘 <b>R</b> / 手柄 <b>Y</b> 均可放)。<br><br>六把法杖各有<b>专属大招</b>,其余法杖通用「法术新星」:<br>✦ <b>学徒 · 法术新星</b>:环形冲击波,击退 + 范围伤害<br>⚡ <b>链雷 · 天罚雷网</b>:全场连锁闪电<br>🌌 <b>引力 · 坍缩黑洞</b>:吸入聚拢 → 坍缩内爆<br>🏹 <b>御风 · 万箭齐发</b>:漫天追踪箭雨、贯穿全场<br>🔥 <b>熔火 · 炎狱火海</b>:烈焰覆盖全场、持续灼烧<br>❄ <b>玄霜 · 寒冰天牢</b>:全场冻结定身<br><br>所有大招特效都做了<b>全地图底色可读性</b>(雪原 / 沙漠等亮地形上也清晰),顺带让链雷杖平时的链电在亮地图更醒目。<b>纯新增系统,不改动任何现有法杖 / 法术 / 敌人数值;大招数值为初版,将按真机反馈调平衡。</b></div></div><div class="cl-v"><div class="cl-h">v86.3–v86.5 · 2026-06-22</div><div class="cl-i">🟡 修复:<b>水龙吟 / 蛟龙出海</b>的大水球(尤其配<b>引力杖</b>聚团、或<b>巨化</b>放大后)会糊成一大片白、挡住视野——大球改用实色混合 + 钳制光晕尺寸,重叠时也是清晰可辨的青色水珠,不再相加爆白;普通法术弹不受影响<br>🟡 左下角<b>法术数据条改为默认隐藏</b>(需要的话在暂停菜单可重新开启)——多数玩家平时用不到,隐藏后战斗界面更清爽<br>🟡 修复<b>窄屏</b>(如 iPhone SE / mini)下顶部「波次 + 剩余」一行可能被右上角按钮压住——窄屏自动等比缩小该行,确保与血条、按钮都不重叠;宽屏显示不变</div></div><div class="cl-v"><div class="cl-h">v86.1–v86.2 · 2026-06-21</div><div class="cl-i">🟡 <b>战斗界面 HUD 优化</b>:波次+剩余合并为一行;Boss 血条上移并避让右上角按钮与「剩余」文字;阵型播报「围猎」等改为屏幕中央闪现(不再常驻顶部挡血条);移除顶部分隔线——顶栏更清爽、战斗区更开阔<br>🟡 修复图鉴里「万蛊噬天 / 饕餮吞天」进化符文要求误显示为英文(amp / bounce)→ 增幅符文 / 弹射符文<br>🟡 渲染加坐标兜底:任何实体坐标异常(NaN)跳过该帧绘制,杜绝主循环白屏卡死</div></div>
 <div class="cl-v"><div class="cl-h maj">v86.0 · 2026-06-21</div><div class="cl-i">⚡ <b>新增 4 个法术进化!</b>(基础法术升至 <b>Lv5</b> + 对应符文,选牌时出现进化卡)<br><br>🌊 <b>水龙吟 → 蛟龙出海</b>(巨化):滔天巨浪横扫整线,贯穿击退更猛,沿途之敌濡湿减速<br>🦠 <b>蛊毒 → 万蛊噬天</b>(增幅):疫气更烈、传染更广,染疫者死亡炸开自我蔓延的尸毒云,连锁烂遍全场<br>🔵 <b>奥术球 → 星环</b>(多重):双星环绕、更大更快,持续射出可穿透的奥术弹<br>🩸 <b>噬魂印 → 饕餮吞天</b>(弹射):带印之敌死亡尸爆更大、连锁引爆周围带印之敌,回血翻倍<br><br>四进化均配手绘 SVG 图标 · 护榜铁律,现有数值一律不动</div></div>
 <div class="cl-v"><div class="cl-h">v85.20–v85.30 · 2026-06-21</div><div class="cl-i">✨ <b>更新说明改版</b> + 战斗界面收尾 + 难度灵晶系数 + 续局存档修复。① 更新说明里<b>重大更新(新法杖 / 法术 / 进化 / 遗物 / Boss / 角色 / 系统)的版本号标成醒目青色</b>,一眼能找到;两版重大之间的小更新合并精简。② 左下「法术数据条」改为默认显示,并修好「退出再进就消失 / 有时被裁掉」,位置下调不挡画面。③ 战斗界面剩余系统 emoji(暂停 / 静音 / 血量 / 击杀 / 金币 / 护罩等)全换成手绘图标;「上局战报」改为实时按数据生成。④ 修好御风弓 + 大型法术(如水龙波)化成的巨箭被一圈黑边 / 黑团裹住的问题——箭芯随大小填满、深色只留一圈细描边、拖尾收成锥形,大箭干净清晰。⑤ 「上局战报」改为可上下滑动,矮屏 / 折叠屏也能滑到底部的成就与返回键。⑥ <b>新增「难度灵晶系数」</b>:结算灵晶按难度缩放——凡尘 ×0.8 / 通玄 ×1.0 / 入圣 ×1.25 / 渡劫 ×1.6 / 弑神 ×2.2,越难拿得越多、作为对挑战的回报;难度选择界面与战报都标出系数与基础值。<b>仅影响灵晶产出,战斗数值(伤害 / 血量 / 冷却)与榜单不受影响。</b>⑦ 补齐 13 个「协同」手绘图标(陨石雨 / 雷霆网 / 毒沼 / 虚空回响 / 剑刃风暴 / 冰封 等),<b>至此战斗界面再无 emoji、全部手绘 SVG</b>。纯显示,玩法数值不变。⑧ <b>修好「续上一局」后存档还原不全的问题</b>:此前切后台 / 网页重载再续局,会丢失抽卡计数,导致<b>满级开关型符文(如分裂符文)被重复刷到、甚至能借续局突破符文上限</b>;同时战报的「最高伤害法术 / 致死来源」与「限时 / 无冲刺 / 单法术」成就判定也会被续局重置。现在这些状态全部正确存档还原(旧存档也据现有信息重建修复)。<b>只修存档还原,不动任何战斗数值;灵晶与上榜分数本就由波数 + 击杀现算、一直正确。</b></div></div>
 <div class="cl-v"><div class="cl-h maj">v85.19 · 2026-06-21</div><div class="cl-i">✨ <b>新增 3 个法术进化!</b>(法术练到 <b>Lv5</b> + 持有<b>对应符文</b>,选牌时就会出现金色进化卡 → 进化成更强形态)<br><br>☄️ <b>陨石 + 巨型符文 → 天陨</b>:巨陨砸地大爆炸,额外召来<b>一片小陨石覆盖轰炸</b>。<br>🌀 <b>黑洞 + 穿透符文 → 湮灭奇点</b>:强吸持续灼烧,<b>寿命终结时坍缩内爆</b>,对吸入之敌造成毁灭性爆发。<br>🐝 <b>蜂群飞弹 + 追踪符文 → 蜂巢</b>:一次喷出更多追踪飞蜂,<b>击杀敌人会从尸体涌出新蜂</b>,蜂拥不绝。<br><br>三个都配了专属手绘图标,法术图鉴里能查进化配方。<b>纯新增内容(和新法杖同理),不改动任何现有法术 / 法杖的数值,弑神 / 无尽冲榜公平丝毫不变。</b>(新效果都经过满特效高密度 + 特效滑块拉到底的双重测试,确保不糊屏、敌弹和人物始终清晰。)</div></div>
@@ -812,10 +812,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v87.1', APP_TIME='2026-06-22 15:00';
+const APP_VER='v87.2', APP_TIME='2026-06-22 15:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v87.1';
+const APP_NOTIFY_VER='v87.2';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -2349,9 +2349,15 @@ function ultByWand(wid){
     default:          ultNova();
   }
 }
+/* 大招参考伤害:玩家当前最强单发(dmgOf 已含等级/增幅/巨化/连击/遗物/灵晶全部加成)。各大招伤害 = 此值 × 各自倍数 → 随构筑成长、后期不再无效(修洋反馈"大招太弱":旧版只随波次线性 30+波×5,跟不上敌人血量三次方成长)。倍数可调 */
+function ultRefDmg(){
+  let best=0;
+  for(const id in player.spells){ const d=SPELL_DEF[id]; if(d&&d.dmg>0){ const v=dmgOf(d, player.spells[id].lv||1); if(v>best) best=v; } }
+  return best>0 ? best : 20;
+}
 /* ① 法术新星(学徒 + 通用回退):扩散冲击波,范围伤害 + 击退 + 减速;Boss 免击退 */
 function ultNova(){
-  const dmg = Math.round(30 + waveNum*5);
+  const dmg = Math.round(ultRefDmg()*6);
   ultWaves.push({x:player.x, y:player.y, r:26, maxR:540, dmg, hit:new Set()});
   announce('✦ 法术新星','环形冲击波 · 击退 + 范围伤害');
   cam.shake=Math.min(cam.shake+12,20); try{ S.fire(); }catch(e){}
@@ -2360,7 +2366,7 @@ function ultNova(){
 /* ② 链雷杖 · 天罚雷网:全场连锁闪电,每个敌人挨一击 + 短暂减速(复用 chainZap) */
 function ultThunderNet(){
   const alive = enemies.filter(e=>!e.dead).length;
-  if(alive>0) chainZap(Math.min(alive,46), Math.round(42+waveNum*6), 4000);
+  if(alive>0) chainZap(Math.min(alive,46), Math.round(ultRefDmg()*6), 4000);
   for(const e of enemies){ if(!e.dead&&!e.boss) e.slowT=Math.max(e.slowT||0,.5); }
   announce('⚡ 天罚雷网','全场连锁闪电');
   cam.shake=Math.min(cam.shake+11,20); try{ S.fire(); }catch(e){}
@@ -2369,7 +2375,7 @@ function ultThunderNet(){
 function ultBlackhole(){
   let sx=0,sy=0,n=0; for(const e of enemies){ if(!e.dead){ sx+=e.x; sy+=e.y; n++; } }
   const cx = n? sx/n : player.x, cy = n? sy/n : player.y-100;
-  player.blackholes.push({x:cx, y:cy, r:300, life:1.3, tick:0, ang:0, dmg:Math.round(30+waveNum*5), _singularity:true, _imploded:false});
+  player.blackholes.push({x:cx, y:cy, r:300, life:1.3, tick:0, ang:0, dmg:Math.round(ultRefDmg()*2.5), _singularity:true, _imploded:false});
   announce('🌌 坍缩黑洞','吸入聚拢 → 坍缩内爆');
   cam.shake=Math.min(cam.shake+8,18); try{ S.boom(); }catch(e){}
 }
@@ -2377,7 +2383,7 @@ function ultBlackhole(){
 function ultArrowRain(){
   const sid = Object.keys(player.spells||{})[0];
   if(!sid){ ultNova(); return; }
-  const lv=(player.spells[sid]&&player.spells[sid].lv)||1, base=Math.round(26+waveNum*4), N=22;
+  const lv=(player.spells[sid]&&player.spells[sid].lv)||1, base=Math.round(ultRefDmg()*2.5), N=22;
   for(let i=0;i<N;i++){ const a=i/N*TAU+rand(-.12,.12);
     const b=makeBullet(sid,lv,a);
     b.dmg=base; b.homing=Math.max(b.homing,2.6); b.pierce=Math.max(b.pierce,2); b.life=Math.max(b.life,2.2); b.col='#9fe8c0';
@@ -2388,7 +2394,7 @@ function ultArrowRain(){
 }
 /* ⑤ 熔火杖 · 炎狱火海:全场铺开大片火池,持续灼烧(复用 clouds kind:'fire') */
 function ultInferno(){
-  const dps=Math.round(13+waveNum*1.6), R=Math.max(W,H)*0.55, N=16;
+  const dps=Math.round(ultRefDmg()*1.6), R=Math.max(W,H)*0.55, N=16;
   clouds.push({x:player.x,y:player.y,r:92,life:3.4,dps,tick:0,kind:'fire'});
   for(let i=0;i<N;i++){ const a=Math.random()*TAU, rr=Math.sqrt(Math.random())*R;
     clouds.push({x:player.x+Math.cos(a)*rr, y:player.y+Math.sin(a)*rr, r:70+rand(0,28), life:3.4, dps, tick:0, kind:'fire'}); }
@@ -2397,7 +2403,7 @@ function ultInferno(){
 }
 /* ⑥ 玄霜杖 · 寒冰天牢:全场冻结定身(Boss 短冻)+ 小额伤害(复用 frozenT 定身) */
 function ultFrostPrison(){
-  const dmg=Math.round(20+waveNum*3);
+  const dmg=Math.round(ultRefDmg()*4);
   for(const e of enemies){ if(e.dead)continue;
     if(e.boss){ e.frozenT=Math.max(e.frozenT||0,.9); }
     else { e.frozenT=Math.max(e.frozenT||0,3.0); e.slowT=Math.max(e.slowT||0,3.2); }
@@ -4860,7 +4866,7 @@ async function shareImage(){
 
 /* ============ 卡牌 ============ */
 /* ===== 法术图鉴 ===== */
-const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', phoenix:'辅助·急救', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬', thunderfall:'范围·天雷', swordarray:'环绕·飞剑' };
+const SPELL_TYPE={ bolt:'弹道·单体', fire:'范围·爆发', ice:'控制·减速', zap:'连锁·跳跃', venom:'持续·毒云', blade:'环绕·近身', arc:'连锁·链击', meteor:'范围·爆发', beam:'持续·射线', heal:'辅助·回血', phoenix:'辅助·急救', shield:'辅助·护盾', orb:'环绕·射弹', blackhole:'控制·吸入', nova:'范围·冲击', swarm:'弹道·追踪', chain:'弹道·回旋', totem:'布防·电击', cyclone:'控制·吸入', plague:'持续·传染', tidal:'范围·横扫', devour:'诅咒·吞噬', thunderfall:'范围·天雷', swordarray:'环绕·飞剑', firestorm:'范围·爆发', thunderjudge:'连锁·天雷', thousandblade:'环绕·近身', winterspear:'控制·贯穿', meteorrain:'范围·爆发', singularity:'控制·吸入', hive:'弹道·追踪', seadragon:'范围·横扫', plaguelord:'持续·传染', starring:'环绕·射弹', gluttony:'诅咒·吞噬' };
 const SPELL_ORDER=['bolt','swarm','chain','fire','meteor','nova','ice','blackhole','zap','arc','venom','beam','blade','orb','thunderfall','swordarray','heal','phoenix','shield','totem','cyclone','plague','tidal','devour'];
 /* 大数字缩写显示:≥1万用「万」、≥1亿用「亿」,避免七八位数一长串。仅用于展示(法术图鉴/异兽统计),不影响内部计算。 */
 function fmtNum(n){ n=Math.round(n||0); const g=n<0?'-':''; n=Math.abs(n);
@@ -4890,6 +4896,9 @@ function specialSpellStat(id, lv, base){
     if(base) return '持续4s · 可挡6次起(各扣1血) · 空窗2s';
     return '持续4s · 可挡'+(5+lv)+'次(各扣1血) · 空窗2s';
   }
+  if(id==='blade'||id==='thousandblade'){   /* 环刃/万刃:无 dmg/cd(环绕接触伤害),套通用模板会出 NaN → 描述化 */
+    return id==='thousandblade' ? '环绕魔刃 ×2 · 高速贴身 · 接触持续伤害' : '环绕魔刃 · 接触持续伤害';
+  }
   return null;
 }
 /* 局内「本局构筑」实时数据栏:法杖 + 法术(按等级,含实际伤害/冷却/DPS,via dmgOf/cdOf 反映全部加成) + 符文/属性/契约/遗物全列。仅 buildCodex 在局内时于顶部插入。 */
@@ -4903,7 +4912,8 @@ function buildRunLoadoutHtml(){
     const evo=(EVO_BASES[id]&&lv>=EVO_LV)?' <span style="color:#ffd24d;font-weight:700;">✨可进化</span>':'';
     let stat=specialSpellStat(id,lv,false);
     if(stat===null){ if(dmg>0){ const dps=Math.round(dmg/Math.max(.05,cd)); stat='伤害 '+fmtNum(dmg)+' · 冷却 '+cd.toFixed(1)+'s · DPS '+fmtNum(dps); }
-    else stat='冷却 '+cd.toFixed(1)+'s · 辅助 / 控制'; }
+    else if(!isNaN(cd)){ stat='冷却 '+cd.toFixed(1)+'s · 辅助 / 控制'; }
+    else { stat=SPELL_TYPE[id]||'持续型 · 接触伤害'; } }   /* NaN 兜底:无 dmg/cd 的特殊法术不再显示 NaN */
     h+=cxItem(iconHTML('spell',id,d.icon), 'Lv'+lv+' '+d.name+evo, SPELL_TYPE[id]||'法术', stat, '');
   }
   const sec=(title,kind)=>{ const a=[]; for(const c of CARD_DEFS)if(c.kind===kind&&player.mods[c.id]>0) a.push(cxItem(iconHTML('mod',c.id,c.icon),c.name,'×'+player.mods[c.id],'','')); return a.length?('<div class="cx-sec">'+title+'</div>'+a.join('')):''; };
