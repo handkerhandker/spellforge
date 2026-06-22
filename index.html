@@ -572,6 +572,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v95.5 · 2026-06-23</div><div class="cl-i">🌋 <b>地裂 · 彻底重做</b>(原版又窄又短、瞬发一闪而过,不像「地裂」)——现在豁开的是一道<b>又宽又长、停留数秒的地堑</b>:开裂瞬间全宽重击一记,之后<b>堑底地火持续灼烧(范围 DoT)</b>,站上去或路过的群妖不断掉血。命中带大幅加宽、持续时间大幅拉长、伤害显著提高、冷却略缩短;「裂地殛」(配落雷沿堑降雷)照旧。<br><span style="opacity:.75">注:地裂为新法术,本次数值仍属初版,真机若偏强 / 偏弱可再微调。</span></div></div>
 <div class="cl-v"><div class="cl-h">v95.4 · 2026-06-23</div><div class="cl-i">🎨 <b>小怪立绘按神话重绘 · 收尾批(全部 18 种小怪已合规)</b>——<br>💧 <b>罔象</b>:水中精怪(大耳、长臂、赤爪)。🐂 <b>诸怀</b>:状如牛、四角、人目、彘耳。<br>🐟 <b>蠃鱼</b>:鱼身鸟翼。🐢 <b>旋龟</b>:状如龟而鸟首、虺尾。<br>🐝 <b>钦原</b>:状如蜂(蜂身、透翼、冰螫针)。🐂 <b>夔</b>:牛身一足轮廓强化。<br>至此<b>所有古神与异兽的立绘均按《山海经》等神话描述给出独立轮廓</b>,不再有"换色撞脸"。(仅立绘重绘,机制 / 数值 / 名称不变。)</div></div>
 <div class="cl-v"><div class="cl-h">v95.3 · 2026-06-23</div><div class="cl-i">🎨 <b>小怪立绘按神话重绘 · 第二批</b>——<br>🐦 <b>句芒</b>:依"鸟身人面"(木神/春神)改为<b>鸟身人面、顶生新芽</b>,不再戴巫师帽。<br>🐴 <b>英招</b>:依"人面马身、虎纹、鸟翼"改为<b>马身鸟翼带虎纹的人面兽</b>,去掉天使光环。<br>👁️ <b>蜚</b>:依"状如牛、白首、一目、蛇尾"改为<b>白首独眼、蛇尾的牛</b>。<br>🐦 <b>鬼车</b>:依"九首鸟"补足为<b>九颗头</b>。<br>(仅立绘重绘,机制 / 数值 / 名称不变;剩余小怪将在最后一批继续。)</div></div>
 <div class="cl-v"><div class="cl-h">v95.2 · 2026-06-23</div><div class="cl-i">🎨 <b>小怪立绘按神话重绘 · 第一批</b>(此前不少小怪是"圆球 + 俩大眼"换色撞脸、或与神话不符)——<br>🗡️ <b>刑天</b>:改为<b>无头巨人</b>(平颈断面、以乳为目、以脐为口、操干戚=左盾右斧),不再是抽象菱形。<br>🐆 <b>狰</b>:依"状如赤豹、五尾一角"改为<b>五尾独角豹</b>。<br>🦷 <b>凿齿</b>:改为<b>獠牙如凿的凶兽</b>(持戈),不再是萌脸。<br>🦅 <b>蛊雕</b>:依"状如雕而有角"改为<b>钩喙双角的雕</b>。<br>(仅立绘重绘,机制 / 数值 / 名称不变;其余小怪将在后续批次继续按神话重绘。)</div></div>
@@ -819,10 +820,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v95.4', APP_TIME='2026-06-23 01:25';
+const APP_VER='v95.5', APP_TIME='2026-06-23 01:35';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v95.4';
+const APP_NOTIFY_VER='v95.5';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1307,7 +1308,7 @@ const SPELL_DEF={
   tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
   devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射、回复 1 生命(出处:饕餮)'},
   thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,desc:'天降数道惊雷轰击敌群,每道炸开小范围电击,雷数随等级增加;若场上有飓风,惊雷尽数倾于风涡所聚之妖,威势更盛'},
-  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.7,dmg:24,fissure:true,desc:'裂地为堑——地脉迸裂,沿瞄准方向豁开一道深缝,贯创沿途群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿缝倾下,地火天雷相激(出处:息壤)'},
+  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.5,dmg:36,fissure:true,desc:'裂地为堑——震脚踏地、地脉迸裂,沿瞄准方向豁开一道丈宽深堑、久久不弭;堑底地火翻涌,持续灼烤陷于其中的群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿堑倾下,地火天雷相激(出处:息壤)'},
   swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
@@ -2020,7 +2021,7 @@ let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spa
 let ann={a:'',b:'',t:0};
 /* ===== 终极技(大招)系统 ===== 能量由击杀+受击累积,满后触发(触屏按键/键盘 R/手柄 Y);首版 6 把杖专属大招,效果暂为占位 */
 let ultE=0; const ULT_MAX=100, ULT_KILL=4, ULT_HIT=6; let ultFireT=-1; let ultWaves=[];  /* ultFireT: -1=空闲,否则放招后秒数(屏幕闪光);ultWaves: 法术新星扩散冲击波(伤害+击退) */
-let fissures=[];   /* 地裂法术:裂缝视觉(伤害在 castFissure 一次性结算,这里只存渲染用裂纹,逐帧衰减) */
+let fissures=[];   /* 地裂法术:宽地堑(开裂瞬间在 castFissure 重击一次,之后逐帧在 update 里对堑内群妖结算地火 DoT,并逐渐淡出) */
 let marshes=[];    /* 相柳毒泽:持续地块,玩家在内→中毒+减速(复用 applyPoison/slowT),逐帧衰减 */
 
 /* ============ 学习式 AI 系统 ============ */
@@ -4577,21 +4578,27 @@ function applySlow(dur){ player.slowT=Math.max(player.slowT,dur); }
 function castFissure(dmg, lv){
   const tgt=aimPoint()||{x:player.x+200,y:player.y};
   const ang=Math.atan2(tgt.y-player.y, tgt.x-player.x);
-  const len=Math.min(340+30*(lv-1), 880);   /* 缝长随等级,封顶 880 */
-  const x0=player.x+Math.cos(ang)*34, y0=player.y+Math.sin(ang)*34;
+  const len=Math.min(380+34*(lv-1), 920);    /* 缝长随等级,封顶 920 */
+  const hw=58+7*(lv-1);                        /* HW=半宽命中带:宽地堑(随等级更宽) */
+  const life=2.4+0.25*(lv-1);                  /* 久留时长:地堑久久不弭 */
+  const x0=player.x+Math.cos(ang)*30, y0=player.y+Math.sin(ang)*30;
   const x1=x0+Math.cos(ang)*len, y1=y0+Math.sin(ang)*len;
-  const HW=26, px=-Math.sin(ang), py=Math.cos(ang);   /* HW=半宽命中带, (px,py)=法线 */
-  const L2=len*len||1;
+  const px=-Math.sin(ang), py=Math.cos(ang), L2=len*len||1;   /* (px,py)=法线 */
+  /* 存入地堑(供逐帧 DoT + 渲染);dmg 为本次基础伤,DoT 在 update 里按比例结算 */
+  fissures.push({x0,y0,x1,y1,ang,len,hw,life,max:life,dmg,tick:0.4});
+  /* 开裂瞬间·全宽重击(一次性) */
+  _atkSpell='fissure';
   for(const e of enemies){ if(e.dead)continue;
     const t=clamp(((e.x-x0)*(x1-x0)+(e.y-y0)*(y1-y0))/L2,0,1);
     const cx=x0+(x1-x0)*t, cy=y0+(y1-y0)*t;
-    if(dist2(e.x,e.y,cx,cy)<(HW+e.r)*(HW+e.r)){
+    if(dist2(e.x,e.y,cx,cy)<(hw+e.r)*(hw+e.r)){
       const side=((e.x-cx)*px+(e.y-cy)*py)>=0?1:-1;
-      (_atkSpell='fissure',damageEnemy(e,dmg,{kx:px*side,ky:py*side}),_atkSpell=null);
-      if(!e.boss) e.slowT=Math.max(e.slowT||0,1.2);
+      damageEnemy(e,dmg,{kx:px*side*1.2,ky:py*side*1.2});
+      if(!e.boss) e.slowT=Math.max(e.slowT||0,1.4);
     }
   }
-  /* 裂地殛:兼修落雷 → 沿缝降惊雷(每道 80% 伤害) */
+  _atkSpell=null;
+  /* 裂地殛:兼修落雷 → 沿堑降惊雷(每道 80% 伤害) */
   if(player.spells['fissure'] && player.spells['thunderfall']){
     const n=3+Math.floor(lv/3);
     for(let k=0;k<n;k++){ const tt=(k+0.5)/n, sx=x0+(x1-x0)*tt, sy=y0+(y1-y0)*tt;
@@ -4600,10 +4607,10 @@ function castFissure(dmg, lv){
       for(let i=0;i<5;i++){ const a=Math.random()*TAU; spawnPart(sx,sy,Math.cos(a)*rand(50,130),Math.sin(a)*rand(50,130),rand(.2,.4),rand(2,3.5),pick(['#ffe96b','#fff6c0','#caa46a'])); }
     }
   }
-  fissures.push({x0,y0,x1,y1,ang,len,hw:HW,life:.55,max:.55});
-  for(let k=0;k<12;k++){ const tt=Math.random(), sx=x0+(x1-x0)*tt, sy=y0+(y1-y0)*tt;
-    spawnPart(sx,sy,px*rand(-50,50),py*rand(-50,50),rand(.25,.55),rand(2,4.5),pick(['#caa46a','#8a6a3a','#e8d2a0','#5a4326'])); }
-  cam.shake=Math.min(cam.shake+4,12);
+  /* 开裂迸石 + 震屏 */
+  for(let k=0;k<20;k++){ const tt=Math.random(), sx=x0+(x1-x0)*tt, sy=y0+(y1-y0)*tt;
+    spawnPart(sx,sy,px*rand(-70,70),py*rand(-70,70),rand(.3,.6),rand(2.5,5),pick(['#caa46a','#8a6a3a','#e8d2a0','#5a4326','#ff8a2a'])); }
+  cam.shake=Math.min(cam.shake+6,14);
 }
 function shieldNearby(t){
   for(const e of enemies){
@@ -6069,7 +6076,22 @@ function update(dt){
       _atkSpell=_sv;
       ultWaves=ultWaves.filter(wv=>wv.r<wv.maxR);
     }
-    if(fissures.length){ for(const f of fissures) f.life-=dt; fissures=fissures.filter(f=>f.life>0); }   /* 地裂裂缝衰减(伤害已在 castFissure 一次性结算,此处仅视觉) */
+    if(fissures.length){ for(const f of fissures){ f.life-=dt;
+        if(f.dmg){ f.tick-=dt; if(f.tick<=0){ f.tick=0.4;   /* 地火 DoT:堑内群妖每 0.4s 受 42% 基础伤 + 轻微减速 */
+          const px=-Math.sin(f.ang), py=Math.cos(f.ang), L2=f.len*f.len||1, dot=f.dmg*0.42;
+          _atkSpell='fissure';
+          for(const e of enemies){ if(e.dead)continue;
+            const t=clamp(((e.x-f.x0)*(f.x1-f.x0)+(e.y-f.y0)*(f.y1-f.y0))/L2,0,1);
+            const cx=f.x0+(f.x1-f.x0)*t, cy=f.y0+(f.y1-f.y0)*t;
+            if(dist2(e.x,e.y,cx,cy)<(f.hw+e.r)*(f.hw+e.r)){
+              const side=((e.x-cx)*px+(e.y-cy)*py)>=0?1:-1;
+              damageEnemy(e,dot,{kx:px*side*.4,ky:py*side*.4});
+              if(!e.boss) e.slowT=Math.max(e.slowT||0,.6);
+            }
+          }
+          _atkSpell=null;
+        } } }
+      fissures=fissures.filter(f=>f.life>0); }
     if(marshes.length){ for(const mp of marshes){ mp.life-=dt;
         if(player && dist2(player.x,player.y,mp.x,mp.y)<mp.r*mp.r){ applyPoison(0.6, mp.dps); player.slowT=Math.max(player.slowT||0,0.4); } }   /* 相柳毒泽:站内→刷新中毒(复用玩家中毒tick扣血)+ 减速;走出去毒会残留约0.6s */
       marshes=marshes.filter(mp=>mp.life>0); }
@@ -6722,17 +6744,24 @@ function render(){
     ctx.globalAlpha=1; ctx.restore();
   }
 
-  /* 地裂裂缝(地面层 · 深色裂纹保证雪原/沙漠等亮地形可读,内嵌琥珀岩浆芯 · 裂开后淡出) */
+  /* 地裂·宽地堑(地面层 · 深色堑沟保证雪原/沙漠等亮地形可读,内嵌翻涌地火 · 开裂展开后淡出) */
   if(fissures.length){ ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    const _cp=(f)=>{ const segN=Math.max(4,Math.floor(f.len/40)), nx=-Math.sin(f.ang), ny=Math.cos(f.ang);
+    const _cp=(f)=>{ const segN=Math.max(5,Math.floor(f.len/34)), nx=-Math.sin(f.ang), ny=Math.cos(f.ang);
       ctx.beginPath();
       for(let i=0;i<=segN;i++){ const t=i/segN, bx=f.x0+(f.x1-f.x0)*t, by=f.y0+(f.y1-f.y0)*t,
-        jag=(i===0||i===segN)?0:Math.sin(i*1.7+f.x0*.05)*f.hw*.55, x=bx+nx*jag, y=by+ny*jag;
+        jag=(i===0||i===segN)?0:Math.sin(i*1.5+f.x0*.05)*f.hw*.3, x=bx+nx*jag, y=by+ny*jag;
         if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); } };
-    for(const f of fissures){ const a=clamp(f.life/f.max,0,1);
-      ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=a*.95; ctx.strokeStyle='#241510'; ctx.lineWidth=12; _cp(f); ctx.stroke();
-      ctx.globalCompositeOperation='lighter';   ctx.globalAlpha=a*.85; ctx.strokeStyle='#ff7a2a'; ctx.lineWidth=6;  _cp(f); ctx.stroke();
-      ctx.globalAlpha=a;     ctx.strokeStyle='#ffe08a'; ctx.lineWidth=2.4; _cp(f); ctx.stroke();
+    for(const f of fissures){ const lifeR=clamp(f.life/f.max,0,1);
+      const fade = lifeR<.22 ? lifeR/.22 : 1;                 /* 末段淡出 */
+      const open = clamp((f.max-f.life)/.16,0,1);             /* 开裂瞬间快速展开 */
+      const w = f.hw*2*open;                                  /* 堑宽≈命中带全宽 */
+      const pulse = .82+.18*Math.sin(time*8+f.x0*.03);        /* 地火翻涌脉动 */
+      ctx.globalCompositeOperation='source-over';
+      ctx.globalAlpha=fade*.92; ctx.strokeStyle='#1a0f0a'; ctx.lineWidth=w;            _cp(f); ctx.stroke();   /* 深色堑沟(垫底·全地形可读) */
+      ctx.globalAlpha=fade*.8*pulse; ctx.strokeStyle='#b8461a'; ctx.lineWidth=w*.6;    _cp(f); ctx.stroke();   /* 暗红熔岩 */
+      ctx.globalCompositeOperation='lighter';
+      ctx.globalAlpha=fade*.7*pulse; ctx.strokeStyle='#ff8a2a'; ctx.lineWidth=w*.36;   _cp(f); ctx.stroke();   /* 橙焰 */
+      ctx.globalAlpha=fade*.85; ctx.strokeStyle='#ffe08a'; ctx.lineWidth=Math.max(2,w*.12); _cp(f); ctx.stroke();   /* 亮芯 */
     }
     ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1; ctx.restore();
   }
