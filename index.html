@@ -588,6 +588,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v99.8 · 2026-06-23</div><div class="cl-i">🟡 <b>修复水龙吟 / 蛟龙的「浪」往左 / 上 / 下飞时倒置或躺平(感谢吹水群)。</b>此前浪体随飞行方向<b>整体旋转</b>,只有往右飞才正常——往左飞会上下<b>倒置</b>、往上下飞会<b>躺平成横块</b>,很违和。现在<b>浪头永远朝上、只按左右翻转</b>(往左飞镜像、浪头依旧朝上),任何方向都是一道立着的破浪。纯外观,弹体碰撞与伤害未改、与榜单无关。</div></div>
 <div class="cl-v"><div class="cl-h">v99.7 · 2026-06-23</div><div class="cl-i">🟡 <b>「特效强度」滑块现在对所有法术弹生效(承 v99.6,感谢吹水群)。</b>此前只有火球 / 陨石的弹体会随特效变淡,其余法术弹(<b>冰锥 / 闪电弧 / 毒雾 / 回旋刃 / 水龙吟 / 噬魂印 / 蜂群…</b>)的弹体是恒定实心、拉低特效也不变。现在<b>全部统一</b>:满特效画面不变,拉低特效时<b>所有法术弹的弹体都会一起变淡</b>(自动瞄准下不必紧盯自己的弹,大批弹幕时更能看清敌人与场地),拉到极低只剩幽幽暗影。纯渲染,弹体碰撞与伤害一字未改、与榜单无关。</div></div>
 <div class="cl-v"><div class="cl-h">v99.6 · 2026-06-23</div><div class="cl-i">🟡 <b>修复火球 / 陨石弹体在极低「特效强度」下不降反增、糊成实心(感谢吹水群反馈,接 v99.5)。</b>这俩弹体的透明度此前是<b>搭在辉光绘制段里</b>设的,而辉光在特效<b>低于 5% 时整段跳过</b>——于是弹体 alpha 没被压低、<b>反而跳回实心</b>:把特效拉到最低(如 1%),满屏火球洪流<b>不降反增</b>。现在弹体透明度改为<b>显式、连续地随特效滑块变淡</b>——满特效画面不变,越往低拉越淡(极低时只剩幽幽暗影)。配合 v99.5 的火海减雾,<b>纯火系也能靠拉低特效看清场面</b>。弹体碰撞与伤害一字未改,纯渲染、与榜单无关。</div></div>
 <div class="cl-v"><div class="cl-h">v99.5 · 2026-06-23</div><div class="cl-i">🟡 <b>修复火系等持续特效在低「特效强度」下仍糊屏(感谢吹水群反馈)。</b>焚天 / 天陨的<b>火海</b>(以及毒云 / 冰雾)此前虽然<b>每团</b>已随特效滑块变淡,但<b>同屏团数没减</b>——几十团叠在一起,每团再淡也会饱和成一片<b>散不掉的橙雾</b>,拉低特效也没用。现在<b>同屏绘制的团数也随特效滑块缩减</b>(拉低 → 只画很少几团,拉到 0% → 全不画),低特效真能<b>散掉薄雾、看清场面</b>。满特效画面不变。火海 / 毒云 / 冰雾<b>仍照常造成伤害</b>,纯渲染、与榜单无关。</div></div>
@@ -880,10 +881,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v99.7', APP_TIME='2026-06-23 20:25';
+const APP_VER='v99.8', APP_TIME='2026-06-23 20:50';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v99.7';
+const APP_NOTIFY_VER='v99.8';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -7261,7 +7262,7 @@ function render(){
     if(b.id==='tidal'||b.id==='seadragon'){
       /* 水龙吟/蛟龙:卷曲破浪(浪体后高·浪头前卷·白沫飞溅),非圆椭圆;深色描边=亮地形可读 */
       const ang=Math.atan2(b.vy,b.vx), R=b.r, sw=Math.sin(time*5+b.x*0.05)*R*0.05;
-      ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.translate(b.x,b.y); ctx.rotate(ang); ctx.lineJoin='round'; ctx.lineCap='round';
+      ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.translate(b.x,b.y); if(b.vx<0)ctx.scale(-1,1); ctx.lineJoin='round'; ctx.lineCap='round';   /* v99.8:浪体不再随飞行方向整体旋转(往左→倒置、往上下→躺平,很违和),改为浪头永远朝上、只按左右翻转 */
       const wave=()=>{ ctx.beginPath();
         ctx.moveTo(-R*0.82, R*0.9);
         ctx.bezierCurveTo(-R*1.0,-R*0.15, -R*0.3,-R*1.05-sw, R*0.5,-R*0.98-sw);
