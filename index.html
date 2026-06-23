@@ -588,6 +588,9 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v99.3 · 2026-06-23</div><div class="cl-i">⚡ <b>闪电特效统一升级。</b>连锁闪电、落雷、雷罚等所有闪电的电弧改成更利落的<b>锯齿形</b>(垂直锯齿、越长细节越多),并在电弧两端加了<b>发光命中闪</b>——落雷的天降惊雷落地处现在有明显迸发感、连锁闪电在每个命中点也会炸亮。深色描边保证雪原 / 沙漠等亮地形也清晰。纯外观,数值未动。</div></div>
+<div class="cl-v"><div class="cl-h">v99.2 · 2026-06-23</div><div class="cl-i">⚡ <b>图腾攻击特效升级(感谢反馈)。</b>守护图腾的电击之前只是一根平淡的直线;现在是噼啪作响的<b>锯齿紫电</b>——开火瞬间双眼 / 头部爆亮(枪口闪光)、电弧逐帧抖动、命中处亮闪迸射火花四溅。深色描边保证雪原 / 沙漠等亮地形上也清晰。纯外观,数值未动。</div></div>
+<div class="cl-v"><div class="cl-h">v99.1 · 2026-06-23</div><div class="cl-i">🎨 <b>图腾 + 飓风美术改进(感谢反馈)。</b>① <b>守护图腾</b>从一根潦草的方柱,重做成带角的山海经雕花石像守护神——石身、双角、发光双眼 + 胸口符文,有了神性。② <b>飓风</b>去掉了外圈那个违和的完整圆环;风带外缘改成参差不齐的不规则边界,更像真正卷动的旋风。纯外观,数值未动。</div></div>
 <div class="cl-v"><div class="cl-h">v99.0 · 2026-06-23</div><div class="cl-i">⚖️ <b>发育手感优化(感谢吹水群反馈)。</b>针对「前期钱太小、15 波后发育跟不上」:<b>① 前期经济</b>——前 10 波普通怪必掉币 + 前 5 波每波开局白拿金币,前期不再捉襟见肘、金 / 紫符文不再只买得起一个(10 波后照旧,后期金币雪球曲线不变)。<b>② 抽卡修复</b>——之前前期会被猛塞「未拥有的新法术」、逼你铺一堆 Lv1 导致核心法术升不上去;现在前期不再误触发该加权,且<b>持有 ≥3 个法术后,已有法术的升级卡更常出</b>,能集中把核心法术练高。<b>敌人强度未改</b>,只优化玩家发育。</div></div>
 <div class="cl-v"><div class="cl-h">v98.9 · 2026-06-23</div><div class="cl-i">📜 <b>选卡时的法术描述精简(感谢反馈)。</b>三选一选强化时,描述较长的法术(地裂、不死药、飓风、落雷、守护图腾等)之前会塞一整段山海经文案、选卡时来不及读;现在卡面只显示<b>一句直击重点的简短说明</b>,完整文案仍完整保留在<b>法术图鉴</b>里。<b>纯显示,数值与机制未改。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.8 · 2026-06-23</div><div class="cl-i">🌪️ <b>飓风大改(感谢反馈)。</b>① <b>视觉重做</b>:之前更像个魔法阵,现在是真正的旋风——向心卷入的风带 + 中心涡眼 + 被吸入的碎屑,旋转与吸入感都对了。② <b>移动变慢</b>(从风一样掠过,改成逼近的风暴、在原地多缠一会儿)。③ <b>吸力大幅增强</b>:真正把妖怪卷进涡心、锁在里面绞杀。<b>②③是数值调整,会让飓风更强;伤害与范围未动。</b></div></div>
@@ -873,10 +876,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v99.0', APP_TIME='2026-06-23 12:10';
+const APP_VER='v99.3', APP_TIME='2026-06-23 12:22';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v99.0';
+const APP_NOTIFY_VER='v99.3';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -4581,8 +4584,10 @@ function chainZap(jumps,dmg,range){
   }
 }
 function zapFX(x1,y1,x2,y2){
+  const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy)||1, nx=-dy/len, ny=dx/len;
+  const SEG=Math.max(5,Math.min(10,Math.round(len/42)));   /* 越长段数越多=细节更足 */
   const pts=[[x1,y1]];
-  for(let i=1;i<5;i++){const t=i/5;pts.push([x1+(x2-x1)*t+rand(-13,13),y1+(y2-y1)*t+rand(-13,13)]);}
+  for(let i=1;i<SEG;i++){ const t=i/SEG, off=rand(-15,15)*Math.sin(t*Math.PI)*(.6+Math.random()*.7); pts.push([x1+dx*t+nx*off, y1+dy*t+ny*off]); }   /* 垂直锯齿:中段幅度大、两端归零、略带随机 */
   pts.push([x2,y2]); zaps.push({pts,life:.3});
 }
 function expire(b,skipAoe){
@@ -6168,7 +6173,7 @@ function updateTotems(dt){
     T.cd-=dt;
     if(T.cd<=0&&enemies.length){ T.cd=.6;
       let best=null,bd=TOTEM_RANGE*TOTEM_RANGE; for(const e of enemies){ if(e.dead)continue; const d=dist2(T.x,T.y,e.x,e.y); if(d<bd){bd=d;best=e;} }
-      if(best){ _atkSpell='totem'; damageEnemy(best,dmgOf(SPELL_DEF.totem,T.lv),{kx:best.x-T.x,ky:best.y-T.y}); T.bx=best.x; T.by=best.y; T.beam=.13; puff(best.x,best.y,SPELL_DEF.totem.col,3);
+      if(best){ _atkSpell='totem'; damageEnemy(best,dmgOf(SPELL_DEF.totem,T.lv),{kx:best.x-T.x,ky:best.y-T.y}); T.bx=best.x; T.by=best.y; T.beam=.16; puff(best.x,best.y,SPELL_DEF.totem.col,5);
         if(synOn.thunder_pool){ let from=best, hit=new Set([best]); for(let h=0;h<2;h++){ let nx=null,nd=170*170; for(const e2 of enemies){ if(e2.dead||hit.has(e2))continue; const d2=dist2(from.x,from.y,e2.x,e2.y); if(d2<nd){nd=d2;nx=e2;} } if(!nx)break; hit.add(nx); zapFX(from.x,from.y,nx.x,nx.y); damageEnemy(nx,dmgOf(SPELL_DEF.totem,T.lv)*0.7,{kx:nx.x-from.x,ky:nx.y-from.y}); from=nx; } }   /* 雷池:图腾命中后借节点额外连锁 2 跳 */
         _atkSpell=null; }
     }
@@ -6180,13 +6185,70 @@ function drawTotems(){
     const syn=!!(player.wandFx&&player.wandFx.summon), col=syn?'#ffcf6a':SPELL_DEF.totem.col;
     const pulse=1+.08*Math.sin(T.anim*4);
     ctx.save(); ctx.globalAlpha=.06+.03*Math.sin(T.anim*2); ctx.fillStyle=col; ctx.beginPath(); ctx.arc(T.x,T.y,TOTEM_RANGE,0,TAU); ctx.fill(); ctx.restore();
-    if(T.beam>0){ ctx.save(); ctx.globalAlpha=Math.min(1,T.beam/.13); ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.beginPath(); ctx.moveTo(T.x,T.y-20); ctx.lineTo(T.bx,T.by); ctx.stroke(); ctx.restore(); }
+    if(T.beam>0){ ctx.save();
+      const al=Math.min(1,T.beam/.16), x1=T.x, y1=T.y-20, x2=T.bx, y2=T.by;
+      const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy)||1, nx=-dy/len, ny=dx/len;
+      ctx.lineJoin='round'; ctx.lineCap='round';
+      /* 锯齿电弧:垂直方向锯齿(中段幅度大、两端归零)、每帧重抖=噼啪电感 */
+      const SEG=9, pts=[[x1,y1]];
+      for(let i=1;i<SEG;i++){ const t=i/SEG, off=rand(-17,17)*Math.sin(t*Math.PI); pts.push([x1+dx*t+nx*off, y1+dy*t+ny*off]); }
+      pts.push([x2,y2]);
+      const trace=()=>{ ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]); };
+      trace(); ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=al*.85; ctx.strokeStyle='#0c0618'; ctx.lineWidth=8; ctx.stroke();   /* 深垫底 */
+      trace(); ctx.globalAlpha=al; ctx.strokeStyle=col; ctx.lineWidth=4.5; ctx.stroke();                                                     /* 实色(亮地图也是本色) */
+      trace(); ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=al*.5; ctx.strokeStyle=col; ctx.lineWidth=7.5; ctx.stroke();          /* 加色泛光 */
+      trace(); ctx.globalAlpha=al; ctx.strokeStyle='#fbf4ff'; ctx.lineWidth=1.8; ctx.stroke();                                               /* 白热核 */
+      /* 命中迸射:亮闪 + 放射火花(随消散外扩) */
+      ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=al*.5; ctx.fillStyle='#0c0618'; ctx.beginPath(); ctx.arc(x2,y2,9*al,0,TAU); ctx.fill();
+      ctx.globalCompositeOperation='lighter';
+      ctx.globalAlpha=al*.9; ctx.fillStyle=col; ctx.beginPath(); ctx.arc(x2,y2,7.5*al,0,TAU); ctx.fill();
+      ctx.globalAlpha=al; ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.arc(x2,y2,3.4*al,0,TAU); ctx.fill();
+      ctx.strokeStyle=col; ctx.lineWidth=2.4; ctx.globalAlpha=al*.9;
+      for(let k=0;k<7;k++){ const sa=k*(TAU/7)+T.anim*2, sl=6+12*(1-al*.55); ctx.beginPath(); ctx.moveTo(x2+Math.cos(sa)*4,y2+Math.sin(sa)*4); ctx.lineTo(x2+Math.cos(sa)*(4+sl),y2+Math.sin(sa)*(4+sl)); ctx.stroke(); }
+      ctx.globalCompositeOperation='source-over';
+      ctx.restore();
+    }
     ctx.save();
-    const g=ctx.createRadialGradient(T.x,T.y,0,T.x,T.y,26*pulse); g.addColorStop(0,col+'aa'); g.addColorStop(1,col+'00');
-    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(T.x,T.y,26*pulse,0,TAU); ctx.fill();
-    ctx.fillStyle='#2a2342'; ctx.fillRect(T.x-7,T.y-30,14,34); ctx.strokeStyle=col; ctx.lineWidth=2; ctx.strokeRect(T.x-7,T.y-30,14,34);
-    ctx.fillStyle=col; ctx.beginPath(); ctx.arc(T.x,T.y-30,6*pulse,0,TAU); ctx.fill();
-    ctx.fillStyle='rgba(255,255,255,.8)'; ctx.beginPath(); ctx.arc(T.x-1.5,T.y-31.5,2,0,TAU); ctx.fill();
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    const bx=T.x, by=T.y+4;
+    /* 底座光晕(脉动主发光) */
+    const g=ctx.createRadialGradient(bx,by-16,0,bx,by-16,27*pulse); g.addColorStop(0,col+'66'); g.addColorStop(1,col+'00');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(bx,by-16,27*pulse,0,TAU); ctx.fill();
+    const STONE='#2c2546', STONE_D='#1c1430', DARK='#110a1f';
+    ctx.strokeStyle=DARK;
+    /* —— 底座(梯形) —— */
+    ctx.fillStyle=STONE_D; ctx.lineWidth=2.2;
+    ctx.beginPath(); ctx.moveTo(bx-12,by); ctx.lineTo(bx+12,by); ctx.lineTo(bx+9,by-6); ctx.lineTo(bx-9,by-6); ctx.closePath(); ctx.fill(); ctx.stroke();
+    /* —— 柱身(微鼓) —— */
+    ctx.fillStyle=STONE;
+    ctx.beginPath(); ctx.moveTo(bx-9,by-6); ctx.quadraticCurveTo(bx-10.5,by-18,bx-8,by-28); ctx.lineTo(bx+8,by-28); ctx.quadraticCurveTo(bx+10.5,by-18,bx+9,by-6); ctx.closePath(); ctx.fill(); ctx.stroke();
+    /* —— 头部(方脸) —— */
+    ctx.beginPath(); ctx.moveTo(bx-8,by-28); ctx.lineTo(bx-7.5,by-37); ctx.lineTo(bx+7.5,by-37); ctx.lineTo(bx+8,by-28); ctx.closePath(); ctx.fill(); ctx.stroke();
+    /* —— 双角(自头顶探出) —— */
+    ctx.fillStyle=STONE; ctx.lineWidth=1.8;
+    ctx.beginPath(); ctx.moveTo(bx-5,by-36); ctx.quadraticCurveTo(bx-12,by-39,bx-10.5,by-46); ctx.quadraticCurveTo(bx-8.5,by-40,bx-2.5,by-37); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx+5,by-36); ctx.quadraticCurveTo(bx+12,by-39,bx+10.5,by-46); ctx.quadraticCurveTo(bx+8.5,by-40,bx+2.5,by-37); ctx.closePath(); ctx.fill(); ctx.stroke();
+    /* —— 雕纹:嘴 + 腹部横纹 —— */
+    ctx.strokeStyle=DARK; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(bx-5,by-30.5); ctx.lineTo(bx+5,by-30.5); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx-6,by-12.5); ctx.lineTo(bx+6,by-12.5); ctx.stroke();
+    /* —— 发光双眼(脉动;攻击瞬间爆亮=枪口闪光) —— */
+    const _fire = T.beam>0 ? Math.min(1,T.beam/.16) : 0;
+    if(_fire>0){ ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=_fire*.85; ctx.fillStyle=col;
+      ctx.beginPath(); ctx.arc(bx,by-32,12*_fire,0,TAU); ctx.fill();
+      ctx.globalAlpha=_fire*.9; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(bx,by-32,4*_fire,0,TAU); ctx.fill(); ctx.restore(); }
+    ctx.fillStyle=col;
+    const _er=2*pulse+_fire*1.4;
+    ctx.beginPath(); ctx.arc(bx-3.4,by-33.5,_er,0,TAU); ctx.fill();
+    ctx.beginPath(); ctx.arc(bx+3.4,by-33.5,_er,0,TAU); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.9)';
+    ctx.beginPath(); ctx.arc(bx-3.9,by-34,.8+_fire*.7,0,TAU); ctx.fill();
+    ctx.beginPath(); ctx.arc(bx+2.9,by-34,.8+_fire*.7,0,TAU); ctx.fill();
+    /* —— 胸口菱形符文(主发光·脉动;开火更亮) —— */
+    ctx.fillStyle=col;
+    const _rs=2.7*pulse+_fire*1.0, _rw=2.5*pulse+_fire;
+    ctx.beginPath(); ctx.moveTo(bx,by-22-_rs); ctx.lineTo(bx+_rw,by-22); ctx.lineTo(bx,by-22+_rs); ctx.lineTo(bx-_rw,by-22); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.5)'; ctx.beginPath(); ctx.arc(bx,by-23,.9,0,TAU); ctx.fill();
     ctx.restore();
   }
 }
@@ -7287,6 +7349,12 @@ function render(){
     ctx.globalCompositeOperation='lighter';
     ctx.globalAlpha=al*.5;ctx.strokeStyle='#ffe96b';ctx.lineWidth=7;ctx.stroke();
     ctx.globalAlpha=al;ctx.strokeStyle='#fff7c0';ctx.lineWidth=2.5;ctx.stroke();
+    /* 电弧两端命中闪(深垫底→黄辉光→白核;落雷竖直惊雷落地处也因此有迸发感) */
+    for(const _e of [z.pts[0], z.pts[z.pts.length-1]]){
+      ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=al*.45; ctx.fillStyle='#14081f'; ctx.beginPath(); ctx.arc(_e[0],_e[1],6*al,0,TAU); ctx.fill();
+      ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=al*.75; ctx.fillStyle='#ffe96b'; ctx.beginPath(); ctx.arc(_e[0],_e[1],4.5*al,0,TAU); ctx.fill();
+      ctx.globalAlpha=al; ctx.fillStyle='#fff7c0'; ctx.beginPath(); ctx.arc(_e[0],_e[1],2*al,0,TAU); ctx.fill();
+    }
     ctx.globalCompositeOperation='source-over';
   }
   /* 黑洞吸力场(此前本体缺失,只有零星粒子) */
@@ -7313,19 +7381,18 @@ function render(){
   for(let yi=_yStart;yi<_yN;yi++){ const cy=player.cyclones[yi];
     ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.lineJoin='round'; ctx.lineCap='round';
     const _cR=cy.r, _crot=cy.ang*1.4;
-    /* 外界淡环(暗底 + 浅青) */
-    ctx.globalAlpha=.42*fxAlpha; ctx.strokeStyle='#0e1f30'; ctx.lineWidth=4.5; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR,0,TAU);ctx.stroke();
-    ctx.globalAlpha=.5*fxAlpha; ctx.strokeStyle='#bfe3ff'; ctx.lineWidth=1.4; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR,0,TAU);ctx.stroke();
-    /* 向心卷入的风带 ×7(每臂浓淡不一=湍流感);先暗垫底后浅青 */
-    const _ARMS=7, _SEG=13, _TURN=1.5;
+    /* 向心卷入的风带 ×7:外缘起点参差不齐(不再是规整整圆,像真风的不规则边界)、卷曲圈数与浓淡各异=湍流;先暗垫底后浅青 */
+    const _ARMS=7, _SEG=15;
     for(let pass=0;pass<2;pass++){
       ctx.strokeStyle = pass===0 ? '#0e1f30' : '#dff2ff';
-      ctx.lineWidth   = pass===0 ? 3.8 : 1.7;
+      ctx.lineWidth   = pass===0 ? 3.6 : 1.7;
       for(let k=0;k<_ARMS;k++){
         const a0=_crot + k*(TAU/_ARMS);
-        ctx.globalAlpha=(pass===0?.4:.58)*fxAlpha*(.55+.45*(((k*5)%_ARMS)/_ARMS));
+        const _outR=_cR*(.80+.22*(((k*3+2)%_ARMS)/_ARMS));   /* 每臂外缘起点参差 0.80~1.02R */
+        const _turn=1.35+.32*(((k*5)%_ARMS)/_ARMS);          /* 每臂卷曲圈数略不同 */
+        ctx.globalAlpha=(pass===0?.4:.58)*fxAlpha*(.5+.5*(((k*5)%_ARMS)/_ARMS));
         ctx.beginPath();
-        for(let s=0;s<=_SEG;s++){ const t=s/_SEG, ang=a0+t*_TURN*TAU, rr=_cR*(.96-t*.84);
+        for(let s=0;s<=_SEG;s++){ const t=s/_SEG, ang=a0+t*_turn*TAU, rr=_outR*(1-t*.86);
           const px=cy.x+Math.cos(ang)*rr, py=cy.y+Math.sin(ang)*rr; if(s===0)ctx.moveTo(px,py);else ctx.lineTo(px,py); }
         ctx.stroke();
       }
