@@ -588,6 +588,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v97.4 · 2026-06-23</div><div class="cl-i">❄️ <b>减速状态更醒目了(感谢反馈)。</b>被<b>玄冥的寒冰</b>、<b>相柳的毒泽</b>等减速时移动会明显变慢,但此前只有一圈很淡的蓝光、在雪原 / 沙漠等亮地形上几乎看不见,容易不明白「为什么突然走不动」。现在:<b>① 减速时身上是一圈带深色描边的冰蓝环 + 上绕冰晶</b>(全部地形都清晰可读、亮地图也不糊);<b>② 头顶常驻「🔵 减速」标签</b>,一眼就知道正被减速、该走出寒冰 / 毒泽或等它消;<b>③ 同时中毒又被减速时(如站在毒泽里),两圈光环内外分明、互不遮挡</b>。<b>纯显示,不改动减速的强度 / 持续时间 / 触发(数值一字未改)。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.3 · 2026-06-23</div><div class="cl-i">🛠️ <b>修复「法术槽 5/4 溢出」漏洞(感谢反馈)。</b>此前<b>把基础攻击法术（奥术飞弹）卖掉、再把空出的槽全买成辅助法术</b>后,战斗中"无伤害法术时自动补一发奥术飞弹"的保底会<b>无视上限硬塞</b>,使法术数突破到 5/4。根因是这条"保底补飞弹"从未做满槽检查(当年只堵了商店买入那条路、没堵这条);现在<b>保底补飞弹严格遵守法术槽上限</b>,满槽时不再多塞(已溢出的存档,卖出一个即自动回正)。<b>护榜修复,不改动任何法术数值。</b><br>🦄 <b>御兽法杖「白泽」的作用看得见了(感谢反馈)。</b>白泽是辅助灵兽、<b>不亲自攻击</b>,容易被以为没用;其实只要它活着,<b>全体灵兽 +30% 伤害 + 持续回血</b>。现在<b>白泽登场会提示它的作用</b>,身上有<b>金色辅助光环</b>,被它加成的攻击兽<b>头顶有金色小箭标</b>,一眼就懂它在给全队加 buff。<b>纯显示,白泽数值未改。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.2 · 2026-06-23</div><div class="cl-i">🟢 <b>中毒状态更醒目了(感谢反馈)。</b>此前中毒只有一圈很淡的绿环、在草原 / 雪原 / 沙漠等地形上几乎看不出来,容易没察觉自己正被毒磨血。现在:<b>① 中毒时身上是一圈带深色描边的绿色毒环 + 上绕毒泡</b>(全部地形都清晰可读、亮地图也不糊);<b>② 头顶常驻「🟢 中毒」标签</b>,一眼就知道正在中毒、该走出毒区 / 等毒消。<b>纯显示,不改动中毒的伤害 / 持续时间 / 触发(法盾仍能挡毒、数值一字未改)。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.1 · 2026-06-23</div><div class="cl-i">🛡️ <b>法盾 / 不死药体验打磨(感谢反馈):</b><br>① <b>法盾被打穿时给明确反馈了</b>——此前护罩挡满次数后是"悄无声息地消失",专注走位时容易没察觉、下一下就吃满伤害;现在<b>护罩被击碎时屏幕中央提示「法盾被击碎」+ 青色碎裂特效 + 专属音效 + 轻微震屏</b>,一眼知道盾没了、该走位。<br>② <b>法盾冷却改为"从护罩结束时"算起</b>——以前提前被打穿后,要干等到"开盾后约 6 秒"才能再开(密集火力下提前破盾反而空窗超久);现在<b>无论被打穿还是 4 秒时限到,都统一在结束后 2 秒重开</b>,破盾后能更快拿回护盾、贴脸更稳(撑满 4 秒自然结束的情形与原来一致;2 秒空窗地板不变、不会无限挂盾)。<br>③ <b>不死药免死的"1 秒无敌"做醒目了</b>——不死药本就在"致命一击免死"时给 1 秒无敌,但之前只有角色闪烁、不易察觉;现在<b>免死后身上罩一圈金光</b>,明确告诉你"这 1 秒无敌、速冲刺脱身"(亮地形也清晰可读)。<br><b>不死药数值未改;法盾冷却这点增强属深层无尽生存向,与连击 / 终极技同理,不做纪元、新旧分共存。</b></div></div>
@@ -856,10 +857,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v97.3', APP_TIME='2026-06-23 11:30';
+const APP_VER='v97.4', APP_TIME='2026-06-23 11:31';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v97.3';
+const APP_NOTIFY_VER='v97.4';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -9078,8 +9079,23 @@ function drawPlayer(){
     ctx.lineWidth=3.2; ctx.strokeStyle='rgba(8,20,4,.95)'; ctx.strokeText('中毒',p.x,_ty);
     ctx.fillStyle='#bfff80'; ctx.fillText('中毒',p.x,_ty);
     ctx.restore(); }
-  if(p.slowT>0){ ctx.save();ctx.globalAlpha=.3;ctx.fillStyle='#7ad0ff';
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r+6,0,TAU);ctx.fill();ctx.restore(); }
+  /* 减速:醒目冰蓝环(深色底环→雪原/沙漠等亮地形也可读)+ 上绕冰晶 + 常驻「减速」标签;全程 source-over 不爆白。被减速时移速骤降,需让玩家明白「为何变慢」(玄冥寒冰/相柳毒泽来源);与中毒并存时内外两环分明 */
+  if(p.slowT>0){ const _sp=.5+.5*Math.sin(time*4), _sr=p.r+6+(p.poisonT>0?5:0); ctx.save(); ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(120,200,255,'+(.10+.05*_sp)+')'; ctx.beginPath();ctx.arc(p.x,p.y,_sr,0,TAU);ctx.fill();
+    ctx.strokeStyle='#0a1c2e'; ctx.globalAlpha=.55; ctx.lineWidth=5; ctx.beginPath();ctx.arc(p.x,p.y,_sr,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.72+.24*_sp; ctx.strokeStyle='#9fe4ff'; ctx.lineWidth=2.6; ctx.beginPath();ctx.arc(p.x,p.y,_sr,0,TAU);ctx.stroke();
+    for(let _i=0;_i<4;_i++){ const _a=time*0.9+_i*(TAU/4), _bx=p.x+Math.cos(_a)*_sr, _by=p.y+Math.sin(_a)*_sr;
+      ctx.save(); ctx.translate(_bx,_by); ctx.rotate(_a+time*1.6); ctx.globalAlpha=.9;
+      ctx.fillStyle='#163048'; ctx.beginPath();ctx.moveTo(0,-3.6);ctx.lineTo(2.5,0);ctx.lineTo(0,3.6);ctx.lineTo(-2.5,0);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#e3f3ff'; ctx.beginPath();ctx.moveTo(0,-2.1);ctx.lineTo(1.4,0);ctx.lineTo(0,2.1);ctx.lineTo(-1.4,0);ctx.closePath();ctx.fill();
+      ctx.restore(); }
+    const _ty=p.y-p.r-23-(p.poisonT>0?17:0); ctx.globalAlpha=1; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.lineJoin='round';
+    const _tw=ctx.measureText('减速').width, _dx=p.x-_tw/2-7;
+    ctx.fillStyle='rgba(10,28,46,.92)'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,3.9,0,TAU);ctx.fill();
+    ctx.fillStyle='#7fd8ff'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,2.7,0,TAU);ctx.fill();
+    ctx.lineWidth=3.2; ctx.strokeStyle='rgba(10,28,46,.95)'; ctx.strokeText('减速',p.x,_ty);
+    ctx.fillStyle='#bfeaff'; ctx.fillText('减速',p.x,_ty);
+    ctx.restore(); }
   if(p.wandFx.charge){ const cs=(p.chargeStacks||0)/6; ctx.save();
     ctx.strokeStyle=cs>=1?'#fff3b0':'#ffcf5a';ctx.lineWidth=2.5;ctx.globalAlpha=.4+cs*.5;
     ctx.beginPath();ctx.arc(p.x,p.y,p.r+7,-Math.PI/2,-Math.PI/2+TAU*cs);ctx.stroke();ctx.restore(); }
