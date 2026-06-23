@@ -588,6 +588,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v98.5 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊再校准(感谢反馈)。</b>上一版为了不误判养怪流、把"击杀上限"整个去掉了——但这样又太松,正常人不会刷出几十万击杀。现在改成更准的<b>「合理区间」</b>:一个成绩的击杀数<b>既不能少到根本进不了那么多波,也不能多到远超正常打法 + 重度养怪的合理范围</b>。区间留了约 <b>9 倍余量</b>,常规打法和认真养怪刷币都稳稳通过,只拦"机制上明显刷不出来"的。<b>纯榜单显示逻辑,与游戏数值无关。</b></div></div>
+<div class="cl-v"><div class="cl-h">v98.4 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊优化(感谢反馈)。</b>① <b>修正过滤规则</b>:之前把"击杀数偏高"也当成作弊嫌疑,但<b>养着召唤怪刷击杀存币是正经打法</b>、低波也能刷出很多击杀——所以<b>去掉了"按波数卡击杀上限"这条</b>,免得误判养怪流的真成绩;现在只拦机制上<b>真正不可能</b>的(波数 / 击杀离谱超标,或深波击杀少到根本进不去)。② <b>榜单读取量从 100 提到 1000</b>,把"灌一大堆假分挤掉真榜"的门槛抬高 10 倍。<b>纯榜单显示逻辑,与游戏数值无关。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.3 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊过滤(感谢反馈)。</b>有人往榜上塞了「99999 波 · 999999 杀」这种不可能的成绩。现在榜单会<b>按游戏真实的出怪机制,自动滤掉机制上根本打不出来的成绩</b>——波数与击杀数对不上的、远超人类可达范围的,都不再显示;<b>名次与上榜人数也据此校准</b>。<b>真实成绩绝不受影响。</b>(说明:这是显示端过滤,挡得住屠榜级的离谱假分;若日后需要,可再在服务端加一道硬拦截。)</div></div>
 <div class="cl-v"><div class="cl-h">v98.2 · 2026-06-23</div><div class="cl-i">🌊 <b>水龙吟 / 蛟龙改成卷曲的破浪</b>(感谢反馈)——浪体后高前卷、浪尖白沫翻卷、白沫向上飞溅,终于有"浪"的样子(之前太圆润像个水球)。<br>🔮 <b>奥术飞弹撤掉了彗尾、回到原来紧凑的样子</b>:之前给它加的拖尾在连发时会糊成光条,让人误以为<b>射速变快了</b>——其实<b>射击频率 / 冷却从头到尾一字未改</b>(那是纯视觉错觉),撤掉拖尾就清爽如初了。<b>纯外观,碰撞范围与任何数值均未改动。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.1 · 2026-06-23</div><div class="cl-i">🎨 <b>法术形态打磨(感谢反馈)。</b>针对上两批新形态的细修:<br>⚡ <b>闪电弧</b> 改回该有的<b>黄色</b> + 更<b>尖锐的锯齿</b>(之前偏白、太圆润像小虫)<br>🟢 <b>毒雾弹</b> 改成<b>飘散的浓缩绿雾团</b>(之前像一颗绿水珠)<br>☄️ <b>陨石</b> 石块<b>更大、带坑洼凹坑</b>,尾焰<b>收短</b>,更有陨石的分量感<br><b>纯外观,碰撞范围与任何数值未动。</b></div></div>
@@ -866,10 +868,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v98.3', APP_TIME='2026-06-23 11:45';
+const APP_VER='v98.5', APP_TIME='2026-06-23 11:51';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v98.3';
+const APP_NOTIFY_VER='v98.5';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -4925,7 +4927,7 @@ function periodStart(period){
   return new Date(n.getFullYear(),n.getMonth(),1).toISOString(); /* 本月 1 号 00:00 */
 }
 async function fetchLeaderboard(period){
-  const order='order=wave.desc,kills.desc&limit=100';   /* 多取做缓冲:滤脏名 + 同名合并后仍凑得满前 10 */
+  const order='order=wave.desc,kills.desc&limit=1000';   /* 多取做缓冲:滤脏名/作弊分 + 同名合并后仍凑得满前 10;limit 1000(平台默认天花板)→ 抬高"灌假分挤掉真榜"的门槛 */
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY};
   let tf=''; /* 本周/本月按 created_at 筛选;总榜不筛 */
   if(period==='week'||period==='month') tf='&created_at=gte.'+encodeURIComponent(periodStart(period));
@@ -5069,17 +5071,20 @@ function isBadName(name){
   const hit=w=> raw.indexOf(w)>=0 || norm.indexOf(String(w).toLowerCase())>=0;
   return BAD_WORDS.some(hit) || SENSITIVE_WORDS.some(hit) || BLOCKED_NAMES.some(b=> b && raw.indexOf(b.toLowerCase())>=0 );
 }
-/* 成绩合理性过滤(护榜·反作弊):按游戏真实出怪机制判定"波数+击杀"这对组合可不可能。
-   依据:无尽 15 波后每波皆首领波、出怪随波增长 → 累计击杀≈随波数平方增长(真榜实测 击杀/波² 落在 0.16~0.32 区间)。
-   界限取极宽(真榜全部安全通过、留 5~8 倍余量),只滤"机制上不可能"的脏数据,绝不误杀真成绩。
-   纯客户端显示过滤:拦不住对方直接 POST 上传(密钥在源码里),但作弊分不再显示在榜上、也不计入名次/人数。 */
+/* 成绩合理性过滤(护榜·反作弊):按真实出怪机制给"波数+击杀"卡一个合理区间 [下限, 上限]。
+   依据:真榜实测 击杀/波² ∈ 0.16~0.32(随波数平方增长)。养怪流(不杀 Boss、刷召唤怪存币)会把击杀推高,故区间留足余量:
+   ① 下限 = 0.03·w²(必须清怪才进波;养怪只增杀、绝不触下限;系数仅真榜下限的 1/5)。
+   ② 上限 = 3·w² + 150·w + 300(约真榜上限的 9 倍 + 随波线性放宽,容纳正常打法与重度养怪;但低波刷不出天量、刷到离谱仍拦)。
+   ③ 绝对上限 w≤5000 & k≤500000 兜底(挡 99999/999999 屠榜数字)。
+   关键:上限是"正常人能刷到的合理天花板"的启发式,不是物理铁律——真有人farm到顶可放宽系数(阈值集中此处)。
+   纯客户端显示过滤:拦不住直接 POST 上传,但作弊分不显示、不计入名次/人数。 */
 function plausibleScore(wave, kills){
   const w=+wave, k=+kills;
   if(!Number.isFinite(w)||!Number.isFinite(k)) return false;
   if(w<1||k<0||w!==Math.floor(w)||k!==Math.floor(k)) return false;   /* 负数/非整数/空值 */
-  if(w>5000||k>500000) return false;                                  /* 绝对上限:远高于真人可达(真榜首 ~120 波/2400 杀),挡 99999/999999 这类屠榜数字 */
-  if(k > 2.5*w*w + 500) return false;                                 /* 击杀太多配不上波数:场上没那么多怪可杀(系数 2.5 远高于真榜 0.32 上限) */
-  if(w>=10 && k < 0.03*w*w) return false;                            /* 击杀太少配不上波数:必须清怪才进波(系数 0.03 远低于真榜 0.16 下限;仅 10 波后判,免误杀低波低杀的真成绩) */
+  if(w>5000||k>500000) return false;                                  /* ③ 绝对上限兜底 */
+  if(w>=10 && k < 0.03*w*w) return false;                            /* ① 下限:深波却杀太少=不可能(养怪不触此线;仅 10 波后判,免误杀低波低杀真分) */
+  if(k > 3*w*w + 150*w + 300) return false;                          /* ② 合理上限:含养怪余量(≈真榜 9 倍 + 随波线性放宽);低波刷天量 / 刷到离谱被拦 */
   return true;
 }
 /* 同名只保留一条(传入列表须已按成绩从高到低排好);榜单显示与名次计算共用同一函数,确保两者一致。
