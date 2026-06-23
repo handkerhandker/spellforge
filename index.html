@@ -588,6 +588,9 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v97.3 · 2026-06-23</div><div class="cl-i">🛠️ <b>修复「法术槽 5/4 溢出」漏洞(感谢反馈)。</b>此前<b>把基础攻击法术（奥术飞弹）卖掉、再把空出的槽全买成辅助法术</b>后,战斗中"无伤害法术时自动补一发奥术飞弹"的保底会<b>无视上限硬塞</b>,使法术数突破到 5/4。根因是这条"保底补飞弹"从未做满槽检查(当年只堵了商店买入那条路、没堵这条);现在<b>保底补飞弹严格遵守法术槽上限</b>,满槽时不再多塞(已溢出的存档,卖出一个即自动回正)。<b>护榜修复,不改动任何法术数值。</b><br>🦄 <b>御兽法杖「白泽」的作用看得见了(感谢反馈)。</b>白泽是辅助灵兽、<b>不亲自攻击</b>,容易被以为没用;其实只要它活着,<b>全体灵兽 +30% 伤害 + 持续回血</b>。现在<b>白泽登场会提示它的作用</b>,身上有<b>金色辅助光环</b>,被它加成的攻击兽<b>头顶有金色小箭标</b>,一眼就懂它在给全队加 buff。<b>纯显示,白泽数值未改。</b></div></div>
+<div class="cl-v"><div class="cl-h">v97.2 · 2026-06-23</div><div class="cl-i">🟢 <b>中毒状态更醒目了(感谢反馈)。</b>此前中毒只有一圈很淡的绿环、在草原 / 雪原 / 沙漠等地形上几乎看不出来,容易没察觉自己正被毒磨血。现在:<b>① 中毒时身上是一圈带深色描边的绿色毒环 + 上绕毒泡</b>(全部地形都清晰可读、亮地图也不糊);<b>② 头顶常驻「🟢 中毒」标签</b>,一眼就知道正在中毒、该走出毒区 / 等毒消。<b>纯显示,不改动中毒的伤害 / 持续时间 / 触发(法盾仍能挡毒、数值一字未改)。</b></div></div>
+<div class="cl-v"><div class="cl-h">v97.1 · 2026-06-23</div><div class="cl-i">🛡️ <b>法盾 / 不死药体验打磨(感谢反馈):</b><br>① <b>法盾被打穿时给明确反馈了</b>——此前护罩挡满次数后是"悄无声息地消失",专注走位时容易没察觉、下一下就吃满伤害;现在<b>护罩被击碎时屏幕中央提示「法盾被击碎」+ 青色碎裂特效 + 专属音效 + 轻微震屏</b>,一眼知道盾没了、该走位。<br>② <b>法盾冷却改为"从护罩结束时"算起</b>——以前提前被打穿后,要干等到"开盾后约 6 秒"才能再开(密集火力下提前破盾反而空窗超久);现在<b>无论被打穿还是 4 秒时限到,都统一在结束后 2 秒重开</b>,破盾后能更快拿回护盾、贴脸更稳(撑满 4 秒自然结束的情形与原来一致;2 秒空窗地板不变、不会无限挂盾)。<br>③ <b>不死药免死的"1 秒无敌"做醒目了</b>——不死药本就在"致命一击免死"时给 1 秒无敌,但之前只有角色闪烁、不易察觉;现在<b>免死后身上罩一圈金光</b>,明确告诉你"这 1 秒无敌、速冲刺脱身"(亮地形也清晰可读)。<br><b>不死药数值未改;法盾冷却这点增强属深层无尽生存向,与连击 / 终极技同理,不做纪元、新旧分共存。</b></div></div>
 <div class="cl-v"><div class="cl-h maj">v97.0 · 2026-06-23</div><div class="cl-i">🧙 <b>无尽里程碑:打到深层会解锁额外法术槽!</b>法术槽基础仍是 <b>4</b> 个,但在<b>无尽模式</b>里——<b>抵达第 50 波 → +1 槽(共 5)</b>、<b>抵达第 100 波 → 再 +1 槽(共 6，封顶)</b>。多出的槽能多带一门法术、凑更多<b>连携</b>与构筑深度,给深潜无尽的硬核玩家一个实打实的进度奖励 + 续航工具。跨过里程碑时屏幕中央会提示,且<b>接下来的三选一会优先出"你还没有的新法术"</b>,空槽尽快填上(填满即恢复正常)。<br><b>这是本局凭操作打出来的局内成长(不是跨局永久强化),全难度通用(含弑神),人人都在同一条"打到 X 波才给"的规则下、公平不破;而且它只在 50 波以上才生效——50 波以内、以及所有 15 波通关的旧记录,与新版完全同一条起跑线、一分不贬值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v96.1 · 2026-06-23</div><div class="cl-i">🟡 <b>Boss 出场前会先在落点亮一圈「淡红预警」</b>(感谢玩家建议)。后期 4 樽 Boss 同时刷新时,常有 Boss 突然在你脚下冒出来、被体型卡住躲不掉。现在<b>每樽 Boss 正式现身前约 1 秒,会先在它的落点亮起一个淡红色提示圈</b>(虚线边 + 向中心收拢的内圈,内圈一收紧 Boss 就到),给你时间提前撤离;圈做了深色描边,雪原 / 沙漠等亮地形上也清晰可见。<b>纯提示、不造成任何伤害,也不改动 Boss 的血量 / 伤害 / 刷新数量(与榜单无关)。</b></div></div>
 <div class="cl-v"><div class="cl-h">v95.5 · 2026-06-23</div><div class="cl-i">🌋 <b>地裂 · 彻底重做</b>(原版又窄又短、瞬发一闪而过,不像「地裂」)——现在豁开的是一道<b>又宽又长、停留数秒的地堑</b>:开裂瞬间全宽重击一记,之后<b>堑底地火持续灼烧(范围 DoT)</b>,站上去或路过的群妖不断掉血。命中带大幅加宽、持续时间大幅拉长、伤害显著提高、冷却略缩短;「裂地殛」(配落雷沿堑降雷)照旧。<br><span style="opacity:.75">注:地裂为新法术,本次数值仍属初版,真机若偏强 / 偏弱可再微调。</span></div></div>
@@ -853,10 +856,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v97.0', APP_TIME='2026-06-23 09:15';
+const APP_VER='v97.3', APP_TIME='2026-06-23 11:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v97.0';
+const APP_NOTIFY_VER='v97.3';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1182,6 +1185,7 @@ const S={
   coin:()=>sfx(900,1350,.07,'square',.05),
   buy:()=>sfx(520,780,.16,'triangle',.1),
   no:()=>sfx(170,110,.12,'square',.08),
+  shatter:()=>{sfx(760,170,.11,'square',.09); setTimeout(()=>sfx(430,90,.16,'sawtooth',.08),55);},
   win:()=>{sfx(523,523,.15,'triangle',.11);setTimeout(()=>sfx(659,659,.15,'triangle',.11),150);setTimeout(()=>sfx(784,1046,.35,'triangle',.13),300);}
 };
 $('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').innerHTML=muted?'<svg viewBox="0 0 64 64"><path d="M8 25 L19 25 L31 14 L31 50 L19 39 L8 39 Z" fill="#cfc8f2"/><path d="M40 25 L54 39 M54 25 L40 39" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/></svg>':'<svg viewBox="0 0 64 64"><path d="M8 25 L19 25 L31 14 L31 50 L19 39 L8 39 Z" fill="#cfc8f2"/><path d="M38 24 Q44 32 38 40" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/><path d="M45 18 Q55 32 45 46" fill="none" stroke="#cfc8f2" stroke-width="3.6" stroke-linecap="round"/></svg>';
@@ -2051,7 +2055,7 @@ const cam={x:0,y:0,shake:0};
    EX/EY=因拉远而多出的可视半宽/半高余量,用于把所有屏幕剔除边界一并放宽(viewZoom=1 时 EX=EY=0,行为与原版逐字节一致、零回归) —— */
 const VISION_GAIN=1.20;            /* 视野扩大倍率(每个方向多看 20%);改这一个数即可调 */
 let viewZoom=1, viewZoomT=1, EX=0, EY=0;
-let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spawnQ, waveT, telegraphs, bossWarns, beasts, summonT, totems, _synAnnounced;
+let player, enemies, bullets, ebullets, parts, texts, pickups, clouds, zaps, spawnQ, waveT, telegraphs, bossWarns, beasts, summonT, totems, _synAnnounced, _baizeAnn;
 let ann={a:'',b:'',t:0};
 /* ===== 终极技(大招)系统 ===== 能量由击杀+受击累积,满后触发(触屏按键/键盘 R/手柄 Y);首版 6 把杖专属大招,效果暂为占位 */
 let ultE=0; const ULT_MAX=100, ULT_KILL=4, ULT_HIT=6; let ultFireT=-1; let ultWaves=[];  /* ultFireT: -1=空闲,否则放招后秒数(屏幕闪光);ultWaves: 法术新星扩散冲击波(伤害+击退) */
@@ -2123,7 +2127,7 @@ let profileInitT=0;
 
 function newPlayer(){ return {
   x:ARENA.w/2, y:ARENA.h/2, r:14, hp:100, maxhp:100, spd:215,
-  dirx:1, diry:0, iframe:0, anim:0, bladeAng:0, cc:{},
+  dirx:1, diry:0, iframe:0, phoenixGlow:0, anim:0, bladeAng:0, cc:{},
   dashT:0,dashCD:0,dashDX:1,dashDY:0,dashStock:1,dashMax:1,
   wand:null,wandFx:{dmgM:1,cdM:1,spdM:1,extra:0,spreadM:1,pierce:0,killHeal:0,takenMul:1,critBonus:0,critMul:0,ricochet:0},
   curse:{dmg:0,taken:0,enemySpd:0,coin:0,chaos:0},
@@ -2237,7 +2241,7 @@ function resetGame(){
   runRewardBase=0; runRewardRaw=0;
   player=newPlayer();
   { const _hm=metaHpMul(); if(_hm>1){ player.maxhp=Math.round(player.maxhp*_hm); player.hp=player.maxhp; } }
-  enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; bossWarns=[]; beasts=[]; summonT=0; totems=[]; _synAnnounced=false;
+  enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; bossWarns=[]; beasts=[]; summonT=0; totems=[]; _synAnnounced=false; _baizeAnn=false;
   pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0; ultE=0; ultFireT=-1; ultWaves=[]; fissures=[]; marshes=[];
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
   runMaxComboTier=0; runMaxCombo=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runSpellDmg={}; runBossKills={}; runBossDmg={}; recentSpellDmg={}; runBiggestHit=0; runBiggestHitSpell=''; deathCause=''; deathBlowDmg=0; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
@@ -4202,7 +4206,14 @@ function updateSpellStates(dt){
   if(player.shieldLock>0)player.shieldLock-=dt;
   if(player.shield){
     player.shield.life-=dt;
-    if(player.shield.life<=0||player.shield.hits>=player.shield.max){ player.shield=null; player.shieldLock=2; }
+    if(player.shield.hits>=player.shield.max){   /* 抵挡上限被打穿:明确提示 + 青色碎裂 + 音效 + 轻震屏 */
+      player.shield=null; player.shieldLock=2;
+      announce('🛡️ 法盾被击碎','护罩耗尽 · 强制空窗 2 秒');
+      for(let _i=0;_i<14;_i++){ const _a=_i/14*TAU, _sp=rand(90,230); spawnPart(player.x,player.y,Math.cos(_a)*_sp,Math.sin(_a)*_sp,rand(.3,.6),rand(2.6,4.6),'#9ad8ff'); }
+      cam.shake=Math.min(cam.shake+5,16); hurtFx=Math.max(hurtFx,.2); try{S.shatter();}catch(e){}
+    } else if(player.shield.life<=0){   /* 时限到自然消散:轻提示,不打扰 */
+      player.shield=null; player.shieldLock=2; puff(player.x,player.y,'#9ad8ff',8);
+    }
   }
   /* orb 旋转 + 自动发射 */
   if(player.orb){
@@ -4369,16 +4380,17 @@ function castAll(dt){
       S.card(); announce('🍶 不死药 · 起死回生','濒死自动'+(pct>=1?'回满血':'回 '+Math.round(pct*100)+'% 生命')); puff(player.x,player.y,'#ffd9a8',18);
       continue;
     }
-    us.t=cdOf(udef,us.lv);
-    if(_uid==='heal'){ heal(6+2*(us.lv-1)); S.card(); puff(player.x,player.y,'#a8ffb0',8); }
-    else { if(player.shield||player.shieldLock>0){ us.t=0.05; continue; } player.shield={hits:0,max:udef.shield+1*us.lv,life:4}; S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); }
+    if(_uid==='heal'){ us.t=cdOf(udef,us.lv); heal(6+2*(us.lv-1)); S.card(); puff(player.x,player.y,'#a8ffb0',8); }
+    else { /* 法盾:再开只由 shieldLock(盾结束后2s)守门=冷却从"盾结束"算起;提前被打穿也只等结束后2s,不再被"开盾后6s"卡住。2s空窗地板不受急速影响→不会无限挂盾(沿用 v42 防永久盾) */
+      if(player.shield||player.shieldLock>0){ us.t=0.05; continue; }
+      player.shield={hits:0,max:udef.shield+1*us.lv,life:4}; us.t=0.1; S.card(); announce('🛡️ 法盾','受击仅扣 1 血'); }
   }
   if(_padHoldFire) return;   /* 🎮 B方案右摇杆松手:停火(治愈/法盾已在上方自给触发) */
   if(!enemies.length) return;
   /* 兜底:玩家把所有能射出子弹的法术卖光后会"完全不能攻击",此时注入保底奥术飞弹 */
   const _BAL=['bolt','fire','ice','arc','meteor','chain','venom','swarm','hive','firestorm','winterspear','thunderjudge','thousandblade','meteorrain','cyclone','plague','tidal','devour','singularity','seadragon','plaguelord','starring','gluttony','fissure'];
   let _hasBal=false; for(const _id in player.spells)if(_BAL.indexOf(_id)>=0){_hasBal=true;break;}
-  if(!_hasBal)player.spells.bolt={lv:1,t:.2};
+  if(!_hasBal && Object.keys(player.spells).length<spellSlotMax())player.spells.bolt={lv:1,t:.2};   /* FIX(护榜):兜底补 bolt 必须遵守法术槽上限,否则"卖光伤害法术→填满辅助→兜底再塞 bolt"会突破到 5/4。满槽且无伤害法术时不补(玩家自行卖出辅助换攻击) */
   for(const id in player.spells){
     if(id==='blade'||id==='thousandblade'||id==='heal'||id==='shield'||id==='phoenix') continue;  /* 治愈/法盾/不死药已在函数顶部自给处理 */
     const s=player.spells[id], def=SPELL_DEF[id];
@@ -4826,7 +4838,7 @@ function deathSave(){
     const pct=0.25+0.04*((ph.lv||1)-1);
     player.hp=Math.min(player.maxhp, Math.max(1,Math.round(player.maxhp*pct)));   /* 钳到上限:高级不死药 pct>100% 时不再溢出超过满血 */
     ph.t=Math.max(7,14-0.6*((ph.lv||1)-1));
-    player.iframe=Math.max(player.iframe,1.0); hurtFx=Math.max(hurtFx,.5); cam.shake=Math.min(cam.shake+6,18);
+    player.iframe=Math.max(player.iframe,1.0); player.phoenixGlow=1.0; hurtFx=Math.max(hurtFx,.5); cam.shake=Math.min(cam.shake+6,18);
     S.card(); announce('🍶 不死药 · 起死回生','致命一击免死 · '+(pct>=1?'回满血':'回 '+Math.round(pct*100)+'% 生命')); puff(player.x,player.y,'#ffd9a8',20);
     return true;
   }
@@ -6000,6 +6012,7 @@ function spawnBeast(type){
     cd:rand(.2,Math.max(.3,d.cd)),anim:rand(0,TAU),fx:1,fy:0,down:false,downT:0,charge:0,lunge:0,fire:0,beam:0,bx:0,by:0});
   for(let i=0;i<10;i++){const an=rand(0,TAU),s=rand(40,160);spawnPart(player.x,player.y,Math.cos(an)*s,Math.sin(an)*s,rand(.3,.6),rand(2,5),d.col);}
   puff(player.x,player.y,d.col,6); try{S.card();}catch(e){}
+  if(type==='baize'&&!_baizeAnn){ _baizeAnn=true; try{announce('🦄 白泽降临 · 御灵增益','全体灵兽 +30% 伤害 + 持续回血（不亲自攻击）');}catch(e){} }
 }
 function beastMove(B,tx,ty,spd,dt){ const dx=tx-B.x,dy=ty-B.y,m=Math.hypot(dx,dy)||1; B.x+=dx/m*spd*dt; B.y+=dy/m*spd*dt; B.fx=dx/m; B.fy=dy/m; }
 function beastTarget(B,af){ let best=null,bestS=Infinity;
@@ -6067,6 +6080,7 @@ function updateBeasts(dt){
   }
 }
 function drawBeasts(){
+  const _auraOn = beasts.some(B=>!B.down && B.type==='baize');   /* 白泽存活=全队增益生效 */
   for(const B of beasts){
     const d=BEAST_DEF[B.type];
     if(B.down){ ctx.save(); ctx.globalAlpha=.22+.14*Math.sin(time*6); ctx.fillStyle=d.col; ctx.beginPath(); ctx.arc(player.x,player.y,4,0,TAU); ctx.fill(); ctx.restore(); continue; }
@@ -6075,6 +6089,12 @@ function drawBeasts(){
     if(B.beam>0){ ctx.globalAlpha=B.beam/.18; ctx.strokeStyle=d.col; ctx.lineWidth=3+4*(B.beam/.18); ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(B.bx,B.by); ctx.stroke(); ctx.globalAlpha=1; }
     const pulse=(B.lunge>0||B.fire>0)?1.32:(B.charge>0?1+B.charge*.4:1);
     const rr=d.r*pulse;
+    /* 🦄白泽·辅助光环:金色外扩脉冲(向全队放光,标明它是增益源;加成全局生效,故用外扩波而非固定范围圈,避免误以为有距离限制)。全程 source-over→亮地图不爆白 */
+    if(B.type==='baize'){ const _wp=(time*.7)%1; ctx.save(); ctx.globalCompositeOperation='source-over';
+      ctx.strokeStyle='#3a2e08'; ctx.globalAlpha=.30*(1-_wp); ctx.lineWidth=4; ctx.beginPath(); ctx.arc(B.x,B.y,rr*1.7+rr*1.9*_wp,0,TAU); ctx.stroke();
+      ctx.strokeStyle='#ffe27a'; ctx.globalAlpha=.55*(1-_wp); ctx.lineWidth=2.4; ctx.beginPath(); ctx.arc(B.x,B.y,rr*1.7+rr*1.9*_wp,0,TAU); ctx.stroke();
+      const _hp=.4+.25*Math.sin(time*4); ctx.strokeStyle='#3a2e08'; ctx.globalAlpha=.3; ctx.lineWidth=4.5; ctx.beginPath(); ctx.arc(B.x,B.y,rr*1.5,0,TAU); ctx.stroke();
+      ctx.strokeStyle='#ffe88a'; ctx.globalAlpha=_hp; ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(B.x,B.y,rr*1.5,0,TAU); ctx.stroke(); ctx.restore(); }
     const g=ctx.createRadialGradient(B.x,B.y,0,B.x,B.y,rr*2.4);
     g.addColorStop(0,d.col+'bb'); g.addColorStop(1,d.col+'00');
     ctx.fillStyle=g; ctx.beginPath(); ctx.arc(B.x,B.y,rr*2.4,0,TAU); ctx.fill();
@@ -6082,6 +6102,10 @@ function drawBeasts(){
     ctx.fillStyle='rgba(255,255,255,.85)'; ctx.beginPath(); ctx.arc(B.x-rr*.26,B.y-rr*.26,rr*.4,0,TAU); ctx.fill();
     ctx.font=((rr*1.25)|0)+'px serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; drawCanvasIcon(B.type==='baize'?'char':'beast',B.type,d.icon,B.x,B.y,rr*1.6);
     if(B.hp<B.maxhp){ const w=rr*2,hpr=Math.max(0,B.hp/B.maxhp); ctx.fillStyle='rgba(0,0,0,.5)'; ctx.fillRect(B.x-w/2,B.y-rr-7,w,3); ctx.fillStyle=d.col; ctx.fillRect(B.x-w/2,B.y-rr-7,w*hpr,3); }
+    /* 被白泽增益的攻击兽:头顶金色小箭标(深色描边,亮地形可读),让"它在被加成"一眼可见 */
+    if(_auraOn && B.type!=='baize'){ const _my=B.y-rr-(B.hp<B.maxhp?12:7), _bp=.6+.3*Math.sin(time*5+B.x*.05); ctx.save(); ctx.lineJoin='round'; ctx.lineCap='round'; ctx.globalAlpha=_bp;
+      ctx.strokeStyle='rgba(20,14,2,.92)'; ctx.lineWidth=3.4; ctx.beginPath(); ctx.moveTo(B.x-4.5,_my+3); ctx.lineTo(B.x,_my-2.5); ctx.lineTo(B.x+4.5,_my+3); ctx.stroke();
+      ctx.strokeStyle='#ffe27a'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(B.x-4.5,_my+3); ctx.lineTo(B.x,_my-2.5); ctx.lineTo(B.x+4.5,_my+3); ctx.stroke(); ctx.restore(); }
     ctx.restore();
   }
 }
@@ -6238,7 +6262,7 @@ function update(dt){
   }
   if(im>.1){player.dirx=ix/(im||1);player.diry=iy/(im||1);}
   collidePillars(player);
-  player.iframe-=dt; player.anim+=dt;
+  player.iframe-=dt; if(player.phoenixGlow>0)player.phoenixGlow-=dt; player.anim+=dt;
 
   /* 玩家档案采样 */
   updatePlayerProfile(dt);
@@ -7174,6 +7198,13 @@ function render(){
       ctx.fillStyle='rgba(120,200,255,'+(.10+.05*_pu)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.fill();
       ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='#7fdcff'; ctx.lineWidth=2.5; ctx.globalAlpha=.55+.3*_pu; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.stroke();
       for(let _i=0;_i<_rem;_i++){ const _a=-Math.PI/2+_i/Math.max(_rem,1)*TAU; ctx.globalAlpha=.96; ctx.fillStyle='#e3f5ff'; ctx.beginPath(); ctx.arc(_p.x+Math.cos(_a)*_rr,_p.y+Math.sin(_a)*_rr,2.7,0,TAU); ctx.fill(); }
+      ctx.restore(); }
+    /* 🍶不死药·免死无敌:1 秒金光圈,明确告知"此刻无敌、速冲刺脱身"(深色底环保亮地形可读) */
+    if(_p.phoenixGlow>0){ const _g=Math.min(1,_p.phoenixGlow), _gr=_p.r+11+_pu*3+(1-_g)*9; ctx.save();
+      ctx.globalCompositeOperation='source-over'; ctx.strokeStyle='#3a2410'; ctx.globalAlpha=.34*_g; ctx.lineWidth=5.5; ctx.beginPath(); ctx.arc(_p.x,_p.y,_gr,0,TAU); ctx.stroke();
+      ctx.globalCompositeOperation='lighter';
+      ctx.fillStyle='rgba(255,200,120,'+((.10+.06*_pu)*_g)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_gr,0,TAU); ctx.fill();
+      ctx.strokeStyle='#ffd98a'; ctx.globalAlpha=(.55+.4*_pu)*_g; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(_p.x,_p.y,_gr,0,TAU); ctx.stroke();
       ctx.restore(); }
     /* 遗物·玄龟甲:免下一次受击 — 更醒目的金蓝护罩 */
     if(_p._ward){ const _wr=_p.r+15+_pu*2; ctx.save(); ctx.globalCompositeOperation='lighter';
@@ -9032,9 +9063,21 @@ function drawPlayer(){
     ctx.globalAlpha=.7;ctx.fillStyle='#fff2cc';ctx.beginPath();ctx.arc(ex,ey,5,0,TAU);ctx.fill();
     ctx.restore();ctx.lineCap='butt';
   }
-  /* 中毒/减速光环 */
-  if(p.poisonT>0){ ctx.save();ctx.globalAlpha=.3+Math.sin(time*8)*.15;ctx.strokeStyle='#9dff5a';ctx.lineWidth=2;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r+4,0,TAU);ctx.stroke();ctx.restore(); }
+  /* 中毒:醒目毒环(深色底环=雪原/沙漠/草原等亮地形也可读)+ 绿雾 + 上绕毒泡 + 常驻「中毒」标签;全程 source-over,不用 lighter→亮地图不爆白 */
+  if(p.poisonT>0){ const _pp=.5+.5*Math.sin(time*8), _pr=p.r+6; ctx.save(); ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(110,210,60,'+(.10+.05*_pp)+')'; ctx.beginPath();ctx.arc(p.x,p.y,_pr,0,TAU);ctx.fill();
+    ctx.strokeStyle='#0e2606'; ctx.globalAlpha=.55; ctx.lineWidth=5; ctx.beginPath();ctx.arc(p.x,p.y,_pr,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.72+.24*_pp; ctx.strokeStyle='#9dff5a'; ctx.lineWidth=2.6; ctx.beginPath();ctx.arc(p.x,p.y,_pr,0,TAU);ctx.stroke();
+    for(let _i=0;_i<4;_i++){ const _a=time*1.3+_i*(TAU/4), _bx=p.x+Math.cos(_a)*_pr, _by=p.y+Math.sin(_a)*_pr;
+      ctx.globalAlpha=.85; ctx.fillStyle='#1e3a0e'; ctx.beginPath();ctx.arc(_bx,_by,2.8,0,TAU);ctx.fill();
+      ctx.fillStyle='#bfff80'; ctx.beginPath();ctx.arc(_bx,_by,1.7,0,TAU);ctx.fill(); }
+    const _ty=p.y-p.r-23; ctx.globalAlpha=1; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.lineJoin='round';
+    const _tw=ctx.measureText('中毒').width, _dx=p.x-_tw/2-7;
+    ctx.fillStyle='rgba(8,20,4,.92)'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,3.9,0,TAU);ctx.fill();
+    ctx.fillStyle='#7dff4a'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,2.7,0,TAU);ctx.fill();
+    ctx.lineWidth=3.2; ctx.strokeStyle='rgba(8,20,4,.95)'; ctx.strokeText('中毒',p.x,_ty);
+    ctx.fillStyle='#bfff80'; ctx.fillText('中毒',p.x,_ty);
+    ctx.restore(); }
   if(p.slowT>0){ ctx.save();ctx.globalAlpha=.3;ctx.fillStyle='#7ad0ff';
     ctx.beginPath();ctx.arc(p.x,p.y,p.r+6,0,TAU);ctx.fill();ctx.restore(); }
   if(p.wandFx.charge){ const cs=(p.chargeStacks||0)/6; ctx.save();
