@@ -588,6 +588,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v97.8 · 2026-06-23</div><div class="cl-i">📱 <b>修复窄屏(如 iPhone SE / mini)+ 遗物很多时,遗物图标条溢出屏幕 / 压住右上角连击提示。</b>之前遗物条只会一行往右排、不折行也不避让,深层无尽攒一堆遗物后会冲出屏幕、还盖住「连击 + 战意」块。现在<b>遗物条会自动折行成多行</b>,绝不溢出屏幕、且<b>右边界始终给连击块让位</b>(宽屏 / 横屏放得下时维持单行、显示不变)。🎮 顺带修复<b>手柄</b>在暂停时打开图鉴等浮层后,B / Start 误操作底下暂停菜单的问题(现在正确作用于最上层的图鉴浮层)。<b>纯交互 / 布局调整,不涉及任何战斗数值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.7 · 2026-06-23</div><div class="cl-i">⌨️ <b>修复键盘 ESC 在暂停 + 图鉴叠开时的误操作(感谢反馈)。</b>PC 键盘模式下,<b>按 ESC 暂停后再打开法术图鉴</b>(或异兽图鉴 / 成就 / 更新说明等),此时<b>再按 ESC,图鉴关不掉、暂停却被取消了</b>。现在 ESC 会<b>优先关掉当前叠在最上层的图鉴 / 信息浮层、并保持暂停状态不变</b>;只有在没有这类浮层打开时,ESC 才切换暂停。<b>纯交互修复,不涉及任何战斗数值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.6 · 2026-06-23</div><div class="cl-i">🌋 <b>地裂特效重画 —— 不再糊屏挡视线(感谢反馈)。</b>此前地裂会在整条命中带铺满一大片亮橙熔岩、还叠加色光晕,雪原 / 沙漠等亮地图上糊成一片、把路都盖住;而且<b>它没接「特效强度」滑块,拉到最低也照样满屏</b>。现在改成<b>一道发光的细地缝</b>:中央窄裂纹 + 缝内窄熔岩辉光 + 沿缝零星地火余烬 + 几道支缝,<b>中间大面积透出地面,能看清缝里的怪、也看得清路</b>;辉光 / 余烬<b>现在受「特效强度」滑块与省电模式控制</b>(拉低 / 省电会明显变暗变简),深色裂纹垫底保证亮地形也清晰。<b>纯重画,地裂的命中范围 / 伤害 / 持续时间一字未改(与榜单无关)。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.5 · 2026-06-23</div><div class="cl-i">📐 <b>修复横屏下「连击提示」与右侧「终极 / 冲刺」按钮重叠(感谢反馈)。</b>横屏时屏幕较矮,右下角的终极 / 冲刺键会上移(微信底栏还会再把它们抬高一截),与右上角的<b>连击数字 / 段位 / 「战意 +X%」条</b>挤在一起、相互遮挡。现在<b>横屏会把连击提示整块自动左移到按钮列左侧</b>,与按钮、Boss 血条都不重叠;<b>竖屏显示完全不变</b>。<b>纯布局调整,不改动任何战斗 / 连击数值。</b></div></div>
@@ -860,10 +861,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v97.7', APP_TIME='2026-06-23 11:34';
+const APP_VER='v97.8', APP_TIME='2026-06-23 11:35';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v97.7';
+const APP_NOTIFY_VER='v97.8';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -9181,15 +9182,20 @@ function drawHUD(){
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
   drawSkullIcon(21,top+40,5,'#cfc8f2');ctx.fillStyle='#cfc8f2';ctx.fillText(kills,31,top+40);
   drawCoinIcon(21,top+60,5,'#ffd24d');ctx.fillStyle='#ffd24d';ctx.fillText(coins,31,top+60);
-  /* 遗物图标条(常驻,压力条下方) */
+  /* 遗物图标条(常驻,压力条下方) · 窄屏/多遗物自动折行:绝不溢出屏幕,且右边界始终避让右上角连击块(不压「战意」块);无连击时也按此留位,避免连击一出现就重排 */
   if(player.relics.length){
-    const ry=top+106, rw=19; let rx=18;
+    const rw=19, rowH=19, x0=18, ry0=top+106;
+    const _cax=(W>H*1.3)?Math.min(W-14,ultBtnXY().x-ultBtnXY().r-10):(W-14);   /* 连击块右锚(横竖屏一致) */
+    const relRight=_cax-86;                                                     /* 再留出「战意」条/文字宽度 */
+    const perRow=Math.max(6, Math.floor((relRight-x0)/rw));
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='13px serif';
+    let idx=0;
     for(const id of player.relics){
       const r=RELICS.find(x=>x.id===id); if(!r)continue;
+      const rx=x0+(idx%perRow)*rw, ry=ry0+Math.floor(idx/perRow)*rowH;
       ctx.globalAlpha=.5;ctx.fillStyle='rgba(20,14,40,.8)';
       ctx.beginPath();ctx.arc(rx,ry,9,0,TAU);ctx.fill();ctx.globalAlpha=1;
-      drawCanvasIcon('relic',id,r.icon,rx,ry,15); rx+=rw;
+      drawCanvasIcon('relic',id,r.icon,rx,ry,15); idx++;
     }
     ctx.textAlign='left';ctx.textBaseline='alphabetic';
   }
@@ -9377,7 +9383,8 @@ function padFocusables(ov){
   return out;
 }
 function padActiveOverlay(){
-  const ids=['paused','over','win','lastReport','shop','wandUnlock','wandSel','cards','relic','wardrobe','altar','backup','daily','codex','bestiary','achv','changelog','shareCard','tutorial','menu'];
+  /* 信息类浮层排在 'paused' 之前:暂停态叠开图鉴/异兽/成就等时,手柄应导航/关闭最上层的该浮层本身,而非误操作底下的暂停菜单(与键盘 ESC 经 topInfoOverlay 同理修) */
+  const ids=['lastReport','wardrobe','altar','backup','daily','codex','bestiary','achv','changelog','shareCard','paused','over','win','shop','wandUnlock','wandSel','cards','relic','tutorial','menu'];
   for(const id of ids){ const el=$(id); if(el&&!el.classList.contains('hidden')) return el; }
   return null;
 }
