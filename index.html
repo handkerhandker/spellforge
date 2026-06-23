@@ -588,6 +588,10 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v98.9 · 2026-06-23</div><div class="cl-i">📜 <b>选卡时的法术描述精简(感谢反馈)。</b>三选一选强化时,描述较长的法术(地裂、不死药、飓风、落雷、守护图腾等)之前会塞一整段山海经文案、选卡时来不及读;现在卡面只显示<b>一句直击重点的简短说明</b>,完整文案仍完整保留在<b>法术图鉴</b>里。<b>纯显示,数值与机制未改。</b></div></div>
+<div class="cl-v"><div class="cl-h">v98.8 · 2026-06-23</div><div class="cl-i">🌪️ <b>飓风大改(感谢反馈)。</b>① <b>视觉重做</b>:之前更像个魔法阵,现在是真正的旋风——向心卷入的风带 + 中心涡眼 + 被吸入的碎屑,旋转与吸入感都对了。② <b>移动变慢</b>(从风一样掠过,改成逼近的风暴、在原地多缠一会儿)。③ <b>吸力大幅增强</b>:真正把妖怪卷进涡心、锁在里面绞杀。<b>②③是数值调整,会让飓风更强;伤害与范围未动。</b></div></div>
+<div class="cl-v"><div class="cl-h">v98.7 · 2026-06-23</div><div class="cl-i">🎨 <b>御剑 / 护盾在亮地图上更清晰。</b>御剑的环绕飞剑、法盾护罩、玄龟甲护罩之前在雪原 / 沙漠等浅色地图上会糊掉看不清——现在飞剑加了深色描边、护罩加了深色底环,亮底上也一眼看清。纯外观,碰撞范围与数值均未改动。</div></div>
+<div class="cl-v"><div class="cl-h">v98.6 · 2026-06-23</div><div class="cl-i">🎨 <b>范围特效在亮地图上更清晰。</b>飓风的风涡、奥术新星的冲击波环之前在雪原 / 沙漠等浅色地图上会糊成一团、看不清——现在都加了<b>深色描边垫底</b>,亮底上也一眼看清旋臂与环形。纯外观,碰撞范围与数值均未改动。</div></div>
 <div class="cl-v"><div class="cl-h">v98.5 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊再校准(感谢反馈)。</b>上一版为了不误判养怪流、把"击杀上限"整个去掉了——但这样又太松,正常人不会刷出几十万击杀。现在改成更准的<b>「合理区间」</b>:一个成绩的击杀数<b>既不能少到根本进不了那么多波,也不能多到远超正常打法 + 重度养怪的合理范围</b>。区间留了约 <b>9 倍余量</b>,常规打法和认真养怪刷币都稳稳通过,只拦"机制上明显刷不出来"的。<b>纯榜单显示逻辑,与游戏数值无关。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.4 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊优化(感谢反馈)。</b>① <b>修正过滤规则</b>:之前把"击杀数偏高"也当成作弊嫌疑,但<b>养着召唤怪刷击杀存币是正经打法</b>、低波也能刷出很多击杀——所以<b>去掉了"按波数卡击杀上限"这条</b>,免得误判养怪流的真成绩;现在只拦机制上<b>真正不可能</b>的(波数 / 击杀离谱超标,或深波击杀少到根本进不去)。② <b>榜单读取量从 100 提到 1000</b>,把"灌一大堆假分挤掉真榜"的门槛抬高 10 倍。<b>纯榜单显示逻辑,与游戏数值无关。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.3 · 2026-06-23</div><div class="cl-i">🛡️ <b>排行榜反作弊过滤(感谢反馈)。</b>有人往榜上塞了「99999 波 · 999999 杀」这种不可能的成绩。现在榜单会<b>按游戏真实的出怪机制,自动滤掉机制上根本打不出来的成绩</b>——波数与击杀数对不上的、远超人类可达范围的,都不再显示;<b>名次与上榜人数也据此校准</b>。<b>真实成绩绝不受影响。</b>(说明:这是显示端过滤,挡得住屠榜级的离谱假分;若日后需要,可再在服务端加一道硬拦截。)</div></div>
@@ -868,10 +872,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v98.5', APP_TIME='2026-06-23 11:51';
+const APP_VER='v98.9', APP_TIME='2026-06-23 12:06';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v98.5';
+const APP_NOTIFY_VER='v98.9';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1344,21 +1348,21 @@ const SPELL_DEF={
   meteor:{name:'陨石',icon:'☄️',col:'#ff7e3a',cd:2.2,dmg:35,spd:240,r:12,life:1.7,aoe:110,desc:'巨型火球，命中后大范围爆炸'},
   beam:{name:'灼热射线',icon:'🔆',col:'#ff7a30',cd:.3,dmg:4,beam:6,desc:'持续射线灼烧 6 段'},
   heal:{name:'治愈',icon:'💚',col:'#a8ffb0',cd:4.0,dmg:0,upg:'回复量提升，冷却更短',desc:'直接回复 6 点生命(随等级提升)'},
-  phoenix:{name:'不死药',icon:'🍶',col:'#ffd9a8',cd:14,dmg:0,upg:'回血量 +4% · 免死冷却缩短(最快 7s)',desc:'受致命一击时免死、保命回血(回血量随等级提升、练高可回满);血量过低(≤30%)时也会自动回血。触发后约 7~14 秒才能再次生效(随等级缩短,最快 7 秒)'},
+  phoenix:{name:'不死药',icon:'🍶',col:'#ffd9a8',cd:14,dmg:0,upg:'回血量 +4% · 免死冷却缩短(最快 7s)',short:'受致命伤时免死并回血,血量过低也自动回血',desc:'受致命一击时免死、保命回血(回血量随等级提升、练高可回满);血量过低(≤30%)时也会自动回血。触发后约 7~14 秒才能再次生效(随等级缩短,最快 7 秒)'},
   shield:{name:'法盾',icon:'🛡️',col:'#9ad8ff',cd:6.0,dmg:0,shield:5,upg:'可挡次数 +1(持续 4s、空窗 2s 不变)',desc:'展开 4 秒,期间受击仅扣 1 血(可挡多次);结束后强制空窗 2 秒才能再开'},
   orb:{name:'奥术球',icon:'🔵',col:'#6fe3ff',cd:1.0,dmg:7,orb:90,desc:'环绕自身 90 半径,每 0.4s 发射小弹'},
   blackhole:{name:'黑洞',icon:'⚫',col:'#3a0d6e',cd:5.0,dmg:14,bhole:150,desc:'强力吸入并持续灼烧范围内敌人'},
   nova:{name:'奥术新星',icon:'💫',col:'#b9a0ff',dmg:16,cd:2.8,nova:240,desc:'以自身为中心爆发冲击波,清退近身之敌'},
   swarm:{name:'蜂群飞弹',icon:'🐝',col:'#ffd24d',dmg:5,cd:1.4,spd:300,r:5,life:1.5,desc:'射出 3 枚自动追踪的飞弹'},
   chain:{name:'回旋刃',icon:'🪃',col:'#d8c6ff',cd:.9,dmg:14,spd:480,r:6,life:1.15,chain:1,desc:'飞行一段后回旋,可二次命中'},
-  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽攻速提升、持续回血,并额外多召一只'},
-  cyclone:{name:'飓风',icon:'🌪️',col:'#bfe3ff',cd:6.5,dmg:9,vortex:140,desc:'风兽飞廉催旋成风,长驱直掠瞄准之地,裹挟沿途群妖入涡、绞杀不息;等级愈高,风涡行得愈远(出处:风兽飞廉)'},
-  plague:{name:'蛊毒',icon:'🦠',col:'#9be86a',cd:2.0,dmg:8,spd:300,r:9,life:1.2,desc:'命中使敌人染疫,染疫者死亡或靠近他人时传染,连锁烂场(出处:疫鬼)'},
-  tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
-  devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射、回复 1 生命(出处:饕餮)'},
-  thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,desc:'天降数道惊雷轰击敌群,每道炸开小范围电击,雷数随等级增加;若场上有飓风,惊雷尽数倾于风涡所聚之妖,威势更盛'},
-  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.6,dmg:36,fissure:true,desc:'裂地为堑——震脚踏地、地脉迸裂,沿瞄准方向豁开一道丈宽深堑、久久不弭;堑底地火翻涌,持续灼烤陷于其中的群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿堑倾下,地火天雷相激(出处:息壤)'},
-  swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
+  totem:{name:'守护图腾',icon:'🗿',col:'#9d7bff',cd:5.5,dmg:13,totem:true,short:'召唤图腾,自动电击周围敌人',desc:'召唤图腾自动电击周围敌人;【御兽共鸣】持御兽法杖时,范围内灵兽攻速提升、持续回血,并额外多召一只'},
+  cyclone:{name:'飓风',icon:'🌪️',col:'#bfe3ff',cd:6.5,dmg:9,vortex:140,short:'召唤旋风掠向指定方向,卷入并绞杀沿途群妖',desc:'风兽飞廉催旋成风,徐徐掠向瞄准之地,裹挟沿途群妖卷入涡心、绞杀不息;等级愈高,风涡行得愈远(出处:风兽飞廉)'},
+  plague:{name:'蛊毒',icon:'🦠',col:'#9be86a',cd:2.0,dmg:8,spd:300,r:9,life:1.2,short:'使敌人染疫,会在敌群间传染连锁',desc:'命中使敌人染疫,染疫者死亡或靠近他人时传染,连锁烂场(出处:疫鬼)'},
+  tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,short:'射出宽幅水波,贯穿并狠狠击退一线之敌',desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
+  devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,short:'盖上饕餮印,带印之敌死亡时爆裂回血',desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射、回复 1 生命(出处:饕餮)'},
+  thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,short:'天降多道惊雷轰击敌群,雷数随等级增加',desc:'天降数道惊雷轰击敌群,每道炸开小范围电击,雷数随等级增加;若场上有飓风,惊雷尽数倾于风涡所聚之妖,威势更盛'},
+  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.6,dmg:36,fissure:true,short:'劈开一道地裂,持续灼烧落入的群妖',desc:'裂地为堑——震脚踏地、地脉迸裂,沿瞄准方向豁开一道丈宽深堑、久久不弭;堑底地火翻涌,持续灼烤陷于其中的群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿堑倾下,地火天雷相激(出处:息壤)'},
+  swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,short:'召唤环绕飞剑,自动锁敌齐射剑气',desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
   thousandblade:{name:'万刃',icon:'⚔️',col:'#e6d4ff',evo:'blade',desc:'【进化·环刃术】环刃数量翻倍、高速旋转,化作贴身绞肉风暴'},
@@ -4332,11 +4336,13 @@ function updateSpellStates(dt){
     for(const e of enemies){ if(e.dead)continue;
       const dx=cy.x-e.x,dy=cy.y-e.y,d=Math.hypot(dx,dy)||1;
       if(d<cy.r){
-        if(!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); const pull=(1-d/cy.r)*120*km; e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt; }
+        if(!e.boss){ const km=(e._kbm!==undefined?e._kbm:1); const pull=(1-d/cy.r)*250*km; e.x+=dx/d*pull*dt; e.y+=dy/d*pull*dt; }
         (_atkSpell='cyclone',damageEnemy(e,cy.dmg*(d<cy.r*.5?1.5:1)*dt),_atkSpell=null);
       }
     }
-    for(let i=0;i<2;i++){ const aa=cy.ang*2+i*3.14; spawnPart(cy.x+Math.cos(aa)*cy.r*.45,cy.y+Math.sin(aa)*cy.r*.45,rand(-50,50),rand(-50,50),.25,3,'#dff2ff'); }
+    for(let i=0;i<3;i++){ const aa=rand(0,TAU), er=cy.r*rand(.72,1.0), px=cy.x+Math.cos(aa)*er, py=cy.y+Math.sin(aa)*er;
+      const _tg=260, _in=170, vx=-Math.sin(aa)*_tg-Math.cos(aa)*_in, vy=Math.cos(aa)*_tg-Math.sin(aa)*_in;
+      spawnPart(px,py,vx,vy,.42,rand(1.4,2.8),'#dff2ff'); }   /* 碎屑沿切向绕转 + 向心吸入,显"卷入" */
   }
   player.cyclones=player.cyclones.filter(c=>c.life>0);
   /* 生命虹吸(毒云存在时回血) */
@@ -4422,7 +4428,7 @@ function castAll(dt){
       const tgt=aimPoint()||{x:player.x+200,y:player.y};
       const ca=Math.atan2(tgt.y-player.y,tgt.x-player.x);
       const D=180+140*(s.lv-1);   /* 飞行距离随等级:Lv1≈180(近,不破前期平衡),每级+140,高等级横扫大半场 */
-      const spd=320, sx=player.x+Math.cos(ca)*30, sy=player.y+Math.sin(ca)*30;
+      const spd=150, sx=player.x+Math.cos(ca)*30, sy=player.y+Math.sin(ca)*30;
       player.cyclones.push({x:sx,y:sy,tx:player.x+Math.cos(ca)*D,ty:player.y+Math.sin(ca)*D,spd:spd,r:def.vortex*(1+.08*(s.lv-1))*(1+.15*player.mods.giant),life:D/spd+2,ang:0,dmg:dmgOf(def,s.lv)});
       S.zap(); continue;
     }
@@ -5739,7 +5745,7 @@ function achSummaryHTML(){
 function cardInfo(d){
   if(d.kind==='spell'){
     const def=SPELL_DEF[d.id], own=player.spells[d.id];
-    let desc=def.desc, rar=d.rar, dispRar=d.rar;
+    let desc=def.short||def.desc, rar=d.rar, dispRar=d.rar;   /* 卡牌优先用简短 short;图鉴另走 def.desc 长文案 */
     if(own){ rar=1; dispRar=1;
       desc='升级 Lv'+(own.lv+1)+'：'+(def.upg||'伤害提升，施法更快');
       /* 可进化法术升到进化门槛起，点明 Lv5 是进化点（非上限），配齐对应符文即可进化 */
@@ -7016,9 +7022,15 @@ function render(){
   /* 奥术新星扩散环 */
   if(novaFX){ novaFX.t-=.06;
     if(novaFX.t<=0)novaFX=null;
-    else { ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=novaFX.t*.7;
-      ctx.strokeStyle='#b9a0ff';ctx.lineWidth=4+novaFX.t*4;
-      ctx.beginPath();ctx.arc(novaFX.x,novaFX.y,novaFX.r*(1.1-novaFX.t*.5),0,TAU);ctx.stroke();ctx.restore(); }
+    else { const _nt=novaFX.t, _nr=novaFX.r*(1.1-_nt*.5); ctx.save();
+      ctx.globalCompositeOperation='source-over';
+      ctx.globalAlpha=_nt*.8; ctx.strokeStyle='#1a1030'; ctx.lineWidth=8+_nt*5;        /* 深色垫底环=亮地形可读 */
+      ctx.beginPath();ctx.arc(novaFX.x,novaFX.y,_nr,0,TAU);ctx.stroke();
+      ctx.globalAlpha=_nt*.92; ctx.strokeStyle='#c4a8ff'; ctx.lineWidth=4+_nt*3;         /* 紫环主体 */
+      ctx.beginPath();ctx.arc(novaFX.x,novaFX.y,_nr,0,TAU);ctx.stroke();
+      const g=_nt*fxAlpha; if(g>.04){ ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=g*.6; ctx.strokeStyle='#e6d8ff'; ctx.lineWidth=2+_nt*2;   /* 窄加色辉光×fxAlpha,门控 */
+        ctx.beginPath();ctx.arc(novaFX.x,novaFX.y,_nr,0,TAU);ctx.stroke(); }
+      ctx.restore(); }
   }
   /* 可读性:先垫深色底(浅色地形上法术也清晰)。
      v85.7 根治「后期黑屏」:① 垫底跟随「特效强度」滑块(fx=0→不垫,与"特效全关"一致,不再变黑屏)
@@ -7294,15 +7306,28 @@ function render(){
   /* 飓风:旋转风暴 —— 渲染受滑块控制 + 高密度只画最近 FX_CYC_DRAW 个(超出仍存在并照常吸入/伤害) */
   { const _yN=player.cyclones.length, _yStart=Math.max(0,_yN-FX_CYC_DRAW);
   for(let yi=_yStart;yi<_yN;yi++){ const cy=player.cyclones[yi];
-    ctx.save();
-    ctx.globalAlpha=.5*fxAlpha;ctx.strokeStyle='#dff2ff';ctx.lineWidth=2.4;
-    for(let k=0;k<3;k++){ const ra=cy.r*(.42+k*.27), za=cy.ang*(k%2?-1:1);
-      ctx.beginPath();
-      for(let sgi=0;sgi<=14;sgi++){ const tt=sgi/14, ang=za+tt*5.6, rr=ra*(1-tt*.18); const px=cy.x+Math.cos(ang)*rr, py=cy.y+Math.sin(ang)*rr; if(sgi===0)ctx.moveTo(px,py);else ctx.lineTo(px,py); }
-      ctx.stroke();
+    ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.lineJoin='round'; ctx.lineCap='round';
+    const _cR=cy.r, _crot=cy.ang*1.4;
+    /* 外界淡环(暗底 + 浅青) */
+    ctx.globalAlpha=.42*fxAlpha; ctx.strokeStyle='#0e1f30'; ctx.lineWidth=4.5; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR,0,TAU);ctx.stroke();
+    ctx.globalAlpha=.5*fxAlpha; ctx.strokeStyle='#bfe3ff'; ctx.lineWidth=1.4; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR,0,TAU);ctx.stroke();
+    /* 向心卷入的风带 ×7(每臂浓淡不一=湍流感);先暗垫底后浅青 */
+    const _ARMS=7, _SEG=13, _TURN=1.5;
+    for(let pass=0;pass<2;pass++){
+      ctx.strokeStyle = pass===0 ? '#0e1f30' : '#dff2ff';
+      ctx.lineWidth   = pass===0 ? 3.8 : 1.7;
+      for(let k=0;k<_ARMS;k++){
+        const a0=_crot + k*(TAU/_ARMS);
+        ctx.globalAlpha=(pass===0?.4:.58)*fxAlpha*(.55+.45*(((k*5)%_ARMS)/_ARMS));
+        ctx.beginPath();
+        for(let s=0;s<=_SEG;s++){ const t=s/_SEG, ang=a0+t*_TURN*TAU, rr=_cR*(.96-t*.84);
+          const px=cy.x+Math.cos(ang)*rr, py=cy.y+Math.sin(ang)*rr; if(s===0)ctx.moveTo(px,py);else ctx.lineTo(px,py); }
+        ctx.stroke();
+      }
     }
-    ctx.globalAlpha=.85*fxAlpha;ctx.strokeStyle='#aadcff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r,0,TAU);ctx.stroke();
-    ctx.globalAlpha=.28*fxAlpha;ctx.fillStyle='#cfeeff';ctx.beginPath();ctx.arc(cy.x,cy.y,cy.r*.3,0,TAU);ctx.fill();
+    /* 涡眼:暗核 + 亮心 */
+    ctx.globalAlpha=.55*fxAlpha; ctx.fillStyle='#0a1622'; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR*.15,0,TAU);ctx.fill();
+    ctx.globalAlpha=.5*fxAlpha; ctx.fillStyle='#eaf7ff'; ctx.beginPath();ctx.arc(cy.x,cy.y,_cR*.06,0,TAU);ctx.fill();
     ctx.restore();
   } }
   /* 粒子 */
@@ -7356,9 +7381,14 @@ function render(){
     /* 法盾(法术):明显的青色护罩 + 剩余可挡次数(小亮点),解决"只有文字提示/看不出叠几层"(朋友十六) */
     if(_p.shield){ const _rem=Math.max(0,(_p.shield.max||1)-(_p.shield.hits||0)), _rr=_p.r+13+_pu*2;
       ctx.save();
+      ctx.globalCompositeOperation='source-over';
       ctx.fillStyle='rgba(120,200,255,'+(.10+.05*_pu)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.fill();
+      ctx.strokeStyle='#0e2230'; ctx.globalAlpha=.5; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.stroke();   /* 深色底环=亮地形可读 */
       ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='#7fdcff'; ctx.lineWidth=2.5; ctx.globalAlpha=.55+.3*_pu; ctx.beginPath(); ctx.arc(_p.x,_p.y,_rr,0,TAU); ctx.stroke();
-      for(let _i=0;_i<_rem;_i++){ const _a=-Math.PI/2+_i/Math.max(_rem,1)*TAU; ctx.globalAlpha=.96; ctx.fillStyle='#e3f5ff'; ctx.beginPath(); ctx.arc(_p.x+Math.cos(_a)*_rr,_p.y+Math.sin(_a)*_rr,2.7,0,TAU); ctx.fill(); }
+      ctx.globalCompositeOperation='source-over';
+      for(let _i=0;_i<_rem;_i++){ const _a=-Math.PI/2+_i/Math.max(_rem,1)*TAU, _dx=_p.x+Math.cos(_a)*_rr, _dy=_p.y+Math.sin(_a)*_rr;
+        ctx.globalAlpha=.9; ctx.fillStyle='#0e2230'; ctx.beginPath(); ctx.arc(_dx,_dy,3.8,0,TAU); ctx.fill();
+        ctx.globalAlpha=.98; ctx.fillStyle='#e3f5ff'; ctx.beginPath(); ctx.arc(_dx,_dy,2.4,0,TAU); ctx.fill(); }
       ctx.restore(); }
     /* 🍶不死药·免死无敌:1 秒金光圈,明确告知"此刻无敌、速冲刺脱身"(深色底环保亮地形可读) */
     if(_p.phoenixGlow>0){ const _g=Math.min(1,_p.phoenixGlow), _gr=_p.r+11+_pu*3+(1-_g)*9; ctx.save();
@@ -7368,7 +7398,10 @@ function render(){
       ctx.strokeStyle='#ffd98a'; ctx.globalAlpha=(.55+.4*_pu)*_g; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(_p.x,_p.y,_gr,0,TAU); ctx.stroke();
       ctx.restore(); }
     /* 遗物·玄龟甲:免下一次受击 — 更醒目的金蓝护罩 */
-    if(_p._ward){ const _wr=_p.r+15+_pu*2; ctx.save(); ctx.globalCompositeOperation='lighter';
+    if(_p._ward){ const _wr=_p.r+15+_pu*2; ctx.save();
+      ctx.globalCompositeOperation='source-over';
+      ctx.strokeStyle='#0e2230'; ctx.globalAlpha=.5; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(_p.x,_p.y,_wr,0,TAU); ctx.stroke();   /* 深色底环=亮地形可读 */
+      ctx.globalCompositeOperation='lighter';
       ctx.fillStyle='rgba(150,220,255,'+(.08+.05*_pu)+')'; ctx.beginPath(); ctx.arc(_p.x,_p.y,_wr,0,TAU); ctx.fill();
       ctx.strokeStyle='#b6e8ff'; ctx.lineWidth=3; ctx.globalAlpha=.6+.34*_pu; ctx.beginPath(); ctx.arc(_p.x,_p.y,_wr,0,TAU); ctx.stroke(); ctx.restore(); }
     ctx.restore();
@@ -9184,9 +9217,11 @@ function drawPlayer(){
       const sa=p.sword.ang+k*TAU/n;
       const sx=p.x+Math.cos(sa)*p.sword.rad, sy=p.y+Math.sin(sa)*p.sword.rad;
       ctx.save();ctx.translate(sx,sy);ctx.rotate(sa+Math.PI/2);
-        ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.45;ctx.strokeStyle=sc;ctx.lineWidth=3.5;ctx.lineCap='round';
+        ctx.lineCap='round';
+        ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.45;ctx.strokeStyle=sc;ctx.lineWidth=3.5;
         ctx.beginPath();ctx.moveTo(-7,0);ctx.lineTo(11,0);ctx.stroke();
         ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+        ctx.strokeStyle='#16082a';ctx.lineWidth=4.6;ctx.beginPath();ctx.moveTo(-7.5,0);ctx.lineTo(13,0);ctx.stroke();   /* 深色描边=亮地形可读 */
         ctx.strokeStyle='#eaf0ff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-6,0);ctx.lineTo(10,0);ctx.stroke();
         ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(10,-1.7);ctx.lineTo(13.5,0);ctx.lineTo(10,1.7);ctx.closePath();ctx.fill();
         ctx.strokeStyle='#9fb4e0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-6,-2.6);ctx.lineTo(-6,2.6);ctx.stroke();
