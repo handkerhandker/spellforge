@@ -588,6 +588,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v99.0 · 2026-06-23</div><div class="cl-i">⚖️ <b>发育手感优化(感谢吹水群反馈)。</b>针对「前期钱太小、15 波后发育跟不上」:<b>① 前期经济</b>——前 10 波普通怪必掉币 + 前 5 波每波开局白拿金币,前期不再捉襟见肘、金 / 紫符文不再只买得起一个(10 波后照旧,后期金币雪球曲线不变)。<b>② 抽卡修复</b>——之前前期会被猛塞「未拥有的新法术」、逼你铺一堆 Lv1 导致核心法术升不上去;现在前期不再误触发该加权,且<b>持有 ≥3 个法术后,已有法术的升级卡更常出</b>,能集中把核心法术练高。<b>敌人强度未改</b>,只优化玩家发育。</div></div>
 <div class="cl-v"><div class="cl-h">v98.9 · 2026-06-23</div><div class="cl-i">📜 <b>选卡时的法术描述精简(感谢反馈)。</b>三选一选强化时,描述较长的法术(地裂、不死药、飓风、落雷、守护图腾等)之前会塞一整段山海经文案、选卡时来不及读;现在卡面只显示<b>一句直击重点的简短说明</b>,完整文案仍完整保留在<b>法术图鉴</b>里。<b>纯显示,数值与机制未改。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.8 · 2026-06-23</div><div class="cl-i">🌪️ <b>飓风大改(感谢反馈)。</b>① <b>视觉重做</b>:之前更像个魔法阵,现在是真正的旋风——向心卷入的风带 + 中心涡眼 + 被吸入的碎屑,旋转与吸入感都对了。② <b>移动变慢</b>(从风一样掠过,改成逼近的风暴、在原地多缠一会儿)。③ <b>吸力大幅增强</b>:真正把妖怪卷进涡心、锁在里面绞杀。<b>②③是数值调整,会让飓风更强;伤害与范围未动。</b></div></div>
 <div class="cl-v"><div class="cl-h">v98.7 · 2026-06-23</div><div class="cl-i">🎨 <b>御剑 / 护盾在亮地图上更清晰。</b>御剑的环绕飞剑、法盾护罩、玄龟甲护罩之前在雪原 / 沙漠等浅色地图上会糊掉看不清——现在飞剑加了深色描边、护罩加了深色底环,亮底上也一眼看清。纯外观,碰撞范围与数值均未改动。</div></div>
@@ -872,10 +873,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v98.9', APP_TIME='2026-06-23 12:06';
+const APP_VER='v99.0', APP_TIME='2026-06-23 12:10';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v98.9';
+const APP_NOTIFY_VER='v99.0';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -2836,8 +2837,8 @@ function addCoins(n){
   coins+=n; profile.coinsEarned=(profile.coinsEarned||0)+n; if(profile.coinsEarned>=100000)unlockAch('lifecoins'); return n;
 }
 function dropCoins(e){
-  /* 平衡:普通精怪 45% 概率不掉币,削弱后期金币雪球 */
-  if(!e.boss && !e._elite && (e._tier||1)===1 && Math.random()<.45) return;
+  /* 平衡:10 波后普通精怪 45% 概率不掉币,削弱后期金币雪球;前 10 波必掉币(应反馈「前期钱太小」) */
+  if(!e.boss && !e._elite && (e._tier||1)===1 && waveNum>10 && Math.random()<.45) return;
   let v=1+((e._tier||1)-1)*1.5;  /* 精1 妖2 煞4(原 精1妖3煞5) */
   if(e._elite)v+=4;
   if(e.boss)v=18+e.tier*7;       /* Boss 25/32/39(原 40/52/64) */
@@ -2900,6 +2901,8 @@ function startWave(n){ _waveFirstKilled=false;
   if(endless){ if(n>=20) unlockAch('endless20'); if(n>=30) unlockAch('endless30'); if(n>=50) unlockAch('endless50'); if(n>=60) unlockAch('endless60'); if(n>=75) unlockAch('endless75'); if(n>=100) unlockAch('endless100'); }
   /* 遗物:山鬼宝囊 — 每波开始获得金币(续战恢复的那一波跳过,避免重复给币) */
   if(relicMods.waveCoins>0 && !_skipEmod){ coins+=relicMods.waveCoins; }
+  /* 前期经济保底:前 5 波每波开局白给 10 金币(应玩家反馈「前5波钱太小、符文只能买一个」· 续战那波跳过)→ 只补前期、不喂后期金币雪球 */
+  if(n<=5 && !_skipEmod){ coins+=10; }
   /* 随机地形(Boss 波沿用上波地形,避免转场突兀) */
   if(n%5!==0) terrain=pick(TERRAINS);
   /* 无尽难度修饰符:15 波后每 5 波叠加一个 */
@@ -5772,9 +5775,11 @@ function rollCards(n){
     return c<max;
   }).map(cardInfo);
   const W3=[0,4,4,2+(relicMods.cardLuck||0)], out=[];
-  /* 里程碑开了新槽(持有数<上限)时,给"未拥有的新法术"×2.2 权重,空槽尽快填上;填满即 _slotOpen=false 自动恢复正常。非无尽/未开新槽时权重与原版分毫不差→不动正赛平衡与榜。 */
-  const _slotOpen = Object.keys(player.spells).length < spellSlotMax();
-  const _wOf = p => { let w=W3[p.rar]; if(_slotOpen && p.kind==='spell' && !player.spells[p.id]) w*=2.2; return w; };
+  const _nSp = Object.keys(player.spells).length;
+  /* ×2.2「未拥有新法术」权重:仅在「无尽里程碑开了新槽(上限>4)且尚未填满」时生效,空槽尽快填上;正赛/前期(上限=4)不再误触发→前期不再被猛塞新法术、升级卡正常出。填满即恢复正常。 */
+  const _slotOpen = spellSlotMax()>4 && _nSp < spellSlotMax();
+  /* 池子稀释修复:持有 ≥3 法术后,已有法术的升级卡 ×1.6 权重,让玩家能集中把核心法术练高(应玩家反馈「发育稀、buff 加伤少」)。 */
+  const _wOf = p => { let w=W3[p.rar]; if(_slotOpen && p.kind==='spell' && !player.spells[p.id]) w*=2.2; if(p.kind==='spell' && player.spells[p.id] && _nSp>=3) w*=1.6; return w; };
   while(out.length<n&&pool.length){
     let tw=0; for(const p of pool) tw+=_wOf(p);
     let r=Math.random()*tw, idx=0;
