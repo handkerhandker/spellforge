@@ -588,6 +588,8 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer">v58.1</b> · <span id="clTime">2026-06-16 12:51</span></div>
+<div class="cl-v"><div class="cl-h">v97.6 · 2026-06-23</div><div class="cl-i">🌋 <b>地裂特效重画 —— 不再糊屏挡视线(感谢反馈)。</b>此前地裂会在整条命中带铺满一大片亮橙熔岩、还叠加色光晕,雪原 / 沙漠等亮地图上糊成一片、把路都盖住;而且<b>它没接「特效强度」滑块,拉到最低也照样满屏</b>。现在改成<b>一道发光的细地缝</b>:中央窄裂纹 + 缝内窄熔岩辉光 + 沿缝零星地火余烬 + 几道支缝,<b>中间大面积透出地面,能看清缝里的怪、也看得清路</b>;辉光 / 余烬<b>现在受「特效强度」滑块与省电模式控制</b>(拉低 / 省电会明显变暗变简),深色裂纹垫底保证亮地形也清晰。<b>纯重画,地裂的命中范围 / 伤害 / 持续时间一字未改(与榜单无关)。</b></div></div>
+<div class="cl-v"><div class="cl-h">v97.5 · 2026-06-23</div><div class="cl-i">📐 <b>修复横屏下「连击提示」与右侧「终极 / 冲刺」按钮重叠(感谢反馈)。</b>横屏时屏幕较矮,右下角的终极 / 冲刺键会上移(微信底栏还会再把它们抬高一截),与右上角的<b>连击数字 / 段位 / 「战意 +X%」条</b>挤在一起、相互遮挡。现在<b>横屏会把连击提示整块自动左移到按钮列左侧</b>,与按钮、Boss 血条都不重叠;<b>竖屏显示完全不变</b>。<b>纯布局调整,不改动任何战斗 / 连击数值。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.4 · 2026-06-23</div><div class="cl-i">❄️ <b>减速状态更醒目了(感谢反馈)。</b>被<b>玄冥的寒冰</b>、<b>相柳的毒泽</b>等减速时移动会明显变慢,但此前只有一圈很淡的蓝光、在雪原 / 沙漠等亮地形上几乎看不见,容易不明白「为什么突然走不动」。现在:<b>① 减速时身上是一圈带深色描边的冰蓝环 + 上绕冰晶</b>(全部地形都清晰可读、亮地图也不糊);<b>② 头顶常驻「🔵 减速」标签</b>,一眼就知道正被减速、该走出寒冰 / 毒泽或等它消;<b>③ 同时中毒又被减速时(如站在毒泽里),两圈光环内外分明、互不遮挡</b>。<b>纯显示,不改动减速的强度 / 持续时间 / 触发(数值一字未改)。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.3 · 2026-06-23</div><div class="cl-i">🛠️ <b>修复「法术槽 5/4 溢出」漏洞(感谢反馈)。</b>此前<b>把基础攻击法术（奥术飞弹）卖掉、再把空出的槽全买成辅助法术</b>后,战斗中"无伤害法术时自动补一发奥术飞弹"的保底会<b>无视上限硬塞</b>,使法术数突破到 5/4。根因是这条"保底补飞弹"从未做满槽检查(当年只堵了商店买入那条路、没堵这条);现在<b>保底补飞弹严格遵守法术槽上限</b>,满槽时不再多塞(已溢出的存档,卖出一个即自动回正)。<b>护榜修复,不改动任何法术数值。</b><br>🦄 <b>御兽法杖「白泽」的作用看得见了(感谢反馈)。</b>白泽是辅助灵兽、<b>不亲自攻击</b>,容易被以为没用;其实只要它活着,<b>全体灵兽 +30% 伤害 + 持续回血</b>。现在<b>白泽登场会提示它的作用</b>,身上有<b>金色辅助光环</b>,被它加成的攻击兽<b>头顶有金色小箭标</b>,一眼就懂它在给全队加 buff。<b>纯显示,白泽数值未改。</b></div></div>
 <div class="cl-v"><div class="cl-h">v97.2 · 2026-06-23</div><div class="cl-i">🟢 <b>中毒状态更醒目了(感谢反馈)。</b>此前中毒只有一圈很淡的绿环、在草原 / 雪原 / 沙漠等地形上几乎看不出来,容易没察觉自己正被毒磨血。现在:<b>① 中毒时身上是一圈带深色描边的绿色毒环 + 上绕毒泡</b>(全部地形都清晰可读、亮地图也不糊);<b>② 头顶常驻「🟢 中毒」标签</b>,一眼就知道正在中毒、该走出毒区 / 等毒消。<b>纯显示,不改动中毒的伤害 / 持续时间 / 触发(法盾仍能挡毒、数值一字未改)。</b></div></div>
@@ -857,10 +859,10 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v97.4', APP_TIME='2026-06-23 11:31';
+const APP_VER='v97.6', APP_TIME='2026-06-23 11:33';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v97.4';
+const APP_NOTIFY_VER='v97.6';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -6868,7 +6870,7 @@ function render(){
     ctx.globalAlpha=1; ctx.restore();
   }
 
-  /* 地裂·地缝(地面层 · 填充式不规则裂口:上下沿独立锯齿 + 两端收尖,呈"地面豁开"而非圆润香肠 · 深色垫底保证雪原/沙漠等亮地形可读) */
+  /* 地裂·地缝(地面层 · v97.6 重画:从"填满命中带的大火片"改为"一道发光细地缝"——窄裂纹 + 缝内窄熔岩 + 稀疏地火余烬 + 零星支缝,中间大面积透出地面、看得清缝里的怪;辉光吃特效强度滑块 fxAlpha(拉低/省电真能压暗);深色裂纹垫底保证雪原/沙漠等亮地形可读。命中带尺寸/伤害/时长一律未改,纯重画) */
   if(fissures.length){ ctx.save();
     /* 按 ws(宽度比例)生成带锯齿、两端收尖的裂口多边形;同一 fissure 各层共用同一裂形、只缩宽度→嵌套出深浅 */
     const _crack=(f, ws)=>{
@@ -6894,13 +6896,37 @@ function render(){
       const fade = lifeR<.22 ? lifeR/.22 : 1;                       /* 末段淡出 */
       const open = clamp((f.max-f.life)/.16,0,1);                   /* 开裂瞬间快速张开 */
       const pulse = .82+.18*Math.sin(time*8+f.x0*.03);              /* 地火翻涌脉动 */
+      const g = fade*fxAlpha;                                       /* 辉光/余烬随特效强度滑块·省电缩放 */
+      const nx=-Math.sin(f.ang), ny=Math.cos(f.ang), dx=Math.cos(f.ang), dy=Math.sin(f.ang);
+      const seed=f.x0*0.7+f.y0*1.3, rnd=(k)=>{ const v=Math.sin(seed+k*12.9898)*43758.5453; return v-Math.floor(v); };
       ctx.globalCompositeOperation='source-over';
-      ctx.globalAlpha=fade*.97; ctx.fillStyle='#150b07'; _crack(f, open);        ctx.fill();   /* 深黑裂口(垫底·全地形可读) */
-      ctx.globalAlpha=fade*.9;  ctx.fillStyle='#5a2410'; _crack(f, open*.8);      ctx.fill();   /* 焦土内壁 */
-      ctx.globalAlpha=fade*.86*pulse; ctx.fillStyle='#c8461a'; _crack(f, open*.58); ctx.fill(); /* 暗红熔岩 */
-      ctx.globalCompositeOperation='lighter';
-      ctx.globalAlpha=fade*.6*pulse;  ctx.fillStyle='#ff8a2a'; _crack(f, open*.38); ctx.fill(); /* 橙焰 */
-      ctx.globalAlpha=fade*.72;       ctx.fillStyle='#ffe08a'; _crack(f, open*.17); ctx.fill(); /* 亮芯 */
+      /* (a) 命中带极淡暗化:隐约勾出地裂范围、完全透出地面(看得清缝里的怪) */
+      ctx.globalAlpha=fade*.11; ctx.fillStyle='#120a07'; _crack(f, open*.92); ctx.fill();
+      /* (b) 零星支缝:沿主缝法向甩出几道暗色细发丝裂纹,"地豁开"质感、不糙 */
+      ctx.globalAlpha=fade*.5; ctx.strokeStyle='#1c1108'; ctx.lineWidth=1.4;
+      const brN=Math.max(2,Math.floor(f.len/130));
+      for(let k=0;k<brN;k++){ const bt=(k+0.6)/(brN+0.2)*0.86, bx=f.x0+dx*f.len*bt, by=f.y0+dy*f.len*bt;
+        const s=(rnd(k+300)<.5?1:-1), bl=f.hw*(0.5+rnd(k+360)*0.55);
+        const ex=bx+nx*s*bl+dx*(rnd(k+390)-.5)*20, ey=by+ny*s*bl+dy*(rnd(k+390)-.5)*20;
+        ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(ex,ey); ctx.stroke(); }
+      /* (c) 中央窄裂纹 + 暗描边:深色垫底,亮地形可读 */
+      ctx.globalAlpha=fade*.92; ctx.fillStyle='#0e0705'; _crack(f, open*.34); ctx.fill();
+      ctx.globalAlpha=fade*.85; ctx.strokeStyle='#241636'; ctx.lineWidth=2; _crack(f, open*.34); ctx.stroke();
+      /* (d) 缝内熔岩辉光(窄·吃 fxAlpha→拉低/省电变暗;不大面积加色糊屏) */
+      ctx.globalAlpha=fade*.62*pulse; ctx.fillStyle='#b83e16'; _crack(f, open*.2); ctx.fill();
+      if(g>.04){ ctx.globalCompositeOperation='lighter';
+        ctx.globalAlpha=g*.5*pulse; ctx.fillStyle='#ff7a26'; _crack(f, open*.12); ctx.fill();
+        ctx.globalAlpha=g*.55;      ctx.fillStyle='#ffd27a'; _crack(f, open*.045); ctx.fill();
+        ctx.globalCompositeOperation='source-over'; }
+      /* (e) 稀疏地火余烬:沿缝几粒上跳小火星(数量/亮度随特效强度) */
+      if(g>.05){ const emN=Math.round(g*Math.min(9,f.len/80));
+        ctx.globalCompositeOperation='lighter';
+        for(let k=0;k<emN;k++){ const t=((k*0.6180339+time*0.22)%1), cx0=f.x0+dx*f.len*t, cy0=f.y0+dy*f.len*t;
+          const w=(rnd(k+500)-0.5)*f.hw*0.34, rise=((time*0.9+k*0.37)%1);
+          const ex=cx0+nx*w, ey=cy0+ny*w-rise*9, er=(1-rise)*2.2*pulse;
+          ctx.globalAlpha=g*(1-rise)*0.8; ctx.fillStyle=k%2?'#ffce6a':'#ff8a2a';
+          ctx.beginPath(); ctx.arc(ex,ey,Math.max(0,er),0,TAU); ctx.fill(); }
+        ctx.globalCompositeOperation='source-over'; }
     }
     ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1; ctx.restore();
   }
@@ -9184,22 +9210,24 @@ function drawHUD(){
     const hiT=comboTierLv>=4;   /* 屠神及以上:数字脉动 + 强光 */
     const _pz=hiT?(1+0.05*Math.sin(performance.now()/95)):1;
     ctx.save(); ctx.textAlign='right'; ctx.lineJoin='round';
+    /* 横屏避让:竖屏右上角原位;横屏(W>H*1.3,屏矮)时右下角终极/冲刺键会上抬(尤其微信底栏 +52 安全区)顶进本块,故整块右锚左移到终极键列左侧(只左移不右移),与按钮列、Boss 血条均不重叠 */
+    const _ub=ultBtnXY(); const rx=(W>H*1.3)?Math.min(W-14,_ub.x-_ub.r-10):(W-14);
     const numSz=Math.round((22+Math.min(combo,60)*.30)*_pz);
     ctx.font='900 '+numSz+'px "Songti SC","STSong",serif';
     if(info){ ctx.shadowColor=cs; ctx.shadowBlur=Math.min(4+comboTierLv*2.4,15); }
-    ctx.lineWidth=Math.max(4,numSz*0.16); ctx.strokeStyle='#241636'; ctx.strokeText('×'+combo,W-14,top+135);
-    ctx.shadowBlur=0; ctx.fillStyle=cs; ctx.fillText('×'+combo,W-14,top+135);
+    ctx.lineWidth=Math.max(4,numSz*0.16); ctx.strokeStyle='#241636'; ctx.strokeText('×'+combo,rx,top+135);
+    ctx.shadowBlur=0; ctx.fillStyle=cs; ctx.fillText('×'+combo,rx,top+135);
     let by=top+145;
     if(info){ ctx.font='900 14px "Songti SC","STSong",serif';
-      ctx.lineWidth=4; ctx.strokeStyle='#241636'; ctx.strokeText(info.name,W-14,top+153);
-      ctx.fillStyle=cs; ctx.fillText(info.name,W-14,top+153); by=top+161; }
+      ctx.lineWidth=4; ctx.strokeStyle='#241636'; ctx.strokeText(info.name,rx,top+153);
+      ctx.fillStyle=cs; ctx.fillText(info.name,rx,top+153); by=top+161; }
     /* 倒计时条:深色底衬 + 细描边,亮地形也清晰 */
-    ctx.fillStyle='rgba(8,6,20,.85)'; ctx.fillRect(W-95,by-1,82,6);
-    ctx.fillStyle=cs; ctx.fillRect(W-94,by,80*clamp(comboT/COMBO_WINDOW,0,1),4);
-    ctx.lineWidth=1; ctx.strokeStyle='rgba(36,22,54,.9)'; ctx.strokeRect(W-95+.5,by-1+.5,81,5);
+    ctx.fillStyle='rgba(8,6,20,.85)'; ctx.fillRect(rx-81,by-1,82,6);
+    ctx.fillStyle=cs; ctx.fillRect(rx-80,by,80*clamp(comboT/COMBO_WINDOW,0,1),4);
+    ctx.lineWidth=1; ctx.strokeStyle='rgba(36,22,54,.9)'; ctx.strokeRect(rx-81+.5,by-1+.5,81,5);
     if(comboDmg>0){ ctx.font='900 11px "Songti SC","STSong",serif';
-      ctx.lineWidth=3.4; ctx.strokeStyle='#241636'; ctx.strokeText('战意 +'+Math.round(comboDmg*100)+'% 伤害',W-14,by+15);
-      ctx.fillStyle='#ffe1a0'; ctx.fillText('战意 +'+Math.round(comboDmg*100)+'% 伤害',W-14,by+15); }
+      ctx.lineWidth=3.4; ctx.strokeStyle='#241636'; ctx.strokeText('战意 +'+Math.round(comboDmg*100)+'% 伤害',rx,by+15);
+      ctx.fillStyle='#ffe1a0'; ctx.fillText('战意 +'+Math.round(comboDmg*100)+'% 伤害',rx,by+15); }
     ctx.restore();
   }
   /* 首领血条(加大字号 + 朱砂方框印章) */
