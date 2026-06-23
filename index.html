@@ -323,6 +323,22 @@
     #menu .eyebrow,#menu .sub,#menu .desc{display:none;}   /* 矮屏寸土寸金:隐掉装饰副标题+剧情简介,保留 标题/操作提示/难度/拔出法杖 进首屏,其余面板内滚动 */
     #menu .lb-board{max-height:none;overflow-y:visible;}
   }
+#sbToggle{position:fixed;left:10px;top:calc(8px + env(safe-area-inset-top));z-index:140;background:#3a2456;color:#e8d8ff;border:1.5px solid #6a4a9a;border-radius:10px;padding:5px 10px;font:700 13px system-ui;box-shadow:0 2px 8px rgba(0,0,0,.45);}
+#sbPanel{position:fixed;left:0;right:0;bottom:0;z-index:141;max-height:64vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(16,11,28,.975);border-top:2px solid #6a4a9a;padding:8px 10px calc(12px + env(safe-area-inset-bottom));box-shadow:0 -5px 20px rgba(0,0,0,.55);}
+.sb-head{display:flex;align-items:center;gap:8px;color:#d8c4ff;font:700 15px system-ui;margin-bottom:7px;}
+.sb-note{color:#ff9a9a;font:700 11px system-ui;}
+#sbClose{margin-left:auto;color:#bfa8ff;font:700 13px system-ui;cursor:pointer;}
+.sb-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:4px;}
+.sb-god{color:#cfead0;font:700 13px system-ui;display:flex;align-items:center;gap:4px;}
+.sb-b{background:#2a1d44;color:#d8c8f0;border:1px solid #4a3a6a;border-radius:8px;padding:4px 9px;font:700 12px system-ui;}
+.sb-b.sb-exit{margin-left:auto;background:#5a2436;color:#ffd0d8;border-color:#8a3a52;}
+.sb-wv{color:#ffce7a;font:700 12px system-ui;min-width:52px;text-align:center;}
+.sb-sec{color:#9a86c4;font:700 12px system-ui;margin:9px 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.sb-mini{background:#2a1d44;color:#c8b8e8;border:1px solid #4a3a6a;border-radius:6px;padding:2px 7px;font:700 11px system-ui;}
+.sb-grid{display:flex;flex-wrap:wrap;gap:5px;}
+.sb-chip{display:flex;align-items:center;gap:3px;background:#241a3a;border:1.5px solid #3a2f5a;border-radius:9px;padding:3px 8px 3px 5px;color:#d0c4ee;font:700 12px system-ui;cursor:pointer;}
+.sb-chip svg{width:18px;height:18px;flex:none;}
+.sb-chip.on{border-color:#ffce4d;background:#3a2f1a;color:#ffe0a0;}
 </style>
 </head>
 <body>
@@ -345,7 +361,7 @@
     <div class="menu-cols">
     <div class="menu-col menu-col-l">
     <div class="eyebrow">Spellforge · Roguelike</div>
-    <h1 class="title">法术工坊</h1>
+    <h1 class="title" id="mainTitle">法术工坊</h1>
     <div class="sub">组 合 法 术 · 锻 造 奇 迹</div>
     <p class="desc">传说，拔出法杖之人将成为勇者。<br>把投射法术与符文自由叠加——<br>追踪、分裂、弹射的火球也不是不行。<br>肃清 <b style="color:var(--gold)">15</b> 波怪潮，讨伐三位古神。</p>
     <p class="hint"><span id="hintTouch">📱 拖屏移动 · 默认智能 · 右下角冲刺 · 法杖自动施法</span><span id="hintPC" style="display:none;">💻 WASD / 方向键移动 · 鼠标瞄准 · 按 T 切换瞄准模式</span><span id="hintPad" style="display:none;"></span></p>
@@ -782,6 +798,21 @@
   </div>
 </div>
 
+<button id="sbToggle" class="hidden">🧪 试炼</button>
+<div id="sbPanel" class="hidden">
+  <div class="sb-head">🧪 试炼场 · 沙盒<span class="sb-note">本局不上榜 / 不计成就</span><span id="sbClose">收起 ▾</span></div>
+  <div class="sb-ctl">
+    <label class="sb-god"><input type="checkbox" id="sbGodChk" checked> 无敌</label>
+    <button class="sb-b" id="sbClear">清场</button>
+    <button class="sb-b" id="sbWaveDn">波−</button><span id="sbWaveLbl" class="sb-wv">第 1 波</span><button class="sb-b" id="sbWaveUp">波＋</button>
+    <button class="sb-b sb-exit" id="sbExit">退出试炼场</button>
+  </div>
+  <div class="sb-sec">法杖（点击切换）</div><div class="sb-grid" id="sbWands"></div>
+  <div class="sb-sec">法术（点选添加 / 再点移除）<button class="sb-mini" id="sbSpClear">清空法术</button></div><div class="sb-grid" id="sbSpells"></div>
+  <div class="sb-sec">小怪（点击召唤一只）</div><div class="sb-grid" id="sbMobs"></div>
+  <div class="sb-sec">古神 Boss（点击召唤）</div><div class="sb-grid" id="sbBosses"></div>
+</div>
+
 <script>
 (()=>{ 'use strict';
 /* ============ 工具 ============ */
@@ -820,7 +851,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v95.5', APP_TIME='2026-06-23 01:35';
+const APP_VER='v96.0', APP_TIME='2026-06-23 09:15';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
 const APP_NOTIFY_VER='v95.5';
@@ -1308,7 +1339,7 @@ const SPELL_DEF={
   tidal:{name:'水龙吟',icon:'🌊',col:'#5fd0ff',cd:2.6,dmg:18,spd:340,r:30,life:1.4,knock:true,desc:'射出宽幅水龙波,贯穿一线之敌并狠狠击退(出处:应龙)'},
   devour:{name:'噬魂印',icon:'🩸',col:'#ff5d7a',cd:1.6,dmg:11,spd:380,r:9,life:1.1,desc:'命中盖上饕餮印,带印之敌死亡时爆裂溅射、回复 1 生命(出处:饕餮)'},
   thunderfall:{name:'落雷',icon:'🌩️',col:'#ffe96b',cd:1.6,dmg:18,desc:'天降数道惊雷轰击敌群,每道炸开小范围电击,雷数随等级增加;若场上有飓风,惊雷尽数倾于风涡所聚之妖,威势更盛'},
-  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.5,dmg:36,fissure:true,desc:'裂地为堑——震脚踏地、地脉迸裂,沿瞄准方向豁开一道丈宽深堑、久久不弭;堑底地火翻涌,持续灼烤陷于其中的群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿堑倾下,地火天雷相激(出处:息壤)'},
+  fissure:{name:'地裂',icon:'⛰️',col:'#d8923c',cd:1.6,dmg:36,fissure:true,desc:'裂地为堑——震脚踏地、地脉迸裂,沿瞄准方向豁开一道丈宽深堑、久久不弭;堑底地火翻涌,持续灼烤陷于其中的群妖、令其失足顿挫;若兼修落雷,惊雷尽数沿堑倾下,地火天雷相激(出处:息壤)'},
   swordarray:{name:'御剑',icon:'⚔️',col:'#cfe0ff',cd:1.1,dmg:8,sword:92,desc:'召唤环绕飞剑、每隔片刻就近齐射贯穿剑气,自动锁敌;剑数随等级增加'},
   firestorm:{name:'焚天',icon:'💥',col:'#ff6a2a',cd:1.25,dmg:20,spd:300,r:11,life:1.4,aoe:90,evo:'fire',desc:'【进化·火球术】命中炸成一圈连环爆炸,地面燃起火海持续灼烧'},
   thunderjudge:{name:'雷罚',icon:'🌩️',col:'#ffe96b',cd:1.5,dmg:14,evo:'zap',desc:'【进化·连锁闪电】同时劈中周围所有敌人,并随机降下数道天雷'},
@@ -2007,6 +2038,7 @@ const DIFFICULTIES=[
   {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.13,eDmg:1.11,gemM:2.2}
 ];
 let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
+let sandbox=false, sbGod=true;   /* 🧪 试炼场(沙盒测试):sandbox=true 时本局不上榜/不计成就/不记纪录/不发灵晶;sbGod=无敌 */
 let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085,gemM:1.25,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关;gemM=该难度灵晶结算系数 */
 function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg,gemM:d.gemM,nm:d.id===5}; }
 function applyDifficulty(lv){ difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
@@ -2132,7 +2164,7 @@ function openBackup(){
   document.getElementById('backup').classList.remove('hidden');
 }
 /* 结算给灵晶:按 波数 + 击杀(保守草稿,数值以后可调);用基线防止"通关→无尽→死亡"把前 15 波重复计 */
-function awardLj(){ const raw=Math.max(0, waveNum*3 + Math.floor(kills/8)); const mul=(diffMul&&diffMul.gemM)||1; const total=Math.round(raw*mul); const d=Math.max(0, total-runRewardBase); runRewardRaw=raw; runRewardBase=total; if(d>0){ META.lj+=d; saveMeta(); } refreshLj(); return d; }
+function awardLj(){ if(sandbox)return 0; const raw=Math.max(0, waveNum*3 + Math.floor(kills/8)); const mul=(diffMul&&diffMul.gemM)||1; const total=Math.round(raw*mul); const d=Math.max(0, total-runRewardBase); runRewardRaw=raw; runRewardBase=total; if(d>0){ META.lj+=d; saveMeta(); } refreshLj(); return d; }
 
 /* 永久强化:体魄=生命上限,法力=法术伤害;均多级递增,弑神不生效 */
 const UPGRADES=[
@@ -2458,6 +2490,57 @@ function buildWandSel(){
     row.appendChild(el);
   }
   $('wandSel').classList.remove('hidden');
+}
+/* ===== 🧪 试炼场(沙盒测试模式)===== */
+function launchSandbox(w){
+  try{initAudio();}catch(e){}
+  clearResume(); setDiffMul(difficulty); resetGame(); applyWand(w||WANDS[0]);
+  sandbox=true; sbGod=true;
+  startWave(1); spawnQ.length=0; waveNum=1; state='play';   /* 起一波再清空刷怪队列:场上空着,自己召唤 */
+  for(const _id in player.spells) markSpellSeen(_id);
+  ['menu','wandSel','paused','over','win','cards','shop','relic','daily','codex','bestiary','achv','changelog','wardrobe','altar','backup','tutorial','wandUnlock'].forEach(id=>{const e=$(id);if(e)e.classList.add('hidden');});
+  buildSbPanel();
+  const tg=$('sbToggle'); if(tg)tg.classList.remove('hidden');
+  const gc=$('sbGodChk'); if(gc)gc.checked=true;
+  $('sbPanel').classList.remove('hidden');
+  updateSbWave();
+}
+function exitSandbox(){
+  sandbox=false; state='menu';
+  const sp=$('sbPanel'); if(sp)sp.classList.add('hidden');
+  const tg=$('sbToggle'); if(tg)tg.classList.add('hidden');
+  $('menu').classList.remove('hidden');
+  try{refreshResumeBtn();}catch(e){} try{loadMenuBoard(curPeriod);}catch(e){}
+}
+function updateSbWave(){ const l=$('sbWaveLbl'); if(l)l.textContent='第 '+waveNum+' 波'; }
+function sbSpawnPos(){ const a=Math.random()*TAU, d=rand(190,250); return {x:player.x+Math.cos(a)*d, y:player.y+Math.sin(a)*d}; }
+function buildSbPanel(){
+  /* 法杖 */
+  const wr=$('sbWands'); if(wr){ wr.innerHTML='';
+    for(const w of WANDS){ const c=document.createElement('div'); c.className='sb-chip'+(player.wand&&player.wand.id===w.id?' on':'');
+      c.innerHTML=iconHTML('wand',w.id,w.icon)+'<span>'+w.name+'</span>';
+      c.onclick=()=>{ applyWand(w); buildSbPanel(); try{S.card();}catch(e){} };
+      wr.appendChild(c); } }
+  /* 法术(点选添加 / 再点移除) */
+  const sr=$('sbSpells'); if(sr){ sr.innerHTML='';
+    for(const id of SPELL_ORDER){ const d=SPELL_DEF[id]; if(!d)continue;
+      const owned=!!player.spells[id];
+      const c=document.createElement('div'); c.className='sb-chip'+(owned?' on':'');
+      c.innerHTML=iconHTML('spell',id,d.icon)+'<span>'+d.name+(owned?(' L'+(player.spells[id].lv||1)):'')+'</span>';
+      c.onclick=()=>{ if(player.spells[id]){ if((player.spells[id].lv||1)>=3){ delete player.spells[id]; } else { player.spells[id].lv=(player.spells[id].lv||1)+1; } } else { player.spells[id]={lv:1,t:.2}; markSpellSeen(id); } buildSbPanel(); try{S.card();}catch(e){} };
+      sr.appendChild(c); } }
+  /* 小怪 */
+  const mr=$('sbMobs'); if(mr){ mr.innerHTML='';
+    for(const m of BESTIARY_MOBS){ const c=document.createElement('div'); c.className='sb-chip';
+      c.innerHTML='<span>'+(m.ic||'')+' '+m.n+'</span>';
+      c.onclick=()=>{ const p=sbSpawnPos(); try{spawnEnemy(m.k,p.x,p.y,1);}catch(e){} };
+      mr.appendChild(c); } }
+  /* 古神 Boss */
+  const br=$('sbBosses'); if(br){ br.innerHTML='';
+    for(let i=0;i<BOSS_NAMES.length;i++){ const idx=i; const c=document.createElement('div'); c.className='sb-chip';
+      c.innerHTML='<span>'+BOSS_NAMES[i]+'</span>';
+      c.onclick=()=>{ const p=sbSpawnPos(); try{enemies.push(makeBoss(2,1,idx,p.x,p.y,1,1));}catch(e){} };
+      br.appendChild(c); } }
 }
 let _wuWand=null;
 function openWandUnlock(w){
@@ -4578,9 +4661,9 @@ function applySlow(dur){ player.slowT=Math.max(player.slowT,dur); }
 function castFissure(dmg, lv){
   const tgt=aimPoint()||{x:player.x+200,y:player.y};
   const ang=Math.atan2(tgt.y-player.y, tgt.x-player.x);
-  const len=Math.min(380+34*(lv-1), 920);    /* 缝长随等级,封顶 920 */
-  const hw=58+7*(lv-1);                        /* HW=半宽命中带:宽地堑(随等级更宽) */
-  const life=2.4+0.25*(lv-1);                  /* 久留时长:地堑久久不弭 */
+  const len=Math.min(290+24*(lv-1), 700);    /* 缝长随等级,封顶 700 */
+  const hw=34+4*(lv-1);                        /* HW=半宽命中带:宽地缝(随等级更宽) */
+  const life=2.0+0.2*(lv-1);                   /* 久留时长 */
   const x0=player.x+Math.cos(ang)*30, y0=player.y+Math.sin(ang)*30;
   const x1=x0+Math.cos(ang)*len, y1=y0+Math.sin(ang)*len;
   const px=-Math.sin(ang), py=Math.cos(ang), L2=len*len||1;   /* (px,py)=法线 */
@@ -4744,6 +4827,7 @@ function deathSave(){
   return false;
 }
 function hurtPlayer(d, src){
+  if(sandbox&&sbGod)return;
   if(location.hash==='#debug')return; // 测试模式:URL 加 #debug 玩家无敌
   if(player.iframe>0||state!=='play')return;
   /* 遗物:闪避(虚影斗篷) */
@@ -4800,7 +4884,7 @@ const SB_URL='https://ivhwhewqegshzxigmslt.supabase.co';
 const SB_KEY='sb_publishable_JhIPyJDKFZDr0kcwE13gVQ_HTDcn4bQ';
 function lastName(){ try{return localStorage.getItem('sf_name')||'';}catch(e){return '';} }
 function saveName(n){ try{localStorage.setItem('sf_name',n);}catch(e){} }
-async function submitScore(name,wave,kills,diffVal){
+async function submitScore(name,wave,kills,diffVal){ if(sandbox)return;
   const dv=(diffVal!=null)?diffVal:difficulty;
   const hdr={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'};
   const post=body=>fetch(SB_URL+'/rest/v1/scores',{method:'POST',headers:hdr,body:JSON.stringify(body)});
@@ -4861,6 +4945,7 @@ function saveRunPB(d,w,k){ try{ const b=getRunPB(d); if(!b||w>b.wave||(w===b.wav
 /* 本局是否刷新了个人最好成绩(结算页用);必须在写入新纪录"之前"比对旧值,故在 gameOver/victory 里调一次 */
 let _runNewPB=false;
 function recordRunBest(){
+  if(sandbox)return;
   try{ if(player&&player.wand) setWandBest(player.wand.id, waveNum); }catch(e){}
   try{
     if(dailyRun){ const b=getDailyBest(); _runNewPB=!b||waveNum>b.wave||(waveNum===b.wave&&kills>b.kills); saveDailyBest(waveNum,kills); bumpDailyStreak(); }
@@ -5084,6 +5169,7 @@ function gainHTML(reward, total, renownHTML, mul, raw, diffName){
   return s+(renownHTML||'');
 }
 function gameOver(manual){
+  if(sandbox){ exitSandbox(); return; }   /* 🧪 试炼场:沙盒局不结算/不上榜,直接回主菜单 */
   state='over'; clearResume(); if(!manual)S.die();
   { const _b=$('retryBtn'); if(_b&&_b._resetConfirm)_b._resetConfirm(); }
   if(waveNum<=1) unlockAch('wave1death');
@@ -5476,6 +5562,7 @@ const ACH=[
   {id:'legend',    icon:'🏆',name:'山海传说',  desc:'解锁其余全部成就 · 你就是传说', prog:()=>[profile.unlocked.filter(x=>x!=='legend').length,ACH.length-1]}
 ];
 function unlockAch(id){
+  if(sandbox)return;
   if(hasAch(id))return;
   profile.unlocked.push(id); saveProfile();
   const a=ACH.find(x=>x.id===id); if(!a)return;
@@ -6078,7 +6165,7 @@ function update(dt){
     }
     if(fissures.length){ for(const f of fissures){ f.life-=dt;
         if(f.dmg){ f.tick-=dt; if(f.tick<=0){ f.tick=0.4;   /* 地火 DoT:堑内群妖每 0.4s 受 42% 基础伤 + 轻微减速 */
-          const px=-Math.sin(f.ang), py=Math.cos(f.ang), L2=f.len*f.len||1, dot=f.dmg*0.42;
+          const px=-Math.sin(f.ang), py=Math.cos(f.ang), L2=f.len*f.len||1, dot=f.dmg*0.34;
           _atkSpell='fissure';
           for(const e of enemies){ if(e.dead)continue;
             const t=clamp(((e.x-f.x0)*(f.x1-f.x0)+(e.y-f.y0)*(f.y1-f.y0))/L2,0,1);
@@ -6413,7 +6500,7 @@ function update(dt){
   cam.shake*=Math.pow(.0001,dt);
 
   /* —— 过波 —— */
-  if(state==='play'&&!spawnQ.length&&!enemies.length){
+  if(state==='play'&&!spawnQ.length&&!enemies.length&&!sandbox){
     ebullets.length=0; telegraphs.length=0;   /* 过波清场:清掉残留敌弹 + 未结算的预警延迟攻击,免得玩家选完法术一恢复就被冻结在原地的弹/预警白怼一下 */
     heal(8);
     /* 每 5 波(Boss 节奏)打完 → 遗物三选一,选完再继续 */
@@ -6744,24 +6831,39 @@ function render(){
     ctx.globalAlpha=1; ctx.restore();
   }
 
-  /* 地裂·宽地堑(地面层 · 深色堑沟保证雪原/沙漠等亮地形可读,内嵌翻涌地火 · 开裂展开后淡出) */
-  if(fissures.length){ ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    const _cp=(f)=>{ const segN=Math.max(5,Math.floor(f.len/34)), nx=-Math.sin(f.ang), ny=Math.cos(f.ang);
+  /* 地裂·地缝(地面层 · 填充式不规则裂口:上下沿独立锯齿 + 两端收尖,呈"地面豁开"而非圆润香肠 · 深色垫底保证雪原/沙漠等亮地形可读) */
+  if(fissures.length){ ctx.save();
+    /* 按 ws(宽度比例)生成带锯齿、两端收尖的裂口多边形;同一 fissure 各层共用同一裂形、只缩宽度→嵌套出深浅 */
+    const _crack=(f, ws)=>{
+      const segN=Math.max(8, Math.floor(f.len/18));
+      const nx=-Math.sin(f.ang), ny=Math.cos(f.ang), dx=Math.cos(f.ang), dy=Math.sin(f.ang);
+      const seed=f.x0*0.7+f.y0*1.3, rnd=(k)=>{ const v=Math.sin(seed+k*12.9898)*43758.5453; return v-Math.floor(v); };
+      const top=[], bot=[];
+      for(let i=0;i<=segN;i++){ const t=i/segN;
+        const cxb=f.x0+dx*f.len*t, cyb=f.y0+dy*f.len*t;
+        const wander=(rnd(i)-0.5)*f.hw*0.5;                          /* 中线不规则游走(各层一致) */
+        const cx=cxb+nx*wander, cy=cyb+ny*wander;
+        const taper=Math.min(1,t*7)*(1-Math.pow(t,1.6));            /* 起手快速张开、向远端收成尖 */
+        const hwT=f.hw*ws*taper*(0.5+rnd(i+40)*0.85);               /* 上沿锯齿 */
+        const hwB=f.hw*ws*taper*(0.5+rnd(i+130)*0.85);              /* 下沿锯齿(与上沿独立→裂口不对称) */
+        top.push([cx+nx*hwT, cy+ny*hwT]); bot.push([cx-nx*hwB, cy-ny*hwB]);
+      }
       ctx.beginPath();
-      for(let i=0;i<=segN;i++){ const t=i/segN, bx=f.x0+(f.x1-f.x0)*t, by=f.y0+(f.y1-f.y0)*t,
-        jag=(i===0||i===segN)?0:Math.sin(i*1.5+f.x0*.05)*f.hw*.3, x=bx+nx*jag, y=by+ny*jag;
-        if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); } };
+      for(let i=0;i<top.length;i++){ const p=top[i]; if(i===0)ctx.moveTo(p[0],p[1]); else ctx.lineTo(p[0],p[1]); }
+      for(let i=bot.length-1;i>=0;i--){ const p=bot[i]; ctx.lineTo(p[0],p[1]); }
+      ctx.closePath();
+    };
     for(const f of fissures){ const lifeR=clamp(f.life/f.max,0,1);
-      const fade = lifeR<.22 ? lifeR/.22 : 1;                 /* 末段淡出 */
-      const open = clamp((f.max-f.life)/.16,0,1);             /* 开裂瞬间快速展开 */
-      const w = f.hw*2*open;                                  /* 堑宽≈命中带全宽 */
-      const pulse = .82+.18*Math.sin(time*8+f.x0*.03);        /* 地火翻涌脉动 */
+      const fade = lifeR<.22 ? lifeR/.22 : 1;                       /* 末段淡出 */
+      const open = clamp((f.max-f.life)/.16,0,1);                   /* 开裂瞬间快速张开 */
+      const pulse = .82+.18*Math.sin(time*8+f.x0*.03);              /* 地火翻涌脉动 */
       ctx.globalCompositeOperation='source-over';
-      ctx.globalAlpha=fade*.92; ctx.strokeStyle='#1a0f0a'; ctx.lineWidth=w;            _cp(f); ctx.stroke();   /* 深色堑沟(垫底·全地形可读) */
-      ctx.globalAlpha=fade*.8*pulse; ctx.strokeStyle='#b8461a'; ctx.lineWidth=w*.6;    _cp(f); ctx.stroke();   /* 暗红熔岩 */
+      ctx.globalAlpha=fade*.97; ctx.fillStyle='#150b07'; _crack(f, open);        ctx.fill();   /* 深黑裂口(垫底·全地形可读) */
+      ctx.globalAlpha=fade*.9;  ctx.fillStyle='#5a2410'; _crack(f, open*.8);      ctx.fill();   /* 焦土内壁 */
+      ctx.globalAlpha=fade*.86*pulse; ctx.fillStyle='#c8461a'; _crack(f, open*.58); ctx.fill(); /* 暗红熔岩 */
       ctx.globalCompositeOperation='lighter';
-      ctx.globalAlpha=fade*.7*pulse; ctx.strokeStyle='#ff8a2a'; ctx.lineWidth=w*.36;   _cp(f); ctx.stroke();   /* 橙焰 */
-      ctx.globalAlpha=fade*.85; ctx.strokeStyle='#ffe08a'; ctx.lineWidth=Math.max(2,w*.12); _cp(f); ctx.stroke();   /* 亮芯 */
+      ctx.globalAlpha=fade*.6*pulse;  ctx.fillStyle='#ff8a2a'; _crack(f, open*.38); ctx.fill(); /* 橙焰 */
+      ctx.globalAlpha=fade*.72;       ctx.fillStyle='#ffe08a'; _crack(f, open*.17); ctx.fill(); /* 亮芯 */
     }
     ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1; ctx.restore();
   }
@@ -9461,6 +9563,27 @@ bindConfirm($('cardSkipBtn'), '⚠️ 确定放弃？再点一次', ()=>{ $('car
 bindConfirm($('relicSkipBtn'), '⚠️ 确定放弃？再点一次', ()=>{ $('relic').classList.add('hidden'); proceedAfterWave(); });
 $('pauseSaveBtn').onclick=()=>{ if(difficulty>=5||dailyRun)return; saveResume(); paused=false; $('paused').classList.add('hidden'); state='menu'; $('menu').classList.remove('hidden'); refreshResumeBtn(); loadMenuBoard(curPeriod); };
 $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buildWandSel(); };
+/* 🧪 试炼场隐藏入口:依次点标题各字「法×2 · 术×3 · 工×2 · 坊×3」(按落点横向位置判断点的是哪个字;两次点击间隔超 4 秒则重置) */
+(function(){ const tt=$('mainTitle'); if(!tt)return;
+  const PATTERN=[0,0,1,1,1,2,2,3,3,3]; let prog=0, lastT=0;
+  tt.addEventListener('click',(e)=>{
+    let r; try{ const rg=document.createRange(); rg.selectNodeContents(tt); r=rg.getBoundingClientRect(); }catch(_){ r=null; }
+    if(!r||!r.width) r=tt.getBoundingClientRect();
+    let c=Math.floor((e.clientX-r.left)/r.width*4); c=c<0?0:(c>3?3:c);
+    const now=Date.now(); if(now-lastT>4000) prog=0; lastT=now;
+    if(c===PATTERN[prog]) prog++; else prog=(c===PATTERN[0])?1:0;
+    if(prog>=PATTERN.length){ prog=0; try{S.card();}catch(e2){} launchSandbox(WANDS[0]); }
+  }); })();
+(function(){ const on=(id,fn,ev)=>{const e=$(id);if(e)e[ev||'onclick']=fn;};
+  on('sbToggle',()=>{ const p=$('sbPanel'); p.classList.toggle('hidden'); });
+  on('sbClose',()=>{ $('sbPanel').classList.add('hidden'); });
+  on('sbGodChk',(e)=>{ sbGod=!!e.target.checked; },'onchange');
+  on('sbClear',()=>{ enemies.length=0; if(typeof ebullets!=='undefined')ebullets.length=0; if(typeof telegraphs!=='undefined')telegraphs.length=0; if(typeof fissures!=='undefined')fissures.length=0; });
+  on('sbWaveUp',()=>{ waveNum=Math.min(999,waveNum+1); updateSbWave(); });
+  on('sbWaveDn',()=>{ waveNum=Math.max(1,waveNum-1); updateSbWave(); });
+  on('sbExit',()=>{ exitSandbox(); });
+  on('sbSpClear',()=>{ for(const id in player.spells) delete player.spells[id]; buildSbPanel(); });
+})();
 $('wandBack').onclick=()=>{ $('wandSel').classList.add('hidden'); $('menu').classList.remove('hidden'); refreshResumeBtn(); };
 /* v64.1 菜单操作提示按设备区分:触屏默认只显示拖屏/冲刺;非触屏(PC)才切到 WASD/鼠标,免得手机用户看到无关的电脑操作 */
 (function(){ try{ var touch=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches); if(!touch){ var t=$('hintTouch'),pc=$('hintPC'); if(t)t.style.display='none'; if(pc)pc.style.display=''; } }catch(e){} })();
