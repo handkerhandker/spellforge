@@ -9315,7 +9315,7 @@ function drawPlayer(){
       ctx.fillStyle='#163048'; ctx.beginPath();ctx.moveTo(0,-3.6);ctx.lineTo(2.5,0);ctx.lineTo(0,3.6);ctx.lineTo(-2.5,0);ctx.closePath();ctx.fill();
       ctx.fillStyle='#e3f3ff'; ctx.beginPath();ctx.moveTo(0,-2.1);ctx.lineTo(1.4,0);ctx.lineTo(0,2.1);ctx.lineTo(-1.4,0);ctx.closePath();ctx.fill();
       ctx.restore(); }
-    const _ty=p.y-p.r-23-(p.poisonT>0?17:0)-(showPlayerHpBar?15:0); ctx.globalAlpha=1; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.lineJoin='round';
+    const _ty=p.y-p.r-23-(p.poisonT>0?17:0)-(showPlayerHpBar?17:0); ctx.globalAlpha=1; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.lineJoin='round';
     const _tw=ctx.measureText('减速').width, _dx=p.x-_tw/2-7;
     ctx.fillStyle='rgba(10,28,46,.92)'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,3.9,0,TAU);ctx.fill();
     ctx.fillStyle='#7fd8ff'; ctx.beginPath();ctx.arc(_dx,_ty-3.5,2.7,0,TAU);ctx.fill();
@@ -9340,7 +9340,7 @@ function drawPlayer(){
   /* 头顶血条(暂停菜单开关,默认关):参照 Boss 血条标准——深色外晕 + 暗轨 + 渐变填充 + 居中血量数字;贴头顶画、状态文字已上移让位、深晕保证 9 地形可读 */
   if(showPlayerHpBar){
     ctx.save(); ctx.globalAlpha=1;
-    const bw=46, bh=10, bx=p.x-bw/2, by=p.y-p.r-6-bh;
+    const bw=46, bh=10, bx=p.x-bw/2, by=p.y-p.r-23-bh;   /* 底在 p.y-p.r-23,清掉巫师帽尖(p.y-2.1r)等所有皮肤头部 */
     const hr=clamp(p.hp/p.maxhp,0,1);
     ctx.fillStyle='rgba(10,8,24,.82)'; rrect(bx-3,by-3,bw+6,bh+6,5); ctx.fill();
     ctx.fillStyle='#2a1730'; rrect(bx,by,bw,bh,4); ctx.fill();
