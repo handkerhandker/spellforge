@@ -49,7 +49,7 @@
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
   #win .panel,#over .panel,#lastReport .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
   /* 选择/信息类浮层保险:内容超屏时可滚动,放得下时仍居中(safe center 保证正常外观不变),避免选项/按钮被切到点不到 */
-  #wandSel,#cards,#relic,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
+  #wandSel,#cards,#relic,#inherit,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
   #menu .credit{margin-top:2px;}
   /* 两栏 wrapper 的默认(竖屏)样式:还原成与原来一致的居中竖排+间距;横屏才在媒体查询里改成左右两栏 */
@@ -801,7 +801,7 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v100.12', APP_TIME='2026-06-24 11:00';
+const APP_VER='v100.12', APP_TIME='2026-06-24 11:20';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
 const APP_NOTIFY_VER='v100.12';
