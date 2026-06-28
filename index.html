@@ -7703,7 +7703,7 @@ function render(){
     ctx.fillStyle=terrain.pillar;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
     ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.globalAlpha=.5;ctx.stroke();ctx.globalAlpha=1;
     ctx.globalAlpha=.5;ctx.fillStyle=terrain.glow;ctx.font=Math.round(p.r*.6)+'px serif';
-    ctx.fillText('✦',p.x,p.y);ctx.globalAlpha=1;
+    _star4(p.x,p.y,p.r*.18);ctx.globalAlpha=1;
   }
 
   /* Boss 冲撞前摇预警:红色危险车道 + 蓄力辉光(画在地面层、敌人之下,看得见躲得开) */
@@ -9117,6 +9117,7 @@ function eye(e,lookA,off){
   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(e.x+ox,e.y+oy,3.4,0,TAU);ctx.fill();
   ctx.fillStyle='#1c1c2e';ctx.beginPath();ctx.arc(e.x+ox+Math.cos(a)*1.3,e.y+oy+Math.sin(a)*1.3,1.7,0,TAU);ctx.fill();
 }
+function _star4(cx,cy,R){ const r=R*0.4; ctx.beginPath(); for(let i=0;i<8;i++){ const a=i*Math.PI/4-Math.PI/2, rr=(i&1)?r:R, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr; i?ctx.lineTo(x,y):ctx.moveTo(x,y);} ctx.closePath(); ctx.fill(); }   /* 四角星手绘路径(替代 ✦ 字形,保持全手绘无 emoji) */
 function drawWizardBody(p, aimA){
   if(!p||!isFinite(p.x)||!isFinite(p.y)||!isFinite(p.r))return;   /* 兜底:坐标异常跳过绘制,防白屏 */
   const sk=wandSkin(p.wand&&p.wand.id);
@@ -9136,7 +9137,7 @@ function drawWizardBody(p, aimA){
   ctx.fillStyle=sk.hat;
   ctx.beginPath();ctx.moveTo(-p.r*.95,0);ctx.lineTo(p.r*.95,0);ctx.lineTo(p.r*.12,-p.r*1.55);ctx.closePath();ctx.fill();
   ctx.fillStyle=sk.band;ctx.fillRect(-p.r*.95,-2,p.r*1.9,4);
-  ctx.fillStyle=sk.star;ctx.font='9px serif';ctx.fillText('✦',p.r*.05,-p.r*.75);
+  ctx.fillStyle=sk.star;_star4(p.r*.05,-p.r*.75,3);
   ctx.restore();
 }
 /* 法杖造型(v67):每把杖手上呈现不同外形,沿瞄准方向 ang 朝向敌人。
@@ -9425,8 +9426,8 @@ function drawFoxBody(p, aimA){
   ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
   ctx.lineCap='butt';
   /* 额前火纹(金) */
-  ctx.fillStyle='#ffd24a';ctx.font=(r*0.5)+'px serif';ctx.textAlign='center';
-  ctx.fillText('✦',p.x,p.y-r*0.52);
+  ctx.fillStyle='#ffd24a';
+  _star4(p.x,p.y-r*0.52,r*0.16);
   ctx.textAlign='left';
   /* 狐耳(顶部,白外赤内) */
   ctx.save();ctx.translate(p.x,p.y-r*.62);ctx.rotate(sway);
