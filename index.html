@@ -43,7 +43,7 @@
     box-shadow:0 0 60px rgba(110,90,240,.18), inset 0 0 40px rgba(110,90,240,.06);}
   /* 开始页内容超高时面板内部滚动,避免顶部副标题/底部「更新说明」被裁切;放得下时仍居中不滚动 */
   #menu{justify-content:flex-start;padding-top:calc(6px + env(safe-area-inset-top));}
-  #menu .panel{max-height:calc(100vh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:16px 20px 18px;gap:6px;}
+  #menu .panel{max-height:calc(100vh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100svh - 12px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:16px 20px 18px;gap:6px;}
   /* 选法杖页:内容(标题+14法杖+返回)直接放在 overlay 里、原本居中且无滚动容器,内容超过屏高时两头会被推出屏幕够不着(矮屏尤甚)。改为顶部对齐 + 整页可滚 + 上下安全区内边距,任意屏高都能滑到标题与返回键。 */
   #wandSel{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   /* 开始页紧凑排版:目标一屏放下、无需滚动 */
@@ -56,7 +56,7 @@
   .overlay .panel::-webkit-scrollbar{width:0;height:0;}
   /* 结算页(通关/失败):榜展开不自己滚,整页面板滚动,避免把底部按钮顶出屏幕又滑不到 */
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
-  #win .panel,#over .panel,#lastReport .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+  #win .panel,#over .panel,#lastReport .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100svh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
   /* 选择/信息类浮层保险:内容超屏时可滚动,放得下时仍居中(safe center 保证正常外观不变),避免选项/按钮被切到点不到 */
   #wandSel,#cards,#relic,#inherit,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
@@ -905,6 +905,7 @@ try{ const _raw=localStorage.getItem('sf_gfxq'); if(_raw==='auto'){ gfxAuto=true
    抽离渲染树一两帧再放回，主动触发同样的图层重建，等价于 bfcache 的效果；每次 resize 末尾防抖触发一次。 */
 const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent||'') || ((navigator.platform||'')==='MacIntel' && (navigator.maxTouchPoints||0)>1);
 let _kickT=0;
+let _lastKW=0,_lastKH=0;   /* 上次真正重建画布图层时的视口尺寸:微信/Safari 工具栏时隐时现会反复触发 resize,只在尺寸大变(转屏/真 resize)时才重建,忽略工具栏那点小抖,避免画布反复闪 */
 function kickCanvasLayer(){
   if(!_isIOS) return;
   try{
@@ -928,7 +929,7 @@ function resize(){
   vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.32,W/2,H/2,Math.max(W,H)*.78);
   vg.addColorStop(0,'rgba(6,5,13,0)'); vg.addColorStop(1,'rgba(6,5,13,.6)');
   if(location.hash.indexOf('debug')>=0){ try{ const _d=$('dprDbg'); if(_d){ _d.style.display='block'; _d.textContent='dpr='+(window.devicePixelRatio||0)+'  DPR='+DPR+'\nin='+W+'x'+H+'  cv='+cv.width+'x'+cv.height+'\nvv='+(window.visualViewport?Math.round(window.visualViewport.width)+'x'+Math.round(window.visualViewport.height):'-')+'  '+APP_VER; } }catch(e){} }
-  scheduleKick();
+  if(W!==_lastKW || Math.abs(H-_lastKH)>140){ _lastKW=W; _lastKH=H; scheduleKick(); }   /* 仅宽度变或高度大变(转屏/真 resize)才重建图层;忽略工具栏 ~50px 的时隐时现,杜绝菜单闪 */
 }
 window.addEventListener('resize',resize); resize();
 /* v100.36 修复网页版战斗画面发糊:缓存破除重载那一瞬,canvas 可能拿到偏低的分辨率;在页面真正稳定后(load / 延迟 / 视口变化 / 转屏)再重新量一次,确保最终按正确分辨率绘制,且刷新能纠正 */
@@ -1352,6 +1353,7 @@ $('muteBtn').onclick=()=>{ muted=!muted; $('muteBtn').innerHTML=muted?'<svg view
 
 /* ============ 背景乐 BGM（实时合成·复用游戏 AC·v104.15） ============ */
 let bgmMaster=null,bgmReverb=null,bgmRevGain=null,bgmRevSend=null,bgmNoise=null;
+let bgmBus={}, bgmDest=null;   /* 三氛围各一条 voice 总线:切氛围掐掉旧总线、防旧氛围尾音叠加 */
 let bgmWindSrc=null,bgmWindBP=null,bgmWindGain=null,bgmSubOsc=null,bgmSubSaw=null,bgmSubLP=null,bgmSubGain=null;
 let bgmGraphReady=false;
 let bgmOn=true, bgmVibe='auto', bgmVol=0.62;           /* 默认开 + 自动随战况;存 sf_bgm */
@@ -1368,6 +1370,7 @@ function bgmInitGraph(){ if(bgmGraphReady||!AC) return;
   bgmReverb=AC.createConvolver(); bgmReverb.buffer=bgmMakeIR(2.6,2.4);
   bgmRevGain=AC.createGain(); bgmRevGain.gain.value=0.55; bgmReverb.connect(bgmRevGain).connect(bgmMaster);
   bgmRevSend=AC.createGain(); bgmRevSend.gain.value=1.0; bgmRevSend.connect(bgmReverb);
+  bgmBus={}; ["sky","gu","battle"].forEach(function(k){ const bs=AC.createGain(); bs.gain.value=(k===bgmCtxVibe?1:0); bs.connect(bgmMaster); bs.connect(bgmRevSend); bgmBus[k]=bs; }); bgmDest=bgmBus[bgmCtxVibe]||bgmMaster;
   bgmNoise=bgmMakeNoise();
   bgmWindSrc=AC.createBufferSource(); bgmWindSrc.buffer=bgmNoise; bgmWindSrc.loop=true;
   bgmWindBP=AC.createBiquadFilter(); bgmWindBP.type='bandpass'; bgmWindBP.frequency.value=620; bgmWindBP.Q.value=0.8;
@@ -1389,14 +1392,14 @@ function bgmPad(t,midis,dur,gs){ for(let i=0;i<midis.length;i++){ const f=bgmMto
   o1.type='sine'; o2.type='triangle'; o2.detune.value=7; o1.frequency.value=f; o2.frequency.value=f;
   lp.type='lowpass'; lp.frequency.value=850+1500*bgmCtxInt; lp.Q.value=0.4; const peak=0.045*gs;
   g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(peak,t+0.8); g.gain.setValueAtTime(peak,t+dur*0.55); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-  o1.connect(lp); o2.connect(lp); lp.connect(g); g.connect(bgmMaster); g.connect(bgmRevSend);
+  o1.connect(lp); o2.connect(lp); lp.connect(g); g.connect(bgmDest||bgmMaster);
   o1.start(t); o2.start(t); o1.stop(t+dur+0.1); o2.stop(t+dur+0.1); } }
 function bgmPluck(t,midi,dur,gs,bright){ const f=bgmMtof(midi);
   const o=AC.createOscillator(),o2=AC.createOscillator(),g=AC.createGain(),g2=AC.createGain(),lp=AC.createBiquadFilter();
   o.type='triangle'; o2.type='sine'; o.frequency.value=f; o2.frequency.value=f*2;
   lp.type='lowpass'; lp.frequency.setValueAtTime(bright||2300,t); lp.frequency.exponentialRampToValueAtTime(560,t+dur*0.85); lp.Q.value=1; const peak=0.13*gs;
   g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(peak,t+0.008); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-  g2.gain.value=0.38; o2.connect(g2).connect(lp); o.connect(lp); lp.connect(g); g.connect(bgmMaster); g.connect(bgmRevSend);
+  g2.gain.value=0.38; o2.connect(g2).connect(lp); o.connect(lp); lp.connect(g); g.connect(bgmDest||bgmMaster);
   o.start(t); o2.start(t); o.stop(t+dur+0.05); o2.stop(t+dur+0.05); }
 function bgmBass(t,midi,dur,gs){ const f=bgmMtof(midi);
   const o=AC.createOscillator(),o2=AC.createOscillator(),g=AC.createGain(),g2=AC.createGain(),lp=AC.createBiquadFilter();
@@ -1412,14 +1415,14 @@ function bgmKick(t,gs){ const o=AC.createOscillator(),g=AC.createGain(); o.type=
 function bgmTick(t,gs){ bgmNoiseHit(t,0.03,0.035*gs,'highpass',6500); }
 function bgmStab(t,midi,gs){ const f=bgmMtof(midi); const o=AC.createOscillator(),g=AC.createGain(),lp=AC.createBiquadFilter();
   o.type='sawtooth'; o.frequency.value=f; lp.type='lowpass'; lp.frequency.setValueAtTime(1300,t); lp.frequency.exponentialRampToValueAtTime(320,t+0.3); lp.Q.value=2.5;
-  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.085*gs,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.42); o.connect(lp).connect(g); g.connect(bgmMaster); g.connect(bgmRevSend); o.start(t); o.stop(t+0.46); }
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.085*gs,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.42); o.connect(lp).connect(g); g.connect(bgmDest||bgmMaster); o.start(t); o.stop(t+0.46); }
 /* —— 三种氛围编曲 —— */
 const BGM_SKY_CHORDS=[[57,64,69],[59,66,71],[61,66,73],[64,71,76]], BGM_SKY_PLUCK=[69,71,73,76,78,81];
 const BGM_GU_MOTIFS=[[62,null,64,66,null,69,66,64],[69,71,69,null,66,64,null,62],[74,null,71,69,null,66,69,71],[62,64,66,69,71,null,69,null],[66,69,null,71,69,66,64,null]];
 const BGM_GU_BASS=[38,45,42,38], BGM_GU_PAD=[[50,57,62],[52,59,64],[54,57,62],[45,52,57]];
 const BGM_BATTLE_STAB=[40,43,45,47,50,52,55], BGM_BATTLE_PAD=[[40,47,52],[43,50,55],[45,52,59],[40,50,55]], BGM_SUB_FREQ={sky:55,gu:73,battle:41};
 function bgmStepDur(){ const v=bgmCtxVibe; if(v==='sky') return 0.6; if(v==='gu'){ const bpm=80+16*bgmCtxInt; return (60/bpm)/2; } const bpm=110+30*bgmCtxInt; return (60/bpm)/4; }
-function bgmPlayStep(s,t){ const v=bgmCtxVibe, ci=bgmCtxInt;
+function bgmPlayStep(s,t){ const v=bgmCtxVibe, ci=bgmCtxInt; bgmDest=(bgmBus&&bgmBus[v])||bgmMaster;
   if(v==='sky'){ if(s%8===0) bgmPad(t,BGM_SKY_CHORDS[((s/8)|0)%BGM_SKY_CHORDS.length],5.2,1);
     if(Math.random()<0.12+0.32*ci) bgmPluck(t,bgmRpick(BGM_SKY_PLUCK),1.6+Math.random()*1.2,0.7,2700);
     if(ci>0.6&&s%4===0) bgmPad(t,[45,52],2.2,0.5);
@@ -1444,7 +1447,8 @@ function bgmUpdateLayers(){ if(!bgmGraphReady||!AC) return; const now=AC.current
   bgmWindGain.gain.setTargetAtTime(live&&v==='sky'?0.05:0,now,tc);
   const subOn=!live?0:(v==='battle'?0.07:(v==='sky'?0.014:0.022)); bgmSubGain.gain.setTargetAtTime(subOn,now,tc);
   const sf=BGM_SUB_FREQ[v]||41; bgmSubOsc.frequency.setTargetAtTime(sf,now,0.3); bgmSubSaw.frequency.setTargetAtTime(sf,now,0.3);
-  bgmRevGain.gain.setTargetAtTime(v==='battle'?0.28:(v==='sky'?0.95:0.55),now,tc); }
+  bgmRevGain.gain.setTargetAtTime(v==='battle'?0.28:(v==='sky'?0.95:0.55),now,tc);
+  ["sky","gu","battle"].forEach(function(k){ if(bgmBus&&bgmBus[k]) bgmBus[k].gain.setTargetAtTime((live&&k===v)?1:0, now, 0.05); }); }
 function bgmScheduler(){ if(!bgmOn||muted||!AC||AC.state!=='running'){ return; } if(!bgmGraphReady) bgmInitGraph();
   bgmTickCtx(); if(bgmCtxVibe!==bgmLastVibe){ bgmLastVibe=bgmCtxVibe; bgmUpdateLayers(); }
   if(AC.currentTime-bgmNextTime>1) bgmNextTime=AC.currentTime+0.1;   /* 防挂起恢复后补发一串 */
