@@ -670,6 +670,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
+<div class="cl-v"><div class="cl-h maj">v104.26 · 2026-07-05</div><div class="cl-i">🌿 <b>全新机制型角色「神农」· 尝百草赌吉凶</b>:药祖炎帝神农,一生尝尽百草辨药毒。选他出战,<b>每一波开战都会尝一株随机异草</b>,当波即刻生效——可能是<b>良药强身</b>(灵芝伤害 +40%、薄荷攻速 +33%、人参回满生命+减伤、茯苓受伤 −30%、三七击杀回血),也可能是<b>双刃奇药</b>(曼陀罗 +2 发投射但弹道散乱、附子伤害 +60% 但受伤 +40%),更可能是<b>毒草伤身</b>(断肠草伤害 −35%、藜芦攻速 −26%)。草药效果只作用当波,下一波重新抽——<b>每一波都不知道是福是祸</b>,是高波动、险中求真的赌命流派。屏幕左上常驻显示当前所尝之草(<b>绿吉 / 红凶 / 黄兼</b>),整波心里有数。药祖形象:阔叶斗笠、赭绿草木袍、腰悬药葫芦、白须飘然。<b>灵晶解锁</b>(✦300)。(与其它角色同管线的纯角色机制,不改任何既有数值;异草概率后续可微调)</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.25 · 2026-07-05</div><div class="cl-i">🐆 <b>全新宝怪「狡」· 见则大穰</b>:山海经玉山之兽,状如犬而豹纹、头生牛角。它会<b>罕见地在战斗中现身</b>(约每八波一遇、Boss 波除外),<b>不攻击、只顾逃窜</b>,头顶亮着一圈<b>金色遁走倒计时</b>——趁它遁走前<b>追上或射杀</b>,它便<b>爆开「大穰」金币大赏</b>:一地金币喷泉 + 两颗红心 + 满屏金光欢呼。远程流可以直接点它,近战流得抢角落把它堵住;倒计时归零它就溜之大吉、什么都不留。这是一个专为「高峰时刻」设计的小惊喜——打破常规波次节奏,给你一个值得为之一搏的追逐瞬间。(每日挑战为保持公平不出现;纯附加奖励,不改任何既有数值)</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.24 · 2026-07-05</div><div class="cl-i">⚡ <b>全新「选牌预示」· 把藏在法术里的连携亮出来</b>:每次升级三选一、逛商店时,若某张牌<b>正好能凑成一个你还没触发的连携</b>,卡面会亮起<b>青色高亮边</b>并直接标出「<b>⚡ 触发连携 ×××</b>」——比如你已经有了石化,这时抽到寒冰锥,卡上就会提示「触发连携 冰石封印」。以前连携全靠自己记、选完才蹦「协同觉醒」,现在<b>选之前就看得见哪张牌能成combo</b>,新手也能顺着提示玩出深度。法术、符文、属性卡、甚至混沌契约(送多重施法)都会算;进化卡因为本就继承基础的连携、这里不再重复标。想知道全部连携配方,还可以随时翻「成就·图鉴 → 法术图鉴」。<b>纯提示显示,不改任何数值与判定。</b></div></div>
 <div class="cl-v"><div class="cl-h maj">v104.23 · 2026-07-05</div><div class="cl-i">🏆 <b>全新「英雄榜 · 局内追逐」· 让好友的纪录变成你头顶的胡萝卜</b>:开局自动读一次当前难度的英雄榜,战斗中<b>你的波数每超过榜上一位玩家</b>,屏幕中央即播报「<b>已超越 ×××(第 N 波)</b>」并提示<b>下一位目标是谁、还在第几波</b>;一波连超多人会合并成「一举超越 N 人」;把榜上所有人都甩在身后时,<b>「登顶」喝彩</b>加冕。追逐只看比你强的:开局不会把身后的名字一个个念一遍。断网 / 读榜失败自动静默,不影响战斗;<b>纯播报显示,不碰任何分数提交与排名规则</b>。设置里新增「<b>超越播报</b>」开关(默认开),嫌热闹可随时关。(沙盒试炼与每日挑战暂不启用)<br>📈 <b>图鉴完成度一目了然</b>:「成就·图鉴」四格入口现在直接标注进度——<b>法术图鉴 41/54 · 异兽图鉴(已讨伐古神)7/12 · 成就一览 57/83</b> 这样的完成度角标;法术图鉴顶部另加「<b>法术已用过 X / 54 · 进化已达成 Y / 27</b>」、异兽图鉴顶部加「<b>已讨伐古神 X / Y</b>」——配合上一版新增的「未遇见」标记,还差哪些没集齐、一眼看清。(备份码同步收录「超越播报」开关设置)</div></div>
@@ -979,14 +980,16 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.25', APP_TIME='2026-07-05 15:30';
+const APP_VER='v104.26', APP_TIME='2026-07-05 16:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.25';
+const APP_NOTIFY_VER='v104.26';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
   ui_jiao: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 Q10 12 13 6 Q22 12 24 22 Z" fill="#efe4c8" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M44 20 Q54 12 51 6 Q42 12 40 22 Z" fill="#efe4c8" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M16 30 Q14 20 24 18 L40 18 Q50 20 48 30 Q49 44 40 52 Q32 58 24 52 Q15 44 16 30 Z" fill="#f0b83c" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M15 27 Q9 26 10 33 Q11 38 17 36 Z" fill="#d69a1f" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><path d="M49 27 Q55 26 54 33 Q53 38 47 36 Z" fill="#d69a1f" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="23" cy="32" r="3.6" fill="#fff"/><circle cx="41" cy="32" r="3.6" fill="#fff"/><circle cx="23.6" cy="32.6" r="1.9" fill="#241636"/><circle cx="41.6" cy="32.6" r="1.9" fill="#241636"/><ellipse cx="32" cy="42" rx="4.4" ry="3" fill="#7a4a10" stroke="#241636" stroke-width="2.4"/><circle cx="32" cy="40.4" r="1.5" fill="#241636"/><circle cx="27" cy="45" r="2.3" fill="#2c0a04" opacity=".38"/><circle cx="38" cy="46" r="1.9" fill="#2c0a04" opacity=".38"/><circle cx="22" cy="42" r="1.7" fill="#2c0a04" opacity=".38"/><path d="M52 12 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 Z" fill="#fff4c8" stroke="#241636" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+  /* 神农·尝百草(v104.26):药葫芦+叶,用于「尝百草」播报与 HUD 指示 */
+  ui_herb: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="28" y="7" width="8" height="8" rx="2" fill="#7a4a10" stroke="#241636" stroke-width="2.6"/><path d="M39 13 Q55 9 57 23 Q43 25 39 13 Z" fill="#6faa4a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M42 16 L53 20" stroke="#3a6a2a" stroke-width="1.8" stroke-linecap="round"/><circle cx="32" cy="25" r="10" fill="#d99a3c" stroke="#241636" stroke-width="3"/><circle cx="32" cy="45" r="15" fill="#e0a84a" stroke="#241636" stroke-width="3"/><ellipse cx="26" cy="41" rx="3.4" ry="5.2" fill="#ffe0a0" opacity=".7"/></svg>',
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
   syn_meteor_swarm: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M42 22 L60 6" stroke="#ff5c3c" stroke-width="8" stroke-linecap="round"/><path d="M45 27 L60 14" stroke="#ffae3c" stroke-width="4" stroke-linecap="round"/><circle cx="29" cy="37" r="13" fill="#94806d" stroke="#241636" stroke-width="2.8"/><circle cx="24" cy="33" r="3.5" fill="#b8a591"/><circle cx="33" cy="41" r="2.4" fill="#6f5d4d"/><circle cx="31" cy="31" r="1.8" fill="#6f5d4d"/></svg>',
   syn_frost_ray: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M55 32 L23 21 L9 32 L23 43 Z" fill="#7fe2ff" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M46 32 L25 26 M46 32 L25 38" stroke="#d8f5ff" stroke-width="2" stroke-linecap="round"/><path d="M14 12 l4 4 M18 12 l-4 4" stroke="#aee9ff" stroke-width="2.4" stroke-linecap="round"/><path d="M15 49 l3 3 M18 49 l-3 3" stroke="#aee9ff" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -2722,7 +2725,7 @@ function wandUnlocked(id){
   return (WAND_COST[id]||0)===0;
 }
 /* ===== 角色皮肤(v70 加入;v77 起各带取舍 kit,见上方 SKIN_FX);wizard 免费,其余灵晶解锁(记录于 META.unlocked,与法杖键不冲突) ===== */
-const SKIN_COST={fox:300, shangui:300, jingwei:300, houyi:300, kuafu:300, chiyou:300, xiwangmu:300, change:300, qiulong:300, qingnv:300, wuxian:300};
+const SKIN_COST={fox:300, shangui:300, jingwei:300, houyi:300, kuafu:300, chiyou:300, xiwangmu:300, change:300, qiulong:300, qingnv:300, wuxian:300, shennong:300};
 const SKIN_ACH={xingtian:'godslayer', zhulong:'endless50', nuwa:'allboss', gonggong:'wavekill', baize:'relic6', zhurong:'fourfiend', goumang:'endless60'};   /* 成就解锁皮肤:皮肤id → 所需成就id;打出该成就即免费解锁(无灵晶售价、随成就永久) */
 /* ===== v77 皮肤取舍 kit:复用法杖 wandFx 同字段,开局在 applyWand 折入(净值中性的侧向取舍=玩法 kit 非养成 → 全难度通用含弑神,与法杖同理不破榜);幅度比法杖轻;`kit` 文案仅供卡片显示,注入时忽略 ===== */
 const SKIN_FX={
@@ -2745,6 +2748,7 @@ const SKIN_FX={
   qiulong: {dmgM:.80, killHeal:1, maxhpAdj:-20, meleeClose:1.55, meleeDash:true, kit:'贴脸命中重创(近身 ×1.55) · 击杀回血(随上限) · 冲刺撕咬 · 单发伤害 −20% · 生命上限 −20'},
   qingnv:  {slowAura:150, dmgM:.85, maxhpAdj:10, kit:'身周寒域·持续减速靠近的妖兽(古神免疫) · 生命上限 +10 · 单发伤害 −15%'},
   wuxian:  {bloodFuel:.28, lowHpDmg:.85, killHeal:2, kit:'血焰常燃·自灼至残(至 28% 止、不致死) · 血越残法术越狂(残血最高约 +60%) · 强力吸血续命 · 刀尖之上、险中求胜'},
+  shennong:{herbTaste:true, kit:'每波开战尝一株异草·随机吉凶(良药强身/毒草伤身,只作用当波) · 尝尽百草·险中求真 · 高波动赌命流'},
 };
 const CHARS=[
   {id:'wizard',  icon:'🧙', name:'巫师',     theme:'经典 · 暗紫法师', sub:'最初的拔杖者'},
@@ -2766,6 +2770,7 @@ const CHARS=[
   {id:'qiulong', icon:'🐉', name:'虬龙',     theme:'神龙 · 青鳞振翼', sub:'山海神龙 · 振翼扑击 · 近身撕咬搏杀(法师亦能贴身而战)'},
   {id:'qingnv',  icon:'❄️', name:'青女',     theme:'霜神 · 素衣寒霜', sub:'主霜雪·青女乃出以降霜雪 · 身周寒域·控场守土(减速靠近的妖兽、古神免疫)'},
   {id:'wuxian',  icon:'🩸', name:'巫咸',     theme:'大巫 · 血焰朱袍', sub:'灵山十巫之首 · 以血饲法·燃血为焰 · 血越残法越狂(刀尖求生·强吸血续命)'},
+  {id:'shennong', icon:'🌿', name:'神农',     theme:'药祖 · 赭鞭百草', sub:'炎帝神农 · 尝百草辨药毒 · 每波尝一株异草赌吉凶(良药强身/毒草伤身·高波动)'},
 ];
 /* 解锁判定:已购记录 > 成就皮肤看成就 > 其余(免费如巫师即解锁,有价未购则锁) */
 function skinUnlocked(id){
@@ -2797,6 +2802,42 @@ function applyWand(w){
     if(_sf.maxhpMul){player.maxhp=Math.max(40,Math.round(player.maxhp*_sf.maxhpMul));player.hp=Math.min(player.hp,player.maxhp);}
     if(_sf.maxhpAdj){player.maxhp=Math.max(40,player.maxhp+_sf.maxhpAdj);player.hp=Math.min(player.hp,player.maxhp);}
   }
+  snapshotWandFxBase();   /* 神农·尝百草(v104.26):存草药可改字段的基线,供每波恢复;非神农也存(无害) */
+}
+/* ═══ 神农·尝百草(v104.26):机制型角色——每波开战尝一株异草,随机吉凶,效果只作用本波。复用 wandFx 字段(dmgM/cdM/takenMul/extra/spreadM/killHeal…),每波先恢复 applyWand 时的基线快照、再叠加当波草药,故不残留、不改任何战斗计算管线。与其他皮肤 kit 同性质,护榜安全。异草池权重可调(w 字段)。 ═══ */
+const HERBS=[
+  {id:'renshen',  name:'人参',   tone:'good', tag:'回满·减伤', desc:'大补元气 · 回满生命,本波受伤 −20%', w:2, heal:'full', fx:{takenMul:.8}},
+  {id:'lingzhi',  name:'灵芝',   tone:'good', tag:'伤害 +40%', desc:'仙草续命 · 本波法术伤害 +40%',       w:2, fx:{dmgM:1.4}},
+  {id:'bohe',     name:'薄荷',   tone:'good', tag:'攻速 +33%', desc:'清凉提神 · 本波施法更快 +33%',       w:2, fx:{cdM:.75}},
+  {id:'fuling',   name:'茯苓',   tone:'good', tag:'受伤 −30%', desc:'健脾宁神 · 本波受到伤害 −30%',       w:2, fx:{takenMul:.7}},
+  {id:'sanqi',    name:'三七',   tone:'good', tag:'击杀回血', desc:'止血生肌 · 本波击杀回血(随生命上限成长)', w:2, fx:{killHeal:2}},
+  {id:'mantuoluo',name:'曼陀罗', tone:'mix',  tag:'多重+2·散乱', desc:'致幻狂花 · 本波每次施法 +2 发,但弹道散乱', w:3, fx:{extra:2, spreadM:1.7}},
+  {id:'fuzi',     name:'附子',   tone:'mix',  tag:'伤害+60·易伤', desc:'大热之毒 · 本波伤害 +60%,但受伤 +40%', w:3, fx:{dmgM:1.6, takenMul:1.4}},
+  {id:'duanchang',name:'断肠草', tone:'bad',  tag:'伤害 −35%', desc:'剧毒钩吻 · 时运不济,本波法术伤害 −35%', w:3, fx:{dmgM:.65}},
+  {id:'lilu',     name:'藜芦',   tone:'bad',  tag:'攻速 −26%', desc:'涌吐之毒 · 本波施法迟滞 −26%',       w:3, fx:{cdM:1.35}},
+];
+const _HERB_MUL=['dmgM','cdM','spdM','spreadM','takenMul','critMul'];             /* 乘法字段 */
+const _HERB_ADD=['extra','pierce','killHeal','critBonus','homing','splash','dodge','ricochet'];  /* 加法字段 */
+function snapshotWandFxBase(){
+  const wf=player&&player.wandFx; if(!wf)return;
+  player._wfBase={}; for(const k of _HERB_MUL.concat(_HERB_ADD)) player._wfBase[k]=wf[k];
+  player._herb=null;
+}
+function tasteHerb(){
+  if(!player.wandFx || !player._wfBase) return;
+  for(const k in player._wfBase) player.wandFx[k]=player._wfBase[k];   /* 恢复基线(清掉上一波草药) */
+  let tot=0; for(const h of HERBS) tot+=(h.w||1);                     /* 加权随机 */
+  let r=Math.random()*tot, pk=HERBS[0];
+  for(const h of HERBS){ r-=(h.w||1); if(r<=0){ pk=h; break; } }
+  const fx=pk.fx||{};                                                  /* 叠加当波草药 */
+  for(const k in fx){ if(_HERB_MUL.indexOf(k)>=0) player.wandFx[k]=(player.wandFx[k]||1)*fx[k]; else player.wandFx[k]=(player.wandFx[k]||0)+fx[k]; }
+  if(pk.heal==='full') heal(player.maxhp);
+  else if(typeof pk.heal==='number') heal(pk.heal);
+  player._herb=pk;
+  announce('尝百草 · '+pk.name, pk.desc, ['ui','herb']);
+  const col = pk.tone==='good'?'#8fe07a':pk.tone==='bad'?'#c85a5a':'#e0c060';
+  for(let i=0;i<16;i++){ const a=rand(0,TAU),sp=rand(30,120); spawnPart(player.x,player.y,Math.cos(a)*sp,Math.sin(a)*sp-30,rand(.4,.8),rand(2,4),col); }
+  try{ pk.tone==='bad'?S.hurt():S.buy(); }catch(e){}
 }
 /* ============ 遗物 / 被动系统 ============
    平衡核心:伤害走「加法池」不做乘法;暴击/攻速/闪避封顶;每 5 波三选一,慢慢拿,不重复。 */
@@ -3449,6 +3490,8 @@ function startWave(n){ _waveFirstKilled=false; applySteal(); if(player._rwBuf)pl
   chaseCheck();   /* 结算本波新超越(放潮汐播报之后:占用中会自动挂起补播、不顶掉潮汐) */
   /* 宝怪·狡:非 Boss 波、第 3 波起、约 1/8 概率现身(每日/沙盒不出、同时最多一只) */
   if(!dailyRun && !sandbox && n>=3 && n%5!==0 && !_jiaoActive && Math.random()<0.12) spawnJiao();
+  /* 神农·尝百草:每波开战尝一株异草(只作用本波;不刷怪、不碰确定性,故每日/沙盒同享) */
+  if(META.skin==='shennong') tasteHerb();
   /* 自适应难度重算 */
   recomputeDifficulty();
   const sr=difficultyPool.spawnRate;
@@ -10990,6 +11033,63 @@ function wuxianSilhouette(p, color){
   ctx.restore();
   [-1,1].forEach(side=>{ const bx=p.x+side*r*0.92, by=p.y+r*0.2; ctx.beginPath(); ctx.moveTo(bx,by); ctx.quadraticCurveTo(bx+side*r*0.18,by-r*0.42, bx,by-r*0.72); ctx.quadraticCurveTo(bx-side*r*0.16,by-r*0.4, bx,by); ctx.closePath(); ctx.fill(); });
 }
+/* ---------- 🌿 神农:药祖·阔叶斗笠、赭绿草木袍、腰悬药葫芦、白须长者 ---------- */
+function drawShennongBody(p, aimA){
+  if(!p||!isFinite(p.x)||!isFinite(p.y)||!isFinite(p.r))return;
+  const r=p.r;
+  /* 药葫芦(身后左侧·赭黄双葫芦) */
+  ctx.save();
+  ctx.fillStyle='#c98a3c'; ctx.strokeStyle='#5a3a14'; ctx.lineWidth=1.4;
+  const gx=p.x-r*0.92, gy=p.y+r*0.18;
+  ctx.beginPath(); ctx.arc(gx,gy+r*0.3,r*0.28,0,TAU); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.arc(gx,gy-r*0.1,r*0.17,0,TAU); ctx.fill(); ctx.stroke();
+  ctx.fillStyle='#7a4a10'; ctx.fillRect(gx-r*0.06,gy-r*0.3,r*0.12,r*0.1);
+  ctx.restore();
+  /* 斗篷(赭绿·草木土色) */
+  const g=ctx.createRadialGradient(p.x-4,p.y-6,3,p.x,p.y,p.r+2);
+  g.addColorStop(0,'#6f9152'); g.addColorStop(1,'#3f5a34');
+  ctx.fillStyle=g; ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
+  ctx.strokeStyle='#2a3a22';ctx.lineWidth=1.5;ctx.stroke();
+  /* 叶脉纹(斗篷上几笔) */
+  ctx.strokeStyle='#8fae6a';ctx.lineWidth=1.4;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(p.x-r*.3,p.y+r*.3);ctx.lineTo(p.x-r*.1,p.y+r*.55);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(p.x+r*.28,p.y+r*.28);ctx.lineTo(p.x+r*.44,p.y+r*.5);ctx.stroke();
+  ctx.lineCap='butt';
+  /* 脸(风霜黝色) */
+  ctx.fillStyle='#e8c49a';ctx.beginPath();ctx.arc(p.x,p.y-3,p.r*.55,0,TAU);ctx.fill();
+  /* 眼(随瞄准) */
+  ctx.fillStyle='#2b2440';
+  const ex=Math.cos(aimA)*2, ey=Math.sin(aimA)*1.5;
+  ctx.beginPath();ctx.arc(p.x-3+ex,p.y-4+ey,1.5,0,TAU);ctx.arc(p.x+3+ex,p.y-4+ey,1.5,0,TAU);ctx.fill();
+  /* 长须(药祖长者) */
+  ctx.strokeStyle='#e8e2d4';ctx.lineWidth=1.3;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(p.x-r*.22,p.y+r*.08);ctx.quadraticCurveTo(p.x,p.y+r*.52,p.x+r*.22,p.y+r*.08);ctx.stroke();
+  ctx.lineCap='butt';
+  /* 阔叶斗笠(宽绿檐 + 半球顶 + 顶叶) */
+  const tilt=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-p.r*.6);ctx.rotate(tilt);
+  ctx.fillStyle='#5a7a3a';ctx.strokeStyle='#2a3a1a';ctx.lineWidth=1.3;
+  ctx.beginPath();ctx.ellipse(0,0,p.r*1.05,p.r*.34,0,0,TAU);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#6f9152';
+  ctx.beginPath();ctx.arc(0,-r*.02,r*.44,Math.PI,0);ctx.fill();ctx.stroke();
+  ctx.strokeStyle='#4a6a2a';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(0,-r*.4);ctx.lineTo(0,-r*.86);ctx.stroke();
+  ctx.fillStyle='#8fbe5a';ctx.strokeStyle='#2a3a1a';ctx.lineWidth=1.1;
+  ctx.beginPath();ctx.ellipse(-r*.1,-r*.66,r*.13,r*.26,-.5,0,TAU);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(r*.1,-r*.66,r*.13,r*.26,.5,0,TAU);ctx.fill();ctx.stroke();
+  ctx.restore();
+}
+function shennongSilhouette(p, color){
+  if(!p||!isFinite(p.x)||!isFinite(p.y)||!isFinite(p.r))return;
+  ctx.fillStyle=color;
+  ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,TAU);ctx.fill();
+  const tilt=Math.sin(p.anim*3)*.05;
+  ctx.save();ctx.translate(p.x,p.y-p.r*.6);ctx.rotate(tilt);
+  ctx.beginPath();ctx.ellipse(0,0,p.r*1.05,p.r*.34,0,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(0,-p.r*.02,p.r*.44,Math.PI,0);ctx.fill();
+  ctx.beginPath();ctx.ellipse(-p.r*.1,-p.r*.66,p.r*.13,p.r*.26,-.5,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.ellipse(p.r*.1,-p.r*.66,p.r*.13,p.r*.26,.5,0,TAU);ctx.fill();
+  ctx.restore();
+}
 function drawCharBody(p, aimA, skinId){
   const s=skinId||(META&&META.skin)||'wizard';
   if(s==='fox') drawFoxBody(p, aimA);
@@ -11010,6 +11110,7 @@ function drawCharBody(p, aimA, skinId){
   else if(s==='qiulong') drawQiulongBody(p, aimA);
   else if(s==='qingnv') drawQingnvBody(p, aimA);
   else if(s==='wuxian') drawWuxianBody(p, aimA);
+  else if(s==='shennong') drawShennongBody(p, aimA);
   else drawWizardBody(p, aimA);
 }
 function charSilhouette(p, color, skinId){
@@ -11032,6 +11133,7 @@ function charSilhouette(p, color, skinId){
   else if(s==='qiulong') qiulongSilhouette(p, color);
   else if(s==='qingnv') qingnvSilhouette(p, color);
   else if(s==='wuxian') wuxianSilhouette(p, color);
+  else if(s==='shennong') shennongSilhouette(p, color);
   else wizardSilhouette(p, color);
 }
 /* 选择界面卡片预览:临时把全局 ctx 切到小卡画布,画完还原(同步执行,不与游戏循环抢) */
@@ -11283,6 +11385,14 @@ function drawHUD(){
   ctx.textAlign='left';ctx.fillStyle='#cfc8f2';ctx.font='bold 13px sans-serif';
   drawSkullIcon(21,top+40,5,'#cfc8f2');ctx.fillStyle='#cfc8f2';ctx.fillText(kills,31,top+40);
   drawCoinIcon(21,top+60,5,'#ffd24d');ctx.fillStyle='#ffd24d';ctx.fillText(coins,31,top+60);
+  /* 神农·当前草药常驻指示(吉绿/凶红/兼黄):让赌博结果整波可见 */
+  if(META.skin==='shennong' && player._herb){ const _hb=player._herb;
+    const _hc=_hb.tone==='good'?'#8fe07a':_hb.tone==='bad'?'#e07a7a':'#e0c860';
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    drawCanvasIcon('ui','herb','🌿',24,top+82,14);
+    ctx.font='bold 12px sans-serif';ctx.fillStyle=_hc;ctx.fillText(_hb.name+' · '+_hb.tag,34,top+82);
+    ctx.textBaseline='alphabetic';
+  }
   /* 遗物图标条(常驻,压力条下方) · 窄屏/多遗物自动折行:绝不溢出屏幕,且右边界始终避让右上角连击块(不压「战意」块);无连击时也按此留位,避免连击一出现就重排 */
   if(player.relics.length){
     const rw=19, rowH=19, x0=18, ry0=top+106;
