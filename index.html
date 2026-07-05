@@ -335,7 +335,11 @@
     #cardRow .card,#relicRow .card,#wandRow .card,#evoRow .card,#inheritRow .card{flex-direction:column;width:154px;text-align:center;align-items:center;gap:8px;padding:14px 12px;}
     #cardRow .card .ctx,#relicRow .card .ctx,#wandRow .card .ctx,#evoRow .card .ctx,#inheritRow .card .ctx{flex:0 0 auto;text-align:center;}
     #cardRow .card .cr,#relicRow .card .cr,#evoRow .card .cr,#inheritRow .card .cr{align-self:center;}
-    .evo-label{width:100%;text-align:center;}
+    ".evo-label{width:100%;text-align:center;}
+/* 选牌预示(v104.24):触发连携的卡加青色高亮边 + 卡内提示行 */
+.card.syn-ready{border-color:#5fe0b8 !important;box-shadow:0 0 22px rgba(95,224,184,.30) !important;}
+.syn-prev{font-size:11px;margin-top:5px;color:#7fecc8;font-weight:700;background:rgba(60,180,150,.15);border:1px solid rgba(95,224,184,.42);border-radius:8px;padding:3px 8px 3px 7px;line-height:1.5;display:inline-block;}
+.syn-prev .mbi,.syn-prev svg{width:14px;height:14px;vertical-align:-2px;margin-right:2px;}
     /* —— 商店:商品两列(保持横向卡:图标左、文字中、价格右,文字才不会挤成窄条) —— */
     #shopRow{flex-direction:row!important;flex-wrap:wrap;justify-content:center;gap:10px;}
     #shopRow>*{width:calc(50% - 6px);}
@@ -666,6 +670,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
+<div class="cl-v"><div class="cl-h maj">v104.24 · 2026-07-05</div><div class="cl-i">⚡ <b>全新「选牌预示」· 把藏在法术里的连携亮出来</b>:每次升级三选一、逛商店时,若某张牌<b>正好能凑成一个你还没触发的连携</b>,卡面会亮起<b>青色高亮边</b>并直接标出「<b>⚡ 触发连携 ×××</b>」——比如你已经有了石化,这时抽到寒冰锥,卡上就会提示「触发连携 冰石封印」。以前连携全靠自己记、选完才蹦「协同觉醒」,现在<b>选之前就看得见哪张牌能成combo</b>,新手也能顺着提示玩出深度。法术、符文、属性卡、甚至混沌契约(送多重施法)都会算;进化卡因为本就继承基础的连携、这里不再重复标。想知道全部连携配方,还可以随时翻「成就·图鉴 → 法术图鉴」。<b>纯提示显示,不改任何数值与判定。</b></div></div>
 <div class="cl-v"><div class="cl-h maj">v104.23 · 2026-07-05</div><div class="cl-i">🏆 <b>全新「英雄榜 · 局内追逐」· 让好友的纪录变成你头顶的胡萝卜</b>:开局自动读一次当前难度的英雄榜,战斗中<b>你的波数每超过榜上一位玩家</b>,屏幕中央即播报「<b>已超越 ×××(第 N 波)</b>」并提示<b>下一位目标是谁、还在第几波</b>;一波连超多人会合并成「一举超越 N 人」;把榜上所有人都甩在身后时,<b>「登顶」喝彩</b>加冕。追逐只看比你强的:开局不会把身后的名字一个个念一遍。断网 / 读榜失败自动静默,不影响战斗;<b>纯播报显示,不碰任何分数提交与排名规则</b>。设置里新增「<b>超越播报</b>」开关(默认开),嫌热闹可随时关。(沙盒试炼与每日挑战暂不启用)<br>📈 <b>图鉴完成度一目了然</b>:「成就·图鉴」四格入口现在直接标注进度——<b>法术图鉴 41/54 · 异兽图鉴(已讨伐古神)7/12 · 成就一览 57/83</b> 这样的完成度角标;法术图鉴顶部另加「<b>法术已用过 X / 54 · 进化已达成 Y / 27</b>」、异兽图鉴顶部加「<b>已讨伐古神 X / Y</b>」——配合上一版新增的「未遇见」标记,还差哪些没集齐、一眼看清。(备份码同步收录「超越播报」开关设置)</div></div>
 <div class="cl-v"><div class="cl-h">v104.16 – v104.22 · 2026-06-29 – 07-05</div><div class="cl-i">📖 <b>图鉴「法术进化」区更清爽 · 并新增「已用过」标记</b>:此前一部分进化(如太一神矢、烛龙天眼等)在「主动法术」区与「法术进化」区<b>各出现一次</b>、另一部分老进化(焚天、天陨、蛟龙珠等)又<b>只在进化区</b>——两边口径不一。现在全部 27 个进化统一只在「法术进化」区展示(配方 / 数值 / 说明齐全),主动法术区只列基础形态、不再重复;进化区每条并<b>新增「✓ 已用过 / · 未遇见」</b>,进化达成即点亮,方便核对还有哪些进化没见过。(纯图鉴显示,不改任何玩法 / 数值)<br>💾 <b>备份码升级 · 打包内容更全</b>:备份码此前漏了几样生涯成绩——现在<b>各法杖最佳波数、各难度个人最佳、每日挑战连胜</b>,连同<b>背景乐设置、新手引导记录</b>一并打包。清微信缓存拿更新 / 换设备后导码恢复,这些成绩与设置不再丢失。<b>旧备份码照常可用</b>;建议更新后重新生成一份新码存好。<br>📜 <b>修复「上局战报」漏记「主动结束」的局(应朋友反馈)</b>:在暂停菜单点「结束本局」收掉的那一局,此前<b>排行榜与战功簿照常记录、唯独「上局战报」跳过不存</b>——于是上局战报停留在更早一局阵亡的记录、和榜上的波数对不上号。现在<b>主动结束的局也照常存进「上局战报」</b>(无阵亡死因,但波数 / 击杀 / 输出担当 / 伤害分布齐全),与排行榜、战功簿三处一致;主动结束的结算页也一并显示本局输出担当与伤害分布。(纯记录显示,不改任何数值 / 排行规则)<br>📊 <b>修复冥火 / 地裂 / 奥术新星「进化后」伤害统计错位(应朋友反馈)</b>:这几个法术进化后(<b>酆都业火 / 天崩地裂 / 开天辟地</b>),其灼烧 / 地火 / 冲击的伤害此前仍被记到<b>进化前</b>的名下——导致战斗中构筑面板里那门法术显示偏低、结算页却另冒出一条基础法术的高伤,前后对不上。现已归因到你<b>实际持有的进化形态</b>,实时面板与结算统计一致。(纯统计显示,伤害数值一概未变)<br>🪶 <b>深波卡顿优化 · 高负载自动减负</b>:同屏怪潮 / 弹幕 / 链电极多时(深层无尽、多古神同屏),自动简化最吃性能的视觉——天罗地网等链电的<b>描边层数 / 同屏条数</b>、以及满场怪身上石化 / 冰封 / 冥火状态环的<b>棱角装饰</b>——换回流畅帧率。<b>电网、状态、伤害、链击一概照旧</b>,只精简看不太出的装饰细节;<b>只在拥挤时触发,平时画面与浅波完全不变</b>。<br>🔊 <b>音频开关拆成三个独立项</b>:战斗界面右上角的 🔊 是<b>总静音</b>(一键全部静音);设置里「音效」<b>只控音效</b>、「背景乐」<b>只控背景乐</b>,三者互不影响、各管各的。(此前关「音效」会连背景乐一起静掉,已修)<br>🥁 <b>再压战鼓在手机喇叭上的破音</b>:进一步收紧喇叭放不出的极低频、柔化底鼓瞬态,减轻手机小喇叭的破音 / 失真。<br>🎵 <b>修复背景乐切换氛围时的叠加</b>:切换氛围(空灵 / 古风 / 战鼓)时旧氛围尾音不再压在新氛围上,过渡更干净;空灵仅用于初始页面,进入战斗即转古风,古神临世转战鼓。<br>📱 <b>修复 iPhone 微信里初始页面偶发的上下抖动 / 闪烁</b>(微信底部工具栏时隐时现引起)。<br>⏸️ <b>暂停菜单重排</b>:按钮统一等宽等距、图标全部改为手绘,风格一致。<br>🏠 <b>主菜单微调</b>:「拔出法杖 · 开始战斗」与「继续上次战斗」改为等宽全宽、文案更清楚。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.15 · 2026-06-29</div><div class="cl-i">🎵 <b>全新「背景乐」+ 菜单大整理(设置 / 成就·图鉴)</b>:<br>• <b>背景乐(BGM)</b>:全程<b>实时合成、永不重复</b>的山海经氛围乐,三种格调——<b>空灵仙气 / 古风有调 / 战鼓催征</b>。默认开<b>「自动 · 随战况」</b>:初始页空灵悠远,进入战斗转为古风、越深越紧张,<b>古神临世自动转为战鼓</b>;也可锁定其一、随时关闭或调音量。<br>• <b>统一「设置」面板</b>:主菜单与暂停菜单<b>共用同一个设置入口</b>,把<b>音效 / 背景乐 / 画质 / 特效强度 / 省电 / 瞄准 / 双摇杆 / 头顶血条 / 全屏</b>等全部收纳一处,改一次两边一致、不再散落。<br>• <b>新增「成就·图鉴」</b>:<b>法术图鉴 / 异兽图鉴 / 成就一览 / 战功簿</b>四者合一,主菜单一格直达。<br>• <b>主菜单瘦身</b>:二级按钮由八个精简到五个(祭坛 / 皮肤 / 每日 / 成就·图鉴 / 设置),<b>英雄榜随之上移</b>、一进主菜单即见。<br>(纯界面 / 音频,不改任何玩法 / 数值 / 排行。背景乐在 iPhone / 微信里需<b>先点一下屏幕</b>才会响起,系统限制、所有网页一样)</div></div>
@@ -973,10 +978,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.23', APP_TIME='2026-07-05 13:30';
+const APP_VER='v104.24', APP_TIME='2026-07-05 14:30';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.23';
+const APP_NOTIFY_VER='v104.24';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1895,6 +1900,27 @@ function activeSynergies(){
 }
 function synergyApplyToBullet(b){
   for(const syn of activeSynergies()) try{syn.apply(b,player.spells);}catch(e){}
+}
+/* ═══ 选牌预示(v104.24):算「选了这张牌会新触发哪个连携」——按卡片种类模拟状态增量,再比对 SYNERGIES 的 cond 前后差集,只报「原本没激活、选后会激活」的。与英雄榜追逐同理:纯显示,不碰任何数值/判定/施法。升级选牌 + 商店共用。 */
+function cardSynTrigger(c){
+  if(!c) return [];
+  const cur={};                                                      /* 当前状态,构造同 activeSynergies */
+  for(const id in player.spells) cur[id]=(player.spells[id].lv||0);
+  for(const k in player.mods) cur[k]=player.mods[k];
+  const before=new Set(SYNERGIES.filter(syn=>{try{return syn.cond(cur);}catch(e){return false;}}).map(x=>x.id));
+  const sim=Object.assign({},cur);                                   /* 模拟选牌后的增量 */
+  const bump=id=>{ sim[id]=(sim[id]||0)+1; };
+  if(c.kind==='spell'||c.kind==='mod') bump(c.id);
+  else if(c.kind==='stat'){ if(c.id!=='hp') bump(c.id); }            /* boots/leech/armor/pickup 都写入 player.mods;hp 仅加血、与连携无关 */
+  else if(c.kind==='curse'){ if(c.id==='pact_chaos') bump('multi'); }/* 混沌契约 → multi+1(applyCard 里也是),可能凑成连携;其余契约不改连携状态 */
+  else return [];
+  const after=SYNERGIES.filter(syn=>{try{return syn.cond(sim);}catch(e){return false;}});
+  return after.filter(syn=>!before.has(syn.id));
+}
+function cardSynPreviewHTML(c){
+  const hit=cardSynTrigger(c); if(!hit.length) return '';
+  const names=hit.map(x=>iconHTML('syn',x.id,x.icon)+x.name).join('、');
+  return '<div class="syn-prev">⚡ 触发连携 '+names+'</div>';
 }
 
 /* ============ 敌人定义 ============ */
@@ -6748,9 +6774,10 @@ function buildCards(){
     for(const c of opts){
       const wrap=document.createElement('div'); wrap.style.cssText='position:relative;display:flex;';
       const el=document.createElement('button'); el.style.flex='1';
-      el.className='card r'+(c.dispRar||c.rar);
+      const _sp=cardSynPreviewHTML(c);   /* 选牌预示:算一次,复用于边框高亮 + 卡面提示行 */
+      el.className='card r'+(c.dispRar||c.rar)+(_sp?' syn-ready':'');
       el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">'+c.name+cardKindBadge(c)+
-        '</div><div class="cd">'+c.desc+'</div>'+cardTipHTML(c)+'</div><div class="cr">'+['','普通','稀有','史诗'][c.dispRar||c.rar]+'</div>';
+        '</div><div class="cd">'+c.desc+'</div>'+cardTipHTML(c)+_sp+'</div><div class="cr">'+['','普通','稀有','史诗'][c.dispRar||c.rar]+'</div>';
       el.onclick=()=>{ S.card(); applyCard(c);
         $('cards').classList.add('hidden');
         if(shopWave(waveNum)){ openShop(); }
@@ -6809,7 +6836,7 @@ function renderShopItems(){
     const el=document.createElement('button'); el.style.flex='1';
     if(c._bought){ el.className='card r1 dis'; el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">已购入 · '+c.name+'</div></div>'; }
     else if(slotFull){ el.className='card r1 dis'; el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">法术槽已满 · 先卖出</div></div>'; }
-    else { el.className='card r'+(c.dispRar||c.rar); el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">'+c.name+cardKindBadge(c)+'</div><div class="cd">'+c.desc+'</div>'+cardTipHTML(c)+'</div><div class="cr">'+price+'💰</div>'; }
+    else { const _sp=cardSynPreviewHTML(c); el.className='card r'+(c.dispRar||c.rar)+(_sp?' syn-ready':''); el.innerHTML='<div class="cic">'+cardIcon(c)+'</div><div class="ctx"><div class="cn">'+c.name+cardKindBadge(c)+'</div><div class="cd">'+c.desc+'</div>'+cardTipHTML(c)+_sp+'</div><div class="cr">'+price+'💰</div>'; }
     el.onclick=()=>{
       if(c._bought)return;
       if(c.kind==='spell'&&!player.spells[c.id]&&ownedSpellCount()>=spellSlotMax()){ S.no(); return; }
