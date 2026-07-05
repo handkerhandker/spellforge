@@ -608,6 +608,15 @@
   <button class="btn ghost" id="relicSkipBtn" style="margin-top:12px;padding:8px 22px;font-size:12px;opacity:.62;color:#b9b0d8;">🚫 放弃本次（不选）</button>
 </div>
 
+<!-- 山海奇遇(v104.28):波间随机遭遇 · 每个抉择都是取舍 · 永远可「离开」 -->
+<div id="event" class="overlay hidden">
+  <div class="eyebrow" style="color:#7fe0c0;">✦ 山海奇遇 ✦</div>
+  <div id="evtIcon" style="width:72px;height:72px;margin:2px auto 6px;"></div>
+  <h1 class="title" id="evtTitle" style="font-size:27px;"></h1>
+  <div class="sub" id="evtDesc" style="font-size:12.5px;letter-spacing:.05em;line-height:1.85;max-width:330px;white-space:normal;"></div>
+  <div id="evtRow" style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:330px;margin-top:14px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px;"></div>
+</div>
+
 <div id="inherit" class="overlay hidden">
   <div class="eyebrow" style="color:#ffd24d;">✦ 遗物传承 ✦</div>
   <h1 class="title" style="font-size:30px;">传承一件遗物</h1>
@@ -670,6 +679,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
+<div class="cl-v"><div class="cl-h maj">v104.28 · 2026-07-05</div><div class="cl-i">🏮 <b>全新系统「山海奇遇」· 波间随机遭遇</b>:从此每一局都不太一样——清完一波,偶尔会有奇人异事拦路:<b>云中仙翁</b>赠丹(回满血,还是转赠换金币?)、<b>古祠献祭</b>(割舍生命上限换一件遗物)、<b>地肺温泉</b>(泡一泡上限+15)、<b>妖狐赌局</b>(押 50 金五五开,赢了 120、输了打水漂)、<b>荒冢古剑</b>(拔剑白得一张诅咒契约——力与咒同来)、<b>鬼市商人</b>(以血易宝)、<b>息壤一撮</b>(白得一级疾风之靴)。<b>每个抉择都是取舍,而且永远可以「拱手离去」</b>——不强迫任何交易。奇遇第 3 波起现身、每局最多 3 次、Boss 波不出;<b>每日挑战与试炼场不出</b>(保持全员同种子的公平)。所有奖励都走现有系统,不改任何敌人数值。手柄/键盘/触屏都能操作。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.27 · 2026-07-05</div><div class="cl-i">⚔ <b>全新系统「进阶试炼」· 一条能往上爬的难度阶梯</b>:打穿弑神之后,不再是终点——<b>进阶试炼</b>在弑神之上再接一条阶梯,<b>每爬一层叠加一条「改变打法」的新规则</b>(不是数字更大,是玩法质变),而且层层累积。① 磐石之躯(血量+30%)→ ② 群英并起(精英/词缀大增)→ ③ 瘴疠之地(接触中毒)→ ④ 疗愈枯竭(回血减半)→ ⑤ 疾风怒潮(移速+30%)→ ⑥ 百物腾贵(商店翻倍)→ ⑦ 白刃加身(伤害+30%)→ ⑧ 群魔终宴(首领多一尊)。所以<b>进阶 8 = 前 8 条规则同时生效</b>,是一座真正要爬很久的山。<b>每一层都有独立英雄榜</b>——"我 A8 通关"是实打实的炫耀资本;弑神为底=关闭养成加成=纯拼构筑与技术。<b>解锁</b>:弑神通关(打赢第 15 波、见到通关页)开启进阶 1;通关进阶 N 解锁进阶 N+1。此前已经通关过弑神的老玩家,更新后<b>自动解锁</b>进阶入口(凭「屠神」成就 / 弑神战绩识别),无需重通。进阶层越高、灵晶结算越丰。难度选择界面弑神之后会出现进阶层入口。(每层规则会逼你重新审视手里所有皮肤法术、把老内容重新玩出新花样;纯附加轨道,普通/弑神榜一动不动)</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.26 · 2026-07-05</div><div class="cl-i">🌿 <b>全新机制型角色「神农」· 尝百草赌吉凶</b>:药祖炎帝神农,一生尝尽百草辨药毒。选他出战,<b>每一波开战都会尝一株随机异草</b>,当波即刻生效——可能是<b>良药强身</b>(灵芝伤害 +40%、薄荷攻速 +33%、人参回满生命+减伤、茯苓受伤 −30%、三七击杀回血),也可能是<b>双刃奇药</b>(曼陀罗 +2 发投射但弹道散乱、附子伤害 +60% 但受伤 +40%),更可能是<b>毒草伤身</b>(断肠草伤害 −35%、藜芦攻速 −26%)。草药效果只作用当波,下一波重新抽——<b>每一波都不知道是福是祸</b>,是高波动、险中求真的赌命流派。屏幕左上常驻显示当前所尝之草(<b>绿吉 / 红凶 / 黄兼</b>),整波心里有数。药祖形象:阔叶斗笠、赭绿草木袍、腰悬药葫芦、白须飘然。<b>灵晶解锁</b>(✦300)。(与其它角色同管线的纯角色机制,不改任何既有数值;异草概率后续可微调)</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.25 · 2026-07-05</div><div class="cl-i">🐆 <b>全新宝怪「狡」· 见则大穰</b>:山海经玉山之兽,状如犬而豹纹、头生牛角。它会<b>罕见地在战斗中现身</b>(约每八波一遇、Boss 波除外),<b>不攻击、只顾逃窜</b>,头顶亮着一圈<b>金色遁走倒计时</b>——趁它遁走前<b>追上或射杀</b>,它便<b>爆开「大穰」金币大赏</b>:一地金币喷泉 + 两颗红心 + 满屏金光欢呼。远程流可以直接点它,近战流得抢角落把它堵住;倒计时归零它就溜之大吉、什么都不留。这是一个专为「高峰时刻」设计的小惊喜——打破常规波次节奏,给你一个值得为之一搏的追逐瞬间。(每日挑战为保持公平不出现;纯附加奖励,不改任何既有数值)</div></div>
@@ -981,15 +991,22 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.27', APP_TIME='2026-07-05 18:00';
+const APP_VER='v104.28', APP_TIME='2026-07-05 20:00';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.27';
+const APP_NOTIFY_VER='v104.28';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
   ui_jiao: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 Q10 12 13 6 Q22 12 24 22 Z" fill="#efe4c8" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M44 20 Q54 12 51 6 Q42 12 40 22 Z" fill="#efe4c8" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M16 30 Q14 20 24 18 L40 18 Q50 20 48 30 Q49 44 40 52 Q32 58 24 52 Q15 44 16 30 Z" fill="#f0b83c" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M15 27 Q9 26 10 33 Q11 38 17 36 Z" fill="#d69a1f" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><path d="M49 27 Q55 26 54 33 Q53 38 47 36 Z" fill="#d69a1f" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="23" cy="32" r="3.6" fill="#fff"/><circle cx="41" cy="32" r="3.6" fill="#fff"/><circle cx="23.6" cy="32.6" r="1.9" fill="#241636"/><circle cx="41.6" cy="32.6" r="1.9" fill="#241636"/><ellipse cx="32" cy="42" rx="4.4" ry="3" fill="#7a4a10" stroke="#241636" stroke-width="2.4"/><circle cx="32" cy="40.4" r="1.5" fill="#241636"/><circle cx="27" cy="45" r="2.3" fill="#2c0a04" opacity=".38"/><circle cx="38" cy="46" r="1.9" fill="#2c0a04" opacity=".38"/><circle cx="22" cy="42" r="1.7" fill="#2c0a04" opacity=".38"/><path d="M52 12 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 Z" fill="#fff4c8" stroke="#241636" stroke-width="1.3" stroke-linejoin="round"/></svg>',
   /* 神农·尝百草(v104.26):药葫芦+叶,用于「尝百草」播报与 HUD 指示 */
+  evt_xianweng: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M12 47 Q9 47 9 44 Q9 41 12 41 Q13 37 18 37 Q20 33 25 34 Q29 34 30 38 Q34 38 34 42 Q34 47 29 47 Z" fill="#e9dcff" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M32 26 C32 21 36 17 40 17 C36 15 36 10 40 8 C46 6 52 10 52 16 C52 19 50 21 48 22 C52 24 54 28 54 33 C54 41 48 47 41 47 C34 47 29 41 29 34 C29 30 30 27 32 26 Z" fill="#ffcf5a" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M36 12 L45 9" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M44 6 L47 12" stroke="#e5566a" stroke-width="3" stroke-linecap="round"/><path d="M35 30 C34 34 35 39 38 42" fill="none" stroke="#fff0c0" stroke-width="2.6" stroke-linecap="round" opacity=".85"/><circle cx="46" cy="14" r="1.8" fill="#fff" opacity=".8"/></svg>',
+  evt_gusi: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M8 22 L32 9 L56 22 L52 27 L12 27 Z" fill="#8a86a8" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><rect x="14" y="27" width="7" height="26" fill="#a6a2c4" stroke="#241636" stroke-width="2.8"/><rect x="43" y="27" width="7" height="26" fill="#a6a2c4" stroke="#241636" stroke-width="2.8"/><rect x="24" y="30" width="16" height="23" rx="1.5" fill="#2c1a4d" stroke="#241636" stroke-width="2.8"/><ellipse cx="32" cy="44" rx="3.4" ry="4.6" fill="#ff9a3c"/><ellipse cx="32" cy="42.6" rx="1.6" ry="2.4" fill="#ffe14d"/><rect x="10" y="53" width="44" height="4.5" rx="2" fill="#6f6a90" stroke="#241636" stroke-width="2.6"/><circle cx="18" cy="24" r="1.7" fill="#e9dcff" opacity=".6"/></svg>',
+  evt_wenquan: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M22 12 C19 16 23 18 21 22 M32 9 C29 13 33 15 31 19 M42 12 C39 16 43 18 41 22" fill="none" stroke="#dfe6f0" stroke-width="2.8" stroke-linecap="round" opacity=".9"/><ellipse cx="32" cy="38" rx="23" ry="12" fill="#7ec8e8" stroke="#241636" stroke-width="3"/><path d="M14 36 Q22 32 32 36 Q42 40 50 36" fill="none" stroke="#cdeeff" stroke-width="2.6" stroke-linecap="round" opacity=".85"/><path d="M9 42 Q6 46 10 49 Q16 53 26 54 M55 42 Q58 46 54 49 Q48 53 38 54" fill="none" stroke="#8a86a8" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="41" r="1.8" fill="#eef7ff" opacity=".8"/></svg>',
+  evt_hujia: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 14 L24 21 L20 29 Z" fill="#ff7a1a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M50 14 L40 21 L44 29 Z" fill="#ff7a1a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 12 C44 12 52 20 52 30 C52 42 44 52 32 55 C20 52 12 42 12 30 C12 20 20 12 32 12 Z" fill="#fff4e6" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M12 30 C16 26 22 25 26 28 M52 30 C48 26 42 25 38 28" fill="none" stroke="#ff7a1a" stroke-width="3.2" stroke-linecap="round"/><path d="M20 36 L28 38 M44 36 L36 38" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M32 42 L29 46 L32 48 L35 46 Z" fill="#ff7a1a" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="24" cy="20" r="1.6" fill="#fff" opacity=".9"/></svg>',
+  evt_jianzhong: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M8 53 Q14 42 24 40 Q40 37 56 53 Z" fill="#7a6a50" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M28 17 L36 17 L34 44 L30 44 Z" fill="#c9d2e0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 19 L31.4 41" stroke="#eef2f8" stroke-width="1.6" stroke-linecap="round"/><rect x="29.5" y="7" width="5" height="6" rx="1.5" fill="#8a5a32" stroke="#241636" stroke-width="2.6"/><path d="M23 15 L41 15" stroke="#241636" stroke-width="4.6" stroke-linecap="round"/><path d="M23 15 L41 15" stroke="#d99a2a" stroke-width="2.4" stroke-linecap="round"/><path d="M37 17 L48 20 L46 32 L38 30 Z" fill="#f5efe0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M42 21 L43.5 27 M44.5 22 L41 26" stroke="#b0203a" stroke-width="2" stroke-linecap="round"/><path d="M14 49 Q18 45 24 45 M42 47 Q48 46 52 50" fill="none" stroke="#5c4e3a" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="46" r="1.5" fill="#a89678" opacity=".8"/></svg>',
+  evt_guishi: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M17 55 C15 38 20 24 32 22 C44 24 49 38 47 55 Z" fill="#3a2c60" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M23 33 C26 29 38 29 41 33 C40 40 24 40 23 33 Z" fill="#1c1230" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><circle cx="28" cy="34" r="1.8" fill="#7fe0c0"/><circle cx="36" cy="34" r="1.8" fill="#7fe0c0"/><path d="M50 30 L50 20" stroke="#241636" stroke-width="2.8" stroke-linecap="round"/><path d="M46 20 Q50 13 54 20 Q54 27 50 29 Q46 27 46 20 Z" fill="#3ec6a0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><ellipse cx="50" cy="22.5" rx="1.7" ry="2.6" fill="#d8fff2"/><path d="M22 44 C24 47 40 47 42 44" fill="none" stroke="#241636" stroke-width="2.2" stroke-linecap="round" opacity=".6"/><circle cx="26" cy="27" r="1.5" fill="#8f7fc0" opacity=".7"/></svg>',
+  evt_xirang: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 34 C30 28 33 23 32 18 M32 34 C35 30 34 25 37 22" fill="none" stroke="#3f8f4f" stroke-width="3" stroke-linecap="round"/><path d="M32 18 C27 18 25 13 27 9 C32 9 35 12 32 18 Z" fill="#6fce7e" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M37 22 C41 23 45 20 45 15 C40 14 36 17 37 22 Z" fill="#8fdc6a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 48 C13 39 21 33 32 33 C43 33 51 39 51 48 C51 53 46 56 32 56 C18 56 13 53 13 48 Z" fill="#a8734a" stroke="#241636" stroke-width="3" stroke-linejoin="round"/><path d="M20 42 Q24 39 29 40 M37 46 Q42 44 46 47" fill="none" stroke="#7d5231" stroke-width="2.6" stroke-linecap="round"/><circle cx="23" cy="49" r="1.8" fill="#c99a6e" opacity=".85"/><circle cx="41" cy="39" r="1.5" fill="#c99a6e" opacity=".7"/></svg>',
   ui_asc: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g stroke="#241636" stroke-width="2.8" stroke-linejoin="round"><rect x="9" y="44" width="14" height="11" rx="1.5" fill="#e0a84a"/><rect x="21" y="34" width="14" height="21" rx="1.5" fill="#ecc26a"/><rect x="33" y="22" width="14" height="33" rx="1.5" fill="#f5d98a"/></g><path d="M40 17 L47 10 L54 17 M47 10 L47 27" fill="none" stroke="#241636" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="48.5" r="1.8" fill="#fff" opacity=".6"/></svg>',
   ui_herb: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="28" y="7" width="8" height="8" rx="2" fill="#7a4a10" stroke="#241636" stroke-width="2.6"/><path d="M39 13 Q55 9 57 23 Q43 25 39 13 Z" fill="#6faa4a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M42 16 L53 20" stroke="#3a6a2a" stroke-width="1.8" stroke-linecap="round"/><circle cx="32" cy="25" r="10" fill="#d99a3c" stroke="#241636" stroke-width="3"/><circle cx="32" cy="45" r="15" fill="#e0a84a" stroke="#241636" stroke-width="3"/><ellipse cx="26" cy="41" rx="3.4" ry="5.2" fill="#ffe0a0" opacity=".7"/></svg>',
   /* 协同(synergy)图标——构筑条 line3,补齐后战斗界面全 SVG */
@@ -1991,6 +2008,67 @@ const ENDLESS_MODS=[
   {id:'venom', icon:'☢️',name:'剧毒潮',desc:'敌人接触使你中毒',apply:m=>m.contactPoison=true}
 ];
 
+/* ============ 山海奇遇(v104.28):波间随机遭遇事件 ============
+   每个事件 2~3 个抉择、全是取舍、永远有「离开」保底。效果只走现有系统(金币/heal/上限/rollRelics+addRelic/player.mods/applyCard 契约卡),不碰任何敌人数值=护榜安全。
+   触发:非 Boss 波清完、第 3 波起、每局最多 3 次、两次间隔 ≥3 波、概率 0.22;每日挑战/沙盒不出(保种子确定性)。choices 是函数=构建时动态算金额/禁用态。 */
+function _evGold(base){ return base + waveNum*2; }   /* 金额随波数缓涨 */
+const EVENTS=[
+ {id:'xianweng',name:'云中仙翁',
+  desc:'白鹿驮着一位鹤发仙翁自云间落下。他笑指腰间葫芦:「小友杀气缠身,可要一粒九转金丹?」',
+  choices:()=>[
+   {t:'服下金丹',s:'生命全部回满',f:()=>{ heal(player.maxhp); return '丹香入腹,暖流涌遍四肢——伤势尽愈。'; }},
+   {t:'转赠鹿童',s:'+'+_evGold(35)+' 金币',f:()=>{ const g=_evGold(35); coins+=g; S.coin(); return '仙翁抚须大笑,鹿童奉上 '+g+' 金币谢礼。'; }},
+   {t:'拱手作别',s:'',leave:true}
+  ]},
+ {id:'gusi',name:'古祠献祭',
+  desc:'荒草间立着一座无名古祠,神像早已风化,唯石案上的凹槽泛着幽光——像是在等一捧血。',
+  choices:()=>[
+   {t:'献祭精血',s:'生命上限 −12 ▸ 随机获得一件遗物',dis:player.maxhp-12<40,f:()=>{ player.maxhp-=12; player.hp=Math.min(player.hp,player.maxhp);
+      const rs=rollRelics(1); if(rs.length){ addRelic(rs[0]); return '神像双目骤亮,石案裂开——【'+rs[0].name+'】浮出。'; }
+      const g=_evGold(90); coins+=g; return '遗物已尽归你手,神明改赐 '+g+' 金币。'; }},
+   {t:'不敢惊扰',s:'',leave:true}
+  ]},
+ {id:'wenquan',name:'地肺温泉',
+  desc:'山坳里一汪碧泉咕嘟冒泡,白雾带着药香。传闻地肺之水最养筋骨,也有方士高价收购。',
+  choices:()=>[
+   {t:'入汤沐浴',s:'生命上限 +15,并回复 15',f:()=>{ player.maxhp+=15; heal(15); return '泉水浸润,筋骨舒张——你觉得更耐打了。'; }},
+   {t:'汲水售商',s:'+'+_evGold(45)+' 金币',f:()=>{ const g=_evGold(45); coins+=g; S.coin(); return '一葫芦泉水换得 '+g+' 金币。'; }},
+   {t:'继续赶路',s:'',leave:true}
+  ]},
+ {id:'hujia',name:'妖狐赌局',
+  desc:'一只戴着面具的九尾狐盘坐树下,爪边摆着骰盅:「押五十,五五之数——赢了翻倍有余,输了莫哭。」',
+  choices:()=>[
+   {t:'押上 50 金币',s:'一半概率得 120 · 一半血本无归',dis:coins<50,f:()=>{ coins-=50;
+      if(Math.random()<.5){ coins+=120; S.coin(); return '狐火一闪,骰开满堂红——你赢了!+120 金币。'; }
+      return '狐狸嘻嘻一笑,你的金币化作青烟散了。'; }},
+   {t:'不赌,离开',s:'',leave:true}
+  ]},
+ {id:'jianzhong',name:'荒冢古剑',
+  desc:'乱坟岗上插着一柄古剑,剑身缠满符纸,嗡嗡低鸣。碑上刻着:「拔剑者得力,亦承其咒。」',
+  choices:()=>[
+   {t:'拔出古剑',s:'随机获得一张未持有的诅咒契约(白得,但咒随力来)',f:()=>{ const pool=CARD_DEFS.filter(c=>c.kind==='curse'&&!(player.cc[c.id]>0));
+      if(pool.length){ const c=pool[Math.floor(Math.random()*pool.length)]; applyCard(c); return '剑鸣震野,符纸尽碎——【'+c.name+'】烙入掌心。'; }
+      const g=_evGold(60); coins+=g; return '冢中诸剑皆已认主,你在碑下拾得 '+g+' 金币。'; }},
+   {t:'绕道而行',s:'',leave:true}
+  ]},
+ {id:'guishi',name:'鬼市商人',
+  desc:'雾中亮起一盏青灯,兜帽商人压低声音:「鬼市不收金银,只收阳气——你出血,我出货。」',
+  choices:()=>[
+   {t:'以血易宝',s:'失去当前生命三成 ▸ 随机获得一件遗物',dis:player.hp<40,f:()=>{ const c1=Math.floor(player.hp*.3); player.hp=Math.max(1,player.hp-c1);
+      const rs=rollRelics(1); if(rs.length){ addRelic(rs[0]); return '商人收下血珠,递来【'+rs[0].name+'】。'; }
+      const g=_evGold(90); coins+=g; return '货架已空,商人退回 '+g+' 金币作赔。'; }},
+   {t:'以血换金',s:'失去当前生命一成半 ▸ +'+_evGold(55)+' 金币',dis:player.hp<25,f:()=>{ const c2=Math.floor(player.hp*.15); player.hp=Math.max(1,player.hp-c2); const g=_evGold(55); coins+=g; S.coin(); return '一滴血珠换得 '+g+' 金币,倒也划算。'; }},
+   {t:'转身离去',s:'',leave:true}
+  ]},
+ {id:'xirang',name:'息壤一撮',
+  desc:'路边土堆里露出一团会自己生长的神土——息壤!传说大禹曾以此治水,方士也愿出重金收购。',
+  choices:()=>[
+   {t:'埋于足下',s:'疾风之靴 +1(移动速度 +10%)',f:()=>{ if((player.mods.boots||0)<3){ player.mods.boots=(player.mods.boots||0)+1; return '神土没入土中,托着你足下生风。'; }
+      const g=_evGold(35); coins+=g; return '你已迅疾如风,神土无处可施——售得 '+g+' 金币。'; }},
+   {t:'售予方士',s:'+'+_evGold(35)+' 金币',f:()=>{ const g=_evGold(35); coins+=g; S.coin(); return '方士如获至宝,奉上 '+g+' 金币。'; }},
+   {t:'不动它,走',s:'',leave:true}
+  ]}
+];
 const BOSS_PALETTE=[
   {col:'#c06bff',name:'烛龙',  atkName:'睁眼昼闭夜'},
   {col:'#ff6bb3',name:'九尾狐',atkName:'魅惑心火'},
@@ -2412,6 +2490,7 @@ let deathCause=''; /* 本局致命一击来源(死亡结算页显示「被什么
 let deathBlowDmg=0; /* 致命一击的实际伤害值(扣血后,死亡结算页显示「这一下 -X」)*/
 let runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0}; /* 本局实际失血按来源累计(死亡结算页「失血来源」色条)*/
 let roundupT=0, waveStartKills=0, _skipEmod=false; /* 残怪围拢计时 / 开波击杀快照 / 续战恢复那波跳过加无尽修饰符 */
+let _evtCount=0, _evtLast=-9, _evSeen={}; /* 山海奇遇(v104.28):本局已遇次数 / 上次奇遇波数 / 已遇事件去重表 */
 let _runUnlocked=[], runTookHeart=false, runBoughtShop=false, _runDashed=false, _runMaxSpells=0, _runT=0, _playAcc=0; /* 本局成就追踪(需在 resetGame 前声明) */
 let lockedShop=[], shopOffers=[]; /* 商店锁定:lockedShop 存已锁卡片 id(换一批/换波保留、续战存档);shopOffers 当前在售 3 卡对象 */
 let endlessMods=[], modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -2650,7 +2729,7 @@ function resetGame(){
   player=newPlayer();
   { const _hm=metaHpMul(); if(_hm>1){ player.maxhp=Math.round(player.maxhp*_hm); player.hp=player.maxhp; } }
   enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; bossWarns=[]; beasts=[]; summonT=0; totems=[]; clones=[]; _synAnnounced=false; _qilinAnn=false;
-  pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; hurtFx=0; ultE=0; ultFireT=-1; ultWaves=[]; fissures=[]; marshes=[];
+  pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; _evtCount=0; _evtLast=-9; _evSeen={}; hurtFx=0; ultE=0; ultFireT=-1; ultWaves=[]; fissures=[]; marshes=[];
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false;
   runMaxComboTier=0; runMaxCombo=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runSpellDmg={}; runBossKills={}; runBossDmg={}; recentSpellDmg={}; runBiggestHit=0; runBiggestHitSpell=''; deathCause=''; deathBlowDmg=0; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -3002,7 +3081,7 @@ function launchSandbox(w){
   sandbox=true; sbGod=true;
   startWave(1); spawnQ.length=0; waveNum=1; state='play';   /* 起一波再清空刷怪队列:场上空着,自己召唤 */
   for(const _id in player.spells) markSpellSeen(_id);
-  ['menu','wandSel','paused','over','win','cards','shop','relic','daily','codex','bestiary','achv','changelog','wardrobe','altar','backup','tutorial','wandUnlock'].forEach(id=>{const e=$(id);if(e)e.classList.add('hidden');});
+  ['menu','wandSel','paused','over','win','cards','shop','relic','event','daily','codex','bestiary','achv','changelog','wardrobe','altar','backup','tutorial','wandUnlock'].forEach(id=>{const e=$(id);if(e)e.classList.add('hidden');});
   buildSbPanel();
   const tg=$('sbToggle'); if(tg)tg.classList.remove('hidden');
   const gc=$('sbGodChk'); if(gc)gc.checked=true;
@@ -7846,8 +7925,38 @@ function update(dt){
   }
 }
 /* 遗物选完 / 非 Boss 波 → 进入胜利或选卡 */
+function evtShouldRoll(){ return !sandbox && !dailyRun && waveNum>=3 && waveNum%5!==0 && _evtCount<3 && (waveNum-_evtLast)>=3 && Math.random()<0.22; }
+function buildEvent(){
+  const pool=EVENTS.filter(e=>!_evSeen[e.id]);
+  const list=pool.length?pool:EVENTS;
+  const ev=list[Math.floor(Math.random()*list.length)];
+  _evSeen[ev.id]=1; _evtCount++; _evtLast=waveNum;
+  $('evtTitle').textContent=ev.name;
+  $('evtDesc').textContent=ev.desc;
+  $('evtIcon').innerHTML=iconHTML('evt',ev.id,'✦');
+  const row=$('evtRow'); row.innerHTML='';
+  for(const ch of ev.choices()){
+    const b=document.createElement('button');
+    b.className='btn';
+    b.style.cssText='width:100%;box-sizing:border-box;padding:12px 16px;text-align:center;'+(ch.leave?'background:rgba(120,110,160,.22);box-shadow:none;opacity:.85;':'');
+    b.innerHTML='<b style="font-size:14.5px;letter-spacing:.05em;">'+(ch.leave?'🚶 ':'')+ch.t+'</b>'+(ch.s?'<span style="display:block;font-size:11.5px;font-weight:400;opacity:.82;margin-top:3px;letter-spacing:.03em;">'+ch.s+'</span>':'');
+    if(ch.dis){ b.disabled=true; b.style.opacity=.4; b.style.pointerEvents='none'; }
+    b.onclick=()=>{ if(ch.leave){ closeEvent(); return; } let r=''; try{ r=ch.f()||''; }catch(e){} try{S.card();}catch(e){} refreshEvtHUD(); renderEvtResult(r); };
+    row.appendChild(b);
+  }
+}
+function refreshEvtHUD(){ try{ if(player.hp>player.maxhp)player.hp=player.maxhp; }catch(e){} }
+function renderEvtResult(txt){
+  const row=$('evtRow'); row.innerHTML='<div style="color:#ffd9a6;font-size:13.5px;line-height:1.8;padding:8px 6px 4px;letter-spacing:.03em;">'+txt+'</div>';
+  const b=document.createElement('button'); b.className='btn';
+  b.style.cssText='width:100%;box-sizing:border-box;padding:12px 16px;margin-top:6px;';
+  b.innerHTML='<b>继续赶路</b>'; b.onclick=closeEvent;
+  row.appendChild(b);
+}
+function closeEvent(){ $('event').classList.add('hidden'); state='cards'; buildCards(); }
 function proceedAfterWave(){
   if(waveNum>=15&&!endless)victory();
+  else if(evtShouldRoll()){ state='event'; $('event').classList.remove('hidden'); buildEvent(); }
   else {state='cards';buildCards();}
 }
 function buildRelicChoice(){
@@ -11628,7 +11737,7 @@ function padFocusables(ov){
 }
 function padActiveOverlay(){
   /* 信息类浮层排在 'paused' 之前:暂停态叠开图鉴/异兽/成就等时,手柄应导航/关闭最上层的该浮层本身,而非误操作底下的暂停菜单(与键盘 ESC 经 topInfoOverlay 同理修) */
-  const ids=['lastReport','wardrobe','altar','backup','daily','loadout','codex','bestiary','achv','changelog','shareCard','settings','codexHub','paused','over','win','shop','wandUnlock','wandSel','cards','relic','inherit','tutorial','menu'];
+  const ids=['lastReport','wardrobe','altar','backup','daily','loadout','codex','bestiary','achv','changelog','shareCard','settings','codexHub','paused','over','win','shop','wandUnlock','wandSel','event','cards','relic','inherit','tutorial','menu'];
   for(const id of ids){ const el=$(id); if(el&&!el.classList.contains('hidden')) return el; }
   return null;
 }
@@ -11980,7 +12089,7 @@ function saveResume(){
     v:1, wave:waveNum, diff:difficulty,
     wand:(player.wand?player.wand.id:'apprentice'),
     spells:(()=>{const _o={};for(const _k in player.spells)if(!player.spells[_k]._stolen)_o[_k]=player.spells[_k];return _o;})(), mods:player.mods, cc:player.cc, curse:player.curse,
-    relics:player.relics, maxhp:player.maxhp, hp:player.hp, coins:coins,
+    relics:player.relics, maxhp:player.maxhp, hp:player.hp, coins:coins, evc:_evtCount, evw:_evtLast,
     kills:waveStartKills, took:runTookHeart, shop:runBoughtShop, mct:runMaxComboTier, mcc:runMaxCombo, lastb:runLastBoss, unl:_runUnlocked, lock:lockedShop,
     mk:runMobKills, md:runMobDmg, bk:runBossKills, bd:runBossDmg,
     sdmg:runSpellDmg, rsdmg:recentSpellDmg, rbh:runBiggestHit, rbhs:runBiggestHitSpell, dsrc:runDmgBySrc, rdash:_runDashed, rmsp:_runMaxSpells, rt:_runT,
@@ -12008,6 +12117,7 @@ function resumeRun(){
   const s=loadResume(); if(!s) return;
   applyDifficulty(s.diff);          /* 切到存档时的难度 */
   resetGame();                      /* 全新底子(顺带清空无尽/敌人/计时) */
+  _evtCount=s.evc||0; _evtLast=(typeof s.evw==='number')?s.evw:-9;   /* 山海奇遇计数还原(防续战重刷满 3 次) */
   applyWand(WANDS.find(x=>x.id===s.wand)||WANDS[0]);
   if(s.spells) player.spells=s.spells;   /* 还原法术(含等级) */
   if(s.mods)   player.mods=s.mods;        /* 还原符文 */
