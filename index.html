@@ -184,6 +184,15 @@
   .diff-pill[data-diff="3"].active{background-color:#6a72ff;background-image:linear-gradient(135deg,#7a5cff,#37a4ff);}
   .diff-pill[data-diff="4"].active{background-color:#f0851f;background-image:linear-gradient(135deg,#ff9a3c,#e0701a);}
   .diff-pill[data-diff="5"].active{background-color:#e23838;background-image:linear-gradient(135deg,#ff4d4d,#c81e1e);}
+  /* 进阶步进器(v104.39):进阶整族收成一个占位恒定的「◀ 进阶 N ▶」单元,不随解锁层数横向增长;金色=进阶既有视觉语言(对齐旧进阶药丸 #e0a84a/#ffd9a6) */
+  .asc-stepper{display:flex;gap:5px;justify-content:center;margin-top:5px;}
+  .asc-stepper .diff-pill{border-color:#7a5f33;color:#ffd9a6;flex:0 0 auto;}
+  .asc-arrow{width:46px;min-width:46px;max-width:46px;display:flex;align-items:center;justify-content:center;}
+  .asc-arrow svg{width:15px;height:15px;display:block;}
+  .asc-arrow:disabled{opacity:.32;cursor:default;}
+  .asc-cur{width:96px;min-width:96px;max-width:96px;}
+  .asc-cur.done{background:rgba(224,168,74,.14);}
+  .asc-cur.active{color:#fff;border-color:transparent;background-color:#c08a28;background-image:linear-gradient(135deg,#e8a83e,#b06f14);}
   .aim-pill{padding:6px 0;flex:1;min-width:50px;max-width:90px;border-radius:10px;border:1px solid #3b3370;background:linear-gradient(180deg,rgba(34,26,60,.55),rgba(17,12,36,.55));color:#9a8fd0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.04em;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s,color .12s,border-color .12s,box-shadow .12s;}
   .aim-pill.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,#2ea6b8,#1f8090);box-shadow:0 2px 12px rgba(0,0,0,.3);}
   .aim-pill.hide{display:none;}
@@ -416,6 +425,11 @@
       <button class="diff-pill" data-diff="3">入圣</button>
       <button class="diff-pill" data-diff="4">渡劫</button>
       <button class="diff-pill" data-diff="5">弑神</button>
+    </div>
+    <div id="ascRow" class="asc-stepper hidden">
+      <button id="ascPrev" class="diff-pill asc-arrow" aria-label="上一进阶层"><svg viewBox="0 0 64 64"><path d="M42 12 L20 32 L42 52 Z" fill="#ffd9a6" stroke="#241636" stroke-width="3" stroke-linejoin="round"/></svg></button>
+      <button id="ascCur" class="diff-pill asc-cur"></button>
+      <button id="ascNext" class="diff-pill asc-arrow" aria-label="下一进阶层"><svg viewBox="0 0 64 64"><path d="M22 12 L44 32 L22 52 Z" fill="#ffd9a6" stroke="#241636" stroke-width="3" stroke-linejoin="round"/></svg></button>
     </div>
     <div id="diffDesc" class="diff-desc"></div>
     <button class="btn" id="resumeRunBtn" style="margin-top:10px;display:none;width:100%;max-width:320px;box-sizing:border-box;padding:14px 18px;background:linear-gradient(135deg,#2ea36b,#46d196);box-shadow:0 6px 22px rgba(60,201,138,.42);"><svg class="ico-i" viewBox="0 0 64 64"><path d="M20 13 L49 32 L20 51 Z" fill="#eafff4" stroke="#241636" stroke-width="3" stroke-linejoin="round"/></svg> 继续上次战斗<span id="resumeRunSub" style="display:block;font-size:12px;font-weight:400;letter-spacing:.08em;opacity:.85;margin-top:3px;"></span></button>
@@ -698,7 +712,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
-<div class="cl-v"><div class="cl-h">v104.36 – v104.38 · 2026-07-06</div><div class="cl-i">⏸️ <b>修复:设置面板开着时误触暂停键,游戏会在面板背后偷偷开跑</b>:现在设置面板打开期间暂停键一律不响应(触屏/键盘/手柄同),点 ✕ 关闭面板后回到暂停界面,再由你亲自解除暂停——面板盖着战场时绝不会再白挨打。<br>🎚️ <b>修复:部分特效不随「特效」滑块减弱</b>:女魃旱域、守护图腾电弧、灼热射线此前不受「特效」滑块控制,现已全部接入,并统一口径——<b>滑块 0% 时你自己的特效完全不再显示</b>(旱地/电弧/射线与火海、毒云一致;<b>灼烤与减速照常生效</b>),敌方危险提示(红圈预警/敌弹/毒泽/灼池)<b>始终醒目、不受滑块影响</b>。(纯显示,不改任何伤害/范围/冷却)</div></div><div class="cl-v"><div class="cl-h maj">v104.35 · 2026-07-06</div><div class="cl-i">🏜️ <b>全新法术「女魃旱域」</b>:大荒女魃,衣青衣,所居不雨——每隔片刻,于<b>敌群最密之处</b>降下一片龟裂旱地,陷于其中的妖兽<b>持续受赤日灼烤、步履迟滞</b>(古神免滞、仍受灼);练高可同降多块旱地、贵在广布(数域相叠,灼烤不增)。</div></div><div class="cl-v"><div class="cl-h maj">v104.34 · 2026-07-06</div><div class="cl-i">🌋 <b>全新每周变异规则「炎火之山」· 首条战斗中持续搞事的规则</b>:炎火之山,投物辄燃——该周大地<b>时时灼裂喷薄</b>:红圈预警处地面轰然灼爆,留下灼池余焰,<b>敌我皆不可久立</b>。烈焰不长眼,把古神放风筝进火里烧也是本事。<b>下周一 0 点起进入全球轮换</b>,本周规则不受影响。</div></div><div class="cl-v"><div class="cl-h maj">v104.32 · 2026-07-06</div><div class="cl-i">🥁 <b>全新法术「夔皮战鼓」· 受袭自动反击</b>:黄帝杀夔,以其皮为鼓,橛以雷兽之骨,声闻五百里——全游戏首个<b>受击反击</b>法术:<b>被敌人击中的瞬间战鼓自鸣</b>,雷环震慑身边群妖(古神免震慑、仍受创),再放一枚雷音追殛打你的那只妖;<b>被闪避/护盾挡下的攻击同样擂鼓</b>,越扛越猛。<br>🥁 <b>新连携「闻鼓丧胆」</b>:夔皮战鼓 + 朱獳——雷音命中的妖兽闻鼓丧胆,惊惶溃逃。图鉴「法术连携」区可查。</div></div><div class="cl-v"><div class="cl-h maj">v104.31 · 2026-07-05</div><div class="cl-i">🦊 <b>全新法术「朱獳」· 惊惶溃逃</b>:耿山之兽,状如狐而鱼翼,见则其国有恐——放出朱獳之影,<b>命中的妖兽掉头溃逃、逃窜中不敢攻击</b>(古神免惊、仍受创)。被围死时轰一发开路,和飓风/黑洞的「聚」正好一收一放。<br>🐝 <b>新连携「衔尾逐北」</b>:朱獳 + 蜂群飞弹——蜂群衔尾追亡逐北,<b>惊惶溃逃中的妖兽受蜂群叮咬伤害 +35%</b>。图鉴「法术连携」区可查。</div></div>
+<div class="cl-v"><div class="cl-h">v104.36 – v104.39 · 2026-07-06</div><div class="cl-i">⚔ <b>难度选择排版改版</b>:进阶层不再一字排开挤压难度行——收成一个「◀ 进阶 N ▶」步进器,左右点选、位置恒定,已通关层照旧带 ✓;所选难度(含进阶层)现在会记住,下次进入仍是上次的选择。<br>⏸️ <b>修复:设置面板开着时误触暂停键,游戏会在面板背后偷偷开跑</b>:现在设置面板打开期间暂停键一律不响应(触屏/键盘/手柄同),点 ✕ 关闭面板后回到暂停界面,再由你亲自解除暂停——面板盖着战场时绝不会再白挨打。<br>🎚️ <b>修复:部分特效不随「特效」滑块减弱</b>:女魃旱域、守护图腾电弧、灼热射线此前不受「特效」滑块控制,现已全部接入,并统一口径——<b>滑块 0% 时你自己的特效完全不再显示</b>(旱地/电弧/射线与火海、毒云一致;<b>灼烤与减速照常生效</b>),敌方危险提示(红圈预警/敌弹/毒泽/灼池)<b>始终醒目、不受滑块影响</b>。(纯显示,不改任何伤害/范围/冷却)</div></div><div class="cl-v"><div class="cl-h maj">v104.35 · 2026-07-06</div><div class="cl-i">🏜️ <b>全新法术「女魃旱域」</b>:大荒女魃,衣青衣,所居不雨——每隔片刻,于<b>敌群最密之处</b>降下一片龟裂旱地,陷于其中的妖兽<b>持续受赤日灼烤、步履迟滞</b>(古神免滞、仍受灼);练高可同降多块旱地、贵在广布(数域相叠,灼烤不增)。</div></div><div class="cl-v"><div class="cl-h maj">v104.34 · 2026-07-06</div><div class="cl-i">🌋 <b>全新每周变异规则「炎火之山」· 首条战斗中持续搞事的规则</b>:炎火之山,投物辄燃——该周大地<b>时时灼裂喷薄</b>:红圈预警处地面轰然灼爆,留下灼池余焰,<b>敌我皆不可久立</b>。烈焰不长眼,把古神放风筝进火里烧也是本事。<b>下周一 0 点起进入全球轮换</b>,本周规则不受影响。</div></div><div class="cl-v"><div class="cl-h maj">v104.32 · 2026-07-06</div><div class="cl-i">🥁 <b>全新法术「夔皮战鼓」· 受袭自动反击</b>:黄帝杀夔,以其皮为鼓,橛以雷兽之骨,声闻五百里——全游戏首个<b>受击反击</b>法术:<b>被敌人击中的瞬间战鼓自鸣</b>,雷环震慑身边群妖(古神免震慑、仍受创),再放一枚雷音追殛打你的那只妖;<b>被闪避/护盾挡下的攻击同样擂鼓</b>,越扛越猛。<br>🥁 <b>新连携「闻鼓丧胆」</b>:夔皮战鼓 + 朱獳——雷音命中的妖兽闻鼓丧胆,惊惶溃逃。图鉴「法术连携」区可查。</div></div><div class="cl-v"><div class="cl-h maj">v104.31 · 2026-07-05</div><div class="cl-i">🦊 <b>全新法术「朱獳」· 惊惶溃逃</b>:耿山之兽,状如狐而鱼翼,见则其国有恐——放出朱獳之影,<b>命中的妖兽掉头溃逃、逃窜中不敢攻击</b>(古神免惊、仍受创)。被围死时轰一发开路,和飓风/黑洞的「聚」正好一收一放。<br>🐝 <b>新连携「衔尾逐北」</b>:朱獳 + 蜂群飞弹——蜂群衔尾追亡逐北,<b>惊惶溃逃中的妖兽受蜂群叮咬伤害 +35%</b>。图鉴「法术连携」区可查。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.30 · 2026-07-05</div><div class="cl-i">🧜 <b>全新机制型角色「鲛人」· 泣泪成珠</b>(灵晶 ✦300 解锁):南海水底之人,泣泪成珠。选她出战,<b>每次受到真实伤害,失血的 12% 会化作珍珠散落身周</b>——捡起即金币。挨的每一下都不再全是亏:<b>承伤=攒钱</b>,珍珠喂商店、装备滚雪球,催生「以血养财」的另类经济流派——与所有「躲伤害」的角色思路彻底相反。配套取舍:生命上限 +10、单发伤害 −12%(净值中性)。讲究:中毒的缓慢流血<b>不</b>泣珠(泪为剧痛而落)——顺带杜绝站毒里挂机刷珠;闪避 / 护盾挡下的攻击无泪不成珠。专属手绘立绘:银蓝长发、耳鳍鳞衣、眼角一颗泪珠、颈悬珠链;珍珠是独立的白珠造型、雪原沙漠都清晰。另:补齐<b>神农 / 祝融 / 句芒</b>的角色手绘头像(此前皮肤解锁弹窗显示的是系统 emoji)。(与其它角色同管线,不改任何既有数值;化珠比例为初版、将按真机体验微调)</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.29 · 2026-07-05</div><div class="cl-i">🌀 <b>全新模式「每周变异」· 每周一条新规则的全球擂台</b>:主菜单新增入口——<b>每周一换一条全局变异规则、持续七天、全球同一条</b>:双神降世(首领波成双)/仙市大集(商店半价)/群英荟萃(精英大增)/疾如奔雷(敌人+25%移速)/铜皮铁骨(敌人+35%血)/万妖来朝(刷怪+40%)/瘴雨蛮烟(接触中毒)/灵泉涌动(回血+50%)……<b>八条轮番、有凶有吉</b>,每周打开都有新玩法。<b>与每日挑战不同:法杖随便选</b>——整周可以换着流派刷、找本周规则下最强的构筑;难度固定入圣、<b>独立每周英雄榜</b>(每周一清零),还记你的<b>连续参战周数</b>与<b>上周冠军</b>荣誉位。一命冲榜、不可续战;战死可一键再战、继续挑战本周规则。规则<b>只在每周变异内生效</b>,普通/弑神/进阶/每日挑战一切照旧。另修复:<b>手机上选牌「触发连携」提示的图标异常放大、撑爆整张卡面</b>(样式此前只在横屏/电脑生效),连同一直没亮过的连携卡<b>青色高亮边</b>一并修复——现在全平台正常;并去掉与之重复的旧版「凑成『连携名』」提示,<b>同一连携只提示一条</b>、不再连说两遍(「✨ 可进化」与遗物卡提示保持原样)。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.28 · 2026-07-05</div><div class="cl-i">🏮 <b>全新系统「山海奇遇」· 波间随机遭遇</b>:从此每一局都不太一样——清完一波,偶尔会有奇人异事拦路:<b>云中仙翁</b>赠丹(回满血,还是转赠换金币?)、<b>古祠献祭</b>(割舍生命上限换一件遗物)、<b>地肺温泉</b>(泡一泡上限+15)、<b>妖狐赌局</b>(押 50 金五五开,赢了 120、输了打水漂)、<b>荒冢古剑</b>(拔剑白得一张诅咒契约——力与咒同来)、<b>鬼市商人</b>(以血易宝)、<b>息壤一撮</b>(白得一级疾风之靴)。<b>每个抉择都是取舍,而且永远可以「拱手离去」</b>——不强迫任何交易。奇遇第 3 波起现身、每局最多 3 次、Boss 波不出;<b>每日挑战不出</b>(保持全员同种子的公平)。所有奖励都走现有系统,不改任何敌人数值。手柄/键盘/触屏都能操作。</div></div>
@@ -1014,10 +1028,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.38', APP_TIME='2026-07-06 18:32';
+const APP_VER='v104.39', APP_TIME='2026-07-06 19:40';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.38';
+const APP_NOTIFY_VER='v104.39';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
@@ -2559,11 +2573,11 @@ const DIFFICULTIES=[
   {id:5,name:'弑神',sub:'噩梦',desc:'为冲榜而生 · 后期极度致命',         hpM:2.10,dmgM:1.95,spawnM:1.50,eHp:1.13,eDmg:1.11,gemM:2.2}
 ];
 let difficulty=3; /* 选中的难度档(影响敌人 + 榜单);默认入圣 */
-let ascLevel=0; /* 进阶试炼层数(v104.27):0=普通难度;>0=以弑神为底、逐层叠加规则的进阶阶梯,独立榜(boardDiff=100+层)。不持久化,每次回菜单默认 0。 */
+let ascLevel=0; /* 进阶试炼层数(v104.27):0=普通难度;>0=以弑神为底、逐层叠加规则的进阶阶梯,独立榜(boardDiff=100+层)。v104.39 起选层持久化(sf_asc,与 sf_diff 同链路启动恢复);每日/每周开局仍先归零(不叠规则),归零只改运行态、不动持久化选层。 */
 let sandbox=false, sbGod=true;   /* 🧪 试炼场(沙盒测试):sandbox=true 时本局不上榜/不计成就/不记纪录/不发灵晶;sbGod=无敌 */
 let diffMul={hpM:1.18,dmgM:1.15,spawnM:1.06,eHp:1.10,eDmg:1.085,gemM:1.25,nm:false}; /* 当前生效的倍率;nm=弑神(噩梦)质变开关;gemM=该难度灵晶结算系数 */
 function setDiffMul(lv){ const d=DIFFICULTIES[clamp(lv,1,5)-1]; diffMul={hpM:d.hpM,dmgM:d.dmgM,spawnM:d.spawnM,eHp:d.eHp,eDmg:d.eDmg,gemM:d.gemM,nm:d.id===5, spdM:1,eliteBonus:0,contactPoison:false,healMul:1,shopMul:1,bossPlus:0}; if(ascLevel>0)applyAscension(diffMul,ascLevel); }
-function applyDifficulty(lv){ ascLevel=0; difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);}catch(e){} }
+function applyDifficulty(lv){ ascLevel=0; difficulty=clamp(lv,1,5); setDiffMul(difficulty); try{localStorage.setItem('sf_diff',difficulty);localStorage.setItem('sf_asc','0');}catch(e){} }   /* v104.39:选基础难度即清持久化的进阶选层(sf_asc 与 sf_diff 同链路) */
 function diffData(){ return DIFFICULTIES[difficulty-1]; }
 /* ═══ 进阶试炼(v104.27):以弑神为底,一层层解锁、每层叠加一条「改变打法」的新规则(质变≠量变)。每层独立榜(boardDiff=100+层,复用现有按难度分榜的查询、不碰 Supabase);弑神底=nm→关闭 meta 养成加成=纯技术榜;进阶给更高灵晶结算。规则全部落在稳定的 diffMul(不碰无尽随机修饰的 modMult)。解锁:弑神通关(打赢第15波·见到通关页,判定在 victory())开启进阶1;通关进阶N解锁进阶N+1。护榜:纯附加轨道,普通/弑神榜一动不动。 ═══ */
 const ASCENSIONS=[
@@ -2688,7 +2702,7 @@ function refreshRenown(){ const b=document.getElementById('renownBadge'); if(!b)
    (刻意不打包:sf_resume 续局=设备会话态、sf_daily_<日期> 当日临时、sf_last_report 展示缓存、sf_seen_ver 换机弹一次更新说明反而合适)
    旧码兼容:genBackup 只打包当下 BK_KEYS;applyBackup 遍历 BK_KEYS 时,旧码里没有的新键值=undefined,
    两个分支(string→写入 / null→删除)都不命中 → 自动跳过、保留目标机当前设置 → 旧备份码永不失效,无需升 SF1/v1 版本。 */
-const BK_KEYS=['sf_meta','sf_profile','sf_name','sf_aim','sf_diff','sf_fx','sf_sellconfirm','sf_powersave','sf_dual','sf_fixed','sf_padmode','sf_spellbar','sf_hpbar','sf_gfxq','sf_wandbest','sf_pb_1','sf_pb_2','sf_pb_3','sf_pb_4','sf_pb_5','sf_pb_101','sf_pb_102','sf_pb_103','sf_pb_104','sf_pb_105','sf_pb_106','sf_pb_107','sf_pb_108','sf_daily_streak','sf_weekly_streak','sf_bgm','sf_tut_seen','sf_chase'];
+const BK_KEYS=['sf_meta','sf_profile','sf_name','sf_aim','sf_diff','sf_asc','sf_fx','sf_sellconfirm','sf_powersave','sf_dual','sf_fixed','sf_padmode','sf_spellbar','sf_hpbar','sf_gfxq','sf_wandbest','sf_pb_1','sf_pb_2','sf_pb_3','sf_pb_4','sf_pb_5','sf_pb_101','sf_pb_102','sf_pb_103','sf_pb_104','sf_pb_105','sf_pb_106','sf_pb_107','sf_pb_108','sf_daily_streak','sf_weekly_streak','sf_bgm','sf_tut_seen','sf_chase'];
 let _bkConfirm=false;
 function genBackup(){
   const obj={v:1}; for(const k of BK_KEYS) obj[k]=localStorage.getItem(k);
@@ -12324,27 +12338,32 @@ function loadMenuBoard(period){
   fetchLeaderboard(period).then(b=>renderBoard($('menuBoard'),b));
 }
 document.querySelectorAll('#lbTabs .lb-tab').forEach(t=>t.onclick=()=>loadMenuBoard(t.dataset.period));
-function setAscension(lv){ ascLevel=clamp(lv,1,ascCap()); difficulty=5; setDiffMul(5); }   /* 进阶:以弑神为底(不改存的 sf_diff) */
-function renderAscPills(){
-  const sel=document.getElementById('diffSel'); if(!sel)return;
-  sel.querySelectorAll('.asc-pill').forEach(p=>p.remove());
-  if(!META.ngWin) return;                                   /* 弑神通关前不显示进阶入口 */
+function setAscension(lv){ ascLevel=clamp(lv,1,ascCap()); difficulty=5; setDiffMul(5); try{localStorage.setItem('sf_asc',String(ascLevel));}catch(e){} }   /* 进阶:以弑神为底(不改存的 sf_diff);v104.39 选层持久化 sf_asc,与 sf_diff 同链路恢复 */
+/* v104.39 进阶步进器:进阶整族收成一个占位恒定的「◀ 进阶 N ▶」单元(替代随解锁层数无限增长的横排药丸)。
+   ascView=步进器当前显示层(选基础难度时保留浏览位);切换范围 1~ascPlayable()(未解锁层不出现,解锁判定复用旧药丸同款);
+   边界箭头 disabled:手柄 padFocusables 天然跳过 disabled、键盘 Tab 原生跳过、触屏点击无效=三输入同治。 */
+let ascView=1;
+function ascSelect(lv){ setAscension(clamp(lv,1,ascPlayable())); refreshDiffUI(); loadMenuBoard(curPeriod); }
+function renderAscStepper(){
+  const row=$('ascRow'); if(!row)return;
+  if(!META.ngWin){ row.classList.add('hidden'); return; }   /* 弑神通关前不显示进阶入口 */
+  row.classList.remove('hidden');
   const cap=ascPlayable();
-  for(let lv=1; lv<=cap; lv++){
-    const done=lv<=(META.ascMax||0);
-    const b=document.createElement('button');
-    b.className='diff-pill asc-pill'; b.dataset.asc=lv;
-    b.innerHTML=(done?'✓':'')+'进阶'+lv;
-    b.style.cssText='border-color:#e0a84a;color:#ffd9a6;'+(done?'background:rgba(224,168,74,.14);':'');
-    b.onclick=()=>{ setAscension(lv); refreshDiffUI(); loadMenuBoard(curPeriod); };
-    sel.appendChild(b);
-  }
+  ascView=clamp(ascLevel>0?ascLevel:ascView,1,cap);
+  const done=ascView<=(META.ascMax||0), cur=$('ascCur');
+  cur.textContent=(done?'✓':'')+'进阶'+ascView;   /* 已通关 ✓ 前缀=旧进阶药丸同一视觉语言 */
+  cur.classList.toggle('done',done);
+  cur.classList.toggle('active', ascLevel>0 && ascLevel===ascView);
+  $('ascPrev').disabled=(ascView<=1);
+  $('ascNext').disabled=(ascView>=cap);
 }
+$('ascPrev').onclick=()=>{ ascSelect(ascView-1); };
+$('ascNext').onclick=()=>{ ascSelect(ascView+1); };
+$('ascCur').onclick=()=>{ ascSelect(ascView); };
 function refreshDiffUI(){
-  renderAscPills();
+  renderAscStepper();
   document.querySelectorAll('#diffSel .diff-pill').forEach(p=>{
-    if(p.dataset.asc) p.classList.toggle('active', ascLevel>0 && +p.dataset.asc===ascLevel);
-    else p.classList.toggle('active', ascLevel===0 && +p.dataset.diff===difficulty);
+    p.classList.toggle('active', ascLevel===0 && +p.dataset.diff===difficulty);
   });
   if(ascLevel>0){
     const rules=ASCENSIONS.slice(0,ascLevel).map(x=>'第'+x.n+'层 · '+x.rule).join('<br>');
@@ -12488,7 +12507,9 @@ try{ const sv=parseInt(localStorage.getItem('sf_diff')); if(sv>=1&&sv<=5){ diffi
 loadMeta(); refreshLj();
 /* v104.27 老存档迁移:更新前已通关过弑神的玩家(「屠神」成就在 victory() 内 difficulty>=5 必发;或弑神个人最佳 ≥16 波=进过无尽,均为铁证)→ 自动点亮进阶入口,无需重通一遍 */
 if(!META.ngWin){ try{ const _pb5=getRunPB(5); if(hasAch('godslayer')||(_pb5&&_pb5.wave>=16)){ META.ngWin=true; saveMeta(); } }catch(e){} }
-refreshDiffUI();   /* v104.27:须在 loadMeta 之后——首屏渲染进阶药丸要读 META.ngWin/ascMax */
+/* v104.39 进阶选层持久化恢复:与 sf_diff 同链路(刷新/下次进入仍为上次选择)。须在 loadMeta 与老存档迁移之后——钳制到当前已解锁最高可挑战层;未通弑神(无进阶入口)则忽略 */
+try{ const av=parseInt(localStorage.getItem('sf_asc')); if(av>=1&&META.ngWin){ setAscension(Math.min(av,ascPlayable())); } }catch(e){}
+refreshDiffUI();   /* v104.27:须在 loadMeta 之后——首屏渲染进阶步进器要读 META.ngWin/ascMax */
 loadMenuBoard('all');
 /* 遗物传承:选完法杖后,若本难度传承库有遗物,弹页选 1 件带入(或不继承);选/不选后执行 onDone() 开战。库空则直接 onDone() */
 function offerInheritance(onDone){
@@ -12874,8 +12895,9 @@ $('achvCloseTop').onclick=()=>$('achv').classList.add('hidden');
 $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
 bindConfirm($('retryBtn'), '⚠️ 确定再次挑战？再点一次', ()=>{ initAudio(); if(weeklyRun)_wkPick=true; $('over').classList.add('hidden'); buildWandSel(); });   /* 每周局战死→再战仍进每周变异(重新选杖) */
-$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
-$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); loadMenuBoard(curPeriod); };
+/* v104.39:回菜单同步刷新难度区——菜单高亮必须=实际生效难度(每日/每周局把 ascLevel 归零后旧 UI 曾保持过时的进阶高亮=选层与开战层脱钩);进阶通关后 ascMax 变了也顺带解锁 ▶ */
+$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); };
+$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); };
 { const _lre=$('lastReportEntry'); if(_lre) _lre.onclick=()=>{ try{S.card();}catch(e){} openLastReport(); }; }
 { const _lc=$('lastReportClose'); if(_lc) _lc.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
 { const _lb=$('lastReportBack'); if(_lb) _lb.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
