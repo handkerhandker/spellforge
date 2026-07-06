@@ -55,6 +55,7 @@
 - iOS/微信已知坑：用 100svh 不用 100dvh；微信移动端无 Gamepad API；HarmonyOS ArkWeb 静默忽略 requestFullscreen；iOS Safari 在 location.replace 后 canvas GPU 纹理降级；`#debug` 哈希开关是远程 iOS 诊断工具。
 
 ## 工程习惯
+- **归档卷平时禁读**:仓库根目录《Spellforge归档*.gb》一律不在开工/开局时读取或载入(避免污染上下文);仅当确需追查历史版本细节时,按需 `grep` 定位相关段落、只读命中处。
 - 大改动拆小步：每步独立 assert（如 Python `rep(a,b)` + `assert s.count(a)==1`），长内容（SVG/文案）先写独立文件再注入，每步后 grep 核对状态。
 - 上下文节流：按行号范围读码、grep 计数代替全文粘贴。
 - 回合内合并：侦察一次打包、验证一次打包、长输出写文件只回结论（省轮次、少中断）。
