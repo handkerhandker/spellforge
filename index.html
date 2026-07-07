@@ -58,7 +58,7 @@
   #win .lb-board,#over .lb-board{max-height:none;overflow-y:visible;flex-shrink:0;}
   #win .panel,#over .panel,#lastReport .panel{max-height:calc(100vh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100svh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
   /* 选择/信息类浮层保险:内容超屏时可滚动,放得下时仍居中(safe center 保证正常外观不变),避免选项/按钮被切到点不到 */
-  #wandSel,#cards,#relic,#inherit,#daily,#paused{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
+  #wandSel,#cards,#relic,#inherit,#daily,#paused,#event{justify-content:safe center;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));}
   #menu .lb-row{padding:6px 11px;margin-bottom:4px;}
   #menu .credit{margin-top:2px;}
   /* 两栏 wrapper 的默认(竖屏)样式:还原成与原来一致的居中竖排+间距;横屏才在媒体查询里改成左右两栏 */
@@ -641,13 +641,13 @@
   <button class="btn ghost" id="relicSkipBtn" style="margin-top:12px;padding:8px 22px;font-size:12px;opacity:.62;color:#b9b0d8;">🚫 放弃本次（不选）</button>
 </div>
 
-<!-- 山海奇遇(v104.28):波间随机遭遇 · 每个抉择都是取舍 · 永远可「离开」 -->
+<!-- 山海奇遇(v104.28):波间随机遭遇 · 每个抉择都是取舍 · 永远可「离开」 · v104.43:选项列不再自滚(自滚容器仅 2px 内边距,会把 .btn 圆角光晕裁成方形硬边),改为 #event 整层滚动=对齐 #cards/#relic 同族既有处理 -->
 <div id="event" class="overlay hidden">
   <div class="eyebrow" style="color:#7fe0c0;">✦ 山海奇遇 ✦</div>
   <div id="evtIcon" style="width:72px;height:72px;margin:2px auto 6px;"></div>
   <h1 class="title" id="evtTitle" style="font-size:27px;"></h1>
   <div class="sub" id="evtDesc" style="font-size:12.5px;letter-spacing:.05em;line-height:1.85;max-width:330px;white-space:normal;"></div>
-  <div id="evtRow" style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:330px;margin-top:14px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px;"></div>
+  <div id="evtRow" style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:330px;margin-top:14px;padding:2px;"></div>
 </div>
 
 <div id="inherit" class="overlay hidden">
@@ -712,6 +712,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
+<div class="cl-v"><div class="cl-h">v104.43 · 2026-07-07</div><div class="cl-i">🏮 修复奇遇界面按钮阴影显示异常。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.42 · 2026-07-07</div><div class="cl-i">🐅 <b>新异兽「驺吾」· 瞬移猎手</b>:林氏国珍兽,大若虎、五采毕具、尾长于身,日行千里——伏低蓄势、<b>红圈预警处轰然闪现</b>,近身撕咬;落点一旦亮出便不再追人,<b>看圈走位即可让它扑空</b>。<br>🌀 <b>新异兽「计蒙」· 风军旗</b>:人身龙首,恒游漳渊,出入必有飘风暴雨——扬风为旗,<b>身周妖兽奔行如飞</b>(身带疾风纹者即是,古神不受此风);旗在风在,<b>先斩此旗,群妖自缓</b>。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.41 · 2026-07-07</div><div class="cl-i">🏹 <b>新异兽「蜮」· 含沙射影</b>:短狐含沙射影,射人影而使人病——潜伏远处蓄力喷吐毒砂,<b>毒弹命中会让你中毒</b>、持续掉血;毒弹通体碧绿、与寻常妖弹一眼可辨,见它蓄力便侧身。<br>🌊 <b>新异兽「化蛇」· 见则大水</b>:人面豺身、鸟翼蛇行,见则其邑大水——蛇形蜿蜒难以命中,<b>被击杀时原地化开一滩水泽</b>,踩入会步履迟缓;补刀之后,绕开尸处再走。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.40 · 2026-07-06</div><div class="cl-i">☀️ <b>全新角色皮肤「羲和」· 日母浴日</b>(灵晶 ✦300 解锁):东南海之外,甘渊之间——羲和者,帝俊之妻,生十日,方日浴于甘渊。金袍映日、身后朝晖初升,足下甘渊碧水,倒映点点日轮。<br>☀️ <b>取舍 kit「曦光灼世」</b>:<b>法术命中点燃曦光</b>——中的之妖短暂灼烧,按其生命持续焚蚀(古神耐得住些,焚蚀减半);代价是<b>单发伤害 −12%</b>。弹雨不歇,则燎原不熄。</div></div>
@@ -1031,10 +1032,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.42', APP_TIME='2026-07-07 01:20';
+const APP_VER='v104.43', APP_TIME='2026-07-07 12:43';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.42';
+const APP_NOTIFY_VER='v104.43';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
