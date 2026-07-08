@@ -712,7 +712,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
-<div class="cl-v"><div class="cl-h">v104.43 · 2026-07-07</div><div class="cl-i">🏮 修复奇遇界面按钮阴影显示异常。</div></div>
+<div class="cl-v"><div class="cl-h maj">v104.44 · 2026-07-08</div><div class="cl-i">🌊 <b>第 11 位古神「天吴」· 八首水伯降世</b>:朝阳之谷,神曰天吴,是为水伯——八首人面、皆青黄。<br>• <b>八首即命</b>:其血分八段,每折一段便垂闭一首,八首尽阖方休;<br>• <b>潮涌</b>:环浪自本尊外扩,浪锋过身会将你推离——顺浪侧移即可绕出,推力有限、脚步始终由你;<br>• <b>漩涡</b>:预警圈起处成涡、缓缓向心牵引——反向而行必可挣脱,绝非死局;<br>• <b>八首水弹</b>:八口齐张、扇形吐浪,量级同相柳九首吐毒一路;<br>• <b>大招「八荒潮鸣」</b>:与相柳百川灌渊恰相反——吟唱时本尊脚边亮起<b>风眼圈</b>,潮爆时<b>圈内免伤、圈外受创</b>,见圈速入即安;<br>高波无尽随四凶一同现身,试炼场沙盒即点即战。另:成就「神话终结」文案更正为「击败过 8 位不同古神」(判定与进度均不变)。</div></div><div class="cl-v"><div class="cl-h">v104.43 · 2026-07-07</div><div class="cl-i">🏮 修复奇遇界面按钮阴影显示异常。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.42 · 2026-07-07</div><div class="cl-i">🐅 <b>新异兽「驺吾」· 瞬移猎手</b>:林氏国珍兽,大若虎、五采毕具、尾长于身,日行千里——伏低蓄势、<b>红圈预警处轰然闪现</b>,近身撕咬;落点一旦亮出便不再追人,<b>看圈走位即可让它扑空</b>。<br>🌀 <b>新异兽「计蒙」· 风军旗</b>:人身龙首,恒游漳渊,出入必有飘风暴雨——扬风为旗,<b>身周妖兽奔行如飞</b>(身带疾风纹者即是,古神不受此风);旗在风在,<b>先斩此旗,群妖自缓</b>。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.41 · 2026-07-07</div><div class="cl-i">🏹 <b>新异兽「蜮」· 含沙射影</b>:短狐含沙射影,射人影而使人病——潜伏远处蓄力喷吐毒砂,<b>毒弹命中会让你中毒</b>、持续掉血;毒弹通体碧绿、与寻常妖弹一眼可辨,见它蓄力便侧身。<br>🌊 <b>新异兽「化蛇」· 见则大水</b>:人面豺身、鸟翼蛇行,见则其邑大水——蛇形蜿蜒难以命中,<b>被击杀时原地化开一滩水泽</b>,踩入会步履迟缓;补刀之后,绕开尸处再走。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.40 · 2026-07-06</div><div class="cl-i">☀️ <b>全新角色皮肤「羲和」· 日母浴日</b>(灵晶 ✦300 解锁):东南海之外,甘渊之间——羲和者,帝俊之妻,生十日,方日浴于甘渊。金袍映日、身后朝晖初升,足下甘渊碧水,倒映点点日轮。<br>☀️ <b>取舍 kit「曦光灼世」</b>:<b>法术命中点燃曦光</b>——中的之妖短暂灼烧,按其生命持续焚蚀(古神耐得住些,焚蚀减半);代价是<b>单发伤害 −12%</b>。弹雨不歇,则燎原不熄。</div></div>
@@ -1032,10 +1032,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.43', APP_TIME='2026-07-07 12:43';
+const APP_VER='v104.44', APP_TIME='2026-07-08 00:15';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.43';
+const APP_NOTIFY_VER='v104.44';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
@@ -2152,7 +2152,8 @@ const BOSS_PALETTE=[
   {col:'#9aa84e',name:'梼杌',  atkName:'裂地不退'},
   {col:'#c8203a',name:'饕餮',  atkName:'万物归腹'},
   {col:'#3ec6a0',name:'相柳',  atkName:'百川灌渊'},
-  {col:'#7ec8e8',name:'玄冥',  atkName:'玄冰万里'}
+  {col:'#7ec8e8',name:'玄冥',  atkName:'玄冰万里'},
+  {col:'#b4e83c',name:'天吴',  atkName:'八荒潮鸣'}
 ];
 const BOSS_NAMES=BOSS_PALETTE.map(b=>b.name);
 
@@ -2521,9 +2522,79 @@ const BOSS_SVG=[
 <circle cx="126" cy="52" r="1.6" fill="#fff"/>
 <path d="M104,70 Q116,78 130,71" stroke="#14283a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
 <path d="M116,76 Q116,88 110,94 M116,88 Q116,88 122,94" stroke="#3a8ac8" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+</svg>`,
+  /* 10 天吴:朝阳之谷水伯「八首人面,虎身十尾(经文八足八尾,取八尾入画),皆青黄」——碧波踏浪 + 踞坐虎身青纹 + 八条黄颈 + 八颗人面(青发黄面,分深浅做纵深) */
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<g fill="#4ec8c0" stroke="#123024" stroke-width="5" stroke-linejoin="round">
+<path d="M26,224 Q52,210 78,224 Q104,238 128,224 Q152,210 178,224 Q204,238 230,224 Q232,242 128,244 Q24,242 26,224Z"/>
+</g>
+<path d="M40,228 Q64,218 88,228 Q112,238 128,228 Q144,218 168,228 Q192,238 216,228" fill="none" stroke="#bff0ea" stroke-width="3" stroke-linecap="round"/>
+<g fill="none" stroke="#123024" stroke-width="9" stroke-linecap="round">
+<path d="M84,200 Q56,192 38,166"/><path d="M92,206 Q68,206 50,192"/><path d="M96,210 Q76,216 62,210"/><path d="M104,212 Q92,224 78,224"/>
+<path d="M172,200 Q200,192 218,166"/><path d="M164,206 Q188,206 206,192"/><path d="M160,210 Q180,216 194,210"/><path d="M152,212 Q164,224 178,224"/>
+</g>
+<g fill="none" stroke="#3ea88a" stroke-width="5" stroke-linecap="round">
+<path d="M84,200 Q56,192 38,166"/><path d="M92,206 Q68,206 50,192"/><path d="M96,210 Q76,216 62,210"/><path d="M104,212 Q92,224 78,224"/>
+<path d="M172,200 Q200,192 218,166"/><path d="M164,206 Q188,206 206,192"/><path d="M160,210 Q180,216 194,210"/><path d="M152,212 Q164,224 178,224"/>
+</g>
+<g fill="#ffe07a" stroke="#123024" stroke-width="2">
+<circle cx="38" cy="166" r="4"/><circle cx="50" cy="192" r="3.5"/><circle cx="62" cy="210" r="3"/><circle cx="78" cy="224" r="3"/>
+<circle cx="218" cy="166" r="4"/><circle cx="206" cy="192" r="3.5"/><circle cx="194" cy="210" r="3"/><circle cx="178" cy="224" r="3"/>
+</g>
+<ellipse cx="128" cy="184" rx="64" ry="35" fill="#e8c04a" stroke="#123024" stroke-width="6"/>
+<ellipse cx="128" cy="196" rx="38" ry="18" fill="#f7e096" stroke="none"/>
+<g fill="#2e8a70" stroke="#123024" stroke-width="1.6" stroke-linejoin="round">
+<path d="M84,162 Q90,176 86,192 L76,188 Q78,172 84,162Z"/>
+<path d="M108,158 Q112,176 108,198 L98,194 Q100,174 108,158Z"/>
+<path d="M148,158 Q144,176 148,198 L158,194 Q156,174 148,158Z"/>
+<path d="M172,162 Q166,176 170,192 L180,188 Q178,172 172,162Z"/>
+</g>
+<g fill="#e8c04a" stroke="#123024" stroke-width="4" stroke-linejoin="round">
+<ellipse cx="66" cy="212" rx="11" ry="8"/><ellipse cx="94" cy="217" rx="11" ry="8"/><ellipse cx="121" cy="219" rx="11" ry="8"/>
+<ellipse cx="135" cy="219" rx="11" ry="8"/><ellipse cx="162" cy="217" rx="11" ry="8"/><ellipse cx="190" cy="212" rx="11" ry="8"/>
+<ellipse cx="79" cy="215" rx="9" ry="7"/><ellipse cx="177" cy="215" rx="9" ry="7"/>
+</g>
+<g fill="none" stroke="#123024" stroke-width="12" stroke-linecap="round">
+<path d="M120,170 Q84,152 54,104"/><path d="M124,168 Q102,140 76,76"/><path d="M127,166 Q114,118 100,58"/><path d="M128,164 Q124,108 118,46"/>
+<path d="M136,170 Q172,152 202,104"/><path d="M132,168 Q154,140 180,76"/><path d="M129,166 Q142,118 156,58"/><path d="M128,164 Q132,108 138,46"/>
+</g>
+<g fill="none" stroke="#e8c04a" stroke-width="7" stroke-linecap="round">
+<path d="M120,170 Q84,152 54,104"/><path d="M124,168 Q102,140 76,76"/><path d="M127,166 Q114,118 100,58"/><path d="M128,164 Q124,108 118,46"/>
+<path d="M136,170 Q172,152 202,104"/><path d="M132,168 Q154,140 180,76"/><path d="M129,166 Q142,118 156,58"/><path d="M128,164 Q132,108 138,46"/>
+</g>
+<g stroke="#123024" stroke-width="4" stroke-linejoin="round">
+<ellipse cx="54" cy="100" rx="14" ry="16" fill="#d8a848"/><ellipse cx="202" cy="100" rx="14" ry="16" fill="#d8a848"/>
+<ellipse cx="76" cy="72" rx="13" ry="15" fill="#e8bc58"/><ellipse cx="180" cy="72" rx="13" ry="15" fill="#e8bc58"/>
+<ellipse cx="100" cy="54" rx="13" ry="15" fill="#f5d070"/><ellipse cx="156" cy="54" rx="13" ry="15" fill="#f5d070"/>
+<ellipse cx="118" cy="42" rx="12" ry="14" fill="#ffdf88"/><ellipse cx="138" cy="42" rx="12" ry="14" fill="#ffdf88"/>
+</g>
+<g fill="#2e8a70" stroke="#123024" stroke-width="2" stroke-linejoin="round">
+<path d="M42,94 Q54,78 66,94 Q54,88 42,94Z"/><path d="M190,94 Q202,78 214,94 Q202,88 190,94Z"/>
+<path d="M65,66 Q76,51 87,66 Q76,60 65,66Z"/><path d="M169,66 Q180,51 191,66 Q180,60 169,66Z"/>
+<path d="M89,48 Q100,33 111,48 Q100,42 89,48Z"/><path d="M145,48 Q156,33 167,48 Q156,42 145,48Z"/>
+<path d="M107,36 Q118,22 129,36 Q118,30 107,36Z"/><path d="M127,36 Q138,22 149,36 Q138,30 127,36Z"/>
+</g>
+<g fill="#fff" stroke="#123024" stroke-width="1.6">
+<circle cx="49" cy="98" r="3"/><circle cx="59" cy="98" r="3"/><circle cx="197" cy="98" r="3"/><circle cx="207" cy="98" r="3"/>
+<circle cx="71" cy="70" r="2.8"/><circle cx="81" cy="70" r="2.8"/><circle cx="175" cy="70" r="2.8"/><circle cx="185" cy="70" r="2.8"/>
+<circle cx="95" cy="52" r="2.8"/><circle cx="105" cy="52" r="2.8"/><circle cx="151" cy="52" r="2.8"/><circle cx="161" cy="52" r="2.8"/>
+<circle cx="113" cy="40" r="2.6"/><circle cx="123" cy="40" r="2.6"/><circle cx="133" cy="40" r="2.6"/><circle cx="143" cy="40" r="2.6"/>
+</g>
+<g fill="#1a0808">
+<circle cx="49" cy="98" r="1.3"/><circle cx="59" cy="98" r="1.3"/><circle cx="197" cy="98" r="1.3"/><circle cx="207" cy="98" r="1.3"/>
+<circle cx="71" cy="70" r="1.2"/><circle cx="81" cy="70" r="1.2"/><circle cx="175" cy="70" r="1.2"/><circle cx="185" cy="70" r="1.2"/>
+<circle cx="95" cy="52" r="1.2"/><circle cx="105" cy="52" r="1.2"/><circle cx="151" cy="52" r="1.2"/><circle cx="161" cy="52" r="1.2"/>
+<circle cx="113" cy="40" r="1.1"/><circle cx="123" cy="40" r="1.1"/><circle cx="133" cy="40" r="1.1"/><circle cx="143" cy="40" r="1.1"/>
+</g>
+<g fill="none" stroke="#8a5820" stroke-width="1.8" stroke-linecap="round">
+<path d="M50,106 Q54,109 58,106"/><path d="M198,106 Q202,109 206,106"/>
+<path d="M72,78 Q76,81 80,78"/><path d="M176,78 Q180,81 184,78"/>
+<path d="M96,60 Q100,63 104,60"/><path d="M152,60 Q156,63 160,60"/>
+<path d="M114,48 Q118,51 122,48"/><path d="M134,48 Q138,51 142,48"/>
+</g>
 </svg>`
 ];
-/* 预加载 10 张 Boss SVG(同步,无 CORS) */
+/* 预加载 11 张 Boss SVG(同步,无 CORS) */
 const bossImgs=[];
 function buildBossArt(){
   for(let i=0;i<BOSS_SVG.length;i++){
@@ -2622,6 +2693,8 @@ let ultE=0; const ULT_MAX=100, ULT_KILL=4, ULT_HIT=6; let ultFireT=-1; let ultWa
 let fissures=[];   /* 地裂法术:宽地堑(开裂瞬间在 castFissure 重击一次,之后逐帧在 update 里对堑内群妖结算地火 DoT,并逐渐淡出) */
 let droughts=[], _dryTick=0; /* 女魃旱域(v104.35):旱地地块数组 + 全局灼烤跳计时(全部旱地共用一跳=敌同处数域只吃单份) */
 let marshes=[];    /* 相柳毒泽:持续地块,玩家在内→中毒+减速(复用 applyPoison/slowT),逐帧衰减 */
+let tides=[];      /* 天吴潮涌(v104.44):外扩环浪,浪锋过身施加背离本尊位移(走玩家 _suck 通道,全局封顶)+一次性轻伤,外扩至 maxR 消散 */
+let vortices=[];   /* 天吴漩涡(v104.44):吸引区,向心缓吸(上限远低于最低移速档,反向必可挣脱),不伤血,寿命尽即散 */
 
 /* ============ 学习式 AI 系统 ============ */
 /* 玩家档案:近 5s 行为聚合,怪物据此选策略 */
@@ -2807,7 +2880,7 @@ function resetGame(){
   player=newPlayer();
   { const _hm=metaHpMul(); if(_hm>1){ player.maxhp=Math.round(player.maxhp*_hm); player.hp=player.maxhp; } }
   enemies=[]; bullets=[]; ebullets=[]; parts=[]; texts=[]; telegraphs=[]; bossWarns=[]; beasts=[]; summonT=0; totems=[]; clones=[]; _synAnnounced=false; _qilinAnn=false;
-  pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; _evtCount=0; _evtLast=-9; _evSeen={}; hurtFx=0; ultE=0; ultFireT=-1; ultWaves=[]; fissures=[]; marshes=[]; droughts=[]; _dryTick=0;
+  pickups=[]; clouds=[]; zaps=[]; spawnQ=[]; kills=0; waveNum=0; endless=false; _evtCount=0; _evtLast=-9; _evSeen={}; hurtFx=0; ultE=0; ultFireT=-1; ultWaves=[]; fissures=[]; marshes=[]; tides=[]; vortices=[]; droughts=[]; _dryTick=0;
   coins=0; combo=0; comboT=0; comboDmg=0; comboTierLv=0; ghosts=[]; dailyRun=false; weeklyRun=false; lavaPools=[]; _lavaT=3.2;   /* 炎火之山:清空灼池、首批裂隙从开局 3.2s 起调度(telegraphs 池上一行已清=预警同步归零) */
   runMaxComboTier=0; runMaxCombo=0; runLastBoss=-1; runMobKills={}; runMobDmg={}; runSpellDmg={}; runBossKills={}; runBossDmg={}; recentSpellDmg={}; runBiggestHit=0; runBiggestHitSpell=''; deathCause=''; deathBlowDmg=0; runDmgBySrc={melee:0,boss:0,bullet:0,blast:0,poison:0};
   endlessMods=[]; modMult={hpM:1,dmgM:1,spdM:1,spawnM:1,eliteBonus:0,contactPoison:false};
@@ -3699,7 +3772,7 @@ function startWave(n){ _waveFirstKilled=false; applySteal(); if(player._rwBuf)pl
     const cScale=bossCount>1?(0.55+0.45/bossCount):1;
     /* Boss 序号:常规5个(0-4 烛龙/九尾狐/帝江/应龙/蚩尤)无尽起就刷;
        四凶(5-7 穷奇/梼杌/饕餮)26 波起登场,出现概率随波数上升(41+ 波为主),弑神等高难可更早。*/
-    const reg=shuffle([0,1,2,3,4,9]), fiends=shuffle([5,6,7,8]);   /* 玄冥(9)入常规池;相柳(8)随四凶在高波次登场 */
+    const reg=shuffle([0,1,2,3,4,9]), fiends=shuffle([5,6,7,8,10]);   /* 玄冥(9)入常规池;相柳(8)/天吴(10 v104.44)随四凶在高波次登场 */
     let fc=(n>=26)?Math.min(0.8,0.25+(n-26)*0.03):0;
     if(difficulty>=4) fc=Math.min(0.85,fc+0.12); /* 渡劫/弑神:四凶更凶更早 */
     const order=[]; let _ri=0,_fi=0;
@@ -4320,6 +4393,25 @@ function bossAttack(e){
           cam.shake=18; }, e, 1.0); });
     }
   }
+  /* ===== 10 天吴(朝阳之谷神,八首人面,是为水伯;v104.44) ===== */
+  else if(e._bossId===10){
+    const dm=e._dmgMul||1, ph=phase;
+    /* 招牌·八首水弹:八首齐张,朝玩家方位扇形吐浪(量级与接法对标相柳九首吐毒,八发略省=保守起步) */
+    moveSet.push(()=>{ const base=Math.atan2(player.y-e.y,player.x-e.x);
+      for(let k=0;k<8;k++){ const a=base+(k-3.5)*.13; ebullets.push({x:e.x,y:e.y,vx:Math.cos(a)*(230+ph*20),vy:Math.sin(a)*(230+ph*20),r:8,life:3.2,dmg:(7+ph*2)*dm,dead:false,col:'#58e8d0'}); } S.boom(); });
+    /* 潮涌:以本尊为心环浪外扩,浪锋过身施加背离本尊的位移(复用饕餮 _suck 通道反向注入,循环外统一封顶<玩家移速→推送期输入全程有效、可侧移绕出)+一次性轻伤;阶段2起隔半拍追一浪 */
+    moveSet.push(()=>{ tides.push({x:e.x,y:e.y,r:e.r+6,maxR:280+ph*30,spd:150,w:26,dmg:(6+ph)*dm,hit:false,src:e,delay:0});
+      if(ph>=2) tides.push({x:e.x,y:e.y,r:e.r+6,maxR:280+ph*30,spd:150,w:26,dmg:(6+ph)*dm,hit:false,src:e,delay:.7}); S.boom(); });
+    /* 漩涡:玩家附近预警圈(既有 telegraph 体系)后成涡,持续 3.5s 向心缓吸;吸力上限 90px/s=全角色最低移速档(215×贔屃0.9=193.5)的 47%,即便再叠玄冥重减速(193.5×0.55≈106)仍在其下→任何构筑反向移动净位移为正、必可挣脱;不伤血 */
+    moveSet.push(()=>{ const a=Math.random()*TAU, rr=rand(50,190);
+      const vx=clamp(player.x+Math.cos(a)*rr,ARENA.pad+120,ARENA.w-ARENA.pad-120), vy=clamp(player.y+Math.sin(a)*rr,ARENA.pad+120,ARENA.h-ARENA.pad-120);
+      telegraph(vx,vy,110,()=>{ vortices.push({x:vx,y:vy,r:110,life:3.5,max:3.5,pull:90}); },e,0.9); });
+    if(phase>=3 && distToP<=520){
+      /* 招牌大招·八荒潮鸣(与相柳百川灌渊反向):吟唱 2.8s 亮本尊脚边风眼圈+全场浪涌警示,吟唱期定身停手(atkT 冻结见更新循环);爆发时圈内免伤、圈外受伤(伤害档 (26+ph*6)*dm 对标百川灌渊)。仅距玩家≤520 时入池=风眼必在可及范围(2.8s×最低移速档193.5≈542>520,裸走也赶得进,冲刺更稳) */
+      moveSet.push(()=>{ if(e._eyeT>0)return; e._eyeT=2.8; e._eyeMax=2.8; e._eyeX=e.x; e._eyeY=e.y; e._eyeR=120; S.boom();
+        announce('✦ 八荒潮鸣','速入风眼圈 · 圈内免伤',['ui','boss']); });
+    }
+  }
   /* ===== 智能选招:基于玩家行为调整权重 ===== */
   /* 玩家血低 → 偏好持续伤害招;玩家站中心 → 偏好全屏招;玩家贴柱 → 偏好扇形招 */
   const weights=moveSet.map((m,i)=>{
@@ -4725,8 +4817,26 @@ function enemyAI(e,dt){
       const px=-dy/d, py=dx/d;
       e._mv.x=px*e.spd*0.7; e._mv.y=py*e.spd*0.7;
     }
+    /* 天吴(v104.44)·八首闭合:总血分 8 段,每降一段闭合一首(状态珠常显于 drawBossOverlay,敌方信息层不吃特效滑块) */
+    if(e._bossId===10){
+      const _ho=clamp(Math.ceil(e.hp/e.maxhp*8),0,8);
+      if(e._headsOpen===undefined)e._headsOpen=8;
+      if(_ho<e._headsOpen){ e._headsOpen=_ho; puff(e.x,e.y-e.r,'#b4e83c',10); texts.push({x:e.x,y:e.y-e.r-18,str:'一首垂闭',life:.9,vy:-30,col:'#d8f09a',size:13}); }
+      /* 大招·八荒潮鸣吟唱:定身停手,倒计时归零即潮爆——圈内免伤、圈外受伤 */
+      if(e._eyeT>0){
+        e._eyeT-=dt; e._mv.x=0; e._mv.y=0;
+        if(e._eyeT<=0){
+          const _dm=e._dmgMul||1, _ph=e.phase;
+          if(Math.hypot(player.x-e._eyeX,player.y-e._eyeY)<e._eyeR) texts.push({x:player.x,y:player.y-24,str:'风眼庇身',life:.8,vy:-30,col:'#9ff0e0',size:12});
+          else hurtPlayer((26+_ph*6)*_dm, e);
+          const _n=14+_ph*2; for(let i=0;i<_n;i++){const a=i/_n*TAU; ebullets.push({x:e._eyeX+Math.cos(a)*(e._eyeR+14),y:e._eyeY+Math.sin(a)*(e._eyeR+14),vx:Math.cos(a)*(210+_ph*15),vy:Math.sin(a)*(210+_ph*15),r:8,life:4,dmg:(7+_ph)*_dm,dead:false,_src:e,col:'#58e8d0'});}   /* 爆发弹自风眼缘向外放射=圈内绝对安全 */
+          tides.push({x:e._eyeX,y:e._eyeY,r:e._eyeR,maxR:760,spd:210,w:30,dmg:0,hit:true,src:e,delay:0});   /* 爆后余浪:只推不伤(dmg0+hit 锁死),把贴圈者荡开 */
+          cam.shake=18; S.boom();
+        }
+      }
+    }
     /* 攻击 CD（阶段越深越快） */
-    if(!e._charging)e.atkT-=dt;   /* 冲刺(含前摇)期间冻结攻击计时,节奏干净 */
+    if(!e._charging && !(e._eyeT>0))e.atkT-=dt;   /* 冲刺(含前摇)/天吴潮鸣吟唱期间冻结攻击计时,节奏干净 */
     const cdMul=[1,1,0.7,0.55][e.phase]||1;
     if(e.atkT<=0){
       e.atkT=(2.6-.25*e.tier)*cdMul;
@@ -6872,7 +6982,7 @@ const ACH=[
   {id:'kill500',   icon:'💀',name:'百兽伏诛',  desc:'累计击杀 500 只妖兽', prog:()=>[Math.min(profile.totalKills,500),500]},
   {id:'kill3000',  icon:'🪖',name:'千军辟易',  desc:'累计击杀 3000 只妖兽', prog:()=>[Math.min(profile.totalKills,3000),3000]},
   {id:'boss1',     icon:'👁️',name:'初遇古神',  desc:'首次击败任意古神 Boss'},
-  {id:'allboss',   icon:'🐲',name:'神话终结',  desc:'击败过全部 8 位古神', prog:()=>[profile.bosses.length,8]},
+  {id:'allboss',   icon:'🐲',name:'神话终结',  desc:'击败过 8 位不同古神', prog:()=>[profile.bosses.length,8]},
   {id:'fourfiend', icon:'😈',name:'四凶克星',  desc:'集齐击败四凶(帝江/穷奇/梼杌/饕餮)', prog:()=>[FOUR_FIENDS.filter(i=>profile.bosses.indexOf(i)>=0).length,4]},
   {id:'endless20', icon:'🕳️',name:'深渊行者',  desc:'无尽模式抵达第 20 波'},
   {id:'endless50', icon:'♾️',name:'登峰造极',  desc:'无尽模式抵达第 50 波'},
@@ -7035,7 +7145,7 @@ const BESTIARY_AFFIX=[
   {k:'phasing',tip:'周期性免疫伤害,抓它实体的窗口。'},
   {k:'unstoppable',tip:'免疫击退、顶弹冲锋,别挡它路线。'}
 ];
-const BOSS_TIP=['睁眼即昼、闭眼为夜,跟着昼夜节奏走位。','九尾绽放、弹幕华丽量大;保持移动别被合围。','浑敦无面,混沌之袋搅乱全场;留出闪避缝隙。','翔舞九天、雨落成阵;预判落点别贪刀。','铜头铁额、悍勇直撞;侧身绕背输出。','高速俯冲 + 翼刃横扫;看预警侧身闪。','顽固紧追、震地冲击波;别贴脸硬刚。','张口吸入 + 咬合;吸力起时反向拉开。','九首吐毒 + 毒泽蔓延,脚下紫沼会持续中毒+减速、绕开别站;大招「百川灌渊」是以本尊为中心的预警大圈,出圈即免伤。','寒冰锥墙成排推进、冰弹命中会减速你;大招「玄冰万里」是以本尊为中心的预警大圈,圈内爆冰+重减速,看到圈起就冲出圈外。'];
+const BOSS_TIP=['睁眼即昼、闭眼为夜,跟着昼夜节奏走位。','九尾绽放、弹幕华丽量大;保持移动别被合围。','浑敦无面,混沌之袋搅乱全场;留出闪避缝隙。','翔舞九天、雨落成阵;预判落点别贪刀。','铜头铁额、悍勇直撞;侧身绕背输出。','高速俯冲 + 翼刃横扫;看预警侧身闪。','顽固紧追、震地冲击波;别贴脸硬刚。','张口吸入 + 咬合;吸力起时反向拉开。','九首吐毒 + 毒泽蔓延,脚下紫沼会持续中毒+减速、绕开别站;大招「百川灌渊」是以本尊为中心的预警大圈,出圈即免伤。','寒冰锥墙成排推进、冰弹命中会减速你;大招「玄冰万里」是以本尊为中心的预警大圈,圈内爆冰+重减速,看到圈起就冲出圈外。','八首人面、是为水伯:环浪外扩时顺浪侧移即可绕出、漩涡起时反向拉开必能挣脱;大招「八荒潮鸣」与百川灌渊相反——本尊脚边亮起风眼圈,速入圈内即免伤。'];
 function buildBestiary(){
   let h='<div class="ach-sum">已讨伐古神 '+profile.bosses.length+' / '+BOSS_PALETTE.length+'</div>';   /* v104.23 完成度(生涯至少击败过一次的古神/凶兽数) */
   /* 局内:顶部插入「本局已遇见」实时统计(按本局击杀数排,显示本局击杀 / 累计伤害;主菜单 state='menu' 不显示) */
@@ -8150,7 +8260,17 @@ function update(dt){
       if((e._aff&&e._aff.venomous)||modMult.contactPoison||diffMul.contactPoison)applyPoison(3,4);
     }
   }
-  /* 饕餮吞噬·统一封顶:把本帧所有饕餮拉力汇总后限速到 SUCK_CAP(=150 < 玩家移速 215),保证全速永远走得出去、被减速时是减速本身的代价、多只饕餮也不再叠加失控 */
+  /* 天吴潮涌/漩涡 tick(v104.44):位移统一走玩家 _suck 通道(循环外封顶 150<全角色最低移速档→输入全程有效、必可挣脱) */
+  if(tides.length){ for(const td of tides){ if(td.delay>0){td.delay-=dt;continue;} td.r+=td.spd*dt;
+      if(player){ const d=Math.hypot(player.x-td.x,player.y-td.y);
+        if(d>1 && Math.abs(d-td.r)<td.w+player.r){ player._suckX=(player._suckX||0)+(player.x-td.x)/d*140; player._suckY=(player._suckY||0)+(player.y-td.y)/d*140;
+          if(!td.hit){ td.hit=true; if(td.dmg)hurtPlayer(td.dmg, td.src); } } } }
+    tides=tides.filter(td=>td.r<td.maxR); }
+  if(vortices.length){ for(const vt of vortices){ vt.life-=dt;
+      if(player){ const d=Math.hypot(vt.x-player.x,vt.y-player.y);
+        if(d<vt.r && d>6){ player._suckX=(player._suckX||0)+(vt.x-player.x)/d*vt.pull; player._suckY=(player._suckY||0)+(vt.y-player.y)/d*vt.pull; } } }
+    vortices=vortices.filter(vt=>vt.life>0); }
+  /* 饕餮吞噬/天吴潮涌漩涡·统一封顶:把本帧所有拉力/推力汇总后限速到 SUCK_CAP(=150 < 玩家移速 215),保证全速永远走得出去、被减速时是减速本身的代价、多来源也不再叠加失控 */
   if(player._suckX||player._suckY){ const _sm=Math.hypot(player._suckX,player._suckY); if(_sm>0){ const SUCK_CAP=150, _k=Math.min(_sm,SUCK_CAP)/_sm;
     player.x=clamp(player.x+player._suckX*_k*dt, ARENA.pad+player.r, ARENA.w-ARENA.pad-player.r);
     player.y=clamp(player.y+player._suckY*_k*dt, ARENA.pad+player.r, ARENA.h-ARENA.pad-player.r); } }
@@ -8653,6 +8773,20 @@ function render(){
       ctx.globalAlpha=a*.7; ctx.fillStyle='#c98cff';
       for(let k=0;k<5;k++){ const ba=k*TAU/5+time*.6+mp.x*.03, br=mp.r*(.28+.42*(((k*7+Math.floor(time*1.5))%5)/5));
         ctx.beginPath(); ctx.arc(mp.x+Math.cos(ba)*br, mp.y+Math.sin(ba)*br, 2.2+pulse*1.6, 0, TAU); ctx.fill(); }      /* 冒泡 */
+    }
+    ctx.globalAlpha=1; ctx.restore();
+  }
+
+  /* 天吴漩涡(地面层·v104.44):深色垫底+青碧涡面+旋臂,同构相柳毒泽=全 9 地形可读;敌方危险层不吃特效滑块 */
+  if(vortices.length){ ctx.save(); ctx.globalCompositeOperation='source-over';
+    for(const vt of vortices){ const va=clamp(vt.life/vt.max,0,1);
+      ctx.globalAlpha=va*.5; ctx.fillStyle='#0d2c2c'; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r,0,TAU); ctx.fill();
+      ctx.globalAlpha=va*.45; ctx.fillStyle='#1e8a86'; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r*.92,0,TAU); ctx.fill();
+      ctx.globalAlpha=va*.85; ctx.strokeStyle='#0d2c2c'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r,0,TAU); ctx.stroke();
+      ctx.strokeStyle='#8ff0e0'; ctx.lineWidth=2.6; ctx.lineCap='round';
+      for(let k=0;k<3;k++){ const sa=time*2.2+k*TAU/3;
+        ctx.globalAlpha=va*.8; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r*(.68-k*.18),sa,sa+2.1); ctx.stroke(); }
+      ctx.globalAlpha=va*.9; ctx.fillStyle='#0d2c2c'; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r*.14,0,TAU); ctx.fill();
     }
     ctx.globalAlpha=1; ctx.restore();
   }
@@ -9288,6 +9422,37 @@ function render(){
       ctx.globalAlpha=_ma*(0.6+0.35*_mpz); ctx.strokeStyle=mp.kind==='water'?'#7fd4ff':'#d59cff'; ctx.lineWidth=2.6; ctx.beginPath(); ctx.arc(mp.x,mp.y,mp.r,0,TAU); ctx.stroke(); }   /* v104.41:化蛇水泽边环换水色,毒泽原样 */
     ctx.globalAlpha=1; ctx.restore();
   }
+  /* 天吴潮涌浪锋+漩涡边环+八荒潮鸣风眼(v104.44·危险层置顶):深描边+实色浪体,密集特效下始终醒目、不吃特效滑块 */
+  if(tides.length){ ctx.save(); ctx.globalCompositeOperation='source-over';
+    for(const td of tides){ if(td.delay>0)continue; const fade=clamp((td.maxR-td.r)/90,0,1);
+      ctx.globalAlpha=fade*.9; ctx.strokeStyle='#0d2c2c'; ctx.lineWidth=9; ctx.beginPath(); ctx.arc(td.x,td.y,td.r,0,TAU); ctx.stroke();
+      ctx.globalAlpha=fade*.95; ctx.strokeStyle='#4ad8c8'; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(td.x,td.y,td.r,0,TAU); ctx.stroke();
+      ctx.globalAlpha=fade*.9; ctx.strokeStyle='#eafff8'; ctx.lineWidth=1.8; ctx.setLineDash([10,9]); ctx.lineDashOffset=-time*30;
+      ctx.beginPath(); ctx.arc(td.x,td.y,Math.max(2,td.r-3),0,TAU); ctx.stroke(); ctx.setLineDash([]);
+    }
+    ctx.globalAlpha=1; ctx.restore();
+  }
+  if(vortices.length){ ctx.save(); ctx.globalCompositeOperation='source-over';   /* 漩涡边环脉冲:密集弹幕下也始终看得见吸引区边界 */
+    for(const vt of vortices){ const _va=clamp(vt.life/vt.max,0,1), _vp=.5+.5*Math.sin(time*4+vt.x*.05);
+      ctx.globalAlpha=_va*.9; ctx.strokeStyle='#0d2c2c'; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r,0,TAU); ctx.stroke();
+      ctx.globalAlpha=_va*(.6+.35*_vp); ctx.strokeStyle='#7df0dc'; ctx.lineWidth=2.6; ctx.beginPath(); ctx.arc(vt.x,vt.y,vt.r,0,TAU); ctx.stroke(); }
+    ctx.globalAlpha=1; ctx.restore();
+  }
+  for(const _te of enemies){ if(_te.dead||!_te.boss||!(_te._eyeT>0))continue;   /* 八荒潮鸣·吟唱警示:安全风眼圈(青)+潮浪自八荒滚向风眼(红收拢环)=圈外皆险;深垫底全地形可读 */
+    const _ep=1-_te._eyeT/(_te._eyeMax||2.8), _epl=.5+.5*Math.sin(time*7);
+    ctx.save(); ctx.globalCompositeOperation='source-over';
+    ctx.globalAlpha=.10+_ep*.16; ctx.fillStyle='#5dffe6'; ctx.beginPath(); ctx.arc(_te._eyeX,_te._eyeY,_te._eyeR,0,TAU); ctx.fill();
+    ctx.globalAlpha=.85; ctx.strokeStyle='#0d2c2c'; ctx.lineWidth=6.5; ctx.beginPath(); ctx.arc(_te._eyeX,_te._eyeY,_te._eyeR,0,TAU); ctx.stroke();
+    ctx.globalAlpha=.5+_epl*.4; ctx.strokeStyle='#5dffe6'; ctx.lineWidth=3.2; ctx.setLineDash([12,8]); ctx.lineDashOffset=time*24;
+    ctx.beginPath(); ctx.arc(_te._eyeX,_te._eyeY,_te._eyeR,0,TAU); ctx.stroke(); ctx.setLineDash([]);
+    for(let k=0;k<3;k++){ const _wp=1-((time*130+k*140)%420)/420, _wr=_te._eyeR+40+_wp*420;
+      ctx.globalAlpha=.5*(1-_wp); ctx.strokeStyle='#241636'; ctx.lineWidth=6; ctx.beginPath(); ctx.arc(_te._eyeX,_te._eyeY,_wr,0,TAU); ctx.stroke();
+      ctx.globalAlpha=.55*(1-_wp); ctx.strokeStyle='#ff4848'; ctx.lineWidth=2.8; ctx.beginPath(); ctx.arc(_te._eyeX,_te._eyeY,_wr,0,TAU); ctx.stroke(); }
+    ctx.globalAlpha=1; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 15px serif';
+    ctx.lineWidth=4; ctx.strokeStyle='rgba(8,6,20,.92)'; ctx.strokeText('风眼 · 圈内免伤',_te._eyeX,_te._eyeY-_te._eyeR-16);
+    ctx.fillStyle='#9ff0e0'; ctx.fillText('风眼 · 圈内免伤',_te._eyeX,_te._eyeY-_te._eyeR-16);
+    ctx.restore();
+  }
   /* 弹幕置顶高亮:敌弹的高对比轮廓画在所有特效之上,密集时也绝不被自己的粒子/辉光盖住(始终满亮,不受「特效强度」影响) */
   for(const b of ebullets){
     const r=b.r;
@@ -9659,6 +9824,28 @@ function drawBossOverlay(e, variant, lookA){
       ctx.beginPath();ctx.arc(e.x,e.y-r*.8,r*.15,0,TAU);ctx.fill();
       ctx.restore();
     }
+  } else if(variant===10){
+    /* 天吴(v104.44):八首状态珠——存活首亮黄睁目、垂闭首暗青合目(敌方信息层常显不吃特效滑块);另加本色潮息环(对标四凶凶光档) */
+    const open=(e._headsOpen!==undefined)?e._headsOpen:8;
+    ctx.save();
+    ctx.globalAlpha*=.14+(phase-1)*.1+Math.sin(e.anim*3)*.06;
+    ctx.strokeStyle=e.col;ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.arc(e.x,e.y,r*1.12,0,TAU);ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    for(let i=0;i<8;i++){
+      const a=-Math.PI/2+(i-3.5)*.30, hx=e.x+Math.cos(a)*r*1.3, hy=e.y+Math.sin(a)*r*1.3+Math.sin(e.anim*2+i)*1.5, hr=Math.max(4.5,r*.14);
+      const alive=i<open;
+      ctx.globalAlpha=1;
+      ctx.fillStyle=alive?'#ffe9a8':'#2f4a3c'; ctx.strokeStyle='#12301e'; ctx.lineWidth=2.4;
+      ctx.beginPath();ctx.arc(hx,hy,hr,0,TAU);ctx.fill();ctx.stroke();
+      if(alive){ ctx.fillStyle='#12301e';
+        ctx.beginPath();ctx.arc(hx-hr*.34,hy-hr*.08,hr*.17,0,TAU);ctx.fill();
+        ctx.beginPath();ctx.arc(hx+hr*.34,hy-hr*.08,hr*.17,0,TAU);ctx.fill();
+      } else { ctx.strokeStyle='#9ab8a8'; ctx.lineWidth=1.6;
+        ctx.beginPath();ctx.moveTo(hx-hr*.42,hy);ctx.lineTo(hx+hr*.42,hy);ctx.stroke(); }
+    }
+    ctx.restore();
   } else {
     /* 四凶(穷奇/梼杌/饕餮):本色凶光脉动 + 终焉核心(随阶段增强) */
     ctx.save();
@@ -13003,7 +13190,7 @@ $('startBtn').onclick=()=>{ initAudio(); $('menu').classList.add('hidden'); buil
   on('sbToggle',()=>{ const p=$('sbPanel'); p.classList.toggle('hidden'); });
   on('sbClose',()=>{ $('sbPanel').classList.add('hidden'); });
   on('sbGodChk',(e)=>{ sbGod=!!e.target.checked; },'onchange');
-  on('sbClear',()=>{ enemies.length=0; if(typeof ebullets!=='undefined')ebullets.length=0; if(typeof telegraphs!=='undefined')telegraphs.length=0; if(typeof bossWarns!=='undefined')bossWarns.length=0; if(typeof fissures!=='undefined')fissures.length=0; if(typeof lavaPools!=='undefined')lavaPools.length=0; if(typeof droughts!=='undefined')droughts.length=0; });
+  on('sbClear',()=>{ enemies.length=0; if(typeof ebullets!=='undefined')ebullets.length=0; if(typeof telegraphs!=='undefined')telegraphs.length=0; if(typeof bossWarns!=='undefined')bossWarns.length=0; if(typeof fissures!=='undefined')fissures.length=0; if(typeof lavaPools!=='undefined')lavaPools.length=0; if(typeof droughts!=='undefined')droughts.length=0; if(typeof tides!=='undefined')tides.length=0; if(typeof vortices!=='undefined')vortices.length=0; });
   on('sbWaveUp',()=>{ waveNum=Math.min(999,waveNum+1); updateSbWave(); });
   on('sbWaveDn',()=>{ waveNum=Math.max(1,waveNum-1); updateSbWave(); });
   on('sbExit',()=>{ exitSandbox(); });
