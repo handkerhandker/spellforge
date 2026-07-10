@@ -712,6 +712,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
+<div class="cl-v"><div class="cl-h">v104.48 · 2026-07-09</div><div class="cl-i">🏆 <b>超越播报与排行榜口径统一</b>:局内「英雄榜·超越播报」(含下一位目标预告与登顶喝彩)的昵称显示规则,现与排行榜页完全一致——排行榜上不显示的条目,播报中同样不再出现。纯显示,不改任何玩法/数值/排行。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.47 · 2026-07-09</div><div class="cl-i">🏺 <b>新遗物四件 · 山海奇物入藏</b>:遗物池扩充第一批,四件皆看时机吃饭——<br>• <b>若木枝</b>(稀有):对<b>灼烧中</b>的敌人伤害 +18%——若木生昆仑之西,十日所栖,持枝者火势更烈;<br>• <b>冰夷珠</b>(稀有):对<b>被减速或冰封</b>的敌人伤害 +18%——冰夷者河伯也,人面乘两龙,珠中藏河伯之力;<br>• <b>视肉</b>(史诗):<b>每局一次</b>,受到致命伤害时保留 1 点生命并短暂无敌——视肉如牛肝有两目,食之尽,寻复更生;用过之后遗物栏图标变暗;<br>• <b>扶桑露</b>(普通):<b>每波开始 5 秒内</b>攻速 +30%——汤谷上有扶桑,十日所浴,晨露沾杖、施法如飞。<br>Boss 波打完的遗物三选一即有机会遇到,图鉴同步收录。既有 34 件遗物与所有法术数值分毫未动。</div></div><div class="cl-v"><div class="cl-h maj">v104.46 · 2026-07-08</div><div class="cl-i">🐯 <b>第 12 位古神「陆吾」· 昆仑司神降世</b>:昆仑之丘,实惟帝之下都,神陆吾司之——虎身九尾,人面虎爪,司天之九部。<br>• <b>九宫司印</b>:陆吾在场,战场虚划九宫;其血分九段,每折一段震碎头顶一枚司天玉印,<b>对应之格从此永为安处</b>,天罚不再落入;<br>• <b>九部巡狩</b>:红框亮起之格即将降下天罚——<b>格内受创、格外无事</b>,跨格避让即可;<br>• <b>虎爪横扫</b>:贴身时前方扇形亮起,侧身出扇即可让过;<br>• <b>囿时之令</b>:环形时令法球,中者步履迟缓;<br>• <b>大招「司天九部」</b>:天罚循固定路线逐格巡行、每格先亮后落——<b>避入碎印之格</b>,或紧随其后步步腾挪;<br>高波无尽深层现身,图鉴/战功簿自动收录。</div></div><div class="cl-v"><div class="cl-h">v104.45 · 2026-07-08</div><div class="cl-i">📝 更正 v104.44 说明中天吴条目的表述。</div></div>
 <!-- ⚠️ 玩家文案铁律(v104.45 立):隐藏工具名(试炼场/沙盒/#debug 等)与内部变量名/内部池名(如 fiends)禁入 changelog 及一切玩家可见文案;每个功能名词入稿前自检「玩家游戏界面中是否实际可见」,不可见即禁用 -->
 <div class="cl-v"><div class="cl-h maj">v104.44 · 2026-07-08</div><div class="cl-i">🌊 <b>第 11 位古神「天吴」· 八首水伯降世</b>:朝阳之谷,神曰天吴,是为水伯——八首人面、皆青黄。<br>• <b>八首即命</b>:其血分八段,每折一段便垂闭一首,八首尽阖方休;<br>• <b>潮涌</b>:环浪自本尊外扩,浪锋过身会将你推离——顺浪侧移即可绕出,推力有限、脚步始终由你;<br>• <b>漩涡</b>:预警圈起处成涡、缓缓向心牵引——反向而行必可挣脱,绝非死局;<br>• <b>八首水弹</b>:八口齐张、扇形吐浪,量级同相柳九首吐毒一路;<br>• <b>大招「八荒潮鸣」</b>:与相柳百川灌渊恰相反——吟唱时本尊脚边亮起<b>风眼圈</b>,潮爆时<b>圈内免伤、圈外受创</b>,见圈速入即安;<br>高波无尽深层现身。另:成就「神话终结」文案更正为「击败过 8 位不同古神」(判定与进度均不变)。</div></div><div class="cl-v"><div class="cl-h">v104.43 · 2026-07-07</div><div class="cl-i">🏮 修复奇遇界面按钮阴影显示异常。</div></div>
@@ -1034,10 +1035,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.47', APP_TIME='2026-07-09 04:44';
+const APP_VER='v104.48', APP_TIME='2026-07-09 12:21';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.47';
+const APP_NOTIFY_VER='v104.48';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
@@ -6265,6 +6266,7 @@ async function chaseLoad(){
     const me=(lastName()||'').trim();
     const best={};                                               /* 同名合并取最高波 */
     for(const r of raw){ const n=(r&&r.name?String(r.name):'').trim(); if(!n||n===me)continue;
+      if(isBadName(n))continue;                                  /* 昵称出口闸(v104.48):与 renderBoard 同款整行剔除——命中名不点名/不做下一位目标/不计入合并计数,播报口径与榜面一致 */
       const w=Math.floor(r.wave||0); if(w<1)continue; if(!best[n]||w>best[n]) best[n]=w; }
     const list=Object.keys(best).map(n=>({n:n.slice(0,10),w:best[n]})).sort((a,b)=>a.w-b.w);   /* 升序;名字截 10 字防播报溢出 */
     let p=0; while(p<list.length && list[p].w<waveNum) p++;      /* 已在身后的静默跳过(续战恢复 / 榜单晚到) */
@@ -6482,6 +6484,9 @@ function fmtTime(ts){
 }
 /* ===== 排行榜不文明昵称过滤 =====
    两道防线:① 上榜提交时拦截(脏名进不了榜);② 显示时兜底(已在云端的命中名也隐藏)。
+   ⚠️ 昵称唯一出口闸(v104.48 立规):isBadName 是全游戏「渲染他人昵称」的唯一出口——任何新增的昵称展示处
+   (榜单/冠军荣誉位/播报/浮层/toast…)必须先过 isBadName 剔除命中名(整行剔除,不发明替代文本)。
+   已接闸出口:renderBoard(全部榜页)/fetchStanding 名次/fetchYesterdayChamp/fetchLastWeekChamp/chaseLoad(超越播报·下一位预告·登顶)。
    纯前端。BAD_WORDS=自动识别的脏话词库(中 / 粤 / 英),BLOCKED_NAMES=手动精确屏蔽,两者都可随时增减。
    已尽量保守、避免误伤正常昵称:不匹配单字「逼/妈/死/操/鸡」或拼音「cao」(曹) 等,只匹配明确的脏话组合。
    防绕过:大小写、空格与符号间隔(如 f u c k / 傻 逼)也能识别。 */
