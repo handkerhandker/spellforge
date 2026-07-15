@@ -159,6 +159,16 @@
   #achToast .at-tx{min-width:0;}
   #achToast .at-h{font-size:9.5px;letter-spacing:.18em;color:var(--gold);font-weight:700;}
   #achToast .at-n{font-size:13.5px;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  /* 首局聚焦(v104.50):生涯 0 局(战功簿 profile.games=0)时主菜单纯视觉聚焦——非核心入口(.fgDim)淡显但全部照常可点;悬停/键盘焦点/手柄焦点(.pad-focus)时该入口即恢复全亮,焦点环照常可读。开战大钮呼吸辉光=大招就绪脉动(drawUltBtn 青色 sin(time*6) 外发光,周期约 1.05s)的 DOM 等价,同源青色 #57e3c4、只呼吸辉光不动 transform(不夺 .btn:active 按压反馈) */
+  #menu.fgFocus .fgDim{opacity:.5;transition:opacity .2s;}
+  #menu.fgFocus .fgDim:hover,#menu.fgFocus .fgDim:focus-visible,#menu.fgFocus .fgDim.pad-focus{opacity:1;}
+  #menu.fgFocus #startBtn{animation:fgBreath 1.05s ease-in-out infinite;}
+  @keyframes fgBreath{0%,100%{box-shadow:0 8px 28px rgba(110,90,255,.45), inset 0 1px 0 rgba(255,255,255,.35);}50%{box-shadow:0 8px 28px rgba(110,90,255,.5), 0 0 24px 4px rgba(87,227,196,.5), inset 0 1px 0 rgba(255,255,255,.35);}}
+  /* 首局后一次性轻提示(v104.50):与成就吐司 #achToast 同族——顶部中央胶囊、自动消失、pointer-events:none 不挡任何操作 */
+  #fgTip{position:fixed;left:0;right:0;margin:0 auto;top:50px;width:fit-content;transform:translateY(-14px);z-index:60;max-width:84vw;padding:9px 20px;border-radius:18px;background:rgba(24,16,46,.93);border:1.5px solid var(--gold);box-shadow:0 4px 18px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;text-align:center;}
+  #fgTip.show{opacity:1;transform:translateY(0);}
+  #fgTip .ft-h{font-size:9.5px;letter-spacing:.18em;color:var(--gold);font-weight:700;}
+  #fgTip .ft-n{font-size:13px;color:#fff;font-weight:600;line-height:1.55;}
   .btn{margin-top:8px;padding:14px 40px;border:0;border-radius:999px;cursor:pointer;
     font-size:16px;font-weight:800;letter-spacing:.28em;padding-left:calc(40px + .28em);color:#fff;
     background:linear-gradient(135deg,#7a5cff,#37a4ff);
@@ -436,14 +446,14 @@
     <button class="btn" id="startBtn" style="margin-top:10px;width:100%;max-width:320px;box-sizing:border-box;padding:14px 18px;">拔出法杖 · 开始战斗</button>
     <button class="btn ghost" id="padModeBtn" style="display:none;margin-top:8px;padding:7px 18px;font-size:12.5px;border:1px solid #6fe3ff;color:#cfe9ff;"></button>
     <div class="codex-row" style="margin-top:10px;">
-      <button id="altarBtn" style="border:1px solid var(--gold);background:rgba(48,36,12,.55);color:var(--gold);font-weight:700;letter-spacing:.04em;"><svg class="mbi" viewBox="0 0 64 64"><rect x="15" y="46" width="34" height="9" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><rect x="20" y="39" width="24" height="8" rx="2.5" fill="#d99a2a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 9 L41 25 L32 39 L23 25 Z" fill="#9a5ce0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 9 L41 25 L32 39 Z" fill="#b48cff"/><path d="M23 25 L41 25" stroke="#241636" stroke-width="1.8"/><path d="M47 12 l1.5 3.8 3.8 1.5 -3.8 1.5 -1.5 3.8 -1.5 -3.8 -3.8 -1.5 3.8 -1.5 z" fill="#efe6ff"/></svg> 祭坛·强化</button>
-      <button id="wardrobeBtn" style="border:1px solid #b98aff;background:rgba(40,28,60,.55);color:#dcc6ff;font-weight:700;letter-spacing:.04em;"><svg class="mbi" viewBox="0 0 64 64"><path d="M15 14 Q32 9 49 14 Q51 35 40 51 Q32 57 24 51 Q13 35 15 14 Z" fill="#8a5cf0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><ellipse cx="25" cy="29" rx="4.6" ry="3.1" fill="#241636"/><ellipse cx="39" cy="29" rx="4.6" ry="3.1" fill="#241636"/><path d="M25 41 Q32 47 39 41" fill="none" stroke="#241636" stroke-width="2.6" stroke-linecap="round"/><path d="M20 16 Q22 25 21 33" fill="none" stroke="#d9c6ff" stroke-width="2" stroke-linecap="round" opacity=".8"/><circle cx="32" cy="18" r="2" fill="#d9c6ff"/></svg> 外观·皮肤</button>
-      <button id="dailyBtn"><svg class="mbi" viewBox="0 0 64 64"><rect x="21" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="39.4" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="11" y="14" width="42" height="41" rx="6" fill="#f0ece0" stroke="#241636" stroke-width="2.8"/><path d="M11 23 Q11 14 17 14 L47 14 Q53 14 53 23 L53 25 L11 25 Z" fill="#e5566a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 31 l2.1 5.1 5.5 .4 -4.2 3.6 1.4 5.3 -4.8 -3 -4.8 3 1.4 -5.3 -4.2 -3.6 5.5 -.4 z" fill="#ffcf5a" stroke="#241636" stroke-width="1.6" stroke-linejoin="round"/></svg> 每日挑战</button>
-      <button id="weeklyBtn"><svg class="mbi" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#3b2a63" stroke="#241636" stroke-width="2.8"/><g stroke="#241636" stroke-width="2.2" stroke-linejoin="round" fill="#b06cf0"><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z"/><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z" transform="rotate(120 32 32)"/><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z" transform="rotate(240 32 32)"/></g><circle cx="32" cy="32" r="5.5" fill="#ffd24d" stroke="#241636" stroke-width="2.2"/></svg> 每周变异</button>
-      <button id="bCodexHub"><svg class="mbi" viewBox="0 0 64 64" fill="none"><rect x="13" y="13" width="9" height="39" rx="2" fill="#e5566a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><rect x="24" y="13" width="9" height="39" rx="2" fill="#5ec5a0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><rect x="37" y="17" width="11" height="35" rx="2" fill="#a9c2ff" stroke="#241636" stroke-width="2.6" stroke-linejoin="round" transform="rotate(7 42 34)"/><path d="M15 22 L20 22 M26 22 L31 22" stroke="#241636" stroke-width="1.8" stroke-linecap="round"/></svg> 成就·图鉴</button>
+      <button id="altarBtn" class="fgDim" style="border:1px solid var(--gold);background:rgba(48,36,12,.55);color:var(--gold);font-weight:700;letter-spacing:.04em;"><svg class="mbi" viewBox="0 0 64 64"><rect x="15" y="46" width="34" height="9" rx="2.5" fill="#b3794a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><rect x="20" y="39" width="24" height="8" rx="2.5" fill="#d99a2a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 9 L41 25 L32 39 L23 25 Z" fill="#9a5ce0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 9 L41 25 L32 39 Z" fill="#b48cff"/><path d="M23 25 L41 25" stroke="#241636" stroke-width="1.8"/><path d="M47 12 l1.5 3.8 3.8 1.5 -3.8 1.5 -1.5 3.8 -1.5 -3.8 -3.8 -1.5 3.8 -1.5 z" fill="#efe6ff"/></svg> 祭坛·强化</button>
+      <button id="wardrobeBtn" class="fgDim" style="border:1px solid #b98aff;background:rgba(40,28,60,.55);color:#dcc6ff;font-weight:700;letter-spacing:.04em;"><svg class="mbi" viewBox="0 0 64 64"><path d="M15 14 Q32 9 49 14 Q51 35 40 51 Q32 57 24 51 Q13 35 15 14 Z" fill="#8a5cf0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><ellipse cx="25" cy="29" rx="4.6" ry="3.1" fill="#241636"/><ellipse cx="39" cy="29" rx="4.6" ry="3.1" fill="#241636"/><path d="M25 41 Q32 47 39 41" fill="none" stroke="#241636" stroke-width="2.6" stroke-linecap="round"/><path d="M20 16 Q22 25 21 33" fill="none" stroke="#d9c6ff" stroke-width="2" stroke-linecap="round" opacity=".8"/><circle cx="32" cy="18" r="2" fill="#d9c6ff"/></svg> 外观·皮肤</button>
+      <button id="dailyBtn" class="fgDim"><svg class="mbi" viewBox="0 0 64 64"><rect x="21" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="39.4" y="8" width="3.6" height="10" rx="1.8" fill="#241636"/><rect x="11" y="14" width="42" height="41" rx="6" fill="#f0ece0" stroke="#241636" stroke-width="2.8"/><path d="M11 23 Q11 14 17 14 L47 14 Q53 14 53 23 L53 25 L11 25 Z" fill="#e5566a" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M32 31 l2.1 5.1 5.5 .4 -4.2 3.6 1.4 5.3 -4.8 -3 -4.8 3 1.4 -5.3 -4.2 -3.6 5.5 -.4 z" fill="#ffcf5a" stroke="#241636" stroke-width="1.6" stroke-linejoin="round"/></svg> 每日挑战</button>
+      <button id="weeklyBtn" class="fgDim"><svg class="mbi" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#3b2a63" stroke="#241636" stroke-width="2.8"/><g stroke="#241636" stroke-width="2.2" stroke-linejoin="round" fill="#b06cf0"><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z"/><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z" transform="rotate(120 32 32)"/><path d="M32 32 Q28 20 36 10 Q46 16 44 27 Q39 33 32 32 Z" transform="rotate(240 32 32)"/></g><circle cx="32" cy="32" r="5.5" fill="#ffd24d" stroke="#241636" stroke-width="2.2"/></svg> 每周变异</button>
+      <button id="bCodexHub" class="fgDim"><svg class="mbi" viewBox="0 0 64 64" fill="none"><rect x="13" y="13" width="9" height="39" rx="2" fill="#e5566a" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><rect x="24" y="13" width="9" height="39" rx="2" fill="#5ec5a0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><rect x="37" y="17" width="11" height="35" rx="2" fill="#a9c2ff" stroke="#241636" stroke-width="2.6" stroke-linejoin="round" transform="rotate(7 42 34)"/><path d="M15 22 L20 22 M26 22 L31 22" stroke="#241636" stroke-width="1.8" stroke-linecap="round"/></svg> 成就·图鉴</button>
       <button id="settingsBtnMenu"><svg class="mbi" viewBox="0 0 64 64" fill="none"><path d="M12 20 L52 20 M12 32 L52 32 M12 44 L52 44" stroke="#a89cce" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="20" r="5" fill="#b48cff" stroke="#241636" stroke-width="2.6"/><circle cx="40" cy="32" r="5" fill="#b48cff" stroke="#241636" stroke-width="2.6"/><circle cx="20" cy="44" r="5" fill="#b48cff" stroke="#241636" stroke-width="2.6"/></svg> 设置</button>
     </div>
-    <button id="lastReportEntry" class="last-report-entry" style="display:none;"><svg viewBox="0 0 64 64"><path d="M16 12 Q16 9 19 9 L40 9 L52 21 L52 52 Q52 55 49 55 L19 55 Q16 55 16 52 Z" fill="#f2e8d0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M40 9 L40 21 L52 21" fill="#ddcfae" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><path d="M23 30 L45 30 M23 38 L45 38 M23 46 L38 46" stroke="#a8966e" stroke-width="2.4" stroke-linecap="round"/></svg>上局战报<span class="lre-sub" id="lreLabel"></span></button>
+    <button id="lastReportEntry" class="last-report-entry fgDim" style="display:none;"><svg viewBox="0 0 64 64"><path d="M16 12 Q16 9 19 9 L40 9 L52 21 L52 52 Q52 55 49 55 L19 55 Q16 55 16 52 Z" fill="#f2e8d0" stroke="#241636" stroke-width="2.8" stroke-linejoin="round"/><path d="M40 9 L40 21 L52 21" fill="#ddcfae" stroke="#241636" stroke-width="2.4" stroke-linejoin="round"/><path d="M23 30 L45 30 M23 38 L45 38 M23 46 L38 46" stroke="#a8966e" stroke-width="2.4" stroke-linecap="round"/></svg>上局战报<span class="lre-sub" id="lreLabel"></span></button>
     <div class="lb-title" id="lbTitle"><svg class="ico-i" viewBox="0 0 64 64"><path d="M48 9 L53 14 L25 43 L20 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M16 9 L11 14 L39 43 L44 38 Z" fill="#dfe6f0" stroke="#241636" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 38 L13 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M44 38 L51 52" stroke="#8a5a32" stroke-width="3.6" stroke-linecap="round"/><path d="M15 41 L25 45 M49 41 L39 45" stroke="#d99a2a" stroke-width="3" stroke-linecap="round"/></svg> 英雄榜 · TOP 10</div>
     <div id="lbTabs" class="lb-tabs">
       <button class="lb-tab active" data-period="all">总榜</button>
@@ -544,6 +554,9 @@
 
 <!-- 成就解锁吐司 -->
 <div id="achToast"><div class="at-ic"></div><div class="at-tx"><div class="at-h">成就解锁</div><div class="at-n"></div></div></div>
+
+<!-- 首局后一次性轻提示(v104.50):首局结束首次返回主菜单时弹一次,纯运行时判定、零存档字段 -->
+<div id="fgTip"><div class="ft-h">初战卸甲</div><div class="ft-n">下一步：换一把法杖试试新流派，或去祭坛强化自己</div></div>
 
 <!-- 每日挑战 -->
 <div id="daily" class="overlay hidden">
@@ -713,7 +726,7 @@
 <div class="eyebrow" style="color:#8b7df0;">Changelog</div>
 <h1 class="title" style="font-size:30px;margin-bottom:6px;">更新说明</h1>
 <div class="cl-ver">当前版本 <b id="clVer"></b> · <span id="clTime"></span></div>
-<div class="cl-v"><div class="cl-h">v104.48 – v104.49 · 2026-07-09 – 07-15</div><div class="cl-i">📜 <b>「上局战报」新增「本局遗物」一栏</b>:该局收集的全部遗物以小图标一行列出,过多自动换行;主动结束的局同样记录。没拿遗物的局该栏自动隐藏,更早的历史战报照常打开。纯记录显示,不改任何玩法/数值。<br>🏆 <b>超越播报目标与排行榜口径进一步统一</b>:「已超越/下一位/登顶」在挑选目标时,不再将异常成绩计入——播报出现的名字与成绩,与排行榜页实际显示的完全一致。纯显示,不改任何排行规则。<br>🏆 <b>超越播报与排行榜口径统一</b>:局内「英雄榜·超越播报」(含下一位目标预告与登顶喝彩)的昵称显示规则,现与排行榜页完全一致——排行榜上不显示的条目,播报中同样不再出现。纯显示,不改任何玩法/数值/排行。</div></div>
+<div class="cl-v"><div class="cl-h">v104.48 – v104.50 · 2026-07-09 – 07-15</div><div class="cl-i">🧭 <b>新玩家首局聚焦</b>:新玩家首局前,主界面会聚焦「开始战斗」入口(其余入口暂调淡、但全部照常可用),首局结束后恢复常态并有一条一次性小提示指路。纯视觉引导,不锁任何功能。<br>📜 <b>「上局战报」新增「本局遗物」一栏</b>:该局收集的全部遗物以小图标一行列出,过多自动换行;主动结束的局同样记录。没拿遗物的局该栏自动隐藏,更早的历史战报照常打开。纯记录显示,不改任何玩法/数值。<br>🏆 <b>超越播报目标与排行榜口径进一步统一</b>:「已超越/下一位/登顶」在挑选目标时,不再将异常成绩计入——播报出现的名字与成绩,与排行榜页实际显示的完全一致。纯显示,不改任何排行规则。<br>🏆 <b>超越播报与排行榜口径统一</b>:局内「英雄榜·超越播报」(含下一位目标预告与登顶喝彩)的昵称显示规则,现与排行榜页完全一致——排行榜上不显示的条目,播报中同样不再出现。纯显示,不改任何玩法/数值/排行。</div></div>
 <div class="cl-v"><div class="cl-h maj">v104.47 · 2026-07-09</div><div class="cl-i">🏺 <b>新遗物四件 · 山海奇物入藏</b>:遗物池扩充第一批,四件皆看时机吃饭——<br>• <b>若木枝</b>(稀有):对<b>灼烧中</b>的敌人伤害 +18%——若木生昆仑之西,十日所栖,持枝者火势更烈;<br>• <b>冰夷珠</b>(稀有):对<b>被减速或冰封</b>的敌人伤害 +18%——冰夷者河伯也,人面乘两龙,珠中藏河伯之力;<br>• <b>视肉</b>(史诗):<b>每局一次</b>,受到致命伤害时保留 1 点生命并短暂无敌——视肉如牛肝有两目,食之尽,寻复更生;用过之后遗物栏图标变暗;<br>• <b>扶桑露</b>(普通):<b>每波开始 5 秒内</b>攻速 +30%——汤谷上有扶桑,十日所浴,晨露沾杖、施法如飞。<br>Boss 波打完的遗物三选一即有机会遇到,图鉴同步收录。既有 34 件遗物与所有法术数值分毫未动。</div></div><div class="cl-v"><div class="cl-h maj">v104.46 · 2026-07-08</div><div class="cl-i">🐯 <b>第 12 位古神「陆吾」· 昆仑司神降世</b>:昆仑之丘,实惟帝之下都,神陆吾司之——虎身九尾,人面虎爪,司天之九部。<br>• <b>九宫司印</b>:陆吾在场,战场虚划九宫;其血分九段,每折一段震碎头顶一枚司天玉印,<b>对应之格从此永为安处</b>,天罚不再落入;<br>• <b>九部巡狩</b>:红框亮起之格即将降下天罚——<b>格内受创、格外无事</b>,跨格避让即可;<br>• <b>虎爪横扫</b>:贴身时前方扇形亮起,侧身出扇即可让过;<br>• <b>囿时之令</b>:环形时令法球,中者步履迟缓;<br>• <b>大招「司天九部」</b>:天罚循固定路线逐格巡行、每格先亮后落——<b>避入碎印之格</b>,或紧随其后步步腾挪;<br>高波无尽深层现身,图鉴/战功簿自动收录。</div></div><div class="cl-v"><div class="cl-h">v104.45 · 2026-07-08</div><div class="cl-i">📝 更正 v104.44 说明中天吴条目的表述。</div></div>
 <!-- ⚠️ 玩家文案铁律(v104.45 立):隐藏工具名(试炼场/沙盒/#debug 等)与内部变量名/内部池名(如 fiends)禁入 changelog 及一切玩家可见文案;每个功能名词入稿前自检「玩家游戏界面中是否实际可见」,不可见即禁用 -->
 <div class="cl-v"><div class="cl-h maj">v104.44 · 2026-07-08</div><div class="cl-i">🌊 <b>第 11 位古神「天吴」· 八首水伯降世</b>:朝阳之谷,神曰天吴,是为水伯——八首人面、皆青黄。<br>• <b>八首即命</b>:其血分八段,每折一段便垂闭一首,八首尽阖方休;<br>• <b>潮涌</b>:环浪自本尊外扩,浪锋过身会将你推离——顺浪侧移即可绕出,推力有限、脚步始终由你;<br>• <b>漩涡</b>:预警圈起处成涡、缓缓向心牵引——反向而行必可挣脱,绝非死局;<br>• <b>八首水弹</b>:八口齐张、扇形吐浪,量级同相柳九首吐毒一路;<br>• <b>大招「八荒潮鸣」</b>:与相柳百川灌渊恰相反——吟唱时本尊脚边亮起<b>风眼圈</b>,潮爆时<b>圈内免伤、圈外受创</b>,见圈速入即安;<br>高波无尽深层现身。另:成就「神话终结」文案更正为「击败过 8 位不同古神」(判定与进度均不变)。</div></div><div class="cl-v"><div class="cl-h">v104.43 · 2026-07-07</div><div class="cl-i">🏮 修复奇遇界面按钮阴影显示异常。</div></div>
@@ -1036,10 +1049,10 @@ document.addEventListener('visibilitychange',function(){ if(!document.hidden) re
 window.addEventListener('pageshow',function(){ resize(); });
 setTimeout(resize,250); setTimeout(resize,900);
 /* ★版本号与时间:唯一来源,改这一处即可,菜单角标/菜单小字/更新说明弹窗全部自动同步★ */
-const APP_VER='v104.49', APP_TIME='2026-07-15 09:30';
+const APP_VER='v104.50', APP_TIME='2026-07-15 11:20';
 /* ★通知版本:只有把这里改成当前版本号时,老玩家进游戏才会自动弹一次更新说明(看过即记下、不再弹)。
    普通小升级只升 APP_VER、不动这里=不打扰玩家;想宣告某个值得一提的版本时,才把这里同步成那个版本号。 */
-const APP_NOTIFY_VER='v104.49';
+const APP_NOTIFY_VER='v104.50';
 /* ===== 自定义图标(逐类替换emoji;键=cat_id;缺失自动回退emoji) ===== */
 const ICONS = {
   /* 宝怪·狡 头像(v104.25):犬首 + 牛角 + 豹斑 + 金光,用于现身/大穰播报图标 */
@@ -13318,6 +13331,16 @@ function loadResume(){
   }catch(e){ return null; }
 }
 function clearResume(){ try{ localStorage.removeItem('sf_resume'); }catch(e){} }
+/* ===== 首局聚焦(v104.50):生涯局数 0(战功簿同源 profile.games;备份码恢复的老玩家局数>0 天然不触发)→ 主菜单纯视觉聚焦开战;首局结束(局数 0→1)后恢复常态。零禁止:淡显入口全部照常可点;零新存档字段:判定纯派生、一次性提示只用运行时标记 ===== */
+let _fgWasNew=!(profile&&profile.games>0);   /* 页面载入时是否 0 局新玩家(运行时快照,供首局后一次性提示判定) */
+function applyMenuFocus(){ const m=$('menu'); if(!m)return; m.classList.toggle('fgFocus', !(profile&&profile.games>0)); }
+function fgTipMaybe(){   /* 首局(局数 0→1 那次)结束后首次返回主菜单:弹一次性提示(战报回主页两口径=ovHome/winHome,与战报补记同覆盖胜/败/主动结束);弹过即落定,之后永不再现 */
+  if(!_fgWasNew || !profile || profile.games!==1) return;
+  _fgWasNew=false;
+  const el=$('fgTip'); if(!el)return;
+  el.classList.add('show');
+  setTimeout(()=>{ el.classList.remove('show'); },6500);
+}
 function refreshResumeBtn(){
   const b=$('resumeRunBtn'); if(!b) return;
   const s=loadResume();
@@ -13325,6 +13348,7 @@ function refreshResumeBtn(){
     if(sub) sub.textContent='（'+(s.endless?'无尽 · ':'')+'第 '+s.wave+' 波 · '+((DIFFICULTIES[s.diff-1]||{}).name||'')+'）'; }
   else b.style.display='none';
   try{ refreshLastReportEntry(); }catch(e){}
+  try{ applyMenuFocus(); }catch(e){}   /* 首局聚焦态随每次菜单刷新重算(纯派生) */
 }
 function resumeRun(){
   if(state==='play') return;               /* 防连点/重复进入 */
@@ -13643,8 +13667,8 @@ $('cardCodexBtn').onclick=openCodex;
 $('shopCodexBtn').onclick=openCodex;
 bindConfirm($('retryBtn'), '⚠️ 确定再次挑战？再点一次', ()=>{ initAudio(); if(weeklyRun)_wkPick=true; $('over').classList.add('hidden'); buildWandSel(); });   /* 每周局战死→再战仍进每周变异(重新选杖) */
 /* v104.39:回菜单同步刷新难度区——菜单高亮必须=实际生效难度(每日/每周局把 ascLevel 归零后旧 UI 曾保持过时的进阶高亮=选层与开战层脱钩);进阶通关后 ascMax 变了也顺带解锁 ▶ */
-$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); };
-$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); };
+$('ovHomeBtn').onclick=()=>{ $('over').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); fgTipMaybe(); };
+$('winHomeBtn').onclick=()=>{ $('win').classList.add('hidden'); $('menu').classList.remove('hidden'); state='menu'; refreshResumeBtn(); refreshDiffUI(); loadMenuBoard(curPeriod); fgTipMaybe(); };
 { const _lre=$('lastReportEntry'); if(_lre) _lre.onclick=()=>{ try{S.card();}catch(e){} openLastReport(); }; }
 { const _lc=$('lastReportClose'); if(_lc) _lc.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
 { const _lb=$('lastReportBack'); if(_lb) _lb.onclick=()=>{ $('lastReport').classList.add('hidden'); }; }
