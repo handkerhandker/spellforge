@@ -3063,6 +3063,7 @@ function resetGame(){
   relicMods={...RELIC_BASE};
   viewZoom=1; viewZoomT=1; EX=0; EY=0;   /* 开局视野复位(无遗物=正常视角) */
   _sky.on=false; _sky.a=0; _sky.burst=0;   /* 天光沉降复位(v104.54:上局残留演出不带入新局) */
+  _lodLevel=0; _ambTid='';   /* 环境粒子复位(v104.55):阵亡结算/主菜单期间 render 按未清空的旧实体持续定级 LOD,新局首个 update 会读到陈旧值→清零+强制首帧按新局压力重铺(寿命随机相位瞬满);对标上一行 _sky 装饰层状态不跨局惯例 */
   cam.x=player.x-W/2; cam.y=player.y-H/2; cam.shake=0;
   /* 学习系统状态重置 */
   for(const k of Object.keys(playerProfile)) playerProfile[k]=Array.isArray(playerProfile[k])?[]:(typeof playerProfile[k]==='number'?0:playerProfile[k]);
